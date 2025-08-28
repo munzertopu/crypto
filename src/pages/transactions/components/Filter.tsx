@@ -1,0 +1,805 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faFilter, faChevronUp, faChevronDown, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Tabs } from "@material-tailwind/react";
+import { Input, Typography } from "@material-tailwind/react";
+import Datepicker from "react-tailwindcss-datepicker";
+import AmountRangeDropdown from '../../../components/AmountRangeDropdown';
+
+interface WalletOption {
+  id: string;
+  name: string;
+  logo: string;
+  color: string;
+}
+
+interface ActionTypeOption {
+  id: string;
+  name: string;
+}
+
+interface FilterProps {
+  activeTab?: string;
+  onTabChange?: (tab: string) => void;
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
+  selectedType: string;
+  setSelectedType: (type: string) => void;
+  selectedStatus: string;
+  setSelectedStatus: (status: string) => void;
+  showFilters: boolean;
+  setShowFilters: (show: boolean) => void;
+  isDarkMode: boolean;
+}
+const tabs = ['All', 'Uncategorized', 'Warnings'];
+
+const walletOptions: WalletOption[] = [
+  { id: 'bitcoin', name: 'Bitcoin', logo: 'crypto/bitcoin-btc-logo.png', color: 'bg-orange-500' },
+  { id: 'metamask', name: 'MetaMask', logo: 'crypto/metamask.png', color: 'bg-orange-400' },
+  { id: 'ethereum', name: 'Ethereum', logo: 'crypto/ethereum-eth-logo.png', color: 'bg-blue-500' },
+  { id: 'gemini', name: 'Gemini', logo: 'crypto/gemini.png', color: 'bg-black' },
+  { id: 'avalanche', name: 'Avalanche Avax', logo: 'crypto/kraken.png', color: 'bg-red-500' },
+  { id: 'bldget', name: 'Bldget', logo: 'crypto/theta-fuel-tfuel-logo.png', color: 'bg-cyan-500' },
+  { id: 'coinbase', name: 'Coinbase', logo: 'crypto/coinbase.png', color: 'bg-blue-600' },
+];
+
+const actionTypeOptions: ActionTypeOption[] = [
+  { id: 'buy', name: 'Buy' },
+  { id: 'sell', name: 'Sell' },
+  { id: 'swap', name: 'Swap' },
+  { id: 'transfer', name: 'Transfer' },
+];
+
+const resultOptions: ActionTypeOption[] = [
+  { id: 'completed', name: 'Completed' },
+  { id: 'pending', name: 'Pending' },
+  { id: 'failed', name: 'Failed' },
+];
+
+const Filter: React.FC<FilterProps> = ({
+  activeTab = 'Portfolio',
+  onTabChange,
+  searchTerm,
+  setSearchTerm,
+  selectedType,
+  setSelectedType,
+  selectedStatus,
+  setSelectedStatus,
+  showFilters,
+  setShowFilters,
+  isDarkMode
+}) => {
+  const [showWarningBanner, setShowWarningBanner] = useState(true);
+  const [walletDropdownOpen, setWalletDropdownOpen] = useState(false);
+  const [walletSearchTerm, setWalletSearchTerm] = useState('');
+  const [selectedWallets, setSelectedWallets] = useState<string[]>([]);
+  const walletDropdownRef = useRef<HTMLDivElement>(null);
+
+  const [actionTypeDropdownOpen, setActionTypeDropdownOpen] = useState(false);
+  const [actionTypeSearchTerm, setActionTypeSearchTerm] = useState('');
+  const [selectedActionTypes, setSelectedActionTypes] = useState<string[]>([]);
+  const actionTypeDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Result Dropdown
+  const [resultDropdownOpen, setResultDropdownOpen] = useState(false);
+  const [resultSearchTerm, setResultSearchTerm] = useState('');
+  const [selectedResults, setSelectedResults] = useState<string[]>([]);
+  const resultDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Amount Sent Dropdown
+  const [amountSentDropdownOpen, setAmountSentDropdownOpen] = useState(false);
+  const [fromSentCurrency, setFromSentCurrency] = useState('USD');
+  const [toSentCurrency, setToSentCurrency] = useState('USD');
+  const [fromSentValue, setFromSentValue] = useState('0');
+  const [toSentValue, setToSentValue] = useState('0');
+
+  // Amount Received Dropdown
+  const [amountReceivedDropdownOpen, setAmountReceivedDropdownOpen] = useState(false);
+  const [fromReceivedCurrency, setFromReceivedCurrency] = useState('USD');
+  const [toReceivedCurrency, setToReceivedCurrency] = useState('USD');
+  const [fromReceivedValue, setFromReceivedValue] = useState('0');
+  const [toReceivedValue, setToReceivedValue] = useState('0');
+
+  // Date
+  const [selectedDateRange, setSelectedDateRange] = useState<any>(null);
+
+  // Helper function to format dates
+  const formatDate = (date: Date | string) => {
+    if (typeof date === 'string') {
+      return date;
+    }
+    if (date instanceof Date) {
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+    return '';
+  };
+
+  // Create shortcuts with year dropdown
+  const createShortcuts = () => {
+    const shortcuts: any = {
+      today: "Today",
+      last7Days: {
+        text: "Last 7 days",
+        period: {
+          start: new Date(new Date().setDate(new Date().getDate() - 7)),
+          end: new Date(new Date().setDate(new Date().getDate() - 1))
+        }
+      },
+      last30Days: {
+        text: "Last 30 days",
+        period: {
+          start: new Date(new Date().setDate(new Date().getDate() - 30)),
+          end: new Date(new Date().setDate(new Date().getDate() - 1))
+        }
+      },
+      last6Months: {
+        text: "Last 6 months",
+        period: {
+          start: new Date(new Date().setMonth(new Date().getMonth() - 6)),
+          end: new Date(new Date().setDate(new Date().getDate() - 1))
+        }
+      },
+      last12Months: {
+        text: "Last 12 months",
+        period: {
+          start: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+          end: new Date(new Date().setDate(new Date().getDate() - 1))
+        }
+      },
+      byYear: {
+        text: "By Year",
+        period: {
+          start: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+          end: new Date(new Date().setDate(new Date().getDate() - 1))
+        }
+      }
+    };
+
+    return shortcuts;
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (walletDropdownRef.current && !walletDropdownRef.current.contains(event.target as Node)) {
+        setWalletDropdownOpen(false);
+      }
+      if (actionTypeDropdownRef.current && !actionTypeDropdownRef.current.contains(event.target as Node)) {
+        setActionTypeDropdownOpen(false);
+      }
+      if (resultDropdownRef.current && !resultDropdownRef.current.contains(event.target as Node)) {
+        setResultDropdownOpen(false);
+      }
+      
+
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const filteredWalletOptions = walletOptions.filter(option =>
+    option.name.toLowerCase().includes(walletSearchTerm.toLowerCase())
+  );
+
+  const filteredActionTypeOptions = actionTypeOptions.filter(option =>
+    option.name.toLowerCase().includes(actionTypeSearchTerm.toLowerCase())
+  );
+
+  const filteredResultOptions = resultOptions.filter(option =>
+    option.name.toLowerCase().includes(resultSearchTerm.toLowerCase())
+  );
+
+  const handleWalletToggle = (walletId: string) => {
+    setSelectedWallets(prev => 
+      prev.includes(walletId) 
+        ? prev.filter(id => id !== walletId)
+        : [...prev, walletId]
+    );
+  };
+
+  const handleActionTypeToggle = (actionTypeId: string) => {
+    setSelectedActionTypes(prev => 
+      prev.includes(actionTypeId) 
+        ? prev.filter(id => id !== actionTypeId)
+        : [...prev, actionTypeId]
+    );
+  };
+
+  const handleResultToggle = (resultId: string) => {
+    setSelectedResults(prev => 
+      prev.includes(resultId) 
+        ? prev.filter(id => id !== resultId)
+        : [...prev, resultId]
+    );
+  };
+
+  // Helper functions to remove individual filters
+  const removeWalletFilter = (walletId: string) => {
+    setSelectedWallets(prev => prev.filter(id => id !== walletId));
+  };
+
+  const removeActionTypeFilter = (actionTypeId: string) => {
+    setSelectedActionTypes(prev => prev.filter(id => id !== actionTypeId));
+  };
+
+  const removeResultFilter = (resultId: string) => {
+    setSelectedResults(prev => prev.filter(id => id !== resultId));
+  };
+
+  const removeAmountSentFilter = () => {
+    setFromSentValue('0');
+    setToSentValue('0');
+    setFromSentCurrency('USD');
+    setToSentCurrency('USD');
+  };
+
+  const removeAmountReceivedFilter = () => {
+    setFromReceivedValue('0');
+    setToReceivedValue('0');
+    setFromReceivedCurrency('USD');
+    setToReceivedCurrency('USD');
+  };
+
+  const removeDateFilter = () => {
+    setSelectedDateRange(null);
+  };
+
+  const clearAllFilters = () => {
+    setSelectedWallets([]);
+    setSelectedActionTypes([]);
+    setSelectedResults([]);
+    setFromSentValue('0');
+    setToSentValue('0');
+    setFromSentCurrency('USD');
+    setToSentCurrency('USD');
+    setFromReceivedValue('0');
+    setToReceivedValue('0');
+    setFromReceivedCurrency('USD');
+    setToReceivedCurrency('USD');
+    setSelectedDateRange(null);
+  };
+
+  // Check if any filters are active
+  const hasActiveFilters = 
+    selectedWallets.length > 0 ||
+    selectedActionTypes.length > 0 ||
+    selectedResults.length > 0 ||
+    fromSentValue !== '0' ||
+    toSentValue !== '0' ||
+    fromReceivedValue !== '0' ||
+    toReceivedValue !== '0' ||
+    (selectedDateRange && selectedDateRange.startDate && selectedDateRange.endDate);
+  return (
+    <div className={`p-4 lg:pt-6 lg:px-8 rounded-lg `}>
+      {/* Tabs */}
+      <div className={`${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+        <Tabs>
+          <Tabs.List className={`my-3 space-x-1 ${isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"}`}>
+            {tabs.map((tab) => (
+              <Tabs.Trigger 
+                key={tab}
+                value={tab}
+                onClick={() => onTabChange?.(tab)}
+                className={`px-5 py-2 rounded-xl text-lg ${
+                  activeTab === tab
+                    ? `${isDarkMode ? 'bg-[#0E201E] text-white' : 'bg-white text-black'}`
+                    : `${isDarkMode ? 'text-[#FFFFFF]' : 'text-[#0E201E]'}`
+                }`}
+              >
+                {tab}
+              </Tabs.Trigger >
+            ))}
+            <Tabs.TriggerIndicator />
+          </Tabs.List>
+        </Tabs>
+      </div>
+
+      {/* Blue Alert Banner for Warnings Tab */}
+      {activeTab === 'Warnings' && showWarningBanner && (
+        <div className={`my-2 p-4 rounded-lg border ${
+          isDarkMode 
+            ? 'border-blue-600 text-blue-300' 
+            : 'border-[#2186D7] text-[#2186D7]'
+        }`}>
+          <div className="flex items-center justify-between mx-2">
+            <div className="flex items-center gap-3">
+              <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-white">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+              </div>
+              <span className="text-sm font-medium">
+                You have 10 missing pricing, match them at the setting
+              </span>
+            </div>
+            <div className="flex items-center gap-4">
+              <button className={`text-sm font-medium ${
+                isDarkMode ? 'text-green-400 hover:text-green-300' : 'text-[#5F9339]'
+              }`}>
+                Match price
+              </button>
+              <button 
+                className={`text-sm font-medium ${
+                  isDarkMode ? 'text-gray-400 hover:text-gray-300' : 'text-[#4D5050]'
+                }`}
+                onClick={() => setShowWarningBanner(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-x-4">
+         {/* Search */}
+         <div className="relative mt-4 w-1/4">
+           <FontAwesomeIcon 
+              icon={faSearch} 
+              className={`absolute size-6 text-xl ml-6 top-1/2 transform -translate-y-1/2 ${isDarkMode ? 'text-gray-400' : 'text-[#7C7C7C]'}`}
+            />
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+                        className={`pl-14 pr-4 py-4 rounded-2xl border text-lg w-full ${
+                isDarkMode 
+                  ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400' 
+                  : 'bg-white border-[#E1E3E5] text-[#0E201E] placeholder-gray-500'
+              } focus:outline-none`}
+            />
+          </div>
+          
+          {/* Additional Filters - Only show when showFilters is true */}
+          {showFilters && (
+             <div className="flex items-center space-x-3 mt-4">
+               {/* Custom Wallet Dropdown */}
+               <div className="relative" ref={walletDropdownRef}>
+                <button
+                  onClick={() => setWalletDropdownOpen(!walletDropdownOpen)}
+                  className={`flex text-lg items-center px-8 py-4 rounded-2xl border ${
+                  isDarkMode 
+                    ? 'bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600' 
+                    : 'bg-white border-gray-300 text-[#0E201E]'
+                }`}
+                 >
+                   <span>Wallet</span>
+                   <FontAwesomeIcon 
+                     icon={walletDropdownOpen ? faChevronUp : faChevronDown} 
+                     className="w-4 h-4 ml-2" 
+                   />
+                 </button>
+                 
+                 {walletDropdownOpen && (
+                   <div className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-lg z-50 ${
+                     isDarkMode 
+                       ? 'bg-gray-800 border-gray-600' 
+                       : 'bg-white border-gray-300'
+                   }`}>
+                     {/* Search Input */}
+                     <div className="px-3 border-b border-gray-200">
+                       <input
+                         type="text"
+                         placeholder="Type or paste wallet"
+                         value={walletSearchTerm}
+                         onChange={(e) => setWalletSearchTerm(e.target.value)}
+                         className={`w-full px-3 py-2 rounded text-sm ${
+                           isDarkMode 
+                             ? 'text-white placeholder-gray-400' 
+                             : 'text-gray-900 placeholder-gray-500'
+                         } focus:outline-none`}
+                       />
+                     </div>
+                     
+                     {/* Wallet Options List */}
+                     <div className="max-h-48 overflow-y-auto">
+                       {filteredWalletOptions.map((option) => {
+                         const isSelected = selectedWallets.includes(option.id);
+                         return (
+                           <div
+                             key={option.id}
+                             onClick={() => handleWalletToggle(option.id)}
+                             className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 ${
+                               isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
+                             }`}
+                           >
+                             <div className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                               isSelected 
+                                 ? 'bg-[#90C853] border-[#90C853]' 
+                                 : 'border-gray-300'
+                             }`}>
+                               {isSelected && (
+                                 <FontAwesomeIcon 
+                                   icon={faCheck} 
+                                   className="w-2.5 h-2.5 text-white" 
+                                 />
+                               )}
+                             </div>
+                             <img src={option.logo} className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}>
+                               
+                             </img>
+                             <span className={`text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                               {option.name}
+                             </span>
+                           </div>
+                         );
+                       })}
+                     </div>
+                   </div>
+                 )}
+               </div>
+               
+               {/* Custom Action Type Dropdown */}
+               <div className="relative" ref={actionTypeDropdownRef}>
+                 <button
+                   onClick={() => setActionTypeDropdownOpen(!actionTypeDropdownOpen)}
+                   className={`flex text-lg items-center px-8 py-4 rounded-2xl border ${
+                      isDarkMode 
+                        ? 'bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600' 
+                        : 'bg-white border-gray-300 text-[#0E201E]'
+                    }`}
+                 >
+                   <span>Action type</span>
+                   <FontAwesomeIcon 
+                     icon={actionTypeDropdownOpen ? faChevronUp : faChevronDown} 
+                     className="w-3 h-3 ml-2" 
+                   />
+                 </button>
+                 
+                 {actionTypeDropdownOpen && (
+                   <div className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-lg z-50 ${
+                     isDarkMode 
+                       ? 'bg-gray-800 border-gray-600' 
+                       : 'bg-white border-gray-300'
+                   }`}>
+                     {/* Search Input */}
+                     <div className="px-3 border-b border-gray-200">
+                       <input
+                         type="text"
+                         placeholder="Type or paste action type"
+                         value={actionTypeSearchTerm}
+                         onChange={(e) => setActionTypeSearchTerm(e.target.value)}
+                         className={`w-full px-3 py-2 rounded text-sm ${
+                           isDarkMode 
+                             ? 'text-white placeholder-gray-400' 
+                             : 'text-gray-900 placeholder-gray-500'
+                         } focus:outline-none`}
+                       />
+                     </div>
+                     
+                     {/* Action Type Options List */}
+                     <div className="max-h-48 overflow-y-auto">
+                       {filteredActionTypeOptions.map((option) => {
+                         const isSelected = selectedActionTypes.includes(option.id);
+                         return (
+                           <div
+                             key={option.id}
+                             onClick={() => handleActionTypeToggle(option.id)}
+                             className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 ${
+                               isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
+                             }`}
+                           >
+                             <div className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                               isSelected 
+                                 ? 'bg-[#90C853] border-[#90C853]' 
+                                 : 'border-gray-300'
+                             }`}>
+                               {isSelected && (
+                                 <FontAwesomeIcon 
+                                   icon={faCheck} 
+                                   className="w-2.5 h-2.5 text-white" 
+                                 />
+                               )}
+                             </div>
+                             <span className={`text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                               {option.name}
+                             </span>
+                           </div>
+                         );
+                       })}
+                     </div>
+                   </div>
+                 )}
+               </div>
+               {/* Amount Sent Dropdown */}
+               <AmountRangeDropdown
+                 isDarkMode={isDarkMode}
+                 fromValue={fromSentValue}
+                 setFromValue={setFromSentValue}
+                 toValue={toSentValue}
+                 setToValue={setToSentValue}
+                 fromCurrency={fromSentCurrency}
+                 setFromCurrency={setFromSentCurrency}
+                 toCurrency={toSentCurrency}
+                 setToCurrency={setToSentCurrency}
+                 isOpen={amountSentDropdownOpen}
+                 setIsOpen={setAmountSentDropdownOpen}
+                 title="Amount sent"
+               />
+               
+               {/* Amount Received Dropdown */}
+               <AmountRangeDropdown
+                 isDarkMode={isDarkMode}
+                 fromValue={fromReceivedValue}
+                 setFromValue={setFromReceivedValue}
+                 toValue={toReceivedValue}
+                 setToValue={setToReceivedValue}
+                 fromCurrency={fromReceivedCurrency}
+                 setFromCurrency={setFromReceivedCurrency}
+                 toCurrency={toReceivedCurrency}
+                 setToCurrency={setToReceivedCurrency}
+                 isOpen={amountReceivedDropdownOpen}
+                 setIsOpen={setAmountReceivedDropdownOpen}
+                 title="Amount received"
+               />
+              <div className={`flex items-center space-x-2 py-2 rounded-xl border p-0 shadow-sm ${isDarkMode 
+                    ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
+                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-800'
+                  } focus:outline-none`}>
+                <Datepicker
+                  displayFormat="DD MMM YYYY"
+                  value={null} 
+                  onChange={(newValue: any) => setSelectedDateRange(newValue)}
+                    showShortcuts={true}
+                    configs={{
+                        shortcuts: createShortcuts()
+                    }}
+                    primaryColor='green'
+                    placeholder="Purchase date"
+                  />
+              </div>
+               
+               {/* Custom Result Dropdown */}
+               <div className="relative" ref={resultDropdownRef}>
+                 <button
+                    onClick={() => setResultDropdownOpen(!resultDropdownOpen)}
+                    className={`flex text-lg items-center px-8 py-4 rounded-2xl border ${
+                    isDarkMode 
+                      ? 'bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600' 
+                      : 'bg-white border-gray-300 text-[#0E201E]'
+                  }`}
+                 >
+                   <span>Result</span>
+                   <FontAwesomeIcon 
+                     icon={resultDropdownOpen ? faChevronUp : faChevronDown} 
+                     className="w-3 h-3 ml-2" 
+                   />
+                 </button>
+                 
+                 {resultDropdownOpen && (
+                   <div className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-lg z-50 ${
+                     isDarkMode 
+                       ? 'bg-gray-800 border-gray-600' 
+                       : 'bg-white border-gray-300'
+                   }`}>
+                     {/* Search Input */}
+                     <div className="px-3 border-b border-gray-200">
+                       <input
+                         type="text"
+                         placeholder="Type or paste result"
+                         value={resultSearchTerm}
+                         onChange={(e) => setResultSearchTerm(e.target.value)}
+                         className={`w-full px-3 py-2 rounded text-sm ${
+                           isDarkMode 
+                             ? 'text-white placeholder-gray-400' 
+                             : 'text-gray-900 placeholder-gray-500'
+                         } focus:outline-none`}
+                       />
+                     </div>
+                     
+                     {/* Result Options List */}
+                     <div className="max-h-48 overflow-y-auto">
+                       {filteredResultOptions.map((option) => {
+                         const isSelected = selectedResults.includes(option.id);
+                         return (
+                           <div
+                             key={option.id}
+                             onClick={() => handleResultToggle(option.id)}
+                             className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 ${
+                               isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
+                             }`}
+                           >
+                             <div className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                               isSelected 
+                                 ? 'bg-[#90C853] border-[#90C853]' 
+                                 : 'border-gray-300'
+                             }`}>
+                               {isSelected && (
+                                 <FontAwesomeIcon 
+                                   icon={faCheck} 
+                                   className="w-2.5 h-2.5 text-white" 
+                                 />
+                               )}
+                             </div>
+                             <span className={`text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                               {option.name}
+                             </span>
+                           </div>
+                         );
+                       })}
+                     </div>
+                   </div>
+                 )}
+               </div>
+            </div>
+          )}
+
+          {/* More Filters Button */}
+          {!showFilters && (
+            <div className="flex items-center">
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className={`flex text-xl items-center px-3 py-4 rounded-2xl border transition-colors ${
+                  isDarkMode 
+                    ? 'bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600' 
+                    : 'bg-white border-gray-300 text-[#0E201E]'
+                }`}
+                aria-label="Toggle additional filters"
+                aria-expanded={showFilters}
+              >
+                <FontAwesomeIcon icon={faFilter} className="w-4 h-4 mr-2 text-[#0E201E]" aria-hidden="true" />
+                Filters
+              </button>
+            </div>
+          )}
+      </div>
+      
+      {/* Active Filters Display */}
+      {hasActiveFilters && (
+        <div className="pt-4">
+          <div className="flex flex-wrap gap-2">
+            {/* Wallet Filters */}
+            {selectedWallets.map((walletId) => {
+              const wallet = walletOptions.find(w => w.id === walletId);
+              return wallet ? (
+                <div
+                  key={`wallet-${walletId}`}
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
+                    isDarkMode 
+                      ? 'bg-gray-700 text-white border border-gray-600' 
+                      : 'bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]'
+                  }`}
+                >
+                  <span>{wallet.name}</span>
+                  <button
+                    onClick={() => removeWalletFilter(walletId)}
+                    className="ml-1 hover:text-red-500 transition-colors"
+                    aria-label={`Remove ${wallet.name} filter`}
+                  >
+                    <FontAwesomeIcon icon={faTimes} className="w-3 h-3" aria-hidden="true" />
+                  </button>
+                </div>
+              ) : null;
+            })}
+
+            {/* Action Type Filters */}
+            {selectedActionTypes.map((actionTypeId) => {
+              const actionType = actionTypeOptions.find(a => a.id === actionTypeId);
+              return actionType ? (
+                <div
+                  key={`action-${actionTypeId}`}
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
+                    isDarkMode 
+                      ? 'bg-gray-700 text-white border border-gray-600' 
+                      : 'bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]'
+                  }`}
+                >
+                  <span>{actionType.name}</span>
+                  <button
+                    onClick={() => removeActionTypeFilter(actionTypeId)}
+                    className="ml-1 hover:text-red-500 transition-colors"
+                    aria-label={`Remove ${actionType.name} filter`}
+                  >
+                    <FontAwesomeIcon icon={faTimes} className="w-3 h-3" aria-hidden="true" />
+                  </button>
+                </div>
+              ) : null;
+            })}
+
+            {/* Amount Sent Filter */}
+            {(fromSentValue !== '0' || toSentValue !== '0') && (
+              <div
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
+                  isDarkMode 
+                    ? 'bg-gray-700 text-white border border-gray-600' 
+                    : 'bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]'
+                }`}
+              >
+                <span>{fromSentValue} - {toSentValue} {fromSentCurrency}</span>
+                <button
+                  onClick={removeAmountSentFilter}
+                  className="ml-1 hover:text-red-500 transition-colors"
+                >
+                  <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
+                </button>
+              </div>
+            )}
+
+            {/* Amount Received Filter */}
+            {(fromReceivedValue !== '0' || toReceivedValue !== '0') && (
+              <div
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
+                  isDarkMode 
+                    ? 'bg-gray-700 text-white border border-gray-600' 
+                    : 'bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]'
+                }`}
+              >
+                <span>{fromReceivedValue} - {toReceivedValue} {fromReceivedCurrency}</span>
+                <button
+                  onClick={removeAmountReceivedFilter}
+                  className="ml-1 hover:text-red-500 transition-colors"
+                >
+                  <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
+                </button>
+              </div>
+            )}
+
+                                                                {/* Date Filter */}
+              {selectedDateRange && selectedDateRange.startDate && selectedDateRange.endDate && (
+                <div
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
+                    isDarkMode 
+                      ? 'bg-gray-700 text-white border border-gray-600' 
+                      : 'bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]'
+                  }`}
+                >
+                  <span>{formatDate(selectedDateRange.startDate)} - {formatDate(selectedDateRange.endDate)}</span>
+                  <button
+                    onClick={removeDateFilter}
+                    className="ml-1 hover:text-red-500 transition-colors"
+                  >
+                    <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
+                  </button>
+                </div>
+              )}
+              
+
+            {/* Result Filters */}
+            {selectedResults.map((resultId) => {
+              const result = resultOptions.find(r => r.id === resultId);
+              return result ? (
+                <div
+                  key={`result-${resultId}`}
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
+                    isDarkMode 
+                      ? 'bg-gray-700 text-white border border-gray-600' 
+                      : 'bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]'
+                  }`}
+                >
+                  <span>{result.name}</span>
+                  <button
+                    onClick={() => removeResultFilter(resultId)}
+                    className="ml-1 hover:text-red-500 transition-colors"
+                    aria-label={`Remove ${result.name} filter`}
+                  >
+                    <FontAwesomeIcon icon={faTimes} className="w-3 h-3" aria-hidden="true" />
+                  </button>
+                </div>
+              ) : null;
+            })}
+            <div className="flex items-center justify-between mx-3">
+              <button
+                onClick={clearAllFilters}
+                className={`text-xs text-[#5F9339] font-medium transition-colors`}
+              >
+                <FontAwesomeIcon icon={faTimes} className="w-3 h-3 mx-2" aria-hidden="true" />
+                <span>Clear All</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      
+    </div>
+   );
+ };
+
+export default Filter;
