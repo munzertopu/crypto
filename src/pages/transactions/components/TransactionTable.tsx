@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronUp, faChevronDown, faXmark, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  Card,
-  Typography,
-  CardBody,
-  Avatar,
-} from "@material-tailwind/react";
-import TransactionDetail from './TransactionDetail';
+  faChevronUp,
+  faChevronDown,
+  faXmark,
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { Card, Typography, CardBody, Avatar } from "@material-tailwind/react";
+import TransactionDetail from "./TransactionDetail";
 
 interface Transaction {
   id: string;
@@ -18,14 +19,14 @@ interface Transaction {
     logo: string;
     color: string;
   };
-  type: 'buy' | 'sell' | 'swap' | 'transfer',
-  action: 'Trade' | 'Receive' | 'Transfer' | 'Swap' | 'Send' | 'Deploy';
+  type: "buy" | "sell" | "swap" | "transfer";
+  action: "Trade" | "Receive" | "Transfer" | "Swap" | "Send" | "Deploy";
   sent: string;
   received: string;
   transactionId: string;
   result: string;
   date: string;
-  status: 'completed' | 'pending' | 'failed';
+  status: "completed" | "pending" | "failed";
   platform: string;
   error?: string;
 }
@@ -39,24 +40,70 @@ interface TransactionTableProps {
   onToggleExpanded?: (transactionId: string) => void;
 }
 
-const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, isDarkMode, activeTab = 'All', onTransactionClick, expandedTransactionId, onToggleExpanded }) => {
-  const [selectedTransactions, setSelectedTransactions] = useState<string[]>([]);
+const TransactionTable: React.FC<TransactionTableProps> = ({
+  transactions,
+  isDarkMode,
+  activeTab = "All",
+  onTransactionClick,
+  expandedTransactionId,
+  onToggleExpanded,
+}) => {
+  const [selectedTransactions, setSelectedTransactions] = useState<string[]>(
+    []
+  );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [isTagDropdownOpen, setIsTagDropdownOpen] = useState(false);
-  const [selectedTag, setSelectedTag] = useState('Loan');
+  const [selectedTag, setSelectedTag] = useState("Loan");
 
   // Dynamic table headers based on active tab
   const getTableHeaders = () => {
     switch (activeTab) {
-      case 'All':
-        return ["select", "Wallet", "Action", "Sent", "Received", "Result", "Transaction ID", ""];
-      case 'Uncategorized':
-        return ["select", "Wallet", "Action", "Sent", "Received", "Result", "Transaction ID", ""];
-      case 'Warnings':
-        return ["select", "Wallet", "Action", "Sent", "Received", "Warning", "Transaction ID", "Error", ""];
+      case "All":
+        return [
+          "select",
+          "Wallet",
+          "Action",
+          "Sent",
+          "Received",
+          "Result",
+          "Transaction ID",
+          "",
+        ];
+      case "Uncategorized":
+        return [
+          "select",
+          "Wallet",
+          "Action",
+          "Sent",
+          "Received",
+          "Result",
+          "Transaction ID",
+          "",
+        ];
+      case "Warnings":
+        return [
+          "select",
+          "Wallet",
+          "Action",
+          "Sent",
+          "Received",
+          "Warning",
+          "Transaction ID",
+          "Error",
+          "",
+        ];
       default:
-        return ["select", "Wallet", "Action", "Sent", "Received", "Result", "Transaction ID", ""];
+        return [
+          "select",
+          "Wallet",
+          "Action",
+          "Sent",
+          "Received",
+          "Result",
+          "Transaction ID",
+          "",
+        ];
     }
   };
 
@@ -68,20 +115,23 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, isDar
     if (selectedTransactions.length === data.length) {
       setSelectedTransactions([]);
     } else {
-      setSelectedTransactions(data.map(transaction => transaction.id));
+      setSelectedTransactions(data.map((transaction) => transaction.id));
     }
   };
 
   const handleSelectTransaction = (transactionId: string) => {
-    setSelectedTransactions(prev => 
-      prev.includes(transactionId) 
-        ? prev.filter(id => id !== transactionId)
+    setSelectedTransactions((prev) =>
+      prev.includes(transactionId)
+        ? prev.filter((id) => id !== transactionId)
         : [...prev, transactionId]
     );
   };
 
-  const isAllSelected = data.length > 0 && selectedTransactions.length === data.length;
-  const isIndeterminate = selectedTransactions.length > 0 && selectedTransactions.length < data.length;
+  const isAllSelected =
+    data.length > 0 && selectedTransactions.length === data.length;
+  const isIndeterminate =
+    selectedTransactions.length > 0 &&
+    selectedTransactions.length < data.length;
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -93,46 +143,55 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, isDar
   };
 
   const itemsPerPageOptions = [5, 10, 25, 50];
-  const tagOptions = ['Reward', 'Airdrop', 'Income', 'Loan', 'Fee refund'];
+  const tagOptions = ["Reward", "Airdrop", "Income", "Loan", "Fee refund"];
   const dropdownRef = useRef<HTMLDivElement>(null);
   const tagDropdownRef = useRef<HTMLDivElement>(null);
 
   // Click outside handler for items per page dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     };
 
     if (isDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isDropdownOpen]);
 
   // Click outside handler for tag dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (tagDropdownRef.current && !tagDropdownRef.current.contains(event.target as Node)) {
+      if (
+        tagDropdownRef.current &&
+        !tagDropdownRef.current.contains(event.target as Node)
+      ) {
         setIsTagDropdownOpen(false);
       }
     };
 
     if (isTagDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isTagDropdownOpen]);
 
   const renderExpandedDetails = (transaction: Transaction) => (
-    <tr key={`${transaction.id}-details`} className={`${isDarkMode ? 'bg-gray-800' : 'bg-[#F3F5F7]'}`}>
+    <tr
+      key={`${transaction.id}-details`}
+      className={`${isDarkMode ? "bg-gray-800" : "bg-[#F3F5F7]"}`}
+    >
       <td colSpan={TABLE_HEAD.length} className="px-4">
         <TransactionDetail isDarkMode={isDarkMode} />
       </td>
@@ -143,404 +202,568 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, isDar
     <div className="px-8 mb-6">
       <Card className={`h-full w-full border-transparent bg-transparent`}>
         <CardBody>
-          <table className="w-full min-w-max table-auto text-left">
-            <thead className={`${isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"}`}>
-              <tr>
-                {TABLE_HEAD.map((head, index) => (
-                  <th
-                    key={head}
-                    className={`cursor-pointer p-4 ${index === 0 ? 'rounded-l-md' : ''} ${index === TABLE_HEAD.length - 1 ? 'rounded-r-md' : ''}`}
-                  >
-                    {head === "select" ? (
-                      <div className="flex items-center justify-center">
-                        <input
-                          type="checkbox"
-                          checked={isAllSelected}
-                          ref={(input) => {
-                            if (input) input.indeterminate = isIndeterminate;
-                          }}
-                          onChange={handleSelectAll}
-                          className={`w-4 h-4 rounded-lg accent-green-600 focus:outline-none`}
-                          aria-label="Select all transactions"
-                        />
-                      </div>
-                    ) : (
-                      <div
-                        className={`flex text-lg items-center justify-between gap-2 font-normal leading-none ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}
-                      >
-                        {head}{" "}
-                                                 {head !== "select" && head !== "Action" && head !== "Transaction ID" && head !== "Status" && head !== "Category" && head !== "Warning" && (
-                          <div className="flex flex-col" role="button" aria-label={`Sort by ${head}`}>
-                            <FontAwesomeIcon icon={faChevronUp} className="w-3 h-3" aria-hidden="true" />
-                            <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" aria-hidden="true" />
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((transaction) => {
-                const { id, wallet, action, sent, received, transactionId, result, status } = transaction;
-                const isCompleted = status === 'completed';
-                return (
-                  <React.Fragment key={id}>
-                    <tr 
-                      className={`${onToggleExpanded ? 'cursor-pointer hover:bg-gray-50 transition-colors' : ''} ${isDarkMode && onToggleExpanded ? 'hover:bg-gray-700' : ''}`}
-                      onClick={() => onToggleExpanded && onToggleExpanded(id)}
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-max table-auto text-left">
+              <thead
+                className={`${isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"}`}
+              >
+                <tr>
+                  {TABLE_HEAD.map((head, index) => (
+                    <th
+                      key={head}
+                      className={`cursor-pointer p-4 ${
+                        index === 0 ? "rounded-l-md" : ""
+                      } ${
+                        index === TABLE_HEAD.length - 1 ? "rounded-r-md" : ""
+                      }`}
                     >
-                      <td className='py-4' onClick={(e) => e.stopPropagation()}>
+                      {head === "select" ? (
                         <div className="flex items-center justify-center">
                           <input
                             type="checkbox"
-                            checked={selectedTransactions.includes(id)}
-                            onChange={() => handleSelectTransaction(id)}
+                            checked={isAllSelected}
+                            ref={(input) => {
+                              if (input) input.indeterminate = isIndeterminate;
+                            }}
+                            onChange={handleSelectAll}
                             className={`w-4 h-4 rounded-lg accent-green-600 focus:outline-none`}
-                            aria-label={`Select transaction ${transactionId}`}
+                            aria-label="Select all transactions"
                           />
                         </div>
-                      </td>
-                      <td className='py-4'>
-                        <div className="flex items-center gap-3">
-                          <Avatar 
-                            src={wallet.logo} 
-                            alt={wallet.name} 
-                            size="sm"
-                            className={`h-16 w-16 flex items-center justify-center text-white text-xs font-bold`}
-                          />
-                          <div className="flex flex-col">
-                            <Typography
-                              variant="small"
-                              className={`text-xl font-normal ${isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"}`}
-                            >
-                              {wallet.name}
-                            </Typography>
-                            <Typography
-                              variant="small"
-                              className={`text-md font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}
-                            >
-                              {wallet.address}
-                            </Typography>
-                          </div>
+                      ) : (
+                        <div
+                          className={`flex text-lg items-center justify-between gap-2 font-normal leading-none ${
+                            isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"
+                          }`}
+                        >
+                          {head}{" "}
+                          {head !== "select" &&
+                            head !== "Action" &&
+                            head !== "Transaction ID" &&
+                            head !== "Status" &&
+                            head !== "Category" &&
+                            head !== "Warning" && (
+                              <div
+                                className="flex flex-col"
+                                role="button"
+                                aria-label={`Sort by ${head}`}
+                              >
+                                <FontAwesomeIcon
+                                  icon={faChevronUp}
+                                  className="w-3 h-3"
+                                  aria-hidden="true"
+                                />
+                                <FontAwesomeIcon
+                                  icon={faChevronDown}
+                                  className="w-3 h-3"
+                                  aria-hidden="true"
+                                />
+                              </div>
+                            )}
                         </div>
-                      </td>
-                      <td className='py-4'>
-                        <Typography
-                          variant="small"
-                          className={`text-xl font-normal ${isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"}`}
+                      )}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((transaction) => {
+                  const {
+                    id,
+                    wallet,
+                    action,
+                    sent,
+                    received,
+                    transactionId,
+                    result,
+                    status,
+                  } = transaction;
+                  const isCompleted = status === "completed";
+                  return (
+                    <React.Fragment key={id}>
+                      <tr
+                        className={`${
+                          onToggleExpanded
+                            ? "cursor-pointer hover:bg-gray-50 transition-colors"
+                            : ""
+                        } ${
+                          isDarkMode && onToggleExpanded
+                            ? "hover:bg-gray-700"
+                            : ""
+                        }`}
+                        onClick={() => onToggleExpanded && onToggleExpanded(id)}
+                      >
+                        <td
+                          className="py-4"
+                          onClick={(e) => e.stopPropagation()}
                         >
-                          {action}
-                        </Typography>
-                      </td>
-                      <td className='py-4'>
-                        {sent && (
-                          <div className="flex items-center gap-2">
-                            <Typography
-                              variant="small"
-                              className="text-xl font-normal text-red-600"
-                            >
-                              {sent}
-                            </Typography>
+                          <div className="flex items-center justify-center">
+                            <input
+                              type="checkbox"
+                              checked={selectedTransactions.includes(id)}
+                              onChange={() => handleSelectTransaction(id)}
+                              className={`w-4 h-4 rounded-lg accent-green-600 focus:outline-none`}
+                              aria-label={`Select transaction ${transactionId}`}
+                            />
                           </div>
-                        )}
-                      </td>
-                      <td className='py-4'>
-                        {received && (
-                          <div className="flex items-center gap-2">
-                            <Typography
-                              variant="small"
-                              className="text-xl font-normal text-green-600"
-                            >
-                              {received}
-                            </Typography>
+                        </td>
+                        <td className="py-4">
+                          <div className="flex items-center gap-3">
+                            <Avatar
+                              src={wallet.logo}
+                              alt={wallet.name}
+                              size="sm"
+                              className={`h-16 w-16 flex items-center justify-center text-white text-xs font-bold`}
+                            />
+                            <div className="flex flex-col">
+                              <Typography
+                                variant="small"
+                                className={`text-xl font-normal ${
+                                  isDarkMode
+                                    ? "text-[#F3F5F7]"
+                                    : "text-[#0E201E]"
+                                }`}
+                              >
+                                {wallet.name}
+                              </Typography>
+                              <Typography
+                                variant="small"
+                                className={`text-md font-normal ${
+                                  isDarkMode
+                                    ? "text-[#B6B8BA]"
+                                    : "text-[#666868]"
+                                }`}
+                              >
+                                {wallet.address}
+                              </Typography>
+                            </div>
                           </div>
+                        </td>
+                        <td className="py-4">
+                          <Typography
+                            variant="small"
+                            className={`text-xl font-normal ${
+                              isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
+                            }`}
+                          >
+                            {action}
+                          </Typography>
+                        </td>
+                        <td className="py-4">
+                          {sent && (
+                            <div className="flex items-center gap-2">
+                              <Typography
+                                variant="small"
+                                className="text-xl font-normal text-red-600"
+                              >
+                                {sent}
+                              </Typography>
+                            </div>
+                          )}
+                        </td>
+                        <td className="py-4">
+                          {received && (
+                            <div className="flex items-center gap-2">
+                              <Typography
+                                variant="small"
+                                className="text-xl font-normal text-green-600"
+                              >
+                                {received}
+                              </Typography>
+                            </div>
+                          )}
+                        </td>
+                        <td className="py-4">
+                          <Typography
+                            variant="small"
+                            className={`text-xl font-normal ${
+                              isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
+                            }`}
+                          >
+                            {result}
+                          </Typography>
+                        </td>
+                        <td className="py-4">
+                          <Typography
+                            variant="small"
+                            className={`text-xl font-normal ${
+                              isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
+                            }`}
+                          >
+                            {transactionId}
+                          </Typography>
+                        </td>
+                        {activeTab === "Warnings" && (
+                          <td className="py-4">
+                            <div className="flex items-center gap-2">
+                              {transaction.error &&
+                              transaction.error !== "---" ? (
+                                <>
+                                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                                  <div
+                                    className={`px-3 py-1 rounded-lg border ${
+                                      isDarkMode
+                                        ? "bg-red-900/20 border-red-600 text-red-400"
+                                        : "bg-red-50 border-red-200 text-red-700"
+                                    }`}
+                                  >
+                                    <Typography
+                                      variant="small"
+                                      className="text-sm font-normal"
+                                    >
+                                      {transaction.error}
+                                    </Typography>
+                                  </div>
+                                </>
+                              ) : (
+                                <Typography
+                                  variant="small"
+                                  className={`text-xl font-normal ${
+                                    isDarkMode
+                                      ? "text-[#F3F5F7]"
+                                      : "text-[#0E201E]"
+                                  }`}
+                                >
+                                  {transaction.error || "---"}
+                                </Typography>
+                              )}
+                            </div>
+                          </td>
                         )}
-                      </td>
-                      <td className='py-4'>
-                        <Typography
-                          variant="small"
-                          className={`text-xl font-normal ${isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"}`}
-                        >
-                          {result}
-                        </Typography>
-                       </td>
-                      <td className='py-4'>
-                        <Typography
-                          variant="small"
-                          className={`text-xl font-normal ${isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"}`}
-                        >
-                          {transactionId}
-                        </Typography>
-                      </td>
-                                             {activeTab === 'Warnings' && 
-                         <td className='py-4'>
-                           <div className="flex items-center gap-2">
-                             {transaction.error && transaction.error !== '---' ? (
-                               <>
-                                 <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                                 <div className={`px-3 py-1 rounded-lg border ${
-                                   isDarkMode 
-                                     ? 'bg-red-900/20 border-red-600 text-red-400' 
-                                     : 'bg-red-50 border-red-200 text-red-700'
-                                 }`}>
-                                   <Typography
-                                     variant="small"
-                                     className="text-sm font-normal"
-                                   >
-                                     {transaction.error}
-                                   </Typography>
-                                 </div>
-                               </>
-                             ) : (
-                               <Typography
-                                 variant="small"
-                                 className={`text-xl font-normal ${isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"}`}
-                               >
-                                 {transaction.error || '---'}
-                               </Typography>
-                             )}
-                           </div>
-                         </td>
-                       }
-                      <td className='py-4'>
-                        {isCompleted && (
-                          <div className="w-10 h-10 rounded-full flex items-center justify-end text-[#7C7C7C]">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-8">
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                            </svg>
-                          </div>
-                        )}
-                      </td>
-                    </tr>
-                    
-                    {/* Expanded Details Row */}
-                    {expandedTransactionId === id && renderExpandedDetails(transaction)}
-                  </React.Fragment>
-                );
-              })}
-            </tbody>
-          </table>
+                        <td className="py-4">
+                          {isCompleted && (
+                            <div className="w-10 h-10 rounded-full flex items-center justify-end text-[#7C7C7C]">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="size-8"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                                />
+                              </svg>
+                            </div>
+                          )}
+                        </td>
+                      </tr>
+
+                      {/* Expanded Details Row */}
+                      {expandedTransactionId === id &&
+                        renderExpandedDetails(transaction)}
+                    </React.Fragment>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </CardBody>
       </Card>
-      
+
       {/* Table Footer */}
-      <div className={`mt-4 px-8 py-4 ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+      <div
+        className={`mt-4 px-8 py-4 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
+      >
         <div className="flex items-center justify-between">
           {/* Left side - Show on page dropdown */}
           <div className="flex items-center space-x-2">
-             <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-               Show on page
-             </span>
-             <div className="relative" ref={dropdownRef}>
-               <button 
-                 className={`px-3 py-1 rounded border flex items-center space-x-2 ${
-                   isDarkMode 
-                     ? 'border-gray-600 text-gray-300 bg-gray-700 hover:bg-gray-600' 
-                     : 'border-gray-300 text-gray-700 bg-white hover:bg-gray-50'
-                 }`}
-                 onClick={handleDropdownToggle}
-                 aria-label="Select items per page"
-                 aria-haspopup="true"
-                 aria-expanded={isDropdownOpen}
-               >
-                 <span>{itemsPerPage}</span>
-                 <FontAwesomeIcon icon={faChevronDown} className={`w-3 h-3 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
-               </button>
-               
-               {/* Dropdown Menu */}
-               {isDropdownOpen && (
-                 <div className={`absolute bottom-full left-0 mb-1 w-16 border rounded-lg shadow-lg py-1 z-50 ${
-                   isDarkMode 
-                     ? 'bg-gray-800 border-gray-600' 
-                     : 'bg-white border-gray-300'
-                 }`}>
-                   {itemsPerPageOptions.map((option) => (
-                     <button
-                       key={option}
-                       className={`w-full px-3 py-1 text-sm text-left hover:bg-gray-100 ${
-                         isDarkMode 
-                           ? 'text-gray-300 hover:bg-gray-700' 
-                           : 'text-gray-700 hover:bg-gray-100'
-                       } ${itemsPerPage === option ? 'bg-[#90C853]' : ''}`}
-                       onClick={() => handleItemsPerPageChange(option)}
-                       aria-label={`Show ${option} items per page`}
-                     >
-                       {option}
-                     </button>
-                   ))}
-                 </div>
-               )}
-             </div>
-             <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-               of 77
-             </span>
-           </div>
+            <span
+              className={`text-sm ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              Show on page
+            </span>
+            <div className="relative" ref={dropdownRef}>
+              <button
+                className={`px-3 py-1 rounded border flex items-center space-x-2 ${
+                  isDarkMode
+                    ? "border-gray-600 text-gray-300 bg-gray-700 hover:bg-gray-600"
+                    : "border-gray-300 text-gray-700 bg-white hover:bg-gray-50"
+                }`}
+                onClick={handleDropdownToggle}
+                aria-label="Select items per page"
+                aria-haspopup="true"
+                aria-expanded={isDropdownOpen}
+              >
+                <span>{itemsPerPage}</span>
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  className={`w-3 h-3 transition-transform ${
+                    isDropdownOpen ? "rotate-180" : ""
+                  }`}
+                  aria-hidden="true"
+                />
+              </button>
 
-           {/* Center - Conditional actions when transactions are selected */}
-           {selectedTransactions.length > 0 && (
-             <div className={`flex items-center space-x-3 px-4 py-3 rounded-xl ${isDarkMode ? 'bg-gray-700' : 'bg-transparent border border-[#E1E3E5]'}`}>
-               <span className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                 {selectedTransactions.length} selected
-               </span>
-               <div className={`w-px h-4 ${isDarkMode ? 'bg-gray-600' : 'bg-gray-300'}`} role="separator"></div>
-               <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                 Tag as:
-               </span>
-               <div className={`relative inline-block`} ref={tagDropdownRef}>
-                 <button 
-                   className={`px-3 py-1 text-sm rounded border flex items-center space-x-1 ${
-                     isDarkMode
-                       ? 'border-gray-600 text-gray-300'
-                       : 'border-gray-300 text-gray-700'
-                   }`}
-                   onClick={() => setIsTagDropdownOpen(!isTagDropdownOpen)}
-                   aria-label="Select tag type for selected transactions"
-                   aria-haspopup="true"
-                   aria-expanded={isTagDropdownOpen}
-                 >
-                   <span>{selectedTag}</span>
-                   <FontAwesomeIcon icon={faChevronDown} className={`w-3 h-3 transition-transform ${isTagDropdownOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
-                 </button>
-                 
-                 {/* Tag Dropdown Menu */}
-                 {isTagDropdownOpen && (
-                   <div className={`absolute bottom-full left-0 mb-1 w-32 border rounded-lg shadow-lg py-1 z-50 max-h-40 overflow-y-auto ${
-                     isDarkMode 
-                       ? 'bg-gray-800 border-gray-600' 
-                       : 'bg-white border-gray-300'
-                   }`}>
-                     {tagOptions.map((option) => (
-                       <button
-                         key={option}
-                         className={`w-full px-3 py-2 text-sm text-left flex items-center justify-between ${selectedTag === option ? 'bg-gray-100' : ''}`}
-                         onClick={() => {
-                           setSelectedTag(option);
-                           setIsTagDropdownOpen(false);
-                         }}
-                         aria-label={`Select ${option} tag`}
-                       >
-                         <span>{option}</span>
-                         {selectedTag === option && (
-                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                           </svg>
-                         )}
-                       </button>
-                     ))}
-                   </div>
-                 )}
-               </div>
-               <div className={`w-px h-4 ${isDarkMode ? 'bg-gray-600' : 'bg-gray-300'}`} role="separator"></div>
-               <button 
-                 className={`px-3 py-1 text-sm rounded border ${
-                   isDarkMode
-                     ? 'border-gray-600 text-gray-300'
-                     : 'border-gray-300 text-gray-700'
-                 }`}
-                 aria-label="Merge selected transactions"
-               >
-                 Merge
-               </button>
-               <div className={`w-px h-4 ${isDarkMode ? 'bg-gray-600' : 'bg-gray-300'}`} role="separator"></div>
-               <button 
-                 className={`px-3 py-1 text-sm rounded bg-[#90C853] text-[#0E201E]`}
-                 aria-label="Apply actions to selected transactions"
-               >
-                 Apply
-               </button>
-               <button 
-                 className={`px-2 py-1 text-sm rounded border ${
-                   isDarkMode
-                     ? 'border-gray-600 text-gray-300'
-                     : 'border-gray-300 text-gray-700'
-                 }`} 
-                 onClick={() => setSelectedTransactions([])}
-                 aria-label="Clear selection"
-               >
-                 <FontAwesomeIcon icon={faXmark} className="w-3 h-3" aria-hidden="true" />
-               </button>
-             </div>
-           )}
+              {/* Dropdown Menu */}
+              {isDropdownOpen && (
+                <div
+                  className={`absolute bottom-full left-0 mb-1 w-16 border rounded-lg shadow-lg py-1 z-50 ${
+                    isDarkMode
+                      ? "bg-gray-800 border-gray-600"
+                      : "bg-white border-gray-300"
+                  }`}
+                >
+                  {itemsPerPageOptions.map((option) => (
+                    <button
+                      key={option}
+                      className={`w-full px-3 py-1 text-sm text-left hover:bg-gray-100 ${
+                        isDarkMode
+                          ? "text-gray-300 hover:bg-gray-700"
+                          : "text-gray-700 hover:bg-gray-100"
+                      } ${itemsPerPage === option ? "bg-[#90C853]" : ""}`}
+                      onClick={() => handleItemsPerPageChange(option)}
+                      aria-label={`Show ${option} items per page`}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <span
+              className={`text-sm ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              of 77
+            </span>
+          </div>
 
-           {/* Right side - Page navigation */}
-           <div className="flex items-center space-x-2">
-             {/* Previous button */}
-             <button 
-               className={`w-8 h-8 rounded border flex items-center justify-center ${
-                 isDarkMode 
-                   ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
-                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-               }`}
-               aria-label="Go to previous page"
-             >
-               <FontAwesomeIcon icon={faChevronLeft} className="w-3 h-3" aria-hidden="true" />
-             </button>
+          {/* Center - Conditional actions when transactions are selected */}
+          {selectedTransactions.length > 0 && (
+            <div
+              className={`flex items-center space-x-3 px-4 py-3 rounded-xl ${
+                isDarkMode
+                  ? "bg-gray-700"
+                  : "bg-transparent border border-[#E1E3E5]"
+              }`}
+            >
+              <span
+                className={`text-sm font-medium ${
+                  isDarkMode ? "text-gray-300" : "text-gray-700"
+                }`}
+              >
+                {selectedTransactions.length} selected
+              </span>
+              <div
+                className={`w-px h-4 ${
+                  isDarkMode ? "bg-gray-600" : "bg-gray-300"
+                }`}
+                role="separator"
+              ></div>
+              <span
+                className={`text-sm ${
+                  isDarkMode ? "text-gray-300" : "text-gray-600"
+                }`}
+              >
+                Tag as:
+              </span>
+              <div className={`relative inline-block`} ref={tagDropdownRef}>
+                <button
+                  className={`px-3 py-1 text-sm rounded border flex items-center space-x-1 ${
+                    isDarkMode
+                      ? "border-gray-600 text-gray-300"
+                      : "border-gray-300 text-gray-700"
+                  }`}
+                  onClick={() => setIsTagDropdownOpen(!isTagDropdownOpen)}
+                  aria-label="Select tag type for selected transactions"
+                  aria-haspopup="true"
+                  aria-expanded={isTagDropdownOpen}
+                >
+                  <span>{selectedTag}</span>
+                  <FontAwesomeIcon
+                    icon={faChevronDown}
+                    className={`w-3 h-3 transition-transform ${
+                      isTagDropdownOpen ? "rotate-180" : ""
+                    }`}
+                    aria-hidden="true"
+                  />
+                </button>
 
-             {/* Page numbers */}
-             <button 
-               className={`w-8 h-8 rounded-lg border flex items-center justify-center text-sm font-medium ${
-                 isDarkMode 
-                   ? 'border-gray-600 text-gray-300 bg-[#90C853]' 
-                   : 'text-[#0E201E] bg-[#90C853]'
-               }`}
-               aria-label="Go to page 1"
-               aria-current="page"
-             >
-               1
-             </button>
-             <button 
-               className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium ${
-                 isDarkMode 
-                   ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
-                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-               }`}
-               aria-label="Go to page 2"
-             >
-               2
-             </button>
-             <button 
-               className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium ${
-                 isDarkMode 
-                   ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
-                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-               }`}
-               aria-label="Go to page 3"
-             >
-               3
-             </button>
-             
-             {/* Ellipsis */}
-             <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-               ...
-             </span>
-             
-             <button 
-               className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium ${
-                 isDarkMode 
-                   ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
-                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-               }`}
-               aria-label="Go to page 13"
-             >
-               13
-             </button>
+                {/* Tag Dropdown Menu */}
+                {isTagDropdownOpen && (
+                  <div
+                    className={`absolute bottom-full left-0 mb-1 w-32 border rounded-lg shadow-lg py-1 z-50 max-h-40 overflow-y-auto ${
+                      isDarkMode
+                        ? "bg-gray-800 border-gray-600"
+                        : "bg-white border-gray-300"
+                    }`}
+                  >
+                    {tagOptions.map((option) => (
+                      <button
+                        key={option}
+                        className={`w-full px-3 py-2 text-sm text-left flex items-center justify-between ${
+                          selectedTag === option ? "bg-gray-100" : ""
+                        }`}
+                        onClick={() => {
+                          setSelectedTag(option);
+                          setIsTagDropdownOpen(false);
+                        }}
+                        aria-label={`Select ${option} tag`}
+                      >
+                        <span>{option}</span>
+                        {selectedTag === option && (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                            stroke="currentColor"
+                            className="w-4 h-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M4.5 12.75l6 6 9-13.5"
+                            />
+                          </svg>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div
+                className={`w-px h-4 ${
+                  isDarkMode ? "bg-gray-600" : "bg-gray-300"
+                }`}
+                role="separator"
+              ></div>
+              <button
+                className={`px-3 py-1 text-sm rounded border ${
+                  isDarkMode
+                    ? "border-gray-600 text-gray-300"
+                    : "border-gray-300 text-gray-700"
+                }`}
+                aria-label="Merge selected transactions"
+              >
+                Merge
+              </button>
+              <div
+                className={`w-px h-4 ${
+                  isDarkMode ? "bg-gray-600" : "bg-gray-300"
+                }`}
+                role="separator"
+              ></div>
+              <button
+                className={`px-3 py-1 text-sm rounded bg-[#90C853] text-[#0E201E]`}
+                aria-label="Apply actions to selected transactions"
+              >
+                Apply
+              </button>
+              <button
+                className={`px-2 py-1 text-sm rounded border ${
+                  isDarkMode
+                    ? "border-gray-600 text-gray-300"
+                    : "border-gray-300 text-gray-700"
+                }`}
+                onClick={() => setSelectedTransactions([])}
+                aria-label="Clear selection"
+              >
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
+          )}
 
-             {/* Next button */}
-             <button 
-               className={`w-8 h-8 rounded border flex items-center justify-center ${
-                 isDarkMode 
-                   ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
-                   : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-               }`}
-               aria-label="Go to next page"
-             >
-               <FontAwesomeIcon icon={faChevronRight} className="w-3 h-3" aria-hidden="true" />
-             </button>
-           </div>
-         </div>
-       </div>
+          {/* Right side - Page navigation */}
+          <div className="flex items-center space-x-2">
+            {/* Previous button */}
+            <button
+              className={`w-8 h-8 rounded border flex items-center justify-center ${
+                isDarkMode
+                  ? "border-gray-600 text-gray-300 hover:bg-gray-700"
+                  : "border-gray-300 text-gray-700 hover:bg-gray-50"
+              }`}
+              aria-label="Go to previous page"
+            >
+              <FontAwesomeIcon
+                icon={faChevronLeft}
+                className="w-3 h-3"
+                aria-hidden="true"
+              />
+            </button>
+
+            {/* Page numbers */}
+            <button
+              className={`w-8 h-8 rounded-lg border flex items-center justify-center text-sm font-medium ${
+                isDarkMode
+                  ? "border-gray-600 text-gray-300 bg-[#90C853]"
+                  : "text-[#0E201E] bg-[#90C853]"
+              }`}
+              aria-label="Go to page 1"
+              aria-current="page"
+            >
+              1
+            </button>
+            <button
+              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium ${
+                isDarkMode
+                  ? "border-gray-600 text-gray-300 hover:bg-gray-700"
+                  : "border-gray-300 text-gray-700 hover:bg-gray-50"
+              }`}
+              aria-label="Go to page 2"
+            >
+              2
+            </button>
+            <button
+              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium ${
+                isDarkMode
+                  ? "border-gray-600 text-gray-300 hover:bg-gray-700"
+                  : "border-gray-300 text-gray-700 hover:bg-gray-50"
+              }`}
+              aria-label="Go to page 3"
+            >
+              3
+            </button>
+
+            {/* Ellipsis */}
+            <span
+              className={`text-sm ${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
+              ...
+            </span>
+
+            <button
+              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium ${
+                isDarkMode
+                  ? "border-gray-600 text-gray-300 hover:bg-gray-700"
+                  : "border-gray-300 text-gray-700 hover:bg-gray-50"
+              }`}
+              aria-label="Go to page 13"
+            >
+              13
+            </button>
+
+            {/* Next button */}
+            <button
+              className={`w-8 h-8 rounded border flex items-center justify-center ${
+                isDarkMode
+                  ? "border-gray-600 text-gray-300 hover:bg-gray-700"
+                  : "border-gray-300 text-gray-700 hover:bg-gray-50"
+              }`}
+              aria-label="Go to next page"
+            >
+              <FontAwesomeIcon
+                icon={faChevronRight}
+                className="w-3 h-3"
+                aria-hidden="true"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

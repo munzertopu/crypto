@@ -86,6 +86,8 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
     rows.push(data.slice(i, i + 5));
   }
 
+  console.log("rowsss", rows);
+
   return (
     <div className="px-8 mb-6">
       <h3
@@ -95,59 +97,66 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
       >
         Portfolio Allocation
       </h3>
-      <div className="space-y-4">
-        {rows.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex items-center min-w-0">
-            {row.map((asset, assetIndex) => (
-              <React.Fragment key={asset.name}>
-                <div className="flex items-center space-x-4 min-w-[220px] max-w-[230px] flex-shrink-0">
-                  {/* Asset Logo */}
-                  <div className="flex-shrink-0 rounded-full flex items-center justify-center overflow-hidden">
-                    {asset.logoUrl ? (
-                      <img
-                        src={asset.logo}
-                        alt={`${asset.name} logo`}
-                        className="w-11 h-11 object-contain"
-                        onError={(e) => {
-                          // Fallback to colored background with letter if image fails to load
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = "none";
-                          target.nextElementSibling?.classList.remove("hidden");
-                        }}
-                      />
-                    ) : null}
-                    <div
-                      className={`w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm ${
-                        asset.logoUrl ? "hidden" : ""
-                      }`}
-                    >
-                      {asset.logo}
-                    </div>
-                  </div>
-
-                  {/* Asset Name and Percentage */}
-                  <div className="min-w-0 flex-1">
-                    <span
-                      className={`text-xl text-left font-medium ${
-                        isDarkMode ? "text-[#CDCFD1]" : "text-[#0E201E]"
-                      } truncate block`}
-                    >
-                      <span className="opacity-70">{asset.name}:</span>{" "}
-                      <span className="font-bold">{asset.percentage}%</span>
-                    </span>
+      <div
+        className={` grid gap-4 
+  grid-cols-1 
+  sm:grid-cols-2 
+  md:grid-cols-3 
+  lg:grid-cols-4 
+  xl:grid-cols-5
+     ${isDarkMode ? "divide-[#4D5050]" : "divide-[#E1E3E5]"}
+  
+     `}
+      >
+        {data.map((asset, assetIndex) => (
+          <div key={assetIndex} className="flex items-center min-w-0">
+            <React.Fragment key={asset.name}>
+              <div className="flex items-center space-x-4 w-full sm:min-w-[220px] sm:max-w-[230px] flex-shrink-0">
+                {/* Asset Logo */}
+                <div className="flex-shrink-0 rounded-full flex items-center justify-center overflow-hidden">
+                  {asset.logoUrl ? (
+                    <img
+                      src={asset.logo}
+                      alt={`${asset.name} logo`}
+                      className="w-11 h-11 object-contain"
+                      onError={(e) => {
+                        // Fallback to colored background with letter if image fails to load
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = "none";
+                        target.nextElementSibling?.classList.remove("hidden");
+                      }}
+                    />
+                  ) : null}
+                  <div
+                    className={` w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm ${
+                      asset.logoUrl ? "hidden" : ""
+                    }`}
+                  >
+                    {asset.logo}
                   </div>
                 </div>
 
-                {/* Vertical Separator - don't show for last element in row */}
-                {assetIndex < row.length - 1 && (
-                  <div
-                    className={`flex-shrink-0 w-px h-8 ${
-                      isDarkMode ? "bg-[#8C8E90]" : "bg-[#E1E3E5]"
-                    } mx-4 lg:mx-8`}
-                  ></div>
-                )}
-              </React.Fragment>
-            ))}
+                {/* Asset Name and Percentage */}
+                <div className="min-w-0 flex-1">
+                  <span
+                    className={`text-xl text-left font-medium ${
+                      isDarkMode ? "text-[#CDCFD1]" : "text-[#0E201E]"
+                    } truncate sm:block flex justify-between`}
+                  >
+                    <span className="opacity-70">{asset.name}:</span>{" "}
+                    <span className="font-bold">{asset.percentage}%</span>
+                  </span>
+                </div>
+              </div>
+              {/* Vertical Separator - don't show for last element in row */}
+              {assetIndex < data.length - 1 && (
+                <div
+                  className={`flex-shrink-0 w-px h-8 ${
+                    isDarkMode ? "bg-[#8C8E90]" : "bg-[#E1E3E5]"
+                  } mx-4 lg:mx-8 hidden sm:block`}
+                ></div>
+              )}
+            </React.Fragment>
           </div>
         ))}
       </div>

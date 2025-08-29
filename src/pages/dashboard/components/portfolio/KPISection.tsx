@@ -18,6 +18,7 @@ interface KPICardProps {
   svgIcon?: React.ReactNode; // SVG icon
   isDarkMode: boolean;
   centered?: boolean;
+  className?: string; // NEW: allows external styling
 }
 
 const KPICard: React.FC<KPICardProps> = ({
@@ -29,14 +30,13 @@ const KPICard: React.FC<KPICardProps> = ({
   svgIcon,
   isDarkMode,
   centered = false,
+  className = "",
 }) => (
-  <div className="flex flex-col space-y-4">
+  <div className={`flex flex-col space-y-4 ${className}`}>
     <div className="flex items-center space-x-4">
       <div className="w-6 h-6 opacity-80 flex items-center justify-center">
         {svgIcon ? (
-          <div
-            className={`${isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"}`}
-          >
+          <div className={isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"}>
             {svgIcon}
           </div>
         ) : (
@@ -58,6 +58,7 @@ const KPICard: React.FC<KPICardProps> = ({
         </span>
       </div>
     </div>
+
     <div className="flex items-center space-x-2">
       <span
         className={`text-3xl font-bold ${
@@ -69,7 +70,8 @@ const KPICard: React.FC<KPICardProps> = ({
       <span
         className={`text-lg font-medium ${
           isPositive ? "text-[#5F9339]" : "text-[#D8382C]"
-        }`}
+        }
+        `}
       >
         {change}
       </span>
@@ -240,7 +242,7 @@ const KPISection: React.FC<KPISectionProps> = ({
         >
           KPI
         </h3>
-        <div className="relative pr-8" ref={dropdownRef}>
+        <div className="relative pr-0 sm:pr-8" ref={dropdownRef}>
           {/* Add KPI Button with Dropdown */}
           <button
             onClick={handleDropdownToggle}
@@ -383,66 +385,67 @@ const KPISection: React.FC<KPISectionProps> = ({
           )}
         </div>
       </div>
+      {/* sm:divide-x */}
+      <div
+        className={`
+    grid gap-8
+    grid-cols-[repeat(auto-fit,minmax(220px,1fr))]
+ 
+  `}
+      >
+        <KPICard
+          title="Income"
+          value={income}
+          change={incomeChange}
+          isPositive={incomeChange.startsWith("+")}
+          svgIcon={incomeSvg}
+          isDarkMode={isDarkMode}
+        />
 
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="lg:flex-1">
-          <KPICard
-            title="Income"
-            value={income}
-            change={incomeChange}
-            isPositive={incomeChange.startsWith("+")}
-            svgIcon={incomeSvg}
-            isDarkMode={isDarkMode}
-          />
-        </div>
-        {/* Vertical Separator */}
         <div
-          className={`hidden lg:block w-px ${
-            isDarkMode ? "bg-[#4D5050]" : "bg-[#E1E3E5]"
-          }`}
+          className={`flex-shrink-0 w-px h-20 ${
+            isDarkMode ? "bg-[#8C8E90]" : "bg-[#E1E3E5]"
+          } mx-10 hidden lg:block`}
         ></div>
-        <div className="lg:flex-1 flex justify-center">
-          <KPICard
-            title="Realized Gains"
-            value={realizedGains}
-            change={realizedGainsChange}
-            isPositive={realizedGainsChange.startsWith("+")}
-            svgIcon={realizedGainsSvg}
-            isDarkMode={isDarkMode}
-          />
-        </div>
-        {/* Vertical Separator */}
+
+        <KPICard
+          title="Realized Gains"
+          value={realizedGains}
+          change={realizedGainsChange}
+          isPositive={realizedGainsChange.startsWith("+")}
+          svgIcon={realizedGainsSvg}
+          isDarkMode={isDarkMode}
+        />
+
         <div
-          className={`hidden lg:block w-px ${
-            isDarkMode ? "bg-[#4D5050]" : "bg-[#E1E3E5]"
-          }`}
+          className={`flex-shrink-0 w-px h-20 ${
+            isDarkMode ? "bg-[#8C8E90]" : "bg-[#E1E3E5]"
+          } mx-10 hidden lg:block`}
         ></div>
-        <div className="lg:flex-1 flex justify-center">
-          <KPICard
-            title="Short Terms"
-            value={shortTerms}
-            change={shortTermsChange}
-            isPositive={shortTermsChange.startsWith("+")}
-            svgIcon={shortTermsSvg}
-            isDarkMode={isDarkMode}
-          />
-        </div>
-        {/* Vertical Separator */}
+
+        <KPICard
+          title="Short Terms"
+          value={shortTerms}
+          change={shortTermsChange}
+          isPositive={shortTermsChange.startsWith("+")}
+          svgIcon={shortTermsSvg}
+          isDarkMode={isDarkMode}
+        />
+
         <div
-          className={`hidden lg:block w-px ${
-            isDarkMode ? "bg-[#4D5050]" : "bg-[#E1E3E5]"
-          }`}
+          className={`flex-shrink-0 w-px h-20 ${
+            isDarkMode ? "bg-[#8C8E90]" : "bg-[#E1E3E5]"
+          } mx-10 hidden lg:block`}
         ></div>
-        <div className="lg:flex-1 flex justify-center">
-          <KPICard
-            title="Long Terms"
-            value={longTerms}
-            change={longTermsChange}
-            isPositive={longTermsChange.startsWith("+")}
-            svgIcon={longTermsSvg}
-            isDarkMode={isDarkMode}
-          />
-        </div>
+
+        <KPICard
+          title="Long Terms"
+          value={longTerms}
+          change={longTermsChange}
+          isPositive={longTermsChange.startsWith("+")}
+          svgIcon={longTermsSvg}
+          isDarkMode={isDarkMode}
+        />
       </div>
     </div>
   );

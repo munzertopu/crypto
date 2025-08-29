@@ -1,6 +1,6 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
 interface NFTData {
   id: string;
@@ -23,12 +23,12 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
     <div className="mx-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredNFTs.map((nft) => (
-          <div 
+          <div
             key={nft.id}
             className={`rounded-2xl overflow-hidden border ${
-              isDarkMode 
-                ? 'bg-gray-800 border-gray-700' 
-                : 'bg-white border-gray-200'
+              isDarkMode
+                ? "bg-gray-800 border-gray-700"
+                : "bg-white border-gray-200"
             } `}
           >
             {/* NFT Image */}
@@ -39,52 +39,99 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  target.nextElementSibling?.classList.remove('hidden');
+                  target.style.display = "none";
+                  target.nextElementSibling?.classList.remove("hidden");
                 }}
               />
             </div>
-            
+
             {/* NFT Details */}
             <div className="p-6">
-              <h3 className={`font-bold text-2xl text-left mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              <h3
+                className={`font-semibold text-lg text-left mb-3 ${
+                  isDarkMode ? "text-white" : "text-gray-800"
+                }`}
+              >
                 {nft.name}
               </h3>
-              
+
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <span className={`text-md font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                    <span
+                      className={`text-sm font-medium ${
+                        isDarkMode ? "text-gray-600" : "text-gray-600"
+                      }`}
+                    >
                       Estimated Current Value:
                     </span>
-                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
+                    <svg
+                      className="w-4 h-4 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 9v2m0 4h.01"
+                      />
                     </svg>
                   </div>
-                  <span className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                  <span
+                    className={`font-semibold text-sm ${
+                      isDarkMode ? "text-white" : "text-gray-900"
+                    }`}
+                  >
                     {nft.estimatedValue}
                   </span>
                 </div>
-                
+
                 <div className="flex justify-between items-center">
-                  <span className={`text-md font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <span
+                    className={`text-md font-semibold ${
+                      isDarkMode ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
                     Gain/Loss:
                   </span>
-                  <span className={`font-semibold ${
-                    nft.gainLoss.startsWith('+') ? 'text-green-600' : 'text-red-600'
-                  }`}>
+                  <span
+                    className={`font-semibold ${
+                      nft.gainLoss.startsWith("+")
+                        ? "text-green-600"
+                        : "text-red-600"
+                    }`}
+                  >
                     {nft.gainLossPercentage}
                   </span>
                 </div>
-                
+
                 <div className="flex justify-between items-center">
-                  <span className={`text-lg font-bold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <span
+                    className={`text-lg font-bold ${
+                      isDarkMode ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
                     {nft.purchasePrice}
                   </span>
                   <div className="flex items-center gap-1 border border-[#E1E3E5] rounded-full px-2 py-1 bg-[#F3F5F7]">
-                    <FontAwesomeIcon icon={faCalendarAlt} className="text-md text-gray-500" />
-                    <span className={`text-md font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                    <FontAwesomeIcon
+                      icon={faCalendarAlt}
+                      className="text-md text-gray-500"
+                    />
+                    <span
+                      className={`text-md font-semibold ${
+                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    >
                       {nft.purchaseDate}
                     </span>
                   </div>

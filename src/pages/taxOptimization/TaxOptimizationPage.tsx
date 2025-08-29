@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Tabs } from "@material-tailwind/react";
-import NavigationBar from '../../components/NavigationBar';
-import TaxOptimizationTab from './taxOptimizationTab/TaxOptimizationTab';
-import TaxLossHarvestingTab from './taxLossHarvestingTab/TaxLossHarvestingTab';
+import NavigationBar from "../../components/NavigationBar";
+import TaxOptimizationTab from "./taxOptimizationTab/TaxOptimizationTab";
+import TaxLossHarvestingTab from "./taxLossHarvestingTab/TaxLossHarvestingTab";
 
 interface TaxOptimizationPageProps {
   isDarkMode?: boolean;
@@ -13,10 +13,10 @@ interface TaxOptimizationPageProps {
 const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
   isDarkMode = false,
   onThemeToggle,
-  onLogout
+  onLogout,
 }) => {
-  const tabs = ['Tax Optimization', 'Tax Loss Harvesting'];
-  const [activeTab, setActiveTab] = useState('Tax Optimization');
+  const tabs = ["Tax Optimization", "Tax Loss Harvesting"];
+  const [activeTab, setActiveTab] = useState("Tax Optimization");
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -35,38 +35,54 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
   };
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'bg-[#0E201E] text-white' : 'bg-white text-gray-900'}`}>
-      <NavigationBar 
+    <div
+      className={`min-h-screen ${
+        isDarkMode ? "bg-[#0E201E] text-white" : "bg-white text-gray-900"
+      }`}
+    >
+      <NavigationBar
         isDarkMode={isDarkMode}
         onThemeToggle={handleThemeToggle}
         onLogout={handleLogout}
         currentPage="tax-optimization"
       />
-      
+
       <div className="mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         {/* Header */}
         <div className="mb-6">
-          <h1 className={`text-3xl font-bold mb-4 text-left ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+          <h1
+            className={`text-2xl font-semibold mb-4 text-left ${
+              isDarkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
             Tax Optimization
           </h1>
 
           {/* Sub Navigation Tabs */}
-          <div className={`${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+          <div
+            className={`${isDarkMode ? "border-gray-700" : "border-gray-200"}`}
+          >
             <Tabs>
-              <Tabs.List className={`${isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"}`}>
+              <Tabs.List
+                className={`${isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"}`}
+              >
                 {tabs.map((tab) => (
-                  <Tabs.Trigger 
+                  <Tabs.Trigger
                     key={tab}
                     value={tab}
                     onClick={() => handleTabChange?.(tab)}
-                    className={`py-2 px-3 rounded-lg ${
+                    className={`py-2 px-3 rounded-lg text-sm ${
                       activeTab === tab
-                        ? `${isDarkMode ? 'bg-[#0E201E] text-white' : 'bg-white text-black'}`
-                        : `${isDarkMode ? 'text-[#FFFFFF]' : 'text-[#0E201E]'}`
+                        ? `${
+                            isDarkMode
+                              ? "bg-[#0E201E] text-white"
+                              : "bg-white text-black"
+                          }`
+                        : `${isDarkMode ? "text-[#FFFFFF]" : "text-[#0E201E]"}`
                     }`}
                   >
                     {tab}
-                  </Tabs.Trigger >
+                  </Tabs.Trigger>
                 ))}
                 <Tabs.TriggerIndicator />
               </Tabs.List>
@@ -75,11 +91,11 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
         </div>
 
         {/* Main Content */}
-        {activeTab === 'Tax Optimization' && (
+        {activeTab === "Tax Optimization" && (
           <TaxOptimizationTab isDarkMode={isDarkMode} />
         )}
-        
-        {activeTab === 'Tax Loss Harvesting' && (
+
+        {activeTab === "Tax Loss Harvesting" && (
           <TaxLossHarvestingTab isDarkMode={isDarkMode} />
         )}
       </div>
