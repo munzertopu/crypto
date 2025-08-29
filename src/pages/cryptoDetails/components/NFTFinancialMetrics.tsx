@@ -269,43 +269,46 @@ const NFTSection: React.FC<NFTSectionProps> = ({
   );
   return (
     <div className="px-8 my-6">
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="lg:flex-1">
-          <Card
-            title="Total number of NFTs"
-            value={totalNFTs}
-            svgIcon={totalNFTsSvg}
-          />
-        </div>
-        {/* Vertical Separator */}
-        <div className="hidden lg:block w-px bg-gray-200"></div>
-        <div className="lg:flex-1 flex justify-center">
-          <Card
-            title="Total Purchase Value"
-            value={totalPurchaseValue}
-            svgIcon={totalPurchaseValueSvg}
-          />
-        </div>
-        {/* Vertical Separator */}
-        <div className="hidden lg:block w-px bg-gray-200"></div>
-        <div className="lg:flex-1 flex justify-center">
-          <Card
-            title="Total Estimated Value"
-            value={totalEstimatedValue}
-            svgIcon={totalEstimatedValueSvg}
-          />
-        </div>
-        {/* Vertical Separator */}
-        <div className="hidden lg:block w-px bg-gray-200"></div>
-        <div className="lg:flex-1 flex justify-center">
-          <Card
-            title="Estimated Gain/Loss"
-            value={estimatedGainLoss}
-            change={gainLossPercentage}
-            isPositive={gainLossPercentage.startsWith("+")}
-            svgIcon={estimatedGainLossSvg}
-          />
-        </div>
+      <div
+        className={`
+    grid gap-8
+    grid-cols-[repeat(auto-fit,minmax(220px,1fr))]
+  `}
+      >
+        <Card
+          title="Total number of NFTs"
+          value={totalNFTs}
+          svgIcon={totalNFTsSvg}
+        />
+
+        {/* Divider */}
+        <div className="hidden  lg:block w-px h-20 bg-gray-200 mx-10"></div>
+
+        <Card
+          title="Total Purchase Value"
+          value={totalPurchaseValue}
+          svgIcon={totalPurchaseValueSvg}
+        />
+
+        {/* Divider */}
+        <div className="hidden lg:block w-px h-20 bg-gray-200 mx-10"></div>
+
+        <Card
+          title="Total Estimated Value"
+          value={totalEstimatedValue}
+          svgIcon={totalEstimatedValueSvg}
+        />
+
+        {/* Divider */}
+        <div className="hidden lg:block w-px h-20 bg-gray-200 mx-10"></div>
+
+        <Card
+          title="Estimated Gain/Loss"
+          value={estimatedGainLoss}
+          change={gainLossPercentage}
+          isPositive={gainLossPercentage.startsWith("+")}
+          svgIcon={estimatedGainLossSvg}
+        />
       </div>
     </div>
   );
