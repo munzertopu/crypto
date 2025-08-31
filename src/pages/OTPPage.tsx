@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import LottieAnimation from '../components/LottieAnimation';
+import React, { useState, useRef, useEffect, Fragment } from "react";
+import LottieAnimation from "../components/LottieAnimation";
+import AuthLayout from "../components/layouts/AuthLayout";
 
 interface OTPPageProps {
   onBackToLogin?: () => void;
@@ -7,8 +8,12 @@ interface OTPPageProps {
   email?: string;
 }
 
-const OTPPage: React.FC<OTPPageProps> = ({ onBackToLogin, onVerifyCodeClick, email = 'jon.doe@gmail.com' }) => {
-  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+const OTPPage: React.FC<OTPPageProps> = ({
+  onBackToLogin,
+  onVerifyCodeClick,
+  email = "jon.doe@gmail.com",
+}) => {
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   // Initialize the refs array
@@ -17,12 +22,12 @@ const OTPPage: React.FC<OTPPageProps> = ({ onBackToLogin, onVerifyCodeClick, ema
   }, []);
 
   // Check if OTP is complete (all 6 digits filled)
-  const isOTPComplete = otp.every(digit => digit !== '');
+  const isOTPComplete = otp.every((digit) => digit !== "");
 
   const handleOtpChange = (index: number, value: string) => {
     // Only allow single digits
     if (value.length > 1) return;
-    
+
     // Only allow numbers
     if (!/^\d*$/.test(value)) return;
 
@@ -31,22 +36,25 @@ const OTPPage: React.FC<OTPPageProps> = ({ onBackToLogin, onVerifyCodeClick, ema
     setOtp(newOtp);
 
     // Auto-focus next input if current input is filled
-    if (value !== '' && index < 5) {
+    if (value !== "" && index < 5) {
       inputRefs.current[index + 1]?.focus();
     }
   };
 
-  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (
+    index: number,
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
     // Handle backspace to go to previous input
-    if (e.key === 'Backspace' && otp[index] === '' && index > 0) {
+    if (e.key === "Backspace" && otp[index] === "" && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const otpString = otp.join('');
-    console.log('OTP verification attempt:', otpString);
+    const otpString = otp.join("");
+    console.log("OTP verification attempt:", otpString);
     // Navigate to new password page with the email
     if (onVerifyCodeClick) {
       onVerifyCodeClick(email);
@@ -54,68 +62,70 @@ const OTPPage: React.FC<OTPPageProps> = ({ onBackToLogin, onVerifyCodeClick, ema
   };
 
   const handleResendCode = () => {
-    console.log('Resend code requested for:', email);
+    console.log("Resend code requested for:", email);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <AuthLayout>
       {/* Left Side - OTP Verification Form */}
-      <div className="flex-1 flex items-center justify-center px-8 sm:px-12 lg:px-16 text-left">
-        <div className="w-full max-w-md">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2 text-left">Enter 6 digit code we sent you</h1>
-            <p className="text-gray-600 text-left">
-              We sent a code to <strong>{email}</strong> to verify your identity. Enter it below to reset your password securely.
-            </p>
+
+      {/* Header */}
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2 text-left">
+          Enter 6 digit code we sent you
+        </h1>
+        <p className="text-gray-600 text-left">
+          We sent a code to <strong>{email}</strong> to verify your identity.
+          Enter it below to reset your password securely.
+        </p>
+      </div>
+
+      {/* OTP Verification Form */}
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* OTP Input Fields */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-4">
+            Code
+          </label>
+          <div className="flex justify-between gap-2">
+            {otp.map((digit, index) => (
+              <input
+                key={index}
+                ref={(el) => {
+                  if (el) {
+                    inputRefs.current[index] = el;
+                  }
+                }}
+                type="text"
+                value={digit}
+                onChange={(e) => handleOtpChange(index, e.target.value)}
+                onKeyDown={(e) => handleKeyDown(index, e)}
+                className="w-12 h-12 text-center border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-lg font-semibold"
+                placeholder="-"
+                maxLength={1}
+                required
+              />
+            ))}
           </div>
+        </div>
 
-          {/* OTP Verification Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* OTP Input Fields */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-4">
-                Code
-              </label>
-              <div className="flex justify-between gap-2">
-                 {otp.map((digit, index) => (
-                   <input
-                     key={index}
-                     ref={(el) => {
-                       if (el) {
-                         inputRefs.current[index] = el;
-                       }
-                     }}
-                     type="text"
-                     value={digit}
-                     onChange={(e) => handleOtpChange(index, e.target.value)}
-                     onKeyDown={(e) => handleKeyDown(index, e)}
-                     className="w-12 h-12 text-center border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-lg font-semibold"
-                     placeholder="-"
-                     maxLength={1}
-                     required
-                   />
-                 ))}
-               </div>
-            </div>
-            
-            {/* Verify Code Button */}
-            <div>
-              <button
-                type="submit"
-                disabled={!isOTPComplete}
-                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors ${
-                  isOTPComplete ? 'opacity-100' : 'opacity-50 cursor-not-allowed'
-                }`}
-                style={{ backgroundColor: isOTPComplete ? '#75AE46' : '#9CA3AF' }}
-                aria-label="Verify OTP code and proceed"
-              >
-                Verify Code
-              </button>
-            </div>
+        {/* Verify Code Button */}
+        <div>
+          <button
+            type="submit"
+            disabled={!isOTPComplete}
+            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors ${
+              isOTPComplete ? "opacity-100" : "opacity-50 cursor-not-allowed"
+            }`}
+            style={{ backgroundColor: isOTPComplete ? "#75AE46" : "#9CA3AF" }}
+            aria-label="Verify OTP code and proceed"
+          >
+            Verify Code
+          </button>
+        </div>
 
-            {/* Resend Code Link */}
-            {/* <div className="text-center">
+        {/* Resend Code Link */}
+        {/* <div className="text-center">
               <p className="text-sm text-gray-600">
                 Didn't receive the code?{' '}
                 <button 
@@ -129,8 +139,8 @@ const OTPPage: React.FC<OTPPageProps> = ({ onBackToLogin, onVerifyCodeClick, ema
               </p>
             </div> */}
 
-            {/* Back to Login Link */}
-            {/* <div className="text-center">
+        {/* Back to Login Link */}
+        {/* <div className="text-center">
               <p className="text-sm text-gray-600">
                 Remember your password?{' '}
                 <button 
@@ -143,24 +153,8 @@ const OTPPage: React.FC<OTPPageProps> = ({ onBackToLogin, onVerifyCodeClick, ema
                 </button>
               </p>
             </div> */}
-          </form>
-        </div>
-      </div>
-
-      {/* Right Side - Crypto Icons and Portal */}
-      <div className="hidden lg:flex lg:w-1/2 items-center justify-center p-8 relative overflow-hidden">
-         <div className="text-center relative z-10">
-           <LottieAnimation
-             type="animation"
-             width={700}
-             height={700}
-             loop={true}
-             autoplay={true}
-             className="mb-6"
-           />
-         </div>
-       </div>
-    </div>
+      </form>
+    </AuthLayout>
   );
 };
 
