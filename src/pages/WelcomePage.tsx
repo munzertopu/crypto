@@ -1,25 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import LottieAnimation from '../components/LottieAnimation';
+import React, { useEffect, useState } from "react";
+import LottieAnimation from "../components/LottieAnimation";
 
 interface WelcomePageProps {
   onGetStarted?: () => void;
 }
 
 const WelcomePage: React.FC<WelcomePageProps> = ({ onGetStarted }) => {
-  const [confetti, setConfetti] = useState<Array<{
-    id: number;
-    x: number;
-    y: number;
-    color: string;
-    type: string; // 'confetti' or 'sparkle'
-    animationDelay: number;
-  }>>([]);
+  const [confetti, setConfetti] = useState<
+    Array<{
+      id: number;
+      x: number;
+      y: number;
+      color: string;
+      type: string; // 'confetti' or 'sparkle'
+      animationDelay: number;
+    }>
+  >([]);
 
   // Generate confetti and sparkles
   useEffect(() => {
-    const colors = ['#90EE90', '#FFA500', '#FFFF00', '#FF6B6B', '#4ECDC4', '#45B7D1']; // More colors
+    const colors = [
+      "#90EE90",
+      "#FFA500",
+      "#FFFF00",
+      "#FF6B6B",
+      "#4ECDC4",
+      "#45B7D1",
+    ]; // More colors
     const newConfetti = [];
-    
+
     // Generate confetti pieces (increased from 50 to 120)
     for (let i = 0; i < 120; i++) {
       newConfetti.push({
@@ -27,28 +36,28 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onGetStarted }) => {
         x: Math.random() * 100,
         y: Math.random() * 100,
         color: colors[Math.floor(Math.random() * colors.length)],
-        type: 'confetti',
-        animationDelay: Math.random() * 4
+        type: "confetti",
+        animationDelay: Math.random() * 4,
       });
     }
-    
+
     // Generate sparkles (increased from 20 to 60)
     for (let i = 120; i < 180; i++) {
       newConfetti.push({
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        color: '#D3D3D3', // Light grey
-        type: 'sparkle',
-        animationDelay: Math.random() * 4
+        color: "#D3D3D3", // Light grey
+        type: "sparkle",
+        animationDelay: Math.random() * 4,
       });
     }
-    
+
     setConfetti(newConfetti);
   }, []);
 
   const handleGetStarted = () => {
-    console.log('Get Started clicked - navigating to dashboard');
+    console.log("Get Started clicked - navigating to dashboard");
     if (onGetStarted) {
       onGetStarted();
     }
@@ -66,10 +75,10 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onGetStarted }) => {
               left: `${piece.x}%`,
               top: `${piece.y}%`,
               animationDelay: `${piece.animationDelay}s`,
-              animationDuration: `${2 + Math.random() * 2}s`
+              animationDuration: `${2 + Math.random() * 2}s`,
             }}
           >
-            {piece.type === 'confetti' ? (
+            {piece.type === "confetti" ? (
               <div
                 className="w-2 h-2 rounded-sm"
                 style={{ backgroundColor: piece.color }}
@@ -91,9 +100,9 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onGetStarted }) => {
           {/* Success Icon */}
           <div className="mb-4">
             <div className="w-30 h-30 bg-transparent flex items-center justify-center mx-auto mb-8">
-              <img 
-                src="/logo-only.png" 
-                alt="Portal Logo" 
+              <img
+                src="/logo-only.png"
+                alt="Portal Logo"
                 className="w-30 h-30"
               />
             </div>
@@ -104,9 +113,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onGetStarted }) => {
             <h1 className="text-4xl font-bold text-gray-800 mb-4">
               You're Ready to Go!
             </h1>
-            <p className="text-lg text-gray-600">
-              Enter the Portal now
-            </p>
+            <p className="text-lg text-gray-600">Enter the Portal now</p>
           </div>
 
           {/* Get Started Button */}
@@ -114,7 +121,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onGetStarted }) => {
             <button
               onClick={handleGetStarted}
               className="bg-green-500 hover:bg-green-600 font-semibold py-2 px-4 rounded-lg text-lg transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-              style={{ backgroundColor: '#90C853' }}
+              style={{ backgroundColor: "#90C853" }}
               aria-label="Enter portal dashboard"
             >
               Get Started

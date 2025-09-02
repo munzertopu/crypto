@@ -85,7 +85,7 @@ const RegisterPage: React.FC<RegisterPageProps> = ({
     <AuthLayout>
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2 text-left">
+        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-[#0E201E] mb-2 text-left">
           Welcome to Portal!
         </h1>
       </div>
