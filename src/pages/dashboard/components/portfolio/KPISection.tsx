@@ -33,8 +33,8 @@ const KPICard: React.FC<KPICardProps> = ({
   className = "",
 }) => (
   <div className={`flex flex-col space-y-4 ${className}`}>
-    <div className="flex items-center space-x-4">
-      <div className="w-6 h-6 opacity-80 flex items-center justify-center">
+    <div className="flex items-center gap-1.5">
+      <div className="w-5 h-5 sm:w-6 sm:h-6 opacity-80 flex items-center justify-center">
         {svgIcon ? (
           <div className={isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"}>
             {svgIcon}
@@ -50,7 +50,7 @@ const KPICard: React.FC<KPICardProps> = ({
       </div>
       <div className="flex items-center space-x-1">
         <span
-          className={`text-xl opacity-80 font-medium ${
+          className={`text-base sm:text-xl lg:text-2xl font-medium md:font-semibold ${
             isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
           }`}
         >
@@ -61,17 +61,16 @@ const KPICard: React.FC<KPICardProps> = ({
 
     <div className="flex items-center space-x-2">
       <span
-        className={`text-3xl font-bold ${
+        className={`text-xl sm:text-[32px] font-semibold  ${
           isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
         }`}
       >
         {value}
       </span>
       <span
-        className={`text-lg font-medium ${
+        className={`text-[13px] sm:text-sm font-medium ${
           isPositive ? "text-[#5F9339]" : "text-[#D8382C]"
-        }
-        `}
+        }`}
       >
         {change}
       </span>
@@ -233,10 +232,10 @@ const KPISection: React.FC<KPISectionProps> = ({
   }, [isDropdownOpen]);
 
   return (
-    <div className="px-8 mb-6 mt-12">
+    <div className="sm:px-8 mb-6 mt-12">
       <div className="flex items-center justify-between mb-4">
         <h3
-          className={`text-3xl font-semibold ${
+          className={`text-lg md:text-xl font-semibold ${
             isDarkMode ? "text-[#E1E3E5]" : "text-[#0E201E]"
           }`}
         >
@@ -246,17 +245,17 @@ const KPISection: React.FC<KPISectionProps> = ({
           {/* Add KPI Button with Dropdown */}
           <button
             onClick={handleDropdownToggle}
-            className={`p-4 ${
+            className={`p-2 md:p-4 ${
               isDarkMode
                 ? "text-[#B6B8BA] border-[#4D5050]"
                 : "text-[#7C7C7C] border-[#E1E3E5]"
-            } rounded-2xl bg-transparent flex items-center justify-center border`}
+            } rounded-[8px] md:rounded-[12px] bg-transparent flex items-center justify-center border`}
             aria-label="Add KPI"
             aria-expanded={isDropdownOpen}
             aria-haspopup="true"
           >
             <svg
-              className="w-6 h-6"
+              className="w-4 h-4 md:w-5 md:h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -386,12 +385,10 @@ const KPISection: React.FC<KPISectionProps> = ({
         </div>
       </div>
       {/* sm:divide-x */}
+      {/* grid gap-8
+    grid-cols-[repeat(auto-fit,minmax(220px,1fr))] */}
       <div
-        className={`
-    grid gap-8
-    grid-cols-[repeat(auto-fit,minmax(220px,1fr))]
- 
-  `}
+        className={`grid grid-cols-2 gap-8 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
       >
         <KPICard
           title="Income"
