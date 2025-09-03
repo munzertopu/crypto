@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import LottieAnimation from "../components/LottieAnimation";
+import { useEffect, useState } from "react";
 
 interface WelcomePageProps {
   onGetStarted?: () => void;
