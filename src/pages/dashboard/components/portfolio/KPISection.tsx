@@ -1,12 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faDollarSign,
-  faChartLine,
-  faClock,
-  faChartBar,
-  faCheck,
-} from "@fortawesome/free-solid-svg-icons";
 import { Typography } from "@material-tailwind/react";
 
 interface KPICardProps {
@@ -16,7 +9,6 @@ interface KPICardProps {
   isPositive: boolean;
   icon?: any; // FontAwesome icon
   svgIcon?: React.ReactNode; // SVG icon
-  isDarkMode: boolean;
   centered?: boolean;
   className?: string; // NEW: allows external styling
 }
@@ -28,7 +20,6 @@ const KPICard: React.FC<KPICardProps> = ({
   isPositive,
   icon,
   svgIcon,
-  isDarkMode,
   centered = false,
   className = "",
 }) => (
@@ -36,23 +27,19 @@ const KPICard: React.FC<KPICardProps> = ({
     <div className="flex items-center space-x-4">
       <div className="w-6 h-6 opacity-80 flex items-center justify-center">
         {svgIcon ? (
-          <div className={isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"}>
+          <div className="text-[#0E201E] dark:text-[#CDCFD1]">
             {svgIcon}
           </div>
         ) : (
           <FontAwesomeIcon
             icon={icon}
-            className={`${
-              isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
-            } text-md`}
+            className="text-[#0E201E] dark:text-[#CDCFD1] text-md"
           />
         )}
       </div>
       <div className="flex items-center space-x-1">
         <span
-          className={`text-xl opacity-80 font-medium ${
-            isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
-          }`}
+          className="text-xl font-medium opacity-80 text-[#0E201E] dark:text-[#CDCFD1]"
         >
           {title}
         </span>
@@ -61,9 +48,7 @@ const KPICard: React.FC<KPICardProps> = ({
 
     <div className="flex items-center space-x-2">
       <span
-        className={`text-3xl font-bold ${
-          isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
-        }`}
+        className="text-3xl font-bold text-[#0E201E] dark:text-[#CDCFD1]"
       >
         {value}
       </span>
@@ -236,9 +221,7 @@ const KPISection: React.FC<KPISectionProps> = ({
     <div className="px-8 mb-6 mt-12">
       <div className="flex items-center justify-between mb-4">
         <h3
-          className={`text-3xl font-semibold ${
-            isDarkMode ? "text-[#E1E3E5]" : "text-[#0E201E]"
-          }`}
+          className="text-3xl font-semibold text-[#0E201E] dark:text-[#E1E3E5]"
         >
           KPI
         </h3>
@@ -246,11 +229,7 @@ const KPISection: React.FC<KPISectionProps> = ({
           {/* Add KPI Button with Dropdown */}
           <button
             onClick={handleDropdownToggle}
-            className={`p-4 ${
-              isDarkMode
-                ? "text-[#B6B8BA] border-[#4D5050]"
-                : "text-[#7C7C7C] border-[#E1E3E5]"
-            } rounded-2xl bg-transparent flex items-center justify-center border`}
+            className="p-4 text-[#7C7C7C] dark:text-[#B6B8BA] border-[#E1E3E5] dark:border-[#4D5050] rounded-2xl bg-transparent flex items-center justify-center border"
             aria-label="Add KPI"
             aria-expanded={isDropdownOpen}
             aria-haspopup="true"
@@ -274,24 +253,16 @@ const KPISection: React.FC<KPISectionProps> = ({
           {/* Dropdown Menu */}
           {isDropdownOpen && (
             <div
-              className={`absolute right-0 mt-2 w-64 border rounded-lg shadow-lg py-2 z-50 ${
-                isDarkMode
-                  ? "bg-[#0E201E] border-[#4D5050]"
-                  : "bg-white border-[#E1E3E5]"
-              }`}
+              className="absolute right-0 mt-2 w-64 border rounded-lg shadow-lg py-2 z-50 bg-white dark:bg-[#0E201E] border-[#E1E3E5] dark:border-[#4D5050]"
               role="menu"
               aria-label="KPI selection menu"
             >
               <div
-                className={`px-4 py-2 border-b ${
-                  isDarkMode ? "border-[#4D5050]" : "border-[#E1E3E5]"
-                }`}
+                className="px-4 py-2 border-b border-[#E1E3E5] dark:border-[#4D5050]"
               >
                 <Typography
                   variant="small"
-                  className={`font-semibold ${
-                    isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                  }`}
+                  className="font-semibold text-[#0E201E] dark:text-[#F3F5F7]"
                 >
                   Select KPIs to Display
                 </Typography>
@@ -313,9 +284,7 @@ const KPISection: React.FC<KPISectionProps> = ({
                   return (
                     <div
                       key={key}
-                      className={`flex items-center px-4 py-2 ${
-                        isDarkMode ? "hover:bg-[#2F3232]" : "hover:bg-[#F3F5F7]"
-                      } cursor-pointer`}
+                      className="flex items-center px-4 py-2 hover:bg-[#F3F5F7] dark:hover:bg-[#2F3232] cursor-pointer"
                       onClick={() => handleKPIToggle(key)}
                       role="menuitemcheckbox"
                       aria-checked={isSelected}
@@ -324,8 +293,8 @@ const KPISection: React.FC<KPISectionProps> = ({
                       <div
                         className={`w-5 h-5  border-2 rounded flex items-center justify-center mr-2 transition-colors border-[#90C853] ${
                           isSelected
-                            ? `${isDarkMode ? "bg-[#5F9339]" : "bg-white"}`
-                            : `${isDarkMode ? "" : ""}`
+                            ? "bg-white dark:bg-[#5F9339]"
+                            : ""
                         }`}
                       >
                         {isSelected && (
@@ -347,9 +316,7 @@ const KPISection: React.FC<KPISectionProps> = ({
                       </div>
                       <Typography
                         variant="small"
-                        className={`${
-                          isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                        }`}
+                        className="text-[#0E201E] dark:text-[#F3F5F7]"
                       >
                         {kpiLabels[key]}
                       </Typography>
@@ -360,15 +327,11 @@ const KPISection: React.FC<KPISectionProps> = ({
 
               {/* Action Buttons */}
               <div
-                className={`flex justify-between px-4 py-2 border-t ${
-                  isDarkMode ? "border-[#4D5050]" : "border-[#E1E3E5]"
-                }`}
+                className="flex justify-between px-4 py-2 border-t border-[#E1E3E5] dark:border-[#4D5050]"
               >
                 <button
                   onClick={handleCancel}
-                  className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
-                    isDarkMode ? "text-[#B6B8BA]" : "text-[#7C7C7C]"
-                  }`}
+                  className="px-3 py-1 text-sm font-medium rounded-md transition-colors text-[#7C7C7C] dark:text-[#B6B8BA]"
                   aria-label="Cancel KPI selection"
                 >
                   Cancel
@@ -399,13 +362,10 @@ const KPISection: React.FC<KPISectionProps> = ({
           change={incomeChange}
           isPositive={incomeChange.startsWith("+")}
           svgIcon={incomeSvg}
-          isDarkMode={isDarkMode}
         />
 
         <div
-          className={`flex-shrink-0 w-px h-20 ${
-            isDarkMode ? "bg-[#8C8E90]" : "bg-[#E1E3E5]"
-          } mx-10 hidden lg:block`}
+          className="flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 hidden lg:block"
         ></div>
 
         <KPICard
@@ -414,13 +374,10 @@ const KPISection: React.FC<KPISectionProps> = ({
           change={realizedGainsChange}
           isPositive={realizedGainsChange.startsWith("+")}
           svgIcon={realizedGainsSvg}
-          isDarkMode={isDarkMode}
         />
 
         <div
-          className={`flex-shrink-0 w-px h-20 ${
-            isDarkMode ? "bg-[#8C8E90]" : "bg-[#E1E3E5]"
-          } mx-10 hidden lg:block`}
+          className="flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 hidden lg:block"
         ></div>
 
         <KPICard
@@ -429,13 +386,10 @@ const KPISection: React.FC<KPISectionProps> = ({
           change={shortTermsChange}
           isPositive={shortTermsChange.startsWith("+")}
           svgIcon={shortTermsSvg}
-          isDarkMode={isDarkMode}
         />
 
         <div
-          className={`flex-shrink-0 w-px h-20 ${
-            isDarkMode ? "bg-[#8C8E90]" : "bg-[#E1E3E5]"
-          } mx-10 hidden lg:block`}
+          className="flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 hidden lg:block"
         ></div>
 
         <KPICard
@@ -444,7 +398,6 @@ const KPISection: React.FC<KPISectionProps> = ({
           change={longTermsChange}
           isPositive={longTermsChange.startsWith("+")}
           svgIcon={longTermsSvg}
-          isDarkMode={isDarkMode}
         />
       </div>
     </div>

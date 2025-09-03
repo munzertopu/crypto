@@ -42,7 +42,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
   };
 
   return (
-    <div className={`min-h-screen bg-white}`}>
+    <div className="min-h-screen bg-white dark:bg-[#0E201E]">
       {/* Navigation Bar */}
       <NavigationBar
         userName="Kristin Watson" 
@@ -66,7 +66,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
 
         {/* Horizontal Separator */}
         <div className="p-2">
-          <div className={`w-full h-px ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'}`}></div>
+          <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
         </div>
         
         {/* Dashboard Header */}
@@ -96,7 +96,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
           {/* Crypto Tab */}
           {activeTab === 'Crypto' && (
             <div className="mx-3 p-8 text-center">
-              <div className={`text-lg ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+              <div className="text-lg text-gray-600 dark:text-gray-400">
                 Crypto tab content coming soon...
               </div>
             </div>

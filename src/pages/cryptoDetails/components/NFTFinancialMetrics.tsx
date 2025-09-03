@@ -104,11 +104,9 @@ const NFTSection: React.FC<NFTSectionProps> = ({
     <svg
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
       width="24.000000"
       height="24.000000"
       fill="none"
-      customFrame="#000000"
     >
       <rect
         id="Property 2=coin"
@@ -156,11 +154,9 @@ const NFTSection: React.FC<NFTSectionProps> = ({
     <svg
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
       width="24.000000"
       height="24.000000"
       fill="none"
-      customFrame="#000000"
     >
       <rect
         id="Property 2=status-up"
@@ -270,10 +266,7 @@ const NFTSection: React.FC<NFTSectionProps> = ({
   return (
     <div className="px-8 my-6">
       <div
-        className={`
-    grid gap-8
-    grid-cols-[repeat(auto-fit,minmax(220px,1fr))]
-  `}
+        className="grid gap-8 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]"
       >
         <Card
           title="Total number of NFTs"
@@ -282,7 +275,7 @@ const NFTSection: React.FC<NFTSectionProps> = ({
         />
 
         {/* Divider */}
-        <div className="hidden  lg:block w-px h-20 bg-gray-200 mx-10"></div>
+        <div className="hidden  lg:block w-px h-20 bg-gray-200 dark:bg-gray-700 mx-10"></div>
 
         <Card
           title="Total Purchase Value"
@@ -291,7 +284,7 @@ const NFTSection: React.FC<NFTSectionProps> = ({
         />
 
         {/* Divider */}
-        <div className="hidden lg:block w-px h-20 bg-gray-200 mx-10"></div>
+        <div className="hidden lg:block w-px h-20 bg-gray-200 dark:bg-gray-700 mx-10"></div>
 
         <Card
           title="Total Estimated Value"
@@ -300,7 +293,7 @@ const NFTSection: React.FC<NFTSectionProps> = ({
         />
 
         {/* Divider */}
-        <div className="hidden lg:block w-px h-20 bg-gray-200 mx-10"></div>
+        <div className="hidden lg:block w-px h-20 bg-gray-200 dark:bg-gray-700 mx-10"></div>
 
         <Card
           title="Estimated Gain/Loss"

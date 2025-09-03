@@ -25,11 +25,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
         {filteredNFTs.map((nft) => (
           <div
             key={nft.id}
-            className={`rounded-2xl overflow-hidden border ${
-              isDarkMode
-                ? "bg-gray-800 border-gray-700"
-                : "bg-white border-gray-200"
-            } `}
+            className="rounded-2xl overflow-hidden border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
           >
             {/* NFT Image */}
             <div className="aspect-[2/1] bg-gray-200 relative overflow-hidden">
@@ -48,9 +44,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
             {/* NFT Details */}
             <div className="p-6">
               <h3
-                className={`font-semibold text-lg text-left mb-3 ${
-                  isDarkMode ? "text-white" : "text-gray-800"
-                }`}
+                className="font-semibold text-lg text-left mb-3 text-gray-800 dark:text-white"
               >
                 {nft.name}
               </h3>
@@ -59,9 +53,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
                     <span
-                      className={`text-sm font-medium ${
-                        isDarkMode ? "text-gray-600" : "text-gray-600"
-                      }`}
+                      className="text-sm font-medium text-gray-600 dark:text-gray-400"
                     >
                       Estimated Current Value:
                     </span>
@@ -87,9 +79,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
                     </svg>
                   </div>
                   <span
-                    className={`font-semibold text-sm ${
-                      isDarkMode ? "text-white" : "text-gray-900"
-                    }`}
+                    className="font-semibold text-sm text-gray-900 dark:text-white"
                   >
                     {nft.estimatedValue}
                   </span>
@@ -97,9 +87,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
 
                 <div className="flex justify-between items-center">
                   <span
-                    className={`text-md font-semibold ${
-                      isDarkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
+                    className="text-md font-semibold text-gray-600 dark:text-gray-400"
                   >
                     Gain/Loss:
                   </span>
@@ -116,21 +104,17 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
 
                 <div className="flex justify-between items-center">
                   <span
-                    className={`text-lg font-bold ${
-                      isDarkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
+                    className="text-lg font-bold text-gray-600 dark:text-gray-400"
                   >
                     {nft.purchasePrice}
                   </span>
-                  <div className="flex items-center gap-1 border border-[#E1E3E5] rounded-full px-2 py-1 bg-[#F3F5F7]">
+                  <div className="flex items-center gap-1 border border-[#E1E3E5] dark:border-[#4D5050] rounded-full px-2 py-1 bg-[#F3F5F7] dark:bg-[#2F3232]">
                     <FontAwesomeIcon
                       icon={faCalendarAlt}
-                      className="text-md text-gray-500"
+                      className="text-md text-gray-500 dark:text-gray-400"
                     />
                     <span
-                      className={`text-md font-semibold ${
-                        isDarkMode ? "text-gray-400" : "text-gray-600"
-                      }`}
+                      className="text-md font-semibold text-gray-600 dark:text-gray-400"
                     >
                       {nft.purchaseDate}
                     </span>

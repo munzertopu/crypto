@@ -91,22 +91,18 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
   return (
     <div className="px-8 mb-6">
       <h3
-        className={`text-3xl font-semibold ${
-          isDarkMode ? "text-[#CDCFD1]" : "text-[#0E201E]"
-        } mb-4 text-left`}
+        className="text-3xl font-semibold text-[#0E201E] dark:text-[#CDCFD1] mb-4 text-left"
       >
         Portfolio Allocation
       </h3>
       <div
-        className={` grid gap-4 
-  grid-cols-1 
-  sm:grid-cols-2 
-  md:grid-cols-3 
-  lg:grid-cols-4 
-  xl:grid-cols-5
-     ${isDarkMode ? "divide-[#4D5050]" : "divide-[#E1E3E5]"}
-  
-     `}
+        className="grid gap-4 
+            grid-cols-1 
+            sm:grid-cols-2 
+            md:grid-cols-3 
+            lg:grid-cols-4 
+            xl:grid-cols-5
+            divide-[#E1E3E5] dark:divide-[#8C8E90]"
       >
         {data.map((asset, assetIndex) => (
           <div key={assetIndex} className="flex items-center min-w-0">
@@ -139,21 +135,17 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
                 {/* Asset Name and Percentage */}
                 <div className="min-w-0 flex-1">
                   <span
-                    className={`text-xl text-left font-medium ${
-                      isDarkMode ? "text-[#CDCFD1]" : "text-[#0E201E]"
-                    } truncate sm:block flex justify-between`}
+                    className="text-xl text-left font-medium truncate sm:block flex justify-between"
                   >
-                    <span className="opacity-70">{asset.name}:</span>{" "}
-                    <span className="font-bold">{asset.percentage}%</span>
+                    <span className="text-[#0E201E] dark:text-[#B6B8BA] opacity-80">{asset.name}:</span>{" "}
+                    <span className="font-bold text-[#0E201E] dark:text-[#B6B8BA]">{asset.percentage}%</span>
                   </span>
                 </div>
               </div>
               {/* Vertical Separator - don't show for last element in row */}
               {assetIndex < data.length - 1 && (
                 <div
-                  className={`flex-shrink-0 w-px h-8 ${
-                    isDarkMode ? "bg-[#8C8E90]" : "bg-[#E1E3E5]"
-                  } mx-4 lg:mx-8 hidden sm:block`}
+                  className="flex-shrink-0 w-px h-8 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-4 lg:mx-8 hidden sm:block"
                 ></div>
               )}
             </React.Fragment>

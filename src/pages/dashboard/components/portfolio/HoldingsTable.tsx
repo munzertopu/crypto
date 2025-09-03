@@ -194,18 +194,16 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
     <div className="px-8 mb-6">
       <div className="py-4">
         <h3
-          className={`text-2xl font-semibold ${
-            isDarkMode ? "text-white" : "text-[#0E201E]"
-          } text-left`}
+          className="text-2xl font-semibold text-[#0E201E] dark:text-white text-left"
         >
           Holdings
         </h3>
       </div>
-      <Card className={`h-full w-full border-transparent bg-transprent`}>
+      <Card className="h-full w-full border-transparent bg-transprent">
         <CardBody className="px-0 rounded-lg overflow-x-auto">
           <table className="w-full min-w-max table-auto text-left">
             <thead
-              className={`${isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"}`}
+              className="bg-[#F3F5F7] dark:bg-[#2F3232]"
             >
               <tr className="">
                 {TABLE_HEAD.map((head, index) => (
@@ -217,9 +215,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                   >
                     <Typography
                       variant="small"
-                      className={`flex items-center justify-between gap-2 font-normal text-xl leading-none ${
-                        isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"
-                      }`}
+                      className="flex items-center justify-between gap-2 font-normal text-xl leading-none text-[#666868] dark:text-[#B6B8BA]"
                     >
                       {head}{" "}
                       {index !== TABLE_HEAD.length - 1 && (
@@ -266,9 +262,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                               variant="small"
                               className={`font-medium text-xl ${
                                 onCryptoClick ? "cursor-pointer" : ""
-                              } ${
-                                isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                              }`}
+                              } text-[#0E201E] dark:text-[#F3F5F7]`}
                               onClick={() =>
                                 onCryptoClick && onCryptoClick(symbol)
                               }
@@ -283,9 +277,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                             </Typography>
                             <Typography
                               variant="small"
-                              className={`text-md font-normal ${
-                                isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"
-                              }`}
+                              className="text-md font-normal text-[#666868] dark:text-[#B6B8BA]"
                             >
                               {symbol}
                             </Typography>
@@ -296,9 +288,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                         <div className="flex flex-col">
                           <Typography
                             variant="small"
-                            className={`font-normal text-lg ${
-                              isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                            }`}
+                            className="font-normal text-lg text-[#0E201E] dark:text-[#F3F5F7]"
                           >
                             {balance}
                           </Typography>
@@ -317,9 +307,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                       <td>
                         <Typography
                           variant="small"
-                          className={`font-normal text-lg ${
-                            isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                          }`}
+                          className="font-normal text-lg text-[#0E201E] dark:text-[#F3F5F7]"
                         >
                           {marketValue}
                         </Typography>

@@ -148,10 +148,6 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({
         return '<div>$ ' + series[seriesIndex][dataPointIndex] +
           '</div>'
       }
-    },
-    
-    theme: {
-      mode: isDarkMode ? 'dark' : 'light'
     }
   };
 
@@ -164,7 +160,8 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({
 
   return (
     <div className="mb-6">
-      <div className={`p-3 ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+      <div className="p-3 bg-white
+        dark:bg-[#0E201E]">
         <div className="w-full h-100">
           <ReactApexChart
             options={options}
