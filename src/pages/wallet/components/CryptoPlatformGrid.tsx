@@ -217,9 +217,8 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
                 </div>
               </div>
               <span
-                className={`text-lg font-medium text-center ${
-                  isDarkMode ? "text-white" : "text-[#0E201E]"
-                }`}
+                className={`text-lg font-medium text-center text-[#0E201E]
+                  dark:text-[#B6B8BA]`}
               >
                 {platform.name}
               </span>
