@@ -89,16 +89,16 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
   console.log("rowsss", rows);
 
   return (
-    <div className="px-8 mb-6">
+    <div className="sm:px-8 mb-6">
       <h3
-        className={`text-3xl font-semibold ${
-          isDarkMode ? "text-[#CDCFD1]" : "text-[#0E201E]"
-        } mb-4 text-left`}
+        className={`text-lg md:text-xl font-semibold ${
+          isDarkMode ? "text-[#E1E3E5]" : "text-[#0E201E] text-left py-3"
+        }`}
       >
         Portfolio Allocation
       </h3>
       <div
-        className={` grid gap-4 
+        className={`grid gap-4 
   grid-cols-1 
   sm:grid-cols-2 
   md:grid-cols-3 
@@ -118,7 +118,7 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
                     <img
                       src={asset.logo}
                       alt={`${asset.name} logo`}
-                      className="w-11 h-11 object-contain"
+                      className="w-8 h-8 object-contain"
                       onError={(e) => {
                         // Fallback to colored background with letter if image fails to load
                         const target = e.target as HTMLImageElement;
@@ -128,7 +128,7 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
                     />
                   ) : null}
                   <div
-                    className={` w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm ${
                       asset.logoUrl ? "hidden" : ""
                     }`}
                   >
@@ -139,12 +139,12 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
                 {/* Asset Name and Percentage */}
                 <div className="min-w-0 flex-1">
                   <span
-                    className={`text-xl text-left font-medium ${
+                    className={`text-base md:text-lg text-left  ${
                       isDarkMode ? "text-[#CDCFD1]" : "text-[#0E201E]"
                     } truncate sm:block flex justify-between`}
                   >
                     <span className="opacity-70">{asset.name}:</span>{" "}
-                    <span className="font-bold">{asset.percentage}%</span>
+                    <span className="font-semibold">{asset.percentage}%</span>
                   </span>
                 </div>
               </div>
