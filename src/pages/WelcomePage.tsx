@@ -110,17 +110,19 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onGetStarted }) => {
 
           {/* Success Message */}
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
               You're Ready to Go!
             </h1>
-            <p className="text-lg text-gray-600">Enter the Portal now</p>
+            <p className=" text-base sm:text-lg text-gray-800">
+              Enter the Portal now
+            </p>
           </div>
 
           {/* Get Started Button */}
           <div className="mb-8">
             <button
               onClick={handleGetStarted}
-              className="bg-green-500 hover:bg-green-600 font-semibold py-2 px-4 rounded-lg text-lg transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="bg-green-500 hover:bg-green-600 font-semibold py-2 px-4 rounded-lg text-base transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
               style={{ backgroundColor: "#90C853" }}
               aria-label="Enter portal dashboard"
             >
