@@ -59,7 +59,7 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
   const tableTabs = ['Allocations', 'Tax Lots', 'Insights Summary'];
 
   return (
-    <div className={`min-h-screen ${isDarkModeState ? 'text-white' : 'text-gray-900'}`}>
+    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white">
       <NavigationBar 
         isDarkMode={isDarkModeState} 
         onThemeToggle={handleThemeToggle}
@@ -71,14 +71,14 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
         <nav className="flex mb-6" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
             <li className="inline-flex items-center">
-              <a href="/dashboard" className={`inline-flex items-center text-sm font-medium ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-700 hover:text-gray-900'}`}>
+              <a href="/dashboard" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
                 Dashboard
               </a>
             </li>
             <li>
               <div className="flex items-center">
-                <FontAwesomeIcon icon={faChevronRight} className={`w-4 h-4 ${isDarkMode ? 'text-gray-600' : 'text-gray-400'}`} />
-                <span className={`ml-1 text-sm font-bold ${isDarkMode ? 'text-gray-500' : 'text-gray-500'} md:ml-2`}>
+                <FontAwesomeIcon icon={faChevronRight} className="w-4 h-4 text-gray-400 dark:text-gray-600" />
+                <span className="ml-1 text-sm font-bold text-gray-500 dark:text-gray-500 md:ml-2">
                   {cryptoName} details
                 </span>
               </div>
@@ -98,23 +98,23 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
           />
         </div>
         {/* Market Performance Section */}
-        <div className={`mb-6 ${isDarkModeState ? 'bg-gray-800' : 'bg-white'}`}>
+        <div className="mb-6 bg-white dark:bg-[#0E201E]">
            {/* Header and Time Range in one row */}
            <div className="flex justify-between items-center mb-4">
-             <h2 className="text-xl font-semibold text-left">Market Performance</h2>
+             <h2 className="text-xl font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Market Performance</h2>
              {/* Time Range Selector */}
-             <div className={`flex space-x-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+             <div className="border-gray-200 dark:border-gray-700">
                  <Tabs>
-                     <Tabs.List className='bg-gray-200'>
+                     <Tabs.List className='bg-gray-200 dark:bg-[#2F3232]'>
                          {timeRanges.map((timeRange) => (
                              <Tabs.Trigger 
                                  key={timeRange}
                                  value={timeRange}
                                  onClick={() => handleTimeRangeChange?.(timeRange)}
-                                 className={`py-2 px-3 border-b-2 rounded-md ${
+                                 className={`py-2 px-3 rounded-md ${
                                  activeTimeRange === timeRange
-                                     ? 'bg-white'
-                                     : `border-transparent ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`
+                                     ? 'bg-white dark:bg-[#0E201E] text-black dark:text-white'
+                                      :'text-[#0E201E] dark:text-[#FFFFFF]'
                                  }`}
                              >
                              {timeRange}
@@ -134,18 +134,18 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
         </div>
 
         {/* Table Tabs */}
-        <div className={`${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+        <div className="border-gray-200 dark:border-gray-700">
           <Tabs>
-            <Tabs.List className='bg-gray-200'>
+            <Tabs.List className='bg-gray-200 dark:bg-[#2F3232]'>
               {tableTabs.map((tab) => (
                 <Tabs.Trigger 
                   key={tab}
                   value={tab}
                   onClick={() => setActiveTableTab(tab.toLowerCase().replace(/\s+/g, '') as any)}
-                  className={`py-2 px-3 border-b-2 rounded-md ${
+                  className={`py-2 px-3 rounded-md ${
                     activeTableTab === tab.toLowerCase().replace(/\s+/g, '')
-                      ? 'bg-white'
-                      : `border-transparent ${isDarkMode ? 'text-gray-400 hover:text-gray-200 hover:border-gray-600' : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'}`
+                      ? 'bg-white dark:bg-[#0E201E] text-black dark:text-white'
+                      : 'text-[#0E201E] dark:text-[#FFFFFF]'
                   }`}
                 >
                   {tab}
