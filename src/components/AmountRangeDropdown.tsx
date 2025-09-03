@@ -40,7 +40,7 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
     <div className="relative">
       <div
         className={`flex text-lg items-center px-8 py-4 my-0 sm:my-4 rounded-2xl border bg-transparent border-gray-600 text-gray-300 text-sm
-          dark:border-[#4D5050] dark:text-[#F3F5F7]`}
+          dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span>{title}</span>

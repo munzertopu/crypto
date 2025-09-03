@@ -76,7 +76,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-3 font-medium text-sm border-b-2 transition-colors ${
               activeTab === tab
-                ? 'border-green-500'
+                ? 'border-green-500 dark:text-[#F3F5F7]'
                 : `${isDarkMode ? 'text-gray-400 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'} border-transparent`
             }`}
             aria-label={`View transaction ${tab.toLowerCase()}`}
@@ -91,14 +91,14 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
         <div className="flex justify-between items-start py-2">
           {/* Transaction Type and Date - Left Side */}
           <div className='w-1/4'>
-            <h3 className="text-2xl font-bold mb-2">Transfer</h3>
+            <h3 className="text-2xl font-bold mb-2 dark:text-[#F3F5F7]">Transfer</h3>
             <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               May 11, 2025, 8:37 PM
             </p>
           </div>
 
           {/* Transfer Card - Right Side */}
-          <Card className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} border border-gray-200 w-2/4`}>
+          <Card className={`bg-white border border-gray-200 w-2/4 dark:bg-transparent`}>
             <CardBody className="p-6">
               <div className="flex items-center justify-between">
                 {/* Phantom (Sent) */}
@@ -107,7 +107,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
                     <FontAwesomeIcon icon={faGhost} className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex flex-col">
-                    <Typography variant="small" className="font-medium">
+                    <Typography variant="small" className="font-medium dark:text-[#F3F5F7]">
                       Phantom
                     </Typography>
                     <Typography variant="small" className="text-red-600 font-medium">
@@ -126,7 +126,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
                 {/* Bitcoin (Received) */}
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
-                    <Typography variant="small" className="font-medium">
+                    <Typography variant="small" className="font-medium dark:text-[#F3F5F7]">
                       Bitcoin
                     </Typography>
                     <Typography variant="small" className="text-green-600 font-medium">
@@ -142,26 +142,26 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
               {/* Financial Metrics */}
               <div className="mt-4 space-y-2">
                 <div className="flex justify-between">
-                  <Typography variant="small" className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <Typography variant="small" className={`text-gray-600 dark:text-[#F3F5F7]`}>
                     Fiat Value:
                   </Typography>
-                  <Typography variant="small" className="font-medium">
+                  <Typography variant="small" className="font-medium dark:text-[#F3F5F7]">
                     $780.98
                   </Typography>
                 </div>
                 <div className="flex justify-between">
-                  <Typography variant="small" className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <Typography variant="small" className={`text-gray-600 dark:text-[#F3F5F7]`}>
                     Cost Basis:
                   </Typography>
-                  <Typography variant="small" className="font-medium">
+                  <Typography variant="small" className="font-medium dark:text-[#F3F5F7]">
                     $579.60
                   </Typography>
                 </div>
                 <div className="flex justify-between">
-                  <Typography variant="small" className={`${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <Typography variant="small" className={`text-gray-600 dark:text-[#F3F5F7]`}>
                     Gain:
                   </Typography>
-                  <Typography variant="small" className="font-medium">
+                  <Typography variant="small" className="font-medium dark:text-[#F3F5F7]">
                     $0.00
                   </Typography>
                 </div>
@@ -178,11 +178,11 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
               <thead>
                 <tr>
                   <th className="py-3 px-4 font-medium text-sm">
-                    <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Identifier</span>
+                    <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Identifier</span>
                   </th>
                   <th className="py-3 px-4 font-medium text-sm">
                     <div className="flex items-center space-x-2">
-                      <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date</span>
+                      <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Date</span>
                       <div className="flex flex-col">
                         <FontAwesomeIcon icon={faChevronUp} className="w-3 h-3" />
                         <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" />
@@ -191,7 +191,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
                   </th>
                   <th className="py-3 px-4 font-medium text-sm">
                     <div className="flex items-center space-x-2">
-                      <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Type</span>
+                      <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Type</span>
                       <div className="flex flex-col">
                         <FontAwesomeIcon icon={faChevronUp} className="w-3 h-3" />
                         <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" />
@@ -199,14 +199,14 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
                     </div>
                   </th>
                   <th className="py-3 px-4 font-medium text-sm">
-                    <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Leger</span>
+                    <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Leger</span>
                   </th>
                   <th className="py-3 px-4 font-medium text-sm">
-                    <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Change</span>
+                    <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Change</span>
                   </th>
                   <th className="py-3 px-4 font-medium text-sm">
                     <div className="flex items-center space-x-2">
-                      <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Balance</span>
+                      <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Balance</span>
                       <div className="flex flex-col">
                         <FontAwesomeIcon icon={faChevronUp} className="w-3 h-3" />
                         <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" />
@@ -214,25 +214,25 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
                     </div>
                   </th>
                   <th className="py-3 px-4 font-medium text-sm">
-                    <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}></span>
+                    <span className={`text-gray-700 dark:text-[#B6B8BA]`}></span>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {ledgerData.map((row) => (
-                  <tr key={row.id} className={`border-b border-gray-100 ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'}`}>
+                  <tr key={row.id} className={`border-b border-gray-100`}>
                     <td className="py-3 px-4">
                       <div className="flex items-center space-x-3">
                         <div className={`w-8 h-8 ${row.identifier.color} rounded-full flex items-center justify-center`}>
                           <span className="text-white text-sm font-bold">{row.identifier.icon}</span>
                         </div>
-                        <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                        <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
                           {row.identifier.text}
                         </span>
                       </div>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.date}
                       </span>
                     </td>
@@ -242,12 +242,12 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.ledger}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-sm font-medium`}>
+                      <span className={`text-sm font-medium text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.change}
                       </span>
                     </td>
@@ -280,23 +280,23 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
               <thead>
                 <tr>
                   <th className="py-3 px-4 font-medium text-sm text-left">
-                    <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Date</span>
+                    <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Date</span>
                   </th>
                   <th className="py-3 px-4 font-medium text-sm text-left">
-                    <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Info</span>
+                    <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Info</span>
                   </th>
                   <th className="py-3 px-4 font-medium text-sm text-left">
-                    <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Holding period</span>
+                    <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Holding period</span>
                   </th>
                   <th className="py-3 px-4 font-medium text-sm text-right">
-                    <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Amount</span>
+                    <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Amount</span>
                   </th>
                   <th className="py-3 px-4 font-medium text-sm text-right">
-                    <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Cost(USD)</span>
+                    <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Cost(USD)</span>
                   </th>
                   <th className="py-3 px-4 font-medium text-sm text-right">
                     <div className="flex items-center justify-end space-x-1">
-                      <span className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Gain(USD)</span>
+                      <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Gain(USD)</span>
                     </div>
                   </th>
                   <th className="py-3 px-4 font-medium text-sm text-right">
@@ -306,29 +306,29 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
               </thead>
               <tbody>
                 {costAnalysisData.map((row) => (
-                  <tr key={row.id} className={`border-b border-gray-100 ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'}`}>
+                  <tr key={row.id} className={`border-b border-gray-100`}>
                     <td className="py-3 px-4">
-                      <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.date}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.info}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.holdingPeriod}
                       </span>
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <span className={`text-sm font-medium`}>
+                      <span className={`text-sm font-medium text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.amount}
                       </span>
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <span className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.costUSD}
                       </span>
                     </td>

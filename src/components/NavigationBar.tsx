@@ -64,9 +64,14 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <div className="flex items-center">
           <Link to="/dashboard" className="flex items-center">
             <img
-              src={`${isDarkMode ? 'logo-dark.png' : 'logo.png' }`}
+              src='logo.png'
               alt="Portal"
-              className="h-6 sm:h-7 lg:h-7 w-auto"
+              className="h-6 sm:h-7 lg:h-7 w-auto block dark:hidden"
+            />
+            <img
+              src='logo-dark.png'
+              alt="Portal"
+              className="h-6 sm:h-7 lg:h-7 w-auto hidden dark:block"
             />
           </Link>
         </div>
