@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import DateRangeSelector from '../../../components/DateRangeSelector';
+import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { cryptoAssets, formatCurrency, formatCryptoAmount, modalTableData } from '../../../data/cryptoAssets';
 
 interface TaxOptimizationTabProps {
@@ -112,27 +113,27 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
 
   return (
     <div className="space-y-6">
-             {/* Date Range and Legend Row */}
-       <div className="flex justify-between items-center">
-         {/* Date Range Selector - Left */}
-         <div className="flex-1 max-w-xs">
-           <DateRangeSelector
-             selectedDateRange={selectedDateRange}
-             onDateRangeChange={setSelectedDateRange}
-             isDarkMode={isDarkMode}
-             variant="inline"
-           />
-         </div>
+      {/* Date Range and Legend Row */}
+      <div className="flex justify-between items-center">
+        {/* Date Range Selector - Left */}
+        <div className="flex-1 max-w-xs">
+          <DateRangeSelector
+            selectedDateRange={selectedDateRange}
+            onDateRangeChange={setSelectedDateRange}
+            isDarkMode={isDarkMode}
+            variant="inline"
+          />
+        </div>
 
         {/* Legend - Right */}
         <div className="flex items-center space-x-6 text-sm">
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-            <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>Long term</span>
+            <span className={'text-gray-700 dark:text-[#B6B8BA]'}>Long term</span>
           </div>
           <div className="flex items-center space-x-2">
             <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-            <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>Short term</span>
+            <span className={'text-gray-700 dark:text-[#B6B8BA]'}>Short term</span>
           </div>
         </div>
       </div>
@@ -142,8 +143,8 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
         <CardBody className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left" role="table" aria-label="Tax optimization cryptocurrency holdings">
-               <thead className={`${isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"}`}>
-                 <tr role="row" className='bg-white'>
+               <thead className={`bg-[#F3F5F7] dark:bg-[#2F3232]`}>
+                 <tr role="row" className='bg-white dark:bg-[#0E201E]'>
                    <th>
                      
                    </th>
@@ -164,61 +165,32 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                  </tr>
                  {/* Column Headers Row */}
                  <tr role="row">
-                  <th className="p-4">
-                      <div className={`text-lg font-normal leading-none ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}>
-                        Asset
-                      </div>
-                    </th>
-                   <th className="p-4">
-                     <div className={`flex text-lg items-center justify-between gap-2 font-normal leading-none ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}>
-                       Market Value
-                       <div className="flex flex-col" role="button" aria-label="Sort by Market Value">
-                         <FontAwesomeIcon icon={faChevronUp} className="w-3 h-3" aria-hidden="true" />
-                         <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" aria-hidden="true" />
-                       </div>
-                     </div>
-                   </th>
-                   <th className={`p-4 border-l-2 border-green-500`}>
-                     <div className={`flex text-lg items-center justify-between gap-2 font-normal leading-none ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}>
-                       Potential Gains
-                       <div className="flex flex-col" role="button" aria-label="Sort by Potential Gains">
-                         <FontAwesomeIcon icon={faChevronUp} className="w-3 h-3" aria-hidden="true" />
-                         <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" aria-hidden="true" />
-                       </div>
-                     </div>
-                   </th>
-                   <th className="p-4">
-                     <div className={`flex text-lg items-center justify-between gap-2 font-normal leading-none ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}>
-                       Amount held&lt;12m.
-                       <div className="flex flex-col" role="button" aria-label="Sort by Amount held">
-                         <FontAwesomeIcon icon={faChevronUp} className="w-3 h-3" aria-hidden="true" />
-                         <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" aria-hidden="true" />
-                       </div>
-                     </div>
-                   </th>
-                   <th className={`p-4 border-l-2 border-[#8C5DF3]`}>
-                     <div className={`flex text-lg items-center justify-between gap-2 font-normal leading-none ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}>
-                       Long term gains
-                       <div className="flex flex-col" role="button" aria-label="Sort by Long term gains">
-                         <FontAwesomeIcon icon={faChevronUp} className="w-3 h-3" aria-hidden="true" />
-                         <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" aria-hidden="true" />
-                       </div>
-                     </div>
-                   </th>
-                   <th className="p-4">
-                     <div className={`flex text-lg items-center justify-between gap-2 font-normal leading-none ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}>
-                       Amount Held(&gt;12m.)
-                       <div className="flex flex-col" role="button" aria-label="Sort by Amount Held">
-                         <FontAwesomeIcon icon={faChevronUp} className="w-3 h-3" aria-hidden="true" />
-                         <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" aria-hidden="true" />
-                       </div>
-                     </div>
-                   </th>
-                   <th className="p-4">
-                     <div className={`text-lg font-normal leading-none ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}>
-                       Short vs Long %
-                     </div>
-                   </th>
+                  {TABLE_HEAD.map((head, index) => (
+                  <th
+                    key={head}
+                    className={`cursor-pointer p-6 ${
+                      index === 0 ? "rounded-l-xl" : ""
+                    } ${index === TABLE_HEAD.length - 1 ? "rounded-r-md" : ""}
+                    ${head === "Potential Gains" ? "border-l-2 border-green-500" : ""}
+                    ${head === "Long term gains" ? "border-l-2 border-[#8C5DF3]" : ""}
+                    `}
+                  >
+                    <Typography
+                      variant="small"
+                      className="flex items-center justify-between gap-2 font-normal text-xl leading-none text-[#666868] dark:text-[#B6B8BA]"
+                    >
+                      {head}{" "}
+                      {index !== TABLE_HEAD.length - 1 && (
+                        <ChevronUpDownIcon
+                          strokeWidth={2}
+                          className="h-4 w-4"
+                          role="button"
+                          aria-label={`Sort by ${head}`}
+                        />
+                      )}
+                    </Typography>
+                  </th>
+                ))}
                  </tr>
                </thead>
               <tbody>
@@ -237,11 +209,16 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                              alt={`${asset.name} logo`}
                              className="w-8 h-8 rounded-full"
                            />
-                           <div>
-                             <Typography variant="small" className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                          <div>
+                            <Typography 
+                              variant="small" 
+                              className={`text-xl font-normal text-[#0E201E]
+                                  dark:text-[#F3F5F7]`}
+                             >
                                {asset.name}
                              </Typography>
-                             <Typography variant="small" className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                             <Typography variant="small" className={`text-xs text-gray-500
+                                dark:text-[#F3F5F7]`}>
                                {asset.symbol}
                              </Typography>
                            </div>
@@ -255,9 +232,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                              className={`size-4 cursor-pointer transition-all duration-200 ${
                                modalOpen && selectedAsset && selectedAsset.id === asset.id
                                  ? 'ring-1 ring-green-500 ring-offset-2 rounded-sm'
-                                 : isDarkMode 
-                                   ? 'text-gray-400 hover:text-gray-300'
-                                   : 'text-[#7C7C7C] hover:text-gray-700'
+                                 : 'text-[#7C7C7C] dark:text-[#F3F5F7]'
                              }`}
                              onClick={(e) => handleEyeClick(asset, e)}
                            >
@@ -269,14 +244,14 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                     
                     {/* Market Value */}
                       <td className="px-6 py-4 text-left" role="cell">
-                        <Typography variant="small" className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        <Typography variant="small" className={`font-medium text-gray-900 dark:text-[#F3F5F7]`}>
                           {formatCurrency(asset.marketValue)}
                         </Typography>
                       </td>
 
                       {/* Potential Gains */}
                       <td className="px-6 border-l-2 border-[#75ae46] py-4 text-left" role="cell">
-                        <Typography variant="small" className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        <Typography variant="small" className={`font-medium text-gray-900 dark:text-[#F3F5F7]`}>
                           {formatCurrency(asset.shortTerm.potentialGains)}
                         </Typography>
                       </td>
@@ -288,7 +263,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                              onMouseEnter={() => asset.shortTerm.longTermTransitionDate && handleTooltipShow(asset.id)}
                              onMouseLeave={handleTooltipHide}
                            >
-                             <Typography variant="small" className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                             <Typography variant="small" className={`font-medium text-gray-900 dark:text-[#F3F5F7]`}>
                                {formatCryptoAmount(asset.shortTerm.amountHeldValue, asset.shortTerm.amountHeldUnit)}
                              </Typography>
                              
@@ -329,14 +304,14 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
 
                       {/* Long term gains */}
                       <td className="px-6 py-4 border-l-2 border-[#8C5DF3] text-left" role="cell">
-                        <Typography variant="small" className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        <Typography variant="small" className={`font-medium text-gray-900 dark:text-[#F3F5F7]`}>
                           {formatCurrency(asset.longTerm.potentialGains)}
                         </Typography>
                       </td>
 
                       {/* Amount Held (>12m) */}
                       <td className="px-6 py-4 text-left" role="cell">
-                        <Typography variant="small" className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        <Typography variant="small" className={`font-medium text-gray-900 dark:text-[#F3F5F7]`}>
                           {formatCryptoAmount(asset.longTerm.amountHeldValue, asset.longTerm.amountHeldUnit)}
                         </Typography>
                       </td>
@@ -439,18 +414,18 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                             <div className={`w-8 h-8 rounded-full flex items-center justify-center`}>
                               <img src={row.logo} />
                             </div>
-                            <span className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                            <span className={`font-medium text-gray-900 dark:text-[#F3F5F7]`}>
                               {row.wallet}
                             </span>
                           </div>
                         </td>
-                                                 <td className={`p-3 text-left ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                                                 <td className={`p-3 text-left text-gray-900 dark:text-[#F3F5F7]`}>
                            {row.balance}
                          </td>
-                         <td className={`p-3 text-left ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                         <td className={`p-3 text-left text-gray-900 dark:text-[#F3F5F7]`}>
                            {row.price}
                          </td>
-                         <td className={`p-3 text-left ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                         <td className={`p-3 text-left text-gray-900 dark:text-[#F3F5F7]`}>
                            {row.value}
                          </td>
                       </tr>
