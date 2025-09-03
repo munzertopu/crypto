@@ -3,6 +3,7 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 interface DrawerProps {
   isOpen: boolean;
+  noPadding?: boolean;
   onClose: () => void;
   showLogo?: boolean;
   header?: string;
@@ -17,6 +18,7 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
   height = "92vh",
   children,
   showLogo = false,
+  noPadding = false,
 }) => {
   return (
     <>
@@ -53,7 +55,9 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
 
         {/* Content */}
         <div
-          className="p-4 overflow-y-auto flex flex-col justify-between items-start"
+          className={`${
+            noPadding ? "py-4" : "p-4"
+          }  overflow-y-auto flex flex-col justify-between items-start`}
           style={{ height: `calc(${height} - 140px)` }}
         >
           {children}
