@@ -37,6 +37,7 @@ interface FilterProps {
   showFilters: boolean;
   setShowFilters: (show: boolean) => void;
   isDarkMode: boolean;
+  hideTab?: boolean;
 }
 const tabs = ["All", "Uncategorized", "Warnings"];
 
@@ -110,6 +111,7 @@ const Filter: React.FC<FilterProps> = ({
   showFilters,
   setShowFilters,
   isDarkMode,
+  hideTab = false,
 }) => {
   const [showWarningBanner, setShowWarningBanner] = useState(true);
   const [walletDropdownOpen, setWalletDropdownOpen] = useState(false);
@@ -331,27 +333,31 @@ const Filter: React.FC<FilterProps> = ({
   return (
     <div className={`p-4 lg:pt-6 lg:px-8 rounded-lg `}>
       {/* Tabs */}
-      <div className={`${isDarkMode ? "border-gray-700" : "border-gray-200"}`}>
-        <Tabs>
-          <Tabs.List className="my-2 lg:my-2 bg-[#F3F5F7] dark:bg-[#2F3232]">
-            {tabs.map((tab) => (
-              <Tabs.Trigger
-                key={tab}
-                value={tab}
-                onClick={() => onTabChange?.(tab)}
-                className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl text-sm sm:text-lg ${
-                  activeTab === tab
-                    ? 'bg-white dark:bg-[#0E201E] text-black dark:text-white'
-                    : 'text-[#0E201E] dark:text-[#FFFFFF]'
-                }`}
-              >
-                {tab}
-              </Tabs.Trigger>
-            ))}
-            <Tabs.TriggerIndicator />
-          </Tabs.List>
-        </Tabs>
-      </div>
+      {!hideTab && (
+        <div
+          className={`${isDarkMode ? "border-gray-700" : "border-gray-200"}`}
+        >
+          <Tabs>
+            <Tabs.List className="my-2 lg:my-2 bg-[#F3F5F7] dark:bg-[#2F3232]">
+              {tabs.map((tab) => (
+                <Tabs.Trigger
+                  key={tab}
+                  value={tab}
+                  onClick={() => onTabChange?.(tab)}
+                  className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl text-sm sm:text-lg ${
+                    activeTab === tab
+                      ? "bg-white dark:bg-[#0E201E] text-black dark:text-white"
+                      : "text-[#0E201E] dark:text-[#FFFFFF]"
+                  }`}
+                >
+                  {tab}
+                </Tabs.Trigger>
+              ))}
+              <Tabs.TriggerIndicator />
+            </Tabs.List>
+          </Tabs>
+        </div>
+      )}
 
       {/* Blue Alert Banner for Warnings Tab */}
       {activeTab === "Warnings" && showWarningBanner && (
@@ -409,9 +415,9 @@ const Filter: React.FC<FilterProps> = ({
         </div>
       )}
 
-      <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-x-4">
+      <div className="flex flex-row lg:items-center gap-2 space-y-4 lg:space-x-4">
         {/* Search */}
-        <div className="relative mt-4 w-1/4 ">
+        <div className="relative mt-4 sm:w-1/4 w-full ">
           <FontAwesomeIcon
             icon={faSearch}
             className={`absolute size-6 text-xl ml-6 top-1/2 transform -translate-y-1/2 text-[#7C7C7C]
@@ -628,7 +634,8 @@ const Filter: React.FC<FilterProps> = ({
               setIsOpen={setAmountReceivedDropdownOpen}
               title="Amount received"
             />
-            <div className={`flex items-center py-2 rounded-xl border px-2 shadow-sm bg-white border-gray-300 text-gray-900 placeholder-gray-800 focus:outline-none
+            <div
+              className={`flex items-center py-2 rounded-xl border px-2 shadow-sm bg-white border-gray-300 text-gray-900 placeholder-gray-800 focus:outline-none
               dark:bg-transparent`}
             >
               <Datepicker
@@ -741,11 +748,11 @@ const Filter: React.FC<FilterProps> = ({
             >
               <FontAwesomeIcon
                 icon={faFilter}
-                className="w-4 h-4 mr-2 text-[#0E201E]
+                className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2 text-[#0E201E]
                   dark:text-[#F3F5F7]"
                 aria-hidden="true"
               />
-              Filters
+              <span className="hidden sm:inline">Filters</span>
             </button>
           </div>
         )}
