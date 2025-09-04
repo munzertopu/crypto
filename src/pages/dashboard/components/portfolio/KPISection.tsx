@@ -355,7 +355,7 @@ const KPISection: React.FC<KPISectionProps> = ({
           svgIcon={incomeSvg}
         />
 
-        <div className="flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 hidden lg:block"></div>
+        <div className="hidden xl:block flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 "></div>
 
         <KPICard
           title="Realized Gains"
@@ -365,7 +365,7 @@ const KPISection: React.FC<KPISectionProps> = ({
           svgIcon={realizedGainsSvg}
         />
 
-        <div className="flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 hidden lg:block"></div>
+        <div className="flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 hidden xl:block"></div>
 
         <KPICard
           title="Short Terms"
@@ -375,7 +375,7 @@ const KPISection: React.FC<KPISectionProps> = ({
           svgIcon={shortTermsSvg}
         />
 
-        <div className="flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 hidden lg:block"></div>
+        <div className="flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 hidden xl:block"></div>
 
         <KPICard
           title="Long Terms"
