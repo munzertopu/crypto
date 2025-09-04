@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import ConfigureModal from "./ConfigureModal";
 import SuccessNotification from "../../../components/SuccessNotification";
+import useScreenSize from "../../../hooks/useScreenSize";
+import MobileDrawer from "../../../components/Drawers/MobileDrawer";
+import WalletConfigureForm from "../../../components/Forms/WalletConfigureForm";
 
 interface TooltipProps {
   text: string;
@@ -55,15 +58,23 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState("");
   const [showNotification, setShowNotification] = useState(false);
+  const [isWalletAddressValid, setIsWalletAddressValid] = useState(false);
 
+  const screenSize = useScreenSize();
+  const [openConfigure, setOpenConfigure] = useState(false);
   const handlePlatformClick = (platformName: string) => {
     setSelectedPlatform(platformName);
+    if (screenSize.width < 640) {
+      setOpenConfigure(true);
+      return;
+    }
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedPlatform("");
+    setOpenConfigure(false);
   };
 
   const handleConfigureSuccess = () => {
@@ -186,6 +197,7 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
     }
   };
 
+  console.log("iswallet", isWalletAddressValid);
   return (
     <>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-10 m-5">
@@ -201,12 +213,9 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
             >
               <div className="relative my-6">
                 <div
-                  className={`w-22 h-22 rounded-full flex items-center justify-center`}
+                  className={`max-w-15 max-h-15 rounded-full flex items-center justify-center`}
                 >
-                  <img
-                    src={platform.logo}
-                    className="w-20 h-20 object-contain"
-                  />
+                  <img src={platform.logo} height={"60px"} width={"60px"} />
                 </div>
                 <div
                   className={`absolute -bottom-1 -right-1 w-7 h-7 ${getStatusColor(
@@ -234,7 +243,33 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
         isDarkMode={isDarkMode}
         onConfigureSuccess={handleConfigureSuccess}
       />
-
+      <MobileDrawer
+        isOpen={openConfigure}
+        onClose={() => setOpenConfigure(false)}
+        header={`Configure ${selectedPlatform} address`}
+        height={400}
+        leftButtonText="Cancel"
+        rightButtonText="Configure"
+        disableRightButton={!isWalletAddressValid}
+        onLeftButtonClick={() => setOpenConfigure(false)}
+        onRightButtonClick={() => {
+          setOpenConfigure(false);
+          setShowNotification(true);
+        }}
+      >
+        <div className="flex items-center justify-center">
+          <WalletConfigureForm
+            isOpen={openConfigure}
+            onClose={handleCloseModal}
+            platformName={selectedPlatform}
+            isDarkMode={isDarkMode}
+            onConfigureSuccess={handleConfigureSuccess}
+            showHeader={false}
+            showFooter={false}
+            setIsWalletAddressValid={setIsWalletAddressValid}
+          />
+        </div>
+      </MobileDrawer>
       {/* Success Notification */}
       <SuccessNotification
         message={`${selectedPlatform} wallet configured successfully`}

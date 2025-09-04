@@ -34,11 +34,13 @@ const WalletPage: React.FC<WalletPageProps> = ({ onLogout }) => {
           </h1>
 
           {/* Recommended Accounts Section */}
-          <Recommended
-            showRecommendedAccounts={showRecommendedAccounts}
-            setShowRecommendedAccounts={setShowRecommendedAccounts}
-            isDarkMode={isDarkMode}
-          />
+          <div className="hidden sm:block">
+            <Recommended
+              showRecommendedAccounts={showRecommendedAccounts}
+              setShowRecommendedAccounts={setShowRecommendedAccounts}
+              isDarkMode={isDarkMode}
+            />
+          </div>
 
           {/* Filter and Search Section */}
           <Filter

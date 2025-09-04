@@ -11,18 +11,20 @@ interface DrawerProps {
   rightButtonText?: string;
   onLeftButtonClick?: () => void;
   onRightButtonClick?: () => void;
+  disableRightButton?: boolean;
 }
 
 const MobileDrawer: React.FC<DrawerProps> = ({
   isOpen,
   onClose,
-  header,
+  header = "",
   height = 400,
   children,
   leftButtonText = "Cancel",
   rightButtonText = "Confirm",
   onLeftButtonClick,
   onRightButtonClick,
+  disableRightButton = false,
 }) => {
   return (
     <>
@@ -42,19 +44,17 @@ const MobileDrawer: React.FC<DrawerProps> = ({
         style={{ height: `${height}px` }}
       >
         {/* Header */}
-        {(header || onClose) && (
-          <div className="flex justify-between items-start">
-            {header && (
-              <h2 className="text-lg font-semibold text-gray-800">{header}</h2>
-            )}
-            <button
-              onClick={onClose}
-              className="flex-shrink-0 text-[#7C7C7C] transition-colors"
-            >
-              <FontAwesomeIcon icon={faTimes} className="w-4 h-4" />
-            </button>
-          </div>
-        )}
+
+        <div className="flex justify-between items-start">
+          <h2 className="text-lg font-semibold text-gray-800">{header}</h2>
+
+          <button
+            onClick={onClose}
+            className="flex-shrink-0 text-[#7C7C7C] transition-colors"
+          >
+            <FontAwesomeIcon icon={faTimes} className="w-4 h-4" />
+          </button>
+        </div>
 
         {/* Content */}
         <div
@@ -77,10 +77,14 @@ const MobileDrawer: React.FC<DrawerProps> = ({
 
           <button
             type="submit"
-            className="w-4/12 flex justify-center py-3 px-5 border border-transparent text-md font-medium rounded-xl text-gray-900"
-            style={{ backgroundColor: "#90C853" }}
+            className={`w-4/12 flex justify-center py-3 px-5 border border-transparent text-md font-medium rounded-xl text-gray-900  ${
+              !disableRightButton
+                ? "bg-[#90C853] cursor-pointer"
+                : "bg-gray-300 dark:bg-[#2F3232] dark:text-[#8C8E90] cursor-not-allowed"
+            }`}
             aria-label="rightButtonText"
             onClick={onRightButtonClick || onClose}
+            disabled={disableRightButton}
           >
             {rightButtonText}
           </button>

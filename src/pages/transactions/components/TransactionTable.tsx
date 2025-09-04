@@ -200,13 +200,13 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   );
 
   return (
-    <div className="px-8 mb-6">
+    <div className="md:px-8 mb-6">
       <Card className={`h-full w-full border-transparent bg-transparent`}>
         <CardBody>
           <div className="overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left">
               <thead
-                className={`bg-[#F3F5F7] dark:bg-[#2F3232]`}
+                className={`bg-[#F3F5F7] dark:bg-[#2F3232] hidden sm:table-header-group`}
               >
                 <tr>
                   {TABLE_HEAD.map((head, index) => (
@@ -293,7 +293,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                           className="py-4"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <div className="flex items-center justify-center">
+                          <div className="hidden sm:flex sm:items-center sm:justify-center">
                             <input
                               type="checkbox"
                               checked={selectedTransactions.includes(id)}
@@ -452,8 +452,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       </Card>
 
       {/* Table Footer */}
-      <div className={`mt-4 px-8 py-4 bg-white
-        dark:bg-transparent`}>
+      <div
+        className={`mt-4 px-8 py-4 bg-white
+        dark:bg-transparent`}
+      >
         <div className="flex items-center justify-between">
           {/* Left side - Show on page dropdown */}
           <div className="flex items-center space-x-2">

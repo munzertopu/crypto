@@ -77,7 +77,8 @@ const MetricItem: React.FC<MetricItemProps> = ({
         )}
       </div>
     </div>
-    <div className="flex items-center space-x-2">
+
+    <div className="flex flex-col items-start sm:flex-row sm:items-center space-x-2">
       <span className="text-xl sm:text-[32px] font-semibold text-[#0E201E] dark:text-[#B6B8BA]">
         {value}
       </span>
