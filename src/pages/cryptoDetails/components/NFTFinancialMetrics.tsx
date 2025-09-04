@@ -264,9 +264,9 @@ const NFTSection: React.FC<NFTSectionProps> = ({
     </svg>
   );
   return (
-    <div className="px-8 my-6">
+    <div className="px-2 my-6">
       <div
-        className="grid gap-8 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]"
+        className={`grid grid-cols-2 gap-8 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
       >
         <Card
           title="Total number of NFTs"
@@ -275,7 +275,7 @@ const NFTSection: React.FC<NFTSectionProps> = ({
         />
 
         {/* Divider */}
-        <div className="hidden  lg:block w-px h-20 bg-gray-200 dark:bg-gray-700 mx-10"></div>
+        <div className="hidden xl:block flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 "></div>
 
         <Card
           title="Total Purchase Value"
@@ -284,7 +284,7 @@ const NFTSection: React.FC<NFTSectionProps> = ({
         />
 
         {/* Divider */}
-        <div className="hidden lg:block w-px h-20 bg-gray-200 dark:bg-gray-700 mx-10"></div>
+        <div className="hidden xl:block flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 "></div>
 
         <Card
           title="Total Estimated Value"
@@ -293,7 +293,7 @@ const NFTSection: React.FC<NFTSectionProps> = ({
         />
 
         {/* Divider */}
-        <div className="hidden lg:block w-px h-20 bg-gray-200 dark:bg-gray-700 mx-10"></div>
+        <div className="hidden xl:block flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 "></div>
 
         <Card
           title="Estimated Gain/Loss"
