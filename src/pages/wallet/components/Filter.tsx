@@ -47,7 +47,7 @@ const Filter: React.FC<FilterProps> = ({
       <div className="relative">
         <FontAwesomeIcon
           icon={faSearch}
-          className={`absolute size-6 text-xl ml-6 top-1/2 transform -translate-y-1/2 text-[#7C7C7C]
+          className={`absolute size-4 text-xl ml-6 top-1/2 transform -translate-y-1/2 text-[#7C7C7C]
            dark:text-[#CDCFD1]`}
         />
         <input
@@ -55,7 +55,7 @@ const Filter: React.FC<FilterProps> = ({
           placeholder="Search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className={`pl-14 pr-4 py-4 rounded-2xl border text-base w-full bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:outline-none
+          className={`pl-14 pr-4 py-3 rounded-2xl border text-base w-full bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:outline-none
             dark:bg-transparent dark:border-[#4D5050]`}
         />
       </div>

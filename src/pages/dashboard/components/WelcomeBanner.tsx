@@ -45,7 +45,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             <button
               onClick={handleClose}
               className={` self-start sm:flex items-center space-x-1 px-2 sm:px-3 py-1 sm:py-2 lg:px-2 lg:py-1 text-[#0E201E]
-            dark:text-[#B6B8BA] rounded-md  md:hidden`}
+                dark:text-[#B6B8BA] rounded-md md:hidden`}
               aria-label="Close banner"
             >
               <svg
@@ -147,8 +147,8 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className={`hidden self-start md:flex items-center space-x-1 px-2 md:px-3 py-1 md:py-2 lg:px-2 lg:py-1 border-[#E1E3E5] text-[#7C7C7C] 
-            dark:text-[#B6B8BA] dark:border-[#4D5050] rounded-md`}
+          className={`hidden self-start md:flex items-center space-x-1 px-2 md:px-3 py-1 md:py-2 lg:px-2 lg:py-1 border-[#E1E3E5] text-[#7C7C7C] rounded-md
+            dark:text-[#B6B8BA] dark:border-[#4D5050]`}
           aria-label="Close banner"
         >
           <svg

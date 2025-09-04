@@ -368,7 +368,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                 ))}
               </tbody>
             </table>
-                     </div>
+            </div>
          </CardBody>
        </Card>
        
@@ -376,11 +376,8 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
         {modalOpen && selectedAsset && (
           <div
             ref={modalRef}
-            className={`fixed z-50 w-1/2 rounded-lg shadow-lg border ${
-              isDarkMode 
-                ? 'bg-gray-800 border-gray-600 text-white' 
-                : 'bg-white border-gray-300 text-gray-900'
-            }`}
+            className={`fixed z-50 w-1/2 rounded-lg shadow-lg border bg-white border-gray-300 text-gray-900
+              dark:bg-[#0E201E] dark:border-[#0E201E] `}
             style={{
               top: `${modalPosition.top}px`
             }}
@@ -388,7 +385,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
             <div className="p-4">
               <div className="overflow-x-auto">
                 <table className="w-full min-w-max table-auto text-left">
-                  <thead className={`${isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"}`}>
+                  <thead className={`bg-[#F3F5F7] dark:bg-[#2F3232]`}>
                     <tr>
                       {MODAL_TABLE_HEAD.map((head, index) => (
                         <th

@@ -55,20 +55,16 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
       {/* Dropdown Content */}
       {isOpen && (
         <div
-          className={`absolute top-full left-0 mt-1 p-4 rounded-lg border shadow-lg z-50 w-80 ${
-            isDarkMode
-              ? "bg-gray-800 border-gray-600"
-              : "bg-white border-gray-300"
-          }`}
+          className={`absolute top-full left-0 mt-1 p-4 rounded-lg border shadow-lg z-50 w-80 bg-white border-gray-300
+            dark:bg-[#0E201E]`}
         >
           <div className="flex gap-2">
             {/* From Input */}
             <div className="flex-1">
               <Typography
                 variant="small"
-                className={`mb-2 font-medium text-left ${
-                  isDarkMode ? "text-gray-300" : "text-gray-700"
-                }`}
+                className={`mb-2 font-medium text-left text-gray-700
+                  dark:text-[#F3F5F7]`}
               >
                 From:
               </Typography>
@@ -78,21 +74,15 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                   placeholder="0"
                   value={fromValue}
                   onChange={(e) => setFromValue(e.target.value)}
-                  className={`w-full rounded-lg text-sm font-semibold ${
-                    isDarkMode
-                      ? "border-gray-500 bg-gray-700 !text-white"
-                      : "border-gray-300 bg-white !text-gray-900"
-                  }`}
+                  className={`w-full rounded-lg text-sm font-semibold border-gray-300 bg-white text-gray-900
+                    dark:bg-transparent dark:border-[#4D5050] dark:text-[#A1A3A5]`}
                 />
                 <button
                   onClick={() =>
                     setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
                   }
-                  className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b ${
-                    isDarkMode
-                      ? "border-gray-500 text-gray-300 hover:bg-gray-600"
-                      : "border-gray-300 text-gray-600 bg-white"
-                  }`}
+                  className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-gray-300 text-gray-600 bg-white
+                    dark:bg-[#0E201E] dark:border-[#4D5050]`}
                 >
                   <div className="flex items-center gap-1">
                     <span className="text-xs font-medium">{fromCurrency}</span>
@@ -103,11 +93,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                 {/* Currency Dropdown */}
                 {showFromCurrencyDropdown && (
                   <div
-                    className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 ${
-                      isDarkMode
-                        ? "bg-gray-800 border-gray-600"
-                        : "bg-white border-gray-200"
-                    }`}
+                    className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200
+                      dark:bg-[#0E201E]`}
                   >
                     <div className="py-1">
                       {["USD", "EUR", "USDT"].map((currency) => (
@@ -119,8 +106,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                           }}
                           className={`w-full px-3 py-1 text-left text-xs ${
                             fromCurrency === currency
-                              ? "bg-blue-50 text-blue-600"
-                              : ""
+                              ? "bg-blue-50 text-blue-600 dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                              : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
                           }`}
                         >
                           {currency}
@@ -136,9 +123,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
             <div className="flex-1">
               <Typography
                 variant="small"
-                className={`mb-2 font-medium ${
-                  isDarkMode ? "text-gray-300" : "text-gray-700"
-                }`}
+                className={`mb-2 font-medium text-left text-gray-700
+                  dark:text-[#F3F5F7]`}
               >
                 To:
               </Typography>
@@ -148,21 +134,15 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                   placeholder="1000"
                   value={toValue}
                   onChange={(e) => setToValue(e.target.value)}
-                  className={`w-full rounded-lg text-sm font-semibold ${
-                    isDarkMode
-                      ? "border-gray-500 bg-gray-700 !text-white"
-                      : "border-gray-300 bg-white !text-gray-900"
-                  }`}
+                  className={`w-full rounded-lg text-sm font-semibold border-gray-300 bg-white text-gray-900
+                    dark:bg-transparent dark:border-[#4D5050] dark:text-[#A1A3A5]`}
                 />
                 <button
                   onClick={() =>
                     setShowToCurrencyDropdown(!showToCurrencyDropdown)
                   }
-                  className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b ${
-                    isDarkMode
-                      ? "border-gray-500 text-gray-300 hover:bg-gray-600"
-                      : "border-gray-300 text-gray-600 bg-white"
-                  }`}
+                  className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-gray-300 text-gray-600 bg-white
+                    dark:bg-[#0E201E] dark:border-[#4D5050]`}
                 >
                   <div className="flex items-center gap-1">
                     <span className="text-xs font-medium">{toCurrency}</span>
@@ -173,11 +153,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                 {/* Currency Dropdown */}
                 {showToCurrencyDropdown && (
                   <div
-                    className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 ${
-                      isDarkMode
-                        ? "bg-gray-800 border-gray-600"
-                        : "bg-white border-gray-200"
-                    }`}
+                    className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200
+                      dark:bg-[#0E201E] dark:border-[#4D5050]`}
                   >
                     <div className="py-1">
                       {["USD", "EUR", "USDT"].map((currency) => (
@@ -189,8 +166,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                           }}
                           className={`w-full px-3 py-1 text-left text-xs ${
                             toCurrency === currency
-                              ? "bg-blue-50 text-blue-600"
-                              : ""
+                              ? "bg-blue-50 text-blue-600 dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                              : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
                           }`}
                         >
                           {currency}

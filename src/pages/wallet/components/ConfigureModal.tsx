@@ -87,7 +87,7 @@ const ConfigureModal: React.FC<ConfigureModalProps> = ({
         {isWalletAddressValid && (
           <div className="mb-6">
             <div className="flex items-center mb-2">
-              <label className="text-lg font-medium">Blockchains</label>
+              <label className="text-lg font-medium dark:text-[#CDCFD1]">Blockchains</label>
               <svg className="w-5 h-5 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />

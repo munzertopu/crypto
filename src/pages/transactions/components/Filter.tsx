@@ -9,7 +9,6 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { Tabs } from "@material-tailwind/react";
-import { Input, Typography } from "@material-tailwind/react";
 import Datepicker from "react-tailwindcss-datepicker";
 import AmountRangeDropdown from "../../../components/AmountRangeDropdown";
 
@@ -423,7 +422,7 @@ const Filter: React.FC<FilterProps> = ({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className={`pl-14 pr-4 py-4 rounded-2xl border text-base w-full bg-white border-[#E1E3E5] text-[#0E201E] placeholder-gray-500 focus:outline-none
-              dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050]`}
+              dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#CDCFD1]`}
           />
         </div>
 
@@ -446,11 +445,8 @@ const Filter: React.FC<FilterProps> = ({
 
               {walletDropdownOpen && (
                 <div
-                  className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-lg z-50 ${
-                    isDarkMode
-                      ? "bg-gray-800 border-gray-600"
-                      : "bg-white border-gray-300"
-                  }`}
+                  className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-lg z-50 bg-white border-gray-300
+                    dark:bg-[#0E201E]`}
                 >
                   {/* Search Input */}
                   <div className="px-3 border-b border-gray-200">
@@ -459,11 +455,8 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Type or paste wallet"
                       value={walletSearchTerm}
                       onChange={(e) => setWalletSearchTerm(e.target.value)}
-                      className={`w-full px-3 py-2 rounded text-sm ${
-                        isDarkMode
-                          ? "text-white placeholder-gray-400"
-                          : "text-gray-900 placeholder-gray-500"
-                      } focus:outline-none`}
+                      className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
+                        dark:bg-[#0E201E] dark:text-gray-50`}
                     />
                   </div>
 
@@ -475,11 +468,7 @@ const Filter: React.FC<FilterProps> = ({
                         <div
                           key={option.id}
                           onClick={() => handleWalletToggle(option.id)}
-                          className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 ${
-                            isDarkMode
-                              ? "hover:bg-gray-700"
-                              : "hover:bg-gray-50"
-                          }`}
+                          className={`flex items-center px-3 py-2 cursor-pointer`}
                         >
                           <div
                             className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
@@ -500,9 +489,8 @@ const Filter: React.FC<FilterProps> = ({
                             className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}
                           ></img>
                           <span
-                            className={`text-sm ${
-                              isDarkMode ? "text-white" : "text-gray-900"
-                            }`}
+                            className={`text-sm text-gray-900
+                              dark:text-[#F3F5F7]`}
                           >
                             {option.name}
                           </span>
@@ -532,11 +520,8 @@ const Filter: React.FC<FilterProps> = ({
 
               {actionTypeDropdownOpen && (
                 <div
-                  className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-lg z-50 ${
-                    isDarkMode
-                      ? "bg-gray-800 border-gray-600"
-                      : "bg-white border-gray-300"
-                  }`}
+                  className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-lg z-50 bg-white border-gray-300
+                    dark:bg-[#0E201E]`}
                 >
                   {/* Search Input */}
                   <div className="px-3 border-b border-gray-200">
@@ -545,11 +530,8 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Type or paste action type"
                       value={actionTypeSearchTerm}
                       onChange={(e) => setActionTypeSearchTerm(e.target.value)}
-                      className={`w-full px-3 py-2 rounded text-sm ${
-                        isDarkMode
-                          ? "text-white placeholder-gray-400"
-                          : "text-gray-900 placeholder-gray-500"
-                      } focus:outline-none`}
+                      className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
+                        dark:bg-[#0E201E] dark:text-gray-50`}
                     />
                   </div>
 
@@ -563,11 +545,7 @@ const Filter: React.FC<FilterProps> = ({
                         <div
                           key={option.id}
                           onClick={() => handleActionTypeToggle(option.id)}
-                          className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 ${
-                            isDarkMode
-                              ? "hover:bg-gray-700"
-                              : "hover:bg-gray-50"
-                          }`}
+                          className={`flex items-center px-3 py-2 cursor-pointer`}
                         >
                           <div
                             className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
@@ -584,9 +562,8 @@ const Filter: React.FC<FilterProps> = ({
                             )}
                           </div>
                           <span
-                            className={`text-sm ${
-                              isDarkMode ? "text-white" : "text-gray-900"
-                            }`}
+                            className={`text-sm text-gray-900
+                              dark:text-[#F3F5F7]`}
                           >
                             {option.name}
                           </span>
@@ -663,11 +640,8 @@ const Filter: React.FC<FilterProps> = ({
 
               {resultDropdownOpen && (
                 <div
-                  className={`absolute top-full right-0 mt-1 w-64 rounded-lg border shadow-lg z-50 ${
-                    isDarkMode
-                      ? "bg-gray-800 border-gray-600"
-                      : "bg-white border-gray-300"
-                  }`}
+                  className={`absolute top-full right-0 mt-1 w-64 rounded-lg border shadow-lg z-50 bg-white border-gray-300
+                    dark:bg-[#0E201E]`}
                 >
                   {/* Search Input */}
                   <div className="px-3 border-b border-gray-200">
@@ -676,11 +650,8 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Type or paste result"
                       value={resultSearchTerm}
                       onChange={(e) => setResultSearchTerm(e.target.value)}
-                      className={`w-full px-3 py-2 rounded text-sm ${
-                        isDarkMode
-                          ? "text-white placeholder-gray-400"
-                          : "text-gray-900 placeholder-gray-500"
-                      } focus:outline-none`}
+                      className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
+                        dark:bg-[#0E201E] dark:text-gray-50`}
                     />
                   </div>
 
@@ -692,11 +663,7 @@ const Filter: React.FC<FilterProps> = ({
                         <div
                           key={option.id}
                           onClick={() => handleResultToggle(option.id)}
-                          className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 ${
-                            isDarkMode
-                              ? "hover:bg-gray-700"
-                              : "hover:bg-gray-50"
-                          }`}
+                          className={`flex items-center px-3 py-2 cursor-pointer`}
                         >
                           <div
                             className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
@@ -713,9 +680,8 @@ const Filter: React.FC<FilterProps> = ({
                             )}
                           </div>
                           <span
-                            className={`text-sm ${
-                              isDarkMode ? "text-white" : "text-gray-900"
-                            }`}
+                            className={`text-sm text-gray-900
+                              dark:text-[#F3F5F7]`}
                           >
                             {option.name}
                           </span>
@@ -761,11 +727,8 @@ const Filter: React.FC<FilterProps> = ({
               return wallet ? (
                 <div
                   key={`wallet-${walletId}`}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
-                    isDarkMode
-                      ? "bg-gray-700 text-white border border-gray-600"
-                      : "bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
+                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
                 >
                   <span>{wallet.name}</span>
                   <button
@@ -791,11 +754,8 @@ const Filter: React.FC<FilterProps> = ({
               return actionType ? (
                 <div
                   key={`action-${actionTypeId}`}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
-                    isDarkMode
-                      ? "bg-gray-700 text-white border border-gray-600"
-                      : "bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
+                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
                 >
                   <span>{actionType.name}</span>
                   <button
@@ -816,11 +776,8 @@ const Filter: React.FC<FilterProps> = ({
             {/* Amount Sent Filter */}
             {(fromSentValue !== "0" || toSentValue !== "0") && (
               <div
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
-                  isDarkMode
-                    ? "bg-gray-700 text-white border border-gray-600"
-                    : "bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
-                }`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
+                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
               >
                 <span>
                   {fromSentValue} - {toSentValue} {fromSentCurrency}
@@ -837,11 +794,8 @@ const Filter: React.FC<FilterProps> = ({
             {/* Amount Received Filter */}
             {(fromReceivedValue !== "0" || toReceivedValue !== "0") && (
               <div
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
-                  isDarkMode
-                    ? "bg-gray-700 text-white border border-gray-600"
-                    : "bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
-                }`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
+                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
               >
                 <span>
                   {fromReceivedValue} - {toReceivedValue} {fromReceivedCurrency}
@@ -860,11 +814,8 @@ const Filter: React.FC<FilterProps> = ({
               selectedDateRange.startDate &&
               selectedDateRange.endDate && (
                 <div
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
-                    isDarkMode
-                      ? "bg-gray-700 text-white border border-gray-600"
-                      : "bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
+                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
                 >
                   <span>
                     {formatDate(selectedDateRange.startDate)} -{" "}
@@ -885,11 +836,8 @@ const Filter: React.FC<FilterProps> = ({
               return result ? (
                 <div
                   key={`result-${resultId}`}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
-                    isDarkMode
-                      ? "bg-gray-700 text-white border border-gray-600"
-                      : "bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
+                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
                 >
                   <span>{result.name}</span>
                   <button
