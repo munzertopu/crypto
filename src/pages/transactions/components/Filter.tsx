@@ -435,7 +435,7 @@ const Filter: React.FC<FilterProps> = ({
             placeholder="Search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className={`pl-14 pr-4 py-4 rounded-2xl border text-base w-full bg-white border-[#E1E3E5] text-[#0E201E] placeholder-gray-500 focus:outline-none
+            className={`pl-14 pr-4 py-4 rounded-[12px] border text-base w-full bg-white border-[#E1E3E5] text-[#0E201E] placeholder-gray-500 focus:outline-none
               dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050]`}
           />
         </div>
@@ -754,7 +754,7 @@ const Filter: React.FC<FilterProps> = ({
                 }
                 setShowFilters(!showFilters);
               }}
-              className={`flex text-xl items-center px-3 py-4 rounded-2xl border transition-colors bg-white border-gray-300 text-[#0E201E]
+              className={`flex text-xl items-center px-3 py-4 rounded-[12px] border transition-colors bg-white border-gray-300 text-[#0E201E]
                 dark:bg-transparent dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               aria-label="Toggle additional filters"
               aria-expanded={showFilters}
@@ -776,18 +776,18 @@ const Filter: React.FC<FilterProps> = ({
                   x="0.000000"
                   y="0.000000"
                   fill="rgb(255,255,255)"
-                  fill-opacity="0"
+                  fillOpacity="0"
                 />
                 <g id="vuesax/linear/filter">
                   <g id="filter">
                     <path
                       id="Vector"
                       d="M15.4997 1.75C16.4163 1.75 17.1663 2.5 17.1663 3.41667L17.1663 5.25C17.1663 5.91667 16.7497 6.75 16.333 7.16667L12.7497 10.3333C12.2497 10.75 11.9163 11.5833 11.9163 12.25L11.9163 15.8333C11.9163 16.3333 11.583 17 11.1663 17.25L9.99967 18C8.91634 18.6667 7.41634 17.9167 7.41634 16.5833L7.41634 12.1667C7.41634 11.5833 7.08301 10.8333 6.74967 10.4167L3.58301 7.08333C3.16634 6.66667 2.83301 5.91667 2.83301 5.41667L2.83301 3.5C2.83301 2.5 3.58301 1.75 4.49967 1.75L15.4997 1.75Z"
-                      fill-rule="nonzero"
+                      fillRule="nonzero"
                       stroke="rgb(124,124,124)"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.20000005"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.20000005"
                     />
                     <path id="Vector" opacity="0" />
                   </g>

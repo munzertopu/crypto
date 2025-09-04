@@ -361,9 +361,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
                     />
                   </svg>
@@ -461,18 +461,18 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   x="0.000000"
                   y="0.000000"
                   fill="rgb(255,255,255)"
-                  fill-opacity="0"
+                  fillOpacity="0"
                 />
                 <g id="vuesax/linear/arrow-right">
                   <g id="arrow-right">
                     <path
                       id="Vector"
                       d="M5.94043 13.2797L10.2871 8.93306C10.8004 8.41973 10.8004 7.57973 10.2871 7.06639L5.94043 2.71973"
-                      fill-rule="nonzero"
+                      fillRule="nonzero"
                       stroke="rgb(124,124,124)"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1"
                     />
                     <path
                       id="Vector"
@@ -506,24 +506,24 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                     x="0.000000"
                     y="0.000000"
                     fill="rgb(255,255,255)"
-                    fill-opacity="0"
+                    fillOpacity="0"
                   />
                   <path
                     id="Vector"
                     d="M8.00033 12.3332C5.60709 12.3332 3.66699 10.3931 3.66699 7.99984C3.66699 5.6066 5.60709 3.6665 8.00033 3.6665C10.3936 3.6665 12.3337 5.6066 12.3337 7.99984C12.3337 10.3931 10.3936 12.3332 8.00033 12.3332Z"
                     stroke="rgb(124,124,124)"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1"
                   />
                   <path
                     id="Vector"
                     d="M12.7597 3.24016L12.673 3.32683L12.7597 3.24016ZM3.32634 12.6735L3.23967 12.7602L3.32634 12.6735ZM7.99967 1.3335L7.99967 1.38683L7.99967 1.3335ZM7.99967 14.6135L7.99967 14.6668L7.99967 14.6135ZM1.33301 8.00016L1.38634 8.00016L1.33301 8.00016ZM14.613 8.00016L14.6663 8.00016L14.613 8.00016ZM3.23967 3.24016L3.32634 3.32683L3.23967 3.24016ZM12.7597 12.7602L12.673 12.6735"
-                    fill-rule="nonzero"
+                    fillRule="nonzero"
                     stroke="rgb(124,124,124)"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.33333337"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.33333337"
                   />
                 </svg>
               </span>
