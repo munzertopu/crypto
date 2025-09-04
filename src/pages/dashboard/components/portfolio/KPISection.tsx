@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Typography } from "@material-tailwind/react";
+import useScreenSize from "../../../../hooks/useScreenSize";
+import MobileDrawer from "../../../../components/Drawers/MobileDrawer";
 
 interface KPICardProps {
   title: string;
@@ -158,6 +160,8 @@ const KPISection: React.FC<KPISectionProps> = ({
   );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const screenSize = useScreenSize();
+  const [openKPIFilter, setOpenKPIFilter] = useState(false);
   const [selectedKPIs, setSelectedKPIs] = useState({
     longTerms: true,
     shortTerms: true,
@@ -170,6 +174,10 @@ const KPISection: React.FC<KPISectionProps> = ({
   });
 
   const handleDropdownToggle = () => {
+    if (screenSize.width < 640) {
+      setOpenKPIFilter(!openKPIFilter);
+      return;
+    }
     setIsDropdownOpen(!isDropdownOpen);
   };
 
@@ -377,6 +385,69 @@ const KPISection: React.FC<KPISectionProps> = ({
           svgIcon={longTermsSvg}
         />
       </div>
+      <MobileDrawer
+        isOpen={openKPIFilter}
+        onClose={() => setOpenKPIFilter(false)}
+        header=""
+        height={400}
+        leftButtonText="Cancel"
+        rightButtonText="Save"
+        onLeftButtonClick={() => setOpenKPIFilter(false)}
+        onRightButtonClick={() => setOpenKPIFilter(false)}
+      >
+        {Object.entries(selectedKPIs).map(([key, isSelected]) => {
+          const kpiLabels: { [key: string]: string } = {
+            longTerms: "Long Terms",
+            shortTerms: "Short Terms",
+            realizedGains: "Realized Gains",
+            income: "Income",
+            unrealizedGains: "Unrealized Gains",
+            totalTaxLiability: "Total Tax Liability",
+            capitalLosses: "Capital Losses",
+            airdropIncome: "Airdrop Income",
+          };
+
+          return (
+            <div
+              key={key}
+              className="flex items-center px-4 py-2 hover:bg-[#F3F5F7] dark:hover:bg-[#2F3232] cursor-pointer"
+              onClick={() => handleKPIToggle(key)}
+              role="menuitemcheckbox"
+              aria-checked={isSelected}
+              aria-label={`Toggle ${kpiLabels[key]} KPI display`}
+            >
+              <div
+                className={`w-5 h-5  border-2 rounded flex items-center justify-center mr-2 transition-colors border-[#90C853] ${
+                  isSelected ? "bg-white dark:bg-[#5F9339]" : ""
+                }`}
+              >
+                {isSelected && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="size-6 text-[#4f801cff]"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m4.5 12.75 6 6 9-13.5"
+                    />
+                  </svg>
+                )}
+              </div>
+              <Typography
+                variant="small"
+                className="text-[#0E201E] dark:text-[#F3F5F7]"
+              >
+                {kpiLabels[key]}
+              </Typography>
+            </div>
+          );
+        })}
+      </MobileDrawer>
     </div>
   );
 };
