@@ -56,27 +56,34 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
   return (
     <nav
-      className={`px-4 sm:px-6 lg:px-9 py-2 sm:py-2 lg:py-3.5 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 border-b`}
+      className={`px-4 sm:px-6 lg:px-9 py-2 sm:py-2 lg:py-3.5 bg-white border-b 
+        dark:bg-[#0E201E] dark:border-[#2F3232]`}
     >
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/dashboard" className="flex items-center">
             <img
-              src="/logo.png"
+              src='logo.png'
               alt="Portal"
-              className="h-6 sm:h-7 lg:h-7 w-auto"
+              className="h-6 sm:h-7 lg:h-7 w-auto block dark:hidden"
+            />
+            <img
+              src='logo-dark.png'
+              alt="Portal"
+              className="h-6 sm:h-7 lg:h-7 w-auto hidden dark:block"
             />
           </Link>
         </div>
 
         {/* Navigation Links */}
-        <div className="hidden lg:flex items-center space-x-1 lg:space-x-1 opacity-70">
+        <div className="hidden lg:flex items-center space-x-1 lg:space-x-1">
           {navigationItems.map((item) => (
             <a
               key={item.name}
               href={item.href}
-              className={`px-1 lg:px-3 py-2 text-sm lg:text-md opacity-90 text-[#0E201E] dark:text-[#B6B8BA]
+              className={`px-1 lg:px-3 py-2 text-sm lg:text-md text-[#0E201E] 
+                dark:text-[#B6B8BA]
                 ${
                   currentPage === item.name.toLowerCase()
                     ? "!text-green-600"
@@ -103,7 +110,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           {/* Desktop Settings Button */}
           <Link to="/settings">
             <button
-              className="hidden lg:block bg-transparent border border-[#E1E3E5] text-[#7C7C7C] px-3 py-1.5 lg:px-2 lg:py-2 rounded-xl hover:bg-gray-50 transition-colors"
+              className="hidden lg:block bg-transparent border border-[#E1E3E5] text-[#7C7C7C] px-3 py-1.5 lg:px-2 lg:py-2 rounded-xl
+              dark:text-[#B6B8BA] dark:border-[#4D5050]"
               aria-label="Open settings"
             >
               <svg
@@ -131,6 +139,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           {/* Go Pro Button */}
           <button
             className={`hidden sm:flex items-center space-x-1 sm:space-x-2 bg-transparent border border-[#E1E3E5] px-2 lg:px-3 lg:py-1 rounded-lg text-xs sm:text-sm font-medium
+              dark:text-[#75AE46] dark:border-[#4D5050]
              `}
             aria-label="Upgrade to Pro plan"
           >
@@ -143,7 +152,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             >
               <path d="M230.9,73.6A15.85,15.85,0,0,0,212,77.39l-33.67,36.29-35.8-80.29a1,1,0,0,1,0-.1,16,16,0,0,0-29.06,0,1,1,0,0,1,0,.1l-35.8,80.29L44,77.39A16,16,0,0,0,16.25,90.81c0,.11,0,.21.07.32L39,195a16,16,0,0,0,15.72,13H201.29A16,16,0,0,0,217,195L239.68,91.13c0-.11,0-.21.07-.32A15.85,15.85,0,0,0,230.9,73.6ZM201.35,191.68l-.06.32H54.71l-.06-.32L32,88l.14.16,42,45.24a8,8,0,0,0,13.18-2.18L128,40l40.69,91.25a8,8,0,0,0,13.18,2.18l42-45.24L224,88Z" />
             </svg>
-            <span className="hidden lg:inline text-lg lg:text-md font-normal text-[#5F9339]">
+            <span className="hidden lg:inline text-lg lg:text-md font-normal text-[#5F9339] dark:text-[#75AE46]">
               Go Pro
             </span>
           </button>
@@ -152,7 +161,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           <div className="relative space-x-6">
             <button
               onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-              className="flex items-center justify-between space-x-6 lg:border lg:border-[#E1E3E5] lg:px-3 lg:py-1.5 lg:rounded-xl"
+              className="flex items-center justify-between space-x-6 lg:border lg:border-[#E1E3E5] lg:px-3 lg:py-1.5 lg:rounded-xl
+              dark:border-[#4D5050]"
               aria-label="Open profile menu"
               aria-expanded={isProfileDropdownOpen}
               aria-haspopup="true"
@@ -165,7 +175,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   className="w-5 h-5 rounded-full object-cover"
                 />
                 <span
-                  className={`hidden sm:inline text-xs sm:text-sm lg:text-md text-[#0E201E] dark:text-[#CDCFD1]`}
+                  className={`hidden sm:inline text-xs sm:text-sm lg:text-md text-[#0E201E] 
+                    dark:text-[#CDCFD1]`}
                 >
                   {userName}
                 </span>
@@ -175,9 +186,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               <div className="hidden lg:block">
                 <FontAwesomeIcon
                   icon={faChevronDown}
-                  className={`w-3 h-3 ${
-                    isDarkMode ? "text-[#CDCFD1]" : "text-[#7C7C7C]"
-                  }`}
+                  className={`w-3 h-3 text-[#7C7C7C]
+                    dark:text-[#CDCFD1]
+                  `}
                 />
               </div>
             </button>

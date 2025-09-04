@@ -88,24 +88,19 @@ const Filters: React.FC<FiltersProps> = ({
     <div className="mx-8 my-8">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
         {/* Search Bar - 1/3 width */}
-        <div className="">
+        <div>
           <div className="relative">
             <FontAwesomeIcon
               icon={faSearch}
-              className={`absolute left-3 top-1/2 transform text-xl -translate-y-1/2 ${
-                isDarkMode ? "text-gray-400" : "text-gray-500"
-              }`}
+              className="absolute left-3 top-1/2 transform text-xl -translate-y-1/2 text-gray-500 dark:text-[#CDCFD1]"
             />
             <input
               type="text"
               placeholder="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className={`w-full pl-12 pr-4 py-3 text-lg border rounded-2xl focus:outline-none ${
-                isDarkMode
-                  ? "bg-gray-800 border-gray-600 text-white placeholder-gray-400"
-                  : "bg-white border-[#14151A2F] text-[#0E201E] placeholder-gray-500"
-              }`}
+              className="w-full pl-12 pr-4 py-3 text-lg border rounded-2xl focus:outline-none bg-transparent border-[#14151A2F] text-[#0E201E] placeholder-gray-500
+                dark:border-[#4D5050] dark:text-white dark:placeholder-[#CDCFD1]"
               aria-label="Search NFTs"
             />
           </div>
@@ -129,35 +124,29 @@ const Filters: React.FC<FiltersProps> = ({
             setIsOpen={setShowEstimatedValueDropdown}
             title="Estimated value"
           />
-          <div
-            className={`flex items-center space-x-2 rounded-lg border p-0 shadow-sm ${
-              isDarkMode
-                ? "bg-gray-800 border-gray-600"
-                : "bg-white border-gray-300"
-            }`}
-          >
+          <div className="flex items-center rounded-lg border px-2 my-4 shadow-sm sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]">
             <Datepicker
               displayFormat="DD MMM YYYY"
-              inputClassName={`text-md ml-4 text-[#0E201E]`}
-              useRange={true}
-              value={null}
+              separator='-'
+              placeholder="Purchase date"
+              value={null} 
               onChange={(newValue: any) => setSelectedDateRange(newValue)}
               showShortcuts={true}
               configs={{
-                shortcuts: createShortcuts(),
+                  shortcuts: createShortcuts()
               }}
-              primaryColor="green"
-              placeholder="Purchase date"
+              
+              primaryColor='green'
+              inputClassName="w-full rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white"
+              containerClassName="relative pr-6"
+              toggleClassName="absolute rounded-r-lg px-0 right-0 top-0 h-full text-gray-800 dark:text-white"
             />
           </div>
 
-          <div className="flex-1 relative">
+          <div className="flex-1 relative my-4">
             <div
-              className={`px-3 py-4 rounded-lg border text-md ${
-                isDarkMode
-                  ? "bg-gray-800 border-gray-700 text-white"
-                  : "bg-white border-gray-300 text-[#0E201E]"
-              } flex items-center justify-between cursor-pointer hover:border-gray-400 transition-colors`}
+              className="px-3 py-3 flex items-center justify-between cursor-pointer rounded-lg border text-md bg-transparent border-gray-300 text-[#0E201E] 
+                dark:border-[#4D5050] dark:text-white"
               onClick={() => setShowGainDropdown(!showGainDropdown)}
             >
               <span>{selectedGain}</span>
@@ -172,11 +161,7 @@ const Filters: React.FC<FiltersProps> = ({
             {/* Gain Dropdown */}
             {showGainDropdown && (
               <div
-                className={`absolute top-full left-0 right-0 mt-1 rounded-lg border shadow-lg z-20 ${
-                  isDarkMode
-                    ? "bg-gray-800 border-gray-600"
-                    : "bg-white border-gray-200"
-                }`}
+                className="absolute top-full left-0 right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-600"
               >
                 <div className="py-1">
                   {["Highest gain", "Lowest gain"].map((gain) => (
@@ -186,11 +171,7 @@ const Filters: React.FC<FiltersProps> = ({
                         setSelectedGain(gain);
                         setShowGainDropdown(false);
                       }}
-                      className={`w-full px-3 py-2 text-left text-sm flex items-center justify-between ${
-                        isDarkMode
-                          ? "text-white hover:bg-[#0A0F290A]"
-                          : "text-gray-900 hover:bg-gray-50"
-                      } ${selectedGain === gain ? "bg-[#0A0F290A]" : ""}`}
+                      className={`w-full px-3 py-2 text-left text-sm flex items-center justify-between text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-[#0A0F290A] ${selectedGain === gain ? "bg-[#0A0F290A]" : ""}`}
                     >
                       <span>{gain}</span>
                       {selectedGain === gain && (
@@ -224,8 +205,8 @@ const Filters: React.FC<FiltersProps> = ({
           <div className="flex flex-wrap gap-2">
             {/* Currency Range Filter Tag */}
             {(fromValue !== "0" || toValue !== "0") && (
-              <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 rounded-full">
-                <span className="text-md font-semibold text-black-800">
+              <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">
+                <span className="text-md font-semibold text-black-800 dark:text-white">
                   {fromValue}-{toValue} {fromCurrency}
                 </span>
                 <button
@@ -235,7 +216,7 @@ const Filters: React.FC<FiltersProps> = ({
                     setFromCurrency("USDT");
                     setToCurrency("USDT");
                   }}
-                  className="text-black-600 text-md"
+                  className="text-black-600 dark:text-gray-300 text-md"
                 >
                   <FontAwesomeIcon icon={faXmark} className="w-3 h-3" />
                 </button>
@@ -244,8 +225,8 @@ const Filters: React.FC<FiltersProps> = ({
 
             {/* Date Range Filter Tag */}
             {selectedDateRange && (
-              <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 rounded-full">
-                <span className="text-md font-semibold text-black-800">
+              <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">
+                <span className="text-md font-semibold text-black-800 dark:text-white">
                   {selectedDateRange.startDate && selectedDateRange.endDate
                     ? `${new Date(
                         selectedDateRange.startDate
@@ -260,7 +241,7 @@ const Filters: React.FC<FiltersProps> = ({
                 </span>
                 <button
                   onClick={() => setSelectedDateRange(null)}
-                  className="text-black"
+                  className="text-black dark:text-gray-300"
                 >
                   <FontAwesomeIcon icon={faXmark} className="w-3 h-3" />
                 </button>
@@ -269,13 +250,13 @@ const Filters: React.FC<FiltersProps> = ({
 
             {/* Gain Filter Tag */}
             {selectedGain !== "Highest gain" && (
-              <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 rounded-full">
-                <span className="text-md font-semibold text-black">
+              <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">
+                <span className="text-md font-semibold text-black dark:text-white">
                   {selectedGain}
                 </span>
                 <button
                   onClick={() => setSelectedGain("Highest gain")}
-                  className="text-black"
+                  className="text-black dark:text-gray-300"
                 >
                   <FontAwesomeIcon icon={faXmark} className="w-3 h-3" />
                 </button>

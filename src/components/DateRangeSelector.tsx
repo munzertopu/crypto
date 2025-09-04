@@ -124,8 +124,8 @@ const DateRangeSelector: React.FC<DateRangeSelectorProps> = ({
   // Render inline variant
   if (variant === 'inline') {
     return (
-      <div className={`flex items-center rounded-lg border p-2 shadow-sm w-full sm:w-auto`}
-        style={{borderColor: `${isDarkMode ? '#4D5050' : '#E1E3E5'}`, backgroundColor: `${isDarkMode ? '#0E201E' : '#FFFFFF'}`}}
+      <div className={`flex items-center rounded-lg border p-2 shadow-sm w-full sm:w-auto border-[#E1E3E5] bg-[#FFFFFF]
+        dark:bg-[#0E201E] dark:border-[#4D5050]`}
       >
         <Datepicker
           displayFormat="DD MMM YYYY"
@@ -139,9 +139,9 @@ const DateRangeSelector: React.FC<DateRangeSelectorProps> = ({
           }}
           
           primaryColor='green'
-          inputClassName={`w-full rounded-md bg-transparent mr-16 focus:outline-none text-sm sm:text-base ${isDarkMode ? 'placeholder:text-white text-white' : 'placeholder:text-gray-800 text-gray-800'}`}
-          containerClassName="relative pl-6"
-          toggleClassName={`absolute rounded-r-lg left-0 top-0 h-full ${isDarkMode ? 'text-white' : 'text-gray-800'}`}
+          inputClassName="w-full rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white"
+          containerClassName="relative pr-6"
+          toggleClassName="absolute rounded-r-lg px-0 right-0 top-0 h-full text-gray-800 dark:text-white"
         />
       </div>
     );

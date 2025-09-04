@@ -76,15 +76,15 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({
   const tableData = data.length > 0 ? data : defaultData;
 
   return (
-    <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+    <div className="bg-white dark:bg-[#0E201E]">
       <div className="pt-6 pb-2">
-        <h3 className="text-lg font-semibold text-left">Tax Lots</h3>
+        <h3 className="text-lg font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Tax Lots</h3>
       </div>
       <div className="overflow-x-auto">
-        <Card className="h-full w-full border-transparent">
-          <CardBody className="px-0 rounded-lg">
+        <Card className="h-full w-full">
+          <CardBody className="px-0 rounded-lg m-0 p-0">
             <table className="w-full min-w-max table-auto text-left">
-              <thead className='bg-gray-200'>
+              <thead className='bg-gray-200 dark:bg-[#2F3232]'>
                 <tr className=''>
                   {TABLE_HEAD.map((head, index) => (
                     <th
@@ -93,7 +93,7 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({
                     >
                       <Typography
                         variant="small"
-                        className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
+                        className="flex items-center justify-between gap-2 font-normal leading-none opacity-70 text-[#0E201E] dark:text-[#B6B8BA]"
                       >
                         {head}{" "}
                         {index !== TABLE_HEAD.length - 1 && (
@@ -104,13 +104,13 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({
                   ))}
                 </tr>
               </thead>
-              <tbody className={`${isDarkMode ? 'bg-gray-800 divide-gray-700' : 'bg-white divide-gray-200'}`}>
+              <tbody className="bg-white dark:bg-[#0E201E] divide-gray-200 dark:divide-[#2F3232]">
                 {tableData.map((item) => (
-                  <tr key={item.id} className={`${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'}`}>
+                  <tr key={item.id} className="hover:bg-gray-50 dark:hover:bg-[#2F3232]">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <Avatar src={item.acquisitionAccount.logo} alt={item.acquisitionAccount.name} size="sm" className="mr-3" />
-                        <span className={`text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        <span className="text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                           {item.acquisitionAccount.name}
                         </span>
                       </div>
@@ -118,26 +118,26 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <Avatar src={item.currentAccount.logo} alt={item.currentAccount.name} size="sm" className="mr-3" />
-                        <span className={`text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        <span className="text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                           {item.currentAccount.name}
                         </span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.type}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.amount}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{item.currentPrice.current}</div>
-                      <div className="text-sm text-gray-500">{item.currentPrice.original}</div>
+                      <div className="text-sm text-[#0E201E] dark:text-[#F3F5F7]">{item.currentPrice.current}</div>
+                      <div className="text-sm text-gray-500 dark:text-[#A1A3A5]">{item.currentPrice.original}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{item.change.value}</div>
-                      <div className="text-sm text-gray-600">{item.change.percentage}</div>
+                      <div className="text-sm text-[#0E201E] dark:text-[#F3F5F7]">{item.change.value}</div>
+                      <div className="text-sm text-gray-600 dark:text-[#8C8E90]">{item.change.percentage}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.value}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -145,7 +145,7 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({
                         {item.unrealizedGL.value}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.purchaseDate}
                     </td>
                   </tr>

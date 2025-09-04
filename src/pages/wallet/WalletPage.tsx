@@ -15,7 +15,7 @@ const WalletPage: React.FC<WalletPageProps> = ({ onLogout }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? "bg-gray-900" : "bg-white"}`}>
+    <div className="min-h-screen bg-white dark:bg-[#0E201E]">
       <NavigationBar
         isDarkMode={isDarkMode}
         onThemeToggle={() => setIsDarkMode(!isDarkMode)}
@@ -27,9 +27,8 @@ const WalletPage: React.FC<WalletPageProps> = ({ onLogout }) => {
         <div className="mx-auto px-12 py-8">
           {/* Main Title */}
           <h1
-            className={`text-2xl font-semibold mb-8 text-left ${
-              isDarkMode ? "text-white" : "text-[#0E201E]"
-            }`}
+            className={`text-2xl font-semibold mb-8 text-left text-[#0E201E]
+              dark:text-[#E1E3E5]`}
           >
             Wallets
           </h1>

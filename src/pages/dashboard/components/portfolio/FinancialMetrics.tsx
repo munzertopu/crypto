@@ -39,9 +39,7 @@ const MetricItem: React.FC<MetricItemProps> = ({
       <div className="flex items-center justify-center">
         {svgIcon ? (
           <div
-            className={`${
-              isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
-            } w-5 h-5 flex items-center justify-center`}
+            className={`"text-[#0E201E] dark:text-[#B6B8BA] w-5 h-5 flex items-center justify-center`}
           >
             {svgIcon}
           </div>
@@ -56,25 +54,21 @@ const MetricItem: React.FC<MetricItemProps> = ({
       </div>
       <div className="flex items-center space-x-1">
         <span
-          className={`text-base sm:text-xl lg:text-2xl font-medium md:font-semibold ${
-            isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
-          }`}
+          className={`text-base sm:text-xl lg:text-2xl font-medium md:font-semibold "text-[#0E201E] dark:text-[#B6B8BA]`}
         >
           {title}
         </span>
         {showDropdown && (
           <button
             onClick={onDropdownToggle}
-            className={`flex items-center justify-center w-4 h-4 rounded transition-colors`}
+            className="flex items-center justify-center w-4 h-4 rounded transition-colors"
             aria-label="Toggle unrealized gain options"
             aria-expanded={isDropdownOpen}
             aria-haspopup="true"
           >
             <FontAwesomeIcon
               icon={faChevronDown}
-              className={`${
-                isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
-              } text-xs transition-transform ${
+              className={`"text-[#0E201E] dark:text-[#B6B8BA] text-xs transition-transform ${
                 isDropdownOpen ? "rotate-180" : ""
               }`}
               aria-hidden="true"
@@ -84,11 +78,7 @@ const MetricItem: React.FC<MetricItemProps> = ({
       </div>
     </div>
     <div className="flex items-center space-x-2">
-      <span
-        className={`text-xl sm:text-[32px] font-semibold  ${
-          isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
-        }`}
-      >
+      <span className="text-xl sm:text-[32px] font-semibold text-[#0E201E] dark:text-[#B6B8BA]">
         {value}
       </span>
       <span
@@ -215,9 +205,7 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
             />
             {/* Vertical Separator */}
             <div
-              className={`hidden lg:block w-px ${
-                isDarkMode ? "bg-[#2F3232]" : "bg-[#E1E3E5]"
-              }`}
+              className={`hidden lg:block w-px bg-[#E1E3E5] dark:bg-[#2F3232]`}
             ></div>
             <div className="relative">
               <MetricItem

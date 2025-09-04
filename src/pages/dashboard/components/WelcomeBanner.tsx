@@ -36,18 +36,16 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
           {/* Main Welcome Message */}
           <div className="flex items-start justify-between">
             <h2
-              className={`text-sm sm:text-lg  font-semibold sm:font-medium ${
-                isDarkMode ? "text-white" : "text-[#0E201E] text-left"
-              }`}
+              className={`text-sm sm:text-lg  font-semibold sm:font-medium text-[#0E201E]
+            dark:text-[#B6B8BA] text-left`}
             >
               Welcome [{userName}]! Go Pro and Save an Additional [$] with our
               advanced Tax Settings.
             </h2>
             <button
               onClick={handleClose}
-              className={` self-start sm:flex items-center space-x-1 px-2 sm:px-3 py-1 sm:py-2 lg:px-2 lg:py-1  ${
-                isDarkMode ? "text-white" : "text-[#7C7C7C]"
-              } rounded-md  md:hidden`}
+              className={` self-start sm:flex items-center space-x-1 px-2 sm:px-3 py-1 sm:py-2 lg:px-2 lg:py-1 text-[#0E201E]
+            dark:text-[#B6B8BA] rounded-md  md:hidden`}
               aria-label="Close banner"
             >
               <svg
@@ -75,66 +73,55 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             <div className="flex flex-col md:flex-row justify-start items-start md:items-center gap-2">
               {" "}
               <span
-                className={`text-sm sm:text-base lg:text-md font-medium ${
-                  isDarkMode ? "text-gray-300" : "text-[#0E201E]"
-                }`}
+                className={`text-sm sm:text-base lg:text-md font-medium text-[#0E201E]  dark:text-[#B6B8BA]`}
               >
                 Getting started is as easy as:
               </span>
               <div className="flex flex-row flex-wrap md:gap-5 gap-1.5 ">
                 <div
-                  className={`flex items-center justify-center px-1.5 md:px-3 py-3 rounded-lg lg:rounded-xl border ${
-                    isDarkMode ? "border-gray-600" : "border-[#E1E3E5]"
-                  }`}
+                  className={`flex items-center justify-center px-1.5 md:px-3 py-3 rounded-lg lg:rounded-xl border border-[#E1E3E5] dark:border-gray-600`}
                 >
                   <div
-                    className="w-4 h-4 lg:w-4 lg:h-4 rounded-full flex items-center justify-center text-white text-xs font-bold mr-2"
+                    className="w-4 h-4 lg:w-4 lg:h-4 rounded-full flex items-center justify-center text-white  dark:text-[#2F3232] text-xs font-bold mr-2"
                     style={{ backgroundColor: "#75AE46" }}
                   >
                     1
                   </div>
                   <span
-                    className={`text-sm lg:text-md font-normal opacity-80 ${
-                      isDarkMode ? "text-white" : "text-[#0E201E]"
-                    }`}
+                    className={`text-sm lg:text-md font-normal opacity-80 text-[#0E201E] 
+                  dark:text-[#CDCFD1]`}
                   >
                     Connect Exchanges & Wallets
                   </span>
                 </div>
                 <div
-                  className={`flex items-center justify-center px-1.5 sm:px-3 py-3 rounded-lg lg:rounded-xl border ${
-                    isDarkMode ? "border-gray-600" : "border-[#E1E3E5]"
-                  }`}
+                  className={`flex items-center justify-center px-1.5 md:px-3 py-3 rounded-lg lg:rounded-xl border border-[#E1E3E5] dark:border-gray-600`}
                 >
                   <div
-                    className="w-4 h-4 lg:w-4 lg:h-4 rounded-full flex items-center justify-center text-white text-xs font-bold mr-2"
+                    className="w-4 h-4 lg:w-4 lg:h-4 rounded-full flex items-center justify-center text-white  dark:text-[#2F3232] text-xs font-bold mr-2"
                     style={{ backgroundColor: "#75AE46" }}
                   >
                     2
                   </div>
                   <span
-                    className={`text-sm lg:text-md font-normal opacity-80 ${
-                      isDarkMode ? "text-white" : "text-[#0E201E]"
-                    }`}
+                    className={`text-sm lg:text-md font-normal opacity-80 text-[#0E201E] 
+                  dark:text-[#CDCFD1]`}
                   >
                     Reconcile Trades
                   </span>
                 </div>
                 <div
-                  className={`flex items-center justify-center px-1.5 sm:px-3 py-3 rounded-lg lg:rounded-xl border ${
-                    isDarkMode ? "border-gray-600" : "border-[#E1E3E5]"
-                  }`}
+                  className={`flex items-center justify-center px-1.5 md:px-3 py-3 rounded-lg lg:rounded-xl border border-[#E1E3E5] dark:border-gray-600`}
                 >
                   <div
-                    className="w-4 h-4 lg:w-4 lg:h-4 rounded-full flex items-center justify-center text-white text-xs font-bold mr-2"
+                    className="w-4 h-4 lg:w-4 lg:h-4 rounded-full flex items-center justify-center text-white  dark:text-[#2F3232] text-xs font-bold mr-2"
                     style={{ backgroundColor: "#75AE46" }}
                   >
                     3
                   </div>
                   <span
-                    className={`text-sm lg:text-md font-normal opacity-80 ${
-                      isDarkMode ? "text-white" : "text-[#0E201E]"
-                    }`}
+                    className={`text-sm lg:text-md font-normal opacity-80 text-[#0E201E] 
+                  dark:text-[#CDCFD1]`}
                   >
                     Run Tax Reports
                   </span>
@@ -160,9 +147,8 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className={`hidden self-start md:flex items-center space-x-1 px-2 md:px-3 py-1 md:py-2 lg:px-2 lg:py-1 border border-[#E1E3E5] ${
-            isDarkMode ? "text-white" : "text-[#7C7C7C]"
-          } rounded-md`}
+          className={`hidden self-start md:flex items-center space-x-1 px-2 md:px-3 py-1 md:py-2 lg:px-2 lg:py-1 border-[#E1E3E5] text-[#7C7C7C] 
+            dark:text-[#B6B8BA] dark:border-[#4D5050] rounded-md`}
           aria-label="Close banner"
         >
           <svg
@@ -180,9 +166,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             />
           </svg>
           <span
-            className={`text-sm lg:text-sm font-normal ${
-              isDarkMode ? "text-white" : "text-[#0E201E]"
-            }`}
+            className={`text-sm lg:text-sm font-normaltext-[#0E201E] dark:text-[#CDCFD1]`}
           >
             Close
           </span>

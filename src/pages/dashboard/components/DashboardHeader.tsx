@@ -70,19 +70,14 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
       <div className="flex flex-row items-center justify-between gap-4 ">
         {/* Title */}
         <h1
-          className={`text-lg lg:text-xl font-medium`}
-          style={{ color: `${isDarkMode ? "#E1E3E5" : "#0E201E"}` }}
+          className={`text-lg lg:text-xl font-medium  text-[#0E201E] dark:text-[#E1E3E5]`}
         >
           Dashboard
         </h1>
 
         {/* Date Range Selector */}
         <div
-          className={`flex items-center rounded-lg border p-2 shadow-sm w-full sm:w-auto`}
-          style={{
-            borderColor: `${isDarkMode ? "#4D5050" : "#E1E3E5"}`,
-            backgroundColor: `${isDarkMode ? "#0E201E" : "#FFFFFF"}`,
-          }}
+          className={`flex items-center rounded-lg border p-2 shadow-sm w-full sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]`}
         >
           <Datepicker
             displayFormat="DD MMM YYYY"
@@ -95,26 +90,16 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
               shortcuts: createShortcuts(),
             }}
             primaryColor="green"
-            inputClassName={`w-full rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base ${
-              isDarkMode
-                ? "placeholder:text-white text-white"
-                : "placeholder:text-gray-800 text-gray-800"
-            }`}
+            inputClassName={`w-full rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base  placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white`}
             containerClassName="relative pr-6"
-            toggleClassName={`absolute rounded-r-lg px-0 right-0 top-0 h-full ${
-              isDarkMode ? "text-white" : "text-gray-800"
-            }`}
+            toggleClassName={`absolute rounded-r-lg px-0 right-0 top-0 h-fulltext-gray-800 dark:text-white`}
           />
         </div>
       </div>
       {/* Tabs */}
-      <div className={`${isDarkMode ? "border-gray-700" : "border-gray-200"}`}>
+      <div className="border-gray-200 dark:border-gray-700">
         <Tabs>
-          <Tabs.List
-            className={`my-2 lg:my-2 space-x-1 ${
-              isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"
-            }`}
-          >
+          <Tabs.List className="my-2 lg:my-2 space-x-1 bg-[#F3F5F7] dark:bg-[#2F3232]">
             {tabs.map((tab) => (
               <Tabs.Trigger
                 key={tab}
@@ -122,12 +107,8 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                 onClick={() => onTabChange?.(tab)}
                 className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl text-sm sm:text-lg ${
                   activeTab === tab
-                    ? `${
-                        isDarkMode
-                          ? "bg-[#0E201E] text-white"
-                          : "bg-white text-black"
-                      }`
-                    : `${isDarkMode ? "text-[#FFFFFF]" : "text-[#0E201E]"}`
+                    ? "bg-white dark:bg-[#0E201E] text-black dark:text-white"
+                    : "text-[#0E201E] dark:text-[#FFFFFF]"
                 }`}
               >
                 {tab}

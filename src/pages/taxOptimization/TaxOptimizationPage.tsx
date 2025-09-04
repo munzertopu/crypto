@@ -35,11 +35,7 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
   };
 
   return (
-    <div
-      className={`min-h-screen ${
-        isDarkMode ? "bg-[#0E201E] text-white" : "bg-white text-gray-900"
-      }`}
-    >
+    <div className="min-h-screen bg-white dark:bg-[#0E201E]">
       <NavigationBar
         isDarkMode={isDarkMode}
         onThemeToggle={handleThemeToggle}
@@ -51,9 +47,7 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
         {/* Header */}
         <div className="mb-6">
           <h1
-            className={`text-2xl font-semibold mb-4 text-left ${
-              isDarkMode ? "text-white" : "text-gray-900"
-            }`}
+            className={`text-2xl font-semibold mb-4 text-left text-[#0E201E] dark:text-[#E1E3E5]`}
           >
             Tax Optimization
           </h1>
@@ -63,22 +57,16 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
             className={`${isDarkMode ? "border-gray-700" : "border-gray-200"}`}
           >
             <Tabs>
-              <Tabs.List
-                className={`${isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"}`}
-              >
+              <Tabs.List className="my-2 lg:my-2 bg-[#F3F5F7] dark:bg-[#2F3232]">
                 {tabs.map((tab) => (
                   <Tabs.Trigger
                     key={tab}
                     value={tab}
                     onClick={() => handleTabChange?.(tab)}
-                    className={`py-2 px-3 rounded-lg text-sm ${
+                    className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl text-sm sm:text-lg ${
                       activeTab === tab
-                        ? `${
-                            isDarkMode
-                              ? "bg-[#0E201E] text-white"
-                              : "bg-white text-black"
-                          }`
-                        : `${isDarkMode ? "text-[#FFFFFF]" : "text-[#0E201E]"}`
+                        ? 'bg-white dark:bg-[#0E201E] text-black dark:text-white'
+                        : 'text-[#0E201E] dark:text-[#FFFFFF]'
                     }`}
                   >
                     {tab}
