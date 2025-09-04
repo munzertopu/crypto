@@ -114,9 +114,9 @@ const KPISection: React.FC<KPISectionProps> = ({
     >
       <path
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 5h6m-6 4h6M10 3v4h4V3h-4Z"
       />
     </svg>
@@ -151,9 +151,9 @@ const KPISection: React.FC<KPISectionProps> = ({
     >
       <path
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
         d="M4 4.5V19a1 1 0 0 0 1 1h15M7 14l4-4 4 4 5-5m0 0h-3.207M20 9v3.207"
       />
     </svg>
