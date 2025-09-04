@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavigationBar from "../../components/NavigationBar";
 import { TransactionTable, Filter } from "./components";
+import useScreenSize from "../../hooks/useScreenSize";
 
 interface TransactionPageProps {
   onLogout?: () => void;
@@ -39,6 +40,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   const [expandedTransactionId, setExpandedTransactionId] = useState<
     string | null
   >(null);
+  const screenSize = useScreenSize();
 
   const mockTransactions: Transaction[] = [
     {
@@ -269,7 +271,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           showFilters={showFilters}
           setShowFilters={setShowFilters}
           isDarkMode={isDarkMode}
-          hideTab
+          hideTab={screenSize.width < 640}
         />
 
         {/* Transactions Table */}

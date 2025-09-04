@@ -8,6 +8,7 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import ThemeToggle from "./ThemeToggle";
+import useScreenSize from "../hooks/useScreenSize";
 
 interface NavigationBarProps {
   userName?: string;
@@ -28,6 +29,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
+  const screenSize = useScreenSize();
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -100,12 +102,16 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <div className="flex items-center">
           <Link to="/dashboard" className="flex items-center">
             <img
-              src="logo.png"
+              src={`${screenSize.width < 640 ? "logo-only.png" : "logo.png"}`}
               alt="Portal"
               className="h-6 sm:h-7 lg:h-7 w-auto block dark:hidden"
             />
             <img
-              src="logo-dark.png"
+              src={`${
+                screenSize.width < 640
+                  ? "logo-dark-mobile.png"
+                  : "logo-dark.png"
+              }`}
               alt="Portal"
               className="h-6 sm:h-7 lg:h-7 w-auto hidden dark:block"
             />

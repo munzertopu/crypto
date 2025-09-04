@@ -26,7 +26,7 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
       <div
         className={`fixed bottom-0 left-0 w-[99.7%] bg-white z-50 transition-transform duration-300 transform ${
           isOpen ? "translate-y-0" : "translate-y-full"
-        } rounded-t-[24px] sm:hidden p-8`}
+        } rounded-t-[24px] sm:hidden p-8 dark:bg-[#0E201E]`}
         style={{ height }}
       >
         {/* Header */}
@@ -35,12 +35,14 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
           <div className="flex items-center justify-center gap-3">
             <button
               onClick={onClose}
-              className="text-[#7C7C7C] flex items-center justify-center "
+              className="text-[#7C7C7C] dark:text-[#F3F5F7] flex items-center justify-center "
             >
               <FontAwesomeIcon icon={faChevronLeft} className="w-6 h-6" />
             </button>
 
-            <h2 className="text-xl font-semibold text-gray-900">{header}</h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#F3F5F7]">
+              {header}
+            </h2>
           </div>
           {showLogo && (
             <div className="flex items-center">

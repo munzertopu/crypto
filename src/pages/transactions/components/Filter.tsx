@@ -12,6 +12,9 @@ import { Tabs } from "@material-tailwind/react";
 import { Input, Typography } from "@material-tailwind/react";
 import Datepicker from "react-tailwindcss-datepicker";
 import AmountRangeDropdown from "../../../components/AmountRangeDropdown";
+import { Accordion, AccordionItem } from "../../../components/Accordion";
+import useScreenSize from "../../../hooks/useScreenSize";
+import MobileDrawer from "../../../components/Drawers/MobileDrawer";
 
 interface WalletOption {
   id: string;
@@ -147,7 +150,11 @@ const Filter: React.FC<FilterProps> = ({
 
   // Date
   const [selectedDateRange, setSelectedDateRange] = useState<any>(null);
-
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const screenSize = useScreenSize();
+  const [showFromCurrencyDropdown, setShowFromCurrencyDropdown] =
+    useState(false);
+  const [showToCurrencyDropdown, setShowToCurrencyDropdown] = useState(false);
   // Helper function to format dates
   const formatDate = (date: Date | string) => {
     if (typeof date === "string") {
@@ -346,7 +353,7 @@ const Filter: React.FC<FilterProps> = ({
                   onClick={() => onTabChange?.(tab)}
                   className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl text-sm sm:text-lg ${
                     activeTab === tab
-                      ? "bg-white dark:bg-[#0E201E] text-black dark:text-white"
+                      ? "bg-[#B3E277] dark:bg-[#0E201E] text-black dark:text-white"
                       : "text-[#0E201E] dark:text-[#FFFFFF]"
                   }`}
                 >
@@ -740,23 +747,532 @@ const Filter: React.FC<FilterProps> = ({
         {!showFilters && (
           <div className="flex items-center">
             <button
-              onClick={() => setShowFilters(!showFilters)}
+              onClick={() => {
+                if (screenSize.width < 640) {
+                  setShowMobileFilters(true);
+                  return;
+                }
+                setShowFilters(!showFilters);
+              }}
               className={`flex text-xl items-center px-3 py-4 rounded-2xl border transition-colors bg-white border-gray-300 text-[#0E201E]
                 dark:bg-transparent dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               aria-label="Toggle additional filters"
               aria-expanded={showFilters}
             >
-              <FontAwesomeIcon
-                icon={faFilter}
+              <svg
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                width="20.000000"
+                height="20.000000"
+                fill="none"
                 className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2 text-[#0E201E]
                   dark:text-[#F3F5F7]"
-                aria-hidden="true"
-              />
+              >
+                <rect
+                  id="Property 2=filter"
+                  width="20.000000"
+                  height="20.000000"
+                  x="0.000000"
+                  y="0.000000"
+                  fill="rgb(255,255,255)"
+                  fill-opacity="0"
+                />
+                <g id="vuesax/linear/filter">
+                  <g id="filter">
+                    <path
+                      id="Vector"
+                      d="M15.4997 1.75C16.4163 1.75 17.1663 2.5 17.1663 3.41667L17.1663 5.25C17.1663 5.91667 16.7497 6.75 16.333 7.16667L12.7497 10.3333C12.2497 10.75 11.9163 11.5833 11.9163 12.25L11.9163 15.8333C11.9163 16.3333 11.583 17 11.1663 17.25L9.99967 18C8.91634 18.6667 7.41634 17.9167 7.41634 16.5833L7.41634 12.1667C7.41634 11.5833 7.08301 10.8333 6.74967 10.4167L3.58301 7.08333C3.16634 6.66667 2.83301 5.91667 2.83301 5.41667L2.83301 3.5C2.83301 2.5 3.58301 1.75 4.49967 1.75L15.4997 1.75Z"
+                      fill-rule="nonzero"
+                      stroke="rgb(124,124,124)"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.20000005"
+                    />
+                    <path id="Vector" opacity="0" />
+                  </g>
+                </g>
+              </svg>
+
               <span className="hidden sm:inline">Filters</span>
             </button>
           </div>
         )}
       </div>
+      <MobileDrawer
+        isOpen={showMobileFilters}
+        onClose={() => setShowMobileFilters(false)}
+        header="Filters"
+        height={screenSize.height - 100}
+        leftButtonText="Clear All"
+        rightButtonText="Apply"
+        onLeftButtonClick={() => setShowMobileFilters(false)}
+        onRightButtonClick={() => setShowMobileFilters(false)}
+      >
+        <Accordion>
+          <AccordionItem title="Wallet">
+            {" "}
+            <div
+              className={`w-full  shadow-lg z-50 ${
+                isDarkMode
+                  ? "bg-gray-800 border-gray-600"
+                  : "bg-white border-gray-300"
+              }`}
+            >
+              {/* Search Input */}
+              <div className="border-b border-gray-200">
+                <input
+                  type="text"
+                  placeholder="Type or paste wallet"
+                  value={walletSearchTerm}
+                  onChange={(e) => setWalletSearchTerm(e.target.value)}
+                  className={`w-full px-3 py-2 rounded-lg border text-sm ${
+                    isDarkMode
+                      ? "text-white placeholder-gray-400"
+                      : "text-gray-900 placeholder-gray-500"
+                  } focus:outline-none`}
+                />
+              </div>
+
+              {/* Wallet Options List */}
+              <div className="max-h-48 overflow-y-auto">
+                {filteredWalletOptions.map((option) => {
+                  const isSelected = selectedWallets.includes(option.id);
+                  return (
+                    <div
+                      key={option.id}
+                      onClick={() => handleWalletToggle(option.id)}
+                      className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 ${
+                        isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
+                      }`}
+                    >
+                      <div
+                        className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                          isSelected
+                            ? "bg-[#90C853] border-[#90C853]"
+                            : "border-gray-300"
+                        }`}
+                      >
+                        {isSelected && (
+                          <FontAwesomeIcon
+                            icon={faCheck}
+                            className="w-2.5 h-2.5 text-white"
+                          />
+                        )}
+                      </div>
+                      <img
+                        src={option.logo}
+                        className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}
+                      ></img>
+                      <span
+                        className={`text-sm ${
+                          isDarkMode ? "text-white" : "text-gray-900"
+                        }`}
+                      >
+                        {option.name}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </AccordionItem>
+          <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+          <AccordionItem title="Action Type">
+            {" "}
+            <div
+              className={`w-full  shadow-lg z-50 ${
+                isDarkMode
+                  ? "bg-gray-800 border-gray-600"
+                  : "bg-white border-gray-300"
+              }`}
+            >
+              {/* Search Input */}
+              <div className="border-b border-gray-200">
+                <input
+                  type="text"
+                  placeholder="Type or paste action type"
+                  value={actionTypeSearchTerm}
+                  onChange={(e) => setActionTypeSearchTerm(e.target.value)}
+                  className={`w-full px-3 py-2 rounded-lg border text-sm ${
+                    isDarkMode
+                      ? "text-white placeholder-gray-400"
+                      : "text-gray-900 placeholder-gray-500"
+                  } focus:outline-none`}
+                />
+              </div>
+
+              {/* Action Type Options List */}
+              <div className="max-h-48 overflow-y-auto">
+                {filteredActionTypeOptions.map((option) => {
+                  const isSelected = selectedActionTypes.includes(option.id);
+                  return (
+                    <div
+                      key={option.id}
+                      onClick={() => handleActionTypeToggle(option.id)}
+                      className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 ${
+                        isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
+                      }`}
+                    >
+                      <div
+                        className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                          isSelected
+                            ? "bg-[#90C853] border-[#90C853]"
+                            : "border-gray-300"
+                        }`}
+                      >
+                        {isSelected && (
+                          <FontAwesomeIcon
+                            icon={faCheck}
+                            className="w-2.5 h-2.5 text-white"
+                          />
+                        )}
+                      </div>
+                      <span
+                        className={`text-sm ${
+                          isDarkMode ? "text-white" : "text-gray-900"
+                        }`}
+                      >
+                        {option.name}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </AccordionItem>
+          <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+          <AccordionItem title="Amount Sent">
+            {" "}
+            <div
+              className={`w-full shadow-lg z-50 w-80 ${
+                isDarkMode
+                  ? "bg-gray-800 border-gray-600"
+                  : "bg-white border-gray-300"
+              }`}
+            >
+              <div className="flex flex-col gap-2">
+                {/* From Input */}
+                <div className="flex-1">
+                  <Typography
+                    variant="small"
+                    className={`mb-2 font-medium text-left ${
+                      isDarkMode ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
+                    From:
+                  </Typography>
+
+                  <div className="relative">
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      value={fromSentValue}
+                      onChange={(e) => setFromSentValue(e.target.value)}
+                      className={`w-full rounded-lg text-sm font-semibold ${
+                        isDarkMode
+                          ? "border-gray-500 bg-gray-700 !text-white"
+                          : "border-gray-300 bg-white !text-gray-900"
+                      }`}
+                    />
+                    <button
+                      onClick={() =>
+                        setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
+                      }
+                      className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b ${
+                        isDarkMode
+                          ? "border-gray-500 text-gray-300 hover:bg-gray-600"
+                          : "border-gray-300 text-gray-600 bg-white"
+                      }`}
+                    >
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-medium">
+                          {fromSentCurrency}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          className="w-2 h-2"
+                        />
+                      </div>
+                    </button>
+
+                    {/* Currency Dropdown */}
+                    {showFromCurrencyDropdown && (
+                      <div
+                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 ${
+                          isDarkMode
+                            ? "bg-gray-800 border-gray-600"
+                            : "bg-white border-gray-200"
+                        }`}
+                      >
+                        <div className="py-1">
+                          {["USD", "EUR", "USDT"].map((currency) => (
+                            <button
+                              key={currency}
+                              onClick={() => {
+                                setFromSentCurrency(currency);
+                                setShowFromCurrencyDropdown(false);
+                              }}
+                              className={`w-full px-3 py-1 text-left text-xs ${
+                                fromSentCurrency === currency
+                                  ? "bg-blue-50 text-blue-600"
+                                  : ""
+                              }`}
+                            >
+                              {currency}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* To Input */}
+                <div className="flex-1">
+                  <Typography
+                    variant="small"
+                    className={`mb-2 text-left font-medium ${
+                      isDarkMode ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
+                    To:
+                  </Typography>
+                  <div className="relative">
+                    <Input
+                      type="number"
+                      placeholder="1000"
+                      value={toSentValue}
+                      onChange={(e) => setToSentValue(e.target.value)}
+                      className={`w-full rounded-lg text-sm font-semibold ${
+                        isDarkMode
+                          ? "border-gray-500 bg-gray-700 !text-white"
+                          : "border-gray-300 bg-white !text-gray-900"
+                      }`}
+                    />
+                    <button
+                      onClick={() =>
+                        setShowToCurrencyDropdown(!showToCurrencyDropdown)
+                      }
+                      className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b ${
+                        isDarkMode
+                          ? "border-gray-500 text-gray-300 hover:bg-gray-600"
+                          : "border-gray-300 text-gray-600 bg-white"
+                      }`}
+                    >
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-medium">
+                          {toSentCurrency}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          className="w-2 h-2"
+                        />
+                      </div>
+                    </button>
+
+                    {/* Currency Dropdown */}
+                    {showToCurrencyDropdown && (
+                      <div
+                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 ${
+                          isDarkMode
+                            ? "bg-gray-800 border-gray-600"
+                            : "bg-white border-gray-200"
+                        }`}
+                      >
+                        <div className="py-1">
+                          {["USD", "EUR", "USDT"].map((currency) => (
+                            <button
+                              key={currency}
+                              onClick={() => {
+                                setToSentCurrency(currency);
+                                setShowToCurrencyDropdown(false);
+                              }}
+                              className={`w-full px-3 py-1 text-left text-xs ${
+                                toSentCurrency === currency
+                                  ? "bg-blue-50 text-blue-600"
+                                  : ""
+                              }`}
+                            >
+                              {currency}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AccordionItem>
+          <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+          <AccordionItem title="Amount Received">
+            {" "}
+            <div
+              className={`w-full shadow-lg${
+                isDarkMode
+                  ? "bg-gray-800 border-gray-600"
+                  : "bg-white border-gray-300"
+              }`}
+            >
+              <div className="flex flex-col gap-2">
+                {/* From Input */}
+                <div className="flex-1">
+                  <Typography
+                    variant="small"
+                    className={`mb-2 font-medium text-left ${
+                      isDarkMode ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
+                    From:
+                  </Typography>
+
+                  <div className="relative">
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      value={fromSentValue}
+                      onChange={(e) => setFromSentValue(e.target.value)}
+                      className={`w-full rounded-lg text-sm font-semibold ${
+                        isDarkMode
+                          ? "border-gray-500 bg-gray-700 !text-white"
+                          : "border-gray-300 bg-white !text-gray-900"
+                      }`}
+                    />
+                    <button
+                      onClick={() =>
+                        setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
+                      }
+                      className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b ${
+                        isDarkMode
+                          ? "border-gray-500 text-gray-300 hover:bg-gray-600"
+                          : "border-gray-300 text-gray-600 bg-white"
+                      }`}
+                    >
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-medium">
+                          {fromSentCurrency}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          className="w-2 h-2"
+                        />
+                      </div>
+                    </button>
+
+                    {/* Currency Dropdown */}
+                    {showFromCurrencyDropdown && (
+                      <div
+                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 ${
+                          isDarkMode
+                            ? "bg-gray-800 border-gray-600"
+                            : "bg-white border-gray-200"
+                        }`}
+                      >
+                        <div className="py-1">
+                          {["USD", "EUR", "USDT"].map((currency) => (
+                            <button
+                              key={currency}
+                              onClick={() => {
+                                setFromSentCurrency(currency);
+                                setShowFromCurrencyDropdown(false);
+                              }}
+                              className={`w-full px-3 py-1 text-left text-xs ${
+                                fromSentCurrency === currency
+                                  ? "bg-blue-50 text-blue-600"
+                                  : ""
+                              }`}
+                            >
+                              {currency}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* To Input */}
+                <div className="flex-1">
+                  <Typography
+                    variant="small"
+                    className={`mb-2 text-left font-medium ${
+                      isDarkMode ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
+                    To:
+                  </Typography>
+                  <div className="relative">
+                    <Input
+                      type="number"
+                      placeholder="1000"
+                      value={toSentValue}
+                      onChange={(e) => setToSentValue(e.target.value)}
+                      className={`w-full rounded-lg text-sm font-semibold ${
+                        isDarkMode
+                          ? "border-gray-500 bg-gray-700 !text-white"
+                          : "border-gray-300 bg-white !text-gray-900"
+                      }`}
+                    />
+                    <button
+                      onClick={() =>
+                        setShowToCurrencyDropdown(!showToCurrencyDropdown)
+                      }
+                      className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b ${
+                        isDarkMode
+                          ? "border-gray-500 text-gray-300 hover:bg-gray-600"
+                          : "border-gray-300 text-gray-600 bg-white"
+                      }`}
+                    >
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-medium">
+                          {toSentCurrency}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          className="w-2 h-2"
+                        />
+                      </div>
+                    </button>
+
+                    {/* Currency Dropdown */}
+                    {showToCurrencyDropdown && (
+                      <div
+                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 ${
+                          isDarkMode
+                            ? "bg-gray-800 border-gray-600"
+                            : "bg-white border-gray-200"
+                        }`}
+                      >
+                        <div className="py-1">
+                          {["USD", "EUR", "USDT"].map((currency) => (
+                            <button
+                              key={currency}
+                              onClick={() => {
+                                setToSentCurrency(currency);
+                                setShowToCurrencyDropdown(false);
+                              }}
+                              className={`w-full px-3 py-1 text-left text-xs ${
+                                toSentCurrency === currency
+                                  ? "bg-blue-50 text-blue-600"
+                                  : ""
+                              }`}
+                            >
+                              {currency}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AccordionItem>
+          <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+          <AccordionItem title="Date"> Coming...........</AccordionItem>
+        </Accordion>
+      </MobileDrawer>
 
       {/* Active Filters Display */}
       {hasActiveFilters && (

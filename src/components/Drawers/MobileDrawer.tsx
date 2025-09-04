@@ -40,17 +40,19 @@ const MobileDrawer: React.FC<DrawerProps> = ({
       <div
         className={`fixed bottom-0 left-0 w-[99.8%] bg-white z-50 transition-transform duration-300 transform ${
           isOpen ? "translate-y-0" : "translate-y-full"
-        } rounded-t-[24px] sm:hidden py-6 px-5`}
+        } rounded-t-[24px] sm:hidden py-6 px-5 dark:bg-[#0E201E]`}
         style={{ height: `${height}px` }}
       >
         {/* Header */}
 
         <div className="flex justify-between items-start">
-          <h2 className="text-lg font-semibold text-gray-800">{header}</h2>
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-[#F3F5F7]">
+            {header}
+          </h2>
 
           <button
             onClick={onClose}
-            className="flex-shrink-0 text-[#7C7C7C] transition-colors"
+            className="flex-shrink-0 text-[#7C7C7C] transition-colors dark:text-[#F3F5F7]"
           >
             <FontAwesomeIcon icon={faTimes} className="w-4 h-4" />
           </button>
@@ -68,7 +70,7 @@ const MobileDrawer: React.FC<DrawerProps> = ({
         <div className="flex justify-between pt-3">
           <button
             onClick={onLeftButtonClick || onClose}
-            className="w-[90px] font-medium focus:outline-none"
+            className="w-[90px] font-medium focus:outline-none dark:text-[#F3F5F7]"
             style={{ color: "rgba(77,80,80,1)" }}
             aria-label="leftButtonText"
           >
