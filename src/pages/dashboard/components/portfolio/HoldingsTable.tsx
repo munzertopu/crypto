@@ -69,10 +69,11 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
   const data = holdings.length > 0 ? holdings : defaultHoldings;
 
-  const TrendChart: React.FC<{ trend: "up" | "down"; data?: number[] }> = ({
-    trend,
-    data = [],
-  }) => {
+  const TrendChart: React.FC<{
+    trend: "up" | "down";
+    data?: number[];
+    mobileView?: boolean;
+  }> = ({ trend, data = [], mobileView = false }) => {
     const chartColor = trend === "up" ? "#10b981" : "#ef4444";
 
     const options: ApexOptions = {
@@ -161,31 +162,33 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
             series={series}
             type="area"
             height={32}
-            width={210}
+            width={!mobileView ? 210 : 150}
           />
         </div>
         {/* Checkmark in circle icon */}
-        <svg
-          className="w-6 h-6 mr-4 flex-shrink-0"
-          viewBox="0 0 16 16"
-          fill="none"
-        >
-          <circle
-            cx="8"
-            cy="8"
-            r="7"
-            stroke="#9CA3AF"
-            strokeWidth="1.5"
+        {mobileView ? null : (
+          <svg
+            className="w-6 h-6 mr-4 flex-shrink-0"
+            viewBox="0 0 16 16"
             fill="none"
-          />
-          <path
-            d="M5 8L7 10L11 6"
-            stroke="#9CA3AF"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+          >
+            <circle
+              cx="8"
+              cy="8"
+              r="7"
+              stroke="#9CA3AF"
+              strokeWidth="1.5"
+              fill="none"
+            />
+            <path
+              d="M5 8L7 10L11 6"
+              stroke="#9CA3AF"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        )}
       </div>
     );
   };
@@ -200,7 +203,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
       <Card className="h-full w-full border-transparent bg-transprent">
         <CardBody className="px-0 rounded-lg sm:overflow-x-auto">
           <table className="w-full min-w-max table-auto text-left">
-            <thead className="bg-[#F3F5F7] dark:bg-[#2F3232]">
+            <thead className="bg-[#F3F5F7] dark:bg-[#2F3232] hidden sm:table-header-group">
               <tr className="">
                 {TABLE_HEAD.map((head, index) => (
                   <th
@@ -282,7 +285,11 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                       </td>
                       <td className="table-cell sm:hidden">
                         <div className="font-normal">
-                          <TrendChart trend={trend24h} data={trendData} />
+                          <TrendChart
+                            trend={trend24h}
+                            data={trendData}
+                            mobileView
+                          />
                         </div>
                       </td>
                       <td className="table-cell sm:hidden">
