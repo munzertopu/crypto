@@ -16,7 +16,7 @@ interface DrawerProps {
 const MobileDrawer: React.FC<DrawerProps> = ({
   isOpen,
   onClose,
-  header,
+  header = "",
   height = 400,
   children,
   leftButtonText = "Cancel",
@@ -42,19 +42,17 @@ const MobileDrawer: React.FC<DrawerProps> = ({
         style={{ height: `${height}px` }}
       >
         {/* Header */}
-        {(header || onClose) && (
-          <div className="flex justify-between items-start">
-            {header && (
-              <h2 className="text-lg font-semibold text-gray-800">{header}</h2>
-            )}
-            <button
-              onClick={onClose}
-              className="flex-shrink-0 text-[#7C7C7C] transition-colors"
-            >
-              <FontAwesomeIcon icon={faTimes} className="w-4 h-4" />
-            </button>
-          </div>
-        )}
+
+        <div className="flex justify-between items-start">
+          <h2 className="text-lg font-semibold text-gray-800">{header}</h2>
+
+          <button
+            onClick={onClose}
+            className="flex-shrink-0 text-[#7C7C7C] transition-colors"
+          >
+            <FontAwesomeIcon icon={faTimes} className="w-4 h-4" />
+          </button>
+        </div>
 
         {/* Content */}
         <div
