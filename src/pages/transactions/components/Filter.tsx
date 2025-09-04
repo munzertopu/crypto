@@ -435,7 +435,7 @@ const Filter: React.FC<FilterProps> = ({
             placeholder="Search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className={`pl-14 pr-4 py-4 rounded-2xl border text-base w-full bg-white border-[#E1E3E5] text-[#0E201E] placeholder-gray-500 focus:outline-none
+            className={`pl-14 pr-4 py-4 rounded-[12px] border text-base w-full bg-white border-[#E1E3E5] text-[#0E201E] placeholder-gray-500 focus:outline-none
               dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050]`}
           />
         </div>
@@ -754,7 +754,7 @@ const Filter: React.FC<FilterProps> = ({
                 }
                 setShowFilters(!showFilters);
               }}
-              className={`flex text-xl items-center px-3 py-4 rounded-2xl border transition-colors bg-white border-gray-300 text-[#0E201E]
+              className={`flex text-xl items-center px-3 py-4 rounded-[12px] border transition-colors bg-white border-gray-300 text-[#0E201E]
                 dark:bg-transparent dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               aria-label="Toggle additional filters"
               aria-expanded={showFilters}

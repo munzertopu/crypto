@@ -5,7 +5,7 @@ interface AccordionProps {
 }
 
 export const Accordion: React.FC<AccordionProps> = ({ children }) => {
-  return <div className="w-full">{children}</div>;
+  return <div className="w-full flex flex-col gap-3">{children}</div>;
 };
 
 interface AccordionItemProps {
@@ -20,14 +20,16 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-[#0E201E]">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center  py-3 text-left focus:outline-none"
       >
-        <span className="font-medium text-gray-800">{title}</span>
+        <span className="font-medium text-gray-800 dark:text-[#F3F5F7]">
+          {title}
+        </span>
         <svg
-          className={`w-5 h-5 text-gray-500 transform transition-transform duration-300 ${
+          className={`w-5 h-5 text-gray-800 dark:text-[#F3F5F7] transform transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
           fill="none"
