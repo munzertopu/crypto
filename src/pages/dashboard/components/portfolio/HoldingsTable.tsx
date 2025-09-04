@@ -191,22 +191,16 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
   };
 
   return (
-    <div className="px-8 mb-6">
-      <div className="py-4">
-        <h3
-          className={`text-2xl font-semibold ${
-            isDarkMode ? "text-white" : "text-[#0E201E]"
-          } text-left`}
-        >
+    <div className="md:px-8 mb-6">
+      <div className="sm:py-4">
+        <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-white text-left">
           Holdings
         </h3>
       </div>
-      <Card className={`h-full w-full border-transparent bg-transprent`}>
-        <CardBody className="px-0 rounded-lg overflow-x-auto">
+      <Card className="h-full w-full border-transparent bg-transprent">
+        <CardBody className="px-0 rounded-lg sm:overflow-x-auto">
           <table className="w-full min-w-max table-auto text-left">
-            <thead
-              className={`${isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"}`}
-            >
+            <thead className="bg-[#F3F5F7] dark:bg-[#2F3232]">
               <tr className="">
                 {TABLE_HEAD.map((head, index) => (
                   <th
@@ -217,9 +211,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                   >
                     <Typography
                       variant="small"
-                      className={`flex items-center justify-between gap-2 font-normal text-xl leading-none ${
-                        isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"
-                      }`}
+                      className="flex items-center justify-between gap-2 font-normal text-sm leading-none text-[#666868] dark:text-[#B6B8BA]"
                     >
                       {head}{" "}
                       {index !== TABLE_HEAD.length - 1 && (
@@ -253,22 +245,20 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                   },
                   index
                 ) => {
-                  const roiClasses = `flex items-center gap-1 font-medium text-lg ${
+                  const roiClasses = `flex items-center gap-1 font-medium text-base ${
                     roiChange === "positive" ? "text-green-600" : "text-red-600"
                   }`;
                   return (
                     <tr key={id}>
-                      <td className="p-5">
+                      <td className="p-1 sm:p-5">
                         <div className="flex items-center gap-3">
-                          <Avatar src={logo} alt={name} size="lg" />
+                          <Avatar src={logo} alt={name} size="md" />
                           <div className="flex flex-col">
                             <Typography
                               variant="small"
-                              className={`font-medium text-xl ${
+                              className={`text-base ${
                                 onCryptoClick ? "cursor-pointer" : ""
-                              } ${
-                                isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                              }`}
+                              } text-[#0E201E] dark:text-[#F3F5F7]`}
                               onClick={() =>
                                 onCryptoClick && onCryptoClick(symbol)
                               }
@@ -283,48 +273,60 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                             </Typography>
                             <Typography
                               variant="small"
-                              className={`text-md font-normal ${
-                                isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"
-                              }`}
+                              className={`text-sm font-normal text-[#666868] dark:text-[#B6B8BA]`}
                             >
                               {symbol}
                             </Typography>
                           </div>
                         </div>
                       </td>
-                      <td>
+                      <td className="table-cell sm:hidden">
+                        <div className="font-normal">
+                          <TrendChart trend={trend24h} data={trendData} />
+                        </div>
+                      </td>
+                      <td className="table-cell sm:hidden">
                         <div className="flex flex-col">
                           <Typography
                             variant="small"
-                            className={`font-normal text-lg ${
-                              isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                            }`}
+                            className={`font-normal text-base text-[#0E201E] dark:text-[#F3F5F7]`}
+                          >
+                            {balance}
+                          </Typography>
+                          <Typography variant="small" className={roiClasses}>
+                            {roi}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className="hidden sm:table-cell">
+                        <div className="flex flex-col">
+                          <Typography
+                            variant="small"
+                            className={`font-normal text-base text-[#0E201E] dark:text-[#F3F5F7]`}
                           >
                             {balance}
                           </Typography>
                         </div>
                       </td>
-                      <td>
+                      <td className="hidden sm:table-cell">
                         <Typography variant="small" className={roiClasses}>
                           {roi}
                         </Typography>
                       </td>
-                      <td>
+                      <td className="hidden sm:table-cell">
                         <Typography variant="small" className={roiClasses}>
                           {cost}
                         </Typography>
                       </td>
-                      <td>
+                      <td className="hidden sm:table-cell">
                         <Typography
                           variant="small"
-                          className={`font-normal text-lg ${
-                            isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                          }`}
+                          className={`font-normal text-base text-center  text-[#0E201E] dark:text-[#F3F5F7]`}
                         >
                           {marketValue}
                         </Typography>
                       </td>
-                      <td>
+                      <td className="hidden sm:table-cell">
                         <div className="font-normal">
                           <TrendChart trend={trend24h} data={trendData} />
                         </div>

@@ -72,15 +72,15 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
   const tableData = data.length > 0 ? data : defaultData;
 
   return (
-    <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+    <div className="bg-white dark:bg-[#0E201E]">
       <div className="pt-6 pb-2">
-        <h3 className="text-lg font-semibold text-left">Allocations</h3>
+        <h3 className="text-lg font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Allocations</h3>
       </div>
       <div className="overflow-x-auto">
-        <Card className="h-full w-full border-transparent">
-          <CardBody className="px-0 rounded-lg">
+        <Card className="h-full w-full">
+          <CardBody className="px-0 rounded-lg m-0 p-0">
             <table className="w-full min-w-max table-auto text-left">
-              <thead className='bg-gray-200'>
+              <thead className='bg-gray-200 dark:bg-[#2F3232]'>
                 <tr className=''>
                   {TABLE_HEAD.map((head, index) => (
                     <th
@@ -89,7 +89,7 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
                     >
                       <Typography
                         variant="small"
-                        className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
+                        className="flex items-center justify-between gap-2 font-normal leading-none opacity-70 text-[#0E201E] dark:text-[#B6B8BA]"
                       >
                         {head}{" "}
                         {index !== TABLE_HEAD.length - 1 && (
@@ -100,47 +100,47 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
                   ))}
                 </tr>
               </thead>
-              <tbody className={`${isDarkMode ? 'bg-gray-800 divide-gray-700' : 'bg-white divide-gray-200'}`}>
+              <tbody className="bg-white dark:bg-[#0E201E] divide-gray-200 dark:divide-[#2F3232]">
                 {tableData.map((item) => (
-                  <tr key={item.id} className={`${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'}`}>
+                  <tr key={item.id} className="hover:bg-gray-50 dark:hover:bg-[#2F3232]">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <span className={`text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        <span className="text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                           {item.wallet.name}
                         </span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.balance}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.value}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.allocation}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center space-x-2">
-                        <div className="w-2/3 h-5 bg-gray-200 rounded-full">
+                        <div className="w-2/3 h-5 bg-gray-200 dark:bg-[#4D5050] rounded-full">
                           <div 
                             className="bg-green-500 h-5 rounded-l-full" 
                             style={{ width: `${item.longTermGain}` }}
                           ></div>
                         </div>
-                        <span className="text-sm font-medium">
+                        <span className="text-sm font-medium text-[#0E201E] dark:text-[#F3F5F7]">
                           {item.longTermGain}
                         </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center space-x-2">
-                        <div className="w-2/3 h-5 bg-gray-200 rounded-full">
+                        <div className="w-2/3 h-5 bg-gray-200 dark:bg-[#4D5050] rounded-full">
                           <div 
                             className="bg-red-500 h-5 rounded-l-full" 
                             style={{ width: `${item.shortTermGain}` }}
                           ></div>
                         </div>
-                        <span className="text-sm font-medium">
+                        <span className="text-sm font-medium text-[#0E201E] dark:text-[#F3F5F7]">
                           {item.shortTermGain}
                         </span>
                       </div>

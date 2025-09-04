@@ -220,11 +220,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   };
 
   return (
-    <div
-      className={`min-h-screen ${
-        isDarkMode ? "bg-[#0E201E] text-white" : "bg-white text-gray-900"
-      }`}
-    >
+    <div className="min-h-screen bg-white dark:bg-[#0E201E]">
       <NavigationBar
         isDarkMode={isDarkMode}
         onThemeToggle={handleThemeToggle}
@@ -236,10 +232,12 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-2 lg:pl-8">
           <div className="flex gap-2 justify-start items-end">
-            <h1 className="text-2xl font-semibold text-gray-900 ">
+            <h1 className="text-2xl font-semibold text-gray-900
+              dark:text-[#E1E3E5]">
               Transactions
             </h1>{" "}
-            <h1 className="text-xl font-semibold text-[rgba(77,80,80,1)] ">
+            <h1 className="text-xl font-semibold text-[rgba(77,80,80,1)] 
+              dark:text-[#E1E3E5]">
               (258)
             </h1>{" "}
           </div>

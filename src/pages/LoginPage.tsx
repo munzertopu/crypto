@@ -135,7 +135,13 @@ const LoginPage: React.FC<LoginPageProps> = ({
           <p className="text-sm text-gray-600">
             Don't have an account?{" "}
             <button
-              onClick={onSignUpClick}
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                if (onSignUpClick) {
+                  onSignUpClick();
+                }
+              }}
               className="font-medium focus:outline-none"
               style={{ color: "#75AE46" }}
               aria-label="Navigate to sign up page"

@@ -190,7 +190,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   const renderExpandedDetails = (transaction: Transaction) => (
     <tr
       key={`${transaction.id}-details`}
-      className={`${isDarkMode ? "bg-gray-800" : "bg-[#F3F5F7]"}`}
+      className={`bg-[#F3F5F7] 
+      dark:bg-[#0E201E]`}
     >
       <td colSpan={TABLE_HEAD.length} className="px-4">
         <TransactionDetail isDarkMode={isDarkMode} />
@@ -205,7 +206,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           <div className="overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left">
               <thead
-                className={`${isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"}`}
+                className={`bg-[#F3F5F7] dark:bg-[#2F3232]`}
               >
                 <tr>
                   {TABLE_HEAD.map((head, index) => (
@@ -232,9 +233,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         </div>
                       ) : (
                         <div
-                          className={`flex text-lg items-center justify-between gap-2 font-normal leading-none ${
-                            isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"
-                          }`}
+                          className={`flex text-lg items-center justify-between gap-2 font-normal leading-none text-[#666868]
+                            dark:text-[#B6B8BA]`}
                         >
                           {head}{" "}
                           {head !== "select" &&
@@ -284,11 +284,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                       <tr
                         className={`${
                           onToggleExpanded
-                            ? "cursor-pointer hover:bg-gray-50 transition-colors"
-                            : ""
-                        } ${
-                          isDarkMode && onToggleExpanded
-                            ? "hover:bg-gray-700"
+                            ? "cursor-pointer transition-colors"
                             : ""
                         }`}
                         onClick={() => onToggleExpanded && onToggleExpanded(id)}
@@ -318,21 +314,15 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                             <div className="flex flex-col">
                               <Typography
                                 variant="small"
-                                className={`text-xl font-normal ${
-                                  isDarkMode
-                                    ? "text-[#F3F5F7]"
-                                    : "text-[#0E201E]"
-                                }`}
+                                className={`text-xl font-normal text-[#0E201E]
+                                  dark:text-[#F3F5F7]`}
                               >
                                 {wallet.name}
                               </Typography>
                               <Typography
                                 variant="small"
-                                className={`text-md font-normal ${
-                                  isDarkMode
-                                    ? "text-[#B6B8BA]"
-                                    : "text-[#666868]"
-                                }`}
+                                className={`text-md font-normal text-[#0E201E]
+                                  dark:text-[#F3F5F7]`}
                               >
                                 {wallet.address}
                               </Typography>
@@ -342,9 +332,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         <td className="py-4">
                           <Typography
                             variant="small"
-                            className={`text-xl font-normal ${
-                              isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                            }`}
+                            className={`text-xl font-normal text-[#0E201E]
+                                  dark:text-[#F3F5F7]`}
                           >
                             {action}
                           </Typography>
@@ -376,9 +365,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         <td className="py-4">
                           <Typography
                             variant="small"
-                            className={`text-xl font-normal ${
-                              isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                            }`}
+                            className={`text-xl font-normal text-[#0E201E]
+                                  dark:text-[#F3F5F7]`}
                           >
                             {result}
                           </Typography>
@@ -386,9 +374,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         <td className="py-4">
                           <Typography
                             variant="small"
-                            className={`text-xl font-normal ${
-                              isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                            }`}
+                            className={`text-xl font-normal text-[#0E201E]
+                                  dark:text-[#F3F5F7]`}
                           >
                             {transactionId}
                           </Typography>
@@ -465,26 +452,21 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       </Card>
 
       {/* Table Footer */}
-      <div
-        className={`mt-4 px-8 py-4 ${isDarkMode ? "bg-gray-800" : "bg-white"}`}
-      >
+      <div className={`mt-4 px-8 py-4 bg-white
+        dark:bg-transparent`}>
         <div className="flex items-center justify-between">
           {/* Left side - Show on page dropdown */}
           <div className="flex items-center space-x-2">
             <span
-              className={`text-sm ${
-                isDarkMode ? "text-gray-300" : "text-gray-700"
-              }`}
+              className={`text-sm text-gray-700
+                dark:text-[#F3F5F7]`}
             >
               Show on page
             </span>
             <div className="relative" ref={dropdownRef}>
               <button
-                className={`px-3 py-1 rounded border flex items-center space-x-2 ${
-                  isDarkMode
-                    ? "border-gray-600 text-gray-300 bg-gray-700 hover:bg-gray-600"
-                    : "border-gray-300 text-gray-700 bg-white hover:bg-gray-50"
-                }`}
+                className={`px-3 py-1 rounded border flex items-center space-x-2 border-gray-300 text-gray-700 bg-white hover:bg-gray-50
+                  `}
                 onClick={handleDropdownToggle}
                 aria-label="Select items per page"
                 aria-haspopup="true"
@@ -527,9 +509,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
               )}
             </div>
             <span
-              className={`text-sm ${
-                isDarkMode ? "text-gray-300" : "text-gray-700"
-              }`}
+              className={`text-sm text-gray-700
+                dark:text-[#F3F5F7]`}
             >
               of 77
             </span>
@@ -538,39 +519,30 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           {/* Center - Conditional actions when transactions are selected */}
           {selectedTransactions.length > 0 && (
             <div
-              className={`flex items-center space-x-3 px-4 py-3 rounded-xl ${
-                isDarkMode
-                  ? "bg-gray-700"
-                  : "bg-transparent border border-[#E1E3E5]"
-              }`}
+              className={`flex items-center space-x-3 px-4 py-3 rounded-xl bg-transparent border border-[#E1E3E5]
+                dark:border-[#4D5050]`}
             >
               <span
-                className={`text-sm font-medium ${
-                  isDarkMode ? "text-gray-300" : "text-gray-700"
-                }`}
+                className={`text-sm font-medium text-gray-700
+                 dark:text-[#F3F5F7]`}
               >
                 {selectedTransactions.length} selected
               </span>
               <div
-                className={`w-px h-4 ${
-                  isDarkMode ? "bg-gray-600" : "bg-gray-300"
-                }`}
+                className={`w-px h-4 bg-gray-300
+                  dark:bg-[#F3F5F7]`}
                 role="separator"
               ></div>
               <span
-                className={`text-sm ${
-                  isDarkMode ? "text-gray-300" : "text-gray-600"
-                }`}
+                className={`text-sm text-gray-600
+                  dark:text-[#F3F5F7]`}
               >
                 Tag as:
               </span>
               <div className={`relative inline-block`} ref={tagDropdownRef}>
                 <button
-                  className={`px-3 py-1 text-sm rounded border flex items-center space-x-1 ${
-                    isDarkMode
-                      ? "border-gray-600 text-gray-300"
-                      : "border-gray-300 text-gray-700"
-                  }`}
+                  className={`px-3 py-1 text-sm rounded border flex items-center space-x-1 border-gray-300 text-gray-700"
+                  dark:text-[#F3F5F7]`}
                   onClick={() => setIsTagDropdownOpen(!isTagDropdownOpen)}
                   aria-label="Select tag type for selected transactions"
                   aria-haspopup="true"
@@ -636,11 +608,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                 role="separator"
               ></div>
               <button
-                className={`px-3 py-1 text-sm rounded border ${
-                  isDarkMode
-                    ? "border-gray-600 text-gray-300"
-                    : "border-gray-300 text-gray-700"
-                }`}
+                className={`px-3 py-1 text-sm rounded border border-gray-300 text-gray-700
+                  dark:text-[#F3F5F7]`}
                 aria-label="Merge selected transactions"
               >
                 Merge
@@ -658,11 +627,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                 Apply
               </button>
               <button
-                className={`px-2 py-1 text-sm rounded border ${
-                  isDarkMode
-                    ? "border-gray-600 text-gray-300"
-                    : "border-gray-300 text-gray-700"
-                }`}
+                className={`px-2 py-1 text-sm rounded border border-gray-300 text-gray-700
+                dark:text-[#F3F5F7]`}
                 onClick={() => setSelectedTransactions([])}
                 aria-label="Clear selection"
               >
@@ -679,11 +645,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           <div className="flex items-center space-x-2">
             {/* Previous button */}
             <button
-              className={`w-8 h-8 rounded border flex items-center justify-center ${
-                isDarkMode
-                  ? "border-gray-600 text-gray-300 hover:bg-gray-700"
-                  : "border-gray-300 text-gray-700 hover:bg-gray-50"
-              }`}
+              className={`w-8 h-8 rounded border flex items-center justify-center border-gray-300 text-gray-700
+                dark:text-[#F3F5F7]`}
               aria-label="Go to previous page"
             >
               <FontAwesomeIcon
@@ -695,32 +658,23 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
             {/* Page numbers */}
             <button
-              className={`w-8 h-8 rounded-lg border flex items-center justify-center text-sm font-medium ${
-                isDarkMode
-                  ? "border-gray-600 text-gray-300 bg-[#90C853]"
-                  : "text-[#0E201E] bg-[#90C853]"
-              }`}
+              className={`w-8 h-8 rounded-lg border flex items-center justify-center text-sm font-medium text-[#0E201E] bg-[#90C853]
+                `}
               aria-label="Go to page 1"
               aria-current="page"
             >
               1
             </button>
             <button
-              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium ${
-                isDarkMode
-                  ? "border-gray-600 text-gray-300 hover:bg-gray-700"
-                  : "border-gray-300 text-gray-700 hover:bg-gray-50"
-              }`}
+              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium border-gray-300 text-gray-700 hover:bg-gray-50
+              dark:text-[#F3F5F7]`}
               aria-label="Go to page 2"
             >
               2
             </button>
             <button
-              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium ${
-                isDarkMode
-                  ? "border-gray-600 text-gray-300 hover:bg-gray-700"
-                  : "border-gray-300 text-gray-700 hover:bg-gray-50"
-              }`}
+              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium border-gray-300 text-gray-700 hover:bg-gray-50
+              dark:text-[#F3F5F7]`}
               aria-label="Go to page 3"
             >
               3
@@ -736,11 +690,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
             </span>
 
             <button
-              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium ${
-                isDarkMode
-                  ? "border-gray-600 text-gray-300 hover:bg-gray-700"
-                  : "border-gray-300 text-gray-700 hover:bg-gray-50"
-              }`}
+              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium border-gray-300 text-gray-700 hover:bg-gray-50
+              dark:text-[#F3F5F7]`}
               aria-label="Go to page 13"
             >
               13
@@ -748,11 +699,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
             {/* Next button */}
             <button
-              className={`w-8 h-8 rounded border flex items-center justify-center ${
-                isDarkMode
-                  ? "border-gray-600 text-gray-300 hover:bg-gray-700"
-                  : "border-gray-300 text-gray-700 hover:bg-gray-50"
-              }`}
+              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium border-gray-300 text-gray-700 hover:bg-gray-50
+              dark:text-[#F3F5F7]`}
               aria-label="Go to next page"
             >
               <FontAwesomeIcon

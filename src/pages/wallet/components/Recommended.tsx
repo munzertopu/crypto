@@ -56,17 +56,15 @@ const Recommended: React.FC<RecommendedProps> = ({
     <div className="mb-8">
       <div className="flex items-center justify-between mb-4">
         <h2
-          className={`text-base font-semibold ${
-            isDarkMode ? "text-white" : "text-[#0E201E]"
-          }`}
+          className={`text-base font-semibold text-[#0E201E]
+          dark:text-[#E1E3E5]`}
         >
           Recommended accounts
         </h2>
         <button
           onClick={() => setShowRecommendedAccounts(false)}
-          className={`ml-4 flex items-center space-x-1 px-3 py-2 lg:px-3 lg:py-5 h-8 border border-[#E1E3E5] ${
-            isDarkMode ? "text-white" : "text-[#7C7C7C]"
-          } rounded-md `}
+          className={`ml-4 flex items-center space-x-1 px-3 py-2 lg:px-3 lg:py-5 h-8 border border-[#E1E3E5] text-[#7C7C7C] rounded-md 
+            dark:text-[#E1E3E5]`}
           aria-label="Close recommended accounts section"
         >
           <svg
@@ -84,9 +82,8 @@ const Recommended: React.FC<RecommendedProps> = ({
             />
           </svg>
           <span
-            className={`text-sm font-medium ${
-              isDarkMode ? "text-white" : "text-[#0E201E]"
-            } `}
+            className={`text-sm font-medium text-[#0E201E]
+             dark:text-[#E1E3E5]`}
           >
             Close
           </span>
@@ -97,11 +94,8 @@ const Recommended: React.FC<RecommendedProps> = ({
         {recommendedAccounts.map((account) => (
           <div
             key={account.id}
-            className={`${
-              isDarkMode
-                ? "bg-gray-800 border-gray-700"
-                : "bg-white border-[#E1E3E5]"
-            } border rounded-2xl px-6 py-2`}
+            className={`bg-transparent border-[#E1E3E5] border rounded-2xl px-6 py-2
+              dark:border-[#E1E3E5]`}
           >
             <div className="flex items-center my-3">
               <div
@@ -110,18 +104,16 @@ const Recommended: React.FC<RecommendedProps> = ({
                 <img src={account.logo} />
               </div>
               <h3
-                className={`font-semibold text-base ${
-                  isDarkMode ? "text-white" : "text-[#0E201E]"
-                }`}
+                className={`font-semibold text-base text-[#0E201E]
+                  dark:text-[#B6B8BA]`}
               >
                 {account.platform}
               </h3>
             </div>
             <div className="mb-4">
               <p
-                className={`text-sm text-left font-semibold ${
-                  isDarkMode ? "text-gray-300" : "text-gray-600"
-                }`}
+                className={`text-sm text-left font-semibold text-gray-600
+                  dark:text-[#B6B8BA]`}
               >
                 {account.description}{" "}
                 <span className="text-[#5F9339] cursor-pointer font-medium">
@@ -129,14 +121,14 @@ const Recommended: React.FC<RecommendedProps> = ({
                 </span>
               </p>
               <button
-                className={`flex items-center text-sm border border-[#E1E3E5] rounded-lg px-3 py-1 font-medium ${
-                  isDarkMode ? "text-white" : "text-[#0E201E]"
-                } mt-3`}
+                className={`flex items-center text-sm border border-[#E1E3E5] rounded-lg px-3 py-1 font-medium text-[#0E201E] mt-3
+                  dark:text-[#B6B8BA]`}
                 aria-label={`Add ${account.platform} account`}
               >
                 <FontAwesomeIcon
                   icon={faPlus}
-                  className="w-4 h-4 mr-4 ml-2 text-[#7C7C7C]"
+                  className="w-4 h-4 mr-4 ml-2 text-[#7C7C7C]
+                  dark:text-[#B6B8BA]"
                   aria-hidden="true"
                 />
                 Add Account

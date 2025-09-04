@@ -333,24 +333,16 @@ const Filter: React.FC<FilterProps> = ({
       {/* Tabs */}
       <div className={`${isDarkMode ? "border-gray-700" : "border-gray-200"}`}>
         <Tabs>
-          <Tabs.List
-            className={`my-3 space-x-1 ${
-              isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"
-            }`}
-          >
+          <Tabs.List className="my-2 lg:my-2 bg-[#F3F5F7] dark:bg-[#2F3232]">
             {tabs.map((tab) => (
               <Tabs.Trigger
                 key={tab}
                 value={tab}
                 onClick={() => onTabChange?.(tab)}
-                className={`px-5 py-2 rounded-xl text-sm ${
+                className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl text-sm sm:text-lg ${
                   activeTab === tab
-                    ? `${
-                        isDarkMode
-                          ? "bg-[#0E201E] text-white"
-                          : "bg-white text-black"
-                      }`
-                    : `${isDarkMode ? "text-[#FFFFFF]" : "text-[#0E201E]"}`
+                    ? 'bg-white dark:bg-[#0E201E] text-black dark:text-white'
+                    : 'text-[#0E201E] dark:text-[#FFFFFF]'
                 }`}
               >
                 {tab}
@@ -419,23 +411,19 @@ const Filter: React.FC<FilterProps> = ({
 
       <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-x-4">
         {/* Search */}
-        <div className="relative mt-4 w-1/4">
+        <div className="relative mt-4 w-1/4 ">
           <FontAwesomeIcon
             icon={faSearch}
-            className={`absolute size-6 text-xl ml-6 top-1/2 transform -translate-y-1/2 ${
-              isDarkMode ? "text-gray-400" : "text-[#7C7C7C]"
-            }`}
+            className={`absolute size-6 text-xl ml-6 top-1/2 transform -translate-y-1/2 text-[#7C7C7C]
+              dark:text-[#CDCFD1] `}
           />
           <input
             type="text"
             placeholder="Search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className={`pl-14 pr-4 py-4 rounded-2xl border text-base w-full ${
-              isDarkMode
-                ? "bg-gray-800 border-gray-700 text-white placeholder-gray-400"
-                : "bg-white border-[#E1E3E5] text-[#0E201E] placeholder-gray-500"
-            } focus:outline-none`}
+            className={`pl-14 pr-4 py-4 rounded-2xl border text-base w-full bg-white border-[#E1E3E5] text-[#0E201E] placeholder-gray-500 focus:outline-none
+              dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050]`}
           />
         </div>
 
@@ -446,11 +434,8 @@ const Filter: React.FC<FilterProps> = ({
             <div className="relative" ref={walletDropdownRef}>
               <button
                 onClick={() => setWalletDropdownOpen(!walletDropdownOpen)}
-                className={`flex text-sm items-center px-8 py-4 rounded-2xl border ${
-                  isDarkMode
-                    ? "bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600"
-                    : "bg-white border-gray-300 text-[#0E201E]"
-                }`}
+                className={`flex text-sm items-center px-8 py-4 rounded-2xl border bg-white border-gray-300 text-[#0E201E]
+                  dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               >
                 <span>Wallet</span>
                 <FontAwesomeIcon
@@ -535,11 +520,8 @@ const Filter: React.FC<FilterProps> = ({
                 onClick={() =>
                   setActionTypeDropdownOpen(!actionTypeDropdownOpen)
                 }
-                className={`flex text-lg items-center px-8 py-4 rounded-2xl border ${
-                  isDarkMode
-                    ? "bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600"
-                    : "bg-white border-gray-300 text-[#0E201E] text-sm"
-                }`}
+                className={`flex text-lg items-center px-8 py-4 rounded-2xl border bg-white border-gray-300 text-[#0E201E] text-sm
+                  dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               >
                 <span>Action type</span>
                 <FontAwesomeIcon
@@ -646,12 +628,8 @@ const Filter: React.FC<FilterProps> = ({
               setIsOpen={setAmountReceivedDropdownOpen}
               title="Amount received"
             />
-            <div
-              className={`flex items-center space-x-2 py-2 rounded-xl border p-0 shadow-sm ${
-                isDarkMode
-                  ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                  : "bg-white border-gray-300 text-gray-900 placeholder-gray-800"
-              } focus:outline-none`}
+            <div className={`flex items-center py-2 rounded-xl border px-2 shadow-sm bg-white border-gray-300 text-gray-900 placeholder-gray-800 focus:outline-none
+              dark:bg-transparent`}
             >
               <Datepicker
                 displayFormat="DD MMM YYYY"
@@ -663,6 +641,9 @@ const Filter: React.FC<FilterProps> = ({
                 }}
                 primaryColor="green"
                 placeholder="Purchase date"
+                inputClassName="w-full rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white"
+                containerClassName="relative pr-6"
+                toggleClassName="absolute rounded-r-lg px-0 right-0 top-0 h-full text-gray-800 dark:text-white"
               />
             </div>
 
@@ -670,11 +651,8 @@ const Filter: React.FC<FilterProps> = ({
             <div className="relative" ref={resultDropdownRef}>
               <button
                 onClick={() => setResultDropdownOpen(!resultDropdownOpen)}
-                className={`flex text-lg items-center px-8 py-4 rounded-2xl border ${
-                  isDarkMode
-                    ? "bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600"
-                    : "bg-white border-gray-300 text-[#0E201E] text-sm"
-                }`}
+                className={`flex text-lg items-center px-8 py-4 rounded-2xl border bg-white border-gray-300 text-[#0E201E] text-sm
+                  dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               >
                 <span>Result</span>
                 <FontAwesomeIcon
@@ -685,7 +663,7 @@ const Filter: React.FC<FilterProps> = ({
 
               {resultDropdownOpen && (
                 <div
-                  className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-lg z-50 ${
+                  className={`absolute top-full right-0 mt-1 w-64 rounded-lg border shadow-lg z-50 ${
                     isDarkMode
                       ? "bg-gray-800 border-gray-600"
                       : "bg-white border-gray-300"
@@ -756,17 +734,15 @@ const Filter: React.FC<FilterProps> = ({
           <div className="flex items-center">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`flex text-xl items-center px-3 py-4 rounded-2xl border transition-colors ${
-                isDarkMode
-                  ? "bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600"
-                  : "bg-white border-gray-300 text-[#0E201E]"
-              }`}
+              className={`flex text-xl items-center px-3 py-4 rounded-2xl border transition-colors bg-white border-gray-300 text-[#0E201E]
+                dark:bg-transparent dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               aria-label="Toggle additional filters"
               aria-expanded={showFilters}
             >
               <FontAwesomeIcon
                 icon={faFilter}
-                className="w-4 h-4 mr-2 text-[#0E201E]"
+                className="w-4 h-4 mr-2 text-[#0E201E]
+                  dark:text-[#F3F5F7]"
                 aria-hidden="true"
               />
               Filters

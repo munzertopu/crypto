@@ -29,19 +29,19 @@ const FinancialCard: React.FC<FinancialCardProps> = ({
       <div className="flex items-center space-x-4">
         <div className="bg-transparent rounded-full flex items-center justify-center">
           {svgIcon ? (
-            <div className="text-gray-600">{svgIcon}</div>
+            <div className="text-gray-600 dark:text-[#CDCFD1]">{svgIcon}</div>
           ) : (
-            <FontAwesomeIcon icon={icon} className="text-gray-600 text-xs" />
+            <FontAwesomeIcon icon={icon} className="text-gray-600 dark:text-[#CDCFD1] text-xs" />
           )}
         </div>
         <div className="flex items-center space-x-1">
-          <span className="text-base font-medium text-[rgba(14,32,30,1)]">
+          <span className="text-base font-medium text-[rgba(14,32,30,1)] dark:text-[#CDCFD1] dark:opacity-80">
             {title}
           </span>
         </div>
       </div>
       <div className="flex items-center space-x-2">
-        <span className="text-2xl font-bold text-[rgba(14,32,30,1)]">
+        <span className="text-2xl font-bold text-[rgba(14,32,30,1)] dark:text-[#CDCFD1]">
           {value}
         </span>
         <span

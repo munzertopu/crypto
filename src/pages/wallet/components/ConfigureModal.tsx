@@ -42,18 +42,21 @@ const ConfigureModal: React.FC<ConfigureModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className={`${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'} rounded-2xl p-10 w-full max-w-2xl mx-4`}>
+      <div className={`bg-white text-gray-900 rounded-2xl p-10 w-full max-w-2xl mx-4
+        dark:bg-[#0E201E]`}>
         {/* Header */}
         <div className="flex items-start justify-between mb-6">
           <div>
-            <h2 className="text-2xl text-left font-bold mb-2">Configure {platformName} address</h2>
-            <p className={`text-xl text-left ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <h2 className="text-2xl text-left font-bold mb-2
+              dark:text-[#CDCFD1]">Configure {platformName} address</h2>
+            <p className={`text-xl text-left 'text-gray-600
+              dark:text-[#CDCFD1]`}>
               Paste your wallet address below to configure
             </p>
           </div>
           <button
             onClick={onClose}
-            className={`p-2 rounded-full hover:bg-gray-100 ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
+            className={`p-2 rounded-full dark:text-[#CDCFD1]`}
             aria-label="Close configure modal"
           >
             <FontAwesomeIcon icon={faTimes} className="w-4 h-4" aria-hidden="true" />
@@ -63,7 +66,8 @@ const ConfigureModal: React.FC<ConfigureModalProps> = ({
         {/* Wallet Address Section */}
         <div className="mb-6">
           <div className="flex items-center mb-2">
-            <label className="text-lg font-medium">Wallet Address</label>
+            <label className="text-lg font-medium
+              dark:text-[#CDCFD1]">Wallet Address</label>
             <svg className="w-5 h-5 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
@@ -73,11 +77,8 @@ const ConfigureModal: React.FC<ConfigureModalProps> = ({
             type="text"
             value={walletAddress}
             onChange={(e) => setWalletAddress(e.target.value)}
-            className={`w-full px-4 py-3 border rounded-xl text-2xl ${
-              isDarkMode 
-                ? 'bg-gray-700 border-gray-600 text-white' 
-                : 'bg-white border-gray-300 text-gray-900'
-            } focus:outline-none`}
+            className={`w-full px-4 py-3 border rounded-xl text-2xl bg-white border-gray-300 text-gray-900 focus:outline-none
+              dark:bg-transparent dark:border-[#4D5050] dark:text-white `}
             placeholder="Enter wallet address"
           />
         </div>
@@ -94,11 +95,8 @@ const ConfigureModal: React.FC<ConfigureModalProps> = ({
             </div>
             <div className="relative">
               <div
-                className={`w-full px-3 py-2 border-2 text-xl rounded-lg cursor-pointer flex items-center justify-between ${
-                  isDarkMode
-                    ? 'bg-gray-700 text-white'
-                    : 'bg-white text-gray-900'
-                } focus:outline-none`}
+                className={`w-full px-3 py-2 border-2 text-xl rounded-lg cursor-pointer flex items-center justify-between bg-white text-gray-900 focus:outline-none
+                  dark:bg-transparent dark:text-white dark:border-[#4D5050]`}
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 role="button"
                 aria-label="Select blockchains"
@@ -123,17 +121,13 @@ const ConfigureModal: React.FC<ConfigureModalProps> = ({
               
               {/* Dropdown Options */}
               {isDropdownOpen && (
-                <div className={`absolute top-full left-0 right-0 mt-1 border rounded-lg shadow-lg z-10 ${
-                  isDarkMode 
-                    ? 'bg-gray-800 border-gray-600' 
-                    : 'bg-white border-gray-200'
-                }`}>
+                <div className={`absolute top-full left-0 right-0 mt-1 border rounded-lg shadow-lg z-10 bg-white border-gray-200
+                  dark:bg-[#0E201E] dark:border-[#4D5050] dark:text-[#F3F5F7]`}>
                   {blockchainOptions.map((blockchain) => (
                     <div
                       key={blockchain}
-                      className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 ${
-                        isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
-                      }`}
+                      className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50
+                        dark:hover:bg-[#2F3232]`}
                       onClick={() => handleBlockchainToggle(blockchain)}
                     >
                       <div className={`w-4 h-4 border-2 rounded mr-3 flex items-center justify-center ${
@@ -160,7 +154,8 @@ const ConfigureModal: React.FC<ConfigureModalProps> = ({
         <div className="flex justify-between items-center">
           <button
             onClick={onClose}
-            className={`text-xl font-medium ${isDarkMode ? 'text-gray-400 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'}`}
+            className={`text-xl font-medium text-gray-500
+              dark:text-[#A1A3A5]`}
             aria-label="Cancel wallet configuration"
           >
             Cancel
@@ -176,7 +171,7 @@ const ConfigureModal: React.FC<ConfigureModalProps> = ({
             className={`px-6 py-2 rounded-lg text-xl font-medium transition-colors text-[#0E201E] ${
               isWalletAddressValid
                 ? 'bg-[#90C853] cursor-pointer'
-                : 'bg-gray-300 cursor-not-allowed'
+                : 'bg-gray-300 dark:bg-[#2F3232] dark:text-[#8C8E90] cursor-not-allowed'
             }`}
             aria-label="Configure wallet configuration"
           >

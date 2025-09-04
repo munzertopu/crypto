@@ -29,7 +29,8 @@ const SuccessNotification: React.FC<SuccessNotificationProps> = ({
 
   return (
     <div className="fixed top-4 right-4 z-50 animate-fade-in">
-      <div className="flex items-center bg-white border border-[#419F45] rounded-xl px-4 py-2 shadow-lg">
+      <div className="flex items-center bg-white border border-[#419F45] rounded-xl px-4 py-2 shadow-lg
+      dark:bg-[#0E201E]">
         {/* Success Icon */}
         <div className="flex-shrink-0 mr-3">
           <div className="w-4 h-4 bg-[#419F45] rounded-full flex items-center justify-center">
@@ -40,14 +41,16 @@ const SuccessNotification: React.FC<SuccessNotificationProps> = ({
         </div>
 
         {/* Message */}
-        <span className="text-[#0E201E] text-sm font-medium mr-3">
+        <span className="text-[#0E201E] text-sm font-medium mr-3
+        dark:text-[#E1E3E5]">
           {message}
         </span>
 
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="flex-shrink-0 text-[#7C7C7C] transition-colors"
+          className="flex-shrink-0 text-[#7C7C7C] transition-colors
+          dark:text-[#E1E3E5]"
         >
           <FontAwesomeIcon icon={faTimes} className="w-4 h-4" />
         </button>

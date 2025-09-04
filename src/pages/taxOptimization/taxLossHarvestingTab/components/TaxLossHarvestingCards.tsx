@@ -89,11 +89,11 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
     label: string;
     value: string;
     valueColor?: string;
-  }> = ({ icon, label, value, valueColor = "text-gray-900" }) => (
+  }> = ({ icon, label, value, valueColor = "text-gray-900 dark:text-[#CDCFD1]" }) => (
     <div className='space-y-3'>
       <div className="flex items-center space-x-4">
-        <FontAwesomeIcon icon={icon} className={`w-4 h-4 text-[#7C7C7C]`} />
-        <Typography variant="small" className="text-[#0E201E]">{label}</Typography>
+        <FontAwesomeIcon icon={icon} className={`w-4 h-4 text-[#7C7C7C] dark:text-[#CDCFD1]`} />
+        <Typography variant="small" className="text-[#0E201E] dark:text-[#B6B8BA]">{label}</Typography>
       </div>
       <Typography variant="small" className={`text-left text-lg font-semibold ${valueColor}`}>{value}</Typography>
     </div>
@@ -104,11 +104,11 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
     metrics: MetricData;
     showDropdown?: boolean;
   }> = ({ title, metrics, showDropdown = false }) => (
-         <Card className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} border border-gray-200 overflow-hidden`}>
-             <CardBody className="p-0 overflow-hidden">
+    <Card className={`bg-white dark:bg-transparent border border-gray-200 dark:border-[#E1E3E5] overflow-hidden`}>
+      <CardBody className="p-0 overflow-hidden">
         <div className="flex items-center justify-between mb-4 px-8 pt-8">
           <div className="flex items-center space-x-2">
-            <Typography variant="h2" className={`text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+            <Typography variant="h2" className={`text-lg font-semibold text-gray-900 dark:text-[#B6B8BA]`}>
               {title}
             </Typography>
             <svg className="w-5 h-5 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,18 +120,17 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
              <div className="relative mb-4" ref={assetDropdownRef}>
               <button
                 onClick={() => setAssetDropdownOpen(!assetDropdownOpen)}
-                className={`flex items-center space-x-2 px-3 py-1 border border-gray-300 rounded-lg text-sm ${
-                  isDarkMode 
-                    ? 'bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600' 
-                    : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
-                }`}
+                className={`flex items-center space-x-2 px-3 py-1 border border-gray-300 rounded-lg text-sm 
+                  bg-white border-gray-300 text-gray-700'
+                  dark:bg-transparent
+                `}
               >
-                <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>
+                <span className={'text-gray-700  dark:text-[#F3F5F7]'}>
                    All Assets
                  </span>
                 <FontAwesomeIcon 
                   icon={assetDropdownOpen ? faChevronUp : faChevronDown} 
-                  className="w-3 h-3 text-gray-500" 
+                  className="w-3 h-3 text-gray-500 dark:text-[#F3F5F7]" 
                 />
               </button>
               
