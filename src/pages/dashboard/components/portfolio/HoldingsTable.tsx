@@ -36,6 +36,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
     "Cost",
     "Market Value",
     "Statistic for 24h",
+    "",
   ];
   // Mock data based on the image
   const defaultHoldings: Holding[] = [
@@ -165,30 +166,6 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
             width={!mobileView ? 210 : 150}
           />
         </div>
-        {/* Checkmark in circle icon */}
-        {mobileView ? null : (
-          <svg
-            className="w-6 h-6 mr-4 flex-shrink-0"
-            viewBox="0 0 16 16"
-            fill="none"
-          >
-            <circle
-              cx="8"
-              cy="8"
-              r="7"
-              stroke="#9CA3AF"
-              strokeWidth="1.5"
-              fill="none"
-            />
-            <path
-              d="M5 8L7 10L11 6"
-              stroke="#9CA3AF"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        )}
       </div>
     );
   };
@@ -337,6 +314,29 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                         <div className="font-normal">
                           <TrendChart trend={trend24h} data={trendData} />
                         </div>
+                      </td>
+                      <td className="hidden sm:table-cell">
+                        <svg
+                          className="w-6 h-6 mr-4 flex-shrink-0"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                        >
+                          <circle
+                            cx="8"
+                            cy="8"
+                            r="7"
+                            stroke="#9CA3AF"
+                            strokeWidth="1.5"
+                            fill="none"
+                          />
+                          <path
+                            d="M5 8L7 10L11 6"
+                            stroke="#9CA3AF"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
                       </td>
                     </tr>
                   );
