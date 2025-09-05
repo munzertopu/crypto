@@ -94,7 +94,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   }, [isProfileDropdownOpen]);
   return (
     <nav
-      className={`px-4 sm:px-6 lg:px-9 py-2 sm:py-2 lg:py-3.5 bg-white border-b 
+      className={`px-4 sm:px-6 lg:px-9 py-3 sm:py-2 lg:py-3.5 bg-white border-b 
         dark:bg-[#0E201E] dark:border-[#2F3232]`}
     >
       <div className="flex items-center justify-between">
@@ -102,9 +102,11 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <div className="flex items-center">
           <Link to="/dashboard" className="flex items-center">
             <img
-              src={`${screenSize.width < 640 ? "logo-only.png" : "logo.png"}`}
+              src={`${
+                screenSize.width < 640 ? "logo-mobile-white.png" : "logo.png"
+              }`}
               alt="Portal"
-              className="h-6 sm:h-7 lg:h-7 w-auto block dark:hidden"
+              className="h-8 w-[34px] md:w-[110px]  sm:h-7 lg:h-7 block dark:hidden"
             />
             <img
               src={`${
@@ -209,7 +211,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 <img
                   src="/kristin.png"
                   alt={userName}
-                  className="w-5 h-5 rounded-full object-cover"
+                  className="w-11 h-11 rounded-full object-cover md:w-8 md:h-8"
                 />
                 <span
                   className={`hidden sm:inline text-xs sm:text-sm lg:text-md text-[#0E201E] 
@@ -375,7 +377,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden px-2 py-1.5 bg-transparent border border-[#E1E3E5] text-[#7C7C7C] rounded-lg hover:bg-gray-50 transition-colors"
+            className="lg:hidden w-11 h-11  flex flex-row justify-center items-center gap-1 p-3 rounded-xl shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border border-[#E1E3E5] text-[#7C7C7C] rounded-lg hover:bg-gray-50 transition-colors"
             aria-label="Open mobile menu"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
