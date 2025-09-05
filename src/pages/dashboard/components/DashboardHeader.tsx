@@ -66,11 +66,11 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   };
 
   return (
-    <div className="px-2 sm:px-4 lg:px-6 py-2 lg:py-4">
+    <div className="sm:px-4 lg:px-6 lg:py-4 pt-7">
       <div className="flex flex-row items-center justify-between gap-4 ">
         {/* Title */}
         <h1
-          className={`text-lg lg:text-xl font-medium  text-[#0E201E] dark:text-[#E1E3E5]`}
+          className={`text-lg lg:text-xl font-semibold text-gray-900 dark:text-[#E1E3E5]`}
         >
           Dashboard
         </h1>
@@ -97,9 +97,9 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         </div>
       </div>
       {/* Tabs */}
-      <div className="border-gray-200 dark:border-gray-700">
+      <div className="border-gray-200 dark:border-gray-700 mt-4 sm:mt-0">
         <Tabs>
-          <Tabs.List className="my-2 lg:my-2 space-x-1 bg-[#F3F5F7] dark:bg-[#2F3232]">
+          <Tabs.List className="my-2 lg:my-2 space-x-1 bg-[#F3F5F7] dark:bg-[#2F3232] rounded-xl">
             {tabs.map((tab) => (
               <Tabs.Trigger
                 key={tab}
@@ -107,8 +107,8 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                 onClick={() => onTabChange?.(tab)}
                 className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl text-sm sm:text-lg ${
                   activeTab === tab
-                    ? "bg-white dark:bg-[#0E201E] text-black dark:text-white"
-                    : "text-[#0E201E] dark:text-[#FFFFFF]"
+                    ? "bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white"
+                    : "text-gray-900 dark:text-[#FFFFFF] opacity-75"
                 }`}
               >
                 {tab}

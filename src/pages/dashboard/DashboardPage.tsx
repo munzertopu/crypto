@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import NavigationBar from '../../components/NavigationBar';
-import {
-  WelcomeBanner,
-  DashboardHeader
-} from './components';
-import PortfolioTab from './tabs/PortfolioTab';
-import NFTTab from './tabs/NftTab';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import NavigationBar from "../../components/NavigationBar";
+import { WelcomeBanner, DashboardHeader } from "./components";
+import PortfolioTab from "./tabs/PortfolioTab";
+import NFTTab from "./tabs/NftTab";
 
 interface DashboardPageProps {
   onLogout?: () => void;
@@ -14,7 +11,7 @@ interface DashboardPageProps {
 
 const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('Portfolio');
+  const [activeTab, setActiveTab] = useState("Portfolio");
   const [showWelcomeBanner, setShowWelcomeBanner] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -23,7 +20,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
   };
 
   const handleAddKPI = () => {
-    console.log('Add KPI clicked');
+    console.log("Add KPI clicked");
     // Add KPI functionality would go here
   };
 
@@ -45,19 +42,19 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
     <div className="min-h-screen bg-white dark:bg-[#0E201E]">
       {/* Navigation Bar */}
       <NavigationBar
-        userName="Kristin Watson" 
+        userName="Kristin Watson"
         isDarkMode={isDarkMode}
         onThemeToggle={handleThemeToggle}
         onLogout={handleLogout}
       />
-      
+
       {/* Dashboard Content */}
-      <div className="w-full px-4 sm:px-6 lg:px-6">
+      <div className="w-full px-4 sm:px-6 lg:px-6 ">
         {/* Welcome Banner */}
         {showWelcomeBanner && (
           <div className="mx-2 sm:mx-4 lg:mx-8">
-            <WelcomeBanner 
-              userName="Kristin Watson" 
+            <WelcomeBanner
+              userName="Kristin Watson"
               onClose={handleWelcomeBannerClose}
               isDarkMode={isDarkMode}
             />
@@ -65,36 +62,29 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
         )}
 
         {/* Horizontal Separator */}
-        <div className="p-2">
+        <div className="p-2 hidden md:block">
           <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
         </div>
-        
+
         {/* Dashboard Header */}
         <div className="mx-2">
-          <DashboardHeader 
+          <DashboardHeader
             activeTab={activeTab}
             onTabChange={handleTabChange}
             isDarkMode={isDarkMode}
           />
         </div>
-        <div className='mx-1 sm:mx-2 lg:mx-3'>
+        <div className="mx-1 sm:mx-2 lg:mx-3">
           {/* Portfolio Tab */}
-          {activeTab === 'Portfolio' && (
-            <PortfolioTab 
-              isDarkMode={isDarkMode}
-              onAddKPI={handleAddKPI}
-            />
+          {activeTab === "Portfolio" && (
+            <PortfolioTab isDarkMode={isDarkMode} onAddKPI={handleAddKPI} />
           )}
 
           {/* NFT Tab */}
-          {activeTab === 'NFT' && (
-            <NFTTab 
-              isDarkMode={isDarkMode}
-            />
-          )}
+          {activeTab === "NFT" && <NFTTab isDarkMode={isDarkMode} />}
 
           {/* Crypto Tab */}
-          {activeTab === 'Crypto' && (
+          {activeTab === "Crypto" && (
             <div className="mx-3 p-8 text-center">
               <div className="text-lg text-gray-600 dark:text-gray-400">
                 Crypto tab content coming soon...
@@ -102,7 +92,6 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
             </div>
           )}
         </div>
-        
       </div>
     </div>
   );

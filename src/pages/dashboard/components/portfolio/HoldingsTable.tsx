@@ -270,16 +270,70 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                         </div>
                       </td>
                       <td className="table-cell sm:hidden">
-                        <div className="flex flex-col">
+                        <div className="flex flex-col items-center justify-end">
                           <Typography
                             variant="small"
                             className={`font-normal text-base text-[#0E201E] dark:text-[#F3F5F7]`}
                           >
                             {balance}
                           </Typography>
-                          <Typography variant="small" className={roiClasses}>
-                            {roi}
-                          </Typography>
+                          <div className="flex justify-center items-center gap-1">
+                            {roi.includes("+") ? (
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M12.0465 6.38016L7.99979 2.3335L3.95312 6.38016"
+                                  stroke="#419F45"
+                                  stroke-width="1.2"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                                <path
+                                  d="M8 13.6668V2.44678"
+                                  stroke="#419F45"
+                                  stroke-width="1.2"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M3.95354 9.61984L8.00021 13.6665L12.0469 9.61984"
+                                  stroke="#D8382C"
+                                  stroke-width="1.2"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                                <path
+                                  d="M8 2.33322L8 13.5532"
+                                  stroke="#D8382C"
+                                  stroke-width="1.2"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                              </svg>
+                            )}
+
+                            <Typography variant="small" className={roiClasses}>
+                              {roi}
+                            </Typography>
+                          </div>
                         </div>
                       </td>
                       <td className="hidden sm:table-cell">
