@@ -27,7 +27,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
 
   return (
     <div
-      className={`py-2 sm:py-6 transition-opacity duration-300 ease-in-out ${
+      className={`pb-2 pt-8 sm:pt-5 sm:py-6 transition-opacity duration-300 ease-in-out ${
         isFading ? "opacity-0" : "opacity-100"
       }`}
     >
@@ -44,7 +44,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             </h2>
             <button
               onClick={handleClose}
-              className={` self-start sm:flex items-center space-x-1 px-2 sm:px-3 py-1 sm:py-2 lg:px-2 lg:py-1 text-[#0E201E]
+              className={` self-start sm:flex items-center space-x-1 px-2 sm:px-3 py-1 sm:py-2 lg:px-2 lg:py-1  text-[#7c7c7c]
             dark:text-[#B6B8BA] rounded-md  md:hidden`}
               aria-label="Close banner"
             >
@@ -73,55 +73,55 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             <div className="flex flex-col md:flex-row justify-start items-start md:items-center gap-2">
               {" "}
               <span
-                className={`text-sm sm:text-base lg:text-md font-medium text-[#0E201E]  dark:text-[#B6B8BA]`}
+                className={`text-sm sm:text-base lg:text-md font-medium text-gray-900  dark:text-[#B6B8BA]`}
               >
                 Getting started is as easy as:
               </span>
               <div className="flex flex-row flex-wrap md:gap-5 gap-1.5 ">
                 <div
-                  className={`flex items-center justify-center px-1.5 md:px-3 py-3 rounded-lg lg:rounded-xl border border-[#E1E3E5] dark:border-gray-600`}
+                  className={`flex items-center justify-center px-3 md:px-3 py-1.5 rounded-xl  border border-gray-150 dark:border-gray-600 gap-1.5`}
                 >
                   <div
-                    className="w-4 h-4 lg:w-4 lg:h-4 rounded-full flex items-center justify-center text-white  dark:text-[#2F3232] text-xs font-bold mr-2"
+                    className="w-4 h-4  rounded-[20px] flex flex-col items-center justify-center text-white  dark:text-[#2F3232] text-xs font-bold p-1"
                     style={{ backgroundColor: "#75AE46" }}
                   >
                     1
                   </div>
                   <span
-                    className={`text-sm lg:text-md font-normal opacity-80 text-[#0E201E] 
-                  dark:text-[#CDCFD1]`}
+                    className={` lg:text-md  opacity-80 text-[#0E201E] 
+                  dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[1.43px] tracking-normal text-left `}
                   >
                     Connect Exchanges & Wallets
                   </span>
                 </div>
                 <div
-                  className={`flex items-center justify-center px-1.5 md:px-3 py-3 rounded-lg lg:rounded-xl border border-[#E1E3E5] dark:border-gray-600`}
+                  className={`flex items-center justify-center px-3 md:px-3 py-1.5 rounded-xl  border border-gray-150 dark:border-gray-600 gap-1.5`}
                 >
                   <div
-                    className="w-4 h-4 lg:w-4 lg:h-4 rounded-full flex items-center justify-center text-white  dark:text-[#2F3232] text-xs font-bold mr-2"
+                    className="w-4 h-4  rounded-[20px] flex flex-col items-center justify-center text-white  dark:text-[#2F3232] text-xs font-bold p-1"
                     style={{ backgroundColor: "#75AE46" }}
                   >
                     2
                   </div>
                   <span
-                    className={`text-sm lg:text-md font-normal opacity-80 text-[#0E201E] 
-                  dark:text-[#CDCFD1]`}
+                    className={` lg:text-md  opacity-80 text-[#0E201E] 
+                  dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[1.43px] tracking-normal text-left `}
                   >
                     Reconcile Trades
                   </span>
                 </div>
                 <div
-                  className={`flex items-center justify-center px-1.5 md:px-3 py-3 rounded-lg lg:rounded-xl border border-[#E1E3E5] dark:border-gray-600`}
+                  className={`flex items-center justify-center px-3 md:px-3 py-1.5 rounded-xl  border border-gray-150 dark:border-gray-600 gap-1.5`}
                 >
                   <div
-                    className="w-4 h-4 lg:w-4 lg:h-4 rounded-full flex items-center justify-center text-white  dark:text-[#2F3232] text-xs font-bold mr-2"
+                    className="w-4 h-4  rounded-[20px] flex flex-col items-center justify-center text-white  dark:text-[#2F3232] text-xs font-bold p-1"
                     style={{ backgroundColor: "#75AE46" }}
                   >
                     3
                   </div>
                   <span
-                    className={`text-sm lg:text-md font-normal opacity-80 text-[#0E201E] 
-                  dark:text-[#CDCFD1]`}
+                    className={` lg:text-md  opacity-80 text-[#0E201E] 
+                  dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[1.43px] tracking-normal text-left `}
                   >
                     Run Tax Reports
                   </span>
@@ -132,15 +132,11 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
 
           {/* Additional Savings Info */}
           <div
-            className={`text-sm lg:text-sm ${
-              isDarkMode ? "text-gray-400" : "text-gray-500"
-            } text-left`}
+            className={`text-sm lg:text-sm text-gray-600 dark:text-[#B6B8BA] text-left`}
           >
             Also, you SAVE more when you{" "}
-            <span className="font-bold" style={{ color: "#75AE46" }}>
-              Go Pro
-            </span>{" "}
-            with our advanced tax settings.
+            <span className="font-bold text-info-500">Go Pro</span> with our
+            advanced tax settings.
           </div>
         </div>
 
@@ -166,7 +162,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             />
           </svg>
           <span
-            className={`text-sm lg:text-sm font-normaltext-[#0E201E] dark:text-[#CDCFD1]`}
+            className={`text-sm lg:text-sm font-normal text-[#0E201E] dark:text-[#CDCFD1]`}
           >
             Close
           </span>

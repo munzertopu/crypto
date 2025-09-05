@@ -25,11 +25,15 @@ const KPICard: React.FC<KPICardProps> = ({
   centered = false,
   className = "",
 }) => (
-  <div className={`flex flex-col space-y-4 ${className}`}>
+  <div className={`flex flex-col gap-3 ${className}`}>
     <div className="flex items-center gap-1.5">
-      <div className="w-5 h-5 sm:w-6 sm:h-6 opacity-80 flex items-center justify-center">
+      <div className="flex items-center justify-center">
         {svgIcon ? (
-          <div className="text-[#0E201E] dark:text-[#CDCFD1]">{svgIcon}</div>
+          <div
+            className={`"text-gray-900 dark:text-[#B6B8BA] w-5 h-5 md:h-6 md:w-6 flex items-center justify-center`}
+          >
+            {svgIcon}
+          </div>
         ) : (
           <FontAwesomeIcon
             icon={icon}
@@ -37,19 +41,21 @@ const KPICard: React.FC<KPICardProps> = ({
           />
         )}
       </div>
-      <div className="flex items-center space-x-1">
-        <span className="text-base sm:text-xl lg:text-2xl font-medium md:font-semibold opacity-80 text-[#0E201E] dark:text-[#CDCFD1]">
+      <div className="flex items-center">
+        <span
+          className={`text-base sm:text-xl lg:text-2xl font-medium md:font-semibold text-gray-900 dark:text-[#B6B8BA] opacity-80`}
+        >
           {title}
         </span>
       </div>
     </div>
 
-    <div className="flex flex-col items-start sm:flex-row sm:items-center space-x-2">
-      <span className="`text-xl sm:text-[32px] font-semibold text-[#0E201E] dark:text-[#CDCFD1]">
+    <div className="flex flex-col items-start sm:flex-row  sm:items-end sm:gap-2">
+      <span className="text-xl sm:text-[32px] font-semibold text-gray-900 dark:text-[#B6B8BA]">
         {value}
       </span>
       <span
-        className={`text-[13px] sm:text-sm font-medium ${
+        className={`text-[13px] sm:text-sm font-semibold ${
           isPositive ? "text-[#5F9339]" : "text-[#D8382C]"
         }`}
       >
@@ -87,74 +93,156 @@ const KPISection: React.FC<KPISectionProps> = ({
   // SVG Icons for KPI Cards
   const incomeSvg = (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      className="w-5 h-5 md:h-6 md:w-6"
       viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="size-8"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+        d="M9.5 13.7502C9.5 14.7202 10.25 15.5002 11.17 15.5002H13.05C13.85 15.5002 14.5 14.8202 14.5 13.9702C14.5 13.0602 14.1 12.7302 13.51 12.5202L10.5 11.4702C9.91 11.2602 9.51001 10.9402 9.51001 10.0202C9.51001 9.18023 10.16 8.49023 10.96 8.49023H12.84C13.76 8.49023 14.51 9.27023 14.51 10.2402"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M12 7.5V16.5"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M17 3V7H21"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M22 2L17 7"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
   );
 
   const realizedGainsSvg = (
     <svg
-      className="w-7 h-7 text-gray-800 dark:text-white"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      fill="none"
+      className="w-5 h-5 md:h-6 md:w-6"
       viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
+        d="M6.73 19.7C7.55 18.82 8.8 18.89 9.52 19.85L10.53 21.2C11.34 22.27 12.65 22.27 13.46 21.2L14.47 19.85C15.19 18.89 16.44 18.82 17.26 19.7C19.04 21.6 20.49 20.97 20.49 18.31V7.04C20.5 3.01 19.56 2 15.78 2H8.22C4.44 2 3.5 3.01 3.5 7.04V18.3C3.5 20.97 4.96 21.59 6.73 19.7Z"
         stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 5h6m-6 4h6M10 3v4h4V3h-4Z"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M8 7H16"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M9 11H15"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
   );
 
   const shortTermsSvg = (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      className="w-5 h-5 md:h-6 md:w-6"
       viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="size-8"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+        d="M20.75 13.25C20.75 18.08 16.83 22 12 22C7.17 22 3.25 18.08 3.25 13.25C3.25 8.42 7.17 4.5 12 4.5C16.83 4.5 20.75 8.42 20.75 13.25Z"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M12 8V13"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M9 2H15"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-miterlimit="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
   );
 
   const longTermsSvg = (
     <svg
-      className="w-7 h-7 text-gray-800 dark:text-white"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      fill="none"
+      className="w-5 h-5 md:h-6 md:w-6"
       viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
+        d="M6.88 18.1501V16.0801"
         stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M4 4.5V19a1 1 0 0 0 1 1h15M7 14l4-4 4 4 5-5m0 0h-3.207M20 9v3.207"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+      <path
+        d="M12 18.1498V14.0098"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+      <path
+        d="M17.12 18.1502V11.9302"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+      <path
+        d="M17.12 5.8501L16.66 6.3901C14.11 9.3701 10.69 11.4801 6.88 12.4301"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+      />
+      <path
+        d="M14.1899 5.8501H17.1199V8.7701"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
   );
