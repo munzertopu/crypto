@@ -23,7 +23,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     <div className="bg-white dark:bg-[#0E201E]">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center  py-3 text-left focus:outline-none"
+        className="w-full flex justify-between items-center  py-3 text-left focus:outline-none opacity-80"
       >
         <span className="font-medium text-gray-800 dark:text-[#F3F5F7]">
           {title}

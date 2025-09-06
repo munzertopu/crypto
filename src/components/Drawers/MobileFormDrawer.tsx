@@ -9,6 +9,7 @@ interface DrawerProps {
   header?: string;
   height?: string;
   children: React.ReactNode;
+  noChildPadding?: boolean;
 }
 
 const MobileFormDrawer: React.FC<DrawerProps> = ({
@@ -19,6 +20,7 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
   children,
   showLogo = false,
   noPadding = false,
+  noChildPadding = false,
 }) => {
   return (
     <>
@@ -26,12 +28,18 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
       <div
         className={`fixed bottom-0 left-0 w-[99.7%] bg-white z-50 transition-transform duration-300 transform ${
           isOpen ? "translate-y-0" : "translate-y-full"
-        } rounded-t-[24px] sm:hidden p-8 dark:bg-[#0E201E]`}
+        } rounded-t-[24px] sm:hidden ${
+          noChildPadding ? "p-0" : "p-8"
+        } dark:bg-[#0E201E]`}
         style={{ height }}
       >
         {/* Header */}
 
-        <div className="flex justify-between items-center">
+        <div
+          className={`flex justify-between items-center ${
+            !noChildPadding ? "p-0" : "p-8"
+          }`}
+        >
           <div className="flex items-center justify-center gap-3">
             <button
               onClick={onClose}

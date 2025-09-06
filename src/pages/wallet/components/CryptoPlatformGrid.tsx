@@ -257,7 +257,7 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
           setShowNotification(true);
         }}
       >
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center w-full">
           <WalletConfigureForm
             isOpen={openConfigure}
             onClose={handleCloseModal}
