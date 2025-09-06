@@ -52,19 +52,20 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
       <div className="w-full px-4 sm:px-6 md:px-10 ">
         {/* Welcome Banner */}
         {showWelcomeBanner && (
-          <div className="mx-2 sm:mx-4 md:mx-6">
-            <WelcomeBanner
-              userName="Kristin Watson"
-              onClose={handleWelcomeBannerClose}
-              isDarkMode={isDarkMode}
-            />
-          </div>
+          <>
+            <div className="mx-2 sm:mx-4 md:mx-6">
+              <WelcomeBanner
+                userName="Kristin Watson"
+                onClose={handleWelcomeBannerClose}
+                isDarkMode={isDarkMode}
+              />
+            </div>
+            {/* Horizontal Separator */}
+            <div className="p-2 hidden md:block">
+              <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+            </div>
+          </>
         )}
-
-        {/* Horizontal Separator */}
-        <div className="p-2 hidden md:block">
-          <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
-        </div>
 
         {/* Dashboard Header */}
         <div className="mx-2">
