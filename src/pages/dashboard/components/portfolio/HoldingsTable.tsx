@@ -36,6 +36,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
     "Cost",
     "Market Value",
     "Statistic for 24h",
+    "",
   ];
   // Mock data based on the image
   const defaultHoldings: Holding[] = [
@@ -69,10 +70,11 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
   const data = holdings.length > 0 ? holdings : defaultHoldings;
 
-  const TrendChart: React.FC<{ trend: "up" | "down"; data?: number[] }> = ({
-    trend,
-    data = [],
-  }) => {
+  const TrendChart: React.FC<{
+    trend: "up" | "down";
+    data?: number[];
+    mobileView?: boolean;
+  }> = ({ trend, data = [], mobileView = false }) => {
     const chartColor = trend === "up" ? "#10b981" : "#ef4444";
 
     const options: ApexOptions = {
@@ -161,31 +163,9 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
             series={series}
             type="area"
             height={32}
-            width={210}
+            width={!mobileView ? 210 : 150}
           />
         </div>
-        {/* Checkmark in circle icon */}
-        <svg
-          className="w-6 h-6 mr-4 flex-shrink-0"
-          viewBox="0 0 16 16"
-          fill="none"
-        >
-          <circle
-            cx="8"
-            cy="8"
-            r="7"
-            stroke="#9CA3AF"
-            strokeWidth="1.5"
-            fill="none"
-          />
-          <path
-            d="M5 8L7 10L11 6"
-            stroke="#9CA3AF"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
       </div>
     );
   };
@@ -200,7 +180,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
       <Card className="h-full w-full border-transparent bg-transprent">
         <CardBody className="px-0 rounded-lg sm:overflow-x-auto">
           <table className="w-full min-w-max table-auto text-left">
-            <thead className="bg-[#F3F5F7] dark:bg-[#2F3232]">
+            <thead className="bg-[#F3F5F7] dark:bg-[#2F3232] hidden sm:table-header-group">
               <tr className="">
                 {TABLE_HEAD.map((head, index) => (
                   <th
@@ -282,20 +262,78 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                       </td>
                       <td className="table-cell sm:hidden">
                         <div className="font-normal">
-                          <TrendChart trend={trend24h} data={trendData} />
+                          <TrendChart
+                            trend={trend24h}
+                            data={trendData}
+                            mobileView
+                          />
                         </div>
                       </td>
                       <td className="table-cell sm:hidden">
-                        <div className="flex flex-col">
+                        <div className="flex flex-col items-center justify-end">
                           <Typography
                             variant="small"
                             className={`font-normal text-base text-[#0E201E] dark:text-[#F3F5F7]`}
                           >
                             {balance}
                           </Typography>
-                          <Typography variant="small" className={roiClasses}>
-                            {roi}
-                          </Typography>
+                          <div className="flex justify-center items-center gap-1">
+                            {roi.includes("+") ? (
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M12.0465 6.38016L7.99979 2.3335L3.95312 6.38016"
+                                  stroke="#419F45"
+                                  stroke-width="1.2"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                                <path
+                                  d="M8 13.6668V2.44678"
+                                  stroke="#419F45"
+                                  stroke-width="1.2"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                              </svg>
+                            ) : (
+                              <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M3.95354 9.61984L8.00021 13.6665L12.0469 9.61984"
+                                  stroke="#D8382C"
+                                  stroke-width="1.2"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                                <path
+                                  d="M8 2.33322L8 13.5532"
+                                  stroke="#D8382C"
+                                  stroke-width="1.2"
+                                  stroke-miterlimit="10"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                              </svg>
+                            )}
+
+                            <Typography variant="small" className={roiClasses}>
+                              {roi}
+                            </Typography>
+                          </div>
                         </div>
                       </td>
                       <td className="hidden sm:table-cell">
@@ -330,6 +368,29 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                         <div className="font-normal">
                           <TrendChart trend={trend24h} data={trendData} />
                         </div>
+                      </td>
+                      <td className="hidden sm:table-cell">
+                        <svg
+                          className="w-6 h-6 mr-4 flex-shrink-0"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                        >
+                          <circle
+                            cx="8"
+                            cy="8"
+                            r="7"
+                            stroke="#9CA3AF"
+                            strokeWidth="1.5"
+                            fill="none"
+                          />
+                          <path
+                            d="M5 8L7 10L11 6"
+                            stroke="#9CA3AF"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
                       </td>
                     </tr>
                   );

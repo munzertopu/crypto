@@ -9,6 +9,26 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      colors: {
+        gray: {
+          0: "#FFFFFF",
+          100: "#F3F5F7",
+          150: "#E1E3E5",
+          200: "#CDCFD1",
+          250: "#B6B8BA",
+          300: "#A1A3A5",
+          400: "#8C8E90",
+          500: "#7C7C7C",
+          600: "#666868",
+          700: "#4D5050",
+          800: "#2F3232",
+          900: "#0E201E",
+          // 👆 replace values with your own palette
+        },
+        info: {
+          500: "#2186D7",
+        },
+      },
       fontFamily: {
         sans: [
           "Be Vietnam Pro",

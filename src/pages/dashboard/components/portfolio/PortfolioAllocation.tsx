@@ -85,8 +85,6 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
     rows.push(data.slice(i, i + 5));
   }
 
-  console.log("rowsss", rows);
-
   return (
     <div className="sm:px-8 mb-6">
       <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#CDCFD1] mb-4 text-left">

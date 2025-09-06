@@ -9,6 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Card, Typography, CardBody, Avatar } from "@material-tailwind/react";
 import TransactionDetail from "./TransactionDetail";
+import useScreenSize from "../../../hooks/useScreenSize";
+import MobileFormDrawer from "../../../components/Drawers/MobileFormDrawer";
 
 interface Transaction {
   id: string;
@@ -146,7 +148,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   const tagOptions = ["Reward", "Airdrop", "Income", "Loan", "Fee refund"];
   const dropdownRef = useRef<HTMLDivElement>(null);
   const tagDropdownRef = useRef<HTMLDivElement>(null);
-
+  const screenSize = useScreenSize();
+  const [selectedRow, setSelectedRow] = useState<Transaction | null>(null);
   // Click outside handler for items per page dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -199,14 +202,16 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
     </tr>
   );
 
+  console.log("selectedTransactions:", selectedRow);
+
   return (
-    <div className="px-8 mb-6">
+    <div className="md:px-8 mb-6">
       <Card className={`h-full w-full border-transparent bg-transparent`}>
         <CardBody>
           <div className="overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left">
               <thead
-                className={`bg-[#F3F5F7] dark:bg-[#2F3232]`}
+                className={`bg-[#F3F5F7] dark:bg-[#2F3232] hidden sm:table-header-group`}
               >
                 <tr>
                   {TABLE_HEAD.map((head, index) => (
@@ -287,13 +292,19 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                             ? "cursor-pointer transition-colors"
                             : ""
                         }`}
-                        onClick={() => onToggleExpanded && onToggleExpanded(id)}
+                        onClick={() => {
+                          if (screenSize.width < 640) {
+                            setSelectedRow(transaction);
+                            return;
+                          }
+                          if (onToggleExpanded) onToggleExpanded(id);
+                        }}
                       >
                         <td
                           className="py-4"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <div className="flex items-center justify-center">
+                          <div className="hidden sm:flex sm:items-center sm:justify-center">
                             <input
                               type="checkbox"
                               checked={selectedTransactions.includes(id)}
@@ -309,12 +320,12 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                               src={wallet.logo}
                               alt={wallet.name}
                               size="sm"
-                              className={`h-16 w-16 flex items-center justify-center text-white text-xs font-bold`}
+                              className={`h-12 w-12 flex items-center justify-center text-white text-xs font-bold`}
                             />
                             <div className="flex flex-col">
                               <Typography
                                 variant="small"
-                                className={`text-xl font-normal text-[#0E201E]
+                                className={`text-base font-normal text-[#0E201E]
                                   dark:text-[#F3F5F7]`}
                               >
                                 {wallet.name}
@@ -329,52 +340,84 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                             </div>
                           </div>
                         </td>
-                        <td className="py-4">
+                        <td className="sm:hidden table-cell ">
+                          <div className="flex flex-col justify-center items-center ">
+                            {" "}
+                            <Typography
+                              variant="small"
+                              className={`text-base font-normal text-[#0E201E]
+                                  dark:text-[#F3F5F7]`}
+                            >
+                              {action}
+                            </Typography>
+                            {sent && (
+                              <div className="flex items-center gap-2">
+                                <Typography
+                                  variant="small"
+                                  className="text-base font-normal text-red-600"
+                                >
+                                  {sent}
+                                </Typography>
+                              </div>
+                            )}
+                            {received && (
+                              <div className="flex items-center gap-2">
+                                <Typography
+                                  variant="small"
+                                  className="text-base font-normal text-green-600"
+                                >
+                                  {received}
+                                </Typography>
+                              </div>
+                            )}
+                          </div>
+                        </td>
+                        <td className="hidden sm:table-cell py-4">
                           <Typography
                             variant="small"
-                            className={`text-xl font-normal text-[#0E201E]
+                            className={`text-base font-normal text-[#0E201E]
                                   dark:text-[#F3F5F7]`}
                           >
                             {action}
                           </Typography>
                         </td>
-                        <td className="py-4">
+                        <td className="hidden sm:table-cell py-4">
                           {sent && (
                             <div className="flex items-center gap-2">
                               <Typography
                                 variant="small"
-                                className="text-xl font-normal text-red-600"
+                                className="text-base font-normal text-red-600"
                               >
                                 {sent}
                               </Typography>
                             </div>
                           )}
                         </td>
-                        <td className="py-4">
+                        <td className="hidden sm:table-cell py-4">
                           {received && (
                             <div className="flex items-center gap-2">
                               <Typography
                                 variant="small"
-                                className="text-xl font-normal text-green-600"
+                                className="text-base font-normal text-green-600"
                               >
                                 {received}
                               </Typography>
                             </div>
                           )}
                         </td>
-                        <td className="py-4">
+                        <td className="hidden sm:table-cell py-4">
                           <Typography
                             variant="small"
-                            className={`text-xl font-normal text-[#0E201E]
+                            className={`text-base font-normal text-[#0E201E]
                                   dark:text-[#F3F5F7]`}
                           >
                             {result}
                           </Typography>
                         </td>
-                        <td className="py-4">
+                        <td className="hidden sm:table-cell py-4">
                           <Typography
                             variant="small"
-                            className={`text-xl font-normal text-[#0E201E]
+                            className={`text-base font-normal text-[#0E201E]
                                   dark:text-[#F3F5F7]`}
                           >
                             {transactionId}
@@ -417,7 +460,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                             </div>
                           </td>
                         )}
-                        <td className="py-4">
+                        <td className="hidden sm:table-cell py-4">
                           {isCompleted && (
                             <div className="w-10 h-10 rounded-full flex items-center justify-end text-[#7C7C7C]">
                               <svg
@@ -451,9 +494,105 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         </CardBody>
       </Card>
 
+      <MobileFormDrawer
+        isOpen={selectedRow !== null}
+        onClose={() => setSelectedRow(null)}
+        header={`${selectedRow?.wallet.name} Transaction`}
+        height="95vh"
+      >
+        <div className="flex flex-col justify-start items-center w-full gap-8 dark:bg-[#0E201E]">
+          <div className="flex flex-col justify-start items-center w-full gap-2">
+            {" "}
+            <Avatar
+              src={selectedRow?.wallet.logo}
+              alt={selectedRow?.wallet.name}
+              size="sm"
+              className={`h-12 w-12 flex items-center justify-center text-white text-xs font-bold`}
+            />
+            <div className="flex flex-col justify-start items-center gap-2">
+              <span className="text-lg font-semibold text-[#0E201E] dark:text-[#F3F5F7]">
+                {selectedRow?.wallet.name}
+              </span>
+              <span className="text-lg font-semibold  text-green-600">
+                {selectedRow?.received}
+              </span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-5 w-full">
+            <div className="flex flex-col justify-start items-start w-full">
+              <div className="flex justify-between items-center w-full ">
+                <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                  Action Type:
+                </span>
+                <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                  {selectedRow?.status}
+                </span>
+              </div>
+            </div>
+            <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+            <div className="flex flex-col justify-start items-start w-full">
+              <div className="flex justify-between items-center w-full ">
+                <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                  Receive Amount:
+                </span>
+                <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                  {selectedRow?.received}
+                </span>
+              </div>
+            </div>
+            <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+            <div className="flex flex-col justify-start items-start w-full">
+              <div className="flex justify-between items-center w-full ">
+                <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                  Wallet Address:
+                </span>
+                <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                  {selectedRow?.wallet.address}
+                </span>
+              </div>
+            </div>
+            <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+            <div className="flex flex-col justify-start items-start w-full">
+              <div className="flex justify-between items-center w-full ">
+                <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                  Date:
+                </span>
+                <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                  {selectedRow?.date}
+                </span>
+              </div>
+            </div>
+            <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+            <div className="flex flex-col justify-start items-start w-full">
+              <div className="flex justify-between items-center w-full ">
+                <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                  Result:
+                </span>
+                <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                  {selectedRow?.result}
+                </span>
+              </div>
+            </div>
+            <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+            <div className="flex flex-col justify-start items-start w-full">
+              <div className="flex justify-between items-center w-full ">
+                <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                  Transaction ID:
+                </span>
+                <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                  {selectedRow?.transactionId}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </MobileFormDrawer>
+
       {/* Table Footer */}
-      <div className={`mt-4 px-8 py-4 bg-white
-        dark:bg-transparent`}>
+      <div
+        className={`hidden sm:block mt-4 px-8 py-4 bg-white
+        dark:bg-transparent`}
+      >
         <div className="flex items-center justify-between">
           {/* Left side - Show on page dropdown */}
           <div className="flex items-center space-x-2">
@@ -642,7 +781,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           )}
 
           {/* Right side - Page navigation */}
-          <div className="flex items-center space-x-2">
+          <div className="hidden sm:flex items-center space-x-2">
             {/* Previous button */}
             <button
               className={`w-8 h-8 rounded border flex items-center justify-center border-gray-300 text-gray-700

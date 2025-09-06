@@ -127,25 +127,24 @@ const Filters: React.FC<FiltersProps> = ({
           <div className="flex items-center rounded-lg border px-2 my-4 shadow-sm sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]">
             <Datepicker
               displayFormat="DD MMM YYYY"
-              separator='-'
+              separator="-"
               placeholder="Purchase date"
-              value={null} 
+              value={null}
               onChange={(newValue: any) => setSelectedDateRange(newValue)}
               showShortcuts={true}
               configs={{
-                  shortcuts: createShortcuts()
+                shortcuts: createShortcuts(),
               }}
-              
-              primaryColor='green'
-              inputClassName="w-full rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white"
-              containerClassName="relative pr-6"
+              primaryColor="green"
+              inputClassName="flex items-center justify-between rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white px-3 py-3"
+              containerClassName="relative flex items-center justify-between"
               toggleClassName="absolute rounded-r-lg px-0 right-0 top-0 h-full text-gray-800 dark:text-white"
             />
           </div>
 
           <div className="flex-1 relative my-4">
             <div
-              className="px-3 py-3 flex items-center justify-between cursor-pointer rounded-lg border text-md bg-transparent border-gray-300 text-[#0E201E] 
+              className="w-full sm:w-[200px] px-3 py-3 flex items-center justify-between cursor-pointer rounded-lg border text-md bg-transparent border-gray-300 text-[#0E201E] 
                 dark:border-[#4D5050] dark:text-white"
               onClick={() => setShowGainDropdown(!showGainDropdown)}
             >
@@ -160,9 +159,7 @@ const Filters: React.FC<FiltersProps> = ({
 
             {/* Gain Dropdown */}
             {showGainDropdown && (
-              <div
-                className="absolute top-full left-0 right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-600"
-              >
+              <div className="absolute top-full left-0 right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-600">
                 <div className="py-1">
                   {["Highest gain", "Lowest gain"].map((gain) => (
                     <button
@@ -171,7 +168,9 @@ const Filters: React.FC<FiltersProps> = ({
                         setSelectedGain(gain);
                         setShowGainDropdown(false);
                       }}
-                      className={`w-full px-3 py-2 text-left text-sm flex items-center justify-between text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-[#0A0F290A] ${selectedGain === gain ? "bg-[#0A0F290A]" : ""}`}
+                      className={`w-full px-3 py-2 text-left text-sm flex items-center justify-between text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-[#0A0F290A] ${
+                        selectedGain === gain ? "bg-[#0A0F290A]" : ""
+                      }`}
                     >
                       <span>{gain}</span>
                       {selectedGain === gain && (
