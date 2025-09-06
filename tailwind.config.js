@@ -28,6 +28,10 @@ module.exports = {
         info: {
           500: "#2186D7",
         },
+        green: {
+          400: "#B3E277",
+          500: "#90c853",
+        },
       },
       fontFamily: {
         sans: [
