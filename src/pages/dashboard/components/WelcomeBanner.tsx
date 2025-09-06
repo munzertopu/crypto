@@ -36,7 +36,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
           {/* Main Welcome Message */}
           <div className="flex items-start justify-between">
             <h2
-              className={`text-sm sm:text-lg  font-semibold sm:font-medium text-[#0E201E]
+              className={`text-sm sm:text-lg  font-semibold sm:font-medium text-gray-900
             dark:text-[#B6B8BA] text-left`}
             >
               Welcome [{userName}]! Go Pro and Save an Additional [$] with our
@@ -44,7 +44,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             </h2>
             <button
               onClick={handleClose}
-              className={` self-start sm:flex items-center space-x-1 px-2 sm:px-3 py-1 sm:py-2 lg:px-2 lg:py-1  text-[#7c7c7c]
+              className={`w-20 h-8 flex items-center justify-end  px-2 sm:px-3 py-1 sm:py-2 lg:px-2 lg:py-1  text-[#7c7c7c]
             dark:text-[#B6B8BA] rounded-md  md:hidden`}
               aria-label="Close banner"
             >
@@ -143,8 +143,8 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className={`hidden self-start md:flex items-center space-x-1 px-2 md:px-3 py-1 md:py-2 lg:px-2 lg:py-1 border-[#E1E3E5] text-[#7C7C7C] 
-            dark:text-[#B6B8BA] dark:border-[#4D5050] rounded-md`}
+          className={`hidden w-22 h-8 md:flex flex-row justify-center items-center gap-1 py-[6px] px-2.5 rounded-lg shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border #e1e3e5 border-solid bg-[#fff] 
+            dark:text-[#B6B8BA] dark:border-[#4D5050] dark:bg-transparent `}
           aria-label="Close banner"
         >
           <svg
@@ -162,7 +162,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             />
           </svg>
           <span
-            className={`text-sm lg:text-sm font-normal text-[#0E201E] dark:text-[#CDCFD1]`}
+            className={`text-sm lg:text-sm font-normal text-gray-900 dark:text-[#CDCFD1]`}
           >
             Close
           </span>
