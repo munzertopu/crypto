@@ -40,7 +40,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
       </div>
 
       {/* Horizontal Separator */}
-      <div className="hidden md:block px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6">
+      <div className="hidden md:block px-4 sm:px-6 lg:px-8 md:my-5">
         <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
       </div>
 
@@ -61,7 +61,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
       </div>
 
       {/* Horizontal Separator */}
-      <div className="hidden md:block px-4 sm:px-6 lg:px-8 my-4 sm:my-6 lg:my-8">
+      <div className="hidden md:block px-4 sm:px-6 lg:px-8 my-4  md:my-5">
         <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
       </div>
 

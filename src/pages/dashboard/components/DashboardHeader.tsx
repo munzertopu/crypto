@@ -66,7 +66,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   };
 
   return (
-    <div className="sm:px-4 lg:px-6 lg:py-4 pt-7">
+    <div className="sm:px-4 lg:px-6 lg:pt-4 md:pb-8 pt-7">
       <div className="flex flex-row items-center justify-between gap-4 ">
         {/* Title */}
         <h1
