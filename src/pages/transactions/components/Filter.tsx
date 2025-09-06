@@ -338,7 +338,7 @@ const Filter: React.FC<FilterProps> = ({
       selectedDateRange.startDate &&
       selectedDateRange.endDate);
   return (
-    <div className={`p-4 lg:pt-6 lg:px-8 rounded-lg `}>
+    <div className={`p-0 sm:p-4 lg:pt-6 lg:px-8 rounded-lg `}>
       {/* Tabs */}
       {!hideTab && (
         <div
@@ -422,22 +422,42 @@ const Filter: React.FC<FilterProps> = ({
         </div>
       )}
 
-      <div className="flex flex-row lg:items-center gap-2 space-y-4 lg:space-x-4">
+      <div className="flex flex-row justify-start lg:items-center gap-2 mt-[20px] sm:mt-0 ">
         {/* Search */}
-        <div className="relative mt-4 sm:w-1/4 w-full ">
-          <FontAwesomeIcon
-            icon={faSearch}
-            className={`absolute size-6 text-xl ml-6 top-1/2 transform -translate-y-1/2 text-[#7C7C7C]
-              dark:text-[#CDCFD1] `}
-          />
-          <input
-            type="text"
-            placeholder="Search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className={`pl-14 pr-4 py-4 rounded-[12px] border text-base w-full bg-white border-[#E1E3E5] text-[#0E201E] placeholder-gray-500 focus:outline-none
-              dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050]`}
-          />
+        <div className="flex flex-grow-1 w-full sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]">
+          <div className="flex  flex-row justify-start items-center gap-3">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="text-gray-900 dark:text-[#FFFFFF] opacity-70"
+            >
+              <path
+                d="M9.6 17.2C13.7974 17.2 17.2 13.7974 17.2 9.6C17.2 5.40264 13.7974 2 9.6 2C5.40264 2 2 5.40264 2 9.6C2 13.7974 5.40264 17.2 9.6 17.2Z"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M18.0004 17.9999L16.4004 16.3999"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none bg-transparent
+            dark:bg-transparent dark:border-[#4D5050]`}
+            />
+          </div>
         </div>
 
         {/* Additional Filters - Only show when showFilters is true */}
@@ -745,7 +765,7 @@ const Filter: React.FC<FilterProps> = ({
 
         {/* More Filters Button */}
         {!showFilters && (
-          <div className="flex items-center">
+          <div className="flex items-center justify-center">
             <button
               onClick={() => {
                 if (screenSize.width < 640) {
@@ -754,7 +774,7 @@ const Filter: React.FC<FilterProps> = ({
                 }
                 setShowFilters(!showFilters);
               }}
-              className={`flex text-xl items-center px-3 py-4 rounded-[12px] border transition-colors bg-white border-gray-300 text-[#0E201E]
+              className={`flex text-xl items-center p-3 rounded-[12px] border transition-colors bg-white border-gray-150 text-[#0E201E]
                 dark:bg-transparent dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               aria-label="Toggle additional filters"
               aria-expanded={showFilters}
@@ -820,17 +840,18 @@ const Filter: React.FC<FilterProps> = ({
               }`}
             >
               {/* Search Input */}
-              <div className="border-b border-gray-200">
+              <div className="">
                 <input
                   type="text"
                   placeholder="Type or paste wallet"
                   value={walletSearchTerm}
                   onChange={(e) => setWalletSearchTerm(e.target.value)}
-                  className={`w-full px-3 py-2 rounded-lg border text-sm ${
-                    isDarkMode
-                      ? "text-white placeholder-gray-400"
-                      : "text-gray-900 placeholder-gray-500"
-                  } focus:outline-none`}
+                  className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none
+            dark:bg-transparent  box-border 
+         border border-[rgba(225,227,229,1)] dark:border-gray-700  px-4 py-3 
+         rounded-[12px] 
+         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
+         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                 />
               </div>
 
@@ -865,9 +886,7 @@ const Filter: React.FC<FilterProps> = ({
                         className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}
                       ></img>
                       <span
-                        className={`text-sm ${
-                          isDarkMode ? "text-white" : "text-gray-900"
-                        }`}
+                        className={`text-base text-gray-900 dark:text-[#B6B8BA] `}
                       >
                         {option.name}
                       </span>
@@ -877,7 +896,7 @@ const Filter: React.FC<FilterProps> = ({
               </div>
             </div>
           </AccordionItem>
-          <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
           <AccordionItem title="Action Type">
             {" "}
             <div
@@ -888,17 +907,18 @@ const Filter: React.FC<FilterProps> = ({
               }`}
             >
               {/* Search Input */}
-              <div className="border-b border-gray-200">
+              <div className="">
                 <input
                   type="text"
                   placeholder="Type or paste action type"
                   value={actionTypeSearchTerm}
                   onChange={(e) => setActionTypeSearchTerm(e.target.value)}
-                  className={`w-full px-3 py-2 rounded-lg border text-sm ${
-                    isDarkMode
-                      ? "text-white placeholder-gray-400"
-                      : "text-gray-900 placeholder-gray-500"
-                  } focus:outline-none`}
+                  className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none
+            dark:bg-transparent  box-border 
+         border border-[rgba(225,227,229,1)] dark:border-gray-700  px-4 py-3 
+         rounded-[12px] 
+         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
+         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                 />
               </div>
 
@@ -929,9 +949,7 @@ const Filter: React.FC<FilterProps> = ({
                         )}
                       </div>
                       <span
-                        className={`text-sm ${
-                          isDarkMode ? "text-white" : "text-gray-900"
-                        }`}
+                        className={`text-base text-gray-900 dark:text-[#B6B8BA] `}
                       >
                         {option.name}
                       </span>
@@ -941,52 +959,50 @@ const Filter: React.FC<FilterProps> = ({
               </div>
             </div>
           </AccordionItem>
-          <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
           <AccordionItem title="Amount Sent">
             {" "}
             <div
-              className={`w-full shadow-lg z-50 w-80 ${
+              className={`w-full shadow-lg z-50  ${
                 isDarkMode
                   ? "bg-gray-800 border-gray-600"
                   : "bg-white border-gray-300"
               }`}
             >
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-3">
                 {/* From Input */}
-                <div className="flex-1">
-                  <Typography
-                    variant="small"
-                    className={`mb-2 font-medium text-left ${
-                      isDarkMode ? "text-gray-300" : "text-gray-700"
-                    }`}
+                <div className="flex items-center gap-3 ">
+                  <span
+                    className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
                   >
                     From:
-                  </Typography>
+                  </span>
 
-                  <div className="relative">
+                  <div className="relative flex-1">
                     <Input
                       type="number"
-                      placeholder="0"
+                      placeholder="Amount"
                       value={fromSentValue}
                       onChange={(e) => setFromSentValue(e.target.value)}
-                      className={`w-full rounded-lg text-sm font-semibold ${
-                        isDarkMode
-                          ? "border-gray-500 bg-gray-700 !text-white"
-                          : "border-gray-300 bg-white !text-gray-900"
-                      }`}
+                      className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none
+            dark:bg-transparent  box-border 
+         border border-[rgba(225,227,229,1)] dark:border-gray-700  px-4 py-3 
+         rounded-[12px] 
+         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
+         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
                         setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
                       }
-                      className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b ${
+                      className={`absolute right-0 top-0 h-full px-2   border-[rgba(225,227,229,1)] rounded-l-none rounded-r-lg border-r border-t border-b  ${
                         isDarkMode
                           ? "border-gray-500 text-gray-300 hover:bg-gray-600"
                           : "border-gray-300 text-gray-600 bg-white"
                       }`}
                     >
                       <div className="flex items-center gap-1">
-                        <span className="text-xs font-medium">
+                        <span className="text-[13px] font-medium">
                           {fromSentCurrency}
                         </span>
                         <FontAwesomeIcon
@@ -1029,39 +1045,38 @@ const Filter: React.FC<FilterProps> = ({
                 </div>
 
                 {/* To Input */}
-                <div className="flex-1">
-                  <Typography
-                    variant="small"
-                    className={`mb-2 text-left font-medium ${
-                      isDarkMode ? "text-gray-300" : "text-gray-700"
-                    }`}
+                <div className="flex items-center gap-3 ">
+                  <span
+                    className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
                   >
                     To:
-                  </Typography>
-                  <div className="relative">
+                  </span>
+
+                  <div className="relative flex-1">
                     <Input
                       type="number"
-                      placeholder="1000"
+                      placeholder="Amount"
                       value={toSentValue}
                       onChange={(e) => setToSentValue(e.target.value)}
-                      className={`w-full rounded-lg text-sm font-semibold ${
-                        isDarkMode
-                          ? "border-gray-500 bg-gray-700 !text-white"
-                          : "border-gray-300 bg-white !text-gray-900"
-                      }`}
+                      className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none
+            dark:bg-transparent  box-border 
+         border border-[rgba(225,227,229,1)] dark:border-gray-700  px-4 py-3 
+         rounded-[12px] 
+         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
+         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
                         setShowToCurrencyDropdown(!showToCurrencyDropdown)
                       }
-                      className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b ${
+                      className={`absolute right-0 top-0 h-full px-2   border-[rgba(225,227,229,1)] rounded-l-none rounded-r-lg border-r border-t border-b  ${
                         isDarkMode
                           ? "border-gray-500 text-gray-300 hover:bg-gray-600"
                           : "border-gray-300 text-gray-600 bg-white"
                       }`}
                     >
                       <div className="flex items-center gap-1">
-                        <span className="text-xs font-medium">
+                        <span className="text-[13px] font-medium">
                           {toSentCurrency}
                         </span>
                         <FontAwesomeIcon
@@ -1105,52 +1120,50 @@ const Filter: React.FC<FilterProps> = ({
               </div>
             </div>
           </AccordionItem>
-          <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
           <AccordionItem title="Amount Received">
             {" "}
             <div
-              className={`w-full shadow-lg${
+              className={`w-full shadow-lg z-50  ${
                 isDarkMode
                   ? "bg-gray-800 border-gray-600"
                   : "bg-white border-gray-300"
               }`}
             >
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-3">
                 {/* From Input */}
-                <div className="flex-1">
-                  <Typography
-                    variant="small"
-                    className={`mb-2 font-medium text-left ${
-                      isDarkMode ? "text-gray-300" : "text-gray-700"
-                    }`}
+                <div className="flex items-center gap-3 ">
+                  <span
+                    className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
                   >
                     From:
-                  </Typography>
+                  </span>
 
-                  <div className="relative">
+                  <div className="relative flex-1">
                     <Input
                       type="number"
-                      placeholder="0"
+                      placeholder="Amount"
                       value={fromSentValue}
                       onChange={(e) => setFromSentValue(e.target.value)}
-                      className={`w-full rounded-lg text-sm font-semibold ${
-                        isDarkMode
-                          ? "border-gray-500 bg-gray-700 !text-white"
-                          : "border-gray-300 bg-white !text-gray-900"
-                      }`}
+                      className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none
+            dark:bg-transparent  box-border 
+         border border-[rgba(225,227,229,1)] dark:border-gray-700  px-4 py-3 
+         rounded-[12px] 
+         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
+         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
                         setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
                       }
-                      className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b ${
+                      className={`absolute right-0 top-0 h-full px-2   border-[rgba(225,227,229,1)] rounded-l-none rounded-r-lg border-r border-t border-b  ${
                         isDarkMode
                           ? "border-gray-500 text-gray-300 hover:bg-gray-600"
                           : "border-gray-300 text-gray-600 bg-white"
                       }`}
                     >
                       <div className="flex items-center gap-1">
-                        <span className="text-xs font-medium">
+                        <span className="text-[13px] font-medium">
                           {fromSentCurrency}
                         </span>
                         <FontAwesomeIcon
@@ -1193,39 +1206,38 @@ const Filter: React.FC<FilterProps> = ({
                 </div>
 
                 {/* To Input */}
-                <div className="flex-1">
-                  <Typography
-                    variant="small"
-                    className={`mb-2 text-left font-medium ${
-                      isDarkMode ? "text-gray-300" : "text-gray-700"
-                    }`}
+                <div className="flex items-center gap-3 ">
+                  <span
+                    className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
                   >
                     To:
-                  </Typography>
-                  <div className="relative">
+                  </span>
+
+                  <div className="relative flex-1">
                     <Input
                       type="number"
-                      placeholder="1000"
+                      placeholder="Amount"
                       value={toSentValue}
                       onChange={(e) => setToSentValue(e.target.value)}
-                      className={`w-full rounded-lg text-sm font-semibold ${
-                        isDarkMode
-                          ? "border-gray-500 bg-gray-700 !text-white"
-                          : "border-gray-300 bg-white !text-gray-900"
-                      }`}
+                      className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none
+            dark:bg-transparent  box-border 
+         border border-[rgba(225,227,229,1)] dark:border-gray-700  px-4 py-3 
+         rounded-[12px] 
+         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
+         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
                         setShowToCurrencyDropdown(!showToCurrencyDropdown)
                       }
-                      className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b ${
+                      className={`absolute right-0 top-0 h-full px-2   border-[rgba(225,227,229,1)] rounded-l-none rounded-r-lg border-r border-t border-b  ${
                         isDarkMode
                           ? "border-gray-500 text-gray-300 hover:bg-gray-600"
                           : "border-gray-300 text-gray-600 bg-white"
                       }`}
                     >
                       <div className="flex items-center gap-1">
-                        <span className="text-xs font-medium">
+                        <span className="text-[13px] font-medium">
                           {toSentCurrency}
                         </span>
                         <FontAwesomeIcon
@@ -1269,7 +1281,7 @@ const Filter: React.FC<FilterProps> = ({
               </div>
             </div>
           </AccordionItem>
-          <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
+          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
           <AccordionItem title="Date"> Coming...........</AccordionItem>
         </Accordion>
       </MobileDrawer>
