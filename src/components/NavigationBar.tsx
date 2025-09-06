@@ -95,7 +95,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   return (
     <nav
       className={`px-4 md:px-10  py-3 md:py-4  bg-white border-b 
-        dark:bg-[#0E201E] dark:border-[#2F3232]`}
+        dark:bg-[#0E201E] dark:border-[#2F3232] border-gray-150`}
     >
       <div className="flex items-center justify-between">
         {/* Logo */}
@@ -201,7 +201,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <button
               onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
               className="flex items-center justify-between space-x-6 lg:border lg:border-[#E1E3E5] lg:px-3 lg:py-1.5 lg:rounded-xl
-              dark:border-[#4D5050]"
+              dark:border-[#4D5050] focus:border-green-400"
               aria-label="Open profile menu"
               aria-expanded={isProfileDropdownOpen}
               aria-haspopup="true"
@@ -211,7 +211,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 <img
                   src="/kristin.png"
                   alt={userName}
-                  className="w-11 h-11 rounded-full object-cover md:w-8 md:h-8"
+                  className="w-11 h-11 rounded-full focus:border-green-400 object-cover md:w-8 md:h-8"
                 />
                 <span
                   className={`hidden sm:inline text-xs sm:text-sm lg:text-md text-[#0E201E] 
@@ -327,7 +327,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
                 {/* Log out option */}
                 <div
-                  className={`flex items-center px-2 py-1 cursor-pointer`}
+                  className={`w-full flex items-center justify-between px-2 py-4 cursor-pointer`}
                   onClick={() => {
                     setIsProfileDropdownOpen(false);
                     if (onLogout) {
@@ -337,36 +337,62 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   role="menuitem"
                   aria-label="Log out of account"
                 >
+                  <div className="flex justify-start items-center gap-1.5">
+                    {" "}
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M14.5332 12.1832L16.6665 10.0498L14.5332 7.9165"
+                        stroke="currentColor"
+                        stroke-width="1.2"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M8.13379 10.0498H16.6088"
+                        stroke="currentColor"
+                        stroke-width="1.2"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M9.80046 16.6668C6.11712 16.6668 3.13379 14.1668 3.13379 10.0002C3.13379 5.8335 6.11712 3.3335 9.80046 3.3335"
+                        stroke="currentColor"
+                        stroke-width="1.2"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <span
+                      className={`text-xs font-medium tracking-[1%] leading-[20px] dark:text-[#B6B8BA]`}
+                    >
+                      Log out
+                    </span>
+                  </div>
                   {/* Logout icon - FontAwesome */}
-                  <FontAwesomeIcon
-                    icon={faSignOutAlt}
-                    className={`w-3 h-3 ${
-                      isDarkMode ? "text-[#A1A3A5]" : "text-[#7C7C7C]"
-                    } mr-2 rotate-180`}
-                  />
-                  <span
-                    className={`text-xs ${
-                      isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
-                    } mr-auto`}
-                  >
-                    Log out
-                  </span>
+
                   {/* Right arrow */}
                   <svg
-                    className={`w-2 h-2 ${
-                      isDarkMode ? "text-[#A1A3A5]" : "text-[#7C7C7C]"
-                    }`}
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
                     fill="none"
-                    viewBox="0 0 8 14"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
+                      d="M5.94043 13.2797L10.2871 8.93306C10.8004 8.41973 10.8004 7.57973 10.2871 7.06639L5.94043 2.71973"
                       stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
+                      stroke-miterlimit="10"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
                     />
                   </svg>
                 </div>
@@ -377,7 +403,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden w-11 h-11  flex flex-row justify-center items-center gap-1 p-3 rounded-xl shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border border-[#E1E3E5] text-[#7C7C7C] rounded-lg hover:bg-gray-50 transition-colors"
+            className="lg:hidden w-11 h-11  flex flex-row justify-center items-center gap-1 p-3 rounded-xl shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border border-[#E1E3E5] text-[#7C7C7C] rounded-lg hover:bg-gray-50 transition-colors focus:border-green-400 "
             aria-label="Open mobile menu"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -540,7 +566,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           <div className="px-4 w-full mt-2">
             {" "}
             <button
-              className={`w-full flex items-center justify-center bg-transparent border border-[#75AE46] px-5 py-2.5 rounded-lg text-sm
+              className={`w-full flex items-center justify-center gap-1 bg-transparent border border-[#90c853] px-5 py-2.5 rounded-[12px] text-sm
              text-[#75AE46] dark:border-[#4D5050]
              `}
               aria-label="Upgrade to Pro plan"
@@ -550,11 +576,11 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 256 256"
                 fill="currentColor"
-                className="size-6"
+                className="size-4"
               >
                 <path d="M230.9,73.6A15.85,15.85,0,0,0,212,77.39l-33.67,36.29-35.8-80.29a1,1,0,0,1,0-.1,16,16,0,0,0-29.06,0,1,1,0,0,1,0,.1l-35.8,80.29L44,77.39A16,16,0,0,0,16.25,90.81c0,.11,0,.21.07.32L39,195a16,16,0,0,0,15.72,13H201.29A16,16,0,0,0,217,195L239.68,91.13c0-.11,0-.21.07-.32A15.85,15.85,0,0,0,230.9,73.6ZM201.35,191.68l-.06.32H54.71l-.06-.32L32,88l.14.16,42,45.24a8,8,0,0,0,13.18-2.18L128,40l40.69,91.25a8,8,0,0,0,13.18,2.18l42-45.24L224,88Z" />
               </svg>
-              <span className="hidden lg:inline text-lg lg:text-md font-normal text-[#5F9339] dark:text-[#75AE46]">
+              <span className=" text-sm font-medium text-[#5F9339] dark:text-[#75AE46]">
                 Go Pro
               </span>
             </button>

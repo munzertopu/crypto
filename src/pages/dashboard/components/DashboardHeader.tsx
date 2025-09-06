@@ -77,7 +77,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
 
         {/* Date Range Selector */}
         <div
-          className={`flex items-center rounded-lg border p-2 shadow-sm w-full sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]`}
+          className={`max-w-[190px] flex items-center rounded-lg border p-2 shadow-sm w-full sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]`}
         >
           <Datepicker
             displayFormat="DD MMM YYYY"

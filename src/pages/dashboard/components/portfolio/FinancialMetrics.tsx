@@ -8,6 +8,7 @@ import {
   faBolt,
   faBriefcase,
 } from "@fortawesome/free-solid-svg-icons";
+import useScreenSize from "../../../../hooks/useScreenSize";
 
 interface MetricItemProps {
   title: string;
@@ -286,6 +287,8 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
   const [isUnrealizedGainDropdownOpen, setIsUnrealizedGainDropdownOpen] =
     useState(false);
 
+  const screenSize = useScreenSize();
+
   const handleUnrealizedGainDropdownToggle = () => {
     setIsUnrealizedGainDropdownOpen(!isUnrealizedGainDropdownOpen);
   };
@@ -309,9 +312,9 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
           {/* Horizontal Separator */}
 
           <div
-            className={`w-full h-px lg:hidden ${
-              isDarkMode ? "bg-gray-700" : "bg-gray-200"
-            }`}
+            className={`w-full h-px lg:hidden 
+            dark:bg-gray-700  bg-gray-150
+            `}
           ></div>
 
           {/* Right Section - Cost Basic and Unrealized Gain */}
@@ -335,7 +338,7 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
                 change={unrealizedGainChange}
                 isPositive={unrealizedGainChange.startsWith("+")}
                 svgIcon={unrealizedGainSvg}
-                showDropdown={true}
+                showDropdown={screenSize.width >= 1024 ? true : false}
                 onDropdownToggle={handleUnrealizedGainDropdownToggle}
                 isDropdownOpen={isUnrealizedGainDropdownOpen}
                 isDarkMode={isDarkMode}
