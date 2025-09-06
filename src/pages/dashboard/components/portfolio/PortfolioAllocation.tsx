@@ -86,7 +86,7 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
   }
 
   return (
-    <div className="sm:px-8 mb-6">
+    <div className="sm:px-6 mb-6 md:mb-0 md:pt-3">
       <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#CDCFD1] mb-4 text-left">
         Portfolio Allocation
       </h3>
