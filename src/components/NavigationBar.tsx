@@ -94,7 +94,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   }, [isProfileDropdownOpen]);
   return (
     <nav
-      className={`px-4 sm:px-6 lg:px-9 py-3 sm:py-2 lg:py-3.5 bg-white border-b 
+      className={`px-4 md:px-10  py-3 md:py-4  bg-white border-b 
         dark:bg-[#0E201E] dark:border-[#2F3232]`}
     >
       <div className="flex items-center justify-between">
