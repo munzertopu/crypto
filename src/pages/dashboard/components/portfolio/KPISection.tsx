@@ -307,7 +307,7 @@ const KPISection: React.FC<KPISectionProps> = ({
   }, [isDropdownOpen]);
 
   return (
-    <div className="sm:px-8 mb-6 mt-12">
+    <div className="mb-6 md:mb-0 md:py-6 md:pl-6 md:pr-[60px]">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#E1E3E5]">
           KPI
@@ -316,7 +316,7 @@ const KPISection: React.FC<KPISectionProps> = ({
           {/* Add KPI Button with Dropdown */}
           <button
             onClick={handleDropdownToggle}
-            className="p-2 md:p-4 text-[#7C7C7C] dark:text-[#B6B8BA] border-[#E1E3E5] dark:border-[#4D5050] rounded-[8px] md:rounded-[12px] bg-transparent flex items-center justify-center border"
+            className="p-2 md:p-3 text-[#7C7C7C] dark:text-[#B6B8BA] border-[#E1E3E5] dark:border-[#4D5050] rounded-[8px] md:rounded-[12px] bg-transparent flex items-center justify-center border"
             aria-label="Add KPI"
             aria-expanded={isDropdownOpen}
             aria-haspopup="true"
