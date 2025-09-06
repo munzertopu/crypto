@@ -171,12 +171,11 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
   };
 
   return (
-    <div className="md:px-8 mb-6">
-      <div className="sm:py-4">
-        <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-white text-left">
-          Holdings
-        </h3>
-      </div>
+    <div className="md:px-6 mb-6 md:pt-5">
+      <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-white text-left">
+        Holdings
+      </h3>
+
       <Card className="h-full w-full border-transparent bg-transprent">
         <CardBody className="px-0 rounded-lg sm:overflow-x-auto">
           <table className="w-full min-w-max table-auto text-left">
