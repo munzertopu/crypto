@@ -232,7 +232,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
 
       <div className="px-4 sm:px-6 lg:px-8 mt-4.5 sm:mt-8">
         {/* Header */}
-        <div className="flex flex-row sm:items-center justify-between px-2 lg:pl-8">
+        <div className="flex flex-row sm:items-center justify-between px-1 sm:px-2 lg:pl-8">
           <div className="flex gap-2 justify-start items-end">
             <h1
               className="text-lg sm:text-2xl font-semibold text-gray-900
