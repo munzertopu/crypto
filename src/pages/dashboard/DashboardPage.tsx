@@ -53,7 +53,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
         {/* Welcome Banner */}
         {showWelcomeBanner && (
           <>
-            <div className="mx-2 sm:mx-4 md:mx-6">
+            <div className="sm:mx-4 md:mx-6">
               <WelcomeBanner
                 userName="Kristin Watson"
                 onClose={handleWelcomeBannerClose}
@@ -68,14 +68,14 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
         )}
 
         {/* Dashboard Header */}
-        <div className="mx-2">
+        <div className="sm:mx-2">
           <DashboardHeader
             activeTab={activeTab}
             onTabChange={handleTabChange}
             isDarkMode={isDarkMode}
           />
         </div>
-        <div className="mx-1 ">
+        <div className="sm:mx-1 ">
           {/* Portfolio Tab */}
           {activeTab === "Portfolio" && (
             <PortfolioTab isDarkMode={isDarkMode} onAddKPI={handleAddKPI} />
