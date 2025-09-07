@@ -16,7 +16,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ isDarkMode, onToggle }) => {
       aria-label="Toggle theme"
     >
       <span
-        className={`inline-block h-6 w-6 lg:h-6 lg:w-6 transform rounded-full transition-transform translate-x-0.5 bg-[#FFFFFF]
+        className={`inline-block h-[18px] w-[18px] lg:h-6 lg:w-6 transform rounded-full transition-transform translate-x-0.5 bg-[#FFFFFF]
           dark:translate-x-7 dark:bg-[#4D5050]
           `}
       >
