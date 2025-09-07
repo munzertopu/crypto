@@ -19,9 +19,9 @@ const Filter: React.FC<FilterProps> = ({
   isDarkMode,
 }) => {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-0 sm:mb-8">
       {/* Tabs */}
-      <div className="flex space-x-1 mb-4 mt-5 md:mt-0 sm:mb-0">
+      <div className="flex mb-4 mt-5 md:mt-0 sm:mb-0">
         <Tabs>
           <Tabs.List className="my-2 lg:my-2 bg-[#F3F5F7] dark:bg-[#2F3232]">
             {["All", "Exchanges", "Blockchains"].map((tab) => (
