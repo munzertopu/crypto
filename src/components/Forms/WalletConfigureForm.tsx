@@ -24,11 +24,9 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
 }) => {
   const [walletAddress, setWalletAddress] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedBlockchains, setSelectedBlockchains] = useState<string[]>([
-    "BNB",
-    "Matic",
-  ]);
-
+  const [selectedBlockchains, setSelectedBlockchains] = useState<string[]>([]);
+  // "BNB",
+  //     "Matic",
   const blockchainOptions = ["Eth", "BNB", "ARB", "Matic"];
 
   const isWalletAddressValid = walletAddress.trim().length > 0;
@@ -51,6 +49,13 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
     if (selectedBlockchains.length === 0) return "Select blockchains";
     return selectedBlockchains.join(", ");
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedBlockchains([]);
+      setWalletAddress("");
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -178,7 +183,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
 
           <div className="relative">
             <div
-              className={`w-full px-4 mt-1.5 sm:mt-0 py-3 border-2 border-gray-150 text-base rounded-lg cursor-pointer flex items-center justify-between bg-white text-gray-900 focus:outline-none
+              className={`w-full px-4 mt-1.5 sm:mt-0 py-3 border-2 border-gray-150 text-base rounded-lg cursor-pointer flex items-center justify-between bg-white text-gray-900 focus:ring-green-500
                   dark:bg-transparent dark:text-white dark:border-[#4D5050]`}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               role="button"
@@ -214,7 +219,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
             {/* Dropdown Options */}
             {isDropdownOpen && (
               <div
-                className={`absolute top-full left-0 right-0 mt-1 border rounded-lg shadow-lg z-10 bg-white border-gray-200
+                className={`absolute top-full left-0 right-0 mt-1 border rounded-lg shadow-lg z-10 bg-white border-gray-150
                   dark:bg-[#0E201E] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               >
                 {blockchainOptions.map((blockchain) => (
@@ -228,7 +233,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
                       className={`w-4 h-4 border-2 rounded mr-3 flex items-center justify-center ${
                         selectedBlockchains.includes(blockchain)
                           ? "bg-green-500 border-green-500"
-                          : "border-gray-400"
+                          : "border-gray-150"
                       }`}
                     >
                       {selectedBlockchains.includes(blockchain) && (
