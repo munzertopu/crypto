@@ -92,7 +92,7 @@ const MetricItem: React.FC<MetricItemProps> = ({
         {value}
       </span>
       <span
-        className={`text-[13px] sm:text-sm font-semibold ${
+        className={`text-caption sm:text-sm font-semibold ${
           isPositive ? "text-[#5F9339]" : "text-[#D8382C]"
         }`}
       >
