@@ -12,6 +12,7 @@ interface DrawerProps {
   onLeftButtonClick?: () => void;
   onRightButtonClick?: () => void;
   disableRightButton?: boolean;
+  marginBottom?: boolean;
 }
 
 const MobileDrawer: React.FC<DrawerProps> = ({
@@ -25,6 +26,7 @@ const MobileDrawer: React.FC<DrawerProps> = ({
   onLeftButtonClick,
   onRightButtonClick,
   disableRightButton = false,
+  marginBottom = false,
 }) => {
   return (
     <>
@@ -50,7 +52,9 @@ const MobileDrawer: React.FC<DrawerProps> = ({
           </h2>
           <button
             onClick={onClose}
-            className="flex-shrink-0 text-[#7C7C7C] transition-colors dark:text-[#F3F5F7]"
+            className={`flex-shrink-0 text-[#7C7C7C] transition-colors dark:text-[#F3F5F7] z-10 ${
+              marginBottom ? "-mb-[24px]" : ""
+            } `}
           >
             <FontAwesomeIcon icon={faTimes} className="w-4 h-4" />
           </button>
