@@ -3,6 +3,7 @@ import ReactApexChart from "react-apexcharts";
 import type { ApexOptions } from "apexcharts";
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { Card, Typography, CardBody, Avatar } from "@material-tailwind/react";
+import useScreenSize from "../../../../hooks/useScreenSize";
 
 interface Holding {
   id: string;
@@ -69,6 +70,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
   ];
 
   const data = holdings.length > 0 ? holdings : defaultHoldings;
+  const screenSize = useScreenSize();
 
   const TrendChart: React.FC<{
     trend: "up" | "down";
@@ -157,13 +159,13 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
     return (
       <div className="flex items-center justify-between w-full">
-        <div className="w-40 h-12">
+        <div className="w-full sm:w-full h-12">
           <ReactApexChart
             options={options}
             series={series}
             type="area"
             height={32}
-            width={!mobileView ? 210 : 150}
+            width={!mobileView ? 210 : screenSize.width < 400 ? 110 : 150}
           />
         </div>
       </div>
