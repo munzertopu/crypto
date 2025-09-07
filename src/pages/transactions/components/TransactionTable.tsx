@@ -204,7 +204,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
   return (
     <div className="md:px-8 mb-6 mt-5 sm:mt-0">
-      handleLogout
       <Card className={`h-full w-full border-transparent bg-transparent `}>
         <CardBody className="px-0 sm:px-3.5 sm:py-2.5">
           <div className="overflow-x-auto">
@@ -321,18 +320,18 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                               size="sm"
                               className={`h-12 w-12 flex items-center justify-center text-white text-xs font-bold`}
                             />
-                            <div className="flex flex-col min-w-[150px]">
+                            <div className="flex flex-col  max-w-[200px]">
                               <Typography
                                 variant="small"
-                                className={`text-base font-normal text-[#0E201E]
-                                  dark:text-[#F3F5F7]`}
+                                className={`text-base font-normal text-gray-900
+                                  dark:text-[#F3F5F7] truncate`}
                               >
                                 {wallet.name}
                               </Typography>
                               <Typography
                                 variant="small"
-                                className={`text-md font-normal text-[#0E201E]
-                                  dark:text-[#F3F5F7]`}
+                                className={`text-sm font-normal  text-gray-900
+                                  dark:text-[#F3F5F7] opacity-70 truncate`}
                               >
                                 {wallet.address}
                               </Typography>
@@ -344,7 +343,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                             {" "}
                             <Typography
                               variant="small"
-                              className={`text-base font-normal text-[#0E201E]
+                              className={`text-base font-normal text-gray-900
                                   dark:text-[#F3F5F7]`}
                             >
                               {action}
@@ -500,8 +499,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         noPadding
         noChildPadding
       >
-        <div className="flex flex-col justify-start items-center w-full gap-8 dark:bg-[#0E201E]">
-          <div className="flex flex-col justify-start items-center w-full gap-2">
+        <div className="flex flex-col justify-start items-center w-full gap-8 dark:bg-[#0E201E] pt-2">
+          <div className="flex flex-col justify-start items-center w-full gap-3">
             {" "}
             <Avatar
               src={selectedRow?.wallet.logo}
@@ -521,7 +520,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           <div className="flex flex-col gap-5 w-full">
             <div className="flex flex-col justify-start items-start w-full px-4">
               <div className="flex justify-between items-center w-full ">
-                <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                <span className="text-base  text-gray-700 dark:text-[#F3F5F7]">
                   Action Type:
                 </span>
                 <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
