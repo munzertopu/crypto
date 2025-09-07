@@ -90,6 +90,7 @@ const walletOptions: WalletOption[] = [
 ];
 
 const actionTypeOptions: ActionTypeOption[] = [
+  { id: "all", name: "All" },
   { id: "buy", name: "Buy" },
   { id: "sell", name: "Sell" },
   { id: "swap", name: "Swap" },
@@ -137,8 +138,8 @@ const Filter: React.FC<FilterProps> = ({
   const [amountSentDropdownOpen, setAmountSentDropdownOpen] = useState(false);
   const [fromSentCurrency, setFromSentCurrency] = useState("USD");
   const [toSentCurrency, setToSentCurrency] = useState("USD");
-  const [fromSentValue, setFromSentValue] = useState("0");
-  const [toSentValue, setToSentValue] = useState("0");
+  const [fromSentValue, setFromSentValue] = useState("");
+  const [toSentValue, setToSentValue] = useState("");
 
   // Amount Received Dropdown
   const [amountReceivedDropdownOpen, setAmountReceivedDropdownOpen] =
@@ -330,8 +331,8 @@ const Filter: React.FC<FilterProps> = ({
     selectedWallets.length > 0 ||
     selectedActionTypes.length > 0 ||
     selectedResults.length > 0 ||
-    fromSentValue !== "0" ||
-    toSentValue !== "0" ||
+    (fromSentValue !== "" && fromSentValue !== "0") ||
+    (toSentValue !== "" && toSentValue !== "0") ||
     fromReceivedValue !== "0" ||
     toReceivedValue !== "0" ||
     (selectedDateRange &&
@@ -833,7 +834,7 @@ const Filter: React.FC<FilterProps> = ({
           <AccordionItem title="Wallet">
             {" "}
             <div
-              className={`w-full  shadow-lg z-50 ${
+              className={`w-full  z-50 ${
                 isDarkMode
                   ? "bg-gray-800 border-gray-600"
                   : "bg-white border-gray-300"
@@ -846,32 +847,27 @@ const Filter: React.FC<FilterProps> = ({
                   placeholder="Type or paste wallet"
                   value={walletSearchTerm}
                   onChange={(e) => setWalletSearchTerm(e.target.value)}
-                  className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none
-            dark:bg-transparent  box-border 
-         border border-[rgba(225,227,229,1)] dark:border-gray-700  px-4 py-3 
-         rounded-[12px] 
-         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
-         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                  className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                 />
               </div>
 
               {/* Wallet Options List */}
-              <div className="max-h-48 overflow-y-auto">
+              <div className="max-h-48 overflow-y-auto mt-3 flex flex-col gap-4 ">
                 {filteredWalletOptions.map((option) => {
                   const isSelected = selectedWallets.includes(option.id);
                   return (
                     <div
                       key={option.id}
                       onClick={() => handleWalletToggle(option.id)}
-                      className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 ${
+                      className={`flex items-center px-3 gap-2 cursor-pointer hover:bg-gray-100 ${
                         isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
                       }`}
                     >
                       <div
-                        className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                        className={`w-5 h-5 border-2 rounded flex items-center justify-center  transition-colors ${
                           isSelected
                             ? "bg-[#90C853] border-[#90C853]"
-                            : "border-gray-300"
+                            : "border-gray-150"
                         }`}
                       >
                         {isSelected && (
@@ -883,7 +879,7 @@ const Filter: React.FC<FilterProps> = ({
                       </div>
                       <img
                         src={option.logo}
-                        className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}
+                        className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold ml-3`}
                       ></img>
                       <span
                         className={`text-base text-gray-900 dark:text-[#B6B8BA] `}
@@ -900,42 +896,28 @@ const Filter: React.FC<FilterProps> = ({
           <AccordionItem title="Action Type">
             {" "}
             <div
-              className={`w-full  shadow-lg z-50 ${
+              className={`w-full z-50 ${
                 isDarkMode
                   ? "bg-gray-800 border-gray-600"
                   : "bg-white border-gray-300"
               }`}
             >
               {/* Search Input */}
-              <div className="">
-                <input
-                  type="text"
-                  placeholder="Type or paste action type"
-                  value={actionTypeSearchTerm}
-                  onChange={(e) => setActionTypeSearchTerm(e.target.value)}
-                  className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none
-            dark:bg-transparent  box-border 
-         border border-[rgba(225,227,229,1)] dark:border-gray-700  px-4 py-3 
-         rounded-[12px] 
-         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
-         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
-                />
-              </div>
 
               {/* Action Type Options List */}
-              <div className="max-h-48 overflow-y-auto">
+              <div className="max-h-48 overflow-y-auto  mt-3 flex flex-col gap-4">
                 {filteredActionTypeOptions.map((option) => {
                   const isSelected = selectedActionTypes.includes(option.id);
                   return (
                     <div
                       key={option.id}
                       onClick={() => handleActionTypeToggle(option.id)}
-                      className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 ${
+                      className={`flex items-center  cursor-pointer hover:bg-gray-100 ${
                         isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
                       }`}
                     >
                       <div
-                        className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                        className={`w-5 h-5 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
                           isSelected
                             ? "bg-[#90C853] border-[#90C853]"
                             : "border-gray-300"
@@ -962,13 +944,7 @@ const Filter: React.FC<FilterProps> = ({
           <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
           <AccordionItem title="Amount Sent">
             {" "}
-            <div
-              className={`w-full shadow-lg z-50  ${
-                isDarkMode
-                  ? "bg-gray-800 border-gray-600"
-                  : "bg-white border-gray-300"
-              }`}
-            >
+            <div className={`w-full  z-50 mt-2`}>
               <div className="flex flex-col gap-3">
                 {/* From Input */}
                 <div className="flex items-center gap-3 ">
@@ -984,22 +960,13 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Amount"
                       value={fromSentValue}
                       onChange={(e) => setFromSentValue(e.target.value)}
-                      className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none
-            dark:bg-transparent  box-border 
-         border border-[rgba(225,227,229,1)] dark:border-gray-700  px-4 py-3 
-         rounded-[12px] 
-         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
-         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
                         setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
                       }
-                      className={`absolute right-0 top-0 h-full px-2   border-[rgba(225,227,229,1)] rounded-l-none rounded-r-lg border-r border-t border-b  ${
-                        isDarkMode
-                          ? "border-gray-500 text-gray-300 hover:bg-gray-600"
-                          : "border-gray-300 text-gray-600 bg-white"
-                      }`}
+                      className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
                     >
                       <div className="flex items-center gap-1">
                         <span className="text-caption font-medium">
@@ -1058,22 +1025,13 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Amount"
                       value={toSentValue}
                       onChange={(e) => setToSentValue(e.target.value)}
-                      className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none
-            dark:bg-transparent  box-border 
-         border border-[rgba(225,227,229,1)] dark:border-gray-700  px-4 py-3 
-         rounded-[12px] 
-         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
-         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
                         setShowToCurrencyDropdown(!showToCurrencyDropdown)
                       }
-                      className={`absolute right-0 top-0 h-full px-2   border-[rgba(225,227,229,1)] rounded-l-none rounded-r-lg border-r border-t border-b  ${
-                        isDarkMode
-                          ? "border-gray-500 text-gray-300 hover:bg-gray-600"
-                          : "border-gray-300 text-gray-600 bg-white"
-                      }`}
+                      className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
                     >
                       <div className="flex items-center gap-1">
                         <span className="text-caption font-medium">
@@ -1123,13 +1081,7 @@ const Filter: React.FC<FilterProps> = ({
           <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
           <AccordionItem title="Amount Received">
             {" "}
-            <div
-              className={`w-full shadow-lg z-50  ${
-                isDarkMode
-                  ? "bg-gray-800 border-gray-600"
-                  : "bg-white border-gray-300"
-              }`}
-            >
+            <div className={`w-full  z-50 mt-2`}>
               <div className="flex flex-col gap-3">
                 {/* From Input */}
                 <div className="flex items-center gap-3 ">
@@ -1145,22 +1097,13 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Amount"
                       value={fromSentValue}
                       onChange={(e) => setFromSentValue(e.target.value)}
-                      className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none
-            dark:bg-transparent  box-border 
-         border border-[rgba(225,227,229,1)] dark:border-gray-700  px-4 py-3 
-         rounded-[12px] 
-         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
-         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
                         setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
                       }
-                      className={`absolute right-0 top-0 h-full px-2   border-[rgba(225,227,229,1)] rounded-l-none rounded-r-lg border-r border-t border-b  ${
-                        isDarkMode
-                          ? "border-gray-500 text-gray-300 hover:bg-gray-600"
-                          : "border-gray-300 text-gray-600 bg-white"
-                      }`}
+                      className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
                     >
                       <div className="flex items-center gap-1">
                         <span className="text-caption font-medium">
@@ -1219,22 +1162,13 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Amount"
                       value={toSentValue}
                       onChange={(e) => setToSentValue(e.target.value)}
-                      className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none
-            dark:bg-transparent  box-border 
-         border border-[rgba(225,227,229,1)] dark:border-gray-700  px-4 py-3 
-         rounded-[12px] 
-         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
-         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
                         setShowToCurrencyDropdown(!showToCurrencyDropdown)
                       }
-                      className={`absolute right-0 top-0 h-full px-2   border-[rgba(225,227,229,1)] rounded-l-none rounded-r-lg border-r border-t border-b  ${
-                        isDarkMode
-                          ? "border-gray-500 text-gray-300 hover:bg-gray-600"
-                          : "border-gray-300 text-gray-600 bg-white"
-                      }`}
+                      className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
                     >
                       <div className="flex items-center gap-1">
                         <span className="text-caption font-medium">
