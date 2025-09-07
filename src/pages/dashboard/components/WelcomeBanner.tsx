@@ -44,7 +44,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             </h2>
             <button
               onClick={handleClose}
-              className={`w-20 h-8 flex items-center justify-end  sm:px-3 py-1 sm:py-2 lg:px-2 lg:py-1  text-[#7c7c7c]
+              className={`w-20 h-8 flex items-start justify-end  sm:px-3  sm:py-2 lg:px-2 lg:py-1  text-[#7c7c7c]
             dark:text-[#B6B8BA] rounded-md  md:hidden`}
               aria-label="Close banner"
             >
@@ -66,10 +66,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
           </div>
 
           {/* Getting Started Steps */}
-          <div
-            className={`flex flex-col items-start"
-            }`}
-          >
+          <div className={`flex flex-col items-start`}>
             <div className="flex flex-col md:flex-row justify-start items-start md:items-center gap-2">
               {" "}
               <span
@@ -81,8 +78,11 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                 <div
                   className={`flex items-center justify-center px-3 md:px-3 py-1.5 rounded-xl  border border-gray-150 dark:border-gray-600 gap-1.5`}
                 >
-                  <div className="w-4 h-4 rounded-[20px] flex flex-col items-center justify-center text-white bg-green-500  dark:text-[#2F3232] text-xs font-semibold p-1 text-center leading-5 traciking-[0px]">
-                    1
+                  <div className="w-[18px] h-[18px] rounded-[20px] flex flex-col items-center justify-center  bg-green-500 ">
+                    <span className="flex items-center text-center  text-white  dark:text-[#2F3232] text-xs font-semibold p-1  ">
+                      {" "}
+                      1
+                    </span>
                   </div>
                   <span
                     className={` lg:text-md  opacity-80 text-[#0E201E] 
@@ -94,8 +94,11 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                 <div
                   className={`flex items-center justify-center px-3 md:px-3 py-1.5 rounded-xl  border border-gray-150 dark:border-gray-600 gap-1.5`}
                 >
-                  <div className="w-4 h-4 rounded-[20px] flex flex-col items-center justify-center text-white bg-green-500  dark:text-[#2F3232] text-xs font-semibold p-1 text-center leading-5 traciking-[0px]">
-                    2
+                  <div className="w-[18px] h-[18px] rounded-[20px] flex flex-col items-center justify-center  bg-green-500 ">
+                    <span className="flex items-center text-center  text-white  dark:text-[#2F3232] text-xs font-semibold p-1  ">
+                      {" "}
+                      2
+                    </span>
                   </div>
                   <span
                     className={` lg:text-md  opacity-80 text-[#0E201E] 
@@ -107,8 +110,11 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                 <div
                   className={`flex items-center justify-center px-3 md:px-3 py-1.5 rounded-xl  border border-gray-150 dark:border-gray-600 gap-1.5`}
                 >
-                  <div className="w-4 h-4 rounded-[20px] flex flex-col items-center justify-center text-white bg-green-500  dark:text-[#2F3232] text-xs font-semibold p-1 text-center leading-5 traciking-[0px]">
-                    3
+                  <div className="w-[18px] h-[18px] rounded-[20px] flex flex-col items-center justify-center  bg-green-500 ">
+                    <span className="flex items-center text-center  text-white  dark:text-[#2F3232] text-xs font-semibold p-1  ">
+                      {" "}
+                      3
+                    </span>
                   </div>
                   <span
                     className={` lg:text-md  opacity-80 text-[#0E201E] 
