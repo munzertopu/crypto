@@ -251,7 +251,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                     }`}
                   >
                     <h3
-                      className={`text-xs font-medium ${
+                      className={`text-sm font-medium ${
                         isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
                       } text-left`}
                     >
@@ -342,7 +342,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
                   {/* Log out option */}
                   <div
-                    className={`w-full flex items-center justify-between px-4 cursor-pointer`}
+                    className={`w-full flex items-center justify-between px-4 py-1 cursor-pointer`}
                     onClick={() => {
                       setIsProfileDropdownOpen(false);
                       if (onLogout) {
