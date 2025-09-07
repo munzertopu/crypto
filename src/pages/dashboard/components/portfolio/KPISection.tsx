@@ -307,7 +307,7 @@ const KPISection: React.FC<KPISectionProps> = ({
   }, [isDropdownOpen]);
 
   return (
-    <div className="mb-6 md:mb-0 md:py-6 md:pl-6 md:pr-[60px]">
+    <div className="mb-8 md:mb-0 md:py-6 md:pl-6 md:pr-[60px]">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#E1E3E5]">
           KPI
@@ -433,7 +433,7 @@ const KPISection: React.FC<KPISectionProps> = ({
       {/* grid gap-8
     grid-cols-[repeat(auto-fit,minmax(220px,1fr))] */}
       <div
-        className={`grid grid-cols-2 gap-8 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
+        className={`grid grid-cols-2 gap-4 sm:gap-8 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
       >
         <KPICard
           title="Income"
@@ -455,6 +455,11 @@ const KPISection: React.FC<KPISectionProps> = ({
 
         <div className="flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 hidden xl:block"></div>
 
+        <div
+          className={`sm:hidden col-span-2 w-full h-px
+            dark:bg-gray-700  bg-gray-150
+            `}
+        ></div>
         <KPICard
           title="Short Terms"
           value={shortTerms}
