@@ -1002,7 +1002,7 @@ const Filter: React.FC<FilterProps> = ({
                       }`}
                     >
                       <div className="flex items-center gap-1">
-                        <span className="text-[13px] font-medium">
+                        <span className="text-caption font-medium">
                           {fromSentCurrency}
                         </span>
                         <FontAwesomeIcon
@@ -1076,7 +1076,7 @@ const Filter: React.FC<FilterProps> = ({
                       }`}
                     >
                       <div className="flex items-center gap-1">
-                        <span className="text-[13px] font-medium">
+                        <span className="text-caption font-medium">
                           {toSentCurrency}
                         </span>
                         <FontAwesomeIcon
@@ -1163,7 +1163,7 @@ const Filter: React.FC<FilterProps> = ({
                       }`}
                     >
                       <div className="flex items-center gap-1">
-                        <span className="text-[13px] font-medium">
+                        <span className="text-caption font-medium">
                           {fromSentCurrency}
                         </span>
                         <FontAwesomeIcon
@@ -1237,7 +1237,7 @@ const Filter: React.FC<FilterProps> = ({
                       }`}
                     >
                       <div className="flex items-center gap-1">
-                        <span className="text-[13px] font-medium">
+                        <span className="text-caption font-medium">
                           {toSentCurrency}
                         </span>
                         <FontAwesomeIcon

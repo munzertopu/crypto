@@ -27,7 +27,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
 
   return (
     <div
-      className={`pb-2 pt-8 sm:pt-5 sm:py-6 transition-opacity duration-300 ease-in-out ${
+      className={`pb-2 pt-6 sm:pt-5 sm:py-6 transition-opacity duration-300 ease-in-out ${
         isFading ? "opacity-0" : "opacity-100"
       }`}
     >
@@ -44,7 +44,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             </h2>
             <button
               onClick={handleClose}
-              className={`w-20 h-8 flex items-center justify-end  px-2 sm:px-3 py-1 sm:py-2 lg:px-2 lg:py-1  text-[#7c7c7c]
+              className={`w-20 h-8 flex items-center justify-end  sm:px-3 py-1 sm:py-2 lg:px-2 lg:py-1  text-[#7c7c7c]
             dark:text-[#B6B8BA] rounded-md  md:hidden`}
               aria-label="Close banner"
             >

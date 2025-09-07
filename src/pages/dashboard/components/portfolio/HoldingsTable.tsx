@@ -274,7 +274,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                             variant="small"
                             className={`font-normal text-base text-[#0E201E] dark:text-[#F3F5F7]`}
                           >
-                            {balance}
+                            ${balance}
                           </Typography>
                           <div className="flex justify-center items-center gap-1">
                             {roi.includes("+") ? (

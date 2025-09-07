@@ -204,8 +204,9 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
   return (
     <div className="md:px-8 mb-6 mt-5 sm:mt-0">
-      <Card className={`h-full w-full border-transparent bg-transparent`}>
-        <CardBody>
+      handleLogout
+      <Card className={`h-full w-full border-transparent bg-transparent `}>
+        <CardBody className="px-0 sm:px-3.5 sm:py-2.5">
           <div className="overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left">
               <thead
@@ -491,7 +492,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           </div>
         </CardBody>
       </Card>
-
       <MobileFormDrawer
         isOpen={selectedRow !== null}
         onClose={() => setSelectedRow(null)}
@@ -587,7 +587,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           </div>
         </div>
       </MobileFormDrawer>
-
       {/* Table Footer */}
       <div
         className={`hidden sm:block mt-4 px-8 py-4 bg-white
