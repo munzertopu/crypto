@@ -482,7 +482,7 @@ const KPISection: React.FC<KPISectionProps> = ({
         isOpen={openKPIFilter}
         onClose={() => setOpenKPIFilter(false)}
         header=""
-        height={380}
+        height={400}
         leftButtonText="Cancel"
         rightButtonText="Save"
         onLeftButtonClick={() => setOpenKPIFilter(false)}
@@ -505,7 +505,7 @@ const KPISection: React.FC<KPISectionProps> = ({
             return (
               <div
                 key={key}
-                className="flex items-center justtify-start cursor-pointer gap-3 w-2/4"
+                className="flex items-center justtify-start cursor-pointer gap-3 w-full"
                 onClick={() => handleKPIToggle(key)}
                 role="menuitemcheckbox"
                 aria-checked={isSelected}
