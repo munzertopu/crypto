@@ -65,7 +65,11 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
   const handlePlatformClick = (platformName: string) => {
     setSelectedPlatform(platformName);
     if (screenSize.width < 640) {
-      setOpenConfigure(true);
+      setOpenConfigure(false);
+      setTimeout(() => {
+        setOpenConfigure(true);
+      }, 500);
+
       return;
     }
     setIsModalOpen(true);
@@ -200,7 +204,7 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
   console.log("iswallet", isWalletAddressValid);
   return (
     <>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-10 m-5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-10 mt-5 sm:mt-10">
         {cryptoPlatforms.map((platform) => (
           <Tooltip
             key={platform.name}
@@ -208,7 +212,7 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
             isDarkMode={isDarkMode}
           >
             <div
-              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity"
+              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity justify-center rounded-[12px] px-6 py-2 sm:px-0 sm:py-0 border border-gray-150 dark:border-[#B6B8BA]"
               onClick={() => handlePlatformClick(platform.name)}
             >
               <div className="relative my-6">
@@ -226,7 +230,7 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
                 </div>
               </div>
               <span
-                className={`text-lg font-medium text-center text-[#0E201E]
+                className={`text-lg font-medium text-center text-gray-800
                   dark:text-[#B6B8BA]`}
               >
                 {platform.name}
@@ -245,9 +249,10 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
       />
       <MobileDrawer
         isOpen={openConfigure}
+        key={selectedPlatform}
         onClose={() => setOpenConfigure(false)}
         header={`Configure ${selectedPlatform} address`}
-        height={400}
+        height={isWalletAddressValid ? 400 : 360}
         leftButtonText="Cancel"
         rightButtonText="Configure"
         disableRightButton={!isWalletAddressValid}
@@ -257,8 +262,12 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
           setShowNotification(true);
         }}
       >
-        <div className="flex items-center justify-center w-full">
+        <div
+          key={selectedPlatform}
+          className="flex items-center justify-center w-full"
+        >
           <WalletConfigureForm
+            key={selectedPlatform}
             isOpen={openConfigure}
             onClose={handleCloseModal}
             platformName={selectedPlatform}

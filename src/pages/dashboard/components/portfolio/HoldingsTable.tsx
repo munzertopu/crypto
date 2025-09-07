@@ -165,7 +165,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
             series={series}
             type="area"
             height={32}
-            width={!mobileView ? 210 : screenSize.width < 400 ? 110 : 150}
+            width={!mobileView ? 210 : screenSize.width < 400 ? 100 : 150}
           />
         </div>
       </div>
@@ -262,7 +262,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                         </div>
                       </td>
                       <td className="table-cell sm:hidden">
-                        <div className="font-normal">
+                        <div className="px-3">
                           <TrendChart
                             trend={trend24h}
                             data={trendData}

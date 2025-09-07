@@ -482,11 +482,12 @@ const KPISection: React.FC<KPISectionProps> = ({
         isOpen={openKPIFilter}
         onClose={() => setOpenKPIFilter(false)}
         header=""
-        height={400}
+        height={380}
         leftButtonText="Cancel"
         rightButtonText="Save"
         onLeftButtonClick={() => setOpenKPIFilter(false)}
         onRightButtonClick={() => setOpenKPIFilter(false)}
+        marginBottom
       >
         <div className="flex flex-col gap-3">
           {Object.entries(selectedKPIs).map(([key, isSelected]) => {
@@ -500,11 +501,11 @@ const KPISection: React.FC<KPISectionProps> = ({
               capitalLosses: "Capital Losses",
               airdropIncome: "Airdrop Income",
             };
-
+            // hover:bg-[#F3F5F7] dark:hover:bg-[#2F3232]
             return (
               <div
                 key={key}
-                className="flex items-center justtify-start hover:bg-[#F3F5F7] dark:hover:bg-[#2F3232] cursor-pointer gap-3"
+                className="flex items-center justtify-start cursor-pointer gap-3 w-2/4"
                 onClick={() => handleKPIToggle(key)}
                 role="menuitemcheckbox"
                 aria-checked={isSelected}
