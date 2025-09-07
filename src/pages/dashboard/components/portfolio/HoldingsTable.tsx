@@ -165,7 +165,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
             series={series}
             type="area"
             height={32}
-            width={!mobileView ? 210 : screenSize.width < 400 ? 100 : 150}
+            width={!mobileView ? 210 : screenSize.width < 380 ? 60 : 100}
           />
         </div>
       </div>

@@ -252,7 +252,7 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
         key={selectedPlatform}
         onClose={() => setOpenConfigure(false)}
         header={`Configure ${selectedPlatform} address`}
-        height={isWalletAddressValid ? 400 : 360}
+        height={isWalletAddressValid ? 400 : 260}
         leftButtonText="Cancel"
         rightButtonText="Configure"
         disableRightButton={!isWalletAddressValid}

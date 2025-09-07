@@ -184,7 +184,9 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
           <div className="relative">
             <div
               className={`w-full px-4 mt-1.5 sm:mt-0 py-3 border-2 border-gray-150 text-base rounded-lg cursor-pointer flex items-center justify-between bg-white text-gray-900 focus:ring-green-500
-                  dark:bg-transparent dark:text-white dark:border-[#4D5050]`}
+                  dark:bg-transparent dark:text-white dark:border-[#4D5050] ${
+                    isDropdownOpen ? "border-[#E3F3C7B3]" : "border-gray-150"
+                  }`}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               role="button"
               aria-label="Select blockchains"

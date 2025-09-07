@@ -71,7 +71,7 @@ const OTPPage: React.FC<OTPPageProps> = ({
 
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-[#0E201E] mb-2 text-left">
+        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left">
           Enter 6 digit code we sent you
         </h1>
         <p className="text-base sm:text-lg text-[#2F3232] text-left">
@@ -100,7 +100,7 @@ const OTPPage: React.FC<OTPPageProps> = ({
                 value={digit}
                 onChange={(e) => handleOtpChange(index, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(index, e)}
-                className="w-12 h-12 text-center border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-lg font-semibold"
+                className="w-12 h-12 text-center border border-gray-150 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-lg font-semibold"
                 placeholder="-"
                 maxLength={1}
                 required

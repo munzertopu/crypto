@@ -31,10 +31,10 @@ const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({
 
       {/* Header */}
       <div className="text-center mb-4">
-        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-[#0E201E] mb-2 text-left">
+        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left">
           Reset Password
         </h1>
-        <p className="text-base sm:text-lg text-[#2F3232] text-left">
+        <p className="text-base sm:text-lg text-gray-700 text-left">
           Enter your email address. We'll send you a code to reset password.
         </p>
       </div>
@@ -55,7 +55,7 @@ const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent placeholder:text-base"
+              className="block w-full p-3 border border-gray-150 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent placeholder:text-base"
               placeholder="Enter your email"
               required
             />
