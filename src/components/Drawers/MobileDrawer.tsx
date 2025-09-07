@@ -76,10 +76,10 @@ const MobileDrawer: React.FC<DrawerProps> = ({
 
           <button
             type="submit"
-            className={`w-4/12 flex justify-center py-3 px-5 border border-transparent text-md font-medium rounded-xl text-gray-900 shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] leading-5 ${
+            className={`w-4/12 flex justify-center py-3 px-5 border border-transparent text-base font-medium rounded-xl text-gray-900 shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] leading-5 ${
               !disableRightButton
                 ? "bg-[#90C853] cursor-pointer"
-                : "bg-gray-300 dark:bg-[#2F3232] dark:text-[#8C8E90] cursor-not-allowed"
+                : "bg-gray-150 dark:bg-[#2F3232] dark:text-[#8C8E90] text-gray-400 cursor-not-allowed"
             }`}
             aria-label="rightButtonText"
             onClick={onRightButtonClick || onClose}
