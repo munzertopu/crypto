@@ -9,14 +9,14 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ isDarkMode, onToggle }) => {
   return (
     <button
       onClick={onToggle}
-      className={`relative inline-flex h-[22px] w-[52px] lg:h-7 lg:w-14 items-center rounded-full transition-colors bg-[#E1E3E5]
+      className={`relative inline-flex h-[22px] w-[62px] lg:w-[62px] lg:h-8 md:h-8 lg:w-14 items-center rounded-full transition-colors bg-[#E1E3E5]
         dark:bg-[#2F3232]`}
       role="switch"
       aria-checked={isDarkMode}
       aria-label="Toggle theme"
     >
       <span
-        className={`inline-block h-[18px] w-[18px] lg:h-6 lg:w-6 transform rounded-full transition-transform translate-x-0.5 bg-[#FFFFFF]
+        className={`inline-block h-[18px] w-[18px] md:h-7 md:w-7 transform rounded-full transition-transform translate-x-0.5 bg-[#FFFFFF]
           dark:translate-x-7 dark:bg-[#4D5050]
           `}
       >

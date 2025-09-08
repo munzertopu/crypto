@@ -12,6 +12,7 @@ module.exports = {
       fontSize: {
         // Body
         sm: ["14px", { lineHeight: "18px", letterSpacing: "0px" }], // Small
+        smh: ["14px", { lineHeight: "20px", letterSpacing: "0px" }], // SmallHeight
         base: ["16px", { lineHeight: "20px", letterSpacing: "0.25px" }], // Medium
         lg: ["18px", { lineHeight: "24px", letterSpacing: "0.25px" }], // Large
         caption: ["13px", { lineHeight: "18px", letterSpacing: "0px" }], // Caption

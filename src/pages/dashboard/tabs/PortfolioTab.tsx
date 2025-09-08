@@ -22,7 +22,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
   return (
     <>
       {/* Financial Metrics */}
-      <div className="sm:mx-2 lg:mx-3">
+      <div className="mx-0 md:mx-0 sm:mx-2">
         <FinancialMetrics
           totalValue="$1,500,876"
           totalValueChange="+5.73%"
@@ -35,17 +35,17 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
       </div>
 
       {/* Portfolio Chart */}
-      <div className=" sm:mx-2 lg:mx-3">
+      <div className="mx-0 sm:mx-2 lg:mx-0">
         <PortfolioChart isDarkMode={isDarkMode} chartColor="#90C853" />
       </div>
 
       {/* Horizontal Separator */}
-      <div className="hidden md:block px-4 sm:px-6 lg:px-8 md:my-5">
+      <div className="hidden md:block md:my-5">
         <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
       </div>
 
       {/* KPI Section */}
-      <div className="sm:mx-2 lg:mx-3">
+      <div className="mx-0 md:mx-0 sm:mx-2">
         <KPISection
           income="$200,000"
           incomeChange="+5.73%"
@@ -61,17 +61,17 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
       </div>
 
       {/* Horizontal Separator */}
-      <div className="hidden md:block px-4 sm:px-6 lg:px-8 my-4  md:my-5">
+      <div className="hidden md:block my-4  md:my-5">
         <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
       </div>
 
       {/* Portfolio Allocation */}
-      <div className="sm:mx-2 lg:mx-3">
+      <div className="">
         <PortfolioAllocation isDarkMode={isDarkMode} />
       </div>
 
       {/* Holdings Table */}
-      <div className="sm:mx-2 lg:mx-3">
+      <div className="">
         <HoldingsTable
           isDarkMode={isDarkMode}
           onCryptoClick={(symbol) => navigate(`/crypto/${symbol}`)}

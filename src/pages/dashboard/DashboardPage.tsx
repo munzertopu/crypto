@@ -39,7 +39,8 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0E201E]">
+    <div className="min-h-screen bg-white dark:bg-[#0E201E]
+    ">
       {/* Navigation Bar */}
       <NavigationBar
         userName="Kristin Watson"
@@ -49,11 +50,11 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
       />
 
       {/* Dashboard Content */}
-      <div className="w-full px-4 sm:px-6 md:px-10 ">
+      <div className="px-10 md:px-16 sm:px-6 py-3 md:py-4 w-full">
         {/* Welcome Banner */}
         {showWelcomeBanner && (
           <>
-            <div className="sm:mx-4 md:mx-6">
+            <div>
               <WelcomeBanner
                 userName="Kristin Watson"
                 onClose={handleWelcomeBannerClose}
@@ -61,21 +62,19 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
               />
             </div>
             {/* Horizontal Separator */}
-            <div className="p-2 hidden md:block">
+            <div className="py-2 hidden md:block">
               <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
             </div>
           </>
         )}
 
         {/* Dashboard Header */}
-        <div className="sm:mx-2">
-          <DashboardHeader
-            activeTab={activeTab}
-            onTabChange={handleTabChange}
-            isDarkMode={isDarkMode}
-          />
-        </div>
-        <div className="sm:mx-1 ">
+        <DashboardHeader
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+          isDarkMode={isDarkMode}
+        />
+        <div className="mx-0 md:mx-0 sm:mx-1">
           {/* Portfolio Tab */}
           {activeTab === "Portfolio" && (
             <PortfolioTab isDarkMode={isDarkMode} onAddKPI={handleAddKPI} />

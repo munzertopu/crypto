@@ -94,7 +94,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   }, [isProfileDropdownOpen]);
   return (
     <nav
-      className={`px-4 md:px-10 py-3 md:py-4  bg-white border-b 
+      className={`px-4 md:px-10 py-3 md:py-4 py-3 md:py-4 bg-white border-b 
         dark:bg-[#0E201E] dark:border-[#2F3232] border-gray-150`}
     >
       <div className="flex items-center justify-between">
@@ -106,7 +106,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 screenSize.width < 640 ? "logo-mobile-white.png" : "logo.png"
               }`}
               alt="Portal"
-              className="h-8 w-[34px] md:w-[110px] sm:h-7 lg:h-7 block dark:hidden"
+              className="h-8 w-[34px] md:w-[112px] sm:h-7 lg:h-7 md:h-[32px] block dark:hidden"
             />
             <img
               src={`${
@@ -149,7 +149,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           {/* Desktop Settings Button */}
           <Link to="/settings">
             <button
-              className="hidden lg:block bg-transparent border border-[#E1E3E5] text-[#7C7C7C] px-3 py-1.5 lg:px-2 lg:py-2 rounded-xl
+              className="hidden lg:block bg-transparent border border-[#E1E3E5] text-[#7C7C7C] 
+              px-3 py-1.5 lg:px-2 lg:py-2 rounded-xl
               dark:text-[#B6B8BA] dark:border-[#4D5050]"
               aria-label="Open settings"
             >
@@ -178,8 +179,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           {/* Go Pro Button */}
           <button
             className={`hidden sm:flex items-center space-x-1 sm:space-x-2 bg-transparent border border-[#E1E3E5] px-2 lg:px-3 lg:py-1 rounded-lg text-xs sm:text-sm font-medium
-              dark:text-[#75AE46] dark:border-[#4D5050]
-             `}
+              text-[#5F9339] dark:border-[#4D5050]`}
             aria-label="Upgrade to Pro plan"
           >
             {/* Crown Icon */}
@@ -211,7 +211,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 <img
                   src="/kristin.png"
                   alt={userName}
-                  className="w-11 h-11 rounded-full focus:border-green-400 object-cover md:w-8 md:h-8"
+                  className="w-6 h-6 rounded-full focus:border-green-400 object-cover md:w-6 md:h-6"
                 />
                 <span
                   className={`hidden sm:inline text-xs sm:text-sm lg:text-base text-[#0E201E] 
