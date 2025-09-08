@@ -94,7 +94,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   }, [isProfileDropdownOpen]);
   return (
     <nav
-      className={`py-3 md:py-4 py-3 md:py-4 bg-white border-b 
+      className={`px-4 md:px-10 py-3 md:py-4 py-3 md:py-4 bg-white border-b 
         dark:bg-[#0E201E] dark:border-[#2F3232] border-gray-150`}
     >
       <div className="flex items-center justify-between">
@@ -126,7 +126,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <a
               key={item.name}
               href={item.href}
-              className={`px-1 lg:px-3 py-2 text-sm lg:text-base text-[#0E201E] 
+              className={`py-2 text-sm lg:text-base text-[#0E201E] 
                 dark:text-[#B6B8BA]
                 ${
                   currentPage === item.name.toLowerCase()
