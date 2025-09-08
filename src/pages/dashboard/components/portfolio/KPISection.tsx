@@ -340,90 +340,82 @@ const KPISection: React.FC<KPISectionProps> = ({
           {/* Dropdown Menu */}
           {isDropdownOpen && (
             <div
-              className="absolute right-0 mt-2 w-64 border rounded-lg shadow-lg py-2 z-50 bg-white dark:bg-[#0E201E] border-[#E1E3E5] dark:border-[#4D5050]"
+              className="absolute right-6 mt-2 w-[230px] border rounded-[12px] shadow-lgz-50 bg-white dark:bg-[#0E201E] border-gray-150 dark:border-[#4D5050] z-50"
               role="menu"
               aria-label="KPI selection menu"
             >
-              <div className="px-4 py-2 border-b border-[#E1E3E5] dark:border-[#4D5050]">
-                <Typography
-                  variant="small"
-                  className="font-semibold text-[#0E201E] dark:text-[#F3F5F7]"
-                >
-                  Select KPIs to Display
-                </Typography>
-              </div>
-
-              <div className="py-2">
-                {Object.entries(selectedKPIs).map(([key, isSelected]) => {
-                  const kpiLabels: { [key: string]: string } = {
-                    longTerms: "Long Terms",
-                    shortTerms: "Short Terms",
-                    realizedGains: "Realized Gains",
-                    income: "Income",
-                    unrealizedGains: "Unrealized Gains",
-                    totalTaxLiability: "Total Tax Liability",
-                    capitalLosses: "Capital Losses",
-                    airdropIncome: "Airdrop Income",
-                  };
-
-                  return (
-                    <div
-                      key={key}
-                      className="flex items-center px-4 py-2 hover:bg-[#F3F5F7] dark:hover:bg-[#2F3232] cursor-pointer"
-                      onClick={() => handleKPIToggle(key)}
-                      role="menuitemcheckbox"
-                      aria-checked={isSelected}
-                      aria-label={`Toggle ${kpiLabels[key]} KPI display`}
-                    >
+              <div className="p-5">
+                <div className="flex flex-col justify-start items-start gap-3">
+                  {Object.entries(selectedKPIs).map(([key, isSelected]) => {
+                    const kpiLabels: { [key: string]: string } = {
+                      longTerms: "Long Terms",
+                      shortTerms: "Short Terms",
+                      realizedGains: "Realized Gains",
+                      income: "Income",
+                      unrealizedGains: "Unrealized Gains",
+                      totalTaxLiability: "Total Tax Liability",
+                      capitalLosses: "Capital Losses",
+                      airdropIncome: "Airdrop Income",
+                    };
+                    // hover:bg-[#F3F5F7] dark:hover:bg-[#2F3232]
+                    return (
                       <div
-                        className={`w-5 h-5  border-1 rounded flex items-center justify-center mr-2 transition-colors border-[#90C853] ${
-                          isSelected ? "bg-white dark:bg-[#5F9339]" : ""
-                        }`}
+                        key={key}
+                        className="flex items-center justify-start cursor-pointer gap-3 w-full"
+                        onClick={() => handleKPIToggle(key)}
+                        role="menuitemcheckbox"
+                        aria-checked={isSelected}
+                        aria-label={`Toggle ${kpiLabels[key]} KPI display`}
                       >
-                        {isSelected && (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={2}
-                            stroke="currentColor"
-                            className="size-6 text-[#4f801cff]"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m4.5 12.75 6 6 9-13.5"
-                            />
-                          </svg>
-                        )}
+                        <div
+                          className={`w-5 h-5 border-2 flex items-center justify-center rounded-[4px]  transition-colors border-[#90C853] ${
+                            isSelected
+                              ? "bg-white dark:bg-[#5F9339]"
+                              : "border-[rgba(124,124,124,0.15)]"
+                          }`}
+                        >
+                          {isSelected && (
+                            <svg
+                              width="12"
+                              height="8"
+                              viewBox="0 0 12 8"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M1.5 4L4.49647 7L10.5 1"
+                                stroke="#90C853"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+                          )}
+                        </div>
+                        <span className="text-[#0E201E] dark:text-[#F3F5F7] text-base  opacity-80">
+                          {kpiLabels[key]}
+                        </span>
                       </div>
-                      <Typography
-                        variant="small"
-                        className="text-[#0E201E] dark:text-[#F3F5F7]"
-                      >
-                        {kpiLabels[key]}
-                      </Typography>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex justify-between px-4 py-2 border-t border-[#E1E3E5] dark:border-[#4D5050]">
-                <button
-                  onClick={handleCancel}
-                  className="px-3 py-1 text-sm font-medium rounded-md transition-colors text-[#7C7C7C] dark:text-[#B6B8BA]"
-                  aria-label="Cancel KPI selection"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleSave}
-                  className="px-3 py-1 text-sm font-medium text-[#0E201E] bg-[#5F9339] rounded-md transition-colors"
-                  aria-label="Save KPI selection"
-                >
-                  Save
-                </button>
+                    );
+                  })}
+                </div>
+                {/* Action Buttons */}
+                <div className="flex justify-between pt-5 ">
+                  <button
+                    onClick={handleCancel}
+                    className="py-1.5 text-sm font-medium rounded-[10px] transition-colors text-gray-700 dark:text-[#B6B8BA]"
+                    aria-label="Cancel KPI selection"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleSave}
+                    className="min-w-[61px] py-1.5 px-2.5 bg-green-500 shadow-xs text-sm font-medium rounded-[10px] transition-colors text-gray-900 dark:text-[#B6B8BA]"
+                    aria-label="Save KPI selection"
+                  >
+                    Save
+                  </button>
+                </div>
               </div>
             </div>
           )}
