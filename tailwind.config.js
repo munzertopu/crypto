@@ -50,6 +50,9 @@ module.exports = {
           400: "#B3E277",
           500: "#90c853",
         },
+        error: {
+          500: "#d8382c",
+        },
       },
       fontFamily: {
         sans: [

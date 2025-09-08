@@ -202,6 +202,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
     </tr>
   );
 
+  console.log("data:", data);
   return (
     <div className="md:px-8 mb-6 mt-5 sm:mt-0">
       <Card className={`h-full w-full border-transparent bg-transparent `}>
@@ -512,9 +513,18 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
               <span className="text-lg font-semibold text-[#0E201E] dark:text-[#F3F5F7]">
                 {selectedRow?.wallet.name}
               </span>
-              <span className="text-lg font-semibold  text-green-600">
-                {selectedRow?.received}
-              </span>
+              <div className="flex justify-start items-center gap-2">
+                <span className="text-lg font-semibold  text-error-500">
+                  {selectedRow?.sent}
+                </span>
+                {selectedRow?.sent !== "" && selectedRow?.received !== "" && (
+                  <span className=" flex-shrink-0 w-[2px] h-4 bg-gray-150 dark:bg-[#8C8E90]"></span>
+                )}
+
+                <span className="text-lg font-semibold  text-green-600">
+                  {selectedRow?.received}
+                </span>
+              </div>
             </div>
           </div>
           <div className="flex flex-col gap-5 w-full">
@@ -528,17 +538,38 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                 </span>
               </div>
             </div>
-            <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-            <div className="flex flex-col justify-start items-start w-full px-4">
-              <div className="flex justify-between items-center w-full ">
-                <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
-                  Receive Amount:
-                </span>
-                <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
-                  {selectedRow?.received}
-                </span>
-              </div>
-            </div>
+
+            {selectedRow?.sent !== "" && (
+              <>
+                <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+                <div className="flex flex-col justify-start items-start w-full px-4">
+                  <div className="flex justify-between items-center w-full ">
+                    <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                      Sent Amount:
+                    </span>
+                    <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                      {selectedRow?.sent}
+                    </span>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {selectedRow?.received !== "" && (
+              <>
+                <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+                <div className="flex flex-col justify-start items-start w-full px-4">
+                  <div className="flex justify-between items-center w-full ">
+                    <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                      Receive Amount:
+                    </span>
+                    <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                      {selectedRow?.received}
+                    </span>
+                  </div>
+                </div>
+              </>
+            )}
             <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
             <div className="flex flex-col justify-start items-start w-full px-4">
               <div className="flex justify-between items-center w-full ">

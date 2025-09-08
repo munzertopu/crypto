@@ -917,10 +917,10 @@ const Filter: React.FC<FilterProps> = ({
                       }`}
                     >
                       <div
-                        className={`w-5 h-5 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                        className={`w-5 h-5 border-2 rounded flex mr-3 items-center justify-center  transition-colors ${
                           isSelected
                             ? "bg-[#90C853] border-[#90C853]"
-                            : "border-gray-300"
+                            : "border-gray-150"
                         }`}
                       >
                         {isSelected && (
