@@ -39,8 +39,10 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0E201E]
-    ">
+    <div
+      className="min-h-screen bg-white dark:bg-[#0E201E]
+    "
+    >
       {/* Navigation Bar */}
       <NavigationBar
         userName="Kristin Watson"
@@ -50,7 +52,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
       />
 
       {/* Dashboard Content */}
-      <div className="px-10 md:px-16 sm:px-6 py-3 md:py-4 w-full">
+      <div className="px-4 md:px-10 sm:px-6 md:py-3 md:py-4 w-full">
         {/* Welcome Banner */}
         {showWelcomeBanner && (
           <>
