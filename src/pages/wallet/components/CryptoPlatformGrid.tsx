@@ -77,7 +77,7 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedPlatform("");
+
     setOpenConfigure(false);
   };
 
@@ -87,6 +87,7 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
 
   const handleCloseNotification = () => {
     setShowNotification(false);
+    setSelectedPlatform("");
   };
   const cryptoPlatforms: CryptoPlatform[] = [
     {
@@ -212,10 +213,10 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
             isDarkMode={isDarkMode}
           >
             <div
-              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity justify-center rounded-[12px] px-6 py-2 sm:px-0 sm:py-0 border border-gray-150 dark:border-[#B6B8BA]"
+              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity justify-center rounded-[12px] px-6 py-2 sm:px-6 sm:py-4 border border-gray-150 dark:border-[#B6B8BA]"
               onClick={() => handlePlatformClick(platform.name)}
             >
-              <div className="relative my-6">
+              <div className="relative my-6 sm:my-0 sm:mb-4">
                 <div
                   className={`max-w-15 max-h-15 rounded-full flex items-center justify-center`}
                 >
