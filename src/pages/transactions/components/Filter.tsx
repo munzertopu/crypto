@@ -8,7 +8,7 @@ import {
   faCheck,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import { Tabs } from "@material-tailwind/react";
+import { Input, Tabs } from "@material-tailwind/react";
 import Datepicker from "react-tailwindcss-datepicker";
 import AmountRangeDropdown from "../../../components/AmountRangeDropdown";
 import { Accordion, AccordionItem } from "../../../components/Accordion";
