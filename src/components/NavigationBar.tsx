@@ -115,7 +115,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   : "logo-dark.png"
               }`}
               alt="Portal"
-              className="h-6 sm:h-7 lg:h-7 w-auto hidden dark:block"
+              className="h-8 w-[34px] md:w-[112px] sm:h-7 lg:h-7 md:h-[32px] hidden dark:block"
             />
           </Link>
         </div>
@@ -126,7 +126,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <a
               key={item.name}
               href={item.href}
-              className={`opacity-80 px-1 lg:px-3 py-2 text-sm lg:text-base text-gray-900
+              className={`opacity-80 px-1 lg:px-0 py-2 text-sm lg:text-base text-gray-900
                 dark:text-[#B6B8BA]
                 ${
                   currentPage === item.name.toLowerCase()
@@ -176,27 +176,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             </button>
           </Link>
 
-          {/* Go Pro Button */}
-          {/* <button
-            className={`hidden sm:flex items-center space-x-1 sm:space-x-2 bg-transparent border border-[#E1E3E5] px-2 lg:px-3 lg:py-1 rounded-lg text-xs sm:text-sm font-medium
-              text-[#5F9339] dark:border-[#4D5050]`}
-            aria-label="Upgrade to Pro plan"
-          >
-         
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 256 256"
-              fill="currentColor"
-              className="size-6"
-            >
-              <path d="M230.9,73.6A15.85,15.85,0,0,0,212,77.39l-33.67,36.29-35.8-80.29a1,1,0,0,1,0-.1,16,16,0,0,0-29.06,0,1,1,0,0,1,0,.1l-35.8,80.29L44,77.39A16,16,0,0,0,16.25,90.81c0,.11,0,.21.07.32L39,195a16,16,0,0,0,15.72,13H201.29A16,16,0,0,0,217,195L239.68,91.13c0-.11,0-.21.07-.32A15.85,15.85,0,0,0,230.9,73.6ZM201.35,191.68l-.06.32H54.71l-.06-.32L32,88l.14.16,42,45.24a8,8,0,0,0,13.18-2.18L128,40l40.69,91.25a8,8,0,0,0,13.18,2.18l42-45.24L224,88Z" />
-            </svg>
-            <span className="hidden lg:inline text-lg lg:text-base font-normal text-[#5F9339] dark:text-[#75AE46]">
-              Go Pro
-            </span>
-          </button> */}
           <button
-            className={`hidden  md:flex items-center justify-center gap-1.5 bg-transparent border border-[#90c853] px-5 py-2.5 rounded-[12px] text-sm
+            className={`hidden  md:flex items-center justify-center gap-1.5 bg-transparent border border-gray-150 px-5 py-2.5 rounded-[12px] text-sm
              text-[#75AE46] dark:border-[#4D5050]
              `}
             aria-label="Upgrade to Pro plan"
@@ -242,7 +223,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 <img
                   src="/kristin.png"
                   alt={userName}
-                  className="w-11 h-11 rounded-full focus:border-green-400 object-cover md:w-6 md:h-6"
+                  className="w-8 h-8 rounded-full focus:border-green-400 object-cover md:w-6 md:h-6"
                 />
                 <span
                   className={`hidden sm:inline text-xs sm:text-sm lg:text-base text-[#0E201E] 

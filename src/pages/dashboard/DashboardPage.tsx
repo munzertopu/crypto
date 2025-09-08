@@ -52,7 +52,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
       />
 
       {/* Dashboard Content */}
-      <div className="px-4 md:px-10 sm:px-6  w-full">
+      <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full">
         {/* Welcome Banner */}
         {showWelcomeBanner && (
           <>
@@ -64,7 +64,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
               />
             </div>
             {/* Horizontal Separator */}
-            <div className="py-2 hidden md:block">
+            <div className="py-5 hidden md:block">
               <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
             </div>
           </>
