@@ -97,7 +97,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         </div>
       </div>
       {/* Tabs */}
-      <div className="border-gray-200 dark:border-gray-700 mt-2 mb-2 md:mb-8 sm:mt-0">
+      <div className="mt-4  border-gray-200 dark:border-gray-700  md:mb-8 sm:mt-0">
         <Tabs>
           <Tabs.List className="p-1 bg-[#F3F5F7] dark:bg-[#2F3232] rounded-xl">
             {tabs.map((tab) => (

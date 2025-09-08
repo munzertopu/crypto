@@ -196,7 +196,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             </span>
           </button> */}
           <button
-            className={`flex items-center justify-center gap-1.5 bg-transparent border border-[#90c853] px-5 py-2.5 rounded-[12px] text-sm
+            className={`hidden  md:flex items-center justify-center gap-1.5 bg-transparent border border-[#90c853] px-5 py-2.5 rounded-[12px] text-sm
              text-[#75AE46] dark:border-[#4D5050]
              `}
             aria-label="Upgrade to Pro plan"
@@ -242,7 +242,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 <img
                   src="/kristin.png"
                   alt={userName}
-                  className="w-6 h-6 rounded-full focus:border-green-400 object-cover md:w-6 md:h-6"
+                  className="w-11 h-11 rounded-full focus:border-green-400 object-cover md:w-6 md:h-6"
                 />
                 <span
                   className={`hidden sm:inline text-xs sm:text-sm lg:text-base text-[#0E201E] 
