@@ -20,7 +20,7 @@ interface NFTGridProps {
 
 const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
   return (
-    <div className="mx-8">
+    <div className="mx-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredNFTs.map((nft) => (
           <div
@@ -53,11 +53,11 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
                     <span
-                      className="text-sm font-medium text-gray-600 dark:text-gray-400"
+                      className="text-sm text-left font-medium text-gray-600 dark:text-gray-400"
                     >
                       Estimated Current Value:
                     </span>
-                    <svg
+                    {/* <svg
                       className="w-4 h-4 text-gray-400"
                       fill="none"
                       stroke="currentColor"
@@ -76,7 +76,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
                         strokeWidth={2}
                         d="M12 9v2m0 4h.01"
                       />
-                    </svg>
+                    </svg> */}
                   </div>
                   <span
                     className="font-semibold text-sm text-gray-900 dark:text-white"

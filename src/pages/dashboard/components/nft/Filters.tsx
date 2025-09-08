@@ -85,7 +85,7 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   return (
-    <div className="mx-8 my-8">
+    <div className="mx-8 md:mx-6 my-8">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
         {/* Search Bar - 1/3 width */}
         <div>
@@ -144,7 +144,7 @@ const Filters: React.FC<FiltersProps> = ({
 
           <div className="flex-1 relative my-4">
             <div
-              className="w-full sm:w-[200px] px-3 py-3 flex items-center justify-between cursor-pointer rounded-lg border text-base bg-transparent border-gray-300 text-[#0E201E] 
+              className="w-full sm:w-[200px] px-3 py-3 flex items-center justify-between cursor-pointer rounded-lg border text-base bg-transparent border-[#E1E3E5] text-[#0E201E] 
                 dark:border-[#4D5050] dark:text-white"
               onClick={() => setShowGainDropdown(!showGainDropdown)}
             >

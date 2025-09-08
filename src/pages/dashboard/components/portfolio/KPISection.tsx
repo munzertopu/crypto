@@ -307,7 +307,7 @@ const KPISection: React.FC<KPISectionProps> = ({
   }, [isDropdownOpen]);
 
   return (
-    <div className="mb-8 md:mb-0 md:py-6">
+    <div className="mb-8 md:mb-0 md:px-6">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#E1E3E5] py-2.5">
           KPI
@@ -421,11 +421,8 @@ const KPISection: React.FC<KPISectionProps> = ({
           )}
         </div>
       </div>
-      {/* sm:divide-x */}
-      {/* grid gap-8
-    grid-cols-[repeat(auto-fit,minmax(220px,1fr))] */}
       <div
-        className={`grid grid-cols-2 gap-4 sm:gap-8 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
+        className={`grid grid-cols-2 gap-4 sm:gap-8 md:gap-0 md:mr-9 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
       >
         <KPICard
           title="Income"

@@ -66,7 +66,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   };
 
   return (
-    <div className="sm:px-4 lg:px-6 lg:pt-4 md:pb-8 pt-8">
+    <div className="sm:px-4 lg:px-6 lg:pt-0 md:pb-8 pt-8">
       <div className="flex flex-row items-center justify-between gap-4 ">
         {/* Title */}
         <h4
@@ -77,7 +77,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
 
         {/* Date Range Selector */}
         <div
-          className={`max-w-[190px] flex items-center rounded-xl border py-2.5 px-4 shadow-sm w-full sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]`}
+          className={`max-w-[190px] flex items-center rounded-xl border py-2.5 md:py-1 px-4 shadow-sm w-full sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]`}
         >
           <Datepicker
             displayFormat="DD MMM YYYY"
@@ -90,14 +90,14 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
               shortcuts: createShortcuts(),
             }}
             primaryColor="green"
-            inputClassName={`w-full rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base  placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white`}
+            inputClassName={`w-full rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base md:text-sm placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white`}
             containerClassName="relative pr-6"
             toggleClassName={`absolute rounded-r-lg px-0 right-0 top-0 h-fulltext-gray-800 dark:text-white`}
           />
         </div>
       </div>
       {/* Tabs */}
-      <div className="mt-4  border-gray-200 dark:border-gray-700  md:mb-8 sm:mt-0">
+      <div className="mt-4 md:mt-5 border-gray-200 dark:border-gray-700 md:mb-0 sm:mt-0">
         <Tabs>
           <Tabs.List className="p-1 bg-[#F3F5F7] dark:bg-[#2F3232] rounded-xl">
             {tabs.map((tab) => (
@@ -105,7 +105,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                 key={tab}
                 value={tab}
                 onClick={() => onTabChange?.(tab)}
-                className={`px-1.5 sm:px-5 py-2.5 sm:py-2 rounded-lg sm:rounded-xl text-smh sm:text-lg ${
+                className={`px-1.5 sm:px-5 md:px-2.5 py-2.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl text-smh sm:text-smh md:smh ${
                   activeTab === tab
                     ? "bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white"
                     : "text-gray-900 dark:text-[#FFFFFF] opacity-75"
