@@ -174,10 +174,6 @@ const LoginPage: React.FC<LoginPageProps> = ({
                 showPassword ? "Hide password field" : "Show password field"
               }
             >
-              {/* <FontAwesomeIcon
-                icon={showPassword ? faEye : faEyeSlash}
-                className="h-5 w-5 text-gray-400 hover:text-gray-600 transition-colors"
-              /> */}
               {showPassword ? (
                 <svg
                   width="24"
