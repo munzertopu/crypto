@@ -132,7 +132,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
               htmlFor="password"
               className="text-sm font-medium text-gray-700 my-0"
             >
-              Password <span className="text-red-500">*</span>
+              Password
             </label>
             <button
               type="button"
