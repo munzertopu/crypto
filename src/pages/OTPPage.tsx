@@ -114,7 +114,7 @@ const OTPPage: React.FC<OTPPageProps> = ({
           <button
             type="submit"
             disabled={!isOTPComplete}
-            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors ${
+            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-base font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors ${
               isOTPComplete ? "opacity-100" : "opacity-50 cursor-not-allowed"
             }`}
             style={{ backgroundColor: isOTPComplete ? "#75AE46" : "#9CA3AF" }}
@@ -123,36 +123,6 @@ const OTPPage: React.FC<OTPPageProps> = ({
             Verify Code
           </button>
         </div>
-
-        {/* Resend Code Link */}
-        {/* <div className="text-center">
-              <p className="text-sm text-gray-600">
-                Didn't receive the code?{' '}
-                <button 
-                  type="button"
-                  onClick={handleResendCode}
-                  className="font-medium hover:text-green-500 focus:outline-none"
-                  style={{color: '#75AE46'}}
-                >
-                  Get a code
-                </button>
-              </p>
-            </div> */}
-
-        {/* Back to Login Link */}
-        {/* <div className="text-center">
-              <p className="text-sm text-gray-600">
-                Remember your password?{' '}
-                <button 
-                  type="button"
-                  onClick={onBackToLogin}
-                  className="font-medium hover:text-green-500 focus:outline-none"
-                  style={{color: '#75AE46'}}
-                >
-                  Back to login
-                </button>
-              </p>
-            </div> */}
       </form>
     </AuthLayout>
   );

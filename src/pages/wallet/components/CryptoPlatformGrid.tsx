@@ -25,7 +25,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, isDarkMode }) => {
       {children}
       {isVisible && (
         <div
-          className={`absolute z-50 px-3 py-2 text-md font-medium rounded-lg shadow-lg whitespace-nowrap ${
+          className={`absolute z-50 px-3 py-2 text-base font-medium rounded-lg shadow-lg whitespace-nowrap ${
             isDarkMode ? "bg-[#2F3232] text-white" : "bg-[#0E201E] text-white"
           }`}
           style={{

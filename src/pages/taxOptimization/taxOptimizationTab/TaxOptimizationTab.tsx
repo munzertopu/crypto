@@ -151,14 +151,14 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                    <th>
                    </th>
                    <th className='py-2'>
-                     <span className={`text-md px-2 py-1 rounded-lg font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#5F9339] bg-[#E3F3C7]"}`}>
+                     <span className={`text-base px-2 py-1 rounded-lg font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#5F9339] bg-[#E3F3C7]"}`}>
                        Short term
                      </span>
                    </th>
                    <th>
                    </th>
                    <th className='py-2'>
-                     <span className={`text-md px-2 py-1 rounded-lg font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#8C5DF3] bg-[#8C5DF31F]"}`}>
+                     <span className={`text-base px-2 py-1 rounded-lg font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#8C5DF3] bg-[#8C5DF31F]"}`}>
                        Long term
                      </span>
                    </th>

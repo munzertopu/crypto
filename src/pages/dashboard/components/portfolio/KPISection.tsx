@@ -37,7 +37,7 @@ const KPICard: React.FC<KPICardProps> = ({
         ) : (
           <FontAwesomeIcon
             icon={icon}
-            className="text-[#0E201E] dark:text-[#CDCFD1] text-md"
+            className="text-[#0E201E] dark:text-[#CDCFD1] text-base"
           />
         )}
       </div>

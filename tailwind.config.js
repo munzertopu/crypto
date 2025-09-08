@@ -22,7 +22,7 @@ module.exports = {
         h4: ["24px", { lineHeight: "32px", letterSpacing: "0px" }],
         h3: ["28px", { lineHeight: "36px", letterSpacing: "-0.25px" }],
         h2: ["32px", { lineHeight: "40px", letterSpacing: "-0.25px" }],
-        h1: ["30px", { lineHeight: "48px", letterSpacing: "-0.25px" }],
+        h1: ["36px", { lineHeight: "48px", letterSpacing: "-0.25px" }],
       },
       colors: {
         gray: {

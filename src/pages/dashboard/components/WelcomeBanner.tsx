@@ -70,7 +70,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             <div className="flex flex-col md:flex-row justify-start items-start md:items-center gap-2">
               {" "}
               <span
-                className={`text-sm sm:text-base lg:text-md font-medium text-gray-900  dark:text-[#B6B8BA]`}
+                className={`text-sm sm:text-base lg:text-base font-medium text-gray-900  dark:text-[#B6B8BA]`}
               >
                 Getting started is as easy as:
               </span>
@@ -85,7 +85,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                     </span>
                   </div>
                   <span
-                    className={` lg:text-md  opacity-80 text-[#0E201E] 
+                    className={` lg:text-base  opacity-80 text-[#0E201E] 
                   dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
                   >
                     Connect Exchanges & Wallets
@@ -101,7 +101,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                     </span>
                   </div>
                   <span
-                    className={` lg:text-md  opacity-80 text-[#0E201E] 
+                    className={` lg:text-base  opacity-80 text-[#0E201E] 
                   dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
                   >
                     Reconcile Trades
@@ -117,7 +117,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                     </span>
                   </div>
                   <span
-                    className={` lg:text-md  opacity-80 text-[#0E201E] 
+                    className={` lg:text-base  opacity-80 text-[#0E201E] 
                   dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
                   >
                     Run Tax Reports

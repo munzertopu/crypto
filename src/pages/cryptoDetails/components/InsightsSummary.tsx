@@ -109,7 +109,7 @@ const InsightsSummary: React.FC<InsightsSummaryProps> = ({
                    </div>
                  </div>
                  
-                 <h4 className="text-md font-semibold mb-2 text-[#0E201E] dark:text-[#E1E3E5]">
+                 <h4 className="text-base font-semibold mb-2 text-[#0E201E] dark:text-[#E1E3E5]">
                    {card.title}
                  </h4>
                  

@@ -68,7 +68,7 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
         {/* Content */}
         <div className="px-6">
           {/* Introductory Text */}
-          <Typography variant="small" className={`text-md text-left mb-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <Typography variant="small" className={`text-base text-left mb-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
             Fill in the details for the missing price on {platformText}.
           </Typography>
 

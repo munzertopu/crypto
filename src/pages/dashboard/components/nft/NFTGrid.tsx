@@ -87,7 +87,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
 
                 <div className="flex justify-between items-center">
                   <span
-                    className="text-md font-semibold text-gray-600 dark:text-gray-400"
+                    className="text-base font-semibold text-gray-600 dark:text-gray-400"
                   >
                     Gain/Loss:
                   </span>
@@ -111,10 +111,10 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
                   <div className="flex items-center gap-1 border border-[#E1E3E5] dark:border-[#4D5050] rounded-full px-2 py-1 bg-[#F3F5F7] dark:bg-[#2F3232]">
                     <FontAwesomeIcon
                       icon={faCalendarAlt}
-                      className="text-md text-gray-500 dark:text-gray-400"
+                      className="text-base text-gray-500 dark:text-gray-400"
                     />
                     <span
-                      className="text-md font-semibold text-gray-600 dark:text-gray-400"
+                      className="text-base font-semibold text-gray-600 dark:text-gray-400"
                     >
                       {nft.purchaseDate}
                     </span>

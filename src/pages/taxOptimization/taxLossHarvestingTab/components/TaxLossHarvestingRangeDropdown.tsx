@@ -29,7 +29,7 @@ const TaxLossHarvestingRangeDropdown: React.FC<TaxLossHarvestingRangeDropdownPro
   return (
     <div className="relative">
       <button
-        className={`flex items-center space-x-8 px-4 py-3 border border-gray-300 rounded-xl text-md hover:bg-gray-50 transition-colors ${
+        className={`flex items-center space-x-8 px-4 py-3 border border-gray-300 rounded-xl text-base hover:bg-gray-50 transition-colors ${
           isDarkMode ? 'text-gray-300 border-gray-600 hover:bg-gray-700' : 'text-[#0E201E]'
         }`}
         onClick={() => setIsOpen(!isOpen)}

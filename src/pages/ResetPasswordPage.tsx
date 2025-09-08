@@ -67,7 +67,7 @@ const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({
           <button
             type="submit"
             disabled={!isEmailValid}
-            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors ${
+            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-base font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors ${
               isEmailValid ? "opacity-100" : "opacity-50 cursor-not-allowed"
             }`}
             style={{

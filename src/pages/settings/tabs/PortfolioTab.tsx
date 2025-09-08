@@ -149,7 +149,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
               type="text"
               value={formData.fullName}
               onChange={(e) => handleInputChange('fullName', e.target.value)}
-              className={`text-md ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
             />
           </div>
           <div>
@@ -160,7 +160,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
               type="email"
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
-              className={`text-md ${isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className={`text-base ${isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-[#E1E3E5]'}`}
             />
           </div>
         </div>
