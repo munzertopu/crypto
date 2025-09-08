@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import AuthLayout from "../components/layouts/AuthLayout";
 
 interface LoginPageProps {
@@ -9,29 +7,80 @@ interface LoginPageProps {
   onLoginSuccess?: () => void;
 }
 
+interface FormErrors {
+  email?: string;
+  password?: string;
+}
+
 const LoginPage: React.FC<LoginPageProps> = ({
   onSignUpClick,
   onForgotPasswordClick,
   onLoginSuccess,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  // Email validation function
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Form validation function
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+
+    // Email validation
+    if (!email.trim()) {
+      newErrors.email = "*Email field cannot be blank";
+    } else if (!validateEmail(email)) {
+      newErrors.email = "*Please enter a valid email address";
+    }
+
+    // Password validation
+    if (!password.trim()) {
+      newErrors.password = "*Password field cannot be blank";
+    }
+    else if (password !== "123456") {
+      newErrors.password = "Wrong password. Try again or reset password";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Clear specific field error when user starts typing
+  const clearFieldError = (field: keyof FormErrors) => {
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: undefined }));
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
     console.log("Login attempt:", { email, password });
 
     // Simulate login success - in real app, this would validate credentials
-    if (email && password) {
+    setTimeout(() => {
+      setIsSubmitting(false);
       if (onLoginSuccess) {
         onLoginSuccess();
       }
-    }
+    }, 1000);
   };
 
   return (
@@ -40,7 +89,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
         <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left">
           Login
         </h1>
-        <p className="text-base sm:text-lg text-gray-800 text-left">
+        <p className="text-base text-md sm:text-lg text-gray-800 text-left">
           Access your crypto tax tools securely.
         </p>
       </div>
@@ -60,11 +109,20 @@ const LoginPage: React.FC<LoginPageProps> = ({
             id="email"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="block w-full my-1 py-2 px-4 border border-gray-150 rounded-xl focus:outline-none placeholder:text-base"
+            onChange={(e) => {
+              setEmail(e.target.value);
+              clearFieldError('email');
+            }}
+            className={`block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none placeholder:text-base ${
+              errors.email 
+                ? 'border-red-500 focus:border-red-500' 
+                : 'border-gray-150 focus:border-green-500'
+            }`}
             placeholder="Enter your email"
-            required
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+          )}
         </div>
 
         {/* Password Field */}
@@ -74,7 +132,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
               htmlFor="password"
               className="text-sm font-medium text-gray-700 my-0"
             >
-              Password
+              Password <span className="text-red-500">*</span>
             </label>
             <button
               type="button"
@@ -97,10 +155,16 @@ const LoginPage: React.FC<LoginPageProps> = ({
               id="password"
               type={showPassword ? "text" : "password"}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="block w-full my-1 py-2 px-4 border border-gray-150 rounded-xl focus:outline-none"
+              onChange={(e) => {
+                setPassword(e.target.value);
+                clearFieldError('password');
+              }}
+              className={`block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none ${
+                errors.password 
+                  ? 'border-red-500 focus:border-red-500' 
+                  : 'border-gray-150 focus:border-green-500'
+              }`}
               placeholder="Type a password"
-              required
             />
             <button
               type="button"
@@ -192,17 +256,35 @@ const LoginPage: React.FC<LoginPageProps> = ({
               )}
             </button>
           </div>
+          {errors.password && (
+            <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+          )}
         </div>
 
         {/* Sign In Button */}
         <div className="mt-6 mb-4">
           <button
             type="submit"
-            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-lg"
+            disabled={isSubmitting}
+            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-lg transition-colors ${
+              isSubmitting 
+                ? 'opacity-50 cursor-not-allowed' 
+                : 'hover:opacity-90'
+            }`}
             style={{ backgroundColor: "#90C853", color: "black" }}
             aria-label="Sign in to account"
           >
-            Login
+            {isSubmitting ? (
+              <div className="flex items-center">
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Logging in...
+              </div>
+            ) : (
+              'Login'
+            )}
           </button>
         </div>
 
