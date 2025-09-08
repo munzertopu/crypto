@@ -9,6 +9,21 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      fontSize: {
+        // Body
+        sm: ["14px", { lineHeight: "18px", letterSpacing: "0px" }], // Small
+        base: ["16px", { lineHeight: "20px", letterSpacing: "0.25px" }], // Medium
+        lg: ["18px", { lineHeight: "24px", letterSpacing: "0.25px" }], // Large
+        caption: ["13px", { lineHeight: "18px", letterSpacing: "0px" }], // Caption
+
+        // Headings
+        h6: ["20px", { lineHeight: "24px", letterSpacing: "0px" }],
+        h5: ["22px", { lineHeight: "32px", letterSpacing: "0px" }],
+        h4: ["24px", { lineHeight: "32px", letterSpacing: "0px" }],
+        h3: ["28px", { lineHeight: "36px", letterSpacing: "-0.25px" }],
+        h2: ["32px", { lineHeight: "40px", letterSpacing: "-0.25px" }],
+        h1: ["30px", { lineHeight: "48px", letterSpacing: "-0.25px" }],
+      },
       colors: {
         gray: {
           0: "#FFFFFF",
@@ -27,6 +42,16 @@ module.exports = {
         },
         info: {
           500: "#2186D7",
+        },
+        success: {
+          500: "#419F45",
+        },
+        green: {
+          400: "#B3E277",
+          500: "#90c853",
+        },
+        error: {
+          500: "#d8382c",
         },
       },
       fontFamily: {

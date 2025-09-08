@@ -8,6 +8,7 @@ import {
   faBolt,
   faBriefcase,
 } from "@fortawesome/free-solid-svg-icons";
+import useScreenSize from "../../../../hooks/useScreenSize";
 
 interface MetricItemProps {
   title: string;
@@ -56,7 +57,7 @@ const MetricItem: React.FC<MetricItemProps> = ({
       </div>
       <div className="flex items-center ">
         <span
-          className={`text-base sm:text-xl lg:text-2xl font-medium md:font-semibold text-gray-900 dark:text-[#B6B8BA] opacity-80`}
+          className={`text-base md:text-lg font-medium md:font-semibold text-gray-900 dark:text-[#B6B8BA] opacity-80`}
         >
           {title}
         </span>
@@ -87,11 +88,11 @@ const MetricItem: React.FC<MetricItemProps> = ({
           : "flex-col gap-1 sm:flex-row"
       }  items-start  sm:items-end sm:gap-2  `}
     >
-      <span className="text-xl sm:text-[32px] font-semibold text-gray-900 dark:text-[#B6B8BA]">
+      <span className="text-xl md:text-[32px] font-semibold text-gray-900 dark:text-[#B6B8BA]">
         {value}
       </span>
       <span
-        className={`text-[13px] sm:text-sm font-semibold ${
+        className={`text-caption sm:text-sm font-semibold ${
           isPositive ? "text-[#5F9339]" : "text-[#D8382C]"
         }`}
       >
@@ -286,12 +287,14 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
   const [isUnrealizedGainDropdownOpen, setIsUnrealizedGainDropdownOpen] =
     useState(false);
 
+  const screenSize = useScreenSize();
+
   const handleUnrealizedGainDropdownToggle = () => {
     setIsUnrealizedGainDropdownOpen(!isUnrealizedGainDropdownOpen);
   };
 
   return (
-    <div className="sm:px-4 lg:px-8 mb-4 sm:mb-6 pt-4 sm:pt-0">
+    <div className="md:px-2 mb-4 sm:mb-6 pt-4 sm:pt-0">
       <div className="bg-transparent">
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
           {/* Left Section - Total Value */}
@@ -309,9 +312,9 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
           {/* Horizontal Separator */}
 
           <div
-            className={`w-full h-px lg:hidden ${
-              isDarkMode ? "bg-gray-700" : "bg-gray-200"
-            }`}
+            className={`w-full h-px lg:hidden 
+            dark:bg-gray-700  bg-gray-150
+            `}
           ></div>
 
           {/* Right Section - Cost Basic and Unrealized Gain */}
@@ -335,7 +338,7 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
                 change={unrealizedGainChange}
                 isPositive={unrealizedGainChange.startsWith("+")}
                 svgIcon={unrealizedGainSvg}
-                showDropdown={true}
+                showDropdown={screenSize.width >= 1024 ? true : false}
                 onDropdownToggle={handleUnrealizedGainDropdownToggle}
                 isDropdownOpen={isUnrealizedGainDropdownOpen}
                 isDarkMode={isDarkMode}

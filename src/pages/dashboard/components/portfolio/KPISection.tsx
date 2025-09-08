@@ -55,7 +55,7 @@ const KPICard: React.FC<KPICardProps> = ({
         {value}
       </span>
       <span
-        className={`text-[13px] sm:text-sm font-semibold ${
+        className={`text-caption sm:text-sm font-semibold ${
           isPositive ? "text-[#5F9339]" : "text-[#D8382C]"
         }`}
       >
@@ -307,7 +307,7 @@ const KPISection: React.FC<KPISectionProps> = ({
   }, [isDropdownOpen]);
 
   return (
-    <div className="sm:px-8 mb-6 mt-12">
+    <div className="mb-8 md:mb-0 md:py-6 md:pl-6 md:pr-[60px]">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#E1E3E5]">
           KPI
@@ -316,7 +316,7 @@ const KPISection: React.FC<KPISectionProps> = ({
           {/* Add KPI Button with Dropdown */}
           <button
             onClick={handleDropdownToggle}
-            className="p-2 md:p-4 text-[#7C7C7C] dark:text-[#B6B8BA] border-[#E1E3E5] dark:border-[#4D5050] rounded-[8px] md:rounded-[12px] bg-transparent flex items-center justify-center border"
+            className="p-2 md:p-3 text-[#7C7C7C] dark:text-[#B6B8BA] border-[#E1E3E5] dark:border-[#4D5050] rounded-[8px] md:rounded-[12px] bg-transparent flex items-center justify-center border"
             aria-label="Add KPI"
             aria-expanded={isDropdownOpen}
             aria-haspopup="true"
@@ -376,7 +376,7 @@ const KPISection: React.FC<KPISectionProps> = ({
                       aria-label={`Toggle ${kpiLabels[key]} KPI display`}
                     >
                       <div
-                        className={`w-5 h-5  border-2 rounded flex items-center justify-center mr-2 transition-colors border-[#90C853] ${
+                        className={`w-5 h-5  border-1 rounded flex items-center justify-center mr-2 transition-colors border-[#90C853] ${
                           isSelected ? "bg-white dark:bg-[#5F9339]" : ""
                         }`}
                       >
@@ -433,7 +433,7 @@ const KPISection: React.FC<KPISectionProps> = ({
       {/* grid gap-8
     grid-cols-[repeat(auto-fit,minmax(220px,1fr))] */}
       <div
-        className={`grid grid-cols-2 gap-8 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
+        className={`grid grid-cols-2 gap-4 sm:gap-8 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
       >
         <KPICard
           title="Income"
@@ -455,6 +455,11 @@ const KPISection: React.FC<KPISectionProps> = ({
 
         <div className="flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 hidden xl:block"></div>
 
+        <div
+          className={`sm:hidden col-span-2 w-full h-px
+            dark:bg-gray-700  bg-gray-150
+            `}
+        ></div>
         <KPICard
           title="Short Terms"
           value={shortTerms}
@@ -482,59 +487,62 @@ const KPISection: React.FC<KPISectionProps> = ({
         rightButtonText="Save"
         onLeftButtonClick={() => setOpenKPIFilter(false)}
         onRightButtonClick={() => setOpenKPIFilter(false)}
+        marginBottom
       >
-        {Object.entries(selectedKPIs).map(([key, isSelected]) => {
-          const kpiLabels: { [key: string]: string } = {
-            longTerms: "Long Terms",
-            shortTerms: "Short Terms",
-            realizedGains: "Realized Gains",
-            income: "Income",
-            unrealizedGains: "Unrealized Gains",
-            totalTaxLiability: "Total Tax Liability",
-            capitalLosses: "Capital Losses",
-            airdropIncome: "Airdrop Income",
-          };
-
-          return (
-            <div
-              key={key}
-              className="flex items-center px-4 py-2 hover:bg-[#F3F5F7] dark:hover:bg-[#2F3232] cursor-pointer"
-              onClick={() => handleKPIToggle(key)}
-              role="menuitemcheckbox"
-              aria-checked={isSelected}
-              aria-label={`Toggle ${kpiLabels[key]} KPI display`}
-            >
+        <div className="flex flex-col gap-3">
+          {Object.entries(selectedKPIs).map(([key, isSelected]) => {
+            const kpiLabels: { [key: string]: string } = {
+              longTerms: "Long Terms",
+              shortTerms: "Short Terms",
+              realizedGains: "Realized Gains",
+              income: "Income",
+              unrealizedGains: "Unrealized Gains",
+              totalTaxLiability: "Total Tax Liability",
+              capitalLosses: "Capital Losses",
+              airdropIncome: "Airdrop Income",
+            };
+            // hover:bg-[#F3F5F7] dark:hover:bg-[#2F3232]
+            return (
               <div
-                className={`w-5 h-5  border-2 rounded flex items-center justify-center mr-2 transition-colors border-[#90C853] ${
-                  isSelected ? "bg-white dark:bg-[#5F9339]" : ""
-                }`}
+                key={key}
+                className="flex items-center justtify-start cursor-pointer gap-3 w-full"
+                onClick={() => handleKPIToggle(key)}
+                role="menuitemcheckbox"
+                aria-checked={isSelected}
+                aria-label={`Toggle ${kpiLabels[key]} KPI display`}
               >
-                {isSelected && (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="size-6 text-[#4f801cff]"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m4.5 12.75 6 6 9-13.5"
-                    />
-                  </svg>
-                )}
+                <div
+                  className={`w-5 h-5 border-2 flex items-center justify-center rounded-[4px]  transition-colors border-[#90C853] ${
+                    isSelected
+                      ? "bg-white dark:bg-[#5F9339]"
+                      : "border-[rgba(124,124,124,0.15)]"
+                  }`}
+                >
+                  {isSelected && (
+                    <svg
+                      width="12"
+                      height="8"
+                      viewBox="0 0 12 8"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1.5 4L4.49647 7L10.5 1"
+                        stroke="#90C853"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  )}
+                </div>
+                <span className="text-[#0E201E] dark:text-[#F3F5F7] text-base leading-5 opacity-80">
+                  {kpiLabels[key]}
+                </span>
               </div>
-              <Typography
-                variant="small"
-                className="text-[#0E201E] dark:text-[#F3F5F7]"
-              >
-                {kpiLabels[key]}
-              </Typography>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </MobileDrawer>
     </div>
   );

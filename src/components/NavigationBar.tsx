@@ -94,8 +94,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   }, [isProfileDropdownOpen]);
   return (
     <nav
-      className={`px-4 sm:px-6 lg:px-9 py-3 sm:py-2 lg:py-3.5 bg-white border-b 
-        dark:bg-[#0E201E] dark:border-[#2F3232]`}
+      className={`px-4 md:px-10  py-3 md:py-4  bg-white border-b 
+        dark:bg-[#0E201E] dark:border-[#2F3232] border-gray-150`}
     >
       <div className="flex items-center justify-between">
         {/* Logo */}
@@ -201,7 +201,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <button
               onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
               className="flex items-center justify-between space-x-6 lg:border lg:border-[#E1E3E5] lg:px-3 lg:py-1.5 lg:rounded-xl
-              dark:border-[#4D5050]"
+              dark:border-[#4D5050] focus:border-green-400"
               aria-label="Open profile menu"
               aria-expanded={isProfileDropdownOpen}
               aria-haspopup="true"
@@ -211,7 +211,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 <img
                   src="/kristin.png"
                   alt={userName}
-                  className="w-11 h-11 rounded-full object-cover md:w-8 md:h-8"
+                  className="w-11 h-11 rounded-full focus:border-green-400 object-cover md:w-8 md:h-8"
                 />
                 <span
                   className={`hidden sm:inline text-xs sm:text-sm lg:text-md text-[#0E201E] 
@@ -236,37 +236,39 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             {isProfileDropdownOpen && (
               <div
                 ref={profileMenuRef}
-                className={`absolute right-0 mt-2 w-48  border ${
+                className={`absolute top-[48px] right-[-48px] w-[220px] sm:w-48  border ${
                   isDarkMode
                     ? "bg-[#0E201E] border-[#4D5050]"
                     : "bg-white border-[#E1E3E5]"
-                } rounded-lg shadow-lg py-1 z-50`}
+                } rounded-lg shadow-lg py-2 z-50`}
                 role="menu"
                 aria-label="Profile menu"
               >
-                {/* Switch account title */}
-                <div
-                  className={`px-3 py-1.5 ${
-                    isDarkMode ? "bg-[#0E201E]" : "bg-white"
-                  }`}
-                >
-                  <h3
-                    className={`text-xs font-semibold ${
-                      isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                    } text-left`}
+                <div className="flex flex-col justify-center items-start gap-2 w-full">
+                  <div
+                    className={`w-full px-4 pb-0.5 opacity-70 ${
+                      isDarkMode ? "bg-[#0E201E]" : "bg-white"
+                    }`}
                   >
-                    Switch account
-                  </h3>
-                </div>
-                {/* Account list */}
-                <div className="py-1">
-                  {/* Arlene Watson */}
-                  {userList.map((user) => (
-                    <div
-                      key={user.name}
-                      className={`flex items-center px-2 py-1 cursor-pointer ${
-                        isDarkMode ? "hover:bg-[#2F3232]" : "hover:bg-[#F3F5F7]"
-                      }
+                    <h3
+                      className={`text-sm font-medium ${
+                        isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
+                      } text-left`}
+                    >
+                      Switch account
+                    </h3>
+                  </div>
+                  {/* Account list */}
+                  <div className="flex flex-col justify-start items-start gap-0.5 w-full">
+                    {/* Arlene Watson */}
+                    {userList.map((user) => (
+                      <div
+                        key={user.name}
+                        className={`w-full flex items-center justify-between px-4 py-1 cursor-pointer ${
+                          isDarkMode
+                            ? "hover:bg-[#2F3232]"
+                            : "hover:bg-[#F3F5F7]"
+                        }
                           ${
                             user.name === "Kristin Watson"
                               ? isDarkMode
@@ -275,101 +277,142 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                               : ""
                           }
                           `}
-                      role="menuitem"
-                      aria-label={`Switch to ${user.name} account`}
-                    >
-                      <img
-                        src={user.photo}
-                        alt={user.name}
-                        className="w-6 h-6 rounded-full object-cover mr-2"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = "none";
-                          target.nextElementSibling?.classList.remove("hidden");
-                        }}
-                      />
-                      <span
-                        className={`text-xs font-medium ${
-                          isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                        } mr-auto
-                        `}
+                        role="menuitem"
+                        aria-label={`Switch to ${user.name} account`}
                       >
-                        {user.name}
-                      </span>
-                      {/* Checkmark icon */}
-                      {user.name === "Kristin Watson" && (
-                        <svg
-                          className={`w-3 h-3 ${
-                            isDarkMode ? "text-[#F3F5F7]" : "text-[#7C7C7C]"
-                          } text-gray-600`}
-                          fill="none"
+                        <div className="w-full flex justify-start items-center gap-1.5">
+                          <div
+                            // className={`w-3 h-3 rounded-full ${
+                            //   user.name === "Kristin Watson" ? "bg-[#7C7C7C]" : "bg-[#F3F5F7]"
+                            // }`}
+                            className="w-full flex items-center justify-start"
+                          >
+                            <img
+                              src={user.photo}
+                              alt={user.name}
+                              className="w-6 h-6 rounded-full object-cover mr-2"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = "none";
+                                target.nextElementSibling?.classList.remove(
+                                  "hidden"
+                                );
+                              }}
+                            />
+                            <span
+                              className={`text-xs font-medium ${
+                                isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
+                              } mr-auto
+                        `}
+                            >
+                              {user.name}
+                            </span>
+                          </div>
+                          {user.name === "Kristin Watson" && (
+                            <svg
+                              className={`w-3 h-3 ${
+                                isDarkMode ? "text-[#F3F5F7]" : "text-[#7C7C7C]"
+                              } text-gray-600`}
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                          )}
+                        </div>
+
+                        {/* Checkmark icon */}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Separator */}
+                  <div
+                    className={`sm:hidden  w-full h-px
+            dark:bg-gray-700  bg-gray-150
+            `}
+                  ></div>
+
+                  {/* Log out option */}
+                  <div
+                    className={`w-full flex items-center justify-between px-4 py-1 cursor-pointer`}
+                    onClick={() => {
+                      setIsProfileDropdownOpen(false);
+                      if (onLogout) {
+                        onLogout();
+                      }
+                    }}
+                    role="menuitem"
+                    aria-label="Log out of account"
+                  >
+                    <div className="flex justify-start items-center gap-1.5">
+                      {" "}
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M14.5332 12.1832L16.6665 10.0498L14.5332 7.9165"
                           stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      )}
+                          stroke-width="1.2"
+                          stroke-miterlimit="10"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M8.13379 10.0498H16.6088"
+                          stroke="currentColor"
+                          stroke-width="1.2"
+                          stroke-miterlimit="10"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M9.80046 16.6668C6.11712 16.6668 3.13379 14.1668 3.13379 10.0002C3.13379 5.8335 6.11712 3.3335 9.80046 3.3335"
+                          stroke="currentColor"
+                          stroke-width="1.2"
+                          stroke-miterlimit="10"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <span
+                        className={`text-xs font-medium tracking-[1%] leading-[20px] dark:text-[#B6B8BA]`}
+                      >
+                        Log out
+                      </span>
                     </div>
-                  ))}
-                </div>
+                    {/* Logout icon - FontAwesome */}
 
-                {/* Separator */}
-                <div
-                  className="border-t border-gray-100 my-1"
-                  role="separator"
-                ></div>
-
-                {/* Log out option */}
-                <div
-                  className={`flex items-center px-2 py-1 cursor-pointer`}
-                  onClick={() => {
-                    setIsProfileDropdownOpen(false);
-                    if (onLogout) {
-                      onLogout();
-                    }
-                  }}
-                  role="menuitem"
-                  aria-label="Log out of account"
-                >
-                  {/* Logout icon - FontAwesome */}
-                  <FontAwesomeIcon
-                    icon={faSignOutAlt}
-                    className={`w-3 h-3 ${
-                      isDarkMode ? "text-[#A1A3A5]" : "text-[#7C7C7C]"
-                    } mr-2 rotate-180`}
-                  />
-                  <span
-                    className={`text-xs ${
-                      isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
-                    } mr-auto`}
-                  >
-                    Log out
-                  </span>
-                  {/* Right arrow */}
-                  <svg
-                    className={`w-2 h-2 ${
-                      isDarkMode ? "text-[#A1A3A5]" : "text-[#7C7C7C]"
-                    }`}
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 8 14"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"
-                    />
-                  </svg>
+                    {/* Right arrow */}
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5.94043 13.2797L10.2871 8.93306C10.8004 8.41973 10.8004 7.57973 10.2871 7.06639L5.94043 2.71973"
+                        stroke="currentColor"
+                        stroke-miterlimit="10"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
                 </div>
+                {/* Switch account title */}
               </div>
             )}
           </div>
@@ -377,7 +420,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden w-11 h-11  flex flex-row justify-center items-center gap-1 p-3 rounded-xl shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border border-[#E1E3E5] text-[#7C7C7C] rounded-lg hover:bg-gray-50 transition-colors"
+            className="lg:hidden w-11 h-11  flex flex-row justify-center items-center gap-1 p-3 rounded-xl shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border border-[#E1E3E5] text-[#7C7C7C] rounded-lg hover:bg-gray-50 transition-colors focus:border-green-400 "
             aria-label="Open mobile menu"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -391,14 +434,14 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
       {isMobileMenuOpen && (
         <div
           ref={mobileMenuRef}
-          className="absolute top-12 right-0 w-[240px] bg-white shadow-lg rounded-[12px] border border-gray-150 py-3 z-50 flex flex-col justify-center items-start  dark:bg-[#0E201E] dark:border-[#2F3232]"
+          className="absolute top-[64px] right-4 w-[240px] bg-white shadow-lg rounded-[12px] border border-gray-150 py-3 z-50 flex flex-col justify-center items-start  dark:bg-[#0E201E] dark:border-[#2F3232]"
         >
           <div className="w-full flex flex-col justify-start items-start gap-2 px-4 ">
             {navigationItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className={`dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 text-gray-600 hover:text-gray-900 hover:bg-gray-50 block text-sm font-medium rounded-lg transition-colors`}
+                className={`dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 text-gray-900 hover:text-gray-900 hover:bg-gray-50 block text-sm transition-colors opacity-80`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 role="menuitem"
               >
@@ -407,11 +450,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             ))}
           </div>{" "}
           <div
-            className={`w-full h-px  my-2 ${
-              isDarkMode ? "bg-gray-700" : "bg-gray-200"
-            }`}
+            className={`w-full h-px  my-2 dark:bg-gray-700  bg-gray-150`}
           ></div>
-          <div className="flex justify-between items-center w-full  py-1 px-3">
+          <div className="flex justify-between items-center w-full  px-3">
             <div className="flex justify-normal items-center gap-1.5">
               <span
                 className="bg-transparent  text-[#7C7C7C] px-1 py-1.5 rounded-xl
@@ -540,21 +581,34 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           <div className="px-4 w-full mt-2">
             {" "}
             <button
-              className={`w-full flex items-center justify-center bg-transparent border border-[#75AE46] px-5 py-2.5 rounded-lg text-sm
+              className={`w-full flex items-center justify-center gap-1.5 bg-transparent border border-[#90c853] px-5 py-2.5 rounded-[12px] text-sm
              text-[#75AE46] dark:border-[#4D5050]
              `}
               aria-label="Upgrade to Pro plan"
             >
               {/* Crown Icon */}
               <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 256 256"
-                fill="currentColor"
-                className="size-6"
               >
-                <path d="M230.9,73.6A15.85,15.85,0,0,0,212,77.39l-33.67,36.29-35.8-80.29a1,1,0,0,1,0-.1,16,16,0,0,0-29.06,0,1,1,0,0,1,0,.1l-35.8,80.29L44,77.39A16,16,0,0,0,16.25,90.81c0,.11,0,.21.07.32L39,195a16,16,0,0,0,15.72,13H201.29A16,16,0,0,0,217,195L239.68,91.13c0-.11,0-.21.07-.32A15.85,15.85,0,0,0,230.9,73.6ZM201.35,191.68l-.06.32H54.71l-.06-.32L32,88l.14.16,42,45.24a8,8,0,0,0,13.18-2.18L128,40l40.69,91.25a8,8,0,0,0,13.18,2.18l42-45.24L224,88Z" />
+                <path
+                  d="M11.1335 12.6532H4.8668C4.5868 12.6532 4.27347 12.4332 4.18013 12.1666L1.42013 4.44658C1.0268 3.33991 1.4868 2.99991 2.43347 3.67991L5.03347 5.53991C5.4668 5.83991 5.96013 5.68658 6.1468 5.19991L7.32013 2.07324C7.69347 1.07324 8.31347 1.07324 8.6868 2.07324L9.86013 5.19991C10.0468 5.68658 10.5401 5.83991 10.9668 5.53991L13.4068 3.79991C14.4468 3.05324 14.9468 3.43324 14.5201 4.63991L11.8268 12.1799C11.7268 12.4332 11.4135 12.6532 11.1335 12.6532Z"
+                  stroke="#66A521"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M4.33301 14.6665H11.6663"
+                  stroke="#66A521"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
               </svg>
-              <span className="hidden lg:inline text-lg lg:text-md font-normal text-[#5F9339] dark:text-[#75AE46]">
+
+              <span className=" text-sm font-medium text-[#5F9339] dark:text-[#75AE46]">
                 Go Pro
               </span>
             </button>

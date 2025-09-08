@@ -58,7 +58,7 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
       name: "Shibainu",
       percentage: 11,
       color: "#ff6b35",
-      logo: "crypto/shiba-inu-shib-logo.png",
+      logo: "crypto/ShibaInu.png",
       logoUrl: "https://cryptologos.cc/logos/shiba-inu-shib-logo.png",
     },
     {
@@ -72,7 +72,7 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
       name: "Others",
       percentage: 6,
       color: "#10b981",
-      logo: "crypto/chainlink-link-logo.png",
+      logo: "crypto/others.png",
       logoUrl: "https://cryptologos.cc/logos/chainlink-link-logo.png",
     },
   ];
@@ -86,8 +86,8 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
   }
 
   return (
-    <div className="sm:px-8 mb-6">
-      <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#CDCFD1] mb-4 text-left">
+    <div className="sm:px-6 mb-8 md:mb-0 md:pt-3">
+      <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#CDCFD1] mb-3 text-left">
         Portfolio Allocation
       </h3>
       <div

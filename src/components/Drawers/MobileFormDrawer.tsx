@@ -9,6 +9,7 @@ interface DrawerProps {
   header?: string;
   height?: string;
   children: React.ReactNode;
+  noChildPadding?: boolean;
 }
 
 const MobileFormDrawer: React.FC<DrawerProps> = ({
@@ -19,6 +20,7 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
   children,
   showLogo = false,
   noPadding = false,
+  noChildPadding = false,
 }) => {
   return (
     <>
@@ -26,21 +28,44 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
       <div
         className={`fixed bottom-0 left-0 w-[99.7%] bg-white z-50 transition-transform duration-300 transform ${
           isOpen ? "translate-y-0" : "translate-y-full"
-        } rounded-t-[24px] sm:hidden p-8 dark:bg-[#0E201E]`}
+        } rounded-t-[24px] sm:hidden ${
+          noChildPadding ? "p-0" : "px-5 pt-8"
+        } dark:bg-[#0E201E]`}
         style={{ height }}
       >
         {/* Header */}
 
-        <div className="flex justify-between items-center">
+        <div
+          className={`flex justify-between items-center ${
+            !noChildPadding ? "p-0" : "px-4 pt-6"
+          }`}
+        >
           <div className="flex items-center justify-center gap-3">
             <button
               onClick={onClose}
               className="text-[#7C7C7C] dark:text-[#F3F5F7] flex items-center justify-center "
             >
-              <FontAwesomeIcon icon={faChevronLeft} className="w-6 h-6" />
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5005 16.5999L7.06719 11.1666C6.42552 10.5249 6.42552 9.4749 7.06719 8.83324L12.5005 3.3999"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              {/* <FontAwesomeIcon icon={faChevronLeft} className="w-6 h-6" /> */}
             </button>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-[#F3F5F7]">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-[#F3F5F7]">
               {header}
             </h2>
           </div>

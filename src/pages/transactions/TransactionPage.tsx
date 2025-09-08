@@ -54,7 +54,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
       },
       action: "Trade",
       type: "buy",
-      sent: "-12,37%",
+      sent: "",
       received: "+296,48 USDT",
       transactionId: "TX-0001",
       result: "-$220.5",
@@ -89,13 +89,13 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
         name: "Phantom",
         symbol: "PH",
         address: "GJH7...K5UJ",
-        logo: "crypto/phantom.png",
+        logo: "crypto/Phantom.png",
         color: "bg-purple-400",
       },
       action: "Transfer",
       type: "transfer",
-      sent: "-12 USDT",
-      received: "",
+      sent: "-1,000 USDT",
+      received: "+1 BTC",
       transactionId: "TX-0093",
       result: "$0",
       date: "06-04-2025",
@@ -115,7 +115,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
       action: "Swap",
       type: "swap",
       sent: "-12 USDT",
-      received: "+296,48 USDT",
+      received: "",
       transactionId: "lab-tx-468AD",
       result: "+$85",
       date: "05-29-2025",
@@ -143,26 +143,26 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
       platform: "Kraken",
       error: "No market price found",
     },
-    {
-      id: "6",
-      wallet: {
-        name: "Arbitrum",
-        symbol: "AM",
-        address: "wallet-cc01",
-        logo: "crypto/arbitrum.png",
-        color: "bg-blue-600",
-      },
-      action: "Deploy",
-      type: "buy",
-      sent: "-12 USDT",
-      received: "",
-      transactionId: "TX-0108",
-      result: "+$545",
-      date: "05-12-2025",
-      status: "completed",
-      platform: "Binance",
-      error: "---",
-    },
+    // {
+    //   id: "6",
+    //   wallet: {
+    //     name: "Arbitrum",
+    //     symbol: "AM",
+    //     address: "wallet-cc01",
+    //     logo: "crypto/arbitrum.png",
+    //     color: "bg-blue-600",
+    //   },
+    //   action: "Deploy",
+    //   type: "buy",
+    //   sent: "-12 USDT",
+    //   received: "",
+    //   transactionId: "TX-0108",
+    //   result: "+$545",
+    //   date: "05-12-2025",
+    //   status: "completed",
+    //   platform: "Binance",
+    //   error: "---",
+    // },
   ];
 
   const filteredTransactions = mockTransactions.filter((transaction) => {
@@ -230,18 +230,18 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
         currentPage="transactions"
       />
 
-      <div className=" px-4 sm:px-6 lg:px-8 mt-8">
+      <div className="px-4 sm:px-6 lg:px-8 mt-4.5 sm:mt-8">
         {/* Header */}
-        <div className="flex flex-row sm:items-center justify-between px-2 lg:pl-8">
+        <div className="flex flex-row sm:items-center justify-between px-1 sm:px-2 lg:pl-8">
           <div className="flex gap-2 justify-start items-end">
             <h1
-              className="text-2xl font-semibold text-gray-900
+              className="text-lg sm:text-2xl font-semibold text-gray-900
               dark:text-[#E1E3E5]"
             >
               Transactions
             </h1>{" "}
             <h1
-              className="text-xl font-semibold text-[rgba(77,80,80,1)] 
+              className="hidden sm:inline text-xl font-semibold text-[rgba(77,80,80,1)] 
               dark:text-[#E1E3E5]"
             >
               (258)
@@ -275,6 +275,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
         />
 
         {/* Transactions Table */}
+
         <TransactionTable
           transactions={sortedTransactions}
           isDarkMode={isDarkMode}

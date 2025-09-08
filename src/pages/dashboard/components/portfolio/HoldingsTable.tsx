@@ -3,6 +3,7 @@ import ReactApexChart from "react-apexcharts";
 import type { ApexOptions } from "apexcharts";
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { Card, Typography, CardBody, Avatar } from "@material-tailwind/react";
+import useScreenSize from "../../../../hooks/useScreenSize";
 
 interface Holding {
   id: string;
@@ -69,6 +70,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
   ];
 
   const data = holdings.length > 0 ? holdings : defaultHoldings;
+  const screenSize = useScreenSize();
 
   const TrendChart: React.FC<{
     trend: "up" | "down";
@@ -157,13 +159,13 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
 
     return (
       <div className="flex items-center justify-between w-full">
-        <div className="w-40 h-12">
+        <div className="w-full sm:w-full h-12">
           <ReactApexChart
             options={options}
             series={series}
             type="area"
             height={32}
-            width={!mobileView ? 210 : 150}
+            width={!mobileView ? 210 : screenSize.width < 380 ? 60 : 100}
           />
         </div>
       </div>
@@ -171,12 +173,11 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
   };
 
   return (
-    <div className="md:px-8 mb-6">
-      <div className="sm:py-4">
-        <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-white text-left">
-          Holdings
-        </h3>
-      </div>
+    <div className="md:px-6 mb-6 md:pt-5">
+      <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-white text-left">
+        Holdings
+      </h3>
+
       <Card className="h-full w-full border-transparent bg-transprent">
         <CardBody className="px-0 rounded-lg sm:overflow-x-auto">
           <table className="w-full min-w-max table-auto text-left">
@@ -261,7 +262,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                         </div>
                       </td>
                       <td className="table-cell sm:hidden">
-                        <div className="font-normal">
+                        <div className="px-3">
                           <TrendChart
                             trend={trend24h}
                             data={trendData}
@@ -275,7 +276,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                             variant="small"
                             className={`font-normal text-base text-[#0E201E] dark:text-[#F3F5F7]`}
                           >
-                            {balance}
+                            ${balance}
                           </Typography>
                           <div className="flex justify-center items-center gap-1">
                             {roi.includes("+") ? (

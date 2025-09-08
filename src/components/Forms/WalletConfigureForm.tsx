@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -24,15 +24,28 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
 }) => {
   const [walletAddress, setWalletAddress] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedBlockchains, setSelectedBlockchains] = useState<string[]>([
-    "BNB",
-    "Matic",
-  ]);
-
+  const [selectedBlockchains, setSelectedBlockchains] = useState<string[]>([]);
+  // "BNB",
+  //     "Matic",
   const blockchainOptions = ["Eth", "BNB", "ARB", "Matic"];
 
   const isWalletAddressValid = walletAddress.trim().length > 0;
+  const [openUpward, setOpenUpward] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (isDropdownOpen && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
 
+      // If not enough space below, open upward
+      if (spaceBelow < 200 && spaceAbove > spaceBelow) {
+        setOpenUpward(true);
+      } else {
+        setOpenUpward(false);
+      }
+    }
+  }, [isDropdownOpen]);
   useEffect(() => {
     if (setIsWalletAddressValid) {
       setIsWalletAddressValid(isWalletAddressValid);
@@ -51,6 +64,13 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
     if (selectedBlockchains.length === 0) return "Select blockchains";
     return selectedBlockchains.join(", ");
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedBlockchains([]);
+      setWalletAddress("");
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -84,39 +104,46 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
         </div>
       )}
       <p
-        className={`text-xl text-left 'text-gray-600
+        className={`text-sm  md:text-xl text-left text-gray-700
               dark:text-[#CDCFD1]`}
       >
         Paste your wallet address below to configure
       </p>
 
       {/* Wallet Address Section */}
-      <div className="mb-6">
-        <div className="flex items-center mb-2">
+      <div className="w-full mb-3  sm:mb-6 pt-5 sm:pt-0 ">
+        <div className="flex items-start justify-start md:mb-2 gap-1">
           <label
-            className="text-lg font-medium
-              dark:text-[#CDCFD1]"
+            className="text-sm md:text-lg font-medium text-gray-800
+              dark:text-[#CDCFD1] "
           >
             Wallet Address
           </label>
           <svg
-            className="w-5 h-5 mx-2 text-gray-400"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
             fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="2"
+            <path
+              d="M7.99967 14.6666C11.6663 14.6666 14.6663 11.6666 14.6663 7.99992C14.6663 4.33325 11.6663 1.33325 7.99967 1.33325C4.33301 1.33325 1.33301 4.33325 1.33301 7.99992C1.33301 11.6666 4.33301 14.6666 7.99967 14.6666Z"
+              stroke="#7C7C7C"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             />
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 9v2m0 4h.01"
+              d="M8 5.33325V8.66659"
+              stroke="#7C7C7C"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M7.99609 10.6667H8.00208"
+              stroke="#7C7C7C"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             />
           </svg>
         </div>
@@ -124,7 +151,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
           type="text"
           value={walletAddress}
           onChange={(e) => setWalletAddress(e.target.value)}
-          className={`w-full px-4 py-3 border rounded-xl text-2xl bg-white border-gray-300 text-gray-900 focus:outline-none
+          className={`w-full mt-1.5 sm:mt-0 px-4 py-3 border rounded-[12px] text-base bg-white border-gray-150 text-gray-900 focus:outline-none
               dark:bg-transparent dark:border-[#4D5050] dark:text-white `}
           placeholder="Enter wallet address"
         />
@@ -133,33 +160,49 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
       {/* Blockchains Section - Only show when wallet address is entered */}
       {isWalletAddressValid && (
         <div className="mb-6">
-          <div className="flex items-center mb-2">
-            <label className="text-lg font-medium">Blockchains</label>
-            <svg
-              className="w-5 h-5 mx-2 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div className="flex items-start justify-start md:mb-2 gap-1">
+            <label
+              className="text-sm md:text-lg font-medium text-gray-800
+              dark:text-[#CDCFD1] "
             >
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="2"
+              Blockchains
+            </label>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.99967 14.6666C11.6663 14.6666 14.6663 11.6666 14.6663 7.99992C14.6663 4.33325 11.6663 1.33325 7.99967 1.33325C4.33301 1.33325 1.33301 4.33325 1.33301 7.99992C1.33301 11.6666 4.33301 14.6666 7.99967 14.6666Z"
+                stroke="#7C7C7C"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 9v2m0 4h.01"
+                d="M8 5.33325V8.66659"
+                stroke="#7C7C7C"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M7.99609 10.6667H8.00208"
+                stroke="#7C7C7C"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
             </svg>
           </div>
-          <div className="relative">
+
+          <div className="relative" ref={containerRef}>
             <div
-              className={`w-full px-3 py-2 border-2 text-xl rounded-lg cursor-pointer flex items-center justify-between bg-white text-gray-900 focus:outline-none
-                  dark:bg-transparent dark:text-white dark:border-[#4D5050]`}
+              className={`w-full px-4 mt-1.5 sm:mt-0 py-3 border-2 rounded-lg cursor-pointer flex items-center justify-between bg-white text-gray-900 dark:bg-transparent dark:text-white dark:border-[#4D5050] ${
+                isDropdownOpen ? "border-[#E3F3C7B3]" : "border-gray-150"
+              } ${
+                openUpward ? "bottom-full mb-1" : "top-full mt-1"
+              } max-h-60 overflow-y-auto z-50`}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               role="button"
               aria-label="Select blockchains"
@@ -191,24 +234,23 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
               </svg>
             </div>
 
-            {/* Dropdown Options */}
             {isDropdownOpen && (
               <div
-                className={`absolute top-full left-0 right-0 mt-1 border rounded-lg shadow-lg z-10 bg-white border-gray-200
-                  dark:bg-[#0E201E] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
+                className={`absolute left-0 right-0 border rounded-lg shadow-lg z-10 bg-white border-gray-150 dark:bg-[#0E201E] dark:border-[#4D5050] dark:text-[#F3F5F7] ${
+                  openUpward ? "bottom-full mb-1" : "top-full mt-1"
+                }`}
               >
                 {blockchainOptions.map((blockchain) => (
                   <div
                     key={blockchain}
-                    className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50
-                        dark:hover:bg-[#2F3232]`}
+                    className="flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-[#2F3232]"
                     onClick={() => handleBlockchainToggle(blockchain)}
                   >
                     <div
                       className={`w-4 h-4 border-2 rounded mr-3 flex items-center justify-center ${
                         selectedBlockchains.includes(blockchain)
                           ? "bg-green-500 border-green-500"
-                          : "border-gray-400"
+                          : "border-gray-150"
                       }`}
                     >
                       {selectedBlockchains.includes(blockchain) && (
@@ -225,7 +267,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
                         </svg>
                       )}
                     </div>
-                    <span className="text-sm">{blockchain}</span>
+                    <span className="text-sm text-gray-900">{blockchain}</span>
                   </div>
                 ))}
               </div>
