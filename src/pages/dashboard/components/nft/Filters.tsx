@@ -85,7 +85,7 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   return (
-    <div className="mx-8 my-8">
+    <div className="mx-6 my-8">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
         {/* Search Bar - 1/3 width */}
         <div>
@@ -99,7 +99,7 @@ const Filters: React.FC<FiltersProps> = ({
               placeholder="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 text-lg border rounded-2xl focus:outline-none bg-transparent border-[#14151A2F] text-[#0E201E] placeholder-gray-500
+              className="w-full pl-12 px-4 py-3 text-base border rounded-2xl focus:outline-none bg-transparent border-[#14151A2F] text-[#0E201E] placeholder-gray-500
                 dark:border-[#4D5050] dark:text-white dark:placeholder-[#CDCFD1]"
               aria-label="Search NFTs"
             />
@@ -124,27 +124,25 @@ const Filters: React.FC<FiltersProps> = ({
             setIsOpen={setShowEstimatedValueDropdown}
             title="Estimated value"
           />
-          <div className="flex items-center rounded-lg border px-2 my-4 shadow-sm sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]">
-            <Datepicker
-              displayFormat="DD MMM YYYY"
-              separator="-"
-              placeholder="Purchase date"
-              value={null}
-              onChange={(newValue: any) => setSelectedDateRange(newValue)}
-              showShortcuts={true}
-              configs={{
-                shortcuts: createShortcuts(),
-              }}
-              primaryColor="green"
-              inputClassName="flex items-center justify-between rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white px-3 py-3"
-              containerClassName="relative flex items-center justify-between"
-              toggleClassName="absolute rounded-r-lg px-0 right-0 top-0 h-full text-gray-800 dark:text-white"
-            />
-          </div>
+          <Datepicker
+            displayFormat="DD MMM YYYY"
+            separator="-"
+            placeholder="Purchase date"
+            value={null}
+            onChange={(newValue: any) => setSelectedDateRange(newValue)}
+            showShortcuts={true}
+            configs={{
+              shortcuts: createShortcuts(),
+            }}
+            primaryColor="green"
+            inputClassName="rounded-xl border flex items-center justify-between rounded-md bg-transparent focus:outline-none text-sm placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white px-4 py-3"
+            containerClassName="relative flex items-center justify-between"
+            toggleClassName="absolute rounded-r-lg right-0 top-0 mr-4 h-full text-gray-800 dark:text-white"
+          />
 
           <div className="flex-1 relative my-4">
             <div
-              className="w-full sm:w-[200px] px-3 py-3 flex items-center justify-between cursor-pointer rounded-lg border text-base bg-transparent border-gray-300 text-[#0E201E] 
+              className="w-full sm:w-[200px] px-4 py-3 flex items-center justify-between cursor-pointer rounded-xl border text-sm bg-transparent border-[#E1E3E5] text-[#0E201E] 
                 dark:border-[#4D5050] dark:text-white"
               onClick={() => setShowGainDropdown(!showGainDropdown)}
             >
