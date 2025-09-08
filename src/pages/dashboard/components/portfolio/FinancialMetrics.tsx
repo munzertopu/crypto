@@ -22,6 +22,7 @@ interface MetricItemProps {
   isDropdownOpen?: boolean;
   isDarkMode: boolean;
   isRowDirection?: boolean;
+  isLarge?: boolean;
 }
 
 const MetricItem: React.FC<MetricItemProps> = ({
@@ -36,6 +37,7 @@ const MetricItem: React.FC<MetricItemProps> = ({
   isDropdownOpen = false,
   isDarkMode = false,
   isRowDirection = false,
+  isLarge = false
 }) => (
   <div className="flex flex-col gap-3">
     <div className="flex items-center gap-3">
@@ -57,7 +59,7 @@ const MetricItem: React.FC<MetricItemProps> = ({
       </div>
       <div className="flex items-center ">
         <span
-          className={`text-base md:text-lg font-medium md:font-semibold text-gray-900 dark:text-[#B6B8BA] opacity-80`}
+          className={`text-base ${isLarge ? "md:text-lg" : "md:text-md" } font-medium md:font-semibold text-gray-900 dark:text-[#B6B8BA] opacity-80`}
         >
           {title}
         </span>
@@ -88,7 +90,7 @@ const MetricItem: React.FC<MetricItemProps> = ({
           : "flex-col gap-1 sm:flex-row"
       }  items-start  sm:items-end sm:gap-2  `}
     >
-      <span className="text-xl md:text-[32px] font-semibold text-gray-900 dark:text-[#B6B8BA]">
+      <span className={`text-xl ${isLarge ? "md:text-[32px]" : "md:text-[24px]" } font-semibold text-gray-900 dark:text-[#B6B8BA]`}>
         {value}
       </span>
       <span
@@ -307,6 +309,7 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
               svgIcon={totalValueSvg}
               isDarkMode={isDarkMode}
               isRowDirection
+              isLarge={true}
             />
           </div>
           {/* Horizontal Separator */}
