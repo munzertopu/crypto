@@ -27,7 +27,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
 
   return (
     <div
-      className={`pb-2 pt-6 sm:pt-5 sm:py-6 transition-opacity duration-300 ease-in-out ${
+      className={`pt-6 sm:pt-5 sm:py-6 transition-opacity duration-300 ease-in-out ${
         isFading ? "opacity-0" : "opacity-100"
       }`}
     >
