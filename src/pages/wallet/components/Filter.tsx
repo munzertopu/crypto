@@ -90,7 +90,7 @@ const Filter: React.FC<FilterProps> = ({
       {/* <div className="relative">
         <FontAwesomeIcon
           icon={faSearch}
-          className={`absolute size-6 text-xl ml-6 top-1/2 transform -translate-y-1/2 text-[#7C7C7C]
+          className={`absolute size-4 text-xl ml-6 top-1/2 transform -translate-y-1/2 text-[#7C7C7C]
            dark:text-[#CDCFD1]`}
         />
         <input

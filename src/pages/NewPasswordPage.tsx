@@ -190,107 +190,46 @@ const NewPasswordPage: React.FC<NewPasswordPageProps> = ({
           </div>
 
           {/* Password Validation Rules */}
-          {password.length > 0 && (
-            <div className="mt-3 space-y-2">
-              <div
-                className={`flex items-center text-sm ${
-                  passwordValidation.hasUpperCase &&
-                  passwordValidation.hasLowerCase
-                    ? "text-green-600"
-                    : "text-red-600"
-                }`}
-              >
-                <svg
-                  className={`w-4 h-4 mr-2 ${
-                    passwordValidation.hasUpperCase &&
-                    passwordValidation.hasLowerCase
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  {" "}
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />{" "}
-                </svg>
-                One uppercase & lowercase letter
-              </div>
-              <div
-                className={`flex items-center text-sm ${
-                  passwordValidation.hasMinLength
-                    ? "text-green-600"
-                    : "text-red-600"
-                }`}
-              >
-                <svg
-                  className={`w-4 h-4 mr-2 ${
-                    passwordValidation.hasMinLength
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  {" "}
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />{" "}
-                </svg>
-                Minimum 8 characters
-              </div>
-              <div
-                className={`flex items-center text-sm ${
-                  passwordValidation.hasNumber &&
-                  passwordValidation.hasSpecialChar
-                    ? "text-green-600"
-                    : "text-red-600"
-                }`}
-              >
-                <svg
-                  className={`w-4 h-4 mr-2 ${
-                    passwordValidation.hasNumber &&
-                    passwordValidation.hasSpecialChar
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  {" "}
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                  />{" "}
-                </svg>
-                Special characters, & number
-              </div>
+          <div className="mt-3 space-y-2">
+            <div
+              className={`flex items-center text-sm text-gray-600`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`size-4 mr-2  ${
+                passwordValidation.hasUpperCase &&
+                passwordValidation.hasLowerCase
+                  ? "text-green-700"
+                  : "text-gray-600"
+              }`}>
+                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
+              </svg>
+              One uppercase & lowercase letter
             </div>
-          )}
+            <div
+              className={`flex items-center text-sm text-gray-600`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`size-4 mr-2  ${
+                passwordValidation.hasMinLength
+                  ? "text-green-700"
+                  : "text-gray-600"
+              }`}>
+                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
+              </svg>
+              Minimum 8 characters
+            </div>
+            <div
+              className={`flex items-center text-sm text-gray-600`}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`size-4 mr-2 ${
+                passwordValidation.hasNumber &&
+                passwordValidation.hasSpecialChar
+                  ? "text-green-700"
+                  : "text-gray-600"
+              }`}>
+                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
+              </svg>
+              Special characters, & number
+            </div>
+          </div>
         </div>
 
         {/* Set Password Button */}
@@ -298,30 +237,14 @@ const NewPasswordPage: React.FC<NewPasswordPageProps> = ({
           <button
             type="submit"
             disabled={!isFormComplete}
-            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors ${
-              isFormComplete ? "opacity-100" : "opacity-50 cursor-not-allowed"
+            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-lg transition-colors ${
+              isFormComplete ? "opacity-100 bg-[#90C853]" : "opacity-50 cursor-not-allowed bg-[#E1E3E5]"
             }`}
-            style={{ backgroundColor: isFormComplete ? "#75AE46" : "#9CA3AF" }}
             aria-label="Set new password and complete reset"
           >
             Set New Password
           </button>
         </div>
-
-        {/* Back to Login Link */}
-        {/* <div className="text-center">
-              <p className="text-sm text-gray-600">
-                Remember your password?{' '}
-                <button 
-                  type="button"
-                  onClick={onBackToLogin}
-                  className="font-medium hover:text-green-500 focus:outline-none"
-                  style={{color: '#75AE46'}}
-                >
-                  Back to login
-                </button>
-              </p>
-            </div> */}
       </form>
     </AuthLayout>
   );
