@@ -121,12 +121,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         </div>
 
         {/* Navigation Links */}
-        <div className="hidden lg:flex items-center space-x-1 lg:space-x-6">
+        <div className="hidden lg:flex items-center gap-6 ">
           {navigationItems.map((item) => (
             <a
               key={item.name}
               href={item.href}
-              className={`px-1 lg:px-3 py-2 text-sm lg:text-base text-[#0E201E] 
+              className={`opacity-80 px-1 lg:px-3 py-2 text-sm lg:text-base text-gray-900
                 dark:text-[#B6B8BA]
                 ${
                   currentPage === item.name.toLowerCase()
@@ -177,12 +177,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           </Link>
 
           {/* Go Pro Button */}
-          <button
+          {/* <button
             className={`hidden sm:flex items-center space-x-1 sm:space-x-2 bg-transparent border border-[#E1E3E5] px-2 lg:px-3 lg:py-1 rounded-lg text-xs sm:text-sm font-medium
               text-[#5F9339] dark:border-[#4D5050]`}
             aria-label="Upgrade to Pro plan"
           >
-            {/* Crown Icon */}
+         
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 256 256"
@@ -194,8 +194,39 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <span className="hidden lg:inline text-lg lg:text-base font-normal text-[#5F9339] dark:text-[#75AE46]">
               Go Pro
             </span>
-          </button>
+          </button> */}
+          <button
+            className={`flex items-center justify-center gap-1.5 bg-transparent border border-[#90c853] px-5 py-2.5 rounded-[12px] text-sm
+             text-[#75AE46] dark:border-[#4D5050]
+             `}
+            aria-label="Upgrade to Pro plan"
+          >
+            {/* Crown Icon */}
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.1335 12.6532H4.8668C4.5868 12.6532 4.27347 12.4332 4.18013 12.1666L1.42013 4.44658C1.0268 3.33991 1.4868 2.99991 2.43347 3.67991L5.03347 5.53991C5.4668 5.83991 5.96013 5.68658 6.1468 5.19991L7.32013 2.07324C7.69347 1.07324 8.31347 1.07324 8.6868 2.07324L9.86013 5.19991C10.0468 5.68658 10.5401 5.83991 10.9668 5.53991L13.4068 3.79991C14.4468 3.05324 14.9468 3.43324 14.5201 4.63991L11.8268 12.1799C11.7268 12.4332 11.4135 12.6532 11.1335 12.6532Z"
+                stroke="#66A521"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M4.33301 14.6665H11.6663"
+                stroke="#66A521"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
 
+            <span className=" text-sm font-medium text-[#5F9339] dark:text-[#75AE46]">
+              Go Pro
+            </span>
+          </button>
           {/* Profile */}
           <div className="relative space-x-6 px-3 sm:px-0">
             <button
@@ -236,7 +267,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             {isProfileDropdownOpen && (
               <div
                 ref={profileMenuRef}
-                className={`absolute top-[48px] right-[-48px] w-[220px] sm:w-48  border ${
+                className={`absolute top-[48px] right-[-48px] sm:right-0 w-[220px]   border ${
                   isDarkMode
                     ? "bg-[#0E201E] border-[#4D5050]"
                     : "bg-white border-[#E1E3E5]"
