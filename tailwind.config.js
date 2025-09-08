@@ -26,8 +26,17 @@ module.exports = {
         h1: ["36px", { lineHeight: "48px", letterSpacing: "-0.25px" }],
       },
       colors: {
+        primary: {
+          light: "#0E201E",
+          dark: "#0E201E",
+        },
+        secondary: {
+          light: "#4D5050",
+          dark: "#4D5050",
+        },
         gray: {
           0: "#FFFFFF",
+          11: "#191919",
           100: "#F3F5F7",
           150: "#E1E3E5",
           200: "#CDCFD1",
