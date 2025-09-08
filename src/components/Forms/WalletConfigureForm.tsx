@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -30,7 +30,22 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
   const blockchainOptions = ["Eth", "BNB", "ARB", "Matic"];
 
   const isWalletAddressValid = walletAddress.trim().length > 0;
+  const [openUpward, setOpenUpward] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (isDropdownOpen && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
 
+      // If not enough space below, open upward
+      if (spaceBelow < 200 && spaceAbove > spaceBelow) {
+        setOpenUpward(true);
+      } else {
+        setOpenUpward(false);
+      }
+    }
+  }, [isDropdownOpen]);
   useEffect(() => {
     if (setIsWalletAddressValid) {
       setIsWalletAddressValid(isWalletAddressValid);
@@ -181,12 +196,13 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
             </svg>
           </div>
 
-          <div className="relative">
+          <div className="relative" ref={containerRef}>
             <div
-              className={`w-full px-4 mt-1.5 sm:mt-0 py-3 border-2 border-gray-150 text-base rounded-lg cursor-pointer flex items-center justify-between bg-white text-gray-900 focus:ring-green-500
-                  dark:bg-transparent dark:text-white dark:border-[#4D5050] ${
-                    isDropdownOpen ? "border-[#E3F3C7B3]" : "border-gray-150"
-                  }`}
+              className={`w-full px-4 mt-1.5 sm:mt-0 py-3 border-2 rounded-lg cursor-pointer flex items-center justify-between bg-white text-gray-900 dark:bg-transparent dark:text-white dark:border-[#4D5050] ${
+                isDropdownOpen ? "border-[#E3F3C7B3]" : "border-gray-150"
+              } ${
+                openUpward ? "bottom-full mb-1" : "top-full mt-1"
+              } max-h-60 overflow-y-auto z-50`}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               role="button"
               aria-label="Select blockchains"
@@ -218,17 +234,16 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
               </svg>
             </div>
 
-            {/* Dropdown Options */}
             {isDropdownOpen && (
               <div
-                className={`absolute top-full left-0 right-0 mt-1 border rounded-lg shadow-lg z-10 bg-white border-gray-150
-                  dark:bg-[#0E201E] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
+                className={`absolute left-0 right-0 border rounded-lg shadow-lg z-10 bg-white border-gray-150 dark:bg-[#0E201E] dark:border-[#4D5050] dark:text-[#F3F5F7] ${
+                  openUpward ? "bottom-full mb-1" : "top-full mt-1"
+                }`}
               >
                 {blockchainOptions.map((blockchain) => (
                   <div
                     key={blockchain}
-                    className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50
-                        dark:hover:bg-[#2F3232]`}
+                    className="flex items-center px-3 py-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-[#2F3232]"
                     onClick={() => handleBlockchainToggle(blockchain)}
                   >
                     <div
