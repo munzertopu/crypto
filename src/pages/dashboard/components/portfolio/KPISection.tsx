@@ -51,7 +51,7 @@ const KPICard: React.FC<KPICardProps> = ({
     </div>
 
     <div className="flex flex-col items-start sm:flex-row  sm:items-end sm:gap-2">
-      <span className="text-h4 sm:text-[32px] md:text-h4 font-semibold text-gray-900 dark:text-[#B6B8BA]">
+      <span className="text-h6 sm:text-[32px] md:text-h4 font-semibold text-gray-900 dark:text-[#B6B8BA]">
         {value}
       </span>
       <span
