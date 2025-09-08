@@ -28,7 +28,7 @@ const SuccessNotification: React.FC<SuccessNotificationProps> = ({
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 left-4 z-50 animate-fade-in">
+    <div className="fixed bottom-4 sm:top-4 right-4 left-4 z-50 animate-fade-in">
       <div
         className="flex items-start justify-between bg-white border border-success-500 rounded-xl px-4 py-3 shadow-lg
       dark:bg-[#0E201E]"

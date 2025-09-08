@@ -76,15 +76,15 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
 
   return (
     <div
-      className={`bg-white text-gray-900 rounded-2xl sm:p-10 w-full sm:max-w-2xl
+      className={`bg-white text-gray-900 rounded-2xl sm:p-8 w-full sm:max-w-2xl
         dark:bg-[#0E201E]`}
     >
       {/* Header */}
       {showHeader && (
-        <div className="flex items-start justify-between mb-6">
+        <div className="flex items-start justify-between mb-6 md:mb-0">
           <div>
             <h2
-              className="text-2xl text-left font-bold mb-2
+              className="text-h5 text-left font-semibold text-[#191919]
               dark:text-[#CDCFD1]"
             >
               Configure {platformName} address
@@ -92,26 +92,43 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className={`p-2 rounded-full dark:text-[#CDCFD1]`}
+            className={`rounded-full dark:text-[#CDCFD1]`}
             aria-label="Close configure modal"
           >
-            <FontAwesomeIcon
-              icon={faTimes}
-              className="w-4 h-4"
-              aria-hidden="true"
-            />
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 15L15 5"
+                stroke="#7C7C7C"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M15 15L5 5"
+                stroke="#7C7C7C"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </button>
         </div>
       )}
       <p
-        className={`text-sm  md:text-xl text-left text-gray-700
-              dark:text-[#CDCFD1]`}
+        className={`text-sm  md:text-base text-left text-gray-11
+              dark:text-[#CDCFD1] mt-1.5`}
       >
         Paste your wallet address below to configure
       </p>
 
       {/* Wallet Address Section */}
-      <div className="w-full mb-3  sm:mb-6 pt-5 sm:pt-0 ">
+      <div className="w-full mb-3  sm:mb-3 pt-5 sm:pt-6 ">
         <div className="flex items-start justify-start md:mb-2 gap-1">
           <label
             className="text-sm md:text-lg font-medium text-gray-800
@@ -162,7 +179,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
         <div className="mb-6">
           <div className="flex items-start justify-start md:mb-2 gap-1">
             <label
-              className="text-sm md:text-lg font-medium text-gray-800
+              className="text-sm md:text-lg font-medium text-gray-700
               dark:text-[#CDCFD1] "
             >
               Blockchains
@@ -278,10 +295,10 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
 
       {/* Action Buttons */}
       {showFooter && (
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center pt-6">
           <button
             onClick={onClose}
-            className={`text-xl font-medium text-gray-500
+            className={`text-base font-medium text-gray-500
               dark:text-[#A1A3A5]`}
             aria-label="Cancel wallet configuration"
           >
@@ -295,10 +312,10 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
               onClose();
             }}
             disabled={!isWalletAddressValid}
-            className={`px-6 py-2 rounded-lg text-xl font-medium transition-colors text-[#0E201E] ${
+            className={`px-6 py-3  rounded-lg text-base font-medium transition-colors text-[#0E201E] ${
               isWalletAddressValid
                 ? "bg-[#90C853] cursor-pointer"
-                : "bg-gray-300 dark:bg-[#2F3232] dark:text-[#8C8E90] cursor-not-allowed"
+                : "bg-gray-150 dark:bg-[#2F3232] dark:text-[#8C8E90] text-gray-400 cursor-not-allowed"
             }`}
             aria-label="Configure wallet configuration"
           >

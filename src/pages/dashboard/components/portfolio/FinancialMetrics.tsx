@@ -40,11 +40,11 @@ const MetricItem: React.FC<MetricItemProps> = ({
   isLarge = false
 }) => (
   <div className="flex flex-col gap-3">
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-1.5">
       <div className="flex items-center justify-center">
         {svgIcon ? (
           <div
-            className={`text-gray-900 dark:text-[#B6B8BA] w-5 h-5 md:h-6 md:w-6 flex items-center justify-center`}
+            className={`"text-gray-900 dark:text-[#B6B8BA] w-5 h-5 md:h-6 md:w-6 flex items-center justify-center`}
           >
             {svgIcon}
           </div>
@@ -296,7 +296,7 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
   };
 
   return (
-    <div className="mb-4 sm:mb-6 pt-4 sm:pt-0">
+    <div className="md:px-2 mb-4 sm:mb-6 pt-4 sm:pt-0">
       <div className="bg-transparent">
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
           {/* Left Section - Total Value */}
