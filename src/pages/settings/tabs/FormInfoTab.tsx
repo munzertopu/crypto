@@ -80,7 +80,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
             placeholder="Type your name"
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
-            className={`text-md ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+            className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
           />
         </div>
       </div>
@@ -98,7 +98,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
               placeholder="000000000"
               value={formData.personalId}
               onChange={(e) => handleInputChange('personalId', e.target.value)}
-              className={`text-md ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
             />
           </div>
 
@@ -111,7 +111,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
               placeholder="Type your city"
               value={formData.city}
               onChange={(e) => handleInputChange('city', e.target.value)}
-              className={`text-md ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
             />
           </div>
 
@@ -124,7 +124,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
               placeholder="00000"
               value={formData.postalCode}
               onChange={(e) => handleInputChange('postalCode', e.target.value)}
-              className={`text-md ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
             />
           </div>
         </div>
@@ -200,7 +200,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
               placeholder="00000"
               value={formData.state}
               onChange={(e) => handleInputChange('state', e.target.value)}
-              className={`text-md ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
             />
           </div>
 
@@ -219,7 +219,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
               placeholder="000000000"
               value={formData.inn}
               onChange={(e) => handleInputChange('inn', e.target.value)}
-              className={`text-md ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
             />
           </div>
         </div>

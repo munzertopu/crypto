@@ -37,13 +37,13 @@ const KPICard: React.FC<KPICardProps> = ({
         ) : (
           <FontAwesomeIcon
             icon={icon}
-            className="text-[#0E201E] dark:text-[#CDCFD1] text-md"
+            className="text-[#0E201E] dark:text-[#CDCFD1] text-base"
           />
         )}
       </div>
       <div className="flex items-center">
         <span
-          className={`text-base sm:text-xl lg:text-2xl font-medium md:font-semibold text-gray-900 dark:text-[#B6B8BA] opacity-80`}
+          className={`text-base sm:text-xl lg:text-base font-medium md:font-semibold text-gray-900 dark:text-[#B6B8BA] opacity-80`}
         >
           {title}
         </span>
@@ -51,11 +51,11 @@ const KPICard: React.FC<KPICardProps> = ({
     </div>
 
     <div className="flex flex-col items-start sm:flex-row  sm:items-end sm:gap-2">
-      <span className="text-xl sm:text-[32px] font-semibold text-gray-900 dark:text-[#B6B8BA]">
+      <span className="text-h4 sm:text-[32px] md:text-h4 font-semibold text-gray-900 dark:text-[#B6B8BA]">
         {value}
       </span>
       <span
-        className={`text-caption sm:text-sm font-semibold ${
+        className={`text-caption sm:text-sm md:text-smh font-semibold mb-0.5 ${
           isPositive ? "text-[#5F9339]" : "text-[#D8382C]"
         }`}
       >
@@ -307,9 +307,9 @@ const KPISection: React.FC<KPISectionProps> = ({
   }, [isDropdownOpen]);
 
   return (
-    <div className="mb-8 md:mb-0 md:py-6 md:pl-6 md:pr-[60px]">
+    <div className="mb-8 md:mb-0 md:py-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#E1E3E5]">
+        <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#E1E3E5] py-2.5">
           KPI
         </h3>
         <div className="relative pr-0 sm:pr-8" ref={dropdownRef}>

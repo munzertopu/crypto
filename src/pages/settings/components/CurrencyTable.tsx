@@ -262,7 +262,7 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
                                 <div className="flex flex-col">
                                   <Typography
                                     variant="small"
-                                    className={`text-md font-normal ${isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"}`}
+                                    className={`text-base font-normal ${isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"}`}
                                   >
                                     {currency.name}
                                   </Typography>
@@ -278,7 +278,7 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
                             <td className='py-4'>
                               <Typography
                                 variant="small"
-                                className={`text-md font-normal ${currency.gainLoss.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}
+                                className={`text-base font-normal ${currency.gainLoss.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}
                               >
                                 {currency.gainLoss}
                               </Typography>
@@ -286,7 +286,7 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
                             <td className='py-4'>
                               <Typography
                                 variant="small"
-                                className={`text-md font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}
+                                className={`text-base font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}
                               >
                                 {currency.date}
                               </Typography>

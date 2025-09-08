@@ -89,7 +89,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
         <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left">
           Login
         </h1>
-        <p className="text-base text-md sm:text-lg text-gray-800 text-left">
+        <p className="text-base text-base sm:text-lg text-gray-800 text-left">
           Access your crypto tax tools securely.
         </p>
       </div>
@@ -262,7 +262,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-lg transition-colors ${
+            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-base font-medium rounded-lg transition-colors ${
               isSubmitting 
                 ? 'opacity-50 cursor-not-allowed' 
                 : 'hover:opacity-90'

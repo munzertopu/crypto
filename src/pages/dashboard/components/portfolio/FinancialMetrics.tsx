@@ -38,11 +38,11 @@ const MetricItem: React.FC<MetricItemProps> = ({
   isRowDirection = false,
 }) => (
   <div className="flex flex-col gap-3">
-    <div className="flex items-center gap-1.5">
+    <div className="flex items-center gap-3">
       <div className="flex items-center justify-center">
         {svgIcon ? (
           <div
-            className={`"text-gray-900 dark:text-[#B6B8BA] w-5 h-5 md:h-6 md:w-6 flex items-center justify-center`}
+            className={`text-gray-900 dark:text-[#B6B8BA] w-5 h-5 md:h-6 md:w-6 flex items-center justify-center`}
           >
             {svgIcon}
           </div>
@@ -51,7 +51,7 @@ const MetricItem: React.FC<MetricItemProps> = ({
             icon={icon}
             className={`${
               isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
-            } text-md`}
+            } text-base`}
           />
         )}
       </div>
@@ -294,7 +294,7 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
   };
 
   return (
-    <div className="md:px-2 mb-4 sm:mb-6 pt-4 sm:pt-0">
+    <div className="mb-4 sm:mb-6 pt-4 sm:pt-0">
       <div className="bg-transparent">
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
           {/* Left Section - Total Value */}
@@ -364,7 +364,7 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
                           d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"
                         />
                       </svg>
-                      <span className="text-md text-gray-900 mx-2">
+                      <span className="text-base text-gray-900 mx-2">
                         Short Term Gain
                       </span>
                     </div>

@@ -237,7 +237,7 @@ const NewPasswordPage: React.FC<NewPasswordPageProps> = ({
           <button
             type="submit"
             disabled={!isFormComplete}
-            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-lg transition-colors ${
+            className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-base font-medium rounded-lg transition-colors ${
               isFormComplete ? "opacity-100 bg-[#90C853]" : "opacity-50 cursor-not-allowed bg-[#E1E3E5]"
             }`}
             aria-label="Set new password and complete reset"

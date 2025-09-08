@@ -66,18 +66,18 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   };
 
   return (
-    <div className="sm:px-4 lg:px-6 lg:pt-4 md:pb-8 pt-7">
+    <div>
       <div className="flex flex-row items-center justify-between gap-4 ">
         {/* Title */}
-        <h1
-          className={`text-lg lg:text-xl font-semibold text-gray-900 dark:text-[#E1E3E5]`}
+        <h4
+          className={`text-lg md:text-h4 font-semibold text-gray-900 dark:text-[#E1E3E5]`}
         >
           Dashboard
-        </h1>
+        </h4>
 
         {/* Date Range Selector */}
         <div
-          className={`max-w-[190px] flex items-center rounded-lg border p-2 shadow-sm w-full sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]`}
+          className={`max-w-[190px] flex items-center rounded-xl border py-2.5 px-4 shadow-sm w-full sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]`}
         >
           <Datepicker
             displayFormat="DD MMM YYYY"
@@ -97,15 +97,15 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         </div>
       </div>
       {/* Tabs */}
-      <div className="border-gray-200 dark:border-gray-700 mt-4 sm:mt-0">
+      <div className="border-gray-200 dark:border-gray-700 mb-8 sm:mt-0">
         <Tabs>
-          <Tabs.List className="my-2 lg:my-2 space-x-1 bg-[#F3F5F7] dark:bg-[#2F3232] rounded-xl">
+          <Tabs.List className="p-1 bg-[#F3F5F7] dark:bg-[#2F3232] rounded-xl">
             {tabs.map((tab) => (
               <Tabs.Trigger
                 key={tab}
                 value={tab}
                 onClick={() => onTabChange?.(tab)}
-                className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl text-sm sm:text-lg ${
+                className={`px-1.5 sm:px-5 py-2.5 sm:py-2 rounded-lg sm:rounded-xl text-smh sm:text-lg ${
                   activeTab === tab
                     ? "bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white"
                     : "text-gray-900 dark:text-[#FFFFFF] opacity-75"

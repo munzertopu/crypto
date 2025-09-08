@@ -160,7 +160,7 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({
   return (
     <div className="sm:mb-6">
       <div
-        className="sm:p-3 bg-white
+        className="p-0 md:p-0 sm:p-3 bg-white
         dark:bg-[#0E201E]"
       >
         <div className="w-full h-100">

@@ -144,7 +144,7 @@ const Filters: React.FC<FiltersProps> = ({
 
           <div className="flex-1 relative my-4">
             <div
-              className="w-full sm:w-[200px] px-3 py-3 flex items-center justify-between cursor-pointer rounded-lg border text-md bg-transparent border-gray-300 text-[#0E201E] 
+              className="w-full sm:w-[200px] px-3 py-3 flex items-center justify-between cursor-pointer rounded-lg border text-base bg-transparent border-gray-300 text-[#0E201E] 
                 dark:border-[#4D5050] dark:text-white"
               onClick={() => setShowGainDropdown(!showGainDropdown)}
             >
@@ -205,7 +205,7 @@ const Filters: React.FC<FiltersProps> = ({
             {/* Currency Range Filter Tag */}
             {(fromValue !== "0" || toValue !== "0") && (
               <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">
-                <span className="text-md font-semibold text-black-800 dark:text-white">
+                <span className="text-base font-semibold text-black-800 dark:text-white">
                   {fromValue}-{toValue} {fromCurrency}
                 </span>
                 <button
@@ -215,7 +215,7 @@ const Filters: React.FC<FiltersProps> = ({
                     setFromCurrency("USDT");
                     setToCurrency("USDT");
                   }}
-                  className="text-black-600 dark:text-gray-300 text-md"
+                  className="text-black-600 dark:text-gray-300 text-base"
                 >
                   <FontAwesomeIcon icon={faXmark} className="w-3 h-3" />
                 </button>
@@ -225,7 +225,7 @@ const Filters: React.FC<FiltersProps> = ({
             {/* Date Range Filter Tag */}
             {selectedDateRange && (
               <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">
-                <span className="text-md font-semibold text-black-800 dark:text-white">
+                <span className="text-base font-semibold text-black-800 dark:text-white">
                   {selectedDateRange.startDate && selectedDateRange.endDate
                     ? `${new Date(
                         selectedDateRange.startDate
@@ -250,7 +250,7 @@ const Filters: React.FC<FiltersProps> = ({
             {/* Gain Filter Tag */}
             {selectedGain !== "Highest gain" && (
               <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">
-                <span className="text-md font-semibold text-black dark:text-white">
+                <span className="text-base font-semibold text-black dark:text-white">
                   {selectedGain}
                 </span>
                 <button
@@ -273,7 +273,7 @@ const Filters: React.FC<FiltersProps> = ({
                   setFromCurrency("USDT");
                   setToCurrency("USDT");
                 }}
-                className="flex items-center gap-1 text-green-700 text-md"
+                className="flex items-center gap-1 text-green-700 text-base"
               >
                 <FontAwesomeIcon icon={faXmark} className="w-3 h-3" />
                 <span>Clear all</span>

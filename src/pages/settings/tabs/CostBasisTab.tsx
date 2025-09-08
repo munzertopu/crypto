@@ -149,7 +149,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
               >
                 {/* Radio Button */}
                 <div className="flex items-center justify-between mb-2">
-                  <span className={`font-semibold text-md ${isDarkMode ? 'text-white' : 'text-[#0E201E]'}`}>
+                  <span className={`font-semibold text-base ${isDarkMode ? 'text-white' : 'text-[#0E201E]'}`}>
                     {method.name}
                   </span>
                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${

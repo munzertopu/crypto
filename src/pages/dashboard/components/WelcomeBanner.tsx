@@ -70,7 +70,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             <div className="flex flex-col md:flex-row justify-start items-start md:items-center gap-2">
               {" "}
               <span
-                className={`text-sm sm:text-base lg:text-md font-medium text-gray-900  dark:text-[#B6B8BA]`}
+                className={`text-sm sm:text-base lg:text-base font-medium text-gray-900  dark:text-[#B6B8BA]`}
               >
                 Getting started is as easy as:
               </span>
@@ -78,15 +78,15 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                 <div
                   className={`flex items-center justify-center px-3 md:px-3 py-1.5 rounded-xl  border border-gray-150 dark:border-gray-600 gap-1.5`}
                 >
-                  <div className="w-[18px] h-[18px] rounded-[20px] flex flex-col items-center justify-center  bg-green-500 ">
-                    <span className="flex items-center text-center  text-white  dark:text-[#2F3232] text-xs font-semibold p-1  ">
+                  <div className="w-[18px] h-[18px] rounded-[20px] flex flex-col items-center justify-center  bg-[#75AE46]">
+                    <span className="flex items-center text-center  text-white  dark:text-[#2F3232] text-[12px] font-semibold p-1">
                       {" "}
                       1
                     </span>
                   </div>
                   <span
-                    className={` lg:text-md  opacity-80 text-[#0E201E] 
-                  dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
+                    className={`md:text-smh  opacity-80 text-gray-900
+                      dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
                   >
                     Connect Exchanges & Wallets
                   </span>
@@ -94,15 +94,15 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                 <div
                   className={`flex items-center justify-center px-3 md:px-3 py-1.5 rounded-xl  border border-gray-150 dark:border-gray-600 gap-1.5`}
                 >
-                  <div className="w-[18px] h-[18px] rounded-[20px] flex flex-col items-center justify-center  bg-green-500 ">
-                    <span className="flex items-center text-center  text-white  dark:text-[#2F3232] text-xs font-semibold p-1  ">
+                  <div className="w-[18px] h-[18px] rounded-[20px] flex flex-col items-center justify-center  bg-[#75AE46]">
+                    <span className="flex items-center text-center  text-white  dark:text-[#2F3232] text-[12px] font-semibold p-1">
                       {" "}
                       2
                     </span>
                   </div>
                   <span
-                    className={` lg:text-md  opacity-80 text-[#0E201E] 
-                  dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
+                    className={`md:text-smh  opacity-80 text-gray-900
+                      dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
                   >
                     Reconcile Trades
                   </span>
@@ -110,15 +110,15 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                 <div
                   className={`flex items-center justify-center px-3 md:px-3 py-1.5 rounded-xl  border border-gray-150 dark:border-gray-600 gap-1.5`}
                 >
-                  <div className="w-[18px] h-[18px] rounded-[20px] flex flex-col items-center justify-center  bg-green-500 ">
-                    <span className="flex items-center text-center  text-white  dark:text-[#2F3232] text-xs font-semibold p-1  ">
+                  <div className="w-[18px] h-[18px] rounded-[20px] flex flex-col items-center justify-center  bg-[#75AE46]">
+                    <span className="flex items-center text-center  text-white  dark:text-[#2F3232] text-[12px] font-semibold p-1">
                       {" "}
                       3
                     </span>
                   </div>
                   <span
-                    className={` lg:text-md  opacity-80 text-[#0E201E] 
-                  dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
+                    className={`md:text-smh  opacity-80 text-gray-900
+                      dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
                   >
                     Run Tax Reports
                   </span>
@@ -129,10 +129,10 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
 
           {/* Additional Savings Info */}
           <div
-            className={`text-sm lg:text-sm text-gray-600 dark:text-[#B6B8BA] text-left`}
+            className={`text-sm lg:text-smh text-gray-600 dark:text-[#B6B8BA] text-left`}
           >
             Also, you SAVE more when you{" "}
-            <span className="font-bold text-info-500">Go Pro</span> with our
+            <span className="font-bold text-[#75AE46]">Go Pro</span> with our
             advanced tax settings.
           </div>
         </div>
@@ -140,12 +140,12 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className={`hidden w-22 h-8 md:flex flex-row justify-center items-center gap-1 py-[6px] px-2.5 rounded-lg shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border #e1e3e5 border-solid bg-[#fff] 
+          className={`hidden w-22 h-8 md:flex flex-row justify-center items-center gap-1 py-[6px] px-2.5 rounded-lg shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border border-gray-150 bg-[#fff] 
             dark:text-[#B6B8BA] dark:border-[#4D5050] dark:bg-transparent `}
           aria-label="Close banner"
         >
           <svg
-            className="w-2 h-2 lg:w-4 lg:h-4"
+            className="w-2 h-2 lg:w-4 lg:h-4 text-gray-500"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

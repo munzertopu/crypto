@@ -45,7 +45,7 @@ const FinancialCard: React.FC<FinancialCardProps> = ({
           {value}
         </span>
         <span
-          className={`text-md font-medium ${
+          className={`text-base font-medium ${
             isPositive ? "text-green-600" : "text-red-600"
           }`}
         >

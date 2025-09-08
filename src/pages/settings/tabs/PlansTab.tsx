@@ -115,7 +115,7 @@ const PlansTab: React.FC<PlansTabProps> = ({ isDarkMode }) => {
                         icon={faCheck} 
                         className="w-4 h-4 text-[#5F9339] mr-3 flex-shrink-0"
                       />
-                      <span className={`text-md ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <span className={`text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                         {feature}
                       </span>
                     </li>
