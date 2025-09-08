@@ -20,7 +20,7 @@ interface NFTGridProps {
 
 const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
   return (
-    <div className="mx-6">
+    <div className="mx-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredNFTs.map((nft) => (
           <div
@@ -42,7 +42,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
             </div>
 
             {/* NFT Details */}
-            <div className="p-5 mb-8">
+            <div className="p-6">
               <h3
                 className="font-semibold text-lg text-left mb-3 text-gray-800 dark:text-white"
               >
@@ -51,9 +51,9 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
 
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <div className="flex items-center justify-start">
+                  <div className="flex items-center gap-2">
                     <span
-                      className="text-sm font-medium text-gray-600 text-left dark:text-gray-400"
+                      className="text-sm font-medium text-gray-600 dark:text-gray-400"
                     >
                       Estimated Current Value:
                     </span>
@@ -87,7 +87,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
 
                 <div className="flex justify-between items-center">
                   <span
-                    className="text-sm font-semibold text-gray-600 dark:text-gray-400"
+                    className="text-base font-semibold text-gray-600 dark:text-gray-400"
                   >
                     Gain/Loss:
                   </span>
@@ -104,11 +104,11 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
 
                 <div className="flex justify-between items-center">
                   <span
-                    className="text-h6 font-bold text-gray-600 dark:text-gray-400"
+                    className="text-lg font-bold text-gray-600 dark:text-gray-400"
                   >
                     {nft.purchasePrice}
                   </span>
-                  <div className="flex items-center text-sm gap-1 border border-[#E1E3E5] dark:border-[#4D5050] rounded-full px-4 py-1.5 bg-[#F3F5F7] dark:bg-[#2F3232]">
+                  <div className="flex items-center gap-1 border border-[#E1E3E5] dark:border-[#4D5050] rounded-full px-2 py-1 bg-[#F3F5F7] dark:bg-[#2F3232]">
                     <FontAwesomeIcon
                       icon={faCalendarAlt}
                       className="text-base text-gray-500 dark:text-gray-400"
