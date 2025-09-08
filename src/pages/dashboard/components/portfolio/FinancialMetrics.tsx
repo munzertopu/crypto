@@ -294,7 +294,7 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
   };
 
   return (
-    <div className="mb-4 sm:mb-6 pt-4 sm:pt-0">
+    <div className="pt-4 sm:pt-0">
       <div className="bg-transparent">
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
           {/* Left Section - Total Value */}

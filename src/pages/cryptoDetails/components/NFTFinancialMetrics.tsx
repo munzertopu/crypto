@@ -21,8 +21,8 @@ const NFTSection: React.FC<NFTSectionProps> = ({
   // SVG Icons for NFT Cards
   const totalNFTsSvg = (
     <svg
-      width="24"
-      height="24"
+      width="20"
+      height="20"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -104,8 +104,8 @@ const NFTSection: React.FC<NFTSectionProps> = ({
     <svg
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      width="24.000000"
-      height="24.000000"
+      width="20"
+      height="20"
       fill="none"
     >
       <rect
@@ -154,8 +154,8 @@ const NFTSection: React.FC<NFTSectionProps> = ({
     <svg
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      width="24.000000"
-      height="24.000000"
+      width="20"
+      height="20"
       fill="none"
     >
       <rect
@@ -227,8 +227,8 @@ const NFTSection: React.FC<NFTSectionProps> = ({
 
   const estimatedGainLossSvg = (
     <svg
-      width="24"
-      height="24"
+      width="20"
+      height="20"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -264,9 +264,9 @@ const NFTSection: React.FC<NFTSectionProps> = ({
     </svg>
   );
   return (
-    <div className="px-2 my-6">
+    <div className="mt-8">
       <div
-        className={`grid grid-cols-2 gap-8 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
+        className={`grid grid-cols-2 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
       >
         <Card
           title="Total number of NFTs"

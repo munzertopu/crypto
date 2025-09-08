@@ -112,7 +112,7 @@ const NFTTab: React.FC<NFTTabProps> = ({ isDarkMode }) => {
   return (
     <>
       {/* Financial Metrics */}
-      <div className="mx-3">
+      <div className="px-6 mx-0 md:mx-0 sm:mx-3">
         <NFTFinancialMetrics 
           totalNFTs="13"
           totalPurchaseValue="$21,200"

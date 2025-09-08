@@ -307,12 +307,12 @@ const KPISection: React.FC<KPISectionProps> = ({
   }, [isDropdownOpen]);
 
   return (
-    <div className="mb-8 md:mb-0 md:py-6">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#E1E3E5] py-2.5">
+    <div>
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#E1E3E5] pb-5">
           KPI
         </h3>
-        <div className="relative pr-0 sm:pr-8" ref={dropdownRef}>
+        <div className="relative pr-0 md:pr-0 sm:pr-8" ref={dropdownRef}>
           {/* Add KPI Button with Dropdown */}
           <button
             onClick={handleDropdownToggle}
@@ -429,11 +429,9 @@ const KPISection: React.FC<KPISectionProps> = ({
           )}
         </div>
       </div>
-      {/* sm:divide-x */}
-      {/* grid gap-8
-    grid-cols-[repeat(auto-fit,minmax(220px,1fr))] */}
+      
       <div
-        className={`grid grid-cols-2 gap-4 sm:gap-8 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
+        className={`grid grid-cols-2 gap-0 sm:gap-8 md:gap-0 md:mr-3 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
       >
         <KPICard
           title="Income"
