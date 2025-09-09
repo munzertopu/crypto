@@ -22,18 +22,12 @@ interface FiltersProps {
 const Filters: React.FC<FiltersProps> = ({
   searchTerm,
   setSearchTerm,
-  sortBy,
-  setSortBy,
   isDarkMode,
 }) => {
   const [showEstimatedValueDropdown, setShowEstimatedValueDropdown] =
     useState(false);
   const [fromCurrency, setFromCurrency] = useState("USDT");
   const [toCurrency, setToCurrency] = useState("USDT");
-  const [purchaseDateValue, setPurchaseDateValue] = useState<any>({
-    startDate: null,
-    endDate: null,
-  });
   const [showGainDropdown, setShowGainDropdown] = useState(false);
   const [selectedGain, setSelectedGain] = useState("Highest gain");
   const [fromValue, setFromValue] = useState("0");
@@ -106,10 +100,8 @@ const Filters: React.FC<FiltersProps> = ({
           </div>
         </div>
 
-        {/* Gap - 1/3 width */}
-
         {/* Filters - 1/3 width */}
-        <div className="flex gap-2 flex-col sm:flex-row">
+        <div className="flex gap-3 flex-col sm:flex-row">
           <EstimatedValueDropdown
             isDarkMode={isDarkMode}
             fromValue={fromValue}
@@ -144,7 +136,7 @@ const Filters: React.FC<FiltersProps> = ({
 
           <div className="flex-1 relative my-4">
             <div
-              className="w-full sm:w-[200px] px-3 py-3 flex items-center justify-between cursor-pointer rounded-lg border text-base bg-transparent border-[#E1E3E5] text-[#0E201E] 
+              className="w-full sm:w-[200px] px-3 py-4 flex items-center justify-between cursor-pointer rounded-lg shadow-sm border text-sm bg-transparent border-[#E1E3E5] text-[#0E201E] 
                 dark:border-[#4D5050] dark:text-white"
               onClick={() => setShowGainDropdown(!showGainDropdown)}
             >

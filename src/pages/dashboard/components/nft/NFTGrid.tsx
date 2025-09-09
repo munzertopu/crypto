@@ -57,7 +57,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
                     >
                       Estimated Current Value:
                     </span>
-                    {/* <svg
+                    <svg
                       className="w-4 h-4 text-gray-400"
                       fill="none"
                       stroke="currentColor"
@@ -76,7 +76,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
                         strokeWidth={2}
                         d="M12 9v2m0 4h.01"
                       />
-                    </svg> */}
+                    </svg>
                   </div>
                   <span
                     className="font-semibold text-sm text-gray-900 dark:text-white"
@@ -87,7 +87,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
 
                 <div className="flex justify-between items-center">
                   <span
-                    className="text-base font-semibold text-gray-600 dark:text-gray-400"
+                    className="text-sm font-semibold text-gray-600 dark:text-gray-400"
                   >
                     Gain/Loss:
                   </span>
@@ -108,13 +108,13 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
                   >
                     {nft.purchasePrice}
                   </span>
-                  <div className="flex items-center gap-1 border border-[#E1E3E5] dark:border-[#4D5050] rounded-full px-2 py-1 bg-[#F3F5F7] dark:bg-[#2F3232]">
+                  <div className="flex items-center gap-1 border border-[#E1E3E5] dark:border-[#4D5050] rounded-full px-2 py-1 bg-gray-100 dark:bg-[#2F3232]">
                     <FontAwesomeIcon
                       icon={faCalendarAlt}
                       className="text-base text-gray-500 dark:text-gray-400"
                     />
                     <span
-                      className="text-base font-semibold text-gray-600 dark:text-gray-400"
+                      className="text-[13px] font-medium text-gray-600 dark:text-gray-400"
                     >
                       {nft.purchaseDate}
                     </span>
