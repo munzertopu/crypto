@@ -81,7 +81,7 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({
         <h3 className="text-lg font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Tax Lots</h3>
       </div>
       <div className="overflow-x-auto">
-        <Card className="h-full w-full">
+        <Card className="h-full w-full border-transparent bg-transprent shadow-none">
           <CardBody className="px-0 rounded-lg m-0 p-0">
             <table className="w-full min-w-max table-auto text-left">
               <thead className='bg-gray-200 dark:bg-[#2F3232]'>
@@ -89,14 +89,15 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({
                   {TABLE_HEAD.map((head, index) => (
                     <th
                       key={head}
-                      className={`cursor-pointer p-4 ${index === 0 ? 'rounded-l-md' : ''} ${index === TABLE_HEAD.length - 1 ? 'rounded-r-md' : ''}`}
+                      className={`cursor-pointer px-4 py-5 ${index === 0 ? 'rounded-l-md' : ''} ${index === TABLE_HEAD.length - 1 ? 'rounded-r-md' : ''}`}
                     >
                       <Typography
                         variant="small"
-                        className="flex items-center justify-between gap-2 font-normal leading-none opacity-70 text-[#0E201E] dark:text-[#B6B8BA]"
+                        className="flex items-center gap-2 font-normal leading-none opacity-70 text-sm text-[#0E201E] 
+                        dark:text-[#B6B8BA]"
                       >
                         {head}{" "}
-                        {index !== TABLE_HEAD.length - 1 && (
+                        {(index < TABLE_HEAD.length - 1 && index > 0 ) && (
                             <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" />
                         )}
                       </Typography>
@@ -107,45 +108,45 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({
               <tbody className="bg-white dark:bg-[#0E201E] divide-gray-200 dark:divide-[#2F3232]">
                 {tableData.map((item) => (
                   <tr key={item.id} className="hover:bg-gray-50 dark:hover:bg-[#2F3232]">
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-5 py-3 whitespace-nowrap">
                       <div className="flex items-center">
-                        <Avatar src={item.acquisitionAccount.logo} alt={item.acquisitionAccount.name} size="sm" className="mr-3" />
-                        <span className="text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                        <Avatar src={item.acquisitionAccount.logo} alt={item.acquisitionAccount.name} size="sm" className="mr-1.5" />
+                        <span className="text-base text-[#0E201E] dark:text-[#F3F5F7]">
                           {item.acquisitionAccount.name}
                         </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <Avatar src={item.currentAccount.logo} alt={item.currentAccount.name} size="sm" className="mr-3" />
-                        <span className="text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                        <Avatar src={item.currentAccount.logo} alt={item.currentAccount.name} size="sm" className="mr-1.5" />
+                        <span className="text-base text-[#0E201E] dark:text-[#F3F5F7]">
                           {item.currentAccount.name}
                         </span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="px-5 py-3 whitespace-nowrap text-base text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.type}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="px-5 py-3 whitespace-nowrap text-base text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.amount}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-[#0E201E] dark:text-[#F3F5F7]">{item.currentPrice.current}</div>
+                    <td className="px-5 py-3 whitespace-nowrap">
+                      <div className="text-base text-[#0E201E] dark:text-[#F3F5F7]">{item.currentPrice.current}</div>
                       <div className="text-sm text-gray-500 dark:text-[#A1A3A5]">{item.currentPrice.original}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-[#0E201E] dark:text-[#F3F5F7]">{item.change.value}</div>
+                    <td className="px-5 py-3 whitespace-nowrap">
+                      <div className="text-base text-[#0E201E] dark:text-[#F3F5F7]">{item.change.value}</div>
                       <div className="text-sm text-gray-600 dark:text-[#8C8E90]">{item.change.percentage}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="px-5 py-3 whitespace-nowrap text-base text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.value}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`text-sm font-medium ${item.unrealizedGL.type === 'positive' ? 'text-green-600' : 'text-red-600'}`}>
+                    <td className="px-5 py-3 whitespace-nowrap">
+                      <span className={`text-base font-medium ${item.unrealizedGL.type === 'positive' ? 'text-green-600' : 'text-red-600'}`}>
                         {item.unrealizedGL.value}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="px-5 py-3 whitespace-nowrap text-base text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.purchaseDate}
                     </td>
                   </tr>
