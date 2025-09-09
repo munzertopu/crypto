@@ -178,7 +178,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
         Holdings
       </h3>
 
-      <Card className="h-full w-full border-transparent bg-transprent">
+      <Card className="h-full w-full border-transparent bg-transprent shadow-none">
         <CardBody className="px-0 rounded-lg sm:overflow-x-auto">
           <table className="w-full min-w-max table-auto text-left">
             <thead className="bg-[#F3F5F7] dark:bg-[#2F3232] hidden sm:table-header-group">
@@ -360,7 +360,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                       <td className="hidden sm:table-cell">
                         <Typography
                           variant="small"
-                          className={`font-normal text-base text-center  text-[#0E201E] dark:text-[#F3F5F7]`}
+                          className={`font-normal text-base text-[#0E201E] dark:text-[#F3F5F7]`}
                         >
                           {marketValue}
                         </Typography>

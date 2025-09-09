@@ -230,16 +230,16 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
         currentPage="transactions"
       />
 
-      <div className="px-4 sm:px-6 lg:px-8 mt-4.5 sm:mt-8">
+      <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full">
         {/* Header */}
         <div className="flex flex-row sm:items-center justify-between px-1 sm:px-2 lg:pl-8">
           <div className="flex gap-2 justify-start items-end">
-            <h1
+            <h4
               className="text-lg sm:text-2xl font-semibold text-gray-900
               dark:text-[#E1E3E5]"
             >
               Transactions
-            </h1>{" "}
+            </h4>{" "}
             <h1
               className="hidden sm:inline text-xl font-semibold text-[rgba(77,80,80,1)] 
               dark:text-[#E1E3E5]"
@@ -249,7 +249,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           </div>
           <div className="flex items-center space-x-3 mt-4 sm:mt-0">
             <button
-              className={`text-base font-medium px-3 py-1 sm:px-6 sm:py-3 rounded-md sm:rounded-2xl bg-[#90C853] text-[#0E201E]`}
+              className={`text-base font-medium px-3 py-1 sm:px-6 sm:py-3 md:py-3 rounded-md sm:rounded-2xl bg-[#90C853] text-[#0E201E]`}
               aria-label="Add new transaction"
             >
               <span className="hidden sm:inline">Add Transaction</span>
