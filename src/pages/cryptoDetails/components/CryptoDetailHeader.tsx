@@ -22,20 +22,20 @@ const CryptoDetailHeader: React.FC<CryptoDetailHeaderProps> = ({
   return (
     <div className="mb-6 bg-white dark:bg-[#0E201E]">
         <div className="flex items-center mb-4">
-            <img src={cryptoLogo} alt={cryptoName} className="w-12 h-12 rounded-full mr-4" />
-            <h1 className="text-3xl font-bold text-[#0E201E] dark:text-[#E1E3E5]">{cryptoName}</h1>
+            <img src={cryptoLogo} alt={cryptoName} className="w-10 h-10 rounded-full mr-2" />
+            <h1 className="text-h4 font-semibold text-[#0E201E] dark:text-[#E1E3E5]">{cryptoName}</h1>
         </div>
         
         {/* Tabs */}
         <div className="border-gray-200 dark:border-gray-700">
             <Tabs>
-                <Tabs.List className="my-2 lg:my-2 bg-[#F3F5F7] dark:bg-[#2F3232]">
+                <Tabs.List className="my-2 lg:my-2 bg-gray-100 dark:bg-[#2F3232]">
                     {tabs.map((tab) => (
                         <Tabs.Trigger 
                             key={tab}
                             value={tab}
                             onClick={() => onTabChange?.(tab)}
-                            className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl text-sm sm:text-lg ${
+                            className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl md:rounded-lg text-sm sm:text-lg md:text-sm ${
                                 activeTab === tab
                                     ? 'bg-white dark:bg-[#0E201E] text-black dark:text-white'
                                     : 'text-[#0E201E] dark:text-[#FFFFFF]'

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Input, Typography } from "@material-tailwind/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Datepicker from "react-tailwindcss-datepicker";
 import EstimatedValueDropdown from "../../../../components/AmountRangeDropdown";
@@ -7,7 +6,6 @@ import EstimatedValueDropdown from "../../../../components/AmountRangeDropdown";
 import {
   faSearch,
   faChevronDown,
-  faCross,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -79,7 +77,7 @@ const Filters: React.FC<FiltersProps> = ({
   };
 
   return (
-    <div className="mx-8 md:mx-6 my-8">
+    <div className="mx-8 md:mx-6 mt-8">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
         {/* Search Bar - 1/3 width */}
         <div>
@@ -151,7 +149,7 @@ const Filters: React.FC<FiltersProps> = ({
 
             {/* Gain Dropdown */}
             {showGainDropdown && (
-              <div className="absolute top-full left-0 right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-600">
+              <div className="absolute top-full md:px-1.5 md:py-0.5 left-0 right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-600">
                 <div className="py-1">
                   {["Highest gain", "Lowest gain"].map((gain) => (
                     <button
@@ -160,10 +158,11 @@ const Filters: React.FC<FiltersProps> = ({
                         setSelectedGain(gain);
                         setShowGainDropdown(false);
                       }}
-                      className={`w-full px-3 py-2 text-left text-sm flex items-center justify-between text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-[#0A0F290A] ${
+                      className={`w-full px-3 md:px-1.5 py-2 text-left text-sm flex items-center justify-between rounded-lg text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-[#0A0F290A] ${
                         selectedGain === gain ? "bg-[#0A0F290A]" : ""
                       }`}
                     >
+                      {/* <span>#0A0F290A</span> */}
                       <span>{gain}</span>
                       {selectedGain === gain && (
                         <svg
@@ -192,12 +191,12 @@ const Filters: React.FC<FiltersProps> = ({
         toValue !== "0" ||
         selectedDateRange ||
         selectedGain !== "Highest gain") && (
-        <div className="mt-4 py-2">
+        <div className="mb-3 py-2">
           <div className="flex flex-wrap gap-2">
             {/* Currency Range Filter Tag */}
             {(fromValue !== "0" || toValue !== "0") && (
-              <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">
-                <span className="text-base font-semibold text-black-800 dark:text-white">
+              <div className="flex items-center gap-2 px-3 py-1 bg-gray-100 border border-[#E1E3E5] dark:bg-gray-700 rounded-full">
+                <span className="text-sm font-semibold text-black-800 dark:text-white">
                   {fromValue}-{toValue} {fromCurrency}
                 </span>
                 <button
@@ -216,8 +215,8 @@ const Filters: React.FC<FiltersProps> = ({
 
             {/* Date Range Filter Tag */}
             {selectedDateRange && (
-              <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">
-                <span className="text-base font-semibold text-black-800 dark:text-white">
+              <div className="flex items-center gap-2 px-3 py-1 bg-gray-100 border border-[#E1E3E5] dark:bg-gray-700 rounded-full">
+                <span className="text-sm font-semibold text-black-800 dark:text-white">
                   {selectedDateRange.startDate && selectedDateRange.endDate
                     ? `${new Date(
                         selectedDateRange.startDate
@@ -241,8 +240,8 @@ const Filters: React.FC<FiltersProps> = ({
 
             {/* Gain Filter Tag */}
             {selectedGain !== "Highest gain" && (
-              <div className="flex items-center gap-2 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-full">
-                <span className="text-base font-semibold text-black dark:text-white">
+              <div className="flex items-center gap-2 px-3 py-1 bg-gray-100 border border-[#E1E3E5] dark:bg-gray-700 rounded-full">
+                <span className="text-sm font-semibold text-black dark:text-white">
                   {selectedGain}
                 </span>
                 <button
@@ -265,7 +264,7 @@ const Filters: React.FC<FiltersProps> = ({
                   setFromCurrency("USDT");
                   setToCurrency("USDT");
                 }}
-                className="flex items-center gap-1 text-green-700 text-base"
+                className="flex items-center gap-1 text-[#5F9339] text-sm"
               >
                 <FontAwesomeIcon icon={faXmark} className="w-3 h-3" />
                 <span>Clear all</span>

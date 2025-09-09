@@ -55,15 +55,15 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
       {/* Dropdown Content */}
       {isOpen && (
         <div
-          className={`absolute top-full left-0 mt-1 p-4 rounded-lg border shadow-lg z-50 w-80 bg-white border-gray-300
+          className={`absolute top-full left-0 mt-1 p-4 rounded-lg border shadow-lg z-50 w-80 bg-white border-[#E1E3E5]
             dark:bg-[#0E201E]`}
         >
-          <div className="flex gap-2">
+          <div className="flex gap-4">
             {/* From Input */}
             <div className="flex-1">
               <Typography
                 variant="small"
-                className={`mb-2 font-medium text-left text-gray-700
+                className={`mb-2 font-medium text-sm text-left text-gray-700
                   dark:text-[#F3F5F7]`}
               >
                 From:
@@ -74,7 +74,7 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                   placeholder="0"
                   value={fromValue}
                   onChange={(e) => setFromValue(e.target.value)}
-                  className={`w-full rounded-lg text-sm font-semibold border-gray-300 bg-white text-gray-900
+                  className={`w-full rounded-lg text-sm font-semibold border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-1 focus:ring-border-gray-300
                     dark:bg-transparent dark:border-[#4D5050] dark:text-[#A1A3A5]`}
                 />
                 <button
@@ -123,7 +123,7 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
             <div className="flex-1">
               <Typography
                 variant="small"
-                className={`mb-2 font-medium text-left text-gray-700
+                className={`mb-2 font-medium text-left text-sm text-gray-700
                   dark:text-[#F3F5F7]`}
               >
                 To:

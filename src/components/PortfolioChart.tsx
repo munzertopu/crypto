@@ -163,7 +163,7 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({
         className="p-0 md:p-0 sm:p-3 bg-white
         dark:bg-[#0E201E]"
       >
-        <div className="w-full h-100">
+        <div className="w-full h-100 md:-mx-4">
           <ReactApexChart
             options={options}
             series={series}

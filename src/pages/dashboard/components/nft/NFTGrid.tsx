@@ -20,15 +20,15 @@ interface NFTGridProps {
 
 const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
   return (
-    <div className="mx-6">
+    <div className="mx-6 mb-10">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {filteredNFTs.map((nft) => (
           <div
             key={nft.id}
-            className="rounded-2xl overflow-hidden border bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+            className="rounded-2xl overflow-hidden border bg-white dark:bg-gray-800 border-[#E1E3E5] dark:border-gray-700"
           >
             {/* NFT Image */}
-            <div className="aspect-[2/1] bg-gray-200 relative overflow-hidden">
+            <div className="aspect-[3/2] bg-gray-200 relative overflow-hidden">
               <img
                 src={nft.image}
                 alt={nft.name}
@@ -42,7 +42,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
             </div>
 
             {/* NFT Details */}
-            <div className="p-6">
+            <div className="px-5 pt-5 pb-6">
               <h3
                 className="font-semibold text-lg text-left mb-3 text-gray-800 dark:text-white"
               >
@@ -87,7 +87,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
 
                 <div className="flex justify-between items-center">
                   <span
-                    className="text-sm font-semibold text-gray-600 dark:text-gray-400"
+                    className="text-sm font-medium text-gray-600 dark:text-gray-400"
                   >
                     Gain/Loss:
                   </span>
