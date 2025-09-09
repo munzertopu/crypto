@@ -338,12 +338,10 @@ const Filter: React.FC<FilterProps> = ({
       selectedDateRange.startDate &&
       selectedDateRange.endDate);
   return (
-    <div className={`p-0 sm:p-4 lg:pt-6 lg:px-8 rounded-lg `}>
+    <div className={`p-0 sm:p-4 md:pt-5 md:pb-6 rounded-lg `}>
       {/* Tabs */}
       {!hideTab && (
-        <div
-          className={`${isDarkMode ? "border-gray-700" : "border-gray-200"}`}
-        >
+        <div className={`border-gray-200 dark:border-gray-700`}>
           <Tabs>
             <Tabs.List className="my-2 lg:my-2 bg-[#F3F5F7] dark:bg-[#2F3232]">
               {tabs.map((tab) => (
