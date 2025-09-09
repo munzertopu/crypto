@@ -309,7 +309,7 @@ const KPISection: React.FC<KPISectionProps> = ({
   return (
     <div className="mb-8 md:mb-0 md:px-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#E1E3E5] py-2.5">
+        <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#E1E3E5]">
           KPI
         </h3>
         <div className="relative pr-0 sm:pr-8" ref={dropdownRef}>

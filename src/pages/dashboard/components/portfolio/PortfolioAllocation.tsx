@@ -92,9 +92,9 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
       </h3>
       <div
         className="grid gap-4 
-            grid-cols-1 
+            grid-cols-1
             sm:grid-cols-2 
-            md:grid-cols-3 
+            md:grid-cols-4
             lg:grid-cols-4 
             xl:grid-cols-5
             divide-[#E1E3E5] dark:divide-[#8C8E90]"
@@ -143,7 +143,7 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
               </div>
               {/* Vertical Separator - don't show for last element in row */}
               {assetIndex < data.length - 1 && (
-                <div className="flex-shrink-0 w-px h-8 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-4 lg:mx-8 hidden sm:block"></div>
+                <div className="flex-shrink-0 w-px h-8 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-4 lg:mx-8 xl:mx-4 hidden sm:block"></div>
               )}
             </React.Fragment>
           </div>
