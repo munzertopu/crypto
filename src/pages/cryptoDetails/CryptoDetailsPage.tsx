@@ -61,24 +61,25 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
   return (
     <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white">
       <NavigationBar 
-        isDarkMode={isDarkModeState} 
+        userName="Kristin Watson"
+        isDarkMode={isDarkModeState}
         onThemeToggle={handleThemeToggle}
         onLogout={() => navigate('/login')} 
       />
       
-      <div className="mx-10 my-4">
+      <div className="px-4 md:px-10 sm:px-6 md:pt-5 md:pb-2 w-full">
         {/* Breadcrumb */}
-        <nav className="flex mb-6" aria-label="Breadcrumb">
+        <nav className="flex mb-8" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
             <li className="inline-flex items-center">
-              <a href="/dashboard" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+              <a href="/dashboard" className="inline-flex items-center text-base font-normal text-[#8C8E90] dark:text-gray-400 dark:hover:text-white">
                 Dashboard
               </a>
             </li>
             <li>
               <div className="flex items-center">
                 <FontAwesomeIcon icon={faChevronRight} className="w-4 h-4 text-gray-400 dark:text-gray-600" />
-                <span className="ml-1 text-sm font-bold text-gray-500 dark:text-gray-500 md:ml-2">
+                <span className="ml-1 text-base font-medium text-[#0E201E] dark:text-gray-500 md:ml-2">
                   {cryptoName} details
                 </span>
               </div>
@@ -98,20 +99,20 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
           />
         </div>
         {/* Market Performance Section */}
-        <div className="mb-6 bg-white dark:bg-[#0E201E]">
+        <div className="mb-6 md:mb-0 bg-white dark:bg-[#0E201E]">
            {/* Header and Time Range in one row */}
            <div className="flex justify-between items-center mb-4">
-             <h2 className="text-xl font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Market Performance</h2>
+             <h2 className="text-h6 font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Market Performance</h2>
              {/* Time Range Selector */}
-             <div className="border-gray-200 dark:border-gray-700">
+             <div className="border-gray-100 dark:border-gray-700">
                  <Tabs>
-                     <Tabs.List className='bg-gray-200 dark:bg-[#2F3232]'>
+                     <Tabs.List className='bg-gray-100 dark:bg-[#2F3232]'>
                          {timeRanges.map((timeRange) => (
                              <Tabs.Trigger 
                                  key={timeRange}
                                  value={timeRange}
                                  onClick={() => handleTimeRangeChange?.(timeRange)}
-                                 className={`py-2 px-3 rounded-md ${
+                                 className={`py-1.5 px-2.5 rounded-lg text-sm ${
                                  activeTimeRange === timeRange
                                      ? 'bg-white dark:bg-[#0E201E] text-black dark:text-white'
                                       :'text-[#0E201E] dark:text-[#FFFFFF]'
@@ -133,19 +134,24 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
           />
         </div>
 
+        {/* Horizontal Separator */}
+        <div className="pb-6 hidden md:block">
+          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+        </div>
+        
         {/* Table Tabs */}
-        <div className="border-gray-200 dark:border-gray-700">
+        <div className="border-gray-100 dark:border-gray-700">
           <Tabs>
-            <Tabs.List className='bg-gray-200 dark:bg-[#2F3232]'>
+            <Tabs.List className='bg-gray-100 dark:bg-[#2F3232]'>
               {tableTabs.map((tab) => (
                 <Tabs.Trigger 
                   key={tab}
                   value={tab}
                   onClick={() => setActiveTableTab(tab.toLowerCase().replace(/\s+/g, '') as any)}
-                  className={`py-2 px-3 rounded-md ${
+                  className={`py-1.5 px-2.5 rounded-lg text-sm ${
                     activeTableTab === tab.toLowerCase().replace(/\s+/g, '')
                       ? 'bg-white dark:bg-[#0E201E] text-black dark:text-white'
-                      : 'text-[#0E201E] dark:text-[#FFFFFF]'
+                      :'text-[#0E201E] dark:text-[#FFFFFF]'
                   }`}
                 >
                   {tab}

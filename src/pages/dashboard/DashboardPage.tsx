@@ -39,10 +39,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
   };
 
   return (
-    <div
-      className="min-h-screen bg-white dark:bg-[#0E201E]
-    "
-    >
+    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white">
       {/* Navigation Bar */}
       <NavigationBar
         userName="Kristin Watson"

@@ -121,7 +121,9 @@ const AppContent: React.FC = () => {
         path="/settings"
         element={<SettingsPage onLogout={handleLogout} />}
       />
-      <Route path="/crypto/:symbol" element={<CryptoDetailsPage />} />
+      <Route
+        path="/crypto/:symbol" 
+        element={<CryptoDetailsPage />} />
 
       {/* Default redirect */}
       <Route path="/" element={<Navigate to="/login" replace />} />

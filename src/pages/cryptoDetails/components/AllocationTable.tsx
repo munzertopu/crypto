@@ -27,7 +27,7 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
   data = [],
   isDarkMode = false
 }) => {
-      const TABLE_HEAD = ["Wallet", "Balance", "Value", "Allocation", "Long-Term Gain", "Short-Term Gain"];
+      const TABLE_HEAD = ["Wallet", "Balance", "Value", "Allocation", "Short-term vs Long-term Holdings"];
       
       // Default mock data if no data provided
       const defaultData: AllocationData[] = [
@@ -77,22 +77,23 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
         <h3 className="text-lg font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Allocations</h3>
       </div>
       <div className="overflow-x-auto">
-        <Card className="h-full w-full">
-          <CardBody className="px-0 rounded-lg m-0 p-0">
-            <table className="w-full min-w-max table-auto text-left">
+        <Card className="h-full w-full border-transparent bg-transprent shadow-none">
+          <CardBody className="px-0 rounded-lg m-0 p-0 border-0">
+            <table className="w-full min-w-max table-auto text-left shadow-none">
               <thead className='bg-gray-200 dark:bg-[#2F3232]'>
                 <tr className=''>
                   {TABLE_HEAD.map((head, index) => (
                     <th
                       key={head}
-                      className={`cursor-pointer p-4 ${index === 0 ? 'rounded-l-md' : ''} ${index === TABLE_HEAD.length - 1 ? 'rounded-r-md' : ''}`}
+                      className={`cursor-pointer px-4 py-5 ${index === 0 ? 'rounded-l-md' : ''} ${index === TABLE_HEAD.length - 1 ? 'rounded-r-md' : ''}`}
                     >
                       <Typography
                         variant="small"
-                        className="flex items-center justify-between gap-2 font-normal leading-none opacity-70 text-[#0E201E] dark:text-[#B6B8BA]"
+                        className="flex items-center gap-2 font-normal leading-none opacity-70 text-sm text-[#0E201E] 
+                        dark:text-[#B6B8BA]"
                       >
                         {head}{" "}
-                        {index !== TABLE_HEAD.length - 1 && (
+                        {(index < TABLE_HEAD.length - 1 && index > 0 ) && (
                           <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" />
                         )}
                       </Typography>
@@ -103,46 +104,28 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
               <tbody className="bg-white dark:bg-[#0E201E] divide-gray-200 dark:divide-[#2F3232]">
                 {tableData.map((item) => (
                   <tr key={item.id} className="hover:bg-gray-50 dark:hover:bg-[#2F3232]">
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-5 py-3 whitespace-nowrap">
                       <div className="flex items-center">
                         <span className="text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                           {item.wallet.name}
                         </span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="px-5 py-3 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.balance}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="pl-5 pr-8 py-3 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.value}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="pl-5 pr-8 py-3 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
                       {item.allocation}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center space-x-2">
-                        <div className="w-2/3 h-5 bg-gray-200 dark:bg-[#4D5050] rounded-full">
-                          <div 
-                            className="bg-green-500 h-5 rounded-l-full" 
-                            style={{ width: `${item.longTermGain}` }}
-                          ></div>
-                        </div>
-                        <span className="text-sm font-medium text-[#0E201E] dark:text-[#F3F5F7]">
-                          {item.longTermGain}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center space-x-2">
-                        <div className="w-2/3 h-5 bg-gray-200 dark:bg-[#4D5050] rounded-full">
-                          <div 
-                            className="bg-red-500 h-5 rounded-l-full" 
-                            style={{ width: `${item.shortTermGain}` }}
-                          ></div>
-                        </div>
-                        <span className="text-sm font-medium text-[#0E201E] dark:text-[#F3F5F7]">
-                          {item.shortTermGain}
-                        </span>
+                    <td className="px-5 py-3 whitespace-nowrap">
+                      <div className="w-2/3 h-5 bg-[#D8382C] dark:bg-[#4D5050] rounded-full">
+                        <div 
+                          className="bg-[#419F45] h-5 rounded-l-full" 
+                          style={{ width: `${item.longTermGain}` }}
+                        ></div>
                       </div>
                     </td>
                   </tr>
