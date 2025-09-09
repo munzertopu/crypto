@@ -105,7 +105,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                 key={tab}
                 value={tab}
                 onClick={() => onTabChange?.(tab)}
-                className={`px-1.5 sm:px-5 md:px-2.5 py-2.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl text-smh sm:text-smh md:smh ${
+                className={`px-1.5 sm:px-5 md:px-2.5 py-2.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-lg text-smh sm:text-smh md:smh ${
                   activeTab === tab
                     ? "bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white"
                     : "text-gray-900 dark:text-[#FFFFFF] opacity-75"
