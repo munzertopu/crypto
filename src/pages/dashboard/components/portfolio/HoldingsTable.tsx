@@ -192,7 +192,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                   >
                     <Typography
                       variant="small"
-                      className="flex items-center justify-between gap-2 font-normal text-sm leading-none text-[#666868] dark:text-[#B6B8BA]"
+                      className="flex items-center justify-start gap-2 font-normal text-sm leading-none text-[#666868] dark:text-[#B6B8BA]"
                     >
                       {head}{" "}
                       {index !== TABLE_HEAD.length - 1 && (
