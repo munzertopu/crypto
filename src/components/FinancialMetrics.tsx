@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faDollarSign,
-  faCoins,
-  faWallet,
   faChevronDown,
-  faBolt,
-  faBriefcase,
 } from "@fortawesome/free-solid-svg-icons";
-import useScreenSize from "../../../../hooks/useScreenSize";
+import useScreenSize from "../hooks/useScreenSize";
 
 interface MetricItemProps {
   title: string;
