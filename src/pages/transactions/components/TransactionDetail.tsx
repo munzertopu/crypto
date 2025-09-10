@@ -98,6 +98,9 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
                     $780.98
                   </Typography>
                 </div>
+                <div>
+                  <hr className="border-dashed border-gray-500 opacity-20 dark:border-[#2F3232]" />
+                </div>
                 <div className="flex justify-between">
                   <Typography variant="small" className={`text-base text-gray-700 dark:text-[#F3F5F7]`}>
                     Cost Basis:
@@ -105,6 +108,9 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
                   <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-[#F3F5F7]">
                     $579.60
                   </Typography>
+                </div>
+                <div>
+                  <hr className="border-dashed border-gray-500 opacity-20 dark:border-[#2F3232]" />
                 </div>
                 <div className="flex justify-between">
                   <Typography variant="small" className={`text-base text-gray-700 dark:text-[#F3F5F7]`}>
