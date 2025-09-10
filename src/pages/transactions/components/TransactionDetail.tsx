@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExchangeAlt, faGhost, faChevronUp, faChevronDown, faEye, faExchange } from '@fortawesome/free-solid-svg-icons';
+import { faGhost, faChevronUp, faChevronDown, faExchange } from '@fortawesome/free-solid-svg-icons';
 import {
   Card,
   Typography,
   CardBody,
 } from "@material-tailwind/react";
+import { ledgerData, costAnalysisData } from '../../../data/transactionAssets';
 
 interface TransactionDetailProps {
   isDarkMode: boolean;
@@ -14,58 +15,6 @@ interface TransactionDetailProps {
 const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => {
   const [activeTab, setActiveTab] = useState('Details');
 
-  const ledgerData = [
-    {
-      id: 1,
-      identifier: { icon: '₿', color: 'bg-orange-500', text: 'View txn' },
-      date: '4 Jan, 2025, 17:47',
-      type: 'Send',
-      ledger: 'ETH - Bitocion',
-      change: '-0.32348600',
-      balance: '+23.9830191'
-    },
-    {
-      id: 2,
-      identifier: { icon: '♦', color: 'bg-blue-500', text: 'View txn' },
-      date: '21 Nov, 2024, 13:09',
-      type: 'Receive',
-      ledger: 'ETH - Phantom',
-      change: '+0.292096470',
-      balance: '+23.9830191'
-    },
-    {
-      id: 3,
-      identifier: { icon: '☰', color: 'bg-purple-600', text: 'View txn' },
-      date: '19 Sep, 2024, 08:23',
-      type: 'Send',
-      ledger: 'ETH - Metamask',
-      change: '-0.1',
-      balance: '-2.903724'
-    }
-  ];
-
-  const costAnalysisData = [
-    {
-      id: 1,
-      date: '4 Jan, 2025, 17:47',
-      info: 'Own transfer',
-      holdingPeriod: '212 days (Short)',
-      amount: '-0.2535',
-      costUSD: '579.56',
-      gainUSD: '0.00',
-      isMarked: false
-    },
-    {
-      id: 2,
-      date: '4 Jan, 2025, 17:49',
-      info: 'Invested in ETH',
-      holdingPeriod: '212 days (Short)',
-      amount: '-0.2535',
-      costUSD: '579.56',
-      gainUSD: '0.00',
-      isMarked: true
-    }
-  ];
   return (
     <div className="space-y-2">
       {/* Tabs */}
