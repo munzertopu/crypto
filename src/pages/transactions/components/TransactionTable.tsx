@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faChevronUp,
   faChevronDown,
   faXmark,
   faChevronLeft,
@@ -31,6 +30,7 @@ interface Transaction {
   status: "completed" | "pending" | "failed";
   platform: string;
   error?: string;
+  time?: string;
 }
 
 interface TransactionTableProps {
@@ -201,22 +201,21 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       </td>
     </tr>
   );
-
-  console.log("data:", data);
+  
   return (
-    <div className="md:px-8 mb-6 mt-5 sm:mt-0">
+    <div className="md:px-0 mb-6 mt-6 sm:mt-0">
       <Card className={`h-full w-full border-transparent bg-transparent `}>
-        <CardBody className="px-0 sm:px-3.5 sm:py-2.5">
+        <CardBody className="px-0 sm:px-3.5 sm:py-2.5 md:px-0 md:py-0">
           <div className="overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left">
               <thead
-                className={`bg-[#F3F5F7] dark:bg-[#2F3232] hidden sm:table-header-group`}
+                className={`bg-white dark:bg-[#2F3232] hidden sm:table-header-group`}
               >
                 <tr>
                   {TABLE_HEAD.map((head, index) => (
                     <th
                       key={head}
-                      className={`cursor-pointer p-4 ${
+                      className={`cursor-pointer px-5 py-3.5 ${
                         index === 0 ? "rounded-l-md" : ""
                       } ${
                         index === TABLE_HEAD.length - 1 ? "rounded-r-md" : ""
@@ -237,31 +236,20 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         </div>
                       ) : (
                         <div
-                          className={`flex text-lg items-center justify-between gap-2 font-normal leading-none text-[#666868]
+                          className={`flex text-sm items-center gap-2 font-normal leading-none text-[#666868]
                             dark:text-[#B6B8BA]`}
                         >
                           {head}{" "}
-                          {head !== "select" &&
-                            head !== "Action" &&
-                            head !== "Transaction ID" &&
-                            head !== "Status" &&
-                            head !== "Category" &&
-                            head !== "Warning" && (
+                          {index !== 2 &&
+                            index < TABLE_HEAD.length - 2 && (
                               <div
                                 className="flex flex-col"
                                 role="button"
                                 aria-label={`Sort by ${head}`}
                               >
-                                <FontAwesomeIcon
-                                  icon={faChevronUp}
-                                  className="w-3 h-3"
-                                  aria-hidden="true"
-                                />
-                                <FontAwesomeIcon
-                                  icon={faChevronDown}
-                                  className="w-3 h-3"
-                                  aria-hidden="true"
-                                />
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                                  <path fillRule="evenodd" d="M11.47 4.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06L12 6.31 8.78 9.53a.75.75 0 0 1-1.06-1.06l3.75-3.75Zm-3.75 9.75a.75.75 0 0 1 1.06 0L12 17.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+                                </svg>
                               </div>
                             )}
                         </div>
@@ -281,6 +269,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                     transactionId,
                     result,
                     status,
+                    time
                   } = transaction;
                   const isCompleted = status === "completed";
                   return (
@@ -315,26 +304,22 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         </td>
                         <td className="py-0 sm:py-4">
                           <div className="flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
+                              <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
+                            </svg>
                             <Avatar
                               src={wallet.logo}
                               alt={wallet.name}
                               size="sm"
                               className={`h-12 w-12 flex items-center justify-center text-white text-xs font-bold`}
                             />
-                            <div className="flex flex-col  max-w-[200px]">
+                            <div className="flex flex-col">
                               <Typography
                                 variant="small"
                                 className={`text-base font-normal text-gray-900
                                   dark:text-[#F3F5F7] truncate`}
                               >
                                 {wallet.name}
-                              </Typography>
-                              <Typography
-                                variant="small"
-                                className={`text-sm font-normal  text-gray-900
-                                  dark:text-[#F3F5F7] opacity-70 truncate`}
-                              >
-                                {wallet.address}
                               </Typography>
                             </div>
                           </div>
@@ -371,7 +356,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                             )}
                           </div>
                         </td>
-                        <td className="hidden sm:table-cell py-4">
+                        <td className="hidden sm:table-cell py-4 space-y-1">
                           <Typography
                             variant="small"
                             className={`text-base font-normal text-[#0E201E]
@@ -379,13 +364,20 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                           >
                             {action}
                           </Typography>
+                          <Typography
+                            variant="small"
+                            className={`text-sm font-normal text-gray-600
+                                  dark:text-[#F3F5F7]`}
+                          >
+                            {time}
+                          </Typography>
                         </td>
                         <td className="hidden sm:table-cell py-4">
                           {sent && (
                             <div className="flex items-center gap-2">
                               <Typography
                                 variant="small"
-                                className="text-base font-normal text-red-600"
+                                className="text-base font-normal text-error-500"
                               >
                                 {sent}
                               </Typography>
@@ -619,7 +611,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       </MobileFormDrawer>
       {/* Table Footer */}
       <div
-        className={`hidden sm:block mt-4 px-8 py-4 bg-white
+        className={`hidden sm:block mt-4 px-8 py-4
         dark:bg-transparent`}
       >
         <div className="flex items-center justify-between">
@@ -633,7 +625,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
             </span>
             <div className="relative" ref={dropdownRef}>
               <button
-                className={`px-3 py-1 rounded border flex items-center space-x-2 border-gray-300 text-gray-700 bg-white hover:bg-gray-50
+                className={`px-3 py-1 rounded rounded-lg border flex items-center space-x-2 text-base
+                  text-gray-700 bg-white border-default
                   `}
                 onClick={handleDropdownToggle}
                 aria-label="Select items per page"
@@ -687,30 +680,31 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           {/* Center - Conditional actions when transactions are selected */}
           {selectedTransactions.length > 0 && (
             <div
-              className={`flex items-center space-x-3 px-4 py-3 rounded-xl bg-transparent border border-[#E1E3E5]
-                dark:border-[#4D5050]`}
+              className={`flex items-center space-x-3 px-6 py-3 rounded-xl border shadow-sm
+                bg-white border-default dark:border-[#4D5050]`}
             >
               <span
-                className={`text-sm font-medium text-gray-700
+                className={`text-sm font-normal text-gray-700
                  dark:text-[#F3F5F7]`}
               >
                 {selectedTransactions.length} selected
               </span>
               <div
-                className={`w-px h-4 bg-gray-300
+                className={`w-px h-4 bg-default
                   dark:bg-[#F3F5F7]`}
                 role="separator"
               ></div>
               <span
-                className={`text-sm text-gray-600
+                className={`text-sm text-[#4D5050] font-medium
                   dark:text-[#F3F5F7]`}
               >
                 Tag as:
               </span>
               <div className={`relative inline-block`} ref={tagDropdownRef}>
                 <button
-                  className={`px-3 py-1 text-sm rounded border flex items-center space-x-1 border-gray-300 text-gray-700"
-                  dark:text-[#F3F5F7]`}
+                  className={`px-4 py-1 text-sm rounded border flex items-center space-x-16 
+                    border-default text-gray-900"
+                    dark:text-[#F3F5F7]`}
                   onClick={() => setIsTagDropdownOpen(!isTagDropdownOpen)}
                   aria-label="Select tag type for selected transactions"
                   aria-haspopup="true"
@@ -770,32 +764,32 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                 )}
               </div>
               <div
-                className={`w-px h-4 ${
-                  isDarkMode ? "bg-gray-600" : "bg-gray-300"
-                }`}
+                className={`w-px h-4 bg-default
+                  dark:bg-[#F3F5F7]`}
                 role="separator"
               ></div>
               <button
-                className={`px-3 py-1 text-sm rounded border border-gray-300 text-gray-700
+                className={`px-2.5 py-1 text-sm rounded border 
+                  border-default text-gray-900
                   dark:text-[#F3F5F7]`}
                 aria-label="Merge selected transactions"
               >
                 Merge
               </button>
               <div
-                className={`w-px h-4 ${
-                  isDarkMode ? "bg-gray-600" : "bg-gray-300"
-                }`}
+                className={`w-px h-4 bg-default
+                  dark:bg-[#F3F5F7]`}
                 role="separator"
               ></div>
               <button
-                className={`px-3 py-1 text-sm rounded bg-[#90C853] text-[#0E201E]`}
+                className={`px-3 py-1 text-sm rounded rounded-lg 
+                  bg-green-500 text-[#0E201E]`}
                 aria-label="Apply actions to selected transactions"
               >
                 Apply
               </button>
               <button
-                className={`px-2 py-1 text-sm rounded border border-gray-300 text-gray-700
+                className={`px-2 py-1 text-sm rounded rounded-lg border border-default text-gray-700
                 dark:text-[#F3F5F7]`}
                 onClick={() => setSelectedTransactions([])}
                 aria-label="Clear selection"
@@ -813,7 +807,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           <div className="hidden sm:flex items-center space-x-2">
             {/* Previous button */}
             <button
-              className={`w-8 h-8 rounded border flex items-center justify-center border-gray-300 text-gray-700
+              className={`w-8 h-8 rounded rounded-lg border flex items-center justify-center 
+                border-default text-gray-500
                 dark:text-[#F3F5F7]`}
               aria-label="Go to previous page"
             >
@@ -826,7 +821,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
             {/* Page numbers */}
             <button
-              className={`w-8 h-8 rounded-lg border flex items-center justify-center text-sm font-medium text-[#0E201E] bg-[#90C853]
+              className={`w-8 h-8 rounded-lg border flex items-center justify-center text-sm font-medium 
+                text-gray-900 bg-green-500
                 `}
               aria-label="Go to page 1"
               aria-current="page"
@@ -834,14 +830,16 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
               1
             </button>
             <button
-              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium border-gray-300 text-gray-700 hover:bg-gray-50
-              dark:text-[#F3F5F7]`}
+              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium 
+                border-default text-gray-900
+                dark:text-[#F3F5F7]`}
               aria-label="Go to page 2"
             >
               2
             </button>
             <button
-              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium border-gray-300 text-gray-700 hover:bg-gray-50
+              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium 
+                border-default text-gray-900
               dark:text-[#F3F5F7]`}
               aria-label="Go to page 3"
             >
@@ -851,15 +849,16 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
             {/* Ellipsis */}
             <span
               className={`text-sm ${
-                isDarkMode ? "text-gray-300" : "text-gray-700"
+                isDarkMode ? "text-gray-300" : "text-gray-900"
               }`}
             >
               ...
             </span>
 
             <button
-              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium border-gray-300 text-gray-700 hover:bg-gray-50
-              dark:text-[#F3F5F7]`}
+              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium 
+                border-default text-gray-900
+                dark:text-[#F3F5F7]`}
               aria-label="Go to page 13"
             >
               13
@@ -867,7 +866,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
             {/* Next button */}
             <button
-              className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium border-gray-300 text-gray-700 hover:bg-gray-50
+              className={`w-8 h-8 rounded rounded-lg border flex items-center justify-center 
+                border-default text-gray-500
               dark:text-[#F3F5F7]`}
               aria-label="Go to next page"
             >

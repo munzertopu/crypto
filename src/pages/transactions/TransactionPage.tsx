@@ -23,6 +23,7 @@ interface Transaction {
   transactionId: string;
   result: string;
   date: string;
+  time: string;
   status: "completed" | "pending" | "failed";
   platform: string;
   error?: string;
@@ -59,6 +60,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
       transactionId: "TX-0001",
       result: "-$220.5",
       date: "06-25-2025",
+      time: "02:15PM",
       status: "completed",
       platform: "Coinbase",
       error: "Missing purchase history",
@@ -79,6 +81,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
       transactionId: "TX-0141",
       result: "-$500",
       date: "05-07-2025",
+      time: "09:30AM",
       status: "completed",
       platform: "Binance",
       error: "No market price found",
@@ -99,6 +102,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
       transactionId: "TX-0093",
       result: "$0",
       date: "06-04-2025",
+      time: "11:45AM",
       status: "completed",
       platform: "Uniswap",
       error: "---",
@@ -119,6 +123,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
       transactionId: "lab-tx-468AD",
       result: "+$85",
       date: "05-29-2025",
+      time: "04:20PM",
       status: "completed",
       platform: "Phantom",
       error: "Missing purchase history",
@@ -139,6 +144,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
       transactionId: "lab-tx-23A5Z",
       result: "Gain",
       date: "06-07-2025",
+      time: "07:55PM",
       status: "completed",
       platform: "Kraken",
       error: "No market price found",
@@ -159,6 +165,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
     //   transactionId: "TX-0108",
     //   result: "+$545",
     //   date: "05-12-2025",
+    //   time: "01:10PM",
     //   status: "completed",
     //   platform: "Binance",
     //   error: "---",
@@ -222,7 +229,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0E201E]">
+    <div className="min-h-screen bg-background dark:bg-[#0E201E]">
       <NavigationBar
         isDarkMode={isDarkMode}
         onThemeToggle={handleThemeToggle}
@@ -232,7 +239,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
 
       <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full">
         {/* Header */}
-        <div className="flex flex-row sm:items-center justify-between px-1 sm:px-2 lg:pl-8">
+        <div className="flex flex-row sm:items-center justify-between px-1 sm:px-2 lg:pl-0">
           <div className="flex gap-2 justify-start items-end">
             <h4
               className="text-lg sm:text-2xl font-semibold text-gray-900
