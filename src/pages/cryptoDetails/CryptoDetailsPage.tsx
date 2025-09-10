@@ -3,11 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import NavigationBar from '../../components/NavigationBar';
-import PortfolioChart from '../../components/PortfolioChart';
 import CryptoDetailHeader from './components/CryptoDetailHeader';
 import AllocationTable from './components/AllocationTable';
 import TaxLotTable from './components/TaxLotTable';
 import InsightsSummary from './components/InsightsSummary';
+import MarketTab from './tabs/MarketTab';
+import PortfolioTab from './tabs/PortfolioTab';
 import { Tabs } from "@material-tailwind/react";
 
 interface CryptoDetailsPageProps {
@@ -55,7 +56,6 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
     setIsDarkModeState(!isDarkModeState);
   };
 
-  const timeRanges = ['1D', '1W', '1M', '3M', '1Y', 'All time'];
   const tableTabs = ['Allocations', 'Tax Lots', 'Insights Summary'];
 
   return (
@@ -98,41 +98,23 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
             cryptoLogo={cryptoLogo}
           />
         </div>
-        {/* Market Performance Section */}
-        <div className="mb-6 md:mb-0 bg-white dark:bg-[#0E201E]">
-           {/* Header and Time Range in one row */}
-           <div className="flex justify-between items-center mb-4">
-             <h2 className="text-h6 font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Market Performance</h2>
-             {/* Time Range Selector */}
-             <div className="border-gray-100 dark:border-gray-700">
-                 <Tabs>
-                     <Tabs.List className='bg-gray-100 dark:bg-[#2F3232]'>
-                         {timeRanges.map((timeRange) => (
-                             <Tabs.Trigger 
-                                 key={timeRange}
-                                 value={timeRange}
-                                 onClick={() => handleTimeRangeChange?.(timeRange)}
-                                 className={`py-1.5 px-2.5 rounded-lg text-sm ${
-                                 activeTimeRange === timeRange
-                                     ? 'bg-white dark:bg-[#0E201E] text-black dark:text-white'
-                                      :'text-[#0E201E] dark:text-[#FFFFFF]'
-                                 }`}
-                             >
-                             {timeRange}
-                             </Tabs.Trigger >
-                         ))}
-                         <Tabs.TriggerIndicator />
-                     </Tabs.List>
-                 </Tabs>
-             </div>
-           </div>
-
-          {/* Chart */}
-          <PortfolioChart 
-            isDarkMode={isDarkModeState} 
-            chartColor="#3A6FF8"
+        
+        {/* Tab Content */}
+        {activeTab === 'market' && (
+          <MarketTab 
+            isDarkMode={isDarkModeState}
+            activeTimeRange={activeTimeRange}
+            onTimeRangeChange={handleTimeRangeChange}
           />
-        </div>
+        )}
+
+        {activeTab === 'portfolio' && (
+          <PortfolioTab 
+            isDarkMode={isDarkModeState}
+            activeTimeRange={activeTimeRange}
+            onTimeRangeChange={handleTimeRangeChange}
+          />
+        )}
 
         {/* Horizontal Separator */}
         <div className="pb-6 hidden md:block">

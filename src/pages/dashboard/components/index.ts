@@ -1,6 +1,6 @@
 export { default as WelcomeBanner } from './WelcomeBanner';
 export { default as DashboardHeader } from './DashboardHeader';
-export { default as FinancialMetrics } from './portfolio/FinancialMetrics';
+export { default as FinancialMetrics } from '../../../components/FinancialMetrics';
 export { default as NFTFinancialMetrics } from '../../cryptoDetails/components/NFTFinancialMetrics';
 export { default as PortfolioChart } from '../../../components/PortfolioChart';
 export { default as KPISection } from './portfolio/KPISection';

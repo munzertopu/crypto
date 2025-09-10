@@ -54,7 +54,7 @@ const Recommended: React.FC<RecommendedProps> = ({
 
   return (
     <div className="mb-8">
-      <div className="flex items-center justify-between mb-4 md:mb-3">
+      <div className="flex items-center justify-between mb-3">
         <h2
           className={`text-base font-semibold text-gray-900
           dark:text-[#E1E3E5]`}
@@ -63,12 +63,12 @@ const Recommended: React.FC<RecommendedProps> = ({
         </h2>
         <button
           onClick={() => setShowRecommendedAccounts(false)}
-          className={`hidden w-22 h-8 md:flex flex-row justify-center items-center gap-1 py-[6px] px-2.5 rounded-lg shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border border-gray-150 bg-[#fff] 
-            dark:text-[#B6B8BA] dark:border-[#4D5050] dark:bg-transparent `}
-          aria-label="Close banner"
+          className={`ml-4 flex items-center space-x-1 px-3 py-2 lg:px-2.5 lg:py-1.5 text-sm border border-default text-[#7C7C7C] rounded-md 
+            dark:text-[#E1E3E5]`}
+          aria-label="Close recommended accounts section"
         >
           <svg
-            className="w-2 h-2 lg:w-4 lg:h-4 text-gray-500"
+            className="w-4 h-4"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -89,16 +89,16 @@ const Recommended: React.FC<RecommendedProps> = ({
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {recommendedAccounts.map((account) => (
           <div
             key={account.id}
-            className={`bg-transparent border border-gray-150  rounded-[12px] px-5 py-4
-              dark:border-[#E1E3E5] flex flex-col items-start justify-center gap-3`}
+            className={`bg-transparent border-[#E1E3E5] border rounded-2xl px-5 py-4
+              dark:border-[#E1E3E5]`}
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center mb-1.5">
               <div
-                className={`w-6 h-6 rounded-lg flex items-center justify-center`}
+                className={`w-6 h-6 rounded-lg flex items-center justify-center mr-2`}
               >
                 <img src={account.logo} />
               </div>
@@ -109,43 +109,44 @@ const Recommended: React.FC<RecommendedProps> = ({
                 {account.platform}
               </h3>
             </div>
-            <p
-              className={`text-sm text-left font-semibold text-gray-700
+            <div>
+              <p
+                className={`text-sm text-left font-semibold text-gray-600
                   dark:text-[#B6B8BA]`}
-            >
-              {account.description}{" "}
-              <span className="text-[#5F9339] cursor-pointer font-medium">
-                {account.actionText}
-              </span>
-            </p>
-
-            <button
-              className={`flex items-center text-sm border border-gray-150 rounded-[8px] px-2.5 py-1.5 font-medium text-gray-900 
-                  dark:text-[#B6B8BA] `}
-              aria-label={`Add ${account.platform} account`}
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M4 8H12"
-                  stroke="#7C7C7C"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M8 12V4"
-                  stroke="#7C7C7C"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              <span className="px-1">Add Account</span>
-            </button>
+                {account.description}{" "}
+                <span className="text-[#5F9339] cursor-pointer font-medium">
+                  {account.actionText}
+                </span>
+              </p>
+              <button
+                className={`flex items-center text-sm border border-gray-150 rounded-[8px] px-2.5 py-1.5 font-medium text-gray-900 
+                    dark:text-[#B6B8BA] `}
+                aria-label={`Add ${account.platform} account`}
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4 8H12"
+                    stroke="#7C7C7C"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M8 12V4"
+                    stroke="#7C7C7C"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span className="px-1">Add Account</span>
+              </button>
+            </div>
           </div>
         ))}
       </div>
