@@ -81,10 +81,10 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
     >
       {/* Header */}
       {showHeader && (
-        <div className="flex items-start justify-between mb-6">
+        <div className="flex items-start justify-between mb-6 md:mb-1.5">
           <div>
             <h2
-              className="text-2xl text-left font-bold mb-2
+              className="text-h3 text-left font-bold mb-2 md:mb-0
               dark:text-[#CDCFD1]"
             >
               Configure {platformName} address
@@ -92,7 +92,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className={`p-2 rounded-full dark:text-[#CDCFD1]`}
+            className={`p-2 md:p-0 rounded-full dark:text-[#CDCFD1]`}
             aria-label="Close configure modal"
           >
             <FontAwesomeIcon
@@ -104,24 +104,24 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
         </div>
       )}
       <p
-        className={`text-sm  md:text-xl text-left text-gray-700
+        className={`text-sm md:text-base text-left text-gray-700
               dark:text-[#CDCFD1]`}
       >
         Paste your wallet address below to configure
       </p>
 
       {/* Wallet Address Section */}
-      <div className="w-full mb-3  sm:mb-6 pt-5 sm:pt-0 ">
-        <div className="flex items-start justify-start md:mb-2 gap-1">
+      <div className="w-full mb-3  sm:mb-6 pt-5 sm:pt-0 md:pt-6">
+        <div className="flex items-center justify-start md:mb-2 gap-1">
           <label
-            className="text-sm md:text-lg font-medium text-gray-800
+            className="text-sm md:text-sm font-medium text-gray-800
               dark:text-[#CDCFD1] "
           >
             Wallet Address
           </label>
           <svg
-            width="16"
-            height="16"
+            width="14"
+            height="14"
             viewBox="0 0 16 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -160,16 +160,16 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
       {/* Blockchains Section - Only show when wallet address is entered */}
       {isWalletAddressValid && (
         <div className="mb-6">
-          <div className="flex items-start justify-start md:mb-2 gap-1">
+          <div className="flex items-center justify-start md:mb-2 gap-1">
             <label
-              className="text-sm md:text-lg font-medium text-gray-800
+              className="text-sm md:text-sm font-medium text-gray-800
               dark:text-[#CDCFD1] "
             >
               Blockchains
             </label>
             <svg
-              width="16"
-              height="16"
+              width="14"
+              height="14"
               viewBox="0 0 16 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -281,7 +281,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
         <div className="flex justify-between items-center">
           <button
             onClick={onClose}
-            className={`text-xl font-medium text-gray-500
+            className={`text-base font-medium text-gray-500
               dark:text-[#A1A3A5]`}
             aria-label="Cancel wallet configuration"
           >
@@ -295,10 +295,10 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
               onClose();
             }}
             disabled={!isWalletAddressValid}
-            className={`px-6 py-2 rounded-lg text-xl font-medium transition-colors text-[#0E201E] ${
+            className={`px-6 py-2 rounded-lg text-base font-medium transition-colors text-[#0E201E] ${
               isWalletAddressValid
                 ? "bg-[#90C853] cursor-pointer"
-                : "bg-gray-300 dark:bg-[#2F3232] dark:text-[#8C8E90] cursor-not-allowed"
+                : "bg-default dark:bg-[#2F3232] dark:text-[#8C8E90] cursor-not-allowed"
             }`}
             aria-label="Configure wallet configuration"
           >

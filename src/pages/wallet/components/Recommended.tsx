@@ -54,7 +54,7 @@ const Recommended: React.FC<RecommendedProps> = ({
 
   return (
     <div className="mb-8">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-3">
         <h2
           className={`text-base font-semibold text-[#0E201E]
           dark:text-[#E1E3E5]`}
@@ -63,12 +63,12 @@ const Recommended: React.FC<RecommendedProps> = ({
         </h2>
         <button
           onClick={() => setShowRecommendedAccounts(false)}
-          className={`ml-4 flex items-center space-x-1 px-3 py-2 lg:px-3 lg:py-5 h-8 border border-[#E1E3E5] text-[#7C7C7C] rounded-md 
+          className={`ml-4 flex items-center space-x-1 px-3 py-2 lg:px-2.5 lg:py-1.5 text-sm border border-default text-[#7C7C7C] rounded-md 
             dark:text-[#E1E3E5]`}
           aria-label="Close recommended accounts section"
         >
           <svg
-            className="w-6 h-6"
+            className="w-4 h-4"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -90,16 +90,16 @@ const Recommended: React.FC<RecommendedProps> = ({
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {recommendedAccounts.map((account) => (
           <div
             key={account.id}
-            className={`bg-transparent border-[#E1E3E5] border rounded-2xl px-6 py-2
+            className={`bg-transparent border-[#E1E3E5] border rounded-2xl px-5 py-4
               dark:border-[#E1E3E5]`}
           >
-            <div className="flex items-center my-3">
+            <div className="flex items-center mb-1.5">
               <div
-                className={`w-8 h-8 rounded-lg flex items-center justify-center mr-4`}
+                className={`w-6 h-6 rounded-lg flex items-center justify-center mr-2`}
               >
                 <img src={account.logo} />
               </div>
@@ -110,7 +110,7 @@ const Recommended: React.FC<RecommendedProps> = ({
                 {account.platform}
               </h3>
             </div>
-            <div className="mb-4">
+            <div>
               <p
                 className={`text-sm text-left font-semibold text-gray-600
                   dark:text-[#B6B8BA]`}

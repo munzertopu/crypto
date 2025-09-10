@@ -23,7 +23,7 @@ const Filter: React.FC<FilterProps> = ({
       {/* Tabs */}
       <div className="flex mb-4 mt-5 md:mt-0 sm:mb-0">
         <Tabs>
-          <Tabs.List className="my-2 lg:my-2 bg-[#F3F5F7] dark:bg-[#2F3232]">
+          <Tabs.List className="my-2 lg:my-0 bg-[#F3F5F7] dark:bg-[#2F3232]">
             {["All", "Configured", "Available"].map((tab) => (
               <Tabs.Trigger
                 key={tab}
@@ -87,21 +87,6 @@ const Filter: React.FC<FilterProps> = ({
           />
         </div>
       </div>
-      {/* <div className="relative">
-        <FontAwesomeIcon
-          icon={faSearch}
-          className={`absolute size-4 text-xl ml-6 top-1/2 transform -translate-y-1/2 text-[#7C7C7C]
-           dark:text-[#CDCFD1]`}
-        />
-        <input
-          type="text"
-          placeholder="Search"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className={`pl-14 pr-4 py-4 rounded-2xl border text-base w-full  border-gray-700 text-gray-900 placeholder-gray-400 focus:outline-none bg-transparent
-            dark:bg-transparent dark:border-[#4D5050]`}
-        />
-      </div> */}
     </div>
   );
 };
