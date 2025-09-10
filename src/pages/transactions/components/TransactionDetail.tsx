@@ -16,16 +16,16 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
   const [activeTab, setActiveTab] = useState('Details');
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 md:mx-4 md:px-6 rounded-xl bg-background dark:bg-[#0E201E]">
       {/* Tabs */}
       <div className="flex border-b border-gray-200">
         {['Details', 'Ledger', 'Cost analysis'].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-4 py-3 font-medium text-sm border-b-2 transition-colors ${
+            className={`mx-6 py-3 font-medium text-sm border-b-2 transition-colors ${
               activeTab === tab
-                ? 'border-green-500 dark:text-[#F3F5F7]'
+                ? 'border-[#75AE46] dark:text-[#F3F5F7]'
                 : `${isDarkMode ? 'text-gray-400 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'} border-transparent`
             }`}
             aria-label={`View transaction ${tab.toLowerCase()}`}
@@ -40,7 +40,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
         <div className="flex justify-between items-start py-2">
           {/* Transaction Type and Date - Left Side */}
           <div className='w-1/4'>
-            <h3 className="text-2xl font-bold mb-2 dark:text-[#F3F5F7]">Transfer</h3>
+            <h3 className="text-lg font-semibold mb-2 dark:text-[#F3F5F7]">Transfer</h3>
             <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               May 11, 2025, 8:37 PM
             </p>
@@ -56,10 +56,10 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
                     <FontAwesomeIcon icon={faGhost} className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex flex-col">
-                    <Typography variant="small" className="font-medium dark:text-[#F3F5F7]">
+                    <Typography variant="small" className="font-normal dark:text-[#F3F5F7]">
                       Phantom
                     </Typography>
-                    <Typography variant="small" className="text-red-600 font-medium">
+                    <Typography variant="small" className="text-sm font-medium">
                       -0.32348600 ETH
                     </Typography>
                   </div>
@@ -75,10 +75,10 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
                 {/* Bitcoin (Received) */}
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
-                    <Typography variant="small" className="font-medium dark:text-[#F3F5F7]">
+                    <Typography variant="small" className="font-normal dark:text-[#F3F5F7]">
                       Bitcoin
                     </Typography>
-                    <Typography variant="small" className="text-green-600 font-medium">
+                    <Typography variant="small" className="text-sm font-medium">
                       +0.292096470 ETH
                     </Typography>
                   </div>
@@ -89,28 +89,28 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
               </div>
 
               {/* Financial Metrics */}
-              <div className="mt-4 space-y-2">
+              <div className="mt-4 space-y-3">
                 <div className="flex justify-between">
-                  <Typography variant="small" className={`text-gray-600 dark:text-[#F3F5F7]`}>
+                  <Typography variant="small" className={`text-base text-gray-700 dark:text-[#F3F5F7]`}>
                     Fiat Value:
                   </Typography>
-                  <Typography variant="small" className="font-medium dark:text-[#F3F5F7]">
+                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-[#F3F5F7]">
                     $780.98
                   </Typography>
                 </div>
                 <div className="flex justify-between">
-                  <Typography variant="small" className={`text-gray-600 dark:text-[#F3F5F7]`}>
+                  <Typography variant="small" className={`text-base text-gray-700 dark:text-[#F3F5F7]`}>
                     Cost Basis:
                   </Typography>
-                  <Typography variant="small" className="font-medium dark:text-[#F3F5F7]">
+                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-[#F3F5F7]">
                     $579.60
                   </Typography>
                 </div>
                 <div className="flex justify-between">
-                  <Typography variant="small" className={`text-gray-600 dark:text-[#F3F5F7]`}>
+                  <Typography variant="small" className={`text-base text-gray-700 dark:text-[#F3F5F7]`}>
                     Gain:
                   </Typography>
-                  <Typography variant="small" className="font-medium dark:text-[#F3F5F7]">
+                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-[#F3F5F7]">
                     $0.00
                   </Typography>
                 </div>
@@ -126,39 +126,42 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
             <table className="w-full min-w-full table-auto text-left">
               <thead>
                 <tr>
-                  <th className="py-3 px-4 font-medium text-sm">
-                    <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Identifier</span>
+                  <th className="py-3 px-4 font-normal text-sm">
+                    <span className={`text-gray-600 dark:text-[#B6B8BA]`}>Identifier</span>
                   </th>
-                  <th className="py-3 px-4 font-medium text-sm">
-                    <div className="flex items-center space-x-2">
-                      <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Date</span>
+                  <th className="py-3 px-4 font-normal text-sm">
+                    <div className="flex items-center space-x-1">
+                      <span className={`text-gray-600 dark:text-[#B6B8BA]`}>Date</span>
                       <div className="flex flex-col">
-                        <FontAwesomeIcon icon={faChevronUp} className="w-3 h-3" />
-                        <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                        </svg>
                       </div>
                     </div>
                   </th>
-                  <th className="py-3 px-4 font-medium text-sm">
-                    <div className="flex items-center space-x-2">
-                      <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Type</span>
+                  <th className="py-3 px-4 font-normal text-sm">
+                    <div className="flex items-center space-x-1">
+                      <span className={`text-gray-600 dark:text-[#B6B8BA]`}>Type</span>
                       <div className="flex flex-col">
-                        <FontAwesomeIcon icon={faChevronUp} className="w-3 h-3" />
-                        <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                        </svg>
                       </div>
                     </div>
                   </th>
-                  <th className="py-3 px-4 font-medium text-sm">
-                    <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Leger</span>
+                  <th className="py-3 px-4 font-normal text-sm">
+                    <span className={`text-gray-600 dark:text-[#B6B8BA]`}>Leger</span>
                   </th>
-                  <th className="py-3 px-4 font-medium text-sm">
-                    <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Change</span>
+                  <th className="py-3 px-4 font-normal text-sm">
+                    <span className={`text-gray-600 dark:text-[#B6B8BA]`}>Change</span>
                   </th>
-                  <th className="py-3 px-4 font-medium text-sm">
-                    <div className="flex items-center space-x-2">
-                      <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Balance</span>
+                  <th className="py-3 px-4 font-normal text-sm">
+                    <div className="flex items-center space-x-1">
+                      <span className={`text-gray-600 dark:text-[#B6B8BA]`}>Balance</span>
                       <div className="flex flex-col">
-                        <FontAwesomeIcon icon={faChevronUp} className="w-3 h-3" />
-                        <FontAwesomeIcon icon={faChevronDown} className="w-3 h-3" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                        </svg>
                       </div>
                     </div>
                   </th>
@@ -175,38 +178,38 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
                         <div className={`w-8 h-8 ${row.identifier.color} rounded-full flex items-center justify-center`}>
                           <span className="text-white text-sm font-bold">{row.identifier.icon}</span>
                         </div>
-                        <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
+                        <span className={`text-base text-gray-900 dark:text-[#B6B8BA]`}>
                           {row.identifier.text}
                         </span>
                       </div>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
+                      <span className={`text-base text-gray-900 dark:text-[#B6B8BA]`}>
                         {row.date}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-sm font-medium ${row.type === 'Send' ? 'text-red-600' : 'text-green-600'}`}>
+                      <span className={`text-abse font-medium ${row.type === 'Send' ? 'text-red-600' : 'text-green-600'}`}>
                         {row.type}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
+                      <span className={`text-base text-gray-900 dark:text-[#B6B8BA]`}>
                         {row.ledger}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-sm font-medium text-gray-700 dark:text-[#B6B8BA]`}>
+                      <span className={`text-base text-gray-900 dark:text-[#B6B8BA]`}>
                         {row.change}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-sm font-medium ${row.balance.startsWith('-') ? 'text-red-600' : 'text-green-600'}`}>
+                      <span className={`text-base font-medium ${row.balance.startsWith('-') ? 'text-red-600' : 'text-green-600'}`}>
                         {row.balance}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <div className="w-6 h-6 flex items-center justify-center">
+                      <div className="w-6 h-6 flex items-center justify-center text-gray-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                           <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -228,65 +231,69 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
             <table className="w-full min-w-full table-auto text-left">
               <thead>
                 <tr>
-                  <th className="py-3 px-4 font-medium text-sm text-left">
+                  <th className="py-3 px-4 font-normal text-sm text-left">
                     <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Date</span>
                   </th>
-                  <th className="py-3 px-4 font-medium text-sm text-left">
+                  <th className="py-3 px-4 font-normal text-sm text-left">
                     <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Info</span>
                   </th>
-                  <th className="py-3 px-4 font-medium text-sm text-left">
+                  <th className="py-3 px-4 font-normal text-sm text-left">
                     <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Holding period</span>
                   </th>
-                  <th className="py-3 px-4 font-medium text-sm text-right">
+                  <th className="py-3 px-4 font-normal text-sm text-left">
                     <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Amount</span>
                   </th>
-                  <th className="py-3 px-4 font-medium text-sm text-right">
+                  <th className="py-3 px-4 font-normal text-sm text-left">
                     <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Cost(USD)</span>
                   </th>
-                  <th className="py-3 px-4 font-medium text-sm text-right">
+                  <th className="py-3 px-4 font-normal text-sm text-left">
                     <div className="flex items-center justify-end space-x-1">
                       <span className={`text-gray-700 dark:text-[#B6B8BA]`}>Gain(USD)</span>
                     </div>
                   </th>
-                  <th className="py-3 px-4 font-medium text-sm text-right">
+                  <th className="py-3 px-4 font-normal text-sm text-left">
                     
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {costAnalysisData.map((row) => (
-                  <tr key={row.id} className={`border-b border-gray-100`}>
-                    <td className="py-3 px-4">
-                      <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
+                {costAnalysisData.map((row, index) => (
+                  <tr key={row.id} className={`bg-white`}>
+                    <td className={`py-2.5 px-5
+                        ${index === costAnalysisData.length - 1 ? 'rounded-bl-lg' : ''}
+                      `}>
+                      <span className={`text-base text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.date}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
+                      <span className={`text-base text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.info}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
+                      <span className={`text-base text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.holdingPeriod}
                       </span>
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <span className={`text-sm font-medium text-gray-700 dark:text-[#B6B8BA]`}>
+                      <span className={`text-base font-medium text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.amount}
                       </span>
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <span className={`text-sm text-gray-700 dark:text-[#B6B8BA]`}>
+                      <span className={`text-base text-gray-700 dark:text-[#B6B8BA]`}>
                         {row.costUSD}
                       </span>
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <span className={`text-sm font-medium ${row.gainUSD === '0.00' ? 'text-gray-500' : row.gainUSD.startsWith('-') ? 'text-red-600' : 'text-green-600'}`}>
+                      <span className={`text-base font-medium ${row.gainUSD === '0.00' ? 'text-gray-500' : row.gainUSD.startsWith('-') ? 'text-red-600' : 'text-green-600'}`}>
                         {row.gainUSD}
                       </span>
                     </td>
-                    <td className="py-3 px-4 text-right">
+                    <td className={`py-3 px-4 text-right
+                        ${index === costAnalysisData.length - 1 ? 'rounded-br-lg' : ''}
+                      `}>
                       {row.isMarked && 
                         <svg className="w-5 h-5 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>

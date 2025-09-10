@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronDown,
-} from "@fortawesome/free-solid-svg-icons";
 import { Card, Typography, CardBody, Avatar } from "@material-tailwind/react";
 import TransactionDetail from "./TransactionDetail";
 import TransactionFooter from "./TransactionFooter";
@@ -37,6 +33,38 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
   const data = transactions;
 
+  // Group transactions by date
+  const groupTransactionsByDate = (transactions: Transaction[]) => {
+    const grouped = transactions.reduce((groups, transaction) => {
+      const date = transaction.date;
+      if (!groups[date]) {
+        groups[date] = [];
+      }
+      groups[date].push(transaction);
+      return groups;
+    }, {} as Record<string, Transaction[]>);
+
+    // Sort dates in descending order (newest first)
+    return Object.keys(grouped)
+      .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
+      .map(date => ({
+        date,
+        transactions: grouped[date]
+      }));
+  };
+
+  const groupedTransactions = groupTransactionsByDate(data);
+
+  // Format date for display
+  const formatDateForDisplay = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      month: 'long', 
+      day: 'numeric', 
+      year: 'numeric' 
+    });
+  };
+
   const handleSelectAll = () => {
     if (selectedTransactions.length === data.length) {
       setSelectedTransactions([]);
@@ -65,7 +93,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   const renderExpandedDetails = (transaction: Transaction) => (
     <tr
       key={`${transaction.id}-details`}
-      className={`bg-[#F3F5F7] 
+      className={`bg-white
       dark:bg-[#0E201E]`}
     >
       <td colSpan={TABLE_HEAD.length} className="px-4">
@@ -76,7 +104,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   
   return (
     <div className="md:px-0 mb-6 mt-6 sm:mt-0">
-      <Card className={`h-full w-full border-transparent bg-transparent `}>
+      <Card className="h-full w-full border-transparent shadow-none">
         <CardBody className="px-0 sm:px-3.5 sm:py-2.5 md:px-0 md:py-0">
           <div className="overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left">
@@ -131,233 +159,256 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                 </tr>
               </thead>
               <tbody className="flex flex-col gap-3 sm:table-row-group">
-                {data.map((transaction) => {
-                  const {
-                    id,
-                    wallet,
-                    action,
-                    sent,
-                    received,
-                    transactionId,
-                    result,
-                    status,
-                    time
-                  } = transaction;
-                  const isCompleted = status === "completed";
-                  return (
-                    <React.Fragment key={id}>
-                      <tr
-                        className={`flex justify-start items-stretch  sm:table-row ${
-                          onToggleExpanded
-                            ? "cursor-pointer transition-colors"
-                            : ""
-                        }`}
-                        onClick={() => {
-                          if (screenSize.width < 640) {
-                            setSelectedRow(transaction);
-                            return;
-                          }
-                          if (onToggleExpanded) onToggleExpanded(id);
-                        }}
-                      >
-                        <td
-                          className="py-4"
-                          onClick={(e) => e.stopPropagation()}
+                {groupedTransactions.map((group) => (
+                  <React.Fragment key={group.date}>
+                    {/* Date Header Row */}
+                    <tr>
+                      <td colSpan={TABLE_HEAD.length} className="pt-6 pb-3">
+                        <Typography
+                          variant="small"
+                          className="font-semibold text-gray-700 dark:text-[#E1E3E5]"
                         >
-                          <div className="hidden sm:flex sm:items-center sm:justify-center">
-                            <input
-                              type="checkbox"
-                              checked={selectedTransactions.includes(id)}
-                              onChange={() => handleSelectTransaction(id)}
-                              className={`w-4 h-4 rounded-lg accent-green-600 focus:outline-none`}
-                              aria-label={`Select transaction ${transactionId}`}
-                            />
-                          </div>
-                        </td>
-                        <td className="py-0 sm:py-4">
-                          <div className="flex items-center gap-3">
-                            {!expandedTransactionId && 
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
-                                <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
-                              </svg>
-                            }
-                            {expandedTransactionId && 
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 rotate-180">
-                                <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
-                              </svg>
-                            }
-                            <Avatar
-                              src={wallet.logo}
-                              alt={wallet.name}
-                              size="sm"
-                              className={`h-12 w-12 flex items-center justify-center text-white text-xs font-bold`}
-                            />
-                            <div className="flex flex-col">
-                              <Typography
-                                variant="small"
-                                className={`text-base font-normal text-gray-900
-                                  dark:text-[#F3F5F7] truncate`}
-                              >
-                                {wallet.name}
-                              </Typography>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="sm:hidden table-cell w-full">
-                          <div className="flex flex-col justify-center items-end ">
-                            {" "}
-                            <Typography
-                              variant="small"
-                              className={`text-base font-normal text-gray-900
-                                  dark:text-[#F3F5F7]`}
+                          {formatDateForDisplay(group.date)}
+                        </Typography>
+                      </td>
+                    </tr>
+                    
+                    {/* Transactions for this date */}
+                    {group.transactions.map((transaction, index) => {
+                      const {
+                        id,
+                        wallet,
+                        action,
+                        sent,
+                        received,
+                        transactionId,
+                        result,
+                        status,
+                        time
+                      } = transaction;
+                      const isCompleted = status === "completed";
+                      return (
+                        <React.Fragment key={id}>
+                          <tr
+                            className={`flex justify-start
+                              bg-white sm:table-row ${
+                              onToggleExpanded
+                                ? "cursor-pointer transition-colors"
+                                : ""
+                            }`}
+                            onClick={() => {
+                              if (screenSize.width < 640) {
+                                setSelectedRow(transaction);
+                                return;
+                              }
+                              if (onToggleExpanded) onToggleExpanded(id);
+                            }}
+                          >
+                            <td
+                              className={`py-4 
+                                ${index === 0 ? "rounded-tl-lg" : "0" } 
+                                ${index === groupedTransactions.length - 1 ? "rounded-bl-lg" : "0" } `}
+                              onClick={(e) => e.stopPropagation()}
                             >
-                              {action}
-                            </Typography>
-                            {sent && (
-                              <div className="flex items-center gap-2">
-                                <Typography
-                                  variant="small"
-                                  className="text-base font-normal text-red-600"
-                                >
-                                  {sent}
-                                </Typography>
+                              <div className="hidden sm:flex sm:items-center sm:justify-center
+                              ">
+                                <input
+                                  type="checkbox"
+                                  checked={selectedTransactions.includes(id)}
+                                  onChange={() => handleSelectTransaction(id)}
+                                  className={`w-4 h-4 rounded-lg accent-green-600 focus:outline-none`}
+                                  aria-label={`Select transaction ${transactionId}`}
+                                />
                               </div>
-                            )}
-                            {received && (
-                              <div className="flex items-center gap-2">
-                                <Typography
-                                  variant="small"
-                                  className="text-base font-normal text-green-600"
-                                >
-                                  {received}
-                                </Typography>
-                              </div>
-                            )}
-                          </div>
-                        </td>
-                        <td className="hidden sm:table-cell py-4 space-y-1">
-                          <Typography
-                            variant="small"
-                            className={`text-base font-normal text-[#0E201E]
-                                  dark:text-[#F3F5F7]`}
-                          >
-                            {action}
-                          </Typography>
-                          <Typography
-                            variant="small"
-                            className={`text-sm font-normal text-gray-600
-                                  dark:text-[#F3F5F7]`}
-                          >
-                            {time}
-                          </Typography>
-                        </td>
-                        <td className="hidden sm:table-cell py-4">
-                          {sent && (
-                            <div className="flex items-center gap-2">
-                              <Typography
-                                variant="small"
-                                className="text-base font-normal text-error-500"
-                              >
-                                {sent}
-                              </Typography>
-                            </div>
-                          )}
-                        </td>
-                        <td className="hidden sm:table-cell py-4">
-                          {received && (
-                            <div className="flex items-center gap-2">
-                              <Typography
-                                variant="small"
-                                className="text-base font-normal text-green-600"
-                              >
-                                {received}
-                              </Typography>
-                            </div>
-                          )}
-                        </td>
-                        <td className="hidden sm:table-cell py-4">
-                          <Typography
-                            variant="small"
-                            className={`text-base font-normal text-[#0E201E]
-                                  dark:text-[#F3F5F7]`}
-                          >
-                            {result}
-                          </Typography>
-                        </td>
-                        <td className="hidden sm:table-cell py-4">
-                          <Typography
-                            variant="small"
-                            className={`text-base font-normal text-[#0E201E]
-                                  dark:text-[#F3F5F7]`}
-                          >
-                            {transactionId}
-                          </Typography>
-                        </td>
-                        {activeTab === "Warnings" && (
-                          <td className="py-4">
-                            <div className="flex items-center gap-2">
-                              {transaction.error &&
-                              transaction.error !== "---" ? (
-                                <>
-                                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                                  <div
-                                    className={`px-3 py-1 rounded-lg border ${
-                                      isDarkMode
-                                        ? "bg-red-900/20 border-red-600 text-red-400"
-                                        : "bg-red-50 border-red-200 text-red-700"
-                                    }`}
+                            </td>
+                            <td className="py-0 sm:py-4">
+                              <div className="flex items-center gap-3">
+                                {!expandedTransactionId && 
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
+                                    <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
+                                  </svg>
+                                }
+                                {expandedTransactionId && 
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 rotate-180">
+                                    <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
+                                  </svg>
+                                }
+                                <Avatar
+                                  src={wallet.logo}
+                                  alt={wallet.name}
+                                  size="sm"
+                                  className={`h-12 w-12 flex items-center justify-center text-white text-xs font-bold`}
+                                />
+                                <div className="flex flex-col">
+                                  <Typography
+                                    variant="small"
+                                    className={`text-base font-normal text-gray-900
+                                      dark:text-[#F3F5F7] truncate`}
                                   >
+                                    {wallet.name}
+                                  </Typography>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="sm:hidden table-cell w-full">
+                              <div className="flex flex-col justify-center items-end ">
+                                {" "}
+                                <Typography
+                                  variant="small"
+                                  className={`text-base font-normal text-gray-900
+                                      dark:text-[#F3F5F7]`}
+                                >
+                                  {action}
+                                </Typography>
+                                {sent && (
+                                  <div className="flex items-center gap-2">
                                     <Typography
                                       variant="small"
-                                      className="text-sm font-normal"
+                                      className="text-base font-normal text-red-600"
                                     >
-                                      {transaction.error}
+                                      {sent}
                                     </Typography>
                                   </div>
-                                </>
-                              ) : (
-                                <Typography
-                                  variant="small"
-                                  className={`text-xl font-normal ${
-                                    isDarkMode
-                                      ? "text-[#F3F5F7]"
-                                      : "text-[#0E201E]"
-                                  }`}
-                                >
-                                  {transaction.error || "---"}
-                                </Typography>
-                              )}
-                            </div>
-                          </td>
-                        )}
-                        <td className="hidden sm:table-cell py-4">
-                          {isCompleted && (
-                            <div className="w-10 h-10 rounded-full flex items-center justify-end text-[#7C7C7C]">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="size-8"
+                                )}
+                                {received && (
+                                  <div className="flex items-center gap-2">
+                                    <Typography
+                                      variant="small"
+                                      className="text-base font-normal text-green-600"
+                                    >
+                                      {received}
+                                    </Typography>
+                                  </div>
+                                )}
+                              </div>
+                            </td>
+                            <td className="hidden sm:table-cell py-4 space-y-1">
+                              <Typography
+                                variant="small"
+                                className={`text-base font-normal text-[#0E201E]
+                                      dark:text-[#F3F5F7]`}
                               >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                                />
-                              </svg>
-                            </div>
-                          )}
-                        </td>
-                      </tr>
-
-                      {/* Expanded Details Row */}
-                      {expandedTransactionId === id &&
-                        renderExpandedDetails(transaction)}
-                    </React.Fragment>
-                  );
-                })}
+                                {action}
+                              </Typography>
+                              <Typography
+                                variant="small"
+                                className={`text-sm font-normal text-gray-600
+                                      dark:text-[#F3F5F7]`}
+                              >
+                                {time}
+                              </Typography>
+                            </td>
+                            <td className="hidden sm:table-cell py-4">
+                              {sent && (
+                                <div className="flex items-center gap-2">
+                                  <Typography
+                                    variant="small"
+                                    className="text-base font-normal text-error-500"
+                                  >
+                                    {sent}
+                                  </Typography>
+                                </div>
+                              )}
+                            </td>
+                            <td className="hidden sm:table-cell py-4">
+                              {received && (
+                                <div className="flex items-center gap-2">
+                                  <Typography
+                                    variant="small"
+                                    className="text-base font-normal text-green-600"
+                                  >
+                                    {received}
+                                  </Typography>
+                                </div>
+                              )}
+                            </td>
+                            <td className="hidden sm:table-cell py-4">
+                              <Typography
+                                variant="small"
+                                className={`text-base font-normal text-[#0E201E]
+                                      dark:text-[#F3F5F7]`}
+                              >
+                                {result}
+                              </Typography>
+                            </td>
+                            <td className="hidden sm:table-cell py-4">
+                              <Typography
+                                variant="small"
+                                className={`text-base font-normal text-[#0E201E]
+                                      dark:text-[#F3F5F7]`}
+                              >
+                                {transactionId}
+                              </Typography>
+                            </td>
+                            {activeTab === "Warnings" && (
+                              <td className="py-4">
+                                <div className="flex items-center gap-2">
+                                  {transaction.error &&
+                                  transaction.error !== "---" ? (
+                                    <>
+                                      <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                                      <div
+                                        className={`px-3 py-1 rounded-lg border ${
+                                          isDarkMode
+                                            ? "bg-red-900/20 border-red-600 text-red-400"
+                                            : "bg-red-50 border-red-200 text-red-700"
+                                        }`}
+                                      >
+                                        <Typography
+                                          variant="small"
+                                          className="text-sm font-normal"
+                                        >
+                                          {transaction.error}
+                                        </Typography>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <Typography
+                                      variant="small"
+                                      className={`text-xl font-normal ${
+                                        isDarkMode
+                                          ? "text-[#F3F5F7]"
+                                          : "text-[#0E201E]"
+                                      }`}
+                                    >
+                                      {transaction.error || "---"}
+                                    </Typography>
+                                  )}
+                                </div>
+                              </td>
+                            )}
+                            <td className={`hidden sm:table-cell py-4
+                            ${index === 0 ? "rounded-tr-lg" : "0" } 
+                                ${index === transactions.length - 1 ? "rounded-bl-lg" : "0" }
+                            `}>
+                              {isCompleted && (
+                                <div className="w-10 h-10 rounded-full flex items-center justify-end text-[#7C7C7C]">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="size-8"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                                    />
+                                  </svg>
+                                </div>
+                              )}
+                            </td>
+                          </tr>
+                          {/* Expanded Details Row */}
+                          {expandedTransactionId === id &&
+                            renderExpandedDetails(transaction)}
+                        </React.Fragment>
+                      );
+                    })}
+                  </React.Fragment>
+                ))}
               </tbody>
             </table>
           </div>
