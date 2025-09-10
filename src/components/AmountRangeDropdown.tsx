@@ -39,7 +39,7 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
   return (
     <div className="relative">
       <div
-        className={`flex items-center px-4 py-3 my-0 sm:my-4 space-x-4 rounded-xl shadow-sm border bg-white border-default text-primary text-smh
+        className={`flex items-center px-4 py-3 my-0 sm:my-4 md:my-4 space-x-4 rounded-xl shadow-sm border bg-white border-default text-primary text-smh
           dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -55,7 +55,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
       {/* Dropdown Content */}
       {isOpen && (
         <div
-          className={`absolute top-full left-0 mt-1 p-4 rounded-lg border shadow-lg z-50 w-80 bg-white border-[#E1E3E5]
+          className={`absolute top-full left-0 mt-1 md:-mt-3 p-4 rounded-lg 
+            border shadow-sm z-50 w-80 bg-white border-gray-150
             dark:bg-[#0E201E]`}
         >
           <div className="flex gap-4">

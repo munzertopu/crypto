@@ -367,15 +367,15 @@ const Filter: React.FC<FilterProps> = ({
       {/* Blue Alert Banner for Warnings Tab */}
       {activeTab === "Warnings" && showWarningBanner && (
         <div
-          className={`my-2 p-4 rounded-lg border ${
+          className={`my-2 px-6 py-4 rounded-lg border ${
             isDarkMode
               ? "border-blue-600 text-blue-300"
-              : "border-[#2186D7] text-[#2186D7]"
+              : "border-info-500 text-[#2186D7]"
           }`}
         >
           <div className="flex items-center justify-between mx-2">
             <div className="flex items-center gap-3">
-              <div className="w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
+              <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -391,11 +391,11 @@ const Filter: React.FC<FilterProps> = ({
                   />
                 </svg>
               </div>
-              <span className="text-sm font-medium">
+              <span className="text-base font-medium">
                 You have 10 missing pricing, match them at the setting
               </span>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <button
                 className={`text-sm font-medium ${
                   isDarkMode
@@ -477,11 +477,11 @@ const Filter: React.FC<FilterProps> = ({
 
               {walletDropdownOpen && (
                 <div
-                  className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-lg z-50 bg-white border-gray-300
+                  className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-sm z-50 bg-white border-gray-150
                     dark:bg-[#0E201E]`}
                 >
                   {/* Search Input */}
-                  <div className="px-3 border-b border-gray-200">
+                  <div className="px-3 border-b border-gray-150">
                     <input
                       type="text"
                       placeholder="Type or paste wallet"
@@ -500,7 +500,7 @@ const Filter: React.FC<FilterProps> = ({
                         <div
                           key={option.id}
                           onClick={() => handleWalletToggle(option.id)}
-                          className={`flex items-center px-3 py-2 cursor-pointer`}
+                          className={`flex items-center px-3 py-1.5 cursor-pointer`}
                         >
                           <div
                             className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
@@ -534,13 +534,14 @@ const Filter: React.FC<FilterProps> = ({
               )}
             </div>
 
-            {/* Custom Action Type Dropdown */}
+            {/* Action Type Dropdown */}
             <div className="relative" ref={actionTypeDropdownRef}>
               <button
                 onClick={() =>
                   setActionTypeDropdownOpen(!actionTypeDropdownOpen)
                 }
-                className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-primary
+                className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl 
+                  border bg-white border-default text-primary
                   dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               >
                 <span>Action type</span>
@@ -552,11 +553,12 @@ const Filter: React.FC<FilterProps> = ({
 
               {actionTypeDropdownOpen && (
                 <div
-                  className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-lg z-50 bg-white border-gray-300
+                  className={`absolute top-full left-0 mt-1 w-64 rounded-lg 
+                    border shadow-sm z-50 bg-white border-gray-150
                     dark:bg-[#0E201E]`}
                 >
                   {/* Search Input */}
-                  <div className="px-3 border-b border-gray-200">
+                  <div className="px-3 border-b border-gray-150">
                     <input
                       type="text"
                       placeholder="Type or paste action type"
@@ -638,8 +640,9 @@ const Filter: React.FC<FilterProps> = ({
               title="Amount received"
             />
             <div
-              className={`flex items-center text-smh rounded-xl border px-4 py-3 shadow-sm bg-white border-default text-gray-900 placeholder-gray-800 focus:outline-none
-              dark:bg-transparent`}
+              className={`flex items-center text-smh rounded-xl border px-4 py-3 shadow-sm bg-white 
+                border-default text-gray-900 placeholder-gray-800 focus:outline-none
+                dark:bg-transparent`}
             >
               <Datepicker
                 displayFormat="DD MMM YYYY"
@@ -673,11 +676,12 @@ const Filter: React.FC<FilterProps> = ({
 
               {resultDropdownOpen && (
                 <div
-                  className={`absolute top-full right-0 mt-1 w-64 rounded-lg border shadow-lg z-50 bg-white border-gray-300
+                  className={`absolute top-full right-0 mt-1 w-64 rounded-lg 
+                    border shadow-sm z-50 bg-white border-gray-150
                     dark:bg-[#0E201E]`}
                 >
                   {/* Search Input */}
-                  <div className="px-3 border-b border-gray-200">
+                  <div className="px-3 border-b border-gray-150">
                     <input
                       type="text"
                       placeholder="Type or paste result"
