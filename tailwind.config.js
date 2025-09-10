@@ -63,6 +63,9 @@ module.exports = {
         error: {
           500: "#d8382c",
         },
+        default: "#E1E3E5",
+        primary: "#0E201E",
+        background: "#F7F8F9"
       },
       fontFamily: {
         sans: [

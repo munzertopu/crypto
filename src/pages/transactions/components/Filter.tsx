@@ -338,20 +338,18 @@ const Filter: React.FC<FilterProps> = ({
       selectedDateRange.startDate &&
       selectedDateRange.endDate);
   return (
-    <div className={`p-0 sm:p-4 lg:pt-6 lg:px-8 rounded-lg `}>
+    <div className={`p-0 sm:p-4 md:px-0 md:pt-5 md:pb-6 rounded-lg `}>
       {/* Tabs */}
       {!hideTab && (
-        <div
-          className={`${isDarkMode ? "border-gray-700" : "border-gray-200"}`}
-        >
+        <div className={`border-gray-200 dark:border-gray-700`}>
           <Tabs>
-            <Tabs.List className="my-2 lg:my-2 bg-[#F3F5F7] dark:bg-[#2F3232]">
+            <Tabs.List className="my-2 lg:my-2 bg-white dark:bg-[#2F3232]">
               {tabs.map((tab) => (
                 <Tabs.Trigger
                   key={tab}
                   value={tab}
                   onClick={() => onTabChange?.(tab)}
-                  className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl text-sm sm:text-lg ${
+                  className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${
                     activeTab === tab
                       ? "bg-[#B3E277] dark:bg-[#0E201E] text-black dark:text-white"
                       : "text-[#0E201E] dark:text-[#FFFFFF]"
@@ -422,13 +420,13 @@ const Filter: React.FC<FilterProps> = ({
         </div>
       )}
 
-      <div className="flex flex-row justify-start lg:items-center gap-2 mt-[20px] sm:mt-0 ">
+      <div className="flex flex-row justify-start lg:items-center gap-5 mt-[20px] sm:mt-0 ">
         {/* Search */}
-        <div className="flex flex-grow-1 w-full sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]">
-          <div className="flex  flex-row justify-start items-center gap-3">
+        <div className="flex flex-grow-1 sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]">
+          <div className="flex flex-row justify-start items-center gap-3">
             <svg
-              width="20"
-              height="20"
+              width="16"
+              height="16"
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -454,7 +452,7 @@ const Filter: React.FC<FilterProps> = ({
               placeholder="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none bg-transparent
+              className={`text-sm w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none bg-transparent
             dark:bg-transparent dark:border-[#4D5050]`}
             />
           </div>
@@ -462,18 +460,18 @@ const Filter: React.FC<FilterProps> = ({
 
         {/* Additional Filters - Only show when showFilters is true */}
         {showFilters && (
-          <div className="flex items-center space-x-3 mt-4">
+          <div className="flex items-center space-x-5 mt-4 md:mt-0">
             {/* Custom Wallet Dropdown */}
             <div className="relative" ref={walletDropdownRef}>
               <button
                 onClick={() => setWalletDropdownOpen(!walletDropdownOpen)}
-                className={`flex text-sm items-center px-8 py-4 rounded-2xl border bg-white border-gray-300 text-[#0E201E]
+                className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-primary
                   dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               >
                 <span>Wallet</span>
                 <FontAwesomeIcon
                   icon={walletDropdownOpen ? faChevronUp : faChevronDown}
-                  className="w-4 h-4 ml-2"
+                  className="w-4 h-4"
                 />
               </button>
 
@@ -542,13 +540,13 @@ const Filter: React.FC<FilterProps> = ({
                 onClick={() =>
                   setActionTypeDropdownOpen(!actionTypeDropdownOpen)
                 }
-                className={`flex text-lg items-center px-8 py-4 rounded-2xl border bg-white border-gray-300 text-[#0E201E] text-sm
+                className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-primary
                   dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               >
                 <span>Action type</span>
                 <FontAwesomeIcon
                   icon={actionTypeDropdownOpen ? faChevronUp : faChevronDown}
-                  className="w-3 h-3 ml-2"
+                  className="w-3 h-3"
                 />
               </button>
 
@@ -640,7 +638,7 @@ const Filter: React.FC<FilterProps> = ({
               title="Amount received"
             />
             <div
-              className={`flex items-center py-2 rounded-xl border px-2 shadow-sm bg-white border-gray-300 text-gray-900 placeholder-gray-800 focus:outline-none
+              className={`flex items-center text-smh rounded-xl border px-4 py-3 shadow-sm bg-white border-default text-gray-900 placeholder-gray-800 focus:outline-none
               dark:bg-transparent`}
             >
               <Datepicker
@@ -652,10 +650,10 @@ const Filter: React.FC<FilterProps> = ({
                   shortcuts: createShortcuts(),
                 }}
                 primaryColor="green"
-                placeholder="Purchase date"
-                inputClassName="w-full rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white"
-                containerClassName="relative pr-6"
-                toggleClassName="absolute rounded-r-lg px-0 right-0 top-0 h-full text-gray-800 dark:text-white"
+                placeholder="Date"
+                inputClassName="mr-8 md:mr-0 focus:outline-none text-smh sm:text-base md:text-smh placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white"
+                containerClassName="relative pr-6 md:pr-0"
+                toggleClassName="absolute px-0 right-0 top-0 h-full text-gray-800 dark:text-white"
               />
             </div>
 
@@ -663,13 +661,13 @@ const Filter: React.FC<FilterProps> = ({
             <div className="relative" ref={resultDropdownRef}>
               <button
                 onClick={() => setResultDropdownOpen(!resultDropdownOpen)}
-                className={`flex text-lg items-center px-8 py-4 rounded-2xl border bg-white border-gray-300 text-[#0E201E] text-sm
+                className={`flex text-lg items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-[#0E201E] text-smh
                   dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               >
                 <span>Result</span>
                 <FontAwesomeIcon
                   icon={resultDropdownOpen ? faChevronUp : faChevronDown}
-                  className="w-3 h-3 ml-2"
+                  className="w-3 h-3"
                 />
               </button>
 
@@ -741,7 +739,7 @@ const Filter: React.FC<FilterProps> = ({
                 }
                 setShowFilters(!showFilters);
               }}
-              className={`flex text-xl items-center p-3 rounded-[12px] border transition-colors bg-white border-gray-150 text-[#0E201E]
+              className={`flex text-sm items-center p-3 rounded-[12px] border transition-colors bg-white border-gray-150 text-[#0E201E]
                 dark:bg-transparent dark:border-[#4D5050] dark:text-[#F3F5F7]`}
               aria-label="Toggle additional filters"
               aria-expanded={showFilters}
@@ -1188,7 +1186,7 @@ const Filter: React.FC<FilterProps> = ({
 
       {/* Active Filters Display */}
       {hasActiveFilters && (
-        <div className="pt-4">
+        <div className="pt-4 md:pt-0">
           <div className="flex flex-wrap gap-2">
             {/* Wallet Filters */}
             {selectedWallets.map((walletId) => {
@@ -1196,13 +1194,14 @@ const Filter: React.FC<FilterProps> = ({
               return wallet ? (
                 <div
                   key={`wallet-${walletId}`}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+                    bg-gray-100 text-gray-800 border border-default
                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
                 >
                   <span>{wallet.name}</span>
                   <button
                     onClick={() => removeWalletFilter(walletId)}
-                    className="ml-1 hover:text-red-500 transition-colors"
+                    className="transition-colors"
                     aria-label={`Remove ${wallet.name} filter`}
                   >
                     <FontAwesomeIcon
@@ -1223,13 +1222,14 @@ const Filter: React.FC<FilterProps> = ({
               return actionType ? (
                 <div
                   key={`action-${actionTypeId}`}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+                    bg-gray-100 text-gray-800 border border-default
                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
                 >
                   <span>{actionType.name}</span>
                   <button
                     onClick={() => removeActionTypeFilter(actionTypeId)}
-                    className="ml-1 hover:text-red-500 transition-colors"
+                    className="transition-colors"
                     aria-label={`Remove ${actionType.name} filter`}
                   >
                     <FontAwesomeIcon
@@ -1245,7 +1245,8 @@ const Filter: React.FC<FilterProps> = ({
             {/* Amount Sent Filter */}
             {(fromSentValue !== "0" || toSentValue !== "0") && (
               <div
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+                    bg-gray-100 text-gray-800 border border-default
                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
               >
                 <span>
@@ -1253,7 +1254,7 @@ const Filter: React.FC<FilterProps> = ({
                 </span>
                 <button
                   onClick={removeAmountSentFilter}
-                  className="ml-1 hover:text-red-500 transition-colors"
+                  className="transition-colors"
                 >
                   <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
                 </button>
@@ -1263,7 +1264,8 @@ const Filter: React.FC<FilterProps> = ({
             {/* Amount Received Filter */}
             {(fromReceivedValue !== "0" || toReceivedValue !== "0") && (
               <div
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+                    bg-gray-100 text-gray-800 border border-default
                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
               >
                 <span>
@@ -1271,7 +1273,7 @@ const Filter: React.FC<FilterProps> = ({
                 </span>
                 <button
                   onClick={removeAmountReceivedFilter}
-                  className="ml-1 hover:text-red-500 transition-colors"
+                  className="transition-colors"
                 >
                   <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
                 </button>
@@ -1283,7 +1285,8 @@ const Filter: React.FC<FilterProps> = ({
               selectedDateRange.startDate &&
               selectedDateRange.endDate && (
                 <div
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+                    bg-gray-100 text-gray-800 border border-default
                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
                 >
                   <span>
@@ -1292,7 +1295,7 @@ const Filter: React.FC<FilterProps> = ({
                   </span>
                   <button
                     onClick={removeDateFilter}
-                    className="ml-1 hover:text-red-500 transition-colors"
+                    className="transition-colors"
                   >
                     <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
                   </button>
@@ -1305,13 +1308,14 @@ const Filter: React.FC<FilterProps> = ({
               return result ? (
                 <div
                   key={`result-${resultId}`}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]"
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+                    bg-gray-100 text-gray-800 border border-default
                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
                 >
                   <span>{result.name}</span>
                   <button
                     onClick={() => removeResultFilter(resultId)}
-                    className="ml-1 hover:text-red-500 transition-colors"
+                    className="transition-colors"
                     aria-label={`Remove ${result.name} filter`}
                   >
                     <FontAwesomeIcon
@@ -1323,10 +1327,10 @@ const Filter: React.FC<FilterProps> = ({
                 </div>
               ) : null;
             })}
-            <div className="flex items-center justify-between mx-3">
+            <div className="flex items-center justify-between">
               <button
                 onClick={clearAllFilters}
-                className={`text-xs text-[#5F9339] font-medium transition-colors`}
+                className={`text-sm md:mx-2.5 md:my-1.5 text-[#5F9339] font-medium transition-colors`}
               >
                 <FontAwesomeIcon
                   icon={faTimes}
