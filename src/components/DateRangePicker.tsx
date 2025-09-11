@@ -8,19 +8,26 @@ import { enUS } from "date-fns/locale"; // Import enUS locale
 
 interface DateRangeSelectorProps {
   selectedDateRange: {
-    startDate: Date;
-    endDate: Date;
+    startDate: Date | null;
+    endDate: Date | null;
   };
-  onDateRangeChange: (dateRange: { startDate: Date; endDate: Date }) => void;
-  isDarkMode?: boolean;
+  onDateRangeChange: (dateRange: {
+    startDate: Date | null;
+    endDate: Date | null;
+  }) => void;
+
   variant?: "dropdown" | "inline";
+  buttonLabel?: string;
+  className?: string;
+  isDrawer?: boolean;
 }
 
 const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   selectedDateRange,
   onDateRangeChange,
-  isDarkMode = false,
-  variant = "dropdown",
+  buttonLabel,
+  className = "",
+  isDrawer = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dateRange, setDateRange] = useState([
@@ -34,10 +41,6 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   const screenSize = useScreenSize();
   const [selectedOption, setSelectedOption] = useState("");
 
-  const handleSelect = (value: string) => {
-    setSelectedOption(value);
-    console.log("Selected:", value);
-  };
   const createShortcuts = () => {
     const today = new Date();
     return [
@@ -165,7 +168,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
     <div className="relative datepicker-container" ref={containerRef}>
       <button
         onClick={handleIconClick}
-        className={`w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900 hover:bg-gray-50 min-w-[194px]`}
+        className={`w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900 hover:bg-gray-50 min-w-[194px] ${className}`}
         aria-label="Select date range"
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -258,13 +261,19 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
 
           <span className="text-xs font-medium">
             {formatDateRange(selectedDateRange)}
-            {}
+            {!selectedDateRange.startDate && !selectedDateRange.endDate && (
+              <>{buttonLabel}</>
+            )}
           </span>
         </div>
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-[-175px] md:left-[-710px] mt-1 z-50 bg-white dark:bg-gray-800 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ">
+        <div
+          className={`absolute top-full left-[-175px] md:left-[-710px] mt-1 z-50 bg-white dark:bg-gray-800 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
+            isDrawer ? " left-[-10px]" : ""
+          }`}
+        >
           {/* Left Sidebar for Filters */}
           <div className="hidden min-w-[200px] pr-4 border-r border-gray-150 md:flex flex-col justify-start items-start px-2 gap-2 ">
             {createShortcuts().map((shortcut, index) => (
