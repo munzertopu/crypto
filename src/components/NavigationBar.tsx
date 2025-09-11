@@ -100,7 +100,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <img
               // src="/logo.png"
               src={
-                screenSize.width < 640 ? "/logo-mobile-white.png" : "/logo.png"
+                screenSize?.width < 640 ? "/logo-mobile-white.png" : "/logo.png"
               }
               alt="Portal"
               className="h-8 w-[34px] md:w-[112px] sm:h-7 lg:h-7 md:h-[32px] block dark:hidden"
@@ -108,7 +108,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <img
               // src="/logo-dark.png"
               src={
-                screenSize.width < 640
+                screenSize?.width < 640
                   ? "/logo-dark-mobile.png"
                   : "/logo-dark.png"
               }
