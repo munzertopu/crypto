@@ -124,7 +124,8 @@ const DateRangeSelector: React.FC<DateRangeSelectorProps> = ({
   // Render inline variant
   if (variant === 'inline') {
     return (
-      <div className={`flex items-center rounded-lg border p-2 shadow-sm w-full sm:w-auto border-[#E1E3E5] bg-[#FFFFFF]
+      <div className={`flex items-center rounded-lg border p-2 shadow-sm w-full sm:w-auto md:w-64
+        border-[#E1E3E5] bg-[#FFFFFF]
         dark:bg-[#0E201E] dark:border-[#4D5050]`}
       >
         <Datepicker
@@ -137,11 +138,12 @@ const DateRangeSelector: React.FC<DateRangeSelectorProps> = ({
           configs={{
               shortcuts: createShortcuts()
           }}
-          
           primaryColor='green'
-          inputClassName="w-full rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white"
+          inputClassName="w-full rounded-md bg-transparent mr-8 focus:outline-none text-sm 
+          placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white"
           containerClassName="relative pr-6"
-          toggleClassName="absolute rounded-r-lg px-0 right-0 top-0 h-full text-gray-800 dark:text-white"
+          toggleClassName="absolute rounded-r-lg px-0 right-0 top-0 h-full 
+          text-gray-800 dark:text-white"
         />
       </div>
     );

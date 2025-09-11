@@ -79,9 +79,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [modalOpen]);
-
-
-
+  
   const ShortVsLongBar: React.FC<{ shortPercentage: number; longPercentage: number }> = ({
     shortPercentage,
     longPercentage
@@ -112,7 +110,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Date Range and Legend Row */}
       <div className="flex justify-between items-center">
         {/* Date Range Selector - Left */}
@@ -143,7 +141,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
         <CardBody className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left" role="table" aria-label="Tax optimization cryptocurrency holdings">
-               <thead className={`bg-[#F3F5F7] dark:bg-[#2F3232]`}>
+               <thead className={`bg-table-header dark:bg-[#2F3232]`}>
                  <tr role="row" className='bg-white dark:bg-[#0E201E]'>
                    <th>
                      
@@ -151,14 +149,14 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                    <th>
                    </th>
                    <th className='py-2'>
-                     <span className={`text-base px-2 py-1 rounded-lg font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#5F9339] bg-[#E3F3C7]"}`}>
+                     <span className={`text-sm px-2 py-1 rounded-lg font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#5F9339] bg-[#E3F3C7]"}`}>
                        Short term
                      </span>
                    </th>
                    <th>
                    </th>
                    <th className='py-2'>
-                     <span className={`text-base px-2 py-1 rounded-lg font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#8C5DF3] bg-[#8C5DF31F]"}`}>
+                     <span className={`text-sm px-2 py-1 rounded-lg font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#8C5DF3] bg-[#8C5DF31F]"}`}>
                        Long term
                      </span>
                    </th>
@@ -168,7 +166,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                   {TABLE_HEAD.map((head, index) => (
                   <th
                     key={head}
-                    className={`cursor-pointer p-6 ${
+                    className={`cursor-pointer px-3 py-3.5 ${
                       index === 0 ? "rounded-l-xl" : ""
                     } ${index === TABLE_HEAD.length - 1 ? "rounded-r-md" : ""}
                     ${head === "Potential Gains" ? "border-l-2 border-green-500" : ""}
@@ -177,10 +175,11 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                   >
                     <Typography
                       variant="small"
-                      className="flex items-center justify-between gap-2 font-normal text-xl leading-none text-[#666868] dark:text-[#B6B8BA]"
+                      className="flex items-center gap-1.5 font-normal text-sm leading-none 
+                        text-[#666868] dark:text-[#B6B8BA]"
                     >
                       {head}{" "}
-                      {index !== TABLE_HEAD.length - 1 && (
+                      {index !== 0 && index !== TABLE_HEAD.length - 1 && (
                         <ChevronUpDownIcon
                           strokeWidth={2}
                           className="h-4 w-4"
@@ -207,19 +206,15 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                            <img 
                              src={asset.logo} 
                              alt={`${asset.name} logo`}
-                             className="w-8 h-8 rounded-full"
+                             className="w-6 h-6 rounded-full"
                            />
                           <div>
                             <Typography 
                               variant="small" 
-                              className={`text-xl font-normal text-[#0E201E]
+                              className={`text-base font-normal text-primary
                                   dark:text-[#F3F5F7]`}
                              >
                                {asset.name}
-                             </Typography>
-                             <Typography variant="small" className={`text-xs text-gray-500
-                                dark:text-[#F3F5F7]`}>
-                               {asset.symbol}
                              </Typography>
                            </div>
                          </div>
@@ -244,126 +239,126 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                     
                     {/* Market Value */}
                       <td className="px-6 py-4 text-left" role="cell">
-                        <Typography variant="small" className={`font-medium text-gray-900 dark:text-[#F3F5F7]`}>
+                        <Typography variant="small" className={`font-normal text-primary dark:text-[#F3F5F7]`}>
                           {formatCurrency(asset.marketValue)}
                         </Typography>
                       </td>
 
                       {/* Potential Gains */}
                       <td className="px-6 border-l-2 border-[#75ae46] py-4 text-left" role="cell">
-                        <Typography variant="small" className={`font-medium text-gray-900 dark:text-[#F3F5F7]`}>
+                        <Typography variant="small" className={`font-normal text-primary dark:text-[#F3F5F7]`}>
                           {formatCurrency(asset.shortTerm.potentialGains)}
                         </Typography>
                       </td>
-
-                                                                                           {/* Amount Held <12m */}
-                         <td className="px-6 py-4 text-left relative" role="cell">
-                           <div 
-                             className="cursor relative"
-                             onMouseEnter={() => asset.shortTerm.longTermTransitionDate && handleTooltipShow(asset.id)}
-                             onMouseLeave={handleTooltipHide}
-                           >
-                             <Typography variant="small" className={`font-medium text-gray-900 dark:text-[#F3F5F7]`}>
-                               {formatCryptoAmount(asset.shortTerm.amountHeldValue, asset.shortTerm.amountHeldUnit)}
-                             </Typography>
-                             
-                             {/* Tooltip */}
-                             {tooltipOpen === asset.id && asset.shortTerm.longTermTransitionDate && (
-                               <div
-                                 className={`absolute z-50 px-3 py-2 text-sm rounded-lg shadow-lg border whitespace-nowrap ${
-                                   isDarkMode 
-                                     ? 'bg-gray-800 border-gray-600 text-white' 
-                                     : 'bg-[#0E201E] border-gray-300 text-white'
-                                 }`}
-                                 style={{
-                                   top: '25px',
-                                   left: '50%',
-                                   transform: 'translateX(-50%)',
-                                 }}
-                               >
-                                 <div className="relative">
-                                   {/* Caret pointing down */}
-                                   <div 
-                                     className={`absolute w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent ${
-                                       isDarkMode ? 'border-t-gray-800' : 'border-t-white'
-                                     }`}
-                                     style={{
-                                       bottom: '-4px',
-                                       left: '50%',
-                                       transform: 'translateX(-50%)',
-                                     }}
-                                   />
-                                   <div className="text-center">
-                                     This asset will become a long-term holding in {asset.shortTerm.monthsUntilLongTerm} months ({asset.shortTerm.longTermTransitionDate})
-                                   </div>
-                                 </div>
-                               </div>
-                             )}
-                           </div>
-                         </td>
+                      
+                      {/* Amount Held <12m */}
+                      <td className="px-6 py-4 text-left relative" role="cell">
+                        <div 
+                          className="cursor relative"
+                          onMouseEnter={() => asset.shortTerm.longTermTransitionDate && handleTooltipShow(asset.id)}
+                          onMouseLeave={handleTooltipHide}
+                        >
+                          <Typography variant="small" className={`font-normal text-primary dark:text-[#F3F5F7]`}>
+                            {formatCryptoAmount(asset.shortTerm.amountHeldValue, asset.shortTerm.amountHeldUnit)}
+                          </Typography>
+                          
+                          {/* Tooltip */}
+                          {tooltipOpen === asset.id && asset.shortTerm.longTermTransitionDate && (
+                            <div
+                              className={`absolute z-50 px-3 py-2 text-sm rounded-lg shadow-lg border whitespace-nowrap ${
+                                isDarkMode 
+                                  ? 'bg-gray-800 border-gray-600 text-white' 
+                                  : 'bg-[#0E201E] border-gray-300 text-white'
+                              }`}
+                              style={{
+                                top: '25px',
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                              }}
+                            >
+                              <div className="relative">
+                                {/* Caret pointing down */}
+                                <div 
+                                  className={`absolute w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent ${
+                                    isDarkMode ? 'border-t-gray-800' : 'border-t-white'
+                                  }`}
+                                  style={{
+                                    bottom: '-4px',
+                                    left: '50%',
+                                    transform: 'translateX(-50%)',
+                                  }}
+                                />
+                                <div className="text-center">
+                                  This asset will become a long-term holding in {asset.shortTerm.monthsUntilLongTerm} months ({asset.shortTerm.longTermTransitionDate})
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </td>
 
                       {/* Long term gains */}
                       <td className="px-6 py-4 border-l-2 border-[#8C5DF3] text-left" role="cell">
-                        <Typography variant="small" className={`font-medium text-gray-900 dark:text-[#F3F5F7]`}>
+                        <Typography variant="small" className={`font-normal text-primary dark:text-[#F3F5F7]`}>
                           {formatCurrency(asset.longTerm.potentialGains)}
                         </Typography>
                       </td>
 
                       {/* Amount Held (>12m) */}
                       <td className="px-6 py-4 text-left" role="cell">
-                        <Typography variant="small" className={`font-medium text-gray-900 dark:text-[#F3F5F7]`}>
+                        <Typography variant="small" className={`font-normal text-primary dark:text-[#F3F5F7]`}>
                           {formatCryptoAmount(asset.longTerm.amountHeldValue, asset.longTerm.amountHeldUnit)}
                         </Typography>
                       </td>
-
-                                             {/* Short vs Long % */}
-                       <td className="px-6 py-4 text-left relative" role="cell">
-                         <div 
-                           className="relative"
-                           onMouseEnter={() => handleTooltipShow(asset.id + '-shortVsLong')}
-                           onMouseLeave={handleTooltipHide}
-                         >
-                           <ShortVsLongBar 
-                             shortPercentage={asset.shortVsLongPercentage.short}
-                             longPercentage={asset.shortVsLongPercentage.long}
-                           />
-                           
-                           {/* Tooltip */}
-                           {tooltipOpen === asset.id + '-shortVsLong' && (
-                             <div
-                               className={`absolute z-50 px-3 py-2 text-sm rounded-lg whitespace-nowrap ${
-                                 isDarkMode 
-                                   ? 'bg-gray-800 border-gray-600 text-white' 
-                                   : 'bg-[#0E201E] text-white'
-                               }`}
-                               style={{
-                                 top: '25px',
-                                 left: '50%',
-                                 transform: 'translateX(-50%)',
-                               }}
-                             >
-                               <div className="relative">
-                                 {/* Caret pointing down */}
-                                 <div 
-                                   className={`absolute w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent ${
-                                     isDarkMode ? 'border-t-gray-800' : 'border-t-white'
-                                   }`}
-                                   style={{
-                                     bottom: '-4px',
-                                     left: '50%',
-                                     transform: 'translateX(-50%)',
-                                   }}
-                                 />
-                                 <div className="text-center">
-                                   Short Term Gain: {asset.shortVsLongPercentage.short}%
-                                   <br />
-                                   Long Term Gain: {asset.shortVsLongPercentage.long}%
-                                 </div>
-                               </div>
-                             </div>
-                           )}
-                         </div>
-                       </td>
+                      
+                      {/* Short vs Long % */}
+                      <td className="px-6 py-4 text-left relative" role="cell">
+                        <div 
+                          className="relative"
+                          onMouseEnter={() => handleTooltipShow(asset.id + '-shortVsLong')}
+                          onMouseLeave={handleTooltipHide}
+                        >
+                          <ShortVsLongBar 
+                            shortPercentage={asset.shortVsLongPercentage.short}
+                            longPercentage={asset.shortVsLongPercentage.long}
+                          />
+                          
+                          {/* Tooltip */}
+                          {tooltipOpen === asset.id + '-shortVsLong' && (
+                            <div
+                              className={`absolute z-50 px-3 py-2 text-sm rounded-lg whitespace-nowrap ${
+                                isDarkMode 
+                                  ? 'bg-gray-800 border-gray-600 text-white' 
+                                  : 'bg-[#0E201E] text-white'
+                              }`}
+                              style={{
+                                top: '25px',
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                              }}
+                            >
+                              <div className="relative">
+                                {/* Caret pointing down */}
+                                <div 
+                                  className={`absolute w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent ${
+                                    isDarkMode ? 'border-t-gray-800' : 'border-t-white'
+                                  }`}
+                                  style={{
+                                    bottom: '-4px',
+                                    left: '50%',
+                                    transform: 'translateX(-50%)',
+                                  }}
+                                />
+                                <div className="text-center">
+                                  Short Term Gain: {asset.shortVsLongPercentage.short}%
+                                  <br />
+                                  Long Term Gain: {asset.shortVsLongPercentage.long}%
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </td>
                   </tr>
                 ))}
               </tbody>

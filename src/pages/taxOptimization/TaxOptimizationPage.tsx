@@ -35,7 +35,7 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0E201E]">
+    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white">
       <NavigationBar
         isDarkMode={isDarkMode}
         onThemeToggle={handleThemeToggle}
@@ -43,11 +43,11 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
         currentPage="tax-optimization"
       />
 
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 mt-8 md:mt-5">
         {/* Header */}
-        <div className="mb-6">
+        <div className="mb-5">
           <h1
-            className={`text-2xl font-semibold mb-4 text-left text-[#0E201E] dark:text-[#E1E3E5]`}
+            className={`text-2xl font-semibold mb-5 text-left text-[#0E201E] dark:text-[#E1E3E5]`}
           >
             Tax Optimization
           </h1>
@@ -57,13 +57,14 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
             className={`${isDarkMode ? "border-gray-700" : "border-gray-200"}`}
           >
             <Tabs>
-              <Tabs.List className="my-2 lg:my-2 bg-[#F3F5F7] dark:bg-[#2F3232]">
+              <Tabs.List className="my-2 lg:my-0 bg-[#F3F5F7] dark:bg-[#2F3232]">
                 {tabs.map((tab) => (
                   <Tabs.Trigger
                     key={tab}
                     value={tab}
                     onClick={() => handleTabChange?.(tab)}
-                    className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl text-sm sm:text-lg ${
+                    className={`px-3 sm:px-5 md:px-2.5 py-1 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl 
+                      text-sm sm:text-lg md:text-sm ${
                       activeTab === tab
                         ? 'bg-white dark:bg-[#0E201E] text-black dark:text-white'
                         : 'text-[#0E201E] dark:text-[#FFFFFF]'
