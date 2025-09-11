@@ -331,8 +331,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
                   {/* Separator */}
                   <div
-                    className={`sm:hidden  w-full h-px
-                      dark:bg-gray-700  bg-gray-150
+                    className={`sm:hidden md:block w-full h-px
+                      dark:bg-gray-700 bg-gray-150
                     `}
                   ></div>
 
