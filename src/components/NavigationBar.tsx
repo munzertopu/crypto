@@ -102,12 +102,20 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <div className="flex items-center">
           <Link to="/dashboard" className="flex items-center">
             <img
-              src="/logo.png"
+              // src="/logo.png"
+              src={
+                screenSize.width < 640 ? "/logo-mobile-white.png" : "/logo.png"
+              }
               alt="Portal"
               className="h-8 w-[34px] md:w-[112px] sm:h-7 lg:h-7 md:h-[32px] block dark:hidden"
             />
             <img
-              src="/logo-dark.png"
+              // src="/logo-dark.png"
+              src={
+                screenSize.width < 640
+                  ? "/logo-dark-mobile.png"
+                  : "/logo-dark.png"
+              }
               alt="Portal"
               className="h-8 w-[34px] md:w-[112px] sm:h-7 lg:h-7 md:h-[32px] hidden dark:block"
             />
