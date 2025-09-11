@@ -29,15 +29,15 @@ const TaxLossHarvestingRangeDropdown: React.FC<TaxLossHarvestingRangeDropdownPro
   return (
     <div className="relative">
       <button
-        className={`flex items-center space-x-8 px-4 py-3 border border-gray-300 rounded-xl text-base hover:bg-gray-50 transition-colors ${
-          isDarkMode ? 'text-gray-300 border-gray-600 hover:bg-gray-700' : 'text-[#0E201E]'
-        }`}
+        className={`flex items-center space-x-8 px-4 py-3 border rounded-xl text-base 
+          border-default text-primary 
+          dark:text-gray-300 dark:border-gray-600`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <span>{title}</span>
         <FontAwesomeIcon 
           icon={faChevronDown} 
-          className={`w-3 h-3 text-[#0E201E] transition-transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-3 h-3 text-gray-500 transition-transform ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
       

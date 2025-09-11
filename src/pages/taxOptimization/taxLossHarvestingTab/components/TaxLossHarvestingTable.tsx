@@ -8,7 +8,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { taxLossHarvestingAssets } from '../../../../data/cryptoAssets';
-import type { TaxLossHarvestingAsset } from '../../../../data/cryptoAssets';
 
 interface TaxLossHarvestingTableProps {
   isDarkMode?: boolean;
@@ -42,25 +41,31 @@ const TaxLossHarvestingTable: React.FC<TaxLossHarvestingTableProps> = ({
   ];
 
   return (
-    <Card className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} border border-gray-200`}>
-      <CardBody className="p-0">
+    <Card className="h-full w-full border-transparent bg-transprent shadow-none">
+      <CardBody className="px-0 rounded-lg sm:overflow-x-auto">
         <div className="overflow-x-auto">
-          <table className="w-full" role="table" aria-label="Tax loss harvesting cryptocurrency holdings">
-            <thead>
-              <tr className={`${isDarkMode ? 'bg-gray-700' : 'bg-gray-50'}`} role="row">
+          <table className="w-full min-w-max table-auto text-left"
+            role="table" 
+            aria-label="Tax loss harvesting cryptocurrency holdings">
+            <thead className="bg-table-header dark:bg-[#2F3232] hidden sm:table-header-group">
+              <tr role="row">
                 {tableHeaders.map(({ key, label }) => (
                   <th 
                     key={key}
-                    className="px-6 py-4 text-left cursor-pointer" 
-                    role="columnheader" 
+                    className={`cursor-pointer p-6 ${
+                      key === 'asset' ? "rounded-l-xl" : ""
+                    } ${
+                      key === 'gainsLosses' ? "rounded-r-xl" : ""
+                    }`}
+                    role="columnheader"
                     scope="col"
                     onClick={() => onSort(key)}
                   >
                     <div className="flex items-center space-x-2">
-                      <Typography variant="small" className={`font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <Typography variant="small" className={`font-normal ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                         {label}
                       </Typography>
-                      {getSortIcon(key)}
+                      { key !== 'asset' && getSortIcon(key)}
                     </div>
                   </th>
                 ))}
@@ -70,9 +75,6 @@ const TaxLossHarvestingTable: React.FC<TaxLossHarvestingTableProps> = ({
               {taxLossHarvestingAssets.map((asset) => (
                 <tr 
                   key={asset.id}
-                  className={`border-b border-gray-200 ${
-                    isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
-                  }`}
                   role="row"
                 >
                   {/* Asset */}
@@ -81,50 +83,40 @@ const TaxLossHarvestingTable: React.FC<TaxLossHarvestingTableProps> = ({
                       <img 
                         src={asset.logo} 
                         alt={`${asset.name} logo`}
-                        className="w-8 h-8 rounded-full"
+                        className="w-12 h-12 rounded-full"
                       />
-                      <div className="flex items-center space-x-2">
-                        <div>
-                          <Typography variant="small" className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                            {asset.name}
-                          </Typography>
-                          <Typography variant="small" className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                            {asset.symbol}
-                          </Typography>
-                        </div>
-                        <FontAwesomeIcon 
-                          icon={faEye} 
-                          className={`w-3 h-3 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} cursor-pointer`}
-                          aria-label="View asset details"
-                        />
+                      <div className="flex items-center">
+                        <Typography variant="small" className={`text-base text-primary dark:text-white`}>
+                          {asset.name}
+                        </Typography>
                       </div>
                     </div>
                   </td>
 
                   {/* Amount Held */}
                   <td className="px-6 py-4" role="cell">
-                    <Typography variant="small" className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                    <Typography variant="small" className={`text-base text-primary dark:text-white`}>
                       {asset.amountHeld}
                     </Typography>
                   </td>
 
                   {/* Potential Loss */}
                   <td className="px-6 py-4" role="cell">
-                    <Typography variant="small" className="font-medium text-red-600">
+                    <Typography variant="small" className="text-base text-error-500">
                       {asset.potentialLoss}
                     </Typography>
                   </td>
 
                   {/* Cost Basis */}
                   <td className="px-6 py-4" role="cell">
-                    <Typography variant="small" className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                    <Typography variant="small" className={`text-base text-primary dark:text-white`}>
                       {asset.costBasis}
                     </Typography>
                   </td>
 
                   {/* Market Value */}
                   <td className="px-6 py-4" role="cell">
-                    <Typography variant="small" className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                    <Typography variant="small" className={`text-base text-primary dark:text-white`}>
                       {asset.marketValue}
                     </Typography>
                   </td>
@@ -132,11 +124,8 @@ const TaxLossHarvestingTable: React.FC<TaxLossHarvestingTableProps> = ({
                   {/* Gains/Losses */}
                   <td className="px-6 py-4" role="cell">
                     <div>
-                      <Typography variant="small" className="font-medium text-red-600">
-                        {asset.gainsLosses}
-                      </Typography>
-                      <Typography variant="small" className="text-red-600">
-                        {asset.gainsLossesPercentage}
+                      <Typography variant="small" className="font-base text-error-500">
+                        {asset.gainsLosses} ({asset.gainsLossesPercentage})
                       </Typography>
                     </div>
                   </td>

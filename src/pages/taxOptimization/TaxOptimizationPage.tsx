@@ -49,7 +49,7 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
           <h1
             className={`text-2xl font-semibold mb-5 text-left text-[#0E201E] dark:text-[#E1E3E5]`}
           >
-            Tax Optimization
+            Tax Holding Maturity
           </h1>
 
           {/* Sub Navigation Tabs */}
