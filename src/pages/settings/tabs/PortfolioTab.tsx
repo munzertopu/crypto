@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faPencil,
-  faChevronDown,
-  faCalendar
+  faChevronDown
 } from '@fortawesome/free-solid-svg-icons';
 import { Input, Button } from "@material-tailwind/react";
 import DatePicker from "react-datepicker";
@@ -123,14 +122,14 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* User Avatar Section */}
       <div className="flex items-start">
         <div className="relative">
           <img 
             src="/kristin.png" 
             alt="Kristin Watson" 
-            className="w-28 h-28 rounded-full object-cover"
+            className="w-[100px] h-[100px] rounded-full object-cover"
           />
           <button className="absolute bottom-0 right-0 w-8 h-8 bg-[#F3F5F7] border-2 border-white rounded-full flex items-center justify-center">
             <FontAwesomeIcon icon={faPencil} className="w-3 h-3 text-[#7C7C7C]" />
@@ -142,44 +141,44 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
-            <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+            <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
               Full name
             </label>
             <Input
               type="text"
               value={formData.fullName}
               onChange={(e) => handleInputChange('fullName', e.target.value)}
-              className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className={`text-base bg-white border-default dark:bg-gray-700 dark:border-[#E1E3E5] dark:text-white`}
             />
           </div>
           <div>
-            <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+            <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
               Email
             </label>
             <Input
               type="email"
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
-              className={`text-base ${isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className={`text-base bg-white border-default dark:bg-gray-700 dark:border-[#E1E3E5] dark:text-white`}
             />
           </div>
         </div>
         <div className="py-8">
-          <div className={`w-full h-px ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'}`}></div>
+          <div className={`w-full h-px bg-default dark:bg-gray-700`}></div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div>
-              <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+              <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
                 Country
               </label>
               <div className="relative" ref={dropdownRef}>
                 <button
                   type="button"
                   onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
-                  className={`w-full px-3 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between ${
-                    isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white text-gray-900'
-                  }`}
+                  className={`w-full px-3 border rounded-lg focus:outline-none flex items-center justify-between
+                    border-gray-150 bg-white text-gray-900
+                    dark:bg-gray-700 dark:border-gray-600 dark:text-white`}
                 >
                   <div className="flex items-center">
                     <img src={selectedCountry.flag} className="mr-3 py-1.5"></img>
@@ -202,8 +201,9 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
                         key={country.code}
                         type="button"
                         onClick={() => handleCountrySelect(country)}
-                        className={`w-full px-3 py-2 flex items-center hover:bg-gray-50 ${
-                          isDarkMode ? 'hover:bg-gray-600 text-white' : 'text-gray-900'
+                        className={`w-full px-3 border rounded-lg focus:outline-none flex items-center justify-between
+                          border-gray-150 bg-white text-gray-900
+                          dark:bg-gray-700 dark:border-gray-600 dark:text-white
                         } ${selectedCountry.code === country.code ? 'bg-gray-100' : ''}`}
                       >
                         <img src={country.flag} className="text-lg mr-3"></img>
@@ -216,7 +216,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
             </div>
 
             <div>
-              <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+              <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
                 Currency
               </label>
               <div className="relative" ref={currencyDropdownRef}>
@@ -261,7 +261,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
             </div>
             
             <div>
-              <label className={`block text-sm font-medium text-left mb-1 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+              <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
                 Lock transaction prior to this date
               </label>
               <div className="relative" ref={datePickerRef}>
@@ -292,7 +292,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
           </div>
           <div className="space-y-4">
             <div>
-              <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+              <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
                 California Time zone
               </label>
               <div className="relative">
@@ -312,7 +312,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
 
             <div>
               <div className="flex space-x-2">
-                <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+                <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
                   Dust valur threshold
                 </label>
                 <svg className="w-5 h-5 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -370,7 +370,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
             </div>
             
             <div>
-               <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+               <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
                  Beginning of tax reporting year
                </label>
                <div className="relative">
@@ -403,13 +403,13 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
       </div>
 
       {/* Separator */}
-      <div className="border-t border-gray-100 my-6" role="separator"></div>
+      <div className="border-t border-default my-8" role="separator"></div>
 
       {/* Save Button */}
       <div className="flex justify-end pt-2">
         <Button
           onClick={handleSaveChanges}
-          className="bg-[#90C853] text-[#0E201E] px-6 py-2 border-0 rounded-lg font-medium"
+          className="text-base bg-[#90C853] text-[#0E201E] px-5 py-3 border-0 rounded-lg font-medium"
         >
           Save changes
         </Button>
