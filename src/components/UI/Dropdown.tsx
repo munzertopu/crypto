@@ -92,7 +92,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         {isOpen ? <ArrowUpSvg /> : <ArrowDownSvg />}
       </button>
       {isOpen && (
-        <div className="absolute top-full left-0 py-2 w-full bg-white border border-gray-150 rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 flex flex-col items-start justify-start">
+        <div className="absolute top-full left-0 py-2 w-full bg-white border border-gray-150 rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 flex flex-col items-start justify-start max-h-[200px] overflow-y-auto">
           {options.map((option) => (
             <div
               key={option}
