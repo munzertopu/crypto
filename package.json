@@ -29,6 +29,7 @@
     "plotly.js-dist": "^3.1.0",
     "react": "^19.1.1",
     "react-apexcharts": "^1.7.0",
+    "react-date-range": "^2.0.1",
     "react-datepicker": "^8.7.0",
     "react-dom": "^19.1.1",
     "react-plotly.js": "^2.6.0",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@eslint/js": "^9.33.0",
     "@types/react": "^19.1.10",
+    "@types/react-date-range": "^1.4.10",
     "@types/react-dom": "^19.1.7",
     "@types/react-plotly.js": "^2.6.3",
     "@vitejs/plugin-react": "^5.0.0",
