@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { Tabs } from "@material-tailwind/react";
-import Datepicker from "react-tailwindcss-datepicker";
+
+import DateRangePickerPopover from "../../../components/DateRangePicker";
 
 interface DashboardHeaderProps {
   activeTab?: string;
@@ -20,7 +21,10 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     startDate: null,
     endDate: null,
   });
-
+  const [selectedDateRange, setSelectedDateRange] = useState({
+    startDate: new Date("2025-05-01"),
+    endDate: new Date("2025-05-29"),
+  });
   // Create shortcuts with year dropdown
   const createShortcuts = () => {
     const shortcuts: any = {
@@ -76,24 +80,29 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         </h4>
 
         {/* Date Range Selector */}
-        <div
-          className={`max-w-[190px] flex items-center rounded-xl border py-2.5 md:py-1 px-4 shadow-sm w-full sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]`}
-        >
-          <Datepicker
+        <div className={`max-w-[190px] `}>
+          {/* flex items-center rounded-xl border py-2.5 md:py-1 px-4 shadow-sm w-full sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E] */}
+          <DateRangePickerPopover
+            selectedDateRange={selectedDateRange}
+            onDateRangeChange={setSelectedDateRange}
+            isDarkMode={isDarkMode}
+            variant="inline"
+          />
+          {/* <Datepicker
             displayFormat="DD MMM YYYY"
             separator="-"
             placeholder=""
             value={value}
             onChange={(newValue: any) => setValue(newValue)}
-            showShortcuts={true}
-            configs={{
-              shortcuts: createShortcuts(),
-            }}
+            // showShortcuts={true}
+            // configs={{
+            //   shortcuts: createShortcuts(),
+            // }}
             primaryColor="green"
             inputClassName={`w-full rounded-md bg-transparent mr-8 focus:outline-none text-sm sm:text-base md:text-sm placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white`}
             containerClassName="relative pr-6"
             toggleClassName={`absolute rounded-r-lg px-0 right-0 top-0 h-fulltext-gray-800 dark:text-white`}
-          />
+          /> */}
         </div>
       </div>
       {/* Tabs */}
