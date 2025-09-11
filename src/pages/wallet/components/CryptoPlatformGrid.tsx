@@ -204,7 +204,7 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
 
   return (
     <>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-10 mt-5 sm:mt-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-10 md:gap-5 mt-5 sm:mt-10 md:mt-6">
         {cryptoPlatforms.map((platform) => (
           <Tooltip
             key={platform.name}
@@ -212,7 +212,8 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
             isDarkMode={isDarkMode}
           >
             <div
-              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity justify-center rounded-[12px] px-6 py-2 sm:px-0 sm:py-0 sm:px-6 sm:py-4 border border-gray-150 dark:border-[#B6B8BA]"
+              className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity justify-center rounded-[12px] px-6 py-2 sm:px-0 sm:py-0 sm:px-6 md:px-5 sm:py-4 md:py-5 
+              border border-gray-150 dark:border-[#B6B8BA]"
               onClick={() => handlePlatformClick(platform.name)}
             >
               <div className="relative mb-6">

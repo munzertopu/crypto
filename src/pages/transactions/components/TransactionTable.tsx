@@ -115,8 +115,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                   {TABLE_HEAD.map((head, index) => (
                     <th
                       key={head}
-                      className={`cursor-pointer px-5 py-3.5 ${
-                        index === 0 ? "rounded-l-md" : ""
+                      className={`cursor-pointer py-3.5 ${
+                        index === 0 ? "px-1 rounded-l-md" : "px-1.5"
                       } ${
                         index === TABLE_HEAD.length - 1 ? "rounded-r-md" : ""
                       }`}

@@ -1,7 +1,5 @@
 import React from "react";
 import { Tabs } from "@material-tailwind/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 interface FilterProps {
   activeTab: string;
@@ -19,7 +17,7 @@ const Filter: React.FC<FilterProps> = ({
   isDarkMode,
 }) => {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-0 sm:mb-8">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-0 sm:mb-8 md:mb-6">
       {/* Tabs */}
       <div className="flex mb-4 mt-5 md:mt-0 sm:mb-0">
         <Tabs>

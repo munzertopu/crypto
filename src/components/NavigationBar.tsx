@@ -3,12 +3,9 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
-  faCrown,
   faBars,
-  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import ThemeToggle from "./ThemeToggle";
-import useScreenSize from "../hooks/useScreenSize";
 
 interface NavigationBarProps {
   userName?: string;
@@ -29,7 +26,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
-  const screenSize = useScreenSize();
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -124,7 +120,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 dark:text-[#B6B8BA]
                 ${
                   currentPage === item.name.toLowerCase()
-                    ? "!text-green-600"
+                    ? "!text-green-700"
                     : ``
                 }`}
             >
@@ -288,9 +284,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                       >
                         <div className="w-full flex justify-start items-center gap-1.5">
                           <div
-                            // className={`w-3 h-3 rounded-full ${
-                            //   user.name === "Kristin Watson" ? "bg-[#7C7C7C]" : "bg-[#F3F5F7]"
-                            // }`}
                             className="w-full flex items-center justify-start"
                           >
                             <img
@@ -308,8 +301,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                             <span
                               className={`text-xs font-medium ${
                                 isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                              } mr-auto
-                        `}
+                              } mr-auto `}
                             >
                               {user.name}
                             </span>
@@ -333,8 +325,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                             </svg>
                           )}
                         </div>
-
-                        {/* Checkmark icon */}
                       </div>
                     ))}
                   </div>
@@ -342,8 +332,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   {/* Separator */}
                   <div
                     className={`sm:hidden  w-full h-px
-            dark:bg-gray-700  bg-gray-150
-            `}
+                      dark:bg-gray-700  bg-gray-150
+                    `}
                   ></div>
 
                   {/* Log out option */}
