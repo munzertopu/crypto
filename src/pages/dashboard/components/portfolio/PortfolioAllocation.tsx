@@ -76,7 +76,7 @@ const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
                 </div>
               </div>
               {/* Vertical Separator - don't show for last element in row */}
-              {assetIndex < data.length - 1 && (
+              {assetIndex < data.length - 1 && assetIndex != 4 && (
                 <div className="flex-shrink-0 w-px h-8 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-4 lg:mx-8 xl:mx-4 hidden sm:block"></div>
               )}
             </React.Fragment>

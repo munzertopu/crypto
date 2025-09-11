@@ -102,16 +102,15 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
         <div className="relative flex-1 max-w-md">
           <FontAwesomeIcon 
             icon={faSearch} 
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-400"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-500"
           />
           <input
             type="text"
             placeholder="Search"
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
-            className={`w-full pl-12 pr-4 text-lg py-2.5 border border-gray-300 rounded-xl focus:outline-none ${
-              isDarkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-900'
-            }`}
+            className={`w-full pl-12 pr-4 text-lg py-2.5 border border-default rounded-xl focus:outline-none bg-white text-gray-900 
+              dark:bg-gray-700 dark:text-white dark:border-gray-600`}
           />
         </div>
         {/* Market Value Dropdown */}
@@ -162,8 +161,8 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
            title="Gains/losses"
            isRight={true}
          />
-
-                   {/* Potential Loss Dropdown */}
+         
+         {/* Potential Loss Dropdown */}
           <TaxLossHarvestingRangeDropdown
             isDarkMode={isDarkMode}
             fromValue={potentialLossFromValue}
@@ -176,6 +175,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             isRight={true}
           />
       </div>
+      
       {/* Active Filters Display */}
       {hasActiveFilters && (
         <div className="pt-4">

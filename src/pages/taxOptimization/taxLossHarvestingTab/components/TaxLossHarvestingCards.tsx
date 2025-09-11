@@ -91,11 +91,11 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
     valueColor?: string;
   }> = ({ icon, label, value, valueColor = "text-gray-900 dark:text-[#CDCFD1]" }) => (
     <div className='space-y-3'>
-      <div className="flex items-center space-x-4">
-        <FontAwesomeIcon icon={icon} className={`w-4 h-4 text-[#7C7C7C] dark:text-[#CDCFD1]`} />
+      <div className="flex items-center space-x-3">
+        <FontAwesomeIcon icon={icon} className={`w-5 h-5 text-[#7C7C7C] dark:text-[#CDCFD1]`} />
         <Typography variant="small" className="text-[#0E201E] dark:text-[#B6B8BA]">{label}</Typography>
       </div>
-      <Typography variant="small" className={`text-left text-lg font-semibold ${valueColor}`}>{value}</Typography>
+      <Typography variant="small" className={`text-left text-h4 font-semibold ${valueColor}`}>{value}</Typography>
     </div>
   );
 
@@ -104,11 +104,12 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
     metrics: MetricData;
     showDropdown?: boolean;
   }> = ({ title, metrics, showDropdown = false }) => (
-    <Card className={`bg-white dark:bg-transparent border border-gray-200 dark:border-[#E1E3E5] overflow-hidden`}>
+    <Card className={`py-6 bg-white dark:bg-transparent 
+      border border-default dark:border-[#E1E3E5] overflow-hidden`}>
       <CardBody className="p-0 overflow-hidden">
-        <div className="flex items-center justify-between mb-4 px-8 pt-8">
+        <div className="flex items-center justify-between mb-4 px-8">
           <div className="flex items-center space-x-2">
-            <Typography variant="h2" className={`text-lg font-semibold text-gray-900 dark:text-[#B6B8BA]`}>
+            <Typography variant="h2" className={`text-h6 font-semibold text-gray-900 dark:text-[#B6B8BA]`}>
               {title}
             </Typography>
             <svg className="w-5 h-5 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -210,11 +211,11 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
         </div>
         
         {/* Horizontal Separator */}
-        <div className="py-6">
-          <div className={`w-full h-px ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'}`}></div>
+        <div className="py-4">
+          <div className={`w-full h-px bg-default dark:bg-gray-700`}></div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 px-8 pb-6">
+        <div className="grid grid-cols-2 gap-4 px-8">
           <MetricItem
             icon={faPercent}
             label="Total Capital Losses"
