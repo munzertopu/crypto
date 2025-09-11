@@ -56,7 +56,10 @@ module.exports = {
         },
         default: "#E1E3E5",
         primary: "#0E201E",
-        background: "#F7F8F9"
+        background: "#F7F8F9",
+        table: {
+          header: "#F3F5F7"
+        }
       },
       fontFamily: {
         sans: [

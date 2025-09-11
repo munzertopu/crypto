@@ -25,8 +25,6 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
   const [walletAddress, setWalletAddress] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedBlockchains, setSelectedBlockchains] = useState<string[]>([]);
-  // "BNB",
-  //     "Matic",
   const blockchainOptions = ["Eth", "BNB", "ARB", "Matic"];
 
   const isWalletAddressValid = walletAddress.trim().length > 0;
@@ -198,7 +196,8 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
 
           <div className="relative" ref={containerRef}>
             <div
-              className={`w-full px-4 mt-1.5 sm:mt-0 py-3 border-2 rounded-lg cursor-pointer flex items-center justify-between bg-white text-gray-900 dark:bg-transparent dark:text-white dark:border-[#4D5050] ${
+              className={`w-full px-4 mt-1.5 sm:mt-0 py-3 border-2 rounded-lg cursor-pointer flex items-center justify-between 
+                bg-white text-gray-900 dark:bg-transparent dark:text-white dark:border-[#4D5050] ${
                 isDropdownOpen ? "border-[#E3F3C7B3]" : "border-gray-150"
               } ${
                 openUpward ? "bottom-full mb-1" : "top-full mt-1"
@@ -217,7 +216,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
                 {getDisplayText()}
               </span>
               <svg
-                className={`w-4 h-4 transition-transform flex-shrink-0 ${
+                className={`w-4 h-4 transition-transform flex-shrink-0 text-gray-500 ${
                   isDropdownOpen ? "rotate-180" : ""
                 }`}
                 fill="none"

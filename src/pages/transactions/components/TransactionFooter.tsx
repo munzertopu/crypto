@@ -191,7 +191,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
               {/* Tag Dropdown Menu */}
               {isTagDropdownOpen && (
                 <div
-                  className={`absolute bottom-full left-0 mb-1 w-32 border rounded-lg shadow-lg py-1 z-50 max-h-40 overflow-y-auto ${
+                  className={`absolute bottom-full left-0 mb-1 px-1.5 border rounded-lg shadow-lg py-1 z-50 max-h-40 overflow-y-auto ${
                     isDarkMode
                       ? "bg-gray-800 border-gray-600"
                       : "bg-white border-gray-300"
@@ -200,7 +200,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
                   {tagOptions.map((option) => (
                     <button
                       key={option}
-                      className={`w-full px-3 py-2 text-sm text-left flex items-center justify-between ${
+                      className={`w-full px-3 py-2 text-sm text-left rounded-lg flex items-center justify-between ${
                         selectedTag === option ? "bg-gray-100" : ""
                       }`}
                       onClick={() => {

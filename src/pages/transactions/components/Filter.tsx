@@ -349,7 +349,7 @@ const Filter: React.FC<FilterProps> = ({
                   key={tab}
                   value={tab}
                   onClick={() => onTabChange?.(tab)}
-                  className={`px-3 sm:px-5 py-1 sm:py-2 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${
+                  className={`px-3 sm:px-5 md:px-2.5 py-1 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${
                     activeTab === tab
                       ? "bg-[#B3E277] dark:bg-[#0E201E] text-black dark:text-white"
                       : "text-[#0E201E] dark:text-[#FFFFFF]"
@@ -420,9 +420,10 @@ const Filter: React.FC<FilterProps> = ({
         </div>
       )}
 
-      <div className="flex flex-row justify-start lg:items-center gap-5 mt-[20px] sm:mt-0 ">
+      <div className="flex flex-row justify-start lg:items-center gap-5 mt-[20px] sm:mt-0">
         {/* Search */}
-        <div className="flex flex-grow-1 sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]">
+        <div className="flex flex-grow-1 sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border 
+          border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]">
           <div className="flex flex-row justify-start items-center gap-3">
             <svg
               width="16"
