@@ -4,6 +4,7 @@ import "react-date-range/dist/styles.css"; // Main style file
 import "react-date-range/dist/theme/default.css"; // Theme CSS file
 import useScreenSize from "../hooks/useScreenSize";
 import Dropdown from "./UI/Dropdown";
+import { enUS } from "date-fns/locale"; // Import enUS locale
 
 interface DateRangeSelectorProps {
   selectedDateRange: {
@@ -328,6 +329,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
               onChange={handleDateChange}
               moveRangeOnFirstSelection={false}
               ranges={dateRange}
+              locale={enUS} // Added locale prop to fix the error
             />
           </div>
           <div className="w-full px-1 mt-[-10px] pb-5 md:hidden">
