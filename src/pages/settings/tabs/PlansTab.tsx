@@ -68,7 +68,7 @@ const PlansTab: React.FC<PlansTabProps> = ({ isDarkMode }) => {
   return (
     <div>
       {/* Header */}
-      <div className="my-8">
+      <div className="mb-6">
         <h3 className={`text-lg font-bold text-left mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
           Plans
         </h3>
@@ -79,36 +79,36 @@ const PlansTab: React.FC<PlansTabProps> = ({ isDarkMode }) => {
         {plans.map((plan, index) => (
           <div
             key={plan.name}
-            className={`relative bg-white text-left h-min rounded-lg shadow-sm border ${isDarkMode ? 'border-gray-700' : 'border-[#E1E3E5]'}`}
+            className={`relative bg-white text-left h-min rounded-lg shadow-sm border ${isDarkMode ? 'border-gray-700' : 'border-default'}`}
           >
-            <div className='p-8'>
+            <div className='py-10 px-8'>
               {/* Status Badge */}
               {plan.status && (
-                <div className={`absolute top-6 right-6 ${plan.statusColor} ${plan.textColor} px-3 py-1 rounded-full text-sm font-medium`}>
+                <div className={`absolute right-8 ${plan.statusColor} ${plan.textColor} px-3 py-1 rounded-full text-sm font-medium`}>
                   {plan.status}
                 </div>
               )}
 
               {/* Plan Name */}
-              <h4 className={`text-xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              <h4 className={`text-xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                 {plan.name}
               </h4>
 
               {/* Price */}
-              <div className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              <div className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                 {plan.price}
               </div>
             </div>
               
             {/* Separator */}
-            <div className={`border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} my-2`}></div>
-            <div className='py-4 px-8'>
+            <div className={`border-t border-default dark:border-gray-700`}></div>
+            <div className='py-6 px-8'>
               {/* Features */}
               <div className="mb-6">
                 <h5 className={`text-lg font-medium mb-3`}>
                   Features:
                 </h5>
-                <ul className="space-y-4">
+                <ul className="space-y-5">
                   {plan.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center">
                       <FontAwesomeIcon 
@@ -127,7 +127,7 @@ const PlansTab: React.FC<PlansTabProps> = ({ isDarkMode }) => {
               {plan.name !== 'Newbie' && (
                 <button 
                   onClick={() => handleUpgradeClick(plan.name)}
-                  className={`w-full py-2 px-4 bg-white border border-[#E1E3E5] rounded-lg text-gray-700 font-semibold ${isDarkMode ? 'border-gray-600 text-gray-300' : 'text-[#0E201E]'}`}
+                  className={`w-full py-2 px-4 text-base bg-white border border-default rounded-lg text-gray-700 font-semibold text-primary dark:border-gray-600 dark:text-gray-300`}
                 >
                   Upgrade
                 </button>
