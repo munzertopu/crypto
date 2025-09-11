@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Datepicker from "react-tailwindcss-datepicker";
+
 import EstimatedValueDropdown from "../../../../components/AmountRangeDropdown";
 
 import {
@@ -8,6 +8,7 @@ import {
   faChevronDown,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import DateRangePickerPopover from "../../../../components/DateRangePicker";
 
 interface FiltersProps {
   searchTerm: string;
@@ -30,51 +31,15 @@ const Filters: React.FC<FiltersProps> = ({
   const [selectedGain, setSelectedGain] = useState("Highest gain");
   const [fromValue, setFromValue] = useState("0");
   const [toValue, setToValue] = useState("0");
-  const [selectedDateRange, setSelectedDateRange] = useState<any>(null);
+  const [selectedDateRange, setSelectedDateRange] = useState<{
+    startDate: Date | null;
+    endDate: Date | null;
+  }>({
+    startDate: null,
+    endDate: null,
+  });
 
   // Create shortcuts with year dropdown
-  const createShortcuts = () => {
-    const shortcuts: any = {
-      today: "Today",
-      last7Days: {
-        text: "Last 7 days",
-        period: {
-          start: new Date(new Date().setDate(new Date().getDate() - 7)),
-          end: new Date(new Date().setDate(new Date().getDate() - 1)),
-        },
-      },
-      last30Days: {
-        text: "Last 30 days",
-        period: {
-          start: new Date(new Date().setDate(new Date().getDate() - 30)),
-          end: new Date(new Date().setDate(new Date().getDate() - 1)),
-        },
-      },
-      last6Months: {
-        text: "Last 6 months",
-        period: {
-          start: new Date(new Date().setMonth(new Date().getMonth() - 6)),
-          end: new Date(new Date().setDate(new Date().getDate() - 1)),
-        },
-      },
-      last12Months: {
-        text: "Last 12 months",
-        period: {
-          start: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
-          end: new Date(new Date().setDate(new Date().getDate() - 1)),
-        },
-      },
-      byYear: {
-        text: "By Year",
-        period: {
-          start: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
-          end: new Date(new Date().setDate(new Date().getDate() - 1)),
-        },
-      },
-    };
-
-    return shortcuts;
-  };
 
   return (
     <div className="mx-8 md:mx-6 mt-8">
@@ -114,7 +79,15 @@ const Filters: React.FC<FiltersProps> = ({
             setIsOpen={setShowEstimatedValueDropdown}
             title="Estimated value"
           />
-          <div className="flex items-center rounded-lg border px-2 my-4 shadow-sm sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]">
+          <div className={`max-w-[190px] flex items-center`}>
+            <DateRangePickerPopover
+              selectedDateRange={selectedDateRange}
+              onDateRangeChange={setSelectedDateRange}
+              buttonLabel="Purchase date"
+              className="py-4"
+            />
+          </div>
+          {/* <div className="flex items-center rounded-lg border px-2 my-4 shadow-sm sm:w-auto border-[#E1E3E5] dark:border-[#4D5050] bg-white dark:bg-[#0E201E]">
             <Datepicker
               displayFormat="DD MMM YYYY"
               separator="-"
@@ -130,7 +103,7 @@ const Filters: React.FC<FiltersProps> = ({
               containerClassName="relative flex items-center justify-between"
               toggleClassName="absolute rounded-r-lg px-0 right-0 top-0 h-full text-gray-800 dark:text-white"
             />
-          </div>
+          </div> */}
 
           <div className="flex-1 relative my-4">
             <div

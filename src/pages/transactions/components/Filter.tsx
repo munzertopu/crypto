@@ -14,6 +14,7 @@ import AmountRangeDropdown from "../../../components/AmountRangeDropdown";
 import { Accordion, AccordionItem } from "../../../components/Accordion";
 import useScreenSize from "../../../hooks/useScreenSize";
 import MobileDrawer from "../../../components/Drawers/MobileDrawer";
+import DateRangePickerPopover from "../../../components/DateRangePicker";
 
 interface WalletOption {
   id: string;
@@ -149,7 +150,14 @@ const Filter: React.FC<FilterProps> = ({
   const [toReceivedValue, setToReceivedValue] = useState("0");
 
   // Date
-  const [selectedDateRange, setSelectedDateRange] = useState<any>(null);
+  const [selectedDateRange, setSelectedDateRange] = useState<{
+    startDate: Date | null;
+    endDate: Date | null;
+  }>({
+    startDate: null,
+    endDate: null,
+  });
+
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const screenSize = useScreenSize();
   const [showFromCurrencyDropdown, setShowFromCurrencyDropdown] =
@@ -640,24 +648,12 @@ const Filter: React.FC<FilterProps> = ({
               setIsOpen={setAmountReceivedDropdownOpen}
               title="Amount received"
             />
-            <div
-              className={`flex items-center text-smh rounded-xl border px-4 py-3 shadow-sm bg-white 
-                border-default text-gray-900 placeholder-gray-800 focus:outline-none
-                dark:bg-transparent`}
-            >
-              <Datepicker
-                displayFormat="DD MMM YYYY"
-                value={null}
-                onChange={(newValue: any) => setSelectedDateRange(newValue)}
-                showShortcuts={true}
-                configs={{
-                  shortcuts: createShortcuts(),
-                }}
-                primaryColor="green"
-                placeholder="Date"
-                inputClassName="mr-8 md:mr-0 focus:outline-none text-smh sm:text-base md:text-smh placeholder:text-gray-800 dark:placeholder:text-white text-gray-800 dark:text-white"
-                containerClassName="relative pr-6 md:pr-0"
-                toggleClassName="absolute px-0 right-0 top-0 h-full text-gray-800 dark:text-white"
+            <div className={`max-w-[190px] flex items-center`}>
+              <DateRangePickerPopover
+                selectedDateRange={selectedDateRange}
+                onDateRangeChange={setSelectedDateRange}
+                buttonLabel="Date"
+                className="py-4"
               />
             </div>
 
@@ -1185,7 +1181,16 @@ const Filter: React.FC<FilterProps> = ({
             </div>
           </AccordionItem>
           <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-          <AccordionItem title="Date"> Coming...........</AccordionItem>
+          <AccordionItem title="Date">
+            {" "}
+            <DateRangePickerPopover
+              selectedDateRange={selectedDateRange}
+              onDateRangeChange={setSelectedDateRange}
+              buttonLabel="Select Date"
+              className="py-2.5"
+              isDrawer
+            />
+          </AccordionItem>
         </Accordion>
       </MobileDrawer>
 
