@@ -202,65 +202,53 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
   };
 
   return (
-    <div className={`${isDarkMode ? "bg-[#0E201E] text-white" : "bg-white"}`}>
+    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white">
       <NavigationBar
         isDarkMode={isDarkMode}
         onThemeToggle={handleThemeToggle}
         onLogout={handleLogout}
         currentPage="settings"
       />
-
-      <div className="flex ml-10">
-        {/* Left Sidebar */}
-        <div className="py-4">
-          <Typography
-            variant="h4"
-            className={`text-xl font-semibold mb-8 text-left ${
-              isDarkMode ? "text-white" : "text-[#0E201E]"
-            }`}
-          >
-            Settings
-          </Typography>
-
+      <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full">
+        <Typography
+          variant="h4"
+          className={`text-xl font-semibold mb-6 text-left ${
+            isDarkMode ? "text-white" : "text-[#0E201E]"
+          }`}
+        >
+          Settings
+        </Typography>
+        <div className="flex">
+          {/* Left Sidebar */}
           <nav className="space-y-2">
             {settingsTabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`w-full flex items-center space-x-4 px-4 py-2 rounded-lg text-left text-sm ${
-                  activeTab === tab.id
-                    ? `${
-                        isDarkMode
-                          ? "bg-gray-700 text-white border border-gray-600"
-                          : "text-[#0E201E] bg-[#F3F5F7]"
-                      }`
-                    : `${
-                        isDarkMode
-                          ? "text-gray-300 hover:bg-gray-700 hover:text-white"
-                          : "text-[#0E201E]  hover:bg-[#F3F5F7]"
-                      }`
+                className={`w-full flex items-center space-x-2 px-4 py-3 rounded-lg text-left text-sm ${
+                  activeTab === tab.id ? 
+                  `text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white dark:border-gray-600` : 
+                  `text-[#0E201E]  hover:bg-[#F3F5F7] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white`
                 }`}
               >
                 <tab.icon
-                  className={`w-4 h-4 ${
-                    activeTab === tab.id ? "text-[#7C7C7C]" : "text-[#7C7C7C]"
+                  className={`w-5 h-5 ${
+                    activeTab === tab.id ? "text-gray-500" : "text-[#7C7C7C]"
                   }`}
                 />
                 <span className="font-medium">{tab.name}</span>
               </button>
             ))}
           </nav>
-        </div>
-
-        {/* Main Content */}
-        <div className="flex-1 p-8">
-          <Card
-            className={`border-transparent shadow-transparent ${
-              isDarkMode ? "bg-gray-800" : "bg-white"
-            }`}
-          >
-            <CardBody className="p-6">{renderTabContent()}</CardBody>
-          </Card>
+          
+          {/* Main Content */}
+          <div className="flex-1 px-10">
+            <Card
+              className={`border-transparent shadow-transparent bg-white dark:bg-gray-800`}
+            >
+              <CardBody className="px-5 py-0">{renderTabContent()}</CardBody>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

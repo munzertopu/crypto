@@ -66,7 +66,7 @@ const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, isDarkMode
       }`}>
         {/* Header */}
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold">Upgrade to the {planName} plan</h2>
+          <h2 className="text-h6 font-semibold">Upgrade to the {planName} plan</h2>
           <button
             onClick={onClose}
             className={`p-2 rounded-full hover:bg-gray-100 ${
@@ -81,7 +81,7 @@ const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, isDarkMode
         <div>
           {/* Additional Services */}
           <div className="mb-6">
-            <h3 className="text-left text-sm font-semibold mt-2 mb-4 text-[#4D5050]">ADDITIONAL SERVICES:</h3>
+            <h3 className="text-left text-[13px] font-semibold mt-2 mb-4 text-[#4D5050]">ADDITIONAL SERVICES:</h3>
             <div className="space-y-3">
               {additionalServices.map((service) => (
                 <div key={service.id} className="flex items-center justify-between">
@@ -93,7 +93,7 @@ const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, isDarkMode
                     >
                       <Checkbox.Indicator className="text-white bg-[#75AE46] border-[#75AE46]"/>
                     </Checkbox>
-                    <span className="font-medium text-[#0E201E]">{service.name}</span>
+                    <span className="text-base text-gray-900">{service.name}</span>
                     <svg className="size-4 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
@@ -106,7 +106,7 @@ const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, isDarkMode
           </div>
 
           {/* Summary of Charges */}
-          <div className="border-t border-gray-200 py-4">
+          <div className="border-t border-default py-4">
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span>Subtotal:</span>
@@ -116,7 +116,7 @@ const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, isDarkMode
                 <span>Additional services:</span>
                 <span>${additionalServicesTotal}</span>
               </div>
-              <div className="flex justify-between font-bold text-lg border-t border-gray-200 pt-2">
+              <div className="flex justify-between font-bold text-lg border-t border-default pt-2">
                 <span>Total:</span>
                 <span>${total}</span>
               </div>

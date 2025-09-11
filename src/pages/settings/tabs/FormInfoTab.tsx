@@ -60,7 +60,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
     <div className="space-y-6">
       {/* Header Section */}
       <div>
-        <Typography variant="h4" className={`font-bold text-left mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+        <Typography variant="h4" className={`font-bold text-lg text-left mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
           Form Info
         </Typography>
         <Typography variant="small" className={`text-left text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -70,9 +70,9 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
 
       {/* Form Fields */}
       {/* Name Field - Full Width */}
-      <div className="space-y-4">
+      <div className="space-y-6">
         <div>
-          <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+          <label className={`block text-sm font-medium text-left mb-2 text-[#2F3232] dark:text-gray-300`}>
             Name (optional)
           </label>
           <Input
@@ -80,7 +80,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
             placeholder="Type your name"
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
-            className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+            className={`text-base bg-white border-[#E1E3E5] dark:bg-gray-700 dark:border-[#E1E3E5] text-white`}
           />
         </div>
       </div>
