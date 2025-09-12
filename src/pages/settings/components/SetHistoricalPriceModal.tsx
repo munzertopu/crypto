@@ -47,12 +47,12 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className={`relative max-w-md w-full mx-4 rounded-lg shadow-lg overflow-hidden ${
+      <div className={`relative max-w-md w-full mx-4 p-8 rounded-lg shadow-lg overflow-hidden ${
         isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
       }`}>
         {/* Header */}
-        <div className="flex items-center justify-between px-6 pt-6">
-          <Typography className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+        <div className="flex items-center justify-between">
+          <Typography className={`text-h5 font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
             Set historical price
           </Typography>
           <button
@@ -66,15 +66,15 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="px-6">
+        <div>
           {/* Introductory Text */}
-          <Typography variant="small" className={`text-base text-left mb-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <Typography variant="small" className={`text-sm text-left mt-1.5 mb-6 text-[#191919] dark:text-gray-300`}>
             Fill in the details for the missing price on {platformText}.
           </Typography>
 
           {/* Historical Price Input */}
-          <div className="mb-4">
-            <label className={`block text-sm text-left font-medium mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+          <div className="mb-3">
+            <label className={`block text-sm text-left font-medium mb-2 text-gray-700 dark:text-gray-300`}>
               Historical Price
             </label>
             <div className="relative">
@@ -95,7 +95,7 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
 
           {/* Date Input */}
           <div className="mb-6">
-            <label className={`block text-left text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+            <label className={`block text-left text-sm font-medium mb-2 text-gray-700 dark:text-gray-300`}>
               Date
             </label>
             <div className="relative">
@@ -126,14 +126,11 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="flex justify-between items-center p-6 border-t border-gray-200">
+        <div className="flex justify-between items-center border-gray-200">
           <button
             onClick={onClose}
-            className={`px-4 py-2 font-medium ${
-              isDarkMode 
-                ? 'text-gray-300 hover:text-white' 
-                : 'text-[#7C7C7C]'
-            }`}
+            className={`px-4 py-3 font-medium text-gray-500 
+              dark:text-gray-300`}
           >
             Cancel
           </button>
@@ -146,7 +143,7 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
                 }
               }
             }}
-            className={`px-4 py-2 rounded-lg font-medium ${
+            className={`px-4 py-3 rounded-lg font-medium ${
               historicalPrice && selectedDate
                 ? 'bg-[#90C853] text-[#0E201E]'
                 : 'bg-[#E1E3E5] text-[#8C8E90] cursor-not-allowed'
