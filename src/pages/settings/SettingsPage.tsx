@@ -233,7 +233,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
           {/* Main Content */}
           <div className="flex-1 px-10">
             <Card
-              className={`border-transparent shadow-transparent bg-white dark:bg-gray-800`}
+              className={`border-transparent shadow-transparent bg-white dark:bg-transparent`}
             >
               <CardBody className="px-5 py-0">{renderTabContent()}</CardBody>
             </Card>

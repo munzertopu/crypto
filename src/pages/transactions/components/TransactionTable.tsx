@@ -102,13 +102,11 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   
   return (
     <div className="md:px-0 mb-6 mt-6 sm:mt-0">
-      <Card className="h-full w-full border-transparent shadow-none">
+      <Card className="h-full w-full border-transparent bg-transprent shadow-none">
         <CardBody className="px-0 sm:px-3.5 sm:py-2.5 md:px-0 md:py-0">
           <div className="overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left">
-              <thead
-                className={`bg-white dark:bg-[#2F3232] hidden sm:table-header-group`}
-              >
+            <thead className="bg-table-header dark:bg-gray-800 hidden sm:table-header-group">
                 <tr>
                   {TABLE_HEAD.map((head, index) => (
                     <th
@@ -189,7 +187,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         <React.Fragment key={id}>
                           <tr
                             className={`flex justify-start
-                              bg-white sm:table-row ${
+                              bg-white sm:table-row 
+                              dark:bg-transparent ${
                               onToggleExpanded
                                 ? "cursor-pointer transition-colors"
                                 : ""
