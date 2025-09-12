@@ -53,7 +53,7 @@ const AssetDetailModal: React.FC<AssetDetailModalProps> = ({
       <div className="p-2">
         <div className="overflow-x-auto">
           <table className="w-full min-w-max table-auto text-left">
-            <thead className={`bg-table-header dark:bg-[#2F3232]`}>
+            <thead className={`bg-table-header dark:bg-gray-800`}>
               <tr>
                 {MODAL_TABLE_HEAD.map((head, index) => (
                   <th

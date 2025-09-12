@@ -46,7 +46,7 @@ const TaxLossHarvestingTable: React.FC<TaxLossHarvestingTableProps> = ({
           <table className="w-full min-w-max table-auto text-left"
             role="table" 
             aria-label="Tax loss harvesting cryptocurrency holdings">
-            <thead className="bg-table-header dark:bg-[#2F3232] hidden sm:table-header-group">
+            <thead className="bg-table-header dark:bg-gray-800 hidden sm:table-header-group">
               <tr role="row">
                 {tableHeaders.map(({ key, label }) => (
                   <th 

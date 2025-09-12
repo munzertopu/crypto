@@ -181,7 +181,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
       {/* Rules Table */}
       <div className="bg-white rounded-lg border border-default overflow-hidden">
         <table className="w-full">
-          <thead className={`bg-table-header`}>
+          <thead className={`bg-table-header dark:bg-gray-800`}>
             <tr>
               <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">
                 <div className="flex items-center space-x-1">

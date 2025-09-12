@@ -117,7 +117,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
         <CardBody className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left" role="table" aria-label="Tax optimization cryptocurrency holdings">
-               <thead className={`bg-table-header dark:bg-[#2F3232]`}>
+               <thead className={`bg-table-header dark:bg-gray-800`}>
                  <tr role="row" className='bg-white dark:bg-[#0E201E]'>
                    <th>
                      
