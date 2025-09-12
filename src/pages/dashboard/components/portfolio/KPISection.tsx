@@ -30,7 +30,7 @@ const KPICard: React.FC<KPICardProps> = ({
       <div className="flex items-center justify-center">
         {svgIcon ? (
           <div
-            className={`"text-gray-900 dark:text-[#B6B8BA] w-5 h-5 md:h-6 md:w-6 flex items-center justify-center`}
+            className={`"text-gray-900 dark:text-gray-250 w-5 h-5 md:h-6 md:w-6 flex items-center justify-center`}
           >
             {svgIcon}
           </div>
@@ -43,7 +43,7 @@ const KPICard: React.FC<KPICardProps> = ({
       </div>
       <div className="flex items-center">
         <span
-          className={`text-base sm:text-xl lg:text-base font-medium md:font-semibold text-gray-900 dark:text-[#B6B8BA] opacity-80`}
+          className={`text-base sm:text-xl lg:text-base font-medium md:font-semibold text-gray-900 dark:text-gray-250 opacity-80`}
         >
           {title}
         </span>
@@ -51,7 +51,7 @@ const KPICard: React.FC<KPICardProps> = ({
     </div>
 
     <div className="flex flex-col items-start sm:flex-row  sm:items-end sm:gap-2">
-      <span className="text-h6 sm:text-[32px] md:text-h4 font-semibold text-gray-900 dark:text-[#B6B8BA]">
+      <span className="text-h6 sm:text-[32px] md:text-h4 font-semibold text-gray-900 dark:text-gray-250">
         {value}
       </span>
       <span
@@ -88,7 +88,6 @@ const KPISection: React.FC<KPISectionProps> = ({
   longTerms = "$150,000",
   longTermsChange = "+0.93%",
   onAddKPI,
-  isDarkMode = false,
 }) => {
   // SVG Icons for KPI Cards
   const incomeSvg = (
@@ -410,7 +409,7 @@ const KPISection: React.FC<KPISectionProps> = ({
                   </button>
                   <button
                     onClick={handleSave}
-                    className="min-w-[61px] py-1.5 px-2.5 bg-green-500 shadow-xs text-sm font-medium rounded-[10px] transition-colors text-gray-900 dark:text-[#B6B8BA]"
+                    className="min-w-[61px] py-1.5 px-2.5 bg-green-500 shadow-xs text-sm font-medium rounded-[10px] transition-colors text-gray-900 dark:text-gray-250"
                     aria-label="Save KPI selection"
                   >
                     Save

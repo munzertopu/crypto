@@ -6,7 +6,6 @@ interface ConfigureModalProps {
   isOpen: boolean;
   onClose: () => void;
   platformName: string;
-  isDarkMode: boolean;
   showHeader?: boolean;
   showFooter?: boolean;
   onConfigureSuccess?: () => void;
@@ -75,7 +74,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
   return (
     <div
       className={`bg-white text-gray-900 rounded-2xl sm:p-8 w-full sm:max-w-2xl
-        dark:bg-[#0E201E]`}
+        dark:bg-[#0E201E] dark:text-gray-250`}
     >
       {/* Header */}
       {showHeader && (
@@ -167,7 +166,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
           value={walletAddress}
           onChange={(e) => setWalletAddress(e.target.value)}
           className={`w-full mt-1.5 sm:mt-0 px-4 py-3 border rounded-[12px] text-base bg-white border-gray-150 text-gray-900 focus:outline-none
-              dark:bg-transparent dark:border-[#4D5050] dark:text-white `}
+              dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250 `}
           placeholder="Enter wallet address"
         />
       </div>
@@ -214,7 +213,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
           <div className="relative" ref={containerRef}>
             <div
               className={`w-full px-4 mt-1.5 sm:mt-0 py-3 border-2 rounded-lg cursor-pointer flex items-center justify-between 
-                bg-white text-gray-900 dark:bg-transparent dark:text-white dark:border-[#4D5050] ${
+                bg-white text-gray-900 dark:bg-transparent  dark:text-gray-250 dark:border-[#4D5050] ${
                 isDropdownOpen ? "border-[#E3F3C7B3]" : "border-gray-150"
               } ${
                 openUpward ? "bottom-full mb-1" : "top-full mt-1"
@@ -283,7 +282,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
                         </svg>
                       )}
                     </div>
-                    <span className="text-sm text-gray-900">{blockchain}</span>
+                    <span className="text-sm text-gray-900 dark:text-gray-250">{blockchain}</span>
                   </div>
                 ))}
               </div>

@@ -5,7 +5,6 @@ import { faTimes, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 interface OverrideCostModalProps {
   isOpen: boolean;
   onClose: () => void;
-  isDarkMode: boolean;
   onSubmit: (selectedTaxYears: string[], selectedCostBasisMethod: string) => void;
 }
 
@@ -20,7 +19,7 @@ interface CostBasisMethod {
   description: string;
 }
 
-const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, isDarkMode, onSubmit }) => {
+const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, onSubmit }) => {
   const [selectedTaxYears, setSelectedTaxYears] = useState<string[]>([]);
   const [selectedCostBasisMethod, setSelectedCostBasisMethod] = useState<string>('');
   const [isTaxYearDropdownOpen, setIsTaxYearDropdownOpen] = useState(false);
@@ -100,8 +99,8 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className={`relative max-w-md w-full p-8 mx-4 rounded-lg shadow-lg bg-white text-gray-900 
-      dark:bg-gray-800 dark:text-white`}>
+      <div className={`relative max-w-md w-full p-8 mx-4 rounded-lg shadow-lg bg-white text-gray-900
+      dark:bg-gray-800 dark:text-gray-250`}>
         {/* Header */}
         <div className="flex text-left items-start justify-between">
           <div>
@@ -122,14 +121,14 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, 
         <div className="text-left space-y-3 mt-6">
           {/* Tax Year Dropdown */}
           <div className="space-y-2">
-            <label className={`block text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-[#4D5050]'}`}>
+            <label className="block text-sm font-medium text-[#4D5050] dark:text-gray-300">
               Tax year
             </label>
             <div className="relative" ref={taxYearRef}>
               <button
                 onClick={() => setIsTaxYearDropdownOpen(!isTaxYearDropdownOpen)}
                 className={`w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none ${
-                  isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white text-gray-900'
+                  'bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250'
                 }`}
               >
                 <span className={selectedTaxYears.length > 0 ? '' : 'text-gray-500'}>
@@ -143,14 +142,14 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, 
               
               {isTaxYearDropdownOpen && (
                 <div className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg max-h-48 overflow-y-auto ${
-                  isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white'
+                  'bg-white dark:bg-gray-700 dark:border-gray-600'
                 }`}>
                   {taxYears.map((year) => (
                     <button
                       key={year.value}
                       onClick={() => handleTaxYearToggle(year.value)}
                       className={`w-full px-3 py-2 text-left hover:bg-gray-50 flex items-center ${
-                        isDarkMode ? 'hover:bg-gray-600 text-white' : 'text-gray-900'
+                        'text-gray-900 dark:hover:bg-gray-600 dark:text-gray-250'
                       }`}
                     >
                       {/* Checkbox */}
@@ -175,14 +174,14 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, 
 
           {/* Cost Basis Method Dropdown */}
           <div className="space-y-2">
-            <label className={`block text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-[#4D5050]'}`}>
+            <label className="block text-sm font-medium text-[#4D5050] dark:text-gray-300">
               Cost basis method
             </label>
             <div className="relative" ref={costBasisRef}>
               <button
                 onClick={() => setIsCostBasisDropdownOpen(!isCostBasisDropdownOpen)}
                 className={`w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none ${
-                  isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white text-gray-900'
+                  'bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250'
                 }`}
               >
                 <span className={selectedCostBasisMethod ? '' : 'text-gray-500'}>
@@ -196,7 +195,7 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, 
               
               {isCostBasisDropdownOpen && (
                 <div className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg ${
-                  isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white'
+                  'bg-white dark:bg-gray-700 dark:border-gray-600'
                 }`}>
                   {costBasisMethods.map((method) => (
                     <button
@@ -206,7 +205,7 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, 
                         setIsCostBasisDropdownOpen(false);
                       }}
                       className={`w-full px-3 py-2 text-left hover:bg-gray-50 ${
-                        isDarkMode ? 'hover:bg-gray-600 text-white' : 'text-gray-900'
+                        'text-gray-900 dark:hover:bg-gray-600 dark:text-gray-250'
                       } ${selectedCostBasisMethod === method.label ? 'bg-gray-100' : ''}`}
                     >
                       <div>
@@ -225,7 +224,7 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, 
           <button
             onClick={handleCancel}
             className={`px-4 py-3 font-medium ${
-              isDarkMode ? 'text-gray-300 hover:text-white' : 'text-[#7C7C7C]'
+              'text-[#7C7C7C] dark:text-gray-300 dark:hover:text-white'
             }`}
           >
             Cancel

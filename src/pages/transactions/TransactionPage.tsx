@@ -11,7 +11,6 @@ interface TransactionPageProps {
 
 const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   const [activeTab, setActiveTab] = useState("All");
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
@@ -64,9 +63,6 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
     setActiveTab(tab);
   };
 
-  const handleThemeToggle = () => {
-    setIsDarkMode(!isDarkMode);
-  };
 
   const handleLogout = () => {
     if (onLogout) {
@@ -83,8 +79,6 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   return (
     <div className="min-h-screen bg-background dark:bg-[#0E201E]">
       <NavigationBar
-        isDarkMode={isDarkMode}
-        onThemeToggle={handleThemeToggle}
         onLogout={handleLogout}
         currentPage="transactions"
       />
@@ -95,7 +89,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           <div className="flex gap-2 justify-start items-end">
             <h4
               className="text-lg sm:text-2xl font-semibold text-gray-900
-              dark:text-[#E1E3E5]"
+               dark:text-gray-250"
             >
               Transactions
             </h4>{" "}
@@ -129,7 +123,6 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           setSelectedStatus={setSelectedStatus}
           showFilters={showFilters}
           setShowFilters={setShowFilters}
-          isDarkMode={isDarkMode}
           hideTab={screenSize.width < 640}
         />
 
@@ -137,7 +130,6 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
 
         <TransactionTable
           transactions={sortedTransactions}
-          isDarkMode={isDarkMode}
           activeTab={activeTab}
           expandedTransactionId={expandedTransactionId}
           onToggleExpanded={handleToggleExpanded}

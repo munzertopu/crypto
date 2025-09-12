@@ -14,7 +14,6 @@ interface InsightsSummaryProps {
 }
 
 const InsightsSummary: React.FC<InsightsSummaryProps> = ({
-  isDarkMode = false
 }) => {
   const [showBanner, setShowBanner] = useState(true);
   const insightCards: InsightCard[] = [

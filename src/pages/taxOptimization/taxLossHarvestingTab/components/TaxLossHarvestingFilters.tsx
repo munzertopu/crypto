@@ -14,7 +14,6 @@ interface TaxLossHarvestingFiltersProps {
 }
 
 const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
-  isDarkMode = false,
   searchTerm,
   onSearchChange
 }) => {
@@ -110,12 +109,11 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
             className={`w-full pl-12 pr-4 text-lg py-2.5 border border-default rounded-xl focus:outline-none bg-white text-gray-900 
-              dark:bg-gray-700 dark:text-white dark:border-gray-600`}
+              dark:bg-gray-700 dark:text-gray-250 dark:border-gray-600`}
           />
         </div>
         {/* Market Value Dropdown */}
          <TaxLossHarvestingRangeDropdown
-           isDarkMode={isDarkMode}
            fromValue={marketValueFromValue}
            setFromValue={setMarketValueFromValue}
            toValue={marketValueToValue}
@@ -127,7 +125,6 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
 
          {/* Amount Held Dropdown */}
          <TaxLossHarvestingRangeDropdown
-           isDarkMode={isDarkMode}
            fromValue={amountHeldFromValue}
            setFromValue={setAmountHeldFromValue}
            toValue={amountHeldToValue}
@@ -139,7 +136,6 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
 
          {/* Cost Basis Dropdown */}
          <TaxLossHarvestingRangeDropdown
-           isDarkMode={isDarkMode}
            fromValue={costBasisFromValue}
            setFromValue={setCostBasisFromValue}
            toValue={costBasisToValue}
@@ -151,7 +147,6 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
 
          {/* Gains/Losses Dropdown */}
          <TaxLossHarvestingRangeDropdown
-           isDarkMode={isDarkMode}
            fromValue={gainsLossesFromValue}
            setFromValue={setGainsLossesFromValue}
            toValue={gainsLossesToValue}
@@ -164,7 +159,6 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
          
          {/* Potential Loss Dropdown */}
           <TaxLossHarvestingRangeDropdown
-            isDarkMode={isDarkMode}
             fromValue={potentialLossFromValue}
             setFromValue={setPotentialLossFromValue}
             toValue={potentialLossToValue}
@@ -183,11 +177,8 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             {/* Market Value Filter */}
             {(marketValueFromValue !== '0' || marketValueToValue !== '0') && (
               <div
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
-                  isDarkMode 
-                    ? 'bg-gray-700 text-white border border-gray-600' 
-                    : 'bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]'
-                }`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5] border
+                  dark:bg-gray-700 dark:text-white dark:border-gray-600`}
               >
                 <span className='text-[#666868]'>Market Value:</span><span> {marketValueFromValue} - {marketValueToValue}</span>
                 <button
@@ -202,11 +193,8 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             {/* Amount Held Filter */}
             {(amountHeldFromValue !== '0' || amountHeldToValue !== '0') && (
               <div
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
-                  isDarkMode 
-                    ? 'bg-gray-700 text-white border border-gray-600' 
-                    : 'bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]'
-                }`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]
+                  dark:bg-gray-700 dark:text-white dark:border-gray-600`}
               >
                 <span className='text-[#666868]'>Amount Held:</span><span> {amountHeldFromValue} - {amountHeldToValue}</span>
                 <button
@@ -221,11 +209,9 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             {/* Cost Basis Filter */}
             {(costBasisFromValue !== '0' || costBasisToValue !== '0') && (
               <div
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
-                  isDarkMode 
-                    ? 'bg-gray-700 text-white border border-gray-600' 
-                    : 'bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]'
-                }`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]
+                  dark:bg-gray-700 dark:text-white dark:border-gray-600
+                `}
               >
                 <span className='text-[#666868]'>Cost Basis:</span><span> {costBasisFromValue} - {costBasisToValue}</span>
                 <button
@@ -240,11 +226,8 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             {/* Gains/Losses Filter */}
             {(gainsLossesFromValue !== '0' || gainsLossesToValue !== '0') && (
               <div
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
-                  isDarkMode 
-                    ? 'bg-gray-700 text-white border border-gray-600' 
-                    : 'bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]'
-                }`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]
+                  dark:bg-gray-700 dark:text-white dark:border-gray-600`}
               >
                 <span className='text-[#666868]'>Gain/Losses:</span><span> {gainsLossesFromValue} - {gainsLossesToValue}</span>
                 <button
@@ -259,11 +242,9 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             {/* Potential Loss Filter */}
             {(potentialLossFromValue !== '0' || potentialLossToValue !== '0') && (
               <div
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${
-                  isDarkMode 
-                    ? 'bg-gray-700 text-white border border-gray-600' 
-                    : 'bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]'
-                }`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]
+                  dark:bg-gray-700 dark:text-white dark:border-gray-600
+                `}
               >
                 <span className='text-[#666868]'>Potential Loss:</span><span> {potentialLossFromValue} - {potentialLossToValue}</span>
                 <button

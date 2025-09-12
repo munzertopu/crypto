@@ -8,13 +8,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 interface TransactionFooterProps {
-  isDarkMode: boolean;
   selectedTransactions: string[];
   onClearSelection: () => void;
 }
 
 const TransactionFooter: React.FC<TransactionFooterProps> = ({
-  isDarkMode,
   selectedTransactions,
   onClearSelection,
 }) => {
@@ -114,20 +112,15 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
             {/* Dropdown Menu */}
             {isDropdownOpen && (
               <div
-                className={`absolute bottom-full left-0 mb-1 w-16 border rounded-lg shadow-lg py-1 z-50 ${
-                  isDarkMode
-                    ? "bg-gray-800 border-gray-600"
-                    : "bg-white border-gray-300"
-                }`}
+                className={`absolute bottom-full left-0 mb-1 w-16 border rounded-lg shadow-lg py-1 z-50 bg-white border-gray-300 
+                  dark:bg-gray-800 dark:border-gray-600`}
               >
                 {itemsPerPageOptions.map((option) => (
                   <button
                     key={option}
-                    className={`w-full px-3 py-1 text-sm text-left hover:bg-gray-100 ${
-                      isDarkMode
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                    } ${itemsPerPage === option ? "bg-[#90C853]" : ""}`}
+                    className={`w-full px-3 py-1 text-sm text-left hover:bg-gray-100 text-gray-700 hover:bg-gray-100
+                      dark:text-gray-300 dark:hover:bg-gray-700 
+                      ${itemsPerPage === option ? "bg-[#90C853]" : ""}`}
                     onClick={() => handleItemsPerPageChange(option)}
                     aria-label={`Show ${option} items per page`}
                   >
@@ -171,8 +164,8 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
             <div className={`relative inline-block`} ref={tagDropdownRef}>
               <button
                 className={`px-4 py-1 text-sm rounded border flex items-center space-x-16 
-                  border-default text-gray-900"
-                  dark:text-[#F3F5F7]`}
+                  border-default text-gray-900
+                   dark:text-gray-250`}
                 onClick={() => setIsTagDropdownOpen(!isTagDropdownOpen)}
                 aria-label="Select tag type for selected transactions"
                 aria-haspopup="true"
@@ -191,11 +184,8 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
               {/* Tag Dropdown Menu */}
               {isTagDropdownOpen && (
                 <div
-                  className={`absolute bottom-full left-0 mb-1 px-1.5 border rounded-lg shadow-lg py-1 z-50 max-h-40 overflow-y-auto ${
-                    isDarkMode
-                      ? "bg-gray-800 border-gray-600"
-                      : "bg-white border-gray-300"
-                  }`}
+                  className={`absolute bottom-full left-0 mb-1 px-1.5 border rounded-lg shadow-lg py-1 z-50 max-h-40 overflow-y-auto bg-white border-gray-300
+                    dark:bg-gray-800 dark:border-gray-600`}
                 >
                   {tagOptions.map((option) => (
                     <button
@@ -239,7 +229,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
             <button
               className={`px-2.5 py-1 text-sm rounded border 
                 border-default text-gray-900
-                dark:text-[#F3F5F7]`}
+                 dark:text-gray-250`}
               aria-label="Merge selected transactions"
             >
               Merge
@@ -290,7 +280,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
           {/* Page numbers */}
           <button
             className={`w-8 h-8 rounded-lg border flex items-center justify-center text-sm font-medium 
-              text-gray-900 bg-green-500
+              text-gray-900 dark:text-gray-250 bg-green-500
               `}
             aria-label="Go to page 1"
             aria-current="page"
@@ -300,15 +290,15 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
           <button
             className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium 
               border-default text-gray-900
-              dark:text-[#F3F5F7]`}
+              dark:text-gray-250`}
             aria-label="Go to page 2"
           >
             2
           </button>
           <button
             className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium 
-              border-default text-gray-900
-            dark:text-[#F3F5F7]`}
+              border-default text-gray-900 
+              dark:text-gray-250`}
             aria-label="Go to page 3"
           >
             3
@@ -316,17 +306,16 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
 
           {/* Ellipsis */}
           <span
-            className={`text-sm ${
-              isDarkMode ? "text-gray-300" : "text-gray-900"
-            }`}
+            className={`text-sm text-gray-900 
+              dark:text-gray-250`}
           >
             ...
           </span>
 
           <button
             className={`w-8 h-8 rounded border flex items-center justify-center text-sm font-medium 
-              border-default text-gray-900
-              dark:text-[#F3F5F7]`}
+              border-default text-gray-900 
+              dark:text-gray-250`}
             aria-label="Go to page 13"
           >
             13

@@ -27,7 +27,6 @@ interface HoldingsTableProps {
 
 const HoldingsTable: React.FC<HoldingsTableProps> = ({
   holdings = [],
-  isDarkMode = false,
   onCryptoClick,
 }) => {
   const TABLE_HEAD = [
@@ -181,7 +180,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
       <Card className="h-full w-full border-transparent bg-transprent shadow-none">
         <CardBody className="px-0 rounded-lg sm:overflow-x-auto">
           <table className="w-full min-w-max table-auto text-left">
-            <thead className="bg-table-header dark:bg-[#2F3232] hidden sm:table-header-group">
+            <thead className="bg-table-header dark:bg-gray-800 hidden sm:table-header-group">
               <tr className="">
                 {TABLE_HEAD.map((head, index) => (
                   <th

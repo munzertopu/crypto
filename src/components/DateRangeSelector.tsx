@@ -9,14 +9,12 @@ interface DateRangeSelectorProps {
     endDate: Date;
   };
   onDateRangeChange: (dateRange: { startDate: Date; endDate: Date }) => void;
-  isDarkMode?: boolean;
   variant?: 'dropdown' | 'inline';
 }
 
 const DateRangeSelector: React.FC<DateRangeSelectorProps> = ({
   selectedDateRange,
   onDateRangeChange,
-  isDarkMode = false,
   variant = 'dropdown'
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -155,11 +153,8 @@ const DateRangeSelector: React.FC<DateRangeSelectorProps> = ({
       {/* Date Range Display Button */}
       <button
         onClick={handleToggle}
-        className={`w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors ${
-          isDarkMode 
-            ? 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50' 
-            : 'bg-white border-gray-300 text-gray-900 hover:bg-gray-50'
-        }`}
+        className="w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-white dark:bg-[#0E201E] border-gray-300 dark:border-[#4D5050] text-gray-900 hover:bg-gray-50 
+        dark:text-gray-250 dark:hover:bg-[#2F3232]"
         aria-label="Select date range"
         aria-expanded={isOpen}
         aria-haspopup="true"

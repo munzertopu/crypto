@@ -8,13 +8,11 @@ interface DashboardHeaderProps {
   activeTab?: string;
   onTabChange?: (tab: string) => void;
   dateRange?: string;
-  isDarkMode?: boolean;
 }
 
 const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   activeTab = "Portfolio",
   onTabChange,
-  isDarkMode = false,
 }) => {
   const tabs = ["Portfolio", "Crypto", "NFT"];
   const [value, setValue] = useState<any>({
@@ -22,8 +20,8 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     endDate: null,
   });
   const [selectedDateRange, setSelectedDateRange] = useState({
-    startDate: new Date("2025-05-01"),
-    endDate: new Date("2025-05-29"),
+    startDate: new Date("2025-05-01") as Date | null,
+    endDate: new Date("2025-05-29") as Date | null,
   });
   // Create shortcuts with year dropdown
   const createShortcuts = () => {
@@ -74,7 +72,8 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
       <div className="flex flex-row items-center justify-between gap-4 ">
         {/* Title */}
         <h4
-          className={`text-lg md:text-h4 font-semibold text-gray-900 dark:text-[#E1E3E5]`}
+          className={`text-lg md:text-h4 font-semibold text-gray-900
+             dark:text-gray-250`}
         >
           Dashboard
         </h4>
@@ -98,8 +97,8 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                 onClick={() => onTabChange?.(tab)}
                 className={`px-1.5 sm:px-5 md:px-2.5 py-2.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-lg text-smh sm:text-smh md:smh ${
                   activeTab === tab
-                    ? "bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white"
-                    : "text-gray-900 dark:text-[#FFFFFF] opacity-75"
+                    ? "bg-white dark:bg-[#0E201E] text-gray-900 dark:text-gray-250"
+                    : "text-gray-900 dark:text-gray-250 opacity-75"
                 }`}
               >
                 {tab}

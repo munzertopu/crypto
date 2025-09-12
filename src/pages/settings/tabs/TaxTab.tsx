@@ -1,13 +1,11 @@
 import React from 'react';
 
-interface TaxTabProps {
-  isDarkMode: boolean;
-}
+interface TaxTabProps {}
 
-const TaxTab: React.FC<TaxTabProps> = ({ isDarkMode }) => {
+const TaxTab: React.FC<TaxTabProps> = () => {
   return (
-    <div className={`text-center py-12 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-      <h3 className={`text-xl font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+    <div className="text-center py-12 text-gray-600 dark:text-gray-400">
+      <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-250">
         Tax Settings
       </h3>
       <p>Tax settings will be implemented here.</p>

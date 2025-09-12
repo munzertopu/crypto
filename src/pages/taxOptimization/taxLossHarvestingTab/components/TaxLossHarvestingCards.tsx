@@ -23,7 +23,6 @@ interface MetricData {
 }
 
 const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
-  isDarkMode = false
 }) => {
   const [selectedAsset, setSelectedAsset] = useState('All Assets');
   const [assetDropdownOpen, setAssetDropdownOpen] = useState(false);
@@ -89,7 +88,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
     label: string;
     value: string;
     valueColor?: string;
-  }> = ({ icon, label, value, valueColor = "text-gray-900 dark:text-[#CDCFD1]" }) => (
+  }> = ({ icon, label, value, valueColor = "text-gray-900 dark:text-gray-250" }) => (
     <div className='space-y-3'>
       <div className="flex items-center space-x-3">
         <FontAwesomeIcon icon={icon} className={`w-5 h-5 text-[#7C7C7C] dark:text-[#CDCFD1]`} />
@@ -109,7 +108,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
       <CardBody className="p-0 overflow-hidden">
         <div className="flex items-center justify-between mb-4 px-8">
           <div className="flex items-center space-x-2">
-            <Typography variant="h2" className={`text-h6 font-semibold text-gray-900 dark:text-[#B6B8BA]`}>
+            <Typography variant="h2" className={`text-h6 font-semibold text-gray-900 dark:text-gray-250`}>
               {title}
             </Typography>
             <svg className="w-5 h-5 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,11 +135,9 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
               </button>
               
               {assetDropdownOpen && (
-                <div className={`absolute top-full right-0 mt-1 w-52 rounded-lg border shadow-lg z-50 ${
-                  isDarkMode 
-                    ? 'bg-gray-800 border-gray-600' 
-                    : 'bg-white border-gray-300'
-                }`}>
+                <div className={`absolute top-full right-0 mt-1 w-52 rounded-lg border shadow-lg z-50 bg-white border-gray-300
+                  dark:bg-gray-800 dark:border-gray-600'
+                `}>
                   {/* Search Input */}
                   <div className="px-3 border-b border-gray-200">
                     <input
@@ -148,11 +145,8 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                       placeholder="Type asset name"
                       value={assetSearchTerm}
                       onChange={(e) => setAssetSearchTerm(e.target.value)}
-                      className={`w-full px-3 py-2 rounded text-sm ${
-                        isDarkMode 
-                          ? 'text-white placeholder-gray-400' 
-                          : 'text-gray-900 placeholder-gray-500'
-                      } focus:outline-none`}
+                      className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 
+                         dark:text-gray-250 dark:placeholder-gray-400 focus:outline-none`}
                     />
                   </div>
                   
@@ -164,9 +158,8 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                         <div
                           key={option.id}
                           onClick={() => handleAssetToggle(option.id)}
-                          className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 ${
-                            isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
-                          }`}
+                          className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 hover:bg-gray-50
+                          `}
                         >
                           <div className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
                             isSelected 
@@ -184,7 +177,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                             <img src={option.logo} className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold mr-3`}>
                             </img>
                           }
-                          <span className={`text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                          <span className={`text-sm text-gray-900 dark:text-gray-250`}>
                             {option.name}
                           </span>
                         </div>

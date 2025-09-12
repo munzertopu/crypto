@@ -13,7 +13,6 @@ interface CryptoDetailHeaderProps {
 const CryptoDetailHeader: React.FC<CryptoDetailHeaderProps> = ({
     activeTab = 'market',
     onTabChange,
-    isDarkMode = false,
     cryptoName,
     cryptoSymbol,
     cryptoLogo

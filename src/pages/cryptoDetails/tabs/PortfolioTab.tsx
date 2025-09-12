@@ -4,13 +4,11 @@ import PortfolioChart from '../../../components/PortfolioChart';
 import FinancialMetrics from '../../../components/FinancialMetrics';
 
 interface PortfolioTabProps {
-  isDarkMode: boolean;
   activeTimeRange: string;
   onTimeRangeChange: (timeRange: string) => void;
 }
 
 const PortfolioTab: React.FC<PortfolioTabProps> = ({
-  isDarkMode,
   activeTimeRange,
   onTimeRangeChange
 }) => {
@@ -54,12 +52,10 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
           costBasicChange="-2.38%"
           unrealizedGain="$1,000,744"
           unrealizedGainChange="+1.29%"
-          isDarkMode={isDarkMode}
         />
       </div>
       {/* Chart */}
       <PortfolioChart 
-        isDarkMode={isDarkMode} 
         chartColor="#3A6FF8"
       />
     </div>

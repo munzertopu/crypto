@@ -3,11 +3,9 @@ import MissingHistoricalPrice from '../components/MissingHistoricalPrice';
 import CurrencyTable from '../components/CurrencyTable';
 import SuccessNotification from '../../../components/SuccessNotification';
 
-interface CustomPriceTabProps {
-  isDarkMode: boolean;
-}
+interface CustomPriceTabProps {}
 
-const CustomPriceTab: React.FC<CustomPriceTabProps> = ({ isDarkMode }) => {
+const CustomPriceTab: React.FC<CustomPriceTabProps> = () => {
   const [currentView, setCurrentView] = useState<'missing' | 'currency'>('missing');
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
   const [showSuccessNotification, setShowSuccessNotification] = useState(false);
@@ -41,13 +39,11 @@ const CustomPriceTab: React.FC<CustomPriceTabProps> = ({ isDarkMode }) => {
       />
       {currentView === 'missing' ? (
         <MissingHistoricalPrice
-          isDarkMode={isDarkMode}
           onEditMissingPrice={handleEditMissingPrice}
         />
       ) : (
         <CurrencyTable
           selectedPlatforms={selectedPlatforms}
-          isDarkMode={isDarkMode}
           onBack={handleBackToMissing}
           showNotification={handleShowNotification}
         />

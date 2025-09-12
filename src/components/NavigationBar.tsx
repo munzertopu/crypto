@@ -7,16 +7,12 @@ import useScreenSize from "../hooks/useScreenSize";
 
 interface NavigationBarProps {
   userName?: string;
-  isDarkMode?: boolean;
-  onThemeToggle?: () => void;
   onLogout?: () => void;
   currentPage?: string;
 }
 
 const NavigationBar: React.FC<NavigationBarProps> = ({
   userName = "Kristin Watson",
-  isDarkMode = false,
-  onThemeToggle,
   onLogout,
   currentPage = "",
 }) => {
@@ -32,10 +28,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
     }
     localStorage.setItem("theme", theme);
   }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
   const userList = [
     { name: "Arlene Watson", photo: "arlene.png" },
     { name: "Kristin Watson", photo: "kristin.png" },
@@ -119,11 +111,11 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         {/* Navigation Links */}
         <div className="hidden lg:flex items-center gap-6 ">
           {navigationItems.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.href}
+              to={item.href}
               className={`opacity-80 px-1 lg:px-0 py-2 text-sm lg:text-base text-gray-900
-                dark:text-[#B6B8BA]
+                 dark:text-gray-250
                 ${
                   currentPage === item.name.toLowerCase()
                     ? "!text-green-700"
@@ -131,7 +123,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 }`}
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -139,7 +131,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <div className="flex items-center space-x-1 sm:space-x-2 lg:space-x-3">
           {/* Desktop Theme Toggle */}
           <div className="hidden sm:block">
-            <ThemeToggle isDarkMode={theme === "dark"} onToggle={toggleTheme} />
+            <ThemeToggle />
           </div>
 
           {/* Desktop Settings Button */}
@@ -244,25 +236,18 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             {isProfileDropdownOpen && (
               <div
                 ref={profileMenuRef}
-                className={`absolute top-[48px] right-[-48px] sm:right-0 w-[220px]   border ${
-                  isDarkMode
-                    ? "bg-[#0E201E] border-[#4D5050]"
-                    : "bg-white border-[#E1E3E5]"
-                } rounded-lg shadow-lg py-2 z-50`}
+                className="absolute top-[48px] right-[-48px] sm:right-0 w-[220px] rounded-lg shadow-lg py-2 z-50 
+                border bg-white dark:bg-[#0E201E] border-[#E1E3E5] 
+                dark:border-[#4D5050]"
                 role="menu"
                 aria-label="Profile menu"
               >
                 <div className="flex flex-col justify-center items-start gap-2 w-full">
-                  <div
-                    className={`w-full px-4 pb-0.5 opacity-70 ${
-                      isDarkMode ? "bg-[#0E201E]" : "bg-white"
-                    }`}
+                  <div className="w-full px-4 pb-0.5 opacity-70 bg-white 
+                    dark:bg-[#0E201E]"
                   >
-                    <h3
-                      className={`text-sm font-medium ${
-                        isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                      } text-left`}
-                    >
+                    <h3 className="text-sm font-medium text-[#0E201E] text-left
+                    dark:text-[#F3F5F7]">
                       Switch account
                     </h3>
                   </div>
@@ -272,19 +257,11 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                     {userList.map((user) => (
                       <div
                         key={user.name}
-                        className={`w-full flex items-center justify-between px-4 py-1 cursor-pointer ${
-                          isDarkMode
-                            ? "hover:bg-[#2F3232]"
-                            : "hover:bg-[#F3F5F7]"
-                        }
-                          ${
-                            user.name === "Kristin Watson"
-                              ? isDarkMode
-                                ? "bg-[#2F3232]"
-                                : "bg-[#F3F5F7]"
-                              : ""
-                          }
-                          `}
+                        className={`w-full flex items-center justify-between px-4 py-1 cursor-pointer hover:bg-[#F3F5F7] dark:hover:bg-[#2F3232] ${
+                          user.name === "Kristin Watson"
+                            ? "bg-[#F3F5F7] dark:bg-[#2F3232]"
+                            : ""
+                        }`}
                         role="menuitem"
                         aria-label={`Switch to ${user.name} account`}
                       >
@@ -302,19 +279,14 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                                 );
                               }}
                             />
-                            <span
-                              className={`text-xs font-medium ${
-                                isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"
-                              } mr-auto `}
-                            >
+                            <span className="text-xs font-medium mr-auto text-[#0E201E] 
+                              dark:text-[#F3F5F7]">
                               {user.name}
                             </span>
                           </div>
                           {user.name === "Kristin Watson" && (
                             <svg
-                              className={`w-3 h-3 ${
-                                isDarkMode ? "text-[#F3F5F7]" : "text-[#7C7C7C]"
-                              } text-gray-600`}
+                              className="w-3 h-3 text-[#7C7C7C] dark:text-[#F3F5F7]"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -438,15 +410,17 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         >
           <div className="w-full flex flex-col justify-start items-start gap-2 px-4 ">
             {navigationItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
-                className={`dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 text-gray-900 hover:text-gray-900 hover:bg-gray-50 block text-sm transition-colors opacity-80`}
+                to={item.href}
+                className={`dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 text-gray-900 hover:text-gray-900
+                   hover:bg-gray-50 block text-sm transition-colors opacity-80
+                   dark:text-gray-250`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 role="menuitem"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>{" "}
           <div
@@ -480,7 +454,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 </svg>
               </span>
 
-              <p className="text-gray-900 dark:text-[#B6B8BA] text-sm">
+              <p className="text-gray-900 dark:text-gray-250 text-sm">
                 Settings
               </p>
             </div>
@@ -571,12 +545,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 </svg>
               </span>
 
-              <p className="text-gray-900 dark:text-[#B6B8BA] text-sm">
+              <p className="text-gray-900 dark:text-gray-250 text-sm">
                 Light Theme
               </p>
             </div>
 
-            <ThemeToggle isDarkMode={theme === "dark"} onToggle={toggleTheme} />
+            <ThemeToggle />
           </div>
           <div className="px-4 w-full mt-2">
             {" "}

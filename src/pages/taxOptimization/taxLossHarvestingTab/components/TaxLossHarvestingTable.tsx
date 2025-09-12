@@ -17,7 +17,6 @@ interface TaxLossHarvestingTableProps {
 }
 
 const TaxLossHarvestingTable: React.FC<TaxLossHarvestingTableProps> = ({
-  isDarkMode = false,
   sortField,
   sortDirection,
   onSort
@@ -47,7 +46,7 @@ const TaxLossHarvestingTable: React.FC<TaxLossHarvestingTableProps> = ({
           <table className="w-full min-w-max table-auto text-left"
             role="table" 
             aria-label="Tax loss harvesting cryptocurrency holdings">
-            <thead className="bg-table-header dark:bg-[#2F3232] hidden sm:table-header-group">
+            <thead className="bg-table-header dark:bg-gray-800 hidden sm:table-header-group">
               <tr role="row">
                 {tableHeaders.map(({ key, label }) => (
                   <th 
@@ -62,7 +61,8 @@ const TaxLossHarvestingTable: React.FC<TaxLossHarvestingTableProps> = ({
                     onClick={() => onSort(key)}
                   >
                     <div className="flex items-center space-x-2">
-                      <Typography variant="small" className={`font-normal ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                      <Typography variant="small" className={`font-normal text-gray-600 
+                        dark:text-gray-300`}>
                         {label}
                       </Typography>
                       { key !== 'asset' && getSortIcon(key)}

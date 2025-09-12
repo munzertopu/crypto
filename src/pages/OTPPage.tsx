@@ -71,7 +71,8 @@ const OTPPage: React.FC<OTPPageProps> = ({
 
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left">
+        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left
+         dark:text-gray-250">
           Enter 6 digit code we sent you
         </h1>
         <p className="text-base sm:text-lg text-[#2F3232] text-left">

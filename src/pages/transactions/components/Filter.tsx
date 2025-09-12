@@ -39,7 +39,6 @@ interface FilterProps {
   setSelectedStatus: (status: string) => void;
   showFilters: boolean;
   setShowFilters: (show: boolean) => void;
-  isDarkMode: boolean;
   hideTab?: boolean;
 }
 const tabs = ["All", "Uncategorized", "Warnings"];
@@ -114,7 +113,6 @@ const Filter: React.FC<FilterProps> = ({
   setSelectedStatus,
   showFilters,
   setShowFilters,
-  isDarkMode,
   hideTab = false,
 }) => {
   const [showWarningBanner, setShowWarningBanner] = useState(true);
@@ -315,7 +313,7 @@ const Filter: React.FC<FilterProps> = ({
   };
 
   const removeDateFilter = () => {
-    setSelectedDateRange(null);
+    setSelectedDateRange({ startDate: null, endDate: null });
   };
 
   const clearAllFilters = () => {
@@ -330,7 +328,7 @@ const Filter: React.FC<FilterProps> = ({
     setToReceivedValue("0");
     setFromReceivedCurrency("USD");
     setToReceivedCurrency("USD");
-    setSelectedDateRange(null);
+    setSelectedDateRange({ startDate: null, endDate: null });
   };
 
   // Check if any filters are active
@@ -375,11 +373,8 @@ const Filter: React.FC<FilterProps> = ({
       {/* Blue Alert Banner for Warnings Tab */}
       {activeTab === "Warnings" && showWarningBanner && (
         <div
-          className={`my-2 px-6 py-4 rounded-lg border ${
-            isDarkMode
-              ? "border-blue-600 text-blue-300"
-              : "border-info-500 text-[#2186D7]"
-          }`}
+          className={`my-2 px-6 py-4 rounded-lg border border-info-500 text-[#2186D7]
+            dark:border-blue-600 dark:text-blue-300`}
         >
           <div className="flex items-center justify-between mx-2">
             <div className="flex items-center gap-3">
@@ -405,20 +400,14 @@ const Filter: React.FC<FilterProps> = ({
             </div>
             <div className="flex items-center gap-3">
               <button
-                className={`text-sm font-medium ${
-                  isDarkMode
-                    ? "text-green-400 hover:text-green-300"
-                    : "text-[#5F9339]"
-                }`}
+                className={`text-sm font-medium text-[#5F9339] 
+                  dark:text-green-400`}
               >
                 Match price
               </button>
               <button
-                className={`text-sm font-medium ${
-                  isDarkMode
-                    ? "text-gray-400 hover:text-gray-300"
-                    : "text-[#4D5050]"
-                }`}
+                className={`text-sm font-medium text-[#4D5050] 
+                  dark:text-gray-400`}
                 onClick={() => setShowWarningBanner(false)}
               >
                 Close
@@ -439,7 +428,7 @@ const Filter: React.FC<FilterProps> = ({
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="text-gray-900 dark:text-[#FFFFFF] opacity-70"
+              className="text-gray-900 dark:text-gray-250 opacity-70"
             >
               <path
                 d="M9.6 17.2C13.7974 17.2 17.2 13.7974 17.2 9.6C17.2 5.40264 13.7974 2 9.6 2C5.40264 2 2 5.40264 2 9.6C2 13.7974 5.40264 17.2 9.6 17.2Z"
@@ -461,7 +450,7 @@ const Filter: React.FC<FilterProps> = ({
               placeholder="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className={`text-sm w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none bg-transparent
+              className={`text-sm w-full  border-gray-700 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none bg-transparent
             dark:bg-transparent dark:border-[#4D5050]`}
             />
           </div>
@@ -497,7 +486,7 @@ const Filter: React.FC<FilterProps> = ({
                       value={walletSearchTerm}
                       onChange={(e) => setWalletSearchTerm(e.target.value)}
                       className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
-                        dark:bg-[#0E201E] dark:text-gray-50`}
+                        dark:bg-[#0E201E] dark:text-gray-250`}
                     />
                   </div>
 
@@ -531,7 +520,7 @@ const Filter: React.FC<FilterProps> = ({
                           ></img>
                           <span
                             className={`text-sm text-gray-900
-                              dark:text-[#F3F5F7]`}
+                              dark:text-gray-250`}
                           >
                             {option.name}
                           </span>
@@ -573,7 +562,7 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Type or paste action type"
                       value={actionTypeSearchTerm}
                       onChange={(e) => setActionTypeSearchTerm(e.target.value)}
-                      className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
+                      className={`w-full px-3 py-2 rounded text-sm text-gray-900 dark:text-gray-250 placeholder-gray-500 focus:outline-none
                         dark:bg-[#0E201E] dark:text-gray-50`}
                     />
                   </div>
@@ -605,8 +594,8 @@ const Filter: React.FC<FilterProps> = ({
                             )}
                           </div>
                           <span
-                            className={`text-sm text-gray-900
-                              dark:text-[#F3F5F7]`}
+                            className={`text-sm text-gray-900 
+                              dark:text-gray-250`}
                           >
                             {option.name}
                           </span>
@@ -619,7 +608,6 @@ const Filter: React.FC<FilterProps> = ({
             </div>
             {/* Amount Sent Dropdown */}
             <AmountRangeDropdown
-              isDarkMode={isDarkMode}
               fromValue={fromSentValue}
               setFromValue={setFromSentValue}
               toValue={toSentValue}
@@ -635,7 +623,6 @@ const Filter: React.FC<FilterProps> = ({
 
             {/* Amount Received Dropdown */}
             <AmountRangeDropdown
-              isDarkMode={isDarkMode}
               fromValue={fromReceivedValue}
               setFromValue={setFromReceivedValue}
               toValue={toReceivedValue}
@@ -685,7 +672,7 @@ const Filter: React.FC<FilterProps> = ({
                       value={resultSearchTerm}
                       onChange={(e) => setResultSearchTerm(e.target.value)}
                       className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
-                        dark:bg-[#0E201E] dark:text-gray-50`}
+                        dark:bg-[#0E201E] dark:text-gray-250`}
                     />
                   </div>
 
@@ -715,7 +702,7 @@ const Filter: React.FC<FilterProps> = ({
                           </div>
                           <span
                             className={`text-sm text-gray-900
-                              dark:text-[#F3F5F7]`}
+                              dark:text-gray-250`}
                           >
                             {option.name}
                           </span>
@@ -799,11 +786,8 @@ const Filter: React.FC<FilterProps> = ({
           <AccordionItem title="Wallet">
             {" "}
             <div
-              className={`w-full  z-50 ${
-                isDarkMode
-                  ? "bg-gray-800 border-gray-600"
-                  : "bg-white border-gray-300"
-              }`}
+              className={`w-full  z-50 bg-white border-gray-300 
+                dark:bg-gray-800 dark:border-gray-600`}
             >
               {/* Search Input */}
               <div className="">
@@ -812,7 +796,7 @@ const Filter: React.FC<FilterProps> = ({
                   placeholder="Type or paste wallet"
                   value={walletSearchTerm}
                   onChange={(e) => setWalletSearchTerm(e.target.value)}
-                  className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                  className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                 />
               </div>
 
@@ -824,9 +808,8 @@ const Filter: React.FC<FilterProps> = ({
                     <div
                       key={option.id}
                       onClick={() => handleWalletToggle(option.id)}
-                      className={`flex items-center px-3 gap-2 cursor-pointer hover:bg-gray-100 ${
-                        isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
-                      }`}
+                      className={`flex items-center px-3 gap-2 cursor-pointer hover:bg-gray-100 
+                        dark:hover:bg-gray-700`}
                     >
                       <div
                         className={`w-5 h-5 border-2 rounded flex items-center justify-center  transition-colors ${
@@ -847,7 +830,7 @@ const Filter: React.FC<FilterProps> = ({
                         className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold ml-3`}
                       ></img>
                       <span
-                        className={`text-base text-gray-900 dark:text-[#B6B8BA] `}
+                        className={`text-base text-gray-900 dark:text-gray-250`}
                       >
                         {option.name}
                       </span>
@@ -861,11 +844,9 @@ const Filter: React.FC<FilterProps> = ({
           <AccordionItem title="Action Type">
             {" "}
             <div
-              className={`w-full z-50 ${
-                isDarkMode
-                  ? "bg-gray-800 border-gray-600"
-                  : "bg-white border-gray-300"
-              }`}
+              className={`w-full z-50 bg-white border-gray-300 
+                dark:bg-gray-800 dark:border-gray-600
+                `}
             >
               {/* Search Input */}
 
@@ -877,9 +858,9 @@ const Filter: React.FC<FilterProps> = ({
                     <div
                       key={option.id}
                       onClick={() => handleActionTypeToggle(option.id)}
-                      className={`flex items-center  cursor-pointer hover:bg-gray-100 ${
-                        isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-50"
-                      }`}
+                      className={`flex items-center  cursor-pointer hover:bg-gray-100 
+                        dark:hover:bg-gray-700
+                      `}
                     >
                       <div
                         className={`w-5 h-5 border-2 rounded flex mr-3 items-center justify-center  transition-colors ${
@@ -896,7 +877,7 @@ const Filter: React.FC<FilterProps> = ({
                         )}
                       </div>
                       <span
-                        className={`text-base text-gray-900 dark:text-[#B6B8BA] `}
+                        className={`text-base text-gray-900 dark:text-gray-250`}
                       >
                         {option.name}
                       </span>
@@ -925,7 +906,7 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Amount"
                       value={fromSentValue}
                       onChange={(e) => setFromSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
@@ -947,11 +928,8 @@ const Filter: React.FC<FilterProps> = ({
                     {/* Currency Dropdown */}
                     {showFromCurrencyDropdown && (
                       <div
-                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 ${
-                          isDarkMode
-                            ? "bg-gray-800 border-gray-600"
-                            : "bg-white border-gray-200"
-                        }`}
+                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200 
+                          dark:bg-gray-800 dark:border-gray-600`}
                       >
                         <div className="py-1">
                           {["USD", "EUR", "USDT"].map((currency) => (
@@ -990,7 +968,7 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Amount"
                       value={toSentValue}
                       onChange={(e) => setToSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
@@ -1012,11 +990,8 @@ const Filter: React.FC<FilterProps> = ({
                     {/* Currency Dropdown */}
                     {showToCurrencyDropdown && (
                       <div
-                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 ${
-                          isDarkMode
-                            ? "bg-gray-800 border-gray-600"
-                            : "bg-white border-gray-200"
-                        }`}
+                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200 
+                          dark:bg-gray-800 dark:border-gray-600`}
                       >
                         <div className="py-1">
                           {["USD", "EUR", "USDT"].map((currency) => (
@@ -1062,7 +1037,7 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Amount"
                       value={fromSentValue}
                       onChange={(e) => setFromSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
@@ -1084,11 +1059,8 @@ const Filter: React.FC<FilterProps> = ({
                     {/* Currency Dropdown */}
                     {showFromCurrencyDropdown && (
                       <div
-                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 ${
-                          isDarkMode
-                            ? "bg-gray-800 border-gray-600"
-                            : "bg-white border-gray-200"
-                        }`}
+                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200 
+                          dark:bg-gray-800 dark:border-gray-600`}
                       >
                         <div className="py-1">
                           {["USD", "EUR", "USDT"].map((currency) => (
@@ -1127,7 +1099,7 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Amount"
                       value={toSentValue}
                       onChange={(e) => setToSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
@@ -1149,11 +1121,8 @@ const Filter: React.FC<FilterProps> = ({
                     {/* Currency Dropdown */}
                     {showToCurrencyDropdown && (
                       <div
-                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 ${
-                          isDarkMode
-                            ? "bg-gray-800 border-gray-600"
-                            : "bg-white border-gray-200"
-                        }`}
+                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200
+                          dark:bg-gray-800 dark:border-gray-600`}
                       >
                         <div className="py-1">
                           {["USD", "EUR", "USDT"].map((currency) => (

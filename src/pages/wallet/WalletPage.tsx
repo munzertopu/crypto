@@ -9,7 +9,6 @@ interface WalletPageProps {
 }
 
 const WalletPage: React.FC<WalletPageProps> = ({ onLogout }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [showRecommendedAccounts, setShowRecommendedAccounts] = useState(true);
   const [activeTab, setActiveTab] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,8 +16,6 @@ const WalletPage: React.FC<WalletPageProps> = ({ onLogout }) => {
   return (
     <div className="min-h-screen bg-white dark:bg-[#0E201E]">
       <NavigationBar
-        isDarkMode={isDarkMode}
-        onThemeToggle={() => setIsDarkMode(!isDarkMode)}
         onLogout={onLogout}
         currentPage="wallets"
       />
@@ -38,7 +35,6 @@ const WalletPage: React.FC<WalletPageProps> = ({ onLogout }) => {
             <Recommended
               showRecommendedAccounts={showRecommendedAccounts}
               setShowRecommendedAccounts={setShowRecommendedAccounts}
-              isDarkMode={isDarkMode}
             />
           </div>
 
@@ -48,11 +44,10 @@ const WalletPage: React.FC<WalletPageProps> = ({ onLogout }) => {
             setActiveTab={setActiveTab}
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
-            isDarkMode={isDarkMode}
           />
 
           {/* Crypto Platforms Grid */}
-          <CryptoPlatformGrid isDarkMode={isDarkMode} />
+          <CryptoPlatformGrid />
         </div>
       </div>
     </div>

@@ -65,7 +65,7 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
               {/* <FontAwesomeIcon icon={faChevronLeft} className="w-6 h-6" /> */}
             </button>
 
-            <h2 className="text-base font-semibold text-gray-900 dark:text-[#F3F5F7]">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-250">
               {header}
             </h2>
           </div>

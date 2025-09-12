@@ -5,13 +5,9 @@ import TaxLossHarvestingTable from './components/TaxLossHarvestingTable';
 
 
 
-interface TaxLossHarvestingTabProps {
-  isDarkMode?: boolean;
-}
+interface TaxLossHarvestingTabProps {}
 
-const TaxLossHarvestingTab: React.FC<TaxLossHarvestingTabProps> = ({
-  isDarkMode = false
-}) => {
+const TaxLossHarvestingTab: React.FC<TaxLossHarvestingTabProps> = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortField, setSortField] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
@@ -30,18 +26,16 @@ const TaxLossHarvestingTab: React.FC<TaxLossHarvestingTabProps> = ({
   return (
     <div className="space-y-6">
       {/* Cards Section */}
-      <TaxLossHarvestingCards isDarkMode={isDarkMode} />
+      <TaxLossHarvestingCards />
 
       {/* Search and Filter Section */}
       <TaxLossHarvestingFilters 
-        isDarkMode={isDarkMode}
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
       />
 
       {/* Table Section */}
       <TaxLossHarvestingTable 
-        isDarkMode={isDarkMode}
         sortField={sortField}
         sortDirection={sortDirection}
         onSort={handleSort}

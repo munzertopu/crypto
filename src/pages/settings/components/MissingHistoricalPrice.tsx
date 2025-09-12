@@ -10,12 +10,10 @@ interface Platform {
 }
 
 interface MissingHistoricalPriceProps {
-  isDarkMode: boolean;
   onEditMissingPrice: (selectedPlatforms: string[]) => void;
 }
 
 const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({ 
-  isDarkMode, 
   onEditMissingPrice 
 }) => {
   const [editMultiplePrices, setEditMultiplePrices] = useState(false);
@@ -62,7 +60,7 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <Typography variant="h4" className={`font-bold text-lg text-left mb-2 text-gray-900 dark:text-white`}>
+          <Typography variant="h4" className={`font-bold text-lg text-left mb-2 text-gray-900 dark:text-gray-250`}>
             Missing historical price
           </Typography>
           <Typography variant="small" className={`text-left text-sm text-gray-700 dark:text-gray-400`}>
@@ -72,7 +70,7 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
         
         {/* Edit Multiple Prices Toggle */}
         <div className="flex items-center space-x-3">
-          <span className={`text-sm font-medium text-gray-900 dark:text-gray-300`}>
+          <span className={`text-sm font-medium text-gray-900 dark:text-gray-250`}>
             Edit multiple prices
           </span>
           <button
@@ -127,7 +125,7 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
             
             {/* Platform Name */}
             <Typography variant="small" className={`font-medium text-center mt-2 mb-2 w-full truncate ${
-              isDarkMode ? 'text-white' : 'text-gray-900'
+              'text-gray-900 dark:text-gray-250'
             }`}>
               {platform.name}
             </Typography>
@@ -148,7 +146,7 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
             className={`px-4 py-2 rounded-lg font-medium ${
               selectedPlatforms.length === 0
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-[#90C853] text-gray-900 hover:bg-[#7AB342]'
+                : 'bg-[#90C853] text-gray-900 dark:text-gray-250 hover:bg-[#7AB342]'
             }`}
           >
             Edit missing price

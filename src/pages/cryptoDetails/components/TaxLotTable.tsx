@@ -28,8 +28,7 @@ interface TaxLotTableProps {
 }
 
 const TaxLotTable: React.FC<TaxLotTableProps> = ({
-  data = [],
-  isDarkMode = false
+  data = []
 }) => {
   const TABLE_HEAD = ["Acquisition Account", "Current Account", "Type", "Amount", "Current Price", "Change", "Value", "Unrealized G/L", "Purchase Date"];
   
@@ -84,7 +83,7 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({
         <Card className="h-full w-full border-transparent bg-transprent shadow-none">
           <CardBody className="px-0 rounded-lg m-0 p-0">
             <table className="w-full min-w-max table-auto text-left">
-              <thead className='bg-table-header dark:bg-[#2F3232]'>
+              <thead className='bg-table-header dark:bg-gray-800'>
                 <tr className=''>
                   {TABLE_HEAD.map((head, index) => (
                     <th

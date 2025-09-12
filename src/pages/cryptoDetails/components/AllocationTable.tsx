@@ -25,7 +25,6 @@ interface AllocationTableProps {
 
 const AllocationTable: React.FC<AllocationTableProps> = ({
   data = [],
-  isDarkMode = false
 }) => {
       const TABLE_HEAD = ["Wallet", "Balance", "Value", "Allocation", "Short-term vs Long-term Holdings"];
       
@@ -80,7 +79,7 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
         <Card className="h-full w-full border-transparent bg-transprent shadow-none">
           <CardBody className="px-0 rounded-lg m-0 p-0 border-0">
             <table className="w-full min-w-max table-auto text-left shadow-none">
-              <thead className='bg-table-header dark:bg-[#2F3232]'>
+              <thead className='bg-table-header dark:bg-gray-800'>
                 <tr className=''>
                   {TABLE_HEAD.map((head, index) => (
                     <th

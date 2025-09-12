@@ -31,7 +31,8 @@ const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({
 
       {/* Header */}
       <div className="text-center mb-4">
-        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left">
+        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left
+         dark:text-gray-250">
           Reset Password
         </h1>
         <p className="text-base sm:text-lg text-gray-700 text-left">

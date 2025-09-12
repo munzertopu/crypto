@@ -5,14 +5,10 @@ import TaxOptimizationTab from "./taxOptimizationTab/TaxOptimizationTab";
 import TaxLossHarvestingTab from "./taxLossHarvestingTab/TaxLossHarvestingTab";
 
 interface TaxOptimizationPageProps {
-  isDarkMode?: boolean;
-  onThemeToggle?: () => void;
   onLogout?: () => void;
 }
 
 const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
-  isDarkMode = false,
-  onThemeToggle,
   onLogout,
 }) => {
   const tabs = ["Tax Optimization", "Tax Loss Harvesting"];
@@ -22,11 +18,6 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
     setActiveTab(tab);
   };
 
-  const handleThemeToggle = () => {
-    if (onThemeToggle) {
-      onThemeToggle();
-    }
-  };
 
   const handleLogout = () => {
     if (onLogout) {
@@ -35,10 +26,8 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white">
+    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-gray-250">
       <NavigationBar
-        isDarkMode={isDarkMode}
-        onThemeToggle={handleThemeToggle}
         onLogout={handleLogout}
         currentPage="tax-optimization"
       />
@@ -54,7 +43,7 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
 
           {/* Sub Navigation Tabs */}
           <div
-            className={`${isDarkMode ? "border-gray-700" : "border-gray-200"}`}
+            className="border-gray-200 dark:border-gray-700"
           >
             <Tabs>
               <Tabs.List className="my-2 lg:my-0 bg-[#F3F5F7] dark:bg-[#2F3232]">
@@ -81,11 +70,11 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
 
         {/* Main Content */}
         {activeTab === "Tax Optimization" && (
-          <TaxOptimizationTab isDarkMode={isDarkMode} />
+          <TaxOptimizationTab />
         )}
 
         {activeTab === "Tax Loss Harvesting" && (
-          <TaxLossHarvestingTab isDarkMode={isDarkMode} />
+          <TaxLossHarvestingTab />
         )}
       </div>
     </div>

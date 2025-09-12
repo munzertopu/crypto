@@ -7,7 +7,6 @@ interface AssetDetailModalProps {
   isOpen: boolean;
   selectedAsset: any;
   modalPosition: { top: number; left: number };
-  isDarkMode?: boolean;
   onClose: () => void;
 }
 
@@ -15,7 +14,6 @@ const AssetDetailModal: React.FC<AssetDetailModalProps> = ({
   isOpen,
   selectedAsset,
   modalPosition,
-  isDarkMode = false,
   onClose
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -47,7 +45,7 @@ const AssetDetailModal: React.FC<AssetDetailModalProps> = ({
       ref={modalRef}
       className={`fixed z-50 w-1/2 rounded-lg shadow-sm border bg-white 
         border-gray-500 border-opacity-15 text-gray-900
-        dark:bg-[#0E201E] dark:border-[#0E201E] `}
+        dark:text-gray-250dark:bg-[#0E201E] dark:border-[#0E201E] `}
       style={{
         top: `${modalPosition.top}px`
       }}
@@ -55,7 +53,7 @@ const AssetDetailModal: React.FC<AssetDetailModalProps> = ({
       <div className="p-2">
         <div className="overflow-x-auto">
           <table className="w-full min-w-max table-auto text-left">
-            <thead className={`bg-table-header dark:bg-[#2F3232]`}>
+            <thead className={`bg-table-header dark:bg-gray-800`}>
               <tr>
                 {MODAL_TABLE_HEAD.map((head, index) => (
                   <th
@@ -77,7 +75,7 @@ const AssetDetailModal: React.FC<AssetDetailModalProps> = ({
             </thead>
             <tbody>
               {modalTableData.map((row) => (
-                <tr key={row.id} className={`border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                <tr key={row.id} className="border-b border-gray-200 dark:border-gray-700">
                   <td className="p-3">
                     <div className="flex items-center space-x-3">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center`}>

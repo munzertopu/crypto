@@ -10,8 +10,6 @@ import CustomPriceTab from "./tabs/CustomPriceTab";
 import PlansTab from "./tabs/PlansTab";
 
 interface SettingsPageProps {
-  isDarkMode?: boolean;
-  onThemeToggle?: () => void;
   onLogout?: () => void;
 }
 
@@ -140,12 +138,10 @@ interface SettingsTab {
   id: string;
   name: string;
   icon: React.ComponentType<{ className?: string }>;
-  component: React.ComponentType<{ isDarkMode: boolean }>;
+  component: React.ComponentType<{}>;
 }
 
 const SettingsPage: React.FC<SettingsPageProps> = ({
-  isDarkMode = false,
-  onThemeToggle,
   onLogout,
 }) => {
   const [activeTab, setActiveTab] = useState("portfolio");
@@ -180,11 +176,6 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
     { id: "plans", name: "Plans", icon: PlansIcon, component: PlansTab },
   ];
 
-  const handleThemeToggle = () => {
-    if (onThemeToggle) {
-      onThemeToggle();
-    }
-  };
 
   const handleLogout = () => {
     if (onLogout) {
@@ -196,16 +187,14 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
     const activeTabData = settingsTabs.find((tab) => tab.id === activeTab);
     if (activeTabData) {
       const TabComponent = activeTabData.component;
-      return <TabComponent isDarkMode={isDarkMode} />;
+      return <TabComponent />;
     }
     return null;
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white">
+    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-gray-250">
       <NavigationBar
-        isDarkMode={isDarkMode}
-        onThemeToggle={handleThemeToggle}
         onLogout={handleLogout}
         currentPage="settings"
       />
@@ -213,7 +202,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
         <Typography
           variant="h4"
           className={`text-xl font-semibold mb-6 text-left ${
-            isDarkMode ? "text-white" : "text-[#0E201E]"
+            "text-[#0E201E] dark:text-white"
           }`}
         >
           Settings
@@ -227,7 +216,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                 onClick={() => setActiveTab(tab.id)}
                 className={`w-full flex items-center space-x-2 px-4 py-3 rounded-lg text-left text-sm ${
                   activeTab === tab.id ? 
-                  `text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white dark:border-gray-600` : 
+                  `text-gray-900 dark:text-gray-250 bg-gray-100 dark:bg-gray-700 dark:border-gray-600` : 
                   `text-[#0E201E]  hover:bg-[#F3F5F7] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white`
                 }`}
               >

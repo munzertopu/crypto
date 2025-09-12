@@ -19,7 +19,7 @@ const LottieDemo: React.FC = () => {
   return (
     <div className="px-8 mb-6">
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Lottie Animations Demo</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-250 mb-4">Lottie Animations Demo</h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Loading Animation */}
@@ -76,7 +76,7 @@ const LottieDemo: React.FC = () => {
 
         {/* Usage Instructions */}
         <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <h4 className="text-sm font-medium text-gray-900 mb-2">How to Use:</h4>
+          <h4 className="text-sm font-medium text-gray-900 dark:text-gray-250 mb-2">How to Use:</h4>
           <div className="text-xs text-gray-600 space-y-1">
             <p><strong>LoadingSpinner:</strong> &lt;LoadingSpinner size="medium" /&gt;</p>
             <p><strong>SuccessAnimation:</strong> &lt;SuccessAnimation size="large" /&gt;</p>

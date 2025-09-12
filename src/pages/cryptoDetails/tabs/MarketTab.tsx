@@ -3,13 +3,11 @@ import { Tabs } from "@material-tailwind/react";
 import PortfolioChart from '../../../components/PortfolioChart';
 
 interface MarketTabProps {
-  isDarkMode: boolean;
   activeTimeRange: string;
   onTimeRangeChange: (timeRange: string) => void;
 }
 
 const MarketTab: React.FC<MarketTabProps> = ({
-  isDarkMode,
   activeTimeRange,
   onTimeRangeChange
 }) => {
@@ -46,7 +44,6 @@ const MarketTab: React.FC<MarketTabProps> = ({
 
       {/* Chart */}
       <PortfolioChart 
-        isDarkMode={isDarkMode} 
         chartColor="#3A6FF8"
       />
     </div>

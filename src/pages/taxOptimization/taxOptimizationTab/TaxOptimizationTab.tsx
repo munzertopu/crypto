@@ -5,13 +5,9 @@ import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { cryptoAssets, formatCurrency, formatCryptoAmount } from '../../../data/cryptoAssets';
 import AssetDetailModal from '../components/AssetDetailModal';
 
-interface TaxOptimizationTabProps {
-  isDarkMode?: boolean;
-}
+interface TaxOptimizationTabProps {}
 
-const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
-  isDarkMode = false
-}) => {
+const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
   const [selectedDateRange, setSelectedDateRange] = useState({
     startDate: new Date('2025-05-01'),
     endDate: new Date('2025-05-29')
@@ -99,7 +95,6 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
           <DateRangeSelector
             selectedDateRange={selectedDateRange}
             onDateRangeChange={setSelectedDateRange}
-            isDarkMode={isDarkMode}
             variant="inline"
           />
         </div>
@@ -122,7 +117,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
         <CardBody className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left" role="table" aria-label="Tax optimization cryptocurrency holdings">
-               <thead className={`bg-table-header dark:bg-[#2F3232]`}>
+               <thead className={`bg-table-header dark:bg-gray-800`}>
                  <tr role="row" className='bg-white dark:bg-[#0E201E]'>
                    <th>
                      
@@ -130,14 +125,14 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                    <th>
                    </th>
                    <th className='py-2'>
-                     <span className={`text-sm px-2 py-1 rounded-lg font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#5F9339] bg-[#E3F3C7]"}`}>
+                     <span className="text-sm px-2 py-1 rounded-lg font-normal text-[#5F9339] bg-[#E3F3C7] dark:text-[#B6B8BA] dark:bg-transparent">
                        Short term
                      </span>
                    </th>
                    <th>
                    </th>
                    <th className='py-2'>
-                     <span className={`text-sm px-2 py-1 rounded-lg font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#8C5DF3] bg-[#8C5DF31F]"}`}>
+                     <span className="text-sm px-2 py-1 rounded-lg font-normal text-[#8C5DF3] bg-[#8C5DF31F] dark:text-[#B6B8BA] dark:bg-transparent">
                        Long term
                      </span>
                    </th>
@@ -246,11 +241,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                           {/* Tooltip */}
                           {tooltipOpen === asset.id && asset.shortTerm.longTermTransitionDate && (
                             <div
-                              className={`absolute z-50 px-3 py-2 text-sm rounded-lg shadow-lg border whitespace-nowrap ${
-                                isDarkMode 
-                                  ? 'bg-gray-800 border-gray-600 text-white' 
-                                  : 'bg-[#0E201E] border-gray-300 text-white'
-                              }`}
+                              className="absolute z-50 px-3 py-2 text-sm rounded-lg shadow-lg border whitespace-nowrap bg-[#0E201E] dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-white"
                               style={{
                                 top: '25px',
                                 left: '50%',
@@ -261,7 +252,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                                 {/* Caret pointing down */}
                                 <div 
                                   className={`absolute w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent ${
-                                    isDarkMode ? 'border-t-gray-800' : 'border-t-white'
+                                    'border-t-white dark:border-t-gray-800'
                                   }`}
                                   style={{
                                     bottom: '-4px',
@@ -307,11 +298,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                           {/* Tooltip */}
                           {tooltipOpen === asset.id + '-shortVsLong' && (
                             <div
-                              className={`absolute z-50 px-3 py-2 text-sm rounded-lg whitespace-nowrap ${
-                                isDarkMode 
-                                  ? 'bg-gray-800 border-gray-600 text-white' 
-                                  : 'bg-[#0E201E] text-white'
-                              }`}
+                              className="absolute z-50 px-3 py-2 text-sm rounded-lg whitespace-nowrap bg-[#0E201E] dark:bg-gray-800 dark:border-gray-600 text-white"
                               style={{
                                 top: '25px',
                                 left: '50%',
@@ -322,7 +309,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
                                 {/* Caret pointing down */}
                                 <div 
                                   className={`absolute w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent ${
-                                    isDarkMode ? 'border-t-gray-800' : 'border-t-white'
+                                    'border-t-white dark:border-t-gray-800'
                                   }`}
                                   style={{
                                     bottom: '-4px',
@@ -353,7 +340,6 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = ({
          isOpen={modalOpen}
          selectedAsset={selectedAsset}
          modalPosition={modalPosition}
-         isDarkMode={isDarkMode}
          onClose={handleCloseModal}
        />
      </div>

@@ -9,7 +9,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 interface PortfolioTabProps {
-  isDarkMode: boolean;
+  
 }
 
 // Country data with flags and names
@@ -38,7 +38,7 @@ const currencies = [
   { code: 'CNY', name: 'CNY' }
 ];
 
-const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
+const PortfolioTab: React.FC<PortfolioTabProps> = () => {
   const [formData, setFormData] = useState({
     fullName: 'Kristin Watson',
     email: 'kristin.watson@gmail.com',
@@ -178,7 +178,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
                   onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
                   className={`w-full px-3 border rounded-lg focus:outline-none flex items-center justify-between
                     border-gray-150 bg-white text-gray-900
-                    dark:bg-gray-700 dark:border-gray-600 dark:text-white`}
+                    dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250`}
                 >
                   <div className="flex items-center">
                     <img src={selectedCountry.flag} className="mr-3 py-1.5"></img>
@@ -186,16 +186,15 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
                       icon={faChevronDown} 
                       className={`w-3 h-3 transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`}
                     />
-                    <div className={`w-px h-10 my-0 ${isDarkMode ? 'bg-gray-600' : 'bg-[#E1E3E5]'} mx-3`}></div>
+                    <div className={`w-px h-10 my-0 bg-[#E1E3E5] bg-gray-600 mx-3`}></div>
                     <span className="py-1.5 font-medium">{selectedCountry.name}</span>
                   </div>
                 </button>
                 
                 {/* Dropdown Menu */}
                 {isCountryDropdownOpen && (
-                  <div className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg ${
-                    isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white'
-                  }`}>
+                  <div className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg bg-white
+                    dark:bg-gray-700 dark:border-gray-600`}>
                     {countries.map((country) => (
                       <button
                         key={country.code}
@@ -203,7 +202,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
                         onClick={() => handleCountrySelect(country)}
                         className={`w-full px-3 border rounded-lg focus:outline-none flex items-center justify-between
                           border-gray-150 bg-white text-gray-900
-                          dark:bg-gray-700 dark:border-gray-600 dark:text-white
+                          dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250
                         } ${selectedCountry.code === country.code ? 'bg-gray-100' : ''}`}
                       >
                         <img src={country.flag} className="text-lg mr-3"></img>
@@ -223,9 +222,8 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
                 <button
                   type="button"
                   onClick={() => setIsCurrencyDropdownOpen(!isCurrencyDropdownOpen)}
-                  className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between ${
-                    isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white text-gray-900'
-                  }`}
+                  className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between bg-white text-gray-900
+                    dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250`}
                 >
                   <div className="flex items-center justify-between w-full">
                     <div className="flex items-center">
@@ -240,17 +238,17 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
                 
                 {/* Currency Dropdown Menu */}
                 {isCurrencyDropdownOpen && (
-                  <div className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg ${
-                    isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white'
-                  }`}>
+                  <div className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg bg-white 
+                    dark:bg-gray-700 dark:border-gray-600
+                  `}>
                     {currencies.map((currency) => (
                       <button
                         key={currency.code}
                         type="button"
                         onClick={() => handleCurrencySelect(currency)}
-                        className={`w-full px-3 py-2 flex items-center hover:bg-gray-50 ${
-                          isDarkMode ? 'hover:bg-gray-600 text-white' : 'text-gray-900'
-                        } ${selectedCurrency.code === currency.code ? 'bg-gray-100' : ''}`}
+                        className={`w-full px-3 py-2 flex items-center hover:bg-gray-50 text-gray-900
+                          dark:hover:bg-gray-600 dark:text-gray-250 
+                          ${selectedCurrency.code === currency.code ? 'bg-gray-100' : ''}`}
                       >
                         <span className="font-medium">{currency.name}</span>
                       </button>
@@ -268,9 +266,9 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
                 <DatePicker
                   selected={startDate} 
                   onChange={(date) => setStartDate(date)} 
-                  className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer ${
-                    isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white text-gray-900'
-                  }`}
+                  className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-white text-gray-900
+                    dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250
+                  `}
                   placeholderText="MM/DD/YYYY"
                   dateFormat="MM/dd/yyyy"
                   wrapperClassName="w-full"
@@ -299,9 +297,8 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
                 <select
                   value={formData.timezone}
                   onChange={(e) => handleInputChange('timezone', e.target.value)}
-                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none ${
-                    isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white text-gray-900'
-                  }`}
+                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none bg-white text-gray-900
+                    dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250`}
                 >
                   <option value="Pacific Daylight Time (GMT-7)">Pacific Daylight Time (GMT-7)</option>
                   <option value="Pacific Standard Time (GMT-8)">Pacific Standard Time (GMT-8)</option>
@@ -325,15 +322,15 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
                     type="text"
                     value={formData.dustValueThreshold}
                     onChange={(e) => handleInputChange('dustValueThreshold', e.target.value)}
-                    className={`flex-1 focus:outline-none ${isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-[#E1E3E5]'}`}
+                    className={`flex-1 focus:outline-none bg-white border-[#E1E3E5] 
+                      dark:bg-gray-700 dark:border-gray-600 dark:text-white`}
                   />
                   <div className="relative" ref={dustCurrencyDropdownRef}>
                     <button
                       type="button"
                       onClick={() => setIsDustCurrencyDropdownOpen(!isDustCurrencyDropdownOpen)}
-                      className={`px-3 focus:outline-none flex items-center justify-between ${
-                        isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white text-gray-900'
-                      }`}
+                      className={`px-3 focus:outline-none flex items-center justify-between bg-white text-gray-900
+                        dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250`}
                     >
                     <div className="flex items-center justify-between w-full">
                       <div className="flex items-center">
@@ -348,17 +345,17 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
                   
                   {/* Dust Currency Dropdown Menu */}
                   {isDustCurrencyDropdownOpen && (
-                    <div className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg ${
-                      isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white'
-                    }`}>
+                    <div className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg bg-white
+                      dark:bg-gray-700 dark:border-gray-600
+                    `}>
                       {currencies.map((currency) => (
                         <button
                           key={currency.code}
                           type="button"
                           onClick={() => handleDustCurrencySelect(currency)}
-                                                  className={`w-full px-3 py-2 flex items-center ${
-                          isDarkMode ? 'text-white' : 'text-gray-900'
-                        } ${selectedDustCurrency.code === currency.code ? 'bg-gray-100' : ''}`}
+                          className={`w-full px-3 py-2 flex items-center text-gray-900
+                            dark:text-gray-250
+                            ${selectedDustCurrency.code === currency.code ? 'bg-gray-100' : ''}`}
                         >
                           <span className="font-medium">{currency.name}</span>
                         </button>
@@ -377,9 +374,9 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({ isDarkMode }) => {
                  <DatePicker
                    selected={taxReportingYearDate} 
                    onChange={(date) => setTaxReportingYearDate(date)} 
-                   className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer ${
-                     isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white text-gray-900'
-                   }`}
+                   className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-white text-gray-900
+                      dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250
+                   `}
                    placeholderText="MM/DD/YYYY"
                    dateFormat="MM/dd/yyyy"
                    wrapperClassName="w-full"

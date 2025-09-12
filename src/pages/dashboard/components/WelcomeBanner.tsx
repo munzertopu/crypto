@@ -3,13 +3,11 @@ import React, { useState } from "react";
 interface WelcomeBannerProps {
   userName?: string;
   onClose?: () => void;
-  isDarkMode?: boolean;
 }
 
 const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
   userName = "User Nam3",
   onClose,
-  isDarkMode = false,
 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [isFading, setIsFading] = useState(false);
@@ -37,7 +35,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
           <div className="flex items-start justify-between">
             <h2
               className={`text-sm sm:text-lg  font-semibold sm:font-medium text-gray-900
-            dark:text-[#B6B8BA] text-left`}
+                dark:text-gray-250 text-left`}
             >
               Welcome [{userName}]! Go Pro and Save an Additional [$] with our
               advanced Tax Settings.
@@ -70,7 +68,8 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             <div className="flex flex-col md:flex-row justify-start items-start md:items-center gap-2">
               {" "}
               <span
-                className={`text-sm sm:text-base lg:text-base font-medium text-gray-900  dark:text-[#B6B8BA]`}
+                className={`text-sm sm:text-base lg:text-base font-medium text-gray-900
+                   dark:text-gray-250`}
               >
                 Getting started is as easy as:
               </span>
@@ -85,8 +84,8 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                     </span>
                   </div>
                   <span
-                    className={`md:text-smh  opacity-80 text-gray-900
-                      dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
+                    className={`md:text-smh  opacity-80 text-gray-900 opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left
+                      dark:text-gray-250`}
                   >
                     Connect Exchanges & Wallets
                   </span>
@@ -102,7 +101,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                   </div>
                   <span
                     className={`md:text-smh  opacity-80 text-gray-900
-                      dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
+                       dark:text-gray-250 opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
                   >
                     Reconcile Trades
                   </span>
@@ -118,7 +117,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                   </div>
                   <span
                     className={`md:text-smh  opacity-80 text-gray-900
-                      dark:text-[#CDCFD1] opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
+                       dark:text-gray-250 opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
                   >
                     Run Tax Reports
                   </span>
@@ -159,7 +158,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             />
           </svg>
           <span
-            className={`text-sm lg:text-sm font-normal text-gray-900 dark:text-[#CDCFD1]`}
+            className={`text-sm lg:text-sm font-normal text-gray-900 dark:text-gray-250`}
           >
             Close
           </span>

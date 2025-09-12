@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 interface AmountRangeDropdownProps {
-  isDarkMode: boolean;
   fromValue: string;
   setFromValue: (value: string) => void;
   toValue: string;
@@ -19,7 +18,6 @@ interface AmountRangeDropdownProps {
 }
 
 const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
-  isDarkMode,
   fromValue,
   setFromValue,
   toValue,
@@ -76,7 +74,7 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                   value={fromValue}
                   onChange={(e) => setFromValue(e.target.value)}
                   className={`w-full rounded-lg text-sm font-semibold border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-1 focus:ring-border-gray-300
-                    dark:bg-transparent dark:border-[#4D5050] dark:text-[#A1A3A5]`}
+                    dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250`}
                 />
                 <button
                   onClick={() =>
@@ -136,7 +134,7 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                   value={toValue}
                   onChange={(e) => setToValue(e.target.value)}
                   className={`w-full rounded-lg text-sm font-semibold border-gray-300 bg-white text-gray-900
-                    dark:bg-transparent dark:border-[#4D5050] dark:text-[#A1A3A5]`}
+                    dark:bg-transparent dark:border-[#4D5050] dark:text-gray-250`}
                 />
                 <button
                   onClick={() =>

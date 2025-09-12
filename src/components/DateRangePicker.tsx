@@ -32,8 +32,8 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const [dateRange, setDateRange] = useState([
     {
-      startDate: selectedDateRange.startDate,
-      endDate: selectedDateRange.endDate,
+      startDate: selectedDateRange.startDate || new Date(),
+      endDate: selectedDateRange.endDate || new Date(),
       key: "selection",
     },
   ]);
@@ -69,7 +69,8 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
     ];
   };
 
-  const formatDate = (date: Date) => {
+  const formatDate = (date: Date | null) => {
+    if (!date) return "";
     return date.toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
@@ -78,8 +79,8 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   };
 
   const formatDateRange = (selectedDateRange: {
-    startDate: Date;
-    endDate: Date;
+    startDate: Date | null;
+    endDate: Date | null;
   }) => {
     if (!selectedDateRange?.startDate || !selectedDateRange?.endDate) return "";
     const startMonth = selectedDateRange.startDate.toLocaleDateString("en-US", {
@@ -127,8 +128,8 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
     }
     setDateRange([newSelection]);
     onDateRangeChange({
-      startDate: newSelection.startDate,
-      endDate: newSelection.endDate,
+      startDate: newSelection.startDate || null,
+      endDate: newSelection.endDate || null,
     });
     // setIsOpen(false);
   };
@@ -157,8 +158,8 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   useEffect(() => {
     setDateRange([
       {
-        startDate: selectedDateRange.startDate,
-        endDate: selectedDateRange.endDate,
+        startDate: selectedDateRange.startDate || new Date(),
+        endDate: selectedDateRange.endDate || new Date(),
         key: "selection",
       },
     ]);
@@ -168,7 +169,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
     <div className="relative datepicker-container" ref={containerRef}>
       <button
         onClick={handleIconClick}
-        className={`w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900 hover:bg-gray-50 min-w-[194px] ${className}`}
+        className={`w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900 dark:text-gray-250 hover:bg-gray-50 min-w-[194px] ${className}`}
         aria-label="Select date range"
         aria-expanded={isOpen}
         aria-haspopup="true"
