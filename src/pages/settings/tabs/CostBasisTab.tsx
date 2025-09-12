@@ -115,19 +115,19 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
   return (
     <div>
       {/* Cost Basis Section */}
-      <div className="space-y-4 my-6">
+      <div className="space-y-4">
         <div>
-          <Typography variant="h4" className={`font-medium text-left mb-2 ${isDarkMode ? 'text-white' : 'text-[#0E201E]'}`}>
+          <Typography variant="h4" className={`font-medium text-sm text-left mb-2 text-gray-900 dark:text-white`}>
             Cost Basis
           </Typography>
-          <Typography variant="small" className={`text-left text-sm ${isDarkMode ? 'text-gray-400' : 'text-[#4D5050]'}`}>
+          <Typography variant="small" className={`text-left text-sm text-700 dark:text-gray-400`}>
             This affects how your crypto gains and losses are calculated.
           </Typography>
         </div>
 
         {/* Cost Basis Method */}
-        <div className="space-y-3">
-          <div className="flex items-center space-x-2">
+        <div>
+          <div className="flex items-center mt-6 mb-2 space-x-2">
             <Typography variant="h6" className={`font-medium ${isDarkMode ? 'text-white' : 'text-[#2F3232]'}`}>
               Cost Basis Method
             </Typography>
@@ -138,14 +138,14 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
           </div>
 
           {/* Radio Button Options */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
             {costBasisMethods.map((method) => (
               <div
                 key={method.id}
                 onClick={() => handleCostBasisMethodSelect(method.id)}
-                className={`relative cursor-pointer border rounded-lg px-4 py-2 transition-all shadow-sm ${
-                  isDarkMode ? 'bg-gray-700' : 'border-[#E1E3E5] bg-white'
-                }`}
+                className={`relative cursor-pointer border rounded-lg px-5 py-4 transition-all shadow-sm border-default bg-white 
+                  dark:bg-gray-700
+                  `}
               >
                 {/* Radio Button */}
                 <div className="flex items-center justify-between mb-2">
@@ -164,7 +164,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
                     )}
                   </div>
                 </div>
-                <div className={`text-xs text-left ${isDarkMode ? 'text-gray-300' : 'text-[#4D5050]'}`}>
+                <div className={`text-sm text-left ${isDarkMode ? 'text-gray-300' : 'text-[#4D5050]'}`}>
                   {method.description}
                 </div>
               </div>
@@ -172,15 +172,20 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
           </div>
         </div>
       </div>
+      
+      {/* Horizontal Separator */}
+      <div className="py-6 hidden md:block">
+        <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+      </div>
 
       {/* Override Cost Section */}
-      <div className="space-y-3 my-8">
+      <div>
         <div className="flex items-center justify-between">
           <div>
-            <Typography variant="h4" className={`font-bold text-left mb-2 ${isDarkMode ? 'text-white' : 'text-[#0E201E]'}`}>
+            <Typography variant="h4" className={`font-bold text-lg text-left mb-2 text-gray-900 dark:text-white`}>
               Override cost
             </Typography>
-            <Typography variant="small" className={`text-left text-sm ${isDarkMode ? 'text-gray-400' : 'text-[#7C7C7C]'}`}>
+            <Typography variant="small" className={`text-left text-sm text-gray-500 dark:text-gray-400`}>
               You can override the cost basis method for previous years by creating migrations.
             </Typography>
           </div>
@@ -197,7 +202,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
         {/* Override Card */}
         {overrideCard && (
           <div
-            className={`relative w-full sm:w/2 lg:w-1/4 bg-white border border-[#E1E3E5] rounded-lg p-4 ${isDarkMode ? 'bg-gray-700' : 'bg-white'}`}
+            className={`relative w-full sm:w/2 lg:w-1/4 bg-white border border-[#E1E3E5] rounded-lg px-5 py-4 mt-2`}
           >
             <div className="flex items-center justify-between">
               <div>
@@ -219,15 +224,20 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
             </div>
           </div>
         )}
+
+        {/* Horizontal Separator */}
+        <div className="py-6 hidden md:block">
+          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+        </div>
       </div>
 
       {/* Tax Calculation Rules Section */}
-      <div className="space-y-4 my-8">
+      <div className="space-y-4 mb-5">
         <Typography variant="h4" className={`font-bold text-left mb-4 ${isDarkMode ? 'text-white' : 'text-[#0E201E]'}`}>
           Tax Calculation Rules
         </Typography>
 
-        <div className="space-y-3">
+        <div className="space-y-4">
           {taxRules.map((rule) => (
             <div key={rule.id} className="flex items-center py-3">
               {/* Toggle Switch */}
@@ -243,7 +253,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
                   }`}
                 />
               </button>
-              <span className={`text-sm text-left ${isDarkMode ? 'text-gray-300' : 'text-[#0E201E]'}`}>
+              <span className={`text-base text-left text-[#0E201E] dark:text-gray-300`}>
                 {rule.name}
               </span>
             </div>
@@ -255,7 +265,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
       <div className="flex justify-between pt-6 border-t border-gray-200 my-8">
         <Button
           onClick={handleRecalculate}
-          className={`border-[#E1E3E5] px-6 py-2 rounded-lg font-medium ${
+          className={`border-[#E1E3E5] px-5 py-3 rounded-lg font-medium ${
             isDarkMode ? 'border-gray-600 text-gray-300' : 'bg-white border-[#E1E3E5] text-[#0E201E]'
           }`}
         >
@@ -264,7 +274,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
         
         <Button
           onClick={handleSaveChanges}
-          className="bg-[#90C853] text-[#0E201E] px-6 py-2 rounded-lg font-medium border-0"
+          className="bg-[#90C853] text-[#0E201E] px-5 py-3 rounded-lg font-medium border-0"
         >
           Save changes
         </Button>

@@ -58,21 +58,21 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
   };
 
   return (
-    <div>
+    <div className='pb-8'>
       {/* Header */}
-      <div className="flex items-center justify-between my-6">
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <Typography variant="h4" className={`font-bold text-left mb-2 ${isDarkMode ? 'text-white' : 'text-[#0E201E]'}`}>
+          <Typography variant="h4" className={`font-bold text-lg text-left mb-2 text-gray-900 dark:text-white`}>
             Missing historical price
           </Typography>
-          <Typography variant="small" className={`text-left text-sm ${isDarkMode ? 'text-gray-400' : 'text-[#4D5050]'}`}>
+          <Typography variant="small" className={`text-left text-sm text-gray-700 dark:text-gray-400`}>
             We detected missing prices for your wallets
           </Typography>
         </div>
         
         {/* Edit Multiple Prices Toggle */}
         <div className="flex items-center space-x-3">
-          <span className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-[#0E201E]'}`}>
+          <span className={`text-sm font-medium text-gray-900 dark:text-gray-300`}>
             Edit multiple prices
           </span>
           <button
@@ -96,11 +96,7 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
           <div
             key={platform.id}
             onClick={() => handlePlatformSelect(platform.id)}
-            className={`relative flex flex-col items-center p-4 rounded-lg cursor-pointer border transition-all min-w-0 ${
-              isDarkMode 
-                ? 'bg-gray-700 border-gray-600' 
-                : 'bg-white'
-            } 
+            className={`relative flex flex-col items-center p-4 rounded-lg cursor-pointer border transition-all min-w-0}
             ${editMultiplePrices ? 
               selectedPlatforms.includes(platform.id) && editMultiplePrices
                 ? 'border-[#90C853]'
@@ -131,7 +127,7 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
             
             {/* Platform Name */}
             <Typography variant="small" className={`font-medium text-center mt-2 mb-2 w-full truncate ${
-              isDarkMode ? 'text-white' : 'text-[#0E201E]'
+              isDarkMode ? 'text-white' : 'text-gray-900'
             }`}>
               {platform.name}
             </Typography>
@@ -146,13 +142,13 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
 
       {/* Action Buttons */}
       {editMultiplePrices && selectedPlatforms.length > 0 && (
-        <div className="flex justify-end items-center pt-6 border-t border-gray-200">
+        <div className="flex justify-end items-center pt-6 border-gray-200">
           <button
             onClick={handleEditMissingPrice}
             className={`px-4 py-2 rounded-lg font-medium ${
               selectedPlatforms.length === 0
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-[#90C853] text-[#0E201E] hover:bg-[#7AB342]'
+                : 'bg-[#90C853] text-gray-900 hover:bg-[#7AB342]'
             }`}
           >
             Edit missing price
