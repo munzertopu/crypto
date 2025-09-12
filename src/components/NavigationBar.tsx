@@ -111,9 +111,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         {/* Navigation Links */}
         <div className="hidden lg:flex items-center gap-6 ">
           {navigationItems.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.href}
+              to={item.href}
               className={`opacity-80 px-1 lg:px-0 py-2 text-sm lg:text-base text-gray-900
                 dark:text-[#B6B8BA]
                 ${
@@ -123,7 +123,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 }`}
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -410,15 +410,15 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         >
           <div className="w-full flex flex-col justify-start items-start gap-2 px-4 ">
             {navigationItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 className={`dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 text-gray-900 hover:text-gray-900 hover:bg-gray-50 block text-sm transition-colors opacity-80`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 role="menuitem"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>{" "}
           <div
