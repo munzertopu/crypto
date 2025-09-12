@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronDown,
-  faBars,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faBars } from "@fortawesome/free-solid-svg-icons";
 import ThemeToggle from "./ThemeToggle";
+import useScreenSize from "../hooks/useScreenSize";
 
 interface NavigationBarProps {
   userName?: string;
@@ -25,7 +23,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
+  const screenSize = useScreenSize();
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -291,9 +289,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                         aria-label={`Switch to ${user.name} account`}
                       >
                         <div className="w-full flex justify-start items-center gap-1.5">
-                          <div
-                            className="w-full flex items-center justify-start"
-                          >
+                          <div className="w-full flex items-center justify-start">
                             <img
                               src={user.photo}
                               alt={user.name}
