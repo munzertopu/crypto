@@ -17,6 +17,8 @@ import CryptoDetailsPage from "./pages/cryptoDetails/CryptoDetailsPage";
 import WalletPage from "./pages/wallet/WalletPage";
 import TransactionPage from "./pages/transactions/TransactionPage";
 import TaxOptimizationPage from "./pages/taxOptimization/TaxOptimizationPage";
+import TaxReportsPage from "./pages/taxReports/TaxReportsPage";
+import ClientsPage from "./pages/clients/ClientsPage";
 import SettingsPage from "./pages/settings/SettingsPage";
 import "./App.css";
 
@@ -116,6 +118,14 @@ const AppContent: React.FC = () => {
       <Route
         path="/tax-optimization"
         element={<TaxOptimizationPage onLogout={handleLogout} />}
+      />
+      <Route
+        path="/tax-reports"
+        element={<TaxReportsPage onLogout={handleLogout} />}
+      />
+      <Route
+        path="/clients"
+        element={<ClientsPage onLogout={handleLogout} />}
       />
       <Route
         path="/settings"
