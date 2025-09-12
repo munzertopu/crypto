@@ -16,7 +16,6 @@ const NFTSection: React.FC<NFTSectionProps> = ({
   totalEstimatedValue = "$35,800",
   estimatedGainLoss = "$17,150",
   gainLossPercentage = "+5.15%",
-  isDarkMode = false,
 }) => {
   // SVG Icons for NFT Cards
   const totalNFTsSvg = (

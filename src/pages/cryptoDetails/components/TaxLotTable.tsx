@@ -28,8 +28,7 @@ interface TaxLotTableProps {
 }
 
 const TaxLotTable: React.FC<TaxLotTableProps> = ({
-  data = [],
-  isDarkMode = false
+  data = []
 }) => {
   const TABLE_HEAD = ["Acquisition Account", "Current Account", "Type", "Amount", "Current Price", "Change", "Value", "Unrealized G/L", "Purchase Date"];
   

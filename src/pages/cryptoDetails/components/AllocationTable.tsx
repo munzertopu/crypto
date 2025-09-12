@@ -25,7 +25,6 @@ interface AllocationTableProps {
 
 const AllocationTable: React.FC<AllocationTableProps> = ({
   data = [],
-  isDarkMode = false
 }) => {
       const TABLE_HEAD = ["Wallet", "Balance", "Value", "Allocation", "Short-term vs Long-term Holdings"];
       

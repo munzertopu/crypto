@@ -24,7 +24,7 @@ interface OverrideCard {
   taxYears: string[];
 }
 
-const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
+const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
   const [isOverrideModalOpen, setIsOverrideModalOpen] = useState(false);
   const [isLoadingModalOpen, setIsLoadingModalOpen] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
@@ -128,7 +128,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
         {/* Cost Basis Method */}
         <div>
           <div className="flex items-center mt-6 mb-2 space-x-2">
-            <Typography variant="h6" className={`font-medium ${isDarkMode ? 'text-white' : 'text-[#2F3232]'}`}>
+            <Typography variant="h6" className={`font-medium text-[#2F3232] dark:text-white`}>
               Cost Basis Method
             </Typography>
             <svg className="size-4 text-[#7C7C7C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -149,7 +149,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
               >
                 {/* Radio Button */}
                 <div className="flex items-center justify-between mb-2">
-                  <span className={`font-semibold text-base ${isDarkMode ? 'text-white' : 'text-[#0E201E]'}`}>
+                  <span className={`font-semibold text-base text-[#0E201E] dark:text-white`}>
                     {method.name}
                   </span>
                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
@@ -164,7 +164,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
                     )}
                   </div>
                 </div>
-                <div className={`text-sm text-left ${isDarkMode ? 'text-gray-300' : 'text-[#4D5050]'}`}>
+                <div className={`text-sm text-left text-[#4D5050] dark:text-gray-300`}>
                   {method.description}
                 </div>
               </div>
@@ -206,16 +206,16 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <div className={`font-bold text-lg ${isDarkMode ? 'text-white' : 'text-[#0E201E]'}`}>
+                <div className={`font-bold text-lg text-[#0E201E] dark:text-white`}>
                   {overrideCard.costBasisMethod}
                 </div>
-                <div className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-[#0E201E]'}`}>
+                <div className={`text-sm text-[#0E201E] dark:text-gray-300`}>
                   {getYearRangeText(overrideCard.taxYears)}
                 </div>
               </div>
               <button
                 onClick={handleRemoveOverride}
-                className={`p-2 rounded-full hover:bg-gray-100 ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-100'}`}
+                className={`p-2 rounded-full hover:bg-gray-100 hover:bg-gray-100 dark:hover:bg-gray-600`}
               >
                 <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -233,7 +233,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
 
       {/* Tax Calculation Rules Section */}
       <div className="space-y-4 mb-5">
-        <Typography variant="h4" className={`font-bold text-left mb-4 ${isDarkMode ? 'text-white' : 'text-[#0E201E]'}`}>
+        <Typography variant="h4" className={`font-bold text-left mb-4 text-[#0E201E] dark:text-white`}>
           Tax Calculation Rules
         </Typography>
 
@@ -265,9 +265,9 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
       <div className="flex justify-between pt-6 border-t border-gray-200 my-8">
         <Button
           onClick={handleRecalculate}
-          className={`border-[#E1E3E5] px-5 py-3 rounded-lg font-medium ${
-            isDarkMode ? 'border-gray-600 text-gray-300' : 'bg-white border-[#E1E3E5] text-[#0E201E]'
-          }`}
+          className={`border-[#E1E3E5] px-5 py-3 rounded-lg font-medium bg-white border-[#E1E3E5] text-[#0E201E]
+            dartk:border-gray-600 dartk:text-gray-300
+          `}
         >
           Recalculate
         </Button>
@@ -284,7 +284,6 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({ isDarkMode }) => {
       <OverrideCostModal
         isOpen={isOverrideModalOpen}
         onClose={handleCloseOverrideModal}
-        isDarkMode={isDarkMode}
         onSubmit={handleOverrideSubmit}
       />
 

@@ -88,7 +88,6 @@ const KPISection: React.FC<KPISectionProps> = ({
   longTerms = "$150,000",
   longTermsChange = "+0.93%",
   onAddKPI,
-  isDarkMode = false,
 }) => {
   // SVG Icons for KPI Cards
   const incomeSvg = (

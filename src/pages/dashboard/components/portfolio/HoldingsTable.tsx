@@ -27,7 +27,6 @@ interface HoldingsTableProps {
 
 const HoldingsTable: React.FC<HoldingsTableProps> = ({
   holdings = [],
-  isDarkMode = false,
   onCryptoClick,
 }) => {
   const TABLE_HEAD = [
