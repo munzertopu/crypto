@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 interface AmountRangeDropdownProps {
-  isDarkMode: boolean;
   fromValue: string;
   setFromValue: (value: string) => void;
   toValue: string;
@@ -19,7 +18,6 @@ interface AmountRangeDropdownProps {
 }
 
 const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
-  isDarkMode,
   fromValue,
   setFromValue,
   toValue,

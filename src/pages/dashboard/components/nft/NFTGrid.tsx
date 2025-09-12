@@ -15,10 +15,9 @@ interface NFTData {
 
 interface NFTGridProps {
   filteredNFTs: NFTData[];
-  isDarkMode: boolean;
 }
 
-const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs, isDarkMode }) => {
+const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs }) => {
   return (
     <div className="mx-6 mb-10">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

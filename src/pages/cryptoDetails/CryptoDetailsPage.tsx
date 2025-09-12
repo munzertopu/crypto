@@ -11,13 +11,9 @@ import MarketTab from './tabs/MarketTab';
 import PortfolioTab from './tabs/PortfolioTab';
 import { Tabs } from "@material-tailwind/react";
 
-interface CryptoDetailsPageProps {
-  isDarkMode?: boolean;
-}
+interface CryptoDetailsPageProps {}
 
-const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
-  isDarkMode = false
-}) => {
+const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = () => {
   const { symbol } = useParams<{ symbol: string }>();
   const navigate = useNavigate();
   
@@ -42,7 +38,6 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
   const [activeTab, setActiveTab] = useState<'market' | 'portfolio'>('market');
   const [activeTimeRange, setActiveTimeRange] = useState<'1D' | '1W' | '1M' | '3M' | '1Y' | 'All'>('1M');
   const [activeTableTab, setActiveTableTab] = useState<'allocations' | 'taxlots' | 'insightssummary'>('allocations');
-  const [isDarkModeState, setIsDarkModeState] = useState(isDarkMode);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab as 'market' | 'portfolio');
@@ -52,9 +47,6 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
     setActiveTimeRange(timeRange as '1D' | '1W' | '1M' | '3M' | '1Y' | 'All');
   };
   
-  const handleThemeToggle = () => {
-    setIsDarkModeState(!isDarkModeState);
-  };
 
   const tableTabs = ['Allocations', 'Tax Lots', 'Insights Summary'];
 
@@ -62,8 +54,6 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
     <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white">
       <NavigationBar 
         userName="Kristin Watson"
-        isDarkMode={isDarkModeState}
-        onThemeToggle={handleThemeToggle}
         onLogout={() => navigate('/login')} 
       />
       
@@ -92,7 +82,6 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
           <CryptoDetailHeader 
             activeTab={activeTab}
             onTabChange={handleTabChange}
-            isDarkMode={isDarkMode}
             cryptoName={cryptoName}
             cryptoSymbol={cryptoSymbol}
             cryptoLogo={cryptoLogo}
@@ -102,7 +91,6 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
         {/* Tab Content */}
         {activeTab === 'market' && (
           <MarketTab 
-            isDarkMode={isDarkModeState}
             activeTimeRange={activeTimeRange}
             onTimeRangeChange={handleTimeRangeChange}
           />
@@ -110,7 +98,6 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
 
         {activeTab === 'portfolio' && (
           <PortfolioTab 
-            isDarkMode={isDarkModeState}
             activeTimeRange={activeTimeRange}
             onTimeRangeChange={handleTimeRangeChange}
           />
@@ -147,21 +134,18 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = ({
         {/* Allocations Table */}
         {activeTableTab === 'allocations' && (
           <AllocationTable 
-            isDarkMode={isDarkModeState}
           />
         )}
 
         {/* Tax Lots Tab */}
         {activeTableTab === 'taxlots' && (
           <TaxLotTable 
-            isDarkMode={isDarkModeState}
           />
         )}
 
         {/* Insights Summary Tab */}
         {activeTableTab === 'insightssummary' && (
           <InsightsSummary 
-            isDarkMode={isDarkModeState}
           />
         )}
       </div>

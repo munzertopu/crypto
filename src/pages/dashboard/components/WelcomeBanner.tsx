@@ -3,13 +3,11 @@ import React, { useState } from "react";
 interface WelcomeBannerProps {
   userName?: string;
   onClose?: () => void;
-  isDarkMode?: boolean;
 }
 
 const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
   userName = "User Nam3",
   onClose,
-  isDarkMode = false,
 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [isFading, setIsFading] = useState(false);

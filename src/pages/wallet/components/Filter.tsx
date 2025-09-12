@@ -6,7 +6,6 @@ interface FilterProps {
   setActiveTab: (tab: string) => void;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
-  isDarkMode: boolean;
 }
 
 const Filter: React.FC<FilterProps> = ({
@@ -14,7 +13,6 @@ const Filter: React.FC<FilterProps> = ({
   setActiveTab,
   searchTerm,
   setSearchTerm,
-  isDarkMode,
 }) => {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-0 sm:mb-8 md:mb-6">

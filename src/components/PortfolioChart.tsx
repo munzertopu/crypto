@@ -4,13 +4,11 @@ import type { ApexOptions } from "apexcharts";
 
 interface PortfolioChartProps {
   data?: Array<{ date: string; value: number }>;
-  isDarkMode?: boolean;
   chartColor?: string;
 }
 
 const PortfolioChart: React.FC<PortfolioChartProps> = ({
   data = [],
-  isDarkMode = false,
   chartColor = "#90C853",
 }) => {
   // Mock data for demonstration - in a real app, this would come from props or API

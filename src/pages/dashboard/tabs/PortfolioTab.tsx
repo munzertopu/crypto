@@ -9,12 +9,10 @@ import {
 } from "../components";
 
 interface PortfolioTabProps {
-  isDarkMode: boolean;
   onAddKPI: () => void;
 }
 
 const PortfolioTab: React.FC<PortfolioTabProps> = ({
-  isDarkMode,
   onAddKPI,
 }) => {
   const navigate = useNavigate();
@@ -30,13 +28,12 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
           costBasicChange="-2.38%"
           unrealizedGain="$1,000,744"
           unrealizedGainChange="+1.29%"
-          isDarkMode={isDarkMode}
         />
       </div>
 
       {/* Portfolio Chart */}
       <div className="mx-0 sm:mx-2 lg:mx-1">
-        <PortfolioChart isDarkMode={isDarkMode} chartColor="#90C853" />
+        <PortfolioChart chartColor="#90C853" />
       </div>
 
       {/* Horizontal Separator */}
@@ -56,7 +53,6 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
           longTerms="$150,000"
           longTermsChange="+0.93%"
           onAddKPI={onAddKPI}
-          isDarkMode={isDarkMode}
         />
       </div>
 
@@ -67,13 +63,12 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
 
       {/* Portfolio Allocation */}
       <div className="md:px-6">
-        <PortfolioAllocation isDarkMode={isDarkMode} />
+        <PortfolioAllocation />
       </div>
 
       {/* Holdings Table */}
       <div className="md:px-6">
         <HoldingsTable
-          isDarkMode={isDarkMode}
           onCryptoClick={(symbol) => navigate(`/crypto/${symbol}`)}
         />
       </div>

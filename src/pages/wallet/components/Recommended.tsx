@@ -1,6 +1,4 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 interface RecommendedAccount {
   id: number;
@@ -13,13 +11,11 @@ interface RecommendedAccount {
 interface RecommendedProps {
   showRecommendedAccounts: boolean;
   setShowRecommendedAccounts: (show: boolean) => void;
-  isDarkMode: boolean;
 }
 
 const Recommended: React.FC<RecommendedProps> = ({
   showRecommendedAccounts,
   setShowRecommendedAccounts,
-  isDarkMode,
 }) => {
   const recommendedAccounts: RecommendedAccount[] = [
     {

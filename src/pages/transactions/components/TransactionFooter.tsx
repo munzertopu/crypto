@@ -8,13 +8,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 interface TransactionFooterProps {
-  isDarkMode: boolean;
   selectedTransactions: string[];
   onClearSelection: () => void;
 }
 
 const TransactionFooter: React.FC<TransactionFooterProps> = ({
-  isDarkMode,
   selectedTransactions,
   onClearSelection,
 }) => {
@@ -114,20 +112,15 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
             {/* Dropdown Menu */}
             {isDropdownOpen && (
               <div
-                className={`absolute bottom-full left-0 mb-1 w-16 border rounded-lg shadow-lg py-1 z-50 ${
-                  isDarkMode
-                    ? "bg-gray-800 border-gray-600"
-                    : "bg-white border-gray-300"
-                }`}
+                className={`absolute bottom-full left-0 mb-1 w-16 border rounded-lg shadow-lg py-1 z-50 bg-white border-gray-300 
+                  dark:bg-gray-800 dark:border-gray-600`}
               >
                 {itemsPerPageOptions.map((option) => (
                   <button
                     key={option}
-                    className={`w-full px-3 py-1 text-sm text-left hover:bg-gray-100 ${
-                      isDarkMode
-                        ? "text-gray-300 hover:bg-gray-700"
-                        : "text-gray-700 hover:bg-gray-100"
-                    } ${itemsPerPage === option ? "bg-[#90C853]" : ""}`}
+                    className={`w-full px-3 py-1 text-sm text-left hover:bg-gray-100 text-gray-700 hover:bg-gray-100
+                      dark:text-gray-300 dark:hover:bg-gray-700 
+                      ${itemsPerPage === option ? "bg-[#90C853]" : ""}`}
                     onClick={() => handleItemsPerPageChange(option)}
                     aria-label={`Show ${option} items per page`}
                   >
@@ -191,11 +184,8 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
               {/* Tag Dropdown Menu */}
               {isTagDropdownOpen && (
                 <div
-                  className={`absolute bottom-full left-0 mb-1 px-1.5 border rounded-lg shadow-lg py-1 z-50 max-h-40 overflow-y-auto ${
-                    isDarkMode
-                      ? "bg-gray-800 border-gray-600"
-                      : "bg-white border-gray-300"
-                  }`}
+                  className={`absolute bottom-full left-0 mb-1 px-1.5 border rounded-lg shadow-lg py-1 z-50 max-h-40 overflow-y-auto bg-white border-gray-300
+                    dark:bg-gray-800 dark:border-gray-600`}
                 >
                   {tagOptions.map((option) => (
                     <button
@@ -316,9 +306,8 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
 
           {/* Ellipsis */}
           <span
-            className={`text-sm ${
-              isDarkMode ? "text-gray-300" : "text-gray-900"
-            }`}
+            className={`text-sm text-gray-900
+              dark:text-gray-300`}
           >
             ...
           </span>

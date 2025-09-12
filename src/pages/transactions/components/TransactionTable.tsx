@@ -10,7 +10,6 @@ import { getTableHeaders } from "../../../data/transactionAssets";
 
 interface TransactionTableProps {
   transactions: Transaction[];
-  isDarkMode: boolean;
   activeTab?: string;
   onTransactionClick?: (transaction: Transaction) => void;
   expandedTransactionId?: string | null;
@@ -19,7 +18,6 @@ interface TransactionTableProps {
 
 const TransactionTable: React.FC<TransactionTableProps> = ({
   transactions,
-  isDarkMode,
   activeTab = "All",
   onTransactionClick,
   expandedTransactionId,
@@ -97,7 +95,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       dark:bg-[#0E201E]`}
     >
       <td colSpan={TABLE_HEAD.length} className="px-4">
-        <TransactionDetail isDarkMode={isDarkMode} />
+        <TransactionDetail />
       </td>
     </tr>
   );
@@ -348,11 +346,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                     <>
                                       <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                                       <div
-                                        className={`px-3 py-1 rounded-lg border ${
-                                          isDarkMode
-                                            ? "bg-red-900/20 border-red-600 text-red-400"
-                                            : "bg-red-50 border-red-200 text-red-700"
-                                        }`}
+                                        className={`px-3 py-1 rounded-lg border bg-red-50 border-red-200 text-red-700
+                                          dark:bg-red-900/20 dark:border-red-600 dark:text-red-400`}
                                       >
                                         <Typography
                                           variant="small"
@@ -365,11 +360,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                   ) : (
                                     <Typography
                                       variant="small"
-                                      className={`text-xl font-normal ${
-                                        isDarkMode
-                                          ? "text-[#F3F5F7]"
-                                          : "text-[#0E201E]"
-                                      }`}
+                                      className={`text-xl font-normal text-[#0E201E] 
+                                        dark:text-[#F3F5F7]`}
                                     >
                                       {transaction.error || "---"}
                                     </Typography>
@@ -540,7 +532,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         </div>
       </MobileFormDrawer>
       <TransactionFooter
-        isDarkMode={isDarkMode}
         selectedTransactions={selectedTransactions}
         onClearSelection={() => setSelectedTransactions([])}
       />

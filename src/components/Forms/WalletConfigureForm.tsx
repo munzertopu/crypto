@@ -6,7 +6,6 @@ interface ConfigureModalProps {
   isOpen: boolean;
   onClose: () => void;
   platformName: string;
-  isDarkMode: boolean;
   showHeader?: boolean;
   showFooter?: boolean;
   onConfigureSuccess?: () => void;

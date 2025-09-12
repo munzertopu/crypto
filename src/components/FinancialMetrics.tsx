@@ -15,7 +15,6 @@ interface MetricItemProps {
   showDropdown?: boolean;
   onDropdownToggle?: () => void;
   isDropdownOpen?: boolean;
-  isDarkMode: boolean;
   isRowDirection?: boolean;
   isLarge?: boolean;
 }
@@ -30,7 +29,6 @@ const MetricItem: React.FC<MetricItemProps> = ({
   showDropdown = false,
   onDropdownToggle,
   isDropdownOpen = false,
-  isDarkMode = false,
   isRowDirection = false,
   isLarge = false
 }) => (
@@ -46,9 +44,8 @@ const MetricItem: React.FC<MetricItemProps> = ({
         ) : (
           <FontAwesomeIcon
             icon={icon}
-            className={`${
-              isDarkMode ? "text-[#B6B8BA]" : "text-[#0E201E]"
-            } text-base`}
+            className={`text-[#0E201E] text-base 
+              dark:text-[#B6B8BA]`}
           />
         )}
       </div>
@@ -106,7 +103,6 @@ interface FinancialMetricsProps {
   costBasicChange: string;
   unrealizedGain: string;
   unrealizedGainChange: string;
-  isDarkMode?: boolean;
 }
 
 const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
@@ -116,7 +112,6 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
   costBasicChange = "-2.38%",
   unrealizedGain = "$1,000,744",
   unrealizedGainChange = "+1.29%",
-  isDarkMode = false
 }) => {
   // SVG Icons
   const totalValueSvg = (
@@ -302,7 +297,6 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
               change={totalValueChange}
               isPositive={totalValueChange.startsWith("+")}
               svgIcon={totalValueSvg}
-              isDarkMode={isDarkMode}
               isRowDirection
               isLarge = {true}
             />
@@ -323,7 +317,6 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
               change={costBasicChange}
               isPositive={costBasicChange.startsWith("+")}
               svgIcon={costBasicSvg}
-              isDarkMode={isDarkMode}
             />
             {/* Vertical Separator */}
             <div
@@ -339,7 +332,6 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
                 showDropdown={screenSize.width >= 1024 ? true : false}
                 onDropdownToggle={handleUnrealizedGainDropdownToggle}
                 isDropdownOpen={isUnrealizedGainDropdownOpen}
-                isDarkMode={isDarkMode}
               />
 
               {/* Unrealized Gain Dropdown */}

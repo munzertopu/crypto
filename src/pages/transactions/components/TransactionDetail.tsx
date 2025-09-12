@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGhost, faChevronUp, faChevronDown, faExchange } from '@fortawesome/free-solid-svg-icons';
+import { faGhost, faExchange } from '@fortawesome/free-solid-svg-icons';
 import {
   Card,
   Typography,
@@ -9,10 +9,9 @@ import {
 import { ledgerData, costAnalysisData } from '../../../data/transactionAssets';
 
 interface TransactionDetailProps {
-  isDarkMode: boolean;
 }
 
-const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => {
+const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
   const [activeTab, setActiveTab] = useState('Details');
 
   return (
@@ -26,7 +25,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
             className={`mx-6 py-3 font-medium text-sm border-b-2 transition-colors ${
               activeTab === tab
                 ? 'border-[#75AE46] dark:text-[#F3F5F7]'
-                : `${isDarkMode ? 'text-gray-400 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'} border-transparent`
+                : `border-transparent text-gray-500 hover:text-gray-700 dark: text-gray-400 dark: hover:text-gray-300`
             }`}
             aria-label={`View transaction ${tab.toLowerCase()}`}
           >
@@ -41,7 +40,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ isDarkMode }) => 
           {/* Transaction Type and Date - Left Side */}
           <div className='w-1/4'>
             <h3 className="text-lg font-semibold mb-2 dark:text-[#F3F5F7]">Transfer</h3>
-            <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-sm text-gray-600 dark:text-gray-400`}>
               May 11, 2025, 8:37 PM
             </p>
           </div>

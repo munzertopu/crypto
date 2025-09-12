@@ -13,7 +13,6 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Portfolio");
   const [showWelcomeBanner, setShowWelcomeBanner] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -28,10 +27,6 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
     setShowWelcomeBanner(false);
   };
 
-  const handleThemeToggle = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
   const handleLogout = () => {
     if (onLogout) {
       onLogout();
@@ -43,8 +38,6 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
       {/* Navigation Bar */}
       <NavigationBar
         userName="Kristin Watson"
-        isDarkMode={isDarkMode}
-        onThemeToggle={handleThemeToggle}
         onLogout={handleLogout}
       />
 
@@ -57,7 +50,6 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
               <WelcomeBanner
                 userName="Kristin Watson"
                 onClose={handleWelcomeBannerClose}
-                isDarkMode={isDarkMode}
               />
             </div>
             {/* Horizontal Separator */}
@@ -71,16 +63,15 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
         <DashboardHeader
           activeTab={activeTab}
           onTabChange={handleTabChange}
-          isDarkMode={isDarkMode}
         />
         <div className="mx-0 md:mx-0 sm:mx-1">
           {/* Portfolio Tab */}
           {activeTab === "Portfolio" && (
-            <PortfolioTab isDarkMode={isDarkMode} onAddKPI={handleAddKPI} />
+            <PortfolioTab onAddKPI={handleAddKPI} />
           )}
 
           {/* NFT Tab */}
-          {activeTab === "NFT" && <NFTTab isDarkMode={isDarkMode} />}
+          {activeTab === "NFT" && <NFTTab />}
 
           {/* Crypto Tab */}
           {activeTab === "Crypto" && (

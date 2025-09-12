@@ -10,10 +10,9 @@ import WalletConfigureForm from "../../../components/Forms/WalletConfigureForm";
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
-  isDarkMode: boolean;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ text, children, isDarkMode }) => {
+const Tooltip: React.FC<TooltipProps> = ({ text, children }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
@@ -25,9 +24,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, isDarkMode }) => {
       {children}
       {isVisible && (
         <div
-          className={`absolute z-50 px-3 py-2 text-base font-medium rounded-lg shadow-lg whitespace-nowrap ${
-            isDarkMode ? "bg-[#2F3232] text-white" : "bg-[#0E201E] text-white"
-          }`}
+          className="absolute z-50 px-3 py-2 text-base font-medium rounded-lg shadow-lg whitespace-nowrap bg-[#0E201E] dark:bg-[#2F3232] text-white"
           style={{
             top: "50%",
             left: "50%",
@@ -48,13 +45,9 @@ interface CryptoPlatform {
   bgColor: string;
 }
 
-interface CryptoPlatformGridProps {
-  isDarkMode: boolean;
-}
+interface CryptoPlatformGridProps {}
 
-const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
-  isDarkMode,
-}) => {
+const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState("");
   const [showNotification, setShowNotification] = useState(false);
@@ -209,7 +202,6 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
           <Tooltip
             key={platform.name}
             text={`${platform.name} does not match API balance`}
-            isDarkMode={isDarkMode}
           >
             <div
               className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity justify-center rounded-[12px] px-6 py-2 sm:px-0 sm:py-0 sm:px-6 md:px-5 sm:py-4 md:py-5 
@@ -245,7 +237,6 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         platformName={selectedPlatform}
-        isDarkMode={isDarkMode}
         onConfigureSuccess={handleConfigureSuccess}
       />
       <MobileDrawer
@@ -272,7 +263,6 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = ({
             isOpen={openConfigure}
             onClose={handleCloseModal}
             platformName={selectedPlatform}
-            isDarkMode={isDarkMode}
             onConfigureSuccess={handleConfigureSuccess}
             showHeader={false}
             showFooter={false}

@@ -7,7 +7,6 @@ interface AssetDetailModalProps {
   isOpen: boolean;
   selectedAsset: any;
   modalPosition: { top: number; left: number };
-  isDarkMode?: boolean;
   onClose: () => void;
 }
 
@@ -15,7 +14,6 @@ const AssetDetailModal: React.FC<AssetDetailModalProps> = ({
   isOpen,
   selectedAsset,
   modalPosition,
-  isDarkMode = false,
   onClose
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -77,7 +75,7 @@ const AssetDetailModal: React.FC<AssetDetailModalProps> = ({
             </thead>
             <tbody>
               {modalTableData.map((row) => (
-                <tr key={row.id} className={`border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                <tr key={row.id} className="border-b border-gray-200 dark:border-gray-700">
                   <td className="p-3">
                     <div className="flex items-center space-x-3">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center`}>

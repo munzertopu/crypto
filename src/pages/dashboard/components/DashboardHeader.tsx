@@ -8,13 +8,11 @@ interface DashboardHeaderProps {
   activeTab?: string;
   onTabChange?: (tab: string) => void;
   dateRange?: string;
-  isDarkMode?: boolean;
 }
 
 const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   activeTab = "Portfolio",
   onTabChange,
-  isDarkMode = false,
 }) => {
   const tabs = ["Portfolio", "Crypto", "NFT"];
   const [value, setValue] = useState<any>({
@@ -22,8 +20,8 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     endDate: null,
   });
   const [selectedDateRange, setSelectedDateRange] = useState({
-    startDate: new Date("2025-05-01"),
-    endDate: new Date("2025-05-29"),
+    startDate: new Date("2025-05-01") as Date | null,
+    endDate: new Date("2025-05-29") as Date | null,
   });
   // Create shortcuts with year dropdown
   const createShortcuts = () => {

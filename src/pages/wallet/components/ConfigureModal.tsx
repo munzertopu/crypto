@@ -5,7 +5,6 @@ interface ConfigureModalProps {
   isOpen: boolean;
   onClose: () => void;
   platformName: string;
-  isDarkMode: boolean;
   onConfigureSuccess?: () => void;
 }
 
@@ -13,7 +12,6 @@ const ConfigureModal: React.FC<ConfigureModalProps> = ({
   isOpen,
   onClose,
   platformName,
-  isDarkMode,
   onConfigureSuccess,
 }) => {
   if (!isOpen) return null;
@@ -24,7 +22,6 @@ const ConfigureModal: React.FC<ConfigureModalProps> = ({
         isOpen={isOpen}
         onClose={onClose}
         platformName={platformName}
-        isDarkMode={isDarkMode}
         onConfigureSuccess={onConfigureSuccess}
       />
     </div>

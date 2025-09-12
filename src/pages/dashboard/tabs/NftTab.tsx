@@ -14,11 +14,9 @@ interface NFTData {
   purchaseDate: string;
 }
 
-interface NFTTabProps {
-  isDarkMode: boolean;
-}
+interface NFTTabProps {}
 
-const NFTTab: React.FC<NFTTabProps> = ({ isDarkMode }) => {
+const NFTTab: React.FC<NFTTabProps> = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('estimatedValue');
 
@@ -119,7 +117,6 @@ const NFTTab: React.FC<NFTTabProps> = ({ isDarkMode }) => {
           totalEstimatedValue="$35,800"
           estimatedGainLoss="+$17,150"
           gainLossPercentage="+5.15%"
-          isDarkMode={isDarkMode}
         />
       </div>
       
@@ -129,11 +126,10 @@ const NFTTab: React.FC<NFTTabProps> = ({ isDarkMode }) => {
          setSearchTerm={setSearchTerm}
          sortBy={sortBy}
          setSortBy={setSortBy}
-         isDarkMode={isDarkMode}
        />
       
       {/* NFT Grid */}
-       <NFTGrid filteredNFTs={filteredNFTs} isDarkMode={isDarkMode} />
+       <NFTGrid filteredNFTs={filteredNFTs} />
     </>
   );
 };
