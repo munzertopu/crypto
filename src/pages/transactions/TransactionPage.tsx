@@ -89,7 +89,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           <div className="flex gap-2 justify-start items-end">
             <h4
               className="text-lg sm:text-2xl font-semibold text-gray-900
-              dark:text-[#E1E3E5]"
+               dark:text-gray-250"
             >
               Transactions
             </h4>{" "}

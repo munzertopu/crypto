@@ -53,7 +53,7 @@ const Recommended: React.FC<RecommendedProps> = ({
       <div className="flex items-center justify-between mb-3">
         <h2
           className={`text-base font-semibold text-gray-900
-          dark:text-[#E1E3E5]`}
+           dark:text-gray-250`}
         >
           Recommended accounts
         </h2>
@@ -78,7 +78,7 @@ const Recommended: React.FC<RecommendedProps> = ({
             />
           </svg>
           <span
-            className={`text-sm lg:text-sm font-normal text-gray-900 dark:text-[#CDCFD1]`}
+            className={`text-sm lg:text-sm font-normal text-gray-900 dark:text-gray-250`}
           >
             Close
           </span>
@@ -100,7 +100,7 @@ const Recommended: React.FC<RecommendedProps> = ({
               </div>
               <h3
                 className={`font-semibold text-base text-gray-900
-                  dark:text-[#B6B8BA]`}
+                   dark:text-gray-250`}
               >
                 {account.platform}
               </h3>
@@ -116,8 +116,8 @@ const Recommended: React.FC<RecommendedProps> = ({
                 </span>
               </p>
               <button
-                className={`flex items-center text-sm border border-gray-150 rounded-[8px] px-2.5 py-1.5 font-medium text-gray-900 
-                    dark:text-[#B6B8BA] `}
+                className={`flex items-center text-sm border border-gray-150 rounded-[8px] px-2.5 py-1.5 font-medium text-gray-900
+                    dark:text-gray-250 `}
                 aria-label={`Add ${account.platform} account`}
               >
                 <svg

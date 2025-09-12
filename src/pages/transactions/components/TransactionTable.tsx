@@ -241,7 +241,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                   <Typography
                                     variant="small"
                                     className={`text-base font-normal text-gray-900
-                                      dark:text-[#F3F5F7] truncate`}
+                                      dark:text-gray-250 truncate`}
                                   >
                                     {wallet.name}
                                   </Typography>
@@ -254,7 +254,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                 <Typography
                                   variant="small"
                                   className={`text-base font-normal text-gray-900
-                                      dark:text-[#F3F5F7]`}
+                                    dark:text-gray-250`}
                                 >
                                   {action}
                                 </Typography>

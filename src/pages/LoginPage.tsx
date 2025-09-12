@@ -86,7 +86,8 @@ const LoginPage: React.FC<LoginPageProps> = ({
   return (
     <AuthLayout>
       <div className="text-center mb-4">
-        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left">
+        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left
+         dark:text-gray-250">
           Login
         </h1>
         <p className="text-base text-base sm:text-lg text-gray-800 text-left">

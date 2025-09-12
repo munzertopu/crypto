@@ -30,7 +30,8 @@ const RegisterPage: React.FC<RegisterPageProps> = ({
         <div>
           <button
             type="submit"
-            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors
+             dark:text-gray-250"
             style={{ backgroundColor: "#75AE46" }}
             aria-label="Create new portal account"
             onClick={() => setShowSignUpForm(true)}

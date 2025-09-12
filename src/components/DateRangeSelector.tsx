@@ -153,7 +153,8 @@ const DateRangeSelector: React.FC<DateRangeSelectorProps> = ({
       {/* Date Range Display Button */}
       <button
         onClick={handleToggle}
-        className="w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-white dark:bg-[#0E201E] border-gray-300 dark:border-[#4D5050] text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-[#2F3232]"
+        className="w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-white dark:bg-[#0E201E] border-gray-300 dark:border-[#4D5050] text-gray-900 hover:bg-gray-50 
+        dark:text-gray-250 dark:hover:bg-[#2F3232]"
         aria-label="Select date range"
         aria-expanded={isOpen}
         aria-haspopup="true"

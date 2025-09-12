@@ -60,8 +60,8 @@ const SuccessNotification: React.FC<SuccessNotificationProps> = ({
             />
           </svg>
           <span
-            className="text-gray-900 text-base 
-        dark:text-[#E1E3E5] text-left"
+            className="text-gray-900 text-base
+            dark:text-gray-250 text-left"
           >
             {message}
           </span>

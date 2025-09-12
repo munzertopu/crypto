@@ -151,7 +151,7 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between pt-6">
           <div>
-            <Typography variant="h5" className="text-left font-bold text-gray-900 dark:text-white">
+            <Typography variant="h5" className="text-left font-bold text-gray-900 dark:text-gray-250">
               Custom price
             </Typography>
             <Typography variant="small" className="mt-1 text-sm text-left text-gray-600 dark:text-gray-300">

@@ -45,7 +45,7 @@ const AssetDetailModal: React.FC<AssetDetailModalProps> = ({
       ref={modalRef}
       className={`fixed z-50 w-1/2 rounded-lg shadow-sm border bg-white 
         border-gray-500 border-opacity-15 text-gray-900
-        dark:bg-[#0E201E] dark:border-[#0E201E] `}
+        dark:text-gray-250dark:bg-[#0E201E] dark:border-[#0E201E] `}
       style={{
         top: `${modalPosition.top}px`
       }}

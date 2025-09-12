@@ -27,8 +27,8 @@ const Filter: React.FC<FilterProps> = ({
                 onClick={() => setActiveTab(tab)}
                 className={`px-5 py-2 rounded-xl text-sm ${
                   activeTab === tab
-                    ? "bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white"
-                    : "text-gray-900 dark:text-[#FFFFFF] opacity-70"
+                    ? "bg-white dark:bg-[#0E201E] text-gray-900 dark:text-gray-250 dark:text-white"
+                    : "text-gray-900 dark:text-gray-250 dark:text-[#FFFFFF] opacity-70"
                 }`}
               >
                 {tab}
@@ -56,7 +56,7 @@ const Filter: React.FC<FilterProps> = ({
             viewBox="0 0 20 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="text-gray-900 dark:text-[#FFFFFF] opacity-70"
+            className="text-gray-900 dark:text-gray-250 opacity-70"
           >
             <path
               d="M9.6 17.2C13.7974 17.2 17.2 13.7974 17.2 9.6C17.2 5.40264 13.7974 2 9.6 2C5.40264 2 2 5.40264 2 9.6C2 13.7974 5.40264 17.2 9.6 17.2Z"
@@ -78,7 +78,7 @@ const Filter: React.FC<FilterProps> = ({
             placeholder="Search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className={`text-base w-full  border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none bg-transparent
+            className={`text-base w-full  border-gray-700 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none bg-transparent
             dark:bg-transparent dark:border-[#4D5050]`}
           />
         </div>

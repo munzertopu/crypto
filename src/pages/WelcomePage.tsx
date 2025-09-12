@@ -109,7 +109,8 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onGetStarted }) => {
 
           {/* Success Message */}
           <div className="mb-8">
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4
+             dark:text-gray-250">
               You're Ready to Go!
             </h1>
             <p className=" text-base sm:text-lg text-gray-800">

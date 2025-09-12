@@ -93,7 +93,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
                   <Typography variant="small" className={`text-base text-gray-700 dark:text-[#F3F5F7]`}>
                     Fiat Value:
                   </Typography>
-                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-[#F3F5F7]">
+                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-gray-250">
                     $780.98
                   </Typography>
                 </div>
@@ -104,7 +104,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
                   <Typography variant="small" className={`text-base text-gray-700 dark:text-[#F3F5F7]`}>
                     Cost Basis:
                   </Typography>
-                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-[#F3F5F7]">
+                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-gray-250">
                     $579.60
                   </Typography>
                 </div>
@@ -115,7 +115,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
                   <Typography variant="small" className={`text-base text-gray-700 dark:text-[#F3F5F7]`}>
                     Gain:
                   </Typography>
-                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-[#F3F5F7]">
+                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-gray-250">
                     $0.00
                   </Typography>
                 </div>
@@ -183,13 +183,13 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
                         <div className={`w-8 h-8 ${row.identifier.color} rounded-full flex items-center justify-center`}>
                           <span className="text-white text-sm font-bold">{row.identifier.icon}</span>
                         </div>
-                        <span className={`text-base text-gray-900 dark:text-[#B6B8BA]`}>
+                        <span className={`text-base text-gray-900 dark:text-gray-250`}>
                           {row.identifier.text}
                         </span>
                       </div>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-base text-gray-900 dark:text-[#B6B8BA]`}>
+                      <span className={`text-base text-gray-900 dark:text-gray-250`}>
                         {row.date}
                       </span>
                     </td>
@@ -199,12 +199,12 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-base text-gray-900 dark:text-[#B6B8BA]`}>
+                      <span className={`text-base text-gray-900 dark:text-gray-250`}>
                         {row.ledger}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-base text-gray-900 dark:text-[#B6B8BA]`}>
+                      <span className={`text-base text-gray-900 dark:text-gray-250`}>
                         {row.change}
                       </span>
                     </td>

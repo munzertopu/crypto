@@ -60,7 +60,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
     <div className="space-y-6">
       {/* Header Section */}
       <div>
-        <Typography variant="h4" className="font-bold text-lg text-left mb-2 text-gray-900 dark:text-white">
+        <Typography variant="h4" className="font-bold text-lg text-left mb-2 text-gray-900 dark:text-gray-250">
           Form Info
         </Typography>
         <Typography variant="small" className="text-left text-sm text-gray-600 dark:text-gray-400">
@@ -142,7 +142,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
                   type="button"
                   onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
                   className={`flex items-center px-3 py-2 focus:outline-none ${
-                    'bg-white text-gray-900 dark:bg-gray-700 dark:text-white'
+                    'bg-white text-gray-900 dark:text-gray-250 dark:bg-gray-700'
                   }`}
                 >
                   <img src={selectedCountry.flag} className="mr-2"></img>
@@ -162,7 +162,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
                     value={formData.phoneNumber}
                     onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
                     className={`w-full px-3 py-2 focus:outline-none ${
-                      'bg-white text-gray-900 dark:bg-gray-700 dark:text-white'
+                      'bg-white text-gray-900 dark:text-gray-250 dark:bg-gray-700'
                     }`}
                   />
                 </div>
@@ -179,7 +179,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
                     type="button"
                     onClick={() => handleCountrySelect(country)}
                     className={`w-full px-3 py-2 flex items-center hover:bg-gray-50 ${
-                      'text-gray-900 dark:hover:bg-gray-600 dark:text-white'
+                      'text-gray-900 dark:text-gray-250 dark:hover:bg-gray-600'
                     } ${selectedCountry.code === country.code ? 'bg-gray-100' : ''}`}
                   >
                     <img src={country.flag} className="mr-2"></img>

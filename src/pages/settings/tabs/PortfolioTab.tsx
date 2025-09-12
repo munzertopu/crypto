@@ -178,7 +178,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
                   className={`w-full px-3 border rounded-lg focus:outline-none flex items-center justify-between
                     border-gray-150 bg-white text-gray-900
-                    dark:bg-gray-700 dark:border-gray-600 dark:text-white`}
+                    dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250`}
                 >
                   <div className="flex items-center">
                     <img src={selectedCountry.flag} className="mr-3 py-1.5"></img>
@@ -202,7 +202,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                         onClick={() => handleCountrySelect(country)}
                         className={`w-full px-3 border rounded-lg focus:outline-none flex items-center justify-between
                           border-gray-150 bg-white text-gray-900
-                          dark:bg-gray-700 dark:border-gray-600 dark:text-white
+                          dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250
                         } ${selectedCountry.code === country.code ? 'bg-gray-100' : ''}`}
                       >
                         <img src={country.flag} className="text-lg mr-3"></img>
@@ -223,7 +223,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   type="button"
                   onClick={() => setIsCurrencyDropdownOpen(!isCurrencyDropdownOpen)}
                   className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between bg-white text-gray-900
-                    dark:bg-gray-700 dark:border-gray-600 dark:text-white`}
+                    dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250`}
                 >
                   <div className="flex items-center justify-between w-full">
                     <div className="flex items-center">
@@ -247,7 +247,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                         type="button"
                         onClick={() => handleCurrencySelect(currency)}
                         className={`w-full px-3 py-2 flex items-center hover:bg-gray-50 text-gray-900
-                          dark:hover:bg-gray-600 dark:text-white 
+                          dark:hover:bg-gray-600 dark:text-gray-250 
                           ${selectedCurrency.code === currency.code ? 'bg-gray-100' : ''}`}
                       >
                         <span className="font-medium">{currency.name}</span>
@@ -267,7 +267,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   selected={startDate} 
                   onChange={(date) => setStartDate(date)} 
                   className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-white text-gray-900
-                    dark:bg-gray-700 dark:border-gray-600 dark:text-white
+                    dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250
                   `}
                   placeholderText="MM/DD/YYYY"
                   dateFormat="MM/dd/yyyy"
@@ -298,7 +298,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   value={formData.timezone}
                   onChange={(e) => handleInputChange('timezone', e.target.value)}
                   className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none bg-white text-gray-900
-                    dark:bg-gray-700 dark:border-gray-600 dark:text-white`}
+                    dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250`}
                 >
                   <option value="Pacific Daylight Time (GMT-7)">Pacific Daylight Time (GMT-7)</option>
                   <option value="Pacific Standard Time (GMT-8)">Pacific Standard Time (GMT-8)</option>
@@ -330,7 +330,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                       type="button"
                       onClick={() => setIsDustCurrencyDropdownOpen(!isDustCurrencyDropdownOpen)}
                       className={`px-3 focus:outline-none flex items-center justify-between bg-white text-gray-900
-                        dark:bg-gray-700 dark:border-gray-600 dark:text-white`}
+                        dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250`}
                     >
                     <div className="flex items-center justify-between w-full">
                       <div className="flex items-center">
@@ -354,7 +354,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                           type="button"
                           onClick={() => handleDustCurrencySelect(currency)}
                           className={`w-full px-3 py-2 flex items-center text-gray-900
-                            dark:text-white
+                            dark:text-gray-250
                             ${selectedDustCurrency.code === currency.code ? 'bg-gray-100' : ''}`}
                         >
                           <span className="font-medium">{currency.name}</span>
@@ -375,7 +375,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                    selected={taxReportingYearDate} 
                    onChange={(date) => setTaxReportingYearDate(date)} 
                    className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-white text-gray-900
-                      dark:bg-gray-700 dark:border-gray-600 dark:text-white
+                      dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250
                    `}
                    placeholderText="MM/DD/YYYY"
                    dateFormat="MM/dd/yyyy"

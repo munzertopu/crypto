@@ -46,11 +46,11 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className={`relative max-w-md w-full mx-4 p-8 rounded-lg shadow-lg overflow-hidden ${
-        'bg-white text-gray-900 dark:bg-gray-800 dark:text-white'
+        'bg-white text-gray-900 dark:text-gray-250 dark:bg-gray-800'
       }`}>
         {/* Header */}
         <div className="flex items-center justify-between">
-          <Typography className="text-h5 font-bold text-gray-900 dark:text-white">
+          <Typography className="text-h5 font-bold text-gray-900 dark:text-gray-250">
             Set historical price
           </Typography>
           <button
@@ -82,7 +82,7 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
                 value={historicalPrice}
                 onChange={(e) => setHistoricalPrice(e.target.value)}
                 placeholder="127.5"
-                className="w-full pl-8 pr-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none bg-white text-gray-900 placeholder-[#8C8E90] dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
+                className="w-full pl-8 pr-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none bg-white text-gray-900 placeholder-[#8C8E90] dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250 dark:placeholder-gray-400"
               />
             </div>
           </div>
@@ -97,7 +97,7 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
                 selected={selectedDate}
                 onChange={(date) => setSelectedDate(date)}
                 className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer ${
-                  'bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white'
+                  'bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250'
                 }`}
                 placeholderText="When custom price will be added"
                 dateFormat="MM/dd/yyyy"

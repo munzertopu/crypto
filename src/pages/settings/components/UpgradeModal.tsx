@@ -92,7 +92,7 @@ const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, planName }
                     >
                       <Checkbox.Indicator className="text-white bg-[#75AE46] border-[#75AE46]"/>
                     </Checkbox>
-                    <span className="text-base text-gray-900">{service.name}</span>
+                    <span className="text-base text-gray-900 dark:text-gray-250">{service.name}</span>
                     <svg className="size-4 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />

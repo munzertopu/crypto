@@ -57,7 +57,7 @@ const TaxLossHarvestingRangeDropdown: React.FC<TaxLossHarvestingRangeDropdownPro
                value={fromValue}
                onChange={(e) => setFromValue(e.target.value)}
                className={`w-full rounded-lg text-sm font-semibold border-gray-300 bg-white !text-gray-900
-                 dark:border-gray-500 dark:bg-gray-700 dark:text-white`}
+                 dark:border-gray-500 dark:bg-gray-700 dark:text-gray-250`}
              />
            </div>
            
@@ -72,7 +72,7 @@ const TaxLossHarvestingRangeDropdown: React.FC<TaxLossHarvestingRangeDropdownPro
                value={toValue}
                onChange={(e) => setToValue(e.target.value)}
                className={`w-full rounded-lg text-sm font-semibold border-gray-300 bg-white !text-gray-900
-                 dark:border-gray-500 dark:bg-gray-700 dark:text-white`}
+                 dark:border-gray-500 dark:bg-gray-700 dark:text-gray-250`}
              />
            </div>
          </div>

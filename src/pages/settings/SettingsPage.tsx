@@ -193,7 +193,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white">
+    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-gray-250">
       <NavigationBar
         onLogout={handleLogout}
         currentPage="settings"
@@ -216,7 +216,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                 onClick={() => setActiveTab(tab.id)}
                 className={`w-full flex items-center space-x-2 px-4 py-3 rounded-lg text-left text-sm ${
                   activeTab === tab.id ? 
-                  `text-gray-900 bg-gray-100 dark:bg-gray-700 dark:text-white dark:border-gray-600` : 
+                  `text-gray-900 dark:text-gray-250 bg-gray-100 dark:bg-gray-700 dark:border-gray-600` : 
                   `text-[#0E201E]  hover:bg-[#F3F5F7] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white`
                 }`}
               >

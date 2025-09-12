@@ -88,7 +88,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
     label: string;
     value: string;
     valueColor?: string;
-  }> = ({ icon, label, value, valueColor = "text-gray-900 dark:text-[#CDCFD1]" }) => (
+  }> = ({ icon, label, value, valueColor = "text-gray-900 dark:text-gray-250" }) => (
     <div className='space-y-3'>
       <div className="flex items-center space-x-3">
         <FontAwesomeIcon icon={icon} className={`w-5 h-5 text-[#7C7C7C] dark:text-[#CDCFD1]`} />
@@ -108,7 +108,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
       <CardBody className="p-0 overflow-hidden">
         <div className="flex items-center justify-between mb-4 px-8">
           <div className="flex items-center space-x-2">
-            <Typography variant="h2" className={`text-h6 font-semibold text-gray-900 dark:text-[#B6B8BA]`}>
+            <Typography variant="h2" className={`text-h6 font-semibold text-gray-900 dark:text-gray-250`}>
               {title}
             </Typography>
             <svg className="w-5 h-5 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,7 +146,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                       value={assetSearchTerm}
                       onChange={(e) => setAssetSearchTerm(e.target.value)}
                       className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 
-                        dark:text-white dark:placeholder-gray-400 focus:outline-none`}
+                         dark:text-gray-250 dark:placeholder-gray-400 focus:outline-none`}
                     />
                   </div>
                   
@@ -177,7 +177,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                             <img src={option.logo} className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold mr-3`}>
                             </img>
                           }
-                          <span className={`text-sm text-gray-900 dark:text-white`}>
+                          <span className={`text-sm text-gray-900 dark:text-gray-250`}>
                             {option.name}
                           </span>
                         </div>

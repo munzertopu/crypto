@@ -80,7 +80,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <Typography variant="h5" className="text-left text-lg font-bold text-gray-900 dark:text-white">
+          <Typography variant="h5" className="text-left text-lg font-bold text-gray-900 dark:text-gray-250">
             Rules
           </Typography>
           <Typography variant="small" className="mt-2 text-sm text-left text-gray-600 dark:text-gray-300">
@@ -112,7 +112,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className={`w-full pl-10 text-sm pr-4 py-2.5 border rounded-xl focus:outline-none 
               bg-white text-gray-900 placeholder-[#7C7C7C] border-default
-              dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400
+              dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250 dark:placeholder-gray-400
               `}
           />
         </div>
@@ -225,16 +225,16 @@ const RulesTab: React.FC<RulesTabProps> = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {rules.map((rule) => (
               <tr key={rule.id} className="hover:bg-gray-50">
-                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900">
+                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-250">
                   {rule.name}
                 </td>
-                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900">
+                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-250">
                   {rule.wallet}
                 </td>
-                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900">
+                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-250">
                   {rule.token}
                 </td>
-                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900">
+                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-250">
                   {rule.quantity}
                 </td>
                 <td className="text-left px-6 py-4 whitespace-nowrap">

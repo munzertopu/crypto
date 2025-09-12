@@ -97,7 +97,8 @@ const Dropdown: React.FC<DropdownProps> = ({
             <div
               key={option}
               onClick={() => handleSelect(option)}
-              className="px-3 py-1.5 text-sm text-gray-900 hover:bg-gray-100 cursor-pointer rounded min-w-8"
+              className="px-3 py-1.5 text-sm text-gray-900 hover:bg-gray-100 cursor-pointer rounded min-w-8
+               dark:text-gray-250"
             >
               {option}
             </div>
