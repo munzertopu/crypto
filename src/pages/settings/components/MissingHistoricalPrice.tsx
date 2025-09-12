@@ -10,12 +10,10 @@ interface Platform {
 }
 
 interface MissingHistoricalPriceProps {
-  isDarkMode: boolean;
   onEditMissingPrice: (selectedPlatforms: string[]) => void;
 }
 
 const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({ 
-  isDarkMode, 
   onEditMissingPrice 
 }) => {
   const [editMultiplePrices, setEditMultiplePrices] = useState(false);
@@ -127,7 +125,7 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
             
             {/* Platform Name */}
             <Typography variant="small" className={`font-medium text-center mt-2 mb-2 w-full truncate ${
-              isDarkMode ? 'text-white' : 'text-gray-900'
+              'text-gray-900 dark:text-white'
             }`}>
               {platform.name}
             </Typography>

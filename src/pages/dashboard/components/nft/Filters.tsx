@@ -15,13 +15,11 @@ interface FiltersProps {
   setSearchTerm: (term: string) => void;
   sortBy: string;
   setSortBy: (sort: string) => void;
-  isDarkMode: boolean;
 }
 
 const Filters: React.FC<FiltersProps> = ({
   searchTerm,
-  setSearchTerm,
-  isDarkMode,
+  setSearchTerm
 }) => {
   const [showEstimatedValueDropdown, setShowEstimatedValueDropdown] =
     useState(false);
@@ -66,7 +64,6 @@ const Filters: React.FC<FiltersProps> = ({
         {/* Filters - 1/3 width */}
         <div className="flex gap-3 flex-col sm:flex-row">
           <EstimatedValueDropdown
-            isDarkMode={isDarkMode}
             fromValue={fromValue}
             setFromValue={setFromValue}
             toValue={toValue}
@@ -203,7 +200,7 @@ const Filters: React.FC<FiltersProps> = ({
                     : "Date selected"}
                 </span>
                 <button
-                  onClick={() => setSelectedDateRange(null)}
+                  onClick={() => setSelectedDateRange({ startDate: null, endDate: null })}
                   className="text-black dark:text-gray-300"
                 >
                   <FontAwesomeIcon icon={faXmark} className="w-3 h-3" />
@@ -232,7 +229,7 @@ const Filters: React.FC<FiltersProps> = ({
                 onClick={() => {
                   setFromValue("0");
                   setToValue("0");
-                  setSelectedDateRange(null);
+                  setSelectedDateRange({ startDate: null, endDate: null });
                   setSelectedGain("Highest gain");
                   setFromCurrency("USDT");
                   setToCurrency("USDT");

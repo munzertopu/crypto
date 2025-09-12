@@ -7,7 +7,6 @@ interface SetHistoricalPriceModalProps {
   isOpen: boolean;
   onClose: () => void;
   selectedPlatforms: string[];
-  isDarkMode: boolean;
   onSaveSuccess?: () => void;
 }
 
@@ -15,7 +14,6 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
   isOpen,
   onClose,
   selectedPlatforms,
-  isDarkMode,
   onSaveSuccess
 }) => {
   const [historicalPrice, setHistoricalPrice] = useState('');
@@ -48,16 +46,16 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className={`relative max-w-md w-full mx-4 p-8 rounded-lg shadow-lg overflow-hidden ${
-        isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
+        'bg-white text-gray-900 dark:bg-gray-800 dark:text-white'
       }`}>
         {/* Header */}
         <div className="flex items-center justify-between">
-          <Typography className={`text-h5 font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+          <Typography className="text-h5 font-bold text-gray-900 dark:text-white">
             Set historical price
           </Typography>
           <button
             onClick={onClose}
-            className={`p-1 rounded-full hover:bg-gray-100 ${isDarkMode ? 'hover:bg-gray-700' : ''}`}
+            className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -84,11 +82,7 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
                 value={historicalPrice}
                 onChange={(e) => setHistoricalPrice(e.target.value)}
                 placeholder="127.5"
-                className={`w-full pl-8 pr-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none ${
-                  isDarkMode 
-                    ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
-                    : 'bg-white text-gray-900 placeholder-[#8C8E90]'
-                }`}
+                className="w-full pl-8 pr-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none bg-white text-gray-900 placeholder-[#8C8E90] dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
               />
             </div>
           </div>
@@ -103,7 +97,7 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
                 selected={selectedDate}
                 onChange={(date) => setSelectedDate(date)}
                 className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer ${
-                  isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white text-gray-900'
+                  'bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white'
                 }`}
                 placeholderText="When custom price will be added"
                 dateFormat="MM/dd/yyyy"

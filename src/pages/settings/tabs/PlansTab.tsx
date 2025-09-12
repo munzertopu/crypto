@@ -3,11 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import UpgradeModal from '../components/UpgradeModal';
 
-interface PlansTabProps {
-  isDarkMode: boolean;
-}
+interface PlansTabProps {}
 
-const PlansTab: React.FC<PlansTabProps> = ({ isDarkMode }) => {
+const PlansTab: React.FC<PlansTabProps> = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState('');
 
@@ -69,7 +67,7 @@ const PlansTab: React.FC<PlansTabProps> = ({ isDarkMode }) => {
     <div>
       {/* Header */}
       <div className="mb-6">
-        <h3 className={`text-lg font-bold text-left mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+        <h3 className="text-lg font-bold text-left mb-2 text-gray-900 dark:text-white">
           Plans
         </h3>
       </div>
@@ -79,7 +77,7 @@ const PlansTab: React.FC<PlansTabProps> = ({ isDarkMode }) => {
         {plans.map((plan, index) => (
           <div
             key={plan.name}
-            className={`relative bg-white text-left h-min rounded-lg shadow-sm border ${isDarkMode ? 'border-gray-700' : 'border-default'}`}
+            className="relative bg-white text-left h-min rounded-lg shadow-sm border border-default dark:border-gray-700"
           >
             <div className='py-10 px-8'>
               {/* Status Badge */}
@@ -90,12 +88,12 @@ const PlansTab: React.FC<PlansTabProps> = ({ isDarkMode }) => {
               )}
 
               {/* Plan Name */}
-              <h4 className={`text-xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              <h4 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
                 {plan.name}
               </h4>
 
               {/* Price */}
-              <div className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              <div className="text-3xl font-bold text-gray-900 dark:text-white">
                 {plan.price}
               </div>
             </div>
@@ -115,7 +113,7 @@ const PlansTab: React.FC<PlansTabProps> = ({ isDarkMode }) => {
                         icon={faCheck} 
                         className="w-4 h-4 text-[#5F9339] mr-3 flex-shrink-0"
                       />
-                      <span className={`text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <span className="text-base text-gray-700 dark:text-gray-300">
                         {feature}
                       </span>
                     </li>
@@ -141,7 +139,6 @@ const PlansTab: React.FC<PlansTabProps> = ({ isDarkMode }) => {
       <UpgradeModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        isDarkMode={isDarkMode}
         planName={selectedPlan}
       />
     </div>

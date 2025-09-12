@@ -28,14 +28,12 @@ interface Wallet {
 
 interface CurrencyTableProps {
   selectedPlatforms: string[];
-  isDarkMode: boolean;
   onBack: () => void;
   showNotification: () => void;
 }
 
 const CurrencyTable: React.FC<CurrencyTableProps> = ({
   selectedPlatforms,
-  isDarkMode,
   onBack,
   showNotification
 }) => {
@@ -153,13 +151,13 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between pt-6">
           <div>
-            <Typography variant="h5" className={`text-left font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+            <Typography variant="h5" className="text-left font-bold text-gray-900 dark:text-white">
               Custom price
             </Typography>
-            <Typography variant="small" className={`mt-1 text-sm text-left ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <Typography variant="small" className="mt-1 text-sm text-left text-gray-600 dark:text-gray-300">
               Use custom prices to fix missing or incorrect market values for your transactions.
             </Typography>
-            <Typography variant="small" className={`mt-1 text-sm text-left ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <Typography variant="small" className="mt-1 text-sm text-left text-gray-600 dark:text-gray-300">
               This helps ensure your tax calculations are accurate.
             </Typography>
           </div>
@@ -167,22 +165,14 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
           <div className="flex items-center space-x-3">
             <button 
               onClick={handleAddPriceClick}
-              className={`flex items-center space-x-2 px-3 py-2 rounded-lg border ${
-                isDarkMode 
-                  ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
-                  : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-              }`}
+                className="flex items-center space-x-2 px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
               <span className='text-sm'>Add price</span>
             </button>
-            <button className={`p-2 rounded-lg border ${
-              isDarkMode 
-                ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
-                : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-            }`}>
+              <button className="p-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
               </svg>
@@ -195,7 +185,7 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
           <Card className={`h-full w-full border-transparent bg-transparent`}>
             <CardBody className="px-0">
               <table className="w-full min-w-max table-auto text-left">
-                <thead className={`${isDarkMode ? "bg-[#2F3232]" : "bg-[#F3F5F7]"}`}>
+                <thead className="bg-[#F3F5F7] dark:bg-[#2F3232]">
                   <tr>
                     {TABLE_HEAD.map((head, index) => (
                       <th
@@ -217,7 +207,7 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
                           </div>
                         ) : (
                           <div
-                            className={`flex text-lg items-center justify-between gap-2 font-normal leading-none ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}
+                            className="flex text-lg items-center justify-between gap-2 font-normal leading-none text-[#666868] dark:text-[#B6B8BA]"
                           >
                             {head}{" "}
                             {head !== "select" && head !== "" && (
@@ -239,7 +229,7 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
                       {wallet.currencies.map((currency) => {
                         const currencyId = `${wallet.id}-${currency.id}`;
                         return (
-                          <tr key={currencyId} className={`${isDarkMode ? 'border-gray-600' : 'border-gray-200'}`}>
+                          <tr key={currencyId} className="border-gray-200 dark:border-gray-600">
                             <td className='py-4'>
                               <div className="flex items-center justify-center">
                                 <input
@@ -262,13 +252,13 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
                                 <div className="flex flex-col">
                                   <Typography
                                     variant="small"
-                                    className={`text-base font-normal ${isDarkMode ? "text-[#F3F5F7]" : "text-[#0E201E]"}`}
+                                    className="text-base font-normal text-[#0E201E] dark:text-[#F3F5F7]"
                                   >
                                     {currency.name}
                                   </Typography>
                                   <Typography
                                     variant="small"
-                                    className={`text-sm font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}
+                                    className="text-sm font-normal text-[#666868] dark:text-[#B6B8BA]"
                                   >
                                     {currency.symbol}
                                   </Typography>
@@ -286,13 +276,13 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
                             <td className='py-4'>
                               <Typography
                                 variant="small"
-                                className={`text-base font-normal ${isDarkMode ? "text-[#B6B8BA]" : "text-[#666868]"}`}
+                                className="text-base font-normal text-[#666868] dark:text-[#B6B8BA]"
                               >
                                 {currency.date}
                               </Typography>
                             </td>
                             <td className='py-4'>
-                              <button className={`p-1 rounded hover:bg-gray-100 ${isDarkMode ? 'hover:bg-gray-700' : ''}`}>
+                              <button className="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <svg className="w-4 h-4 text-[#7C7C7C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                 </svg>
@@ -314,7 +304,6 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
           isOpen={isAddPriceModalOpen}
           onClose={handleCloseAddPriceModal}
           selectedPlatforms={selectedPlatforms}
-          isDarkMode={isDarkMode}
           onSaveSuccess={handleSaveSuccess}
         />
 

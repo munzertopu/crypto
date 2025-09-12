@@ -7,7 +7,7 @@ import {
 import { Typography, Input, Button } from "@material-tailwind/react";
 
 interface FormInfoTabProps {
-  isDarkMode: boolean;
+  
 }
 
 // Country data with flags and names
@@ -24,7 +24,7 @@ const countries = [
   { code: 'MX', name: 'Mexico', flag: '🇲🇽', dialCode: '+52' }
 ];
 
-const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
+const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
   const [formData, setFormData] = useState({
     name: '',
     personalId: '',
@@ -60,10 +60,10 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
     <div className="space-y-6">
       {/* Header Section */}
       <div>
-        <Typography variant="h4" className={`font-bold text-lg text-left mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+        <Typography variant="h4" className="font-bold text-lg text-left mb-2 text-gray-900 dark:text-white">
           Form Info
         </Typography>
-        <Typography variant="small" className={`text-left text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+        <Typography variant="small" className="text-left text-sm text-gray-600 dark:text-gray-400">
           You do not need to fill in anything on this page unless you want this information to be shown on your tax reports
         </Typography>
       </div>
@@ -90,7 +90,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
         {/* Left Column */}
         <div className="space-y-4">
           <div>
-            <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+            <label className="block text-sm font-medium text-left mb-2 text-[#2F3232] dark:text-gray-300">
               Personal ID Number (optional)
             </label>
             <Input
@@ -98,12 +98,12 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
               placeholder="000000000"
               value={formData.personalId}
               onChange={(e) => handleInputChange('personalId', e.target.value)}
-              className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className="text-base bg-white border-[#E1E3E5] dark:bg-gray-700 dark:text-white"
             />
           </div>
 
           <div>
-            <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+            <label className="block text-sm font-medium text-left mb-2 text-[#2F3232] dark:text-gray-300">
               City
             </label>
             <Input
@@ -111,12 +111,12 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
               placeholder="Type your city"
               value={formData.city}
               onChange={(e) => handleInputChange('city', e.target.value)}
-              className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className="text-base bg-white border-[#E1E3E5] dark:bg-gray-700 dark:text-white"
             />
           </div>
 
           <div>
-            <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+            <label className="block text-sm font-medium text-left mb-2 text-[#2F3232] dark:text-gray-300">
               Postal Code
             </label>
             <Input
@@ -124,7 +124,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
               placeholder="00000"
               value={formData.postalCode}
               onChange={(e) => handleInputChange('postalCode', e.target.value)}
-              className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className="text-base bg-white border-[#E1E3E5] dark:bg-gray-700 dark:text-white"
             />
           </div>
         </div>
@@ -132,7 +132,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
         {/* Right Column */}
         <div className="space-y-4">
           <div className='relative'>
-            <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+            <label className="block text-sm font-medium text-left mb-2 text-[#2F3232] dark:text-gray-300">
               Phone number (optional)
             </label>
             <div className="relative flex border border-[#E1E3E5] rounded-lg overflow-hidden">
@@ -142,7 +142,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
                   type="button"
                   onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
                   className={`flex items-center px-3 py-2 focus:outline-none ${
-                    isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-900'
+                    'bg-white text-gray-900 dark:bg-gray-700 dark:text-white'
                   }`}
                 >
                   <img src={selectedCountry.flag} className="mr-2"></img>
@@ -152,7 +152,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
                   />
                 </button>
                 {/* Vertical Separator */}
-                <div className={`w-px ${isDarkMode ? 'bg-gray-600' : 'bg-[#E1E3E5]'}`}></div>
+                <div className="w-px bg-[#E1E3E5] dark:bg-gray-600"></div>
 
                 {/* Phone Number Input Section */}
                 <div className="flex-1">
@@ -162,7 +162,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
                     value={formData.phoneNumber}
                     onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
                     className={`w-full px-3 py-2 focus:outline-none ${
-                      isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-900'
+                      'bg-white text-gray-900 dark:bg-gray-700 dark:text-white'
                     }`}
                   />
                 </div>
@@ -171,7 +171,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
             {/* Country Dropdown Menu */}
             {isCountryDropdownOpen && (
               <div className={`absolute z-50 w-full mt-1 border border-gray-300 rounded-lg ${
-                isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white'
+                'bg-white dark:bg-gray-700 dark:border-gray-600'
               }`}>
                 {countries.map((country) => (
                   <button
@@ -179,7 +179,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
                     type="button"
                     onClick={() => handleCountrySelect(country)}
                     className={`w-full px-3 py-2 flex items-center hover:bg-gray-50 ${
-                      isDarkMode ? 'hover:bg-gray-600 text-white' : 'text-gray-900'
+                      'text-gray-900 dark:hover:bg-gray-600 dark:text-white'
                     } ${selectedCountry.code === country.code ? 'bg-gray-100' : ''}`}
                   >
                     <img src={country.flag} className="mr-2"></img>
@@ -192,7 +192,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
           </div>
 
           <div>
-            <label className={`block text-sm font-medium text-left mb-2 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+            <label className="block text-sm font-medium text-left mb-2 text-[#2F3232] dark:text-gray-300">
               State (optional)
             </label>
             <Input
@@ -200,13 +200,13 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
               placeholder="00000"
               value={formData.state}
               onChange={(e) => handleInputChange('state', e.target.value)}
-              className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className="text-base bg-white border-[#E1E3E5] dark:bg-gray-700 dark:text-white"
             />
           </div>
 
           <div>
             <div className="flex items-center space-x-2">
-              <label className={`block text-sm font-medium text-left mb-1 ${isDarkMode ? 'text-gray-300' : 'text-[#2F3232]'}`}>
+              <label className="block text-sm font-medium text-left mb-1 text-[#2F3232] dark:text-gray-300">
                 INN
               </label>
               <svg className="w-4 h-4 mx-2 -mt-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -219,7 +219,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ isDarkMode }) => {
               placeholder="000000000"
               value={formData.inn}
               onChange={(e) => handleInputChange('inn', e.target.value)}
-              className={`text-base ${isDarkMode ? 'bg-gray-700 border-[#E1E3E5] text-white' : 'bg-white border-[#E1E3E5]'}`}
+              className="text-base bg-white border-[#E1E3E5] dark:bg-gray-700 dark:text-white"
             />
           </div>
         </div>

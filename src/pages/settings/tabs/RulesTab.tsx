@@ -16,11 +16,9 @@ interface Rule {
   tags: string[];
 }
 
-interface RulesTabProps {
-  isDarkMode: boolean;
-}
+interface RulesTabProps {}
 
-const RulesTab: React.FC<RulesTabProps> = ({ isDarkMode }) => {
+const RulesTab: React.FC<RulesTabProps> = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('Type');
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -82,21 +80,17 @@ const RulesTab: React.FC<RulesTabProps> = ({ isDarkMode }) => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <Typography variant="h5" className={`text-left text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+          <Typography variant="h5" className="text-left text-lg font-bold text-gray-900 dark:text-white">
             Rules
           </Typography>
-          <Typography variant="small" className={`mt-2 text-sm text-left ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <Typography variant="small" className="mt-2 text-sm text-left text-gray-600 dark:text-gray-300">
             Set rules to automatically hide spam and unwanted transactions, so your reports stay clean.
           </Typography>
         </div>
         
         <button 
           onClick={handleAddRuleClick}
-          className={`flex items-center space-x-2 px-5 py-3 rounded-lg border ${
-            isDarkMode 
-              ? 'border-gray-600 text-green-400 hover:bg-gray-700' 
-              : 'border-[#E1E3E5] text-[#0E201E]'
-          }`}
+          className="flex items-center space-x-2 px-5 py-3 rounded-lg border border-[#E1E3E5] text-[#0E201E] dark:border-gray-600 dark:text-green-400 dark:hover:bg-gray-700"
         >
           <FontAwesomeIcon icon={faPlus} className="w-4 h-4 text-gray-500" />
           <span className='text-sm font-medium'>Add rule</span>
@@ -109,7 +103,7 @@ const RulesTab: React.FC<RulesTabProps> = ({ isDarkMode }) => {
         <div className="relative w-80">
           <FontAwesomeIcon 
             icon={faSearch} 
-            className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400"
           />
           <input
             type="text"
@@ -140,16 +134,12 @@ const RulesTab: React.FC<RulesTabProps> = ({ isDarkMode }) => {
           
           {/* {isTypeDropdownOpen && (
             <div className={`absolute top-full left-0 mt-1 w-32 border border-gray-300 rounded-lg shadow-lg py-1 z-50 ${
-              isDarkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-gray-300'
+              'bg-white border-gray-300 dark:bg-gray-800 dark:border-gray-600'
             }`}>
               {typeOptions.map((option) => (
                 <button
                   key={option}
-                  className={`w-full px-3 py-2 text-sm text-left hover:bg-gray-100 ${
-                    isDarkMode 
-                      ? 'text-gray-300 hover:bg-gray-700' 
-                      : 'text-gray-700 hover:bg-gray-100'
-                  }`}
+                  className="w-full px-3 py-2 text-sm text-left hover:bg-gray-100 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
                   onClick={() => {
                     setSelectedType(option);
                     setIsTypeDropdownOpen(false);
@@ -168,7 +158,7 @@ const RulesTab: React.FC<RulesTabProps> = ({ isDarkMode }) => {
             selected={selectedDate} 
             onChange={(date) => setSelectedDate(date)} 
             className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer ${
-              isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white text-[#0E201E]'
+              'bg-white text-[#0E201E] dark:bg-gray-700 dark:border-gray-600 dark:text-white'
             }`}
             placeholderText="Date"
             dateFormat="MM/dd/yyyy"
@@ -289,7 +279,6 @@ const RulesTab: React.FC<RulesTabProps> = ({ isDarkMode }) => {
       <AddRuleModal
         isOpen={isAddRuleModalOpen}
         onClose={handleCloseAddRuleModal}
-        isDarkMode={isDarkMode}
         onRuleAdded={handleRuleAdded}
       />
 

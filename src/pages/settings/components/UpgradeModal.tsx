@@ -6,7 +6,6 @@ import { Checkbox, Typography } from "@material-tailwind/react";
 interface UpgradeModalProps {
   isOpen: boolean;
   onClose: () => void;
-  isDarkMode: boolean;
   planName: string;
 }
 
@@ -17,7 +16,7 @@ interface AdditionalService {
   checked: boolean;
 }
 
-const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, isDarkMode, planName }) => {
+const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, planName }) => {
   const [additionalServices, setAdditionalServices] = useState<AdditionalService[]>([
     { id: 'tax-report', name: 'Tax report', price: 'Free', checked: false },
     { id: 'dual-nationality', name: 'Dual Nationality', price: '$49', checked: false },
@@ -62,7 +61,7 @@ const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, isDarkMode
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className={`relative p-8 max-w-md w-full mx-4 rounded-lg shadow-lg ${
-        isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-[#191919]'
+        'bg-white text-[#191919] dark:bg-gray-800 dark:text-white'
       }`}>
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -70,7 +69,7 @@ const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, isDarkMode
           <button
             onClick={onClose}
             className={`p-2 rounded-full hover:bg-gray-100 ${
-              isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+              'hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
           >
             <FontAwesomeIcon icon={faTimes} className="w-4 h-4 text-[#7C7C7C]" />
