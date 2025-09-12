@@ -100,14 +100,13 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className={`relative max-w-md w-full mx-4 rounded-lg shadow-lg ${
-        isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
-      }`}>
+      <div className={`relative max-w-md w-full p-8 mx-4 rounded-lg shadow-lg bg-white text-gray-900 
+      dark:bg-gray-800 dark:text-white`}>
         {/* Header */}
-        <div className="flex text-left items-start justify-between p-6">
+        <div className="flex text-left items-start justify-between">
           <div>
-            <h2 className={`text-xl font-bold ${isDarkMode ? 'text-gray-300' : 'text-[#191919]'}`}>Override cost basis method</h2>
-            <p className={`text-sm mt-1 ${isDarkMode ? 'text-gray-300' : 'text-[#191919]'}`}>
+            <h2 className={`text-h5 font-bold text-[#191919] dark:text-gray-300`}>Override cost basis method</h2>
+            <p className={`text-base mt-1.5 text-[#191919] dark:text-gray-300`}>
               Apply a different cost basis method for selected tax years, overriding your default setting.
             </p>
           </div>
@@ -120,7 +119,7 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, 
         </div>
 
         {/* Content */}
-        <div className="px-6 text-left space-y-6">
+        <div className="text-left space-y-3 mt-6">
           {/* Tax Year Dropdown */}
           <div className="space-y-2">
             <label className={`block text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-[#4D5050]'}`}>
@@ -222,10 +221,10 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, 
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-between space-x-3 p-6">
+        <div className="flex justify-between mt-6">
           <button
             onClick={handleCancel}
-            className={`px-4 py-2 font-medium ${
+            className={`px-4 py-3 font-medium ${
               isDarkMode ? 'text-gray-300 hover:text-white' : 'text-[#7C7C7C]'
             }`}
           >
@@ -234,7 +233,7 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({ isOpen, onClose, 
           <button
             onClick={handleSubmit}
             disabled={isSubmitDisabled}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`px-4 py-3 rounded-lg font-medium transition-colors ${
               isSubmitDisabled
                 ? 'bg-[#E1E3E5] text-[#8C8E90] cursor-not-allowed'
                 : 'bg-[#90C853] text-[#0E201E] hover:bg-[#7AB342] cursor-pointer'
