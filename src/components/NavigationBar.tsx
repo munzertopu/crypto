@@ -214,8 +214,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   className="w-8 h-8 rounded-full focus:border-green-400 object-cover md:w-6 md:h-6"
                 />
                 <span
-                  className={`hidden sm:inline text-xs sm:text-sm lg:text-base text-[#0E201E] 
-                    dark:text-[#CDCFD1]`}
+                  className={`hidden sm:inline text-xs sm:text-sm lg:text-base text-gray-900 
+                    dark:text-gray-150`}
                 >
                   {userName}
                 </span>
@@ -246,8 +246,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                   <div className="w-full px-4 pb-0.5 opacity-70 bg-white 
                     dark:bg-[#0E201E]"
                   >
-                    <h3 className="text-sm font-medium text-[#0E201E] text-left
-                    dark:text-[#F3F5F7]">
+                    <h3 className="text-sm font-medium text-gray-900 text-left
+                    dark:text-gray-150">
                       Switch account
                     </h3>
                   </div>
@@ -279,8 +279,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                                 );
                               }}
                             />
-                            <span className="text-xs font-medium mr-auto text-[#0E201E] 
-                              dark:text-[#F3F5F7]">
+                            <span className="text-xs font-medium mr-auto text-gray-900 
+                              dark:text-gray-150">
                               {user.name}
                             </span>
                           </div>
@@ -454,7 +454,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 </svg>
               </span>
 
-              <p className="text-gray-900 dark:text-gray-250 text-sm">
+              <p className="text-gray-900 dark:text-gray-150 text-sm">
                 Settings
               </p>
             </div>
@@ -545,7 +545,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 </svg>
               </span>
 
-              <p className="text-gray-900 dark:text-gray-250 text-sm">
+              <p className="text-gray-900 dark:text-gray-150 text-sm">
                 Light Theme
               </p>
             </div>

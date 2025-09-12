@@ -284,14 +284,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                               <Typography
                                 variant="small"
                                 className={`text-base font-normal text-[#0E201E]
-                                      dark:text-[#F3F5F7]`}
+                                      dark:text-gray-250`}
                               >
                                 {action}
                               </Typography>
                               <Typography
                                 variant="small"
                                 className={`text-sm font-normal text-gray-600
-                                      dark:text-[#F3F5F7]`}
+                                      dark:text-gray-250`}
                               >
                                 {time}
                               </Typography>
@@ -324,7 +324,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                               <Typography
                                 variant="small"
                                 className={`text-base font-normal text-[#0E201E]
-                                      dark:text-[#F3F5F7]`}
+                                      dark:text-gray-250`}
                               >
                                 {result}
                               </Typography>
@@ -333,7 +333,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                               <Typography
                                 variant="small"
                                 className={`text-base font-normal text-[#0E201E]
-                                      dark:text-[#F3F5F7]`}
+                                      dark:text-gray-250`}
                               >
                                 {transactionId}
                               </Typography>
@@ -361,7 +361,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                     <Typography
                                       variant="small"
                                       className={`text-xl font-normal text-[#0E201E] 
-                                        dark:text-[#F3F5F7]`}
+                                        dark:text-gray-250`}
                                     >
                                       {transaction.error || "---"}
                                     </Typography>
@@ -424,7 +424,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
               className={`h-12 w-12 flex items-center justify-center text-white text-xs font-bold`}
             />
             <div className="flex flex-col justify-start items-center gap-2">
-              <span className="text-lg font-semibold text-[#0E201E] dark:text-[#F3F5F7]">
+              <span className="text-lg font-semibold text-[#0E201E] dark:text-gray-250">
                 {selectedRow?.wallet.name}
               </span>
               <div className="flex justify-start items-center gap-2">
@@ -444,10 +444,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           <div className="flex flex-col gap-5 w-full">
             <div className="flex flex-col justify-start items-start w-full px-4">
               <div className="flex justify-between items-center w-full ">
-                <span className="text-base  text-gray-700 dark:text-[#F3F5F7]">
+                <span className="text-base  text-gray-700 dark:text-gray-250">
                   Action Type:
                 </span>
-                <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
                   {selectedRow?.status}
                 </span>
               </div>
@@ -458,10 +458,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                 <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
                 <div className="flex flex-col justify-start items-start w-full px-4">
                   <div className="flex justify-between items-center w-full ">
-                    <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                    <span className="text-base  text-[#4D5050] dark:text-gray-250">
                       Sent Amount:
                     </span>
-                    <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                    <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
                       {selectedRow?.sent}
                     </span>
                   </div>
@@ -474,10 +474,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                 <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
                 <div className="flex flex-col justify-start items-start w-full px-4">
                   <div className="flex justify-between items-center w-full ">
-                    <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                    <span className="text-base  text-[#4D5050] dark:text-gray-250">
                       Receive Amount:
                     </span>
-                    <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                    <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
                       {selectedRow?.received}
                     </span>
                   </div>
@@ -487,10 +487,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
             <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
             <div className="flex flex-col justify-start items-start w-full px-4">
               <div className="flex justify-between items-center w-full ">
-                <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                <span className="text-base  text-[#4D5050] dark:text-gray-250">
                   Wallet Address:
                 </span>
-                <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
                   {selectedRow?.wallet.address}
                 </span>
               </div>
@@ -498,10 +498,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
             <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
             <div className="flex flex-col justify-start items-start w-full px-4">
               <div className="flex justify-between items-center w-full ">
-                <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                <span className="text-base  text-[#4D5050] dark:text-gray-250">
                   Date:
                 </span>
-                <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
                   {selectedRow?.date}
                 </span>
               </div>
@@ -509,10 +509,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
             <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
             <div className="flex flex-col justify-start items-start w-full px-4">
               <div className="flex justify-between items-center w-full ">
-                <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                <span className="text-base  text-[#4D5050] dark:text-gray-250">
                   Result:
                 </span>
-                <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
                   {selectedRow?.result}
                 </span>
               </div>
@@ -520,10 +520,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
             <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
             <div className="flex flex-col justify-start items-start w-full px-4">
               <div className="flex justify-between items-center w-full ">
-                <span className="text-base  text-[#4D5050] dark:text-[#F3F5F7]">
+                <span className="text-base  text-[#4D5050] dark:text-gray-250">
                   Transaction ID:
                 </span>
-                <span className="text-base font-medium text-[#0e201e] dark:text-[#F3F5F7] transform capitalize">
+                <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
                   {selectedRow?.transactionId}
                 </span>
               </div>

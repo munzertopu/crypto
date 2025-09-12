@@ -85,7 +85,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
         <div className="flex items-center space-x-2">
           <span
             className={`text-sm text-gray-700
-              dark:text-[#F3F5F7]`}
+              dark:text-gray-250`}
           >
             Show on page
           </span>
@@ -132,7 +132,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
           </div>
           <span
             className={`text-sm text-gray-700
-              dark:text-[#F3F5F7]`}
+              dark:text-gray-250`}
           >
             of 77
           </span>
@@ -146,7 +146,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
           >
             <span
               className={`text-sm font-normal text-gray-700
-               dark:text-[#F3F5F7]`}
+               dark:text-gray-250`}
             >
               {selectedTransactions.length} selected
             </span>
@@ -157,7 +157,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
             ></div>
             <span
               className={`text-sm text-[#4D5050] font-medium
-                dark:text-[#F3F5F7]`}
+                dark:text-gray-250`}
             >
               Tag as:
             </span>
@@ -248,7 +248,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
             </button>
             <button
               className={`px-2 py-1 text-sm rounded rounded-lg border border-default text-gray-700
-              dark:text-[#F3F5F7]`}
+              dark:text-gray-250`}
               onClick={onClearSelection}
               aria-label="Clear selection"
             >
@@ -267,7 +267,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
           <button
             className={`w-8 h-8 rounded rounded-lg border flex items-center justify-center 
               border-default text-gray-500
-              dark:text-[#F3F5F7]`}
+              dark:text-gray-250`}
             aria-label="Go to previous page"
           >
             <FontAwesomeIcon
@@ -280,7 +280,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
           {/* Page numbers */}
           <button
             className={`w-8 h-8 rounded-lg border flex items-center justify-center text-sm font-medium 
-              text-gray-900 dark:text-gray-250 bg-green-500
+              text-gray-900 dark:text-gray-150 bg-green-500
               `}
             aria-label="Go to page 1"
             aria-current="page"
@@ -325,7 +325,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
           <button
             className={`w-8 h-8 rounded rounded-lg border flex items-center justify-center 
               border-default text-gray-500
-            dark:text-[#F3F5F7]`}
+            dark:text-gray-250`}
             aria-label="Go to next page"
           >
             <FontAwesomeIcon

@@ -82,14 +82,14 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
           <div>
             <h2
               className="text-h3 text-left font-bold mb-2 md:mb-0
-              dark:text-[#CDCFD1]"
+              dark:text-gray-250"
             >
               Configure {platformName} address
             </h2>
           </div>
           <button
             onClick={onClose}
-            className={`p-2 md:p-0 rounded-full dark:text-[#CDCFD1]`}
+            className={`p-2 md:p-0 rounded-full dark:text-gray-250`}
             aria-label="Close configure modal"
           >
             <svg
@@ -119,7 +119,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
       )}
       <p
         className={`text-sm md:text-base text-left text-gray-700
-              dark:text-[#CDCFD1]`}
+              dark:text-gray-250`}
       >
         Paste your wallet address below to configure
       </p>
@@ -129,7 +129,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
         <div className="flex items-center justify-start md:mb-2 gap-1">
           <label
             className="text-sm md:text-sm font-medium text-gray-800
-              dark:text-[#CDCFD1] "
+              dark:text-gray-250 "
           >
             Wallet Address
           </label>
@@ -177,7 +177,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
           <div className="flex items-center justify-start md:mb-2 gap-1">
             <label
               className="text-sm md:text-sm font-medium text-gray-800
-              dark:text-[#CDCFD1] "
+              dark:text-gray-250 "
             >
               Blockchains
             </label>
@@ -251,7 +251,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
 
             {isDropdownOpen && (
               <div
-                className={`absolute left-0 right-0 border rounded-lg shadow-lg z-10 bg-white border-gray-150 dark:bg-[#0E201E] dark:border-[#4D5050] dark:text-[#F3F5F7] ${
+                className={`absolute left-0 right-0 border rounded-lg shadow-lg z-10 bg-white border-gray-150 dark:bg-[#0E201E] dark:border-[#4D5050] dark:text-gray-250 ${
                   openUpward ? "bottom-full mb-1" : "top-full mt-1"
                 }`}
               >
@@ -282,7 +282,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
                         </svg>
                       )}
                     </div>
-                    <span className="text-sm text-gray-900 dark:text-gray-250">{blockchain}</span>
+                    <span className="text-sm text-gray-900 dark:text-gray-150">{blockchain}</span>
                   </div>
                 ))}
               </div>

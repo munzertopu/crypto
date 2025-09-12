@@ -78,7 +78,7 @@ const Recommended: React.FC<RecommendedProps> = ({
             />
           </svg>
           <span
-            className={`text-sm lg:text-sm font-normal text-gray-900 dark:text-gray-250`}
+            className={`text-sm lg:text-sm font-normal text-gray-900 dark:text-gray-150`}
           >
             Close
           </span>

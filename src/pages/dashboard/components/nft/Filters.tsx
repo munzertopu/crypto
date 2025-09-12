@@ -47,7 +47,7 @@ const Filters: React.FC<FiltersProps> = ({
           <div className="relative">
             <FontAwesomeIcon
               icon={faSearch}
-              className="absolute left-3 top-1/2 transform text-xl -translate-y-1/2 text-gray-500 dark:text-[#CDCFD1]"
+              className="absolute left-3 top-1/2 transform text-xl -translate-y-1/2 text-gray-500 dark:text-gray-250"
             />
             <input
               type="text"
@@ -128,7 +128,7 @@ const Filters: React.FC<FiltersProps> = ({
                         setSelectedGain(gain);
                         setShowGainDropdown(false);
                       }}
-                      className={`w-full px-3 md:px-1.5 py-2 text-left text-sm flex items-center justify-between rounded-lg text-gray-900 dark:text-gray-250 hover:bg-gray-50 dark:hover:bg-[#0A0F290A] ${
+                      className={`w-full px-3 md:px-1.5 py-2 text-left text-sm flex items-center justify-between rounded-lg text-gray-900 dark:text-gray-150 hover:bg-gray-50 dark:hover:bg-[#0A0F290A] ${
                         selectedGain === gain ? "bg-[#0A0F290A]" : ""
                       }`}
                     >

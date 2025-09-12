@@ -12,7 +12,7 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
       
       <div className="container mx-auto px-4 py-8">
         <div className="text-center py-12">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-250 mb-4">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-150 mb-4">
             Tax Reports
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-400">

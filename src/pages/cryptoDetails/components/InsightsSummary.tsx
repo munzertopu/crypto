@@ -162,7 +162,7 @@ const InsightsSummary: React.FC<InsightsSummaryProps> = ({
 
 
                 </div>
-                <span className="text-base text-gray-700 dark:text-[#CDCFD1]">
+                <span className="text-base text-gray-700 dark:text-gray-250">
                   Insights are estimates only and subject to change with reconciliation and tax rules.
                 </span>
               </div>
@@ -199,7 +199,7 @@ const InsightsSummary: React.FC<InsightsSummaryProps> = ({
                    {card.title}
                  </h4>
                  
-                 <p className="text-sm leading-relaxed text-[#0E201E] dark:text-[#CDCFD1]">
+                 <p className="text-sm leading-relaxed text-[#0E201E] dark:text-gray-250">
                    {card.description}
                  </p>
                </div>

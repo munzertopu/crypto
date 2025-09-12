@@ -105,18 +105,18 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
                   <tr key={item.id} className="hover:bg-gray-50 dark:hover:bg-[#2F3232]">
                     <td className="px-5 py-3 whitespace-nowrap">
                       <div className="flex items-center">
-                        <span className="text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                        <span className="text-sm text-[#0E201E] dark:text-gray-250">
                           {item.wallet.name}
                         </span>
                       </div>
                     </td>
-                    <td className="px-5 py-3 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="px-5 py-3 whitespace-nowrap text-sm text-[#0E201E] dark:text-gray-250">
                       {item.balance}
                     </td>
-                    <td className="pl-5 pr-8 py-3 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="pl-5 pr-8 py-3 whitespace-nowrap text-sm text-[#0E201E] dark:text-gray-250">
                       {item.value}
                     </td>
-                    <td className="pl-5 pr-8 py-3 whitespace-nowrap text-sm text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="pl-5 pr-8 py-3 whitespace-nowrap text-sm text-[#0E201E] dark:text-gray-250">
                       {item.allocation}
                     </td>
                     <td className="px-5 py-3 whitespace-nowrap">

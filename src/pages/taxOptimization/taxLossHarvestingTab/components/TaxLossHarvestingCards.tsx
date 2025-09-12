@@ -88,10 +88,10 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
     label: string;
     value: string;
     valueColor?: string;
-  }> = ({ icon, label, value, valueColor = "text-gray-900 dark:text-gray-250" }) => (
+  }> = ({ icon, label, value, valueColor = "text-gray-900 dark:text-gray-150" }) => (
     <div className='space-y-3'>
       <div className="flex items-center space-x-3">
-        <FontAwesomeIcon icon={icon} className={`w-5 h-5 text-[#7C7C7C] dark:text-[#CDCFD1]`} />
+        <FontAwesomeIcon icon={icon} className={`w-5 h-5 text-[#7C7C7C] dark:text-gray-250`} />
         <Typography variant="small" className="text-[#0E201E] dark:text-[#B6B8BA]">{label}</Typography>
       </div>
       <Typography variant="small" className={`text-left text-h4 font-semibold ${valueColor}`}>{value}</Typography>
@@ -108,7 +108,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
       <CardBody className="p-0 overflow-hidden">
         <div className="flex items-center justify-between mb-4 px-8">
           <div className="flex items-center space-x-2">
-            <Typography variant="h2" className={`text-h6 font-semibold text-gray-900 dark:text-gray-250`}>
+            <Typography variant="h2" className={`text-h6 font-semibold text-gray-900 dark:text-gray-150`}>
               {title}
             </Typography>
             <svg className="w-5 h-5 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,12 +125,12 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                   dark:bg-transparent
                 `}
               >
-                <span className={'text-gray-700  dark:text-[#F3F5F7]'}>
+                <span className={'text-gray-700  dark:text-gray-250'}>
                    All Assets
                  </span>
                 <FontAwesomeIcon 
                   icon={assetDropdownOpen ? faChevronUp : faChevronDown} 
-                  className="w-3 h-3 text-gray-500 dark:text-[#F3F5F7]" 
+                  className="w-3 h-3 text-gray-500 dark:text-gray-250" 
                 />
               </button>
               
@@ -177,7 +177,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                             <img src={option.logo} className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold mr-3`}>
                             </img>
                           }
-                          <span className={`text-sm text-gray-900 dark:text-gray-250`}>
+                          <span className={`text-sm text-gray-900 dark:text-gray-150`}>
                             {option.name}
                           </span>
                         </div>

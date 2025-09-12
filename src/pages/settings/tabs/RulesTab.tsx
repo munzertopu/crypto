@@ -80,7 +80,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <Typography variant="h5" className="text-left text-lg font-bold text-gray-900 dark:text-gray-250">
+          <Typography variant="h5" className="text-left text-lg font-bold text-gray-900 dark:text-gray-150">
             Rules
           </Typography>
           <Typography variant="small" className="mt-2 text-sm text-left text-gray-600 dark:text-gray-300">
@@ -225,16 +225,16 @@ const RulesTab: React.FC<RulesTabProps> = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {rules.map((rule) => (
               <tr key={rule.id} className="hover:bg-gray-50">
-                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-250">
+                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-150">
                   {rule.name}
                 </td>
-                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-250">
+                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-150">
                   {rule.wallet}
                 </td>
-                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-250">
+                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-150">
                   {rule.token}
                 </td>
-                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-250">
+                <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-150">
                   {rule.quantity}
                 </td>
                 <td className="text-left px-6 py-4 whitespace-nowrap">
