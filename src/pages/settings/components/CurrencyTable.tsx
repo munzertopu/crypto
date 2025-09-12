@@ -151,7 +151,7 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between pt-6">
           <div>
-            <Typography variant="h5" className="text-left font-bold text-gray-900 dark:text-gray-250">
+            <Typography variant="h5" className="text-left font-bold text-gray-900 dark:text-gray-150">
               Custom price
             </Typography>
             <Typography variant="small" className="mt-1 text-sm text-left text-gray-600 dark:text-gray-300">
@@ -252,7 +252,7 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
                                 <div className="flex flex-col">
                                   <Typography
                                     variant="small"
-                                    className="text-base font-normal text-[#0E201E] dark:text-[#F3F5F7]"
+                                    className="text-base font-normal text-[#0E201E] dark:text-gray-250"
                                   >
                                     {currency.name}
                                   </Typography>

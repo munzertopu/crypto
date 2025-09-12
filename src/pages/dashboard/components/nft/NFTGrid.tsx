@@ -78,7 +78,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs }) => {
                     </svg>
                   </div>
                   <span
-                    className="font-semibold text-sm text-gray-900 dark:text-gray-250"
+                    className="font-semibold text-sm text-gray-900 dark:text-gray-150"
                   >
                     {nft.estimatedValue}
                   </span>

@@ -39,11 +39,11 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className={`relative max-w-md w-full mx-4 rounded-lg shadow-lg overflow-hidden ${
-        'bg-white text-gray-900 dark:text-gray-250 dark:bg-gray-800'
+        'bg-white text-gray-900 dark:text-gray-150 dark:bg-gray-800'
       }`}>
         {/* Header */}
         <div className="flex items-center justify-between px-6 pt-6">
-          <Typography variant="h5" className="text-lg font-semibold text-gray-900 dark:text-gray-250">
+          <Typography variant="h5" className="text-lg font-semibold text-gray-900 dark:text-gray-150">
             Add rule
           </Typography>
           <button
@@ -89,7 +89,7 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
                   onClick={() => setIsWalletDropdownOpen(!isWalletDropdownOpen)}
                   className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-white text-[#0E201E] dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 >
-                  <span className={`text-left ${selectedWallet ? 'text-gray-900 dark:text-gray-250' : 'text-[#7C7C7C]'}`}>
+                  <span className={`text-left ${selectedWallet ? 'text-gray-900 dark:text-gray-150' : 'text-[#7C7C7C]'}`}>
                     {selectedWallet || 'Choose wallet'}
                   </span>
                   <FontAwesomeIcon 
@@ -127,9 +127,9 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
               <div className="relative">
                 <button
                   onClick={() => setIsTokenDropdownOpen(!isTokenDropdownOpen)}
-                  className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-white text-gray-900 dark:text-gray-250 dark:bg-gray-700 dark:border-gray-600"
+                  className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-white text-gray-900 dark:text-gray-150 dark:bg-gray-700 dark:border-gray-600"
                 >
-                  <span className={`text-left ${selectedToken ? 'text-gray-900 dark:text-gray-250' : 'text-[#7C7C7C]'}`}>
+                  <span className={`text-left ${selectedToken ? 'text-gray-900 dark:text-gray-150' : 'text-[#7C7C7C]'}`}>
                     {selectedToken || 'Select the token'}
                   </span>
                   <FontAwesomeIcon 

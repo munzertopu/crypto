@@ -42,7 +42,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ onToggle }) => {
           `}
       >
         <div
-          className={`flex items-center justify-center h-full w-full text-[#0E201E] dark:text-[#CDCFD1]`}
+          className={`flex items-center justify-center h-full w-full text-[#0E201E] dark:text-gray-250`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

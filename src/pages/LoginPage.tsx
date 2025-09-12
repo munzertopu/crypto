@@ -90,7 +90,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
          dark:text-gray-250">
           Login
         </h1>
-        <p className="text-base text-base sm:text-lg text-gray-800 text-left">
+        <p className="text-base text-base sm:text-lg text-gray-900 text-left">
           Access your crypto tax tools securely.
         </p>
       </div>

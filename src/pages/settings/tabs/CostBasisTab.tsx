@@ -117,7 +117,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
       {/* Cost Basis Section */}
       <div className="space-y-4">
         <div>
-          <Typography variant="h4" className={`font-medium text-sm text-left mb-2 text-gray-900 dark:text-gray-250`}>
+          <Typography variant="h4" className={`font-medium text-sm text-left mb-2 text-gray-900 dark:text-gray-150`}>
             Cost Basis
           </Typography>
           <Typography variant="small" className={`text-left text-sm text-700 dark:text-gray-400`}>
@@ -182,7 +182,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
       <div>
         <div className="flex items-center justify-between">
           <div>
-            <Typography variant="h4" className={`font-bold text-lg text-left mb-2 text-gray-900 dark:text-gray-250`}>
+            <Typography variant="h4" className={`font-bold text-lg text-left mb-2 text-gray-900 dark:text-gray-150`}>
               Override cost
             </Typography>
             <Typography variant="small" className={`text-left text-sm text-gray-500 dark:text-gray-400`}>

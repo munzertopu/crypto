@@ -428,7 +428,7 @@ const Filter: React.FC<FilterProps> = ({
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="text-gray-900 dark:text-gray-250 opacity-70"
+              className="text-gray-900 dark:text-gray-150 opacity-70"
             >
               <path
                 d="M9.6 17.2C13.7974 17.2 17.2 13.7974 17.2 9.6C17.2 5.40264 13.7974 2 9.6 2C5.40264 2 2 5.40264 2 9.6C2 13.7974 5.40264 17.2 9.6 17.2Z"
@@ -450,7 +450,7 @@ const Filter: React.FC<FilterProps> = ({
               placeholder="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className={`text-sm w-full  border-gray-700 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none bg-transparent
+              className={`text-sm w-full  border-gray-700 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none bg-transparent
             dark:bg-transparent dark:border-[#4D5050]`}
             />
           </div>
@@ -464,7 +464,7 @@ const Filter: React.FC<FilterProps> = ({
               <button
                 onClick={() => setWalletDropdownOpen(!walletDropdownOpen)}
                 className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-primary
-                  dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
+                  dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-250`}
               >
                 <span>Wallet</span>
                 <FontAwesomeIcon
@@ -540,7 +540,7 @@ const Filter: React.FC<FilterProps> = ({
                 }
                 className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl 
                   border bg-white border-default text-primary
-                  dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
+                  dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-250`}
               >
                 <span>Action type</span>
                 <FontAwesomeIcon
@@ -562,7 +562,7 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Type or paste action type"
                       value={actionTypeSearchTerm}
                       onChange={(e) => setActionTypeSearchTerm(e.target.value)}
-                      className={`w-full px-3 py-2 rounded text-sm text-gray-900 dark:text-gray-250 placeholder-gray-500 focus:outline-none
+                      className={`w-full px-3 py-2 rounded text-sm text-gray-900 dark:text-gray-150 placeholder-gray-500 focus:outline-none
                         dark:bg-[#0E201E] dark:text-gray-50`}
                     />
                   </div>
@@ -649,7 +649,7 @@ const Filter: React.FC<FilterProps> = ({
               <button
                 onClick={() => setResultDropdownOpen(!resultDropdownOpen)}
                 className={`flex text-lg items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-[#0E201E] text-smh
-                  dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
+                  dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-250`}
               >
                 <span>Result</span>
                 <FontAwesomeIcon
@@ -728,7 +728,7 @@ const Filter: React.FC<FilterProps> = ({
                 setShowFilters(!showFilters);
               }}
               className={`flex text-sm items-center p-3 rounded-[12px] border transition-colors bg-white border-gray-150 text-[#0E201E]
-                dark:bg-transparent dark:border-[#4D5050] dark:text-[#F3F5F7]`}
+                dark:bg-transparent dark:border-[#4D5050] dark:text-gray-250`}
               aria-label="Toggle additional filters"
               aria-expanded={showFilters}
             >
@@ -740,7 +740,7 @@ const Filter: React.FC<FilterProps> = ({
                 height="20.000000"
                 fill="none"
                 className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2 text-[#0E201E]
-                  dark:text-[#F3F5F7]"
+                  dark:text-gray-250"
               >
                 <rect
                   id="Property 2=filter"
@@ -796,7 +796,7 @@ const Filter: React.FC<FilterProps> = ({
                   placeholder="Type or paste wallet"
                   value={walletSearchTerm}
                   onChange={(e) => setWalletSearchTerm(e.target.value)}
-                  className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                  className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                 />
               </div>
 
@@ -830,7 +830,7 @@ const Filter: React.FC<FilterProps> = ({
                         className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold ml-3`}
                       ></img>
                       <span
-                        className={`text-base text-gray-900 dark:text-gray-250`}
+                        className={`text-base text-gray-900 dark:text-gray-150`}
                       >
                         {option.name}
                       </span>
@@ -877,7 +877,7 @@ const Filter: React.FC<FilterProps> = ({
                         )}
                       </div>
                       <span
-                        className={`text-base text-gray-900 dark:text-gray-250`}
+                        className={`text-base text-gray-900 dark:text-gray-150`}
                       >
                         {option.name}
                       </span>
@@ -906,7 +906,7 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Amount"
                       value={fromSentValue}
                       onChange={(e) => setFromSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
@@ -968,7 +968,7 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Amount"
                       value={toSentValue}
                       onChange={(e) => setToSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
@@ -1037,7 +1037,7 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Amount"
                       value={fromSentValue}
                       onChange={(e) => setFromSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>
@@ -1099,7 +1099,7 @@ const Filter: React.FC<FilterProps> = ({
                       placeholder="Amount"
                       value={toSentValue}
                       onChange={(e) => setToSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-250 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
                     />
                     <button
                       onClick={() =>

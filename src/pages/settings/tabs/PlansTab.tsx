@@ -67,7 +67,7 @@ const PlansTab: React.FC<PlansTabProps> = () => {
     <div>
       {/* Header */}
       <div className="mb-6">
-        <h3 className="text-lg font-bold text-left mb-2 text-gray-900 dark:text-gray-250">
+        <h3 className="text-lg font-bold text-left mb-2 text-gray-900 dark:text-gray-150">
           Plans
         </h3>
       </div>
@@ -88,12 +88,12 @@ const PlansTab: React.FC<PlansTabProps> = () => {
               )}
 
               {/* Plan Name */}
-              <h4 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-250">
+              <h4 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-150">
                 {plan.name}
               </h4>
 
               {/* Price */}
-              <div className="text-3xl font-bold text-gray-900 dark:text-gray-250">
+              <div className="text-3xl font-bold text-gray-900 dark:text-gray-150">
                 {plan.price}
               </div>
             </div>

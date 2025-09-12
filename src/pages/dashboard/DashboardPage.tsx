@@ -77,7 +77,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
           {/* Crypto Tab */}
           {activeTab === "Crypto" && (
             <div className="mx-3 p-8 text-center">
-              <div className="text-lg text-gray-600 dark:text-gray-400">
+              <div className="text-lg text-gray-900 dark:text-gray-150">
                 Crypto tab content coming soon...
               </div>
             </div>

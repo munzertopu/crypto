@@ -24,7 +24,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
             onClick={() => setActiveTab(tab)}
             className={`mx-6 py-3 font-medium text-sm border-b-2 transition-colors ${
               activeTab === tab
-                ? 'border-[#75AE46] dark:text-[#F3F5F7]'
+                ? 'border-[#75AE46] dark:text-gray-250'
                 : `border-transparent text-gray-500 hover:text-gray-700 dark: text-gray-400 dark: hover:text-gray-300`
             }`}
             aria-label={`View transaction ${tab.toLowerCase()}`}
@@ -39,7 +39,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
         <div className="flex justify-between items-start py-2">
           {/* Transaction Type and Date - Left Side */}
           <div className='w-1/4'>
-            <h3 className="text-lg font-semibold mb-2 dark:text-[#F3F5F7]">Transfer</h3>
+            <h3 className="text-lg font-semibold mb-2 dark:text-gray-250">Transfer</h3>
             <p className={`text-sm text-gray-600 dark:text-gray-400`}>
               May 11, 2025, 8:37 PM
             </p>
@@ -55,7 +55,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
                     <FontAwesomeIcon icon={faGhost} className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex flex-col">
-                    <Typography variant="small" className="font-normal dark:text-[#F3F5F7]">
+                    <Typography variant="small" className="font-normal dark:text-gray-250">
                       Phantom
                     </Typography>
                     <Typography variant="small" className="text-sm font-medium">
@@ -74,7 +74,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
                 {/* Bitcoin (Received) */}
                 <div className="flex items-center space-x-3">
                   <div className="flex flex-col">
-                    <Typography variant="small" className="font-normal dark:text-[#F3F5F7]">
+                    <Typography variant="small" className="font-normal dark:text-gray-250">
                       Bitcoin
                     </Typography>
                     <Typography variant="small" className="text-sm font-medium">
@@ -90,10 +90,10 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
               {/* Financial Metrics */}
               <div className="mt-4 space-y-3">
                 <div className="flex justify-between">
-                  <Typography variant="small" className={`text-base text-gray-700 dark:text-[#F3F5F7]`}>
+                  <Typography variant="small" className={`text-base text-gray-700 dark:text-gray-250`}>
                     Fiat Value:
                   </Typography>
-                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-gray-250">
+                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-gray-150">
                     $780.98
                   </Typography>
                 </div>
@@ -101,10 +101,10 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
                   <hr className="border-dashed border-gray-500 opacity-20 dark:border-[#2F3232]" />
                 </div>
                 <div className="flex justify-between">
-                  <Typography variant="small" className={`text-base text-gray-700 dark:text-[#F3F5F7]`}>
+                  <Typography variant="small" className={`text-base text-gray-700 dark:text-gray-250`}>
                     Cost Basis:
                   </Typography>
-                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-gray-250">
+                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-gray-150">
                     $579.60
                   </Typography>
                 </div>
@@ -112,10 +112,10 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
                   <hr className="border-dashed border-gray-500 opacity-20 dark:border-[#2F3232]" />
                 </div>
                 <div className="flex justify-between">
-                  <Typography variant="small" className={`text-base text-gray-700 dark:text-[#F3F5F7]`}>
+                  <Typography variant="small" className={`text-base text-gray-700 dark:text-gray-250`}>
                     Gain:
                   </Typography>
-                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-gray-250">
+                  <Typography variant="small" className="test-sm font-medium text-gray-900 dark:text-gray-150">
                     $0.00
                   </Typography>
                 </div>
@@ -183,13 +183,13 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
                         <div className={`w-8 h-8 ${row.identifier.color} rounded-full flex items-center justify-center`}>
                           <span className="text-white text-sm font-bold">{row.identifier.icon}</span>
                         </div>
-                        <span className={`text-base text-gray-900 dark:text-gray-250`}>
+                        <span className={`text-base text-gray-900 dark:text-gray-150`}>
                           {row.identifier.text}
                         </span>
                       </div>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-base text-gray-900 dark:text-gray-250`}>
+                      <span className={`text-base text-gray-900 dark:text-gray-150`}>
                         {row.date}
                       </span>
                     </td>
@@ -199,12 +199,12 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({  }) => {
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-base text-gray-900 dark:text-gray-250`}>
+                      <span className={`text-base text-gray-900 dark:text-gray-150`}>
                         {row.ledger}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span className={`text-base text-gray-900 dark:text-gray-250`}>
+                      <span className={`text-base text-gray-900 dark:text-gray-150`}>
                         {row.change}
                       </span>
                     </td>

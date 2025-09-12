@@ -463,7 +463,7 @@ const SignUpForm = ({
           <Typography
             as="label"
             htmlFor="cryptoNews"
-            className="cursor-pointer text-gray-900 dark:text-gray-250 text-sm "
+            className="cursor-pointer text-gray-900 dark:text-gray-150 text-sm "
           >
             Send me news related to crypto taxes
           </Typography>
@@ -484,7 +484,7 @@ const SignUpForm = ({
           <Typography
             as="label"
             htmlFor="productUpdates"
-            className="cursor-pointer text-gray-900 dark:text-gray-250 text-sm "
+            className="cursor-pointer text-gray-900 dark:text-gray-150 text-sm "
           >
             Send me product updates & discounts
           </Typography>
@@ -495,7 +495,7 @@ const SignUpForm = ({
       <div>
         <button
           type="submit"
-          className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-lg text-gray-900 dark:text-gray-250 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+          className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-lg text-gray-900 dark:text-gray-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
           style={{ backgroundColor: "#75AE46" }}
           aria-label="Create new portal account"
         >

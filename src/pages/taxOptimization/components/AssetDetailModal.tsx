@@ -81,18 +81,18 @@ const AssetDetailModal: React.FC<AssetDetailModalProps> = ({
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center`}>
                         <img src={row.logo} />
                       </div>
-                      <span className={`text-primary text-base dark:text-[#F3F5F7]`}>
+                      <span className={`text-primary text-base dark:text-gray-250`}>
                         {row.wallet}
                       </span>
                     </div>
                   </td>
-                  <td className={`p-3 text-left text-primary dark:text-[#F3F5F7]`}>
+                  <td className={`p-3 text-left text-primary dark:text-gray-250`}>
                     {row.balance}
                   </td>
-                  <td className={`p-3 text-left text-primary dark:text-[#F3F5F7]`}>
+                  <td className={`p-3 text-left text-primary dark:text-gray-250`}>
                     {row.price}
                   </td>
-                  <td className={`p-3 text-left text-primary dark:text-[#F3F5F7]`}>
+                  <td className={`p-3 text-left text-primary dark:text-gray-250`}>
                     {row.value}
                   </td>
                 </tr>

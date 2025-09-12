@@ -43,7 +43,7 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
           <div className="flex items-center justify-center gap-3">
             <button
               onClick={onClose}
-              className="text-[#7C7C7C] dark:text-[#F3F5F7] flex items-center justify-center "
+              className="text-[#7C7C7C] dark:text-gray-250 flex items-center justify-center "
             >
               <svg
                 width="20"
@@ -65,7 +65,7 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
               {/* <FontAwesomeIcon icon={faChevronLeft} className="w-6 h-6" /> */}
             </button>
 
-            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-250">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-150">
               {header}
             </h2>
           </div>

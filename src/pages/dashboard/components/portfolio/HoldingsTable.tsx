@@ -238,7 +238,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                               variant="small"
                               className={`text-base ${
                                 onCryptoClick ? "cursor-pointer" : ""
-                              } text-[#0E201E] dark:text-[#F3F5F7]`}
+                              } text-[#0E201E] dark:text-gray-250`}
                               onClick={() =>
                                 onCryptoClick && onCryptoClick(symbol)
                               }
@@ -273,7 +273,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                         <div className="flex flex-col items-center justify-end">
                           <Typography
                             variant="small"
-                            className={`font-normal text-base text-[#0E201E] dark:text-[#F3F5F7]`}
+                            className={`font-normal text-base text-[#0E201E] dark:text-gray-250`}
                           >
                             ${balance}
                           </Typography>
@@ -340,7 +340,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                         <div className="flex flex-col">
                           <Typography
                             variant="small"
-                            className={`font-normal text-base text-[#0E201E] dark:text-[#F3F5F7]`}
+                            className={`font-normal text-base text-[#0E201E] dark:text-gray-250`}
                           >
                             {balance}
                           </Typography>
@@ -359,7 +359,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                       <td className="hidden sm:table-cell">
                         <Typography
                           variant="small"
-                          className={`font-normal text-base text-[#0E201E] dark:text-[#F3F5F7]`}
+                          className={`font-normal text-base text-[#0E201E] dark:text-gray-250`}
                         >
                           {marketValue}
                         </Typography>

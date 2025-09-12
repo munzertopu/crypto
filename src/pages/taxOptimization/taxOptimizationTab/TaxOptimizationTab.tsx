@@ -188,7 +188,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
                             <Typography 
                               variant="small" 
                               className={`text-base font-normal text-primary
-                                  dark:text-[#F3F5F7]`}
+                                  dark:text-gray-250`}
                              >
                                {asset.name}
                              </Typography>
@@ -203,7 +203,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
                              className={`size-4 cursor-pointer transition-all duration-200 ${
                                modalOpen && selectedAsset && selectedAsset.id === asset.id
                                  ? 'ring-1 ring-green-500 ring-offset-2 rounded-sm'
-                                 : 'text-[#7C7C7C] dark:text-[#F3F5F7]'
+                                 : 'text-[#7C7C7C] dark:text-gray-250'
                              }`}
                              onClick={(e) => handleEyeClick(asset, e)}
                            >
@@ -215,14 +215,14 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
                     
                     {/* Market Value */}
                       <td className="px-6 py-4 text-left" role="cell">
-                        <Typography variant="small" className={`font-normal text-primary dark:text-[#F3F5F7]`}>
+                        <Typography variant="small" className={`font-normal text-primary dark:text-gray-250`}>
                           {formatCurrency(asset.marketValue)}
                         </Typography>
                       </td>
 
                       {/* Potential Gains */}
                       <td className="px-6 border-l-2 border-[#75ae46] py-4 text-left" role="cell">
-                        <Typography variant="small" className={`font-normal text-primary dark:text-[#F3F5F7]`}>
+                        <Typography variant="small" className={`font-normal text-primary dark:text-gray-250`}>
                           {formatCurrency(asset.shortTerm.potentialGains)}
                         </Typography>
                       </td>
@@ -234,7 +234,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
                           onMouseEnter={() => asset.shortTerm.longTermTransitionDate && handleTooltipShow(asset.id)}
                           onMouseLeave={handleTooltipHide}
                         >
-                          <Typography variant="small" className={`font-normal text-primary dark:text-[#F3F5F7]`}>
+                          <Typography variant="small" className={`font-normal text-primary dark:text-gray-250`}>
                             {formatCryptoAmount(asset.shortTerm.amountHeldValue, asset.shortTerm.amountHeldUnit)}
                           </Typography>
                           
@@ -271,14 +271,14 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
 
                       {/* Long term gains */}
                       <td className="px-6 py-4 border-l-2 border-[#8C5DF3] text-left" role="cell">
-                        <Typography variant="small" className={`font-normal text-primary dark:text-[#F3F5F7]`}>
+                        <Typography variant="small" className={`font-normal text-primary dark:text-gray-250`}>
                           {formatCurrency(asset.longTerm.potentialGains)}
                         </Typography>
                       </td>
 
                       {/* Amount Held (>12m) */}
                       <td className="px-6 py-4 text-left" role="cell">
-                        <Typography variant="small" className={`font-normal text-primary dark:text-[#F3F5F7]`}>
+                        <Typography variant="small" className={`font-normal text-primary dark:text-gray-250`}>
                           {formatCryptoAmount(asset.longTerm.amountHeldValue, asset.longTerm.amountHeldUnit)}
                         </Typography>
                       </td>

@@ -110,7 +110,7 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({
                     <td className="px-5 py-3 whitespace-nowrap">
                       <div className="flex items-center">
                         <Avatar src={item.acquisitionAccount.logo} alt={item.acquisitionAccount.name} size="sm" className="mr-1.5" />
-                        <span className="text-base text-[#0E201E] dark:text-[#F3F5F7]">
+                        <span className="text-base text-[#0E201E] dark:text-gray-250">
                           {item.acquisitionAccount.name}
                         </span>
                       </div>
@@ -118,26 +118,26 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <Avatar src={item.currentAccount.logo} alt={item.currentAccount.name} size="sm" className="mr-1.5" />
-                        <span className="text-base text-[#0E201E] dark:text-[#F3F5F7]">
+                        <span className="text-base text-[#0E201E] dark:text-gray-250">
                           {item.currentAccount.name}
                         </span>
                       </div>
                     </td>
-                    <td className="px-5 py-3 whitespace-nowrap text-base text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="px-5 py-3 whitespace-nowrap text-base text-[#0E201E] dark:text-gray-250">
                       {item.type}
                     </td>
-                    <td className="px-5 py-3 whitespace-nowrap text-base text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="px-5 py-3 whitespace-nowrap text-base text-[#0E201E] dark:text-gray-250">
                       {item.amount}
                     </td>
                     <td className="px-5 py-3 whitespace-nowrap">
-                      <div className="text-base text-[#0E201E] dark:text-[#F3F5F7]">{item.currentPrice.current}</div>
+                      <div className="text-base text-[#0E201E] dark:text-gray-250">{item.currentPrice.current}</div>
                       <div className="text-sm text-gray-500 dark:text-[#A1A3A5]">{item.currentPrice.original}</div>
                     </td>
                     <td className="px-5 py-3 whitespace-nowrap">
-                      <div className="text-base text-[#0E201E] dark:text-[#F3F5F7]">{item.change.value}</div>
+                      <div className="text-base text-[#0E201E] dark:text-gray-250">{item.change.value}</div>
                       <div className="text-sm text-gray-600 dark:text-[#8C8E90]">{item.change.percentage}</div>
                     </td>
-                    <td className="px-5 py-3 whitespace-nowrap text-base text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="px-5 py-3 whitespace-nowrap text-base text-[#0E201E] dark:text-gray-250">
                       {item.value}
                     </td>
                     <td className="px-5 py-3 whitespace-nowrap">
@@ -145,7 +145,7 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({
                         {item.unrealizedGL.value}
                       </span>
                     </td>
-                    <td className="px-5 py-3 whitespace-nowrap text-base text-[#0E201E] dark:text-[#F3F5F7]">
+                    <td className="px-5 py-3 whitespace-nowrap text-base text-[#0E201E] dark:text-gray-250">
                       {item.purchaseDate}
                     </td>
                   </tr>

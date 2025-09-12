@@ -46,11 +46,11 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className={`relative max-w-md w-full mx-4 p-8 rounded-lg shadow-lg overflow-hidden ${
-        'bg-white text-gray-900 dark:text-gray-250 dark:bg-gray-800'
+        'bg-white text-gray-900 dark:text-gray-150 dark:bg-gray-800'
       }`}>
         {/* Header */}
         <div className="flex items-center justify-between">
-          <Typography className="text-h5 font-bold text-gray-900 dark:text-gray-250">
+          <Typography className="text-h5 font-bold text-gray-900 dark:text-gray-150">
             Set historical price
           </Typography>
           <button
