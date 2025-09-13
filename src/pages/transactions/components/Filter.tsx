@@ -419,8 +419,10 @@ const Filter: React.FC<FilterProps> = ({
 
       <div className="flex flex-row justify-start lg:items-center gap-5 mt-[20px] sm:mt-0">
         {/* Search */}
-        <div className="flex flex-grow-1 sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border 
-          border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]">
+        <div
+          className="flex flex-grow-1 sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border 
+          border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]"
+        >
           <div className="flex flex-row justify-start items-center gap-3">
             <svg
               width="16"
@@ -845,7 +847,7 @@ const Filter: React.FC<FilterProps> = ({
             {" "}
             <div
               className={`w-full z-50 bg-white border-gray-300 
-                dark:bg-gray-800 dark:border-gray-600
+                dark:bg-[#0E201E] dark:border-gray-600
                 `}
             >
               {/* Search Input */}

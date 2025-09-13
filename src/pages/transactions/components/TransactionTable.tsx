@@ -7,7 +7,6 @@ import MobileFormDrawer from "../../../components/Drawers/MobileFormDrawer";
 import type { Transaction } from "../../../data/transactionAssets";
 import { getTableHeaders } from "../../../data/transactionAssets";
 
-
 interface TransactionTableProps {
   transactions: Transaction[];
   activeTab?: string;
@@ -45,9 +44,9 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
     // Sort dates in descending order (newest first)
     return Object.keys(grouped)
       .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
-      .map(date => ({
+      .map((date) => ({
         date,
-        transactions: grouped[date]
+        transactions: grouped[date],
       }));
   };
 
@@ -56,10 +55,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   // Format date for display
   const formatDateForDisplay = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      month: 'long', 
-      day: 'numeric', 
-      year: 'numeric' 
+    return date.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
     });
   };
 
@@ -99,14 +98,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       </td>
     </tr>
   );
-  
+
   return (
-    <div className="md:px-0 mb-6 mt-6 sm:mt-0">
+    <div className="md:px-0 mde:mb-6 md:mt-6 sm:mt-0">
       <Card className="h-full w-full border-transparent bg-transprent shadow-none">
         <CardBody className="px-0 sm:px-3.5 sm:py-2.5 md:px-0 md:py-0">
           <div className="overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left">
-            <thead className="bg-table-header dark:bg-gray-800 hidden sm:table-header-group">
+              <thead className="bg-table-header dark:bg-gray-800 hidden sm:table-header-group">
                 <tr>
                   {TABLE_HEAD.map((head, index) => (
                     <th
@@ -136,18 +135,26 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                             dark:text-[#B6B8BA]`}
                         >
                           {head}{" "}
-                          {index !== 2 &&
-                            index < TABLE_HEAD.length - 2 && (
-                              <div
-                                className="flex flex-col"
-                                role="button"
-                                aria-label={`Sort by ${head}`}
+                          {index !== 2 && index < TABLE_HEAD.length - 2 && (
+                            <div
+                              className="flex flex-col"
+                              role="button"
+                              aria-label={`Sort by ${head}`}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className="size-6"
                               >
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
-                                  <path fillRule="evenodd" d="M11.47 4.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06L12 6.31 8.78 9.53a.75.75 0 0 1-1.06-1.06l3.75-3.75Zm-3.75 9.75a.75.75 0 0 1 1.06 0L12 17.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
-                                </svg>
-                              </div>
-                            )}
+                                <path
+                                  fillRule="evenodd"
+                                  d="M11.47 4.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06L12 6.31 8.78 9.53a.75.75 0 0 1-1.06-1.06l3.75-3.75Zm-3.75 9.75a.75.75 0 0 1 1.06 0L12 17.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 0 1 0-1.06Z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                            </div>
+                          )}
                         </div>
                       )}
                     </th>
@@ -168,7 +175,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         </Typography>
                       </td>
                     </tr>
-                    
+
                     {/* Transactions for this date */}
                     {group.transactions.map((transaction, index) => {
                       const {
@@ -180,7 +187,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         transactionId,
                         result,
                         status,
-                        time
+                        time,
                       } = transaction;
                       const isCompleted = status === "completed";
                       return (
@@ -189,10 +196,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                             className={`flex justify-start
                               bg-white sm:table-row 
                               dark:bg-transparent ${
-                              onToggleExpanded
-                                ? "cursor-pointer transition-colors"
-                                : ""
-                            }`}
+                                onToggleExpanded
+                                  ? "cursor-pointer transition-colors"
+                                  : ""
+                              }`}
                             onClick={() => {
                               if (screenSize.width < 640) {
                                 setSelectedRow(transaction);
@@ -203,12 +210,18 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                           >
                             <td
                               className={`py-4 
-                                ${index === 0 ? "rounded-tl-lg" : "0" } 
-                                ${index === groupedTransactions.length - 1 ? "rounded-bl-lg" : "0" } `}
+                                ${index === 0 ? "rounded-tl-lg" : "0"} 
+                                ${
+                                  index === groupedTransactions.length - 1
+                                    ? "rounded-bl-lg"
+                                    : "0"
+                                } `}
                               onClick={(e) => e.stopPropagation()}
                             >
-                              <div className="hidden sm:flex sm:items-center sm:justify-center
-                              ">
+                              <div
+                                className="hidden sm:flex sm:items-center sm:justify-center
+                              "
+                              >
                                 <input
                                   type="checkbox"
                                   checked={selectedTransactions.includes(id)}
@@ -220,16 +233,34 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                             </td>
                             <td className="py-0 sm:py-4">
                               <div className="flex items-center gap-3">
-                                {!expandedTransactionId && 
-                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
-                                    <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
+                                {!expandedTransactionId && (
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    className="size-4"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                      clipRule="evenodd"
+                                    />
                                   </svg>
-                                }
-                                {expandedTransactionId && 
-                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 rotate-180">
-                                    <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
+                                )}
+                                {expandedTransactionId && (
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    className="size-4 rotate-180"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                      clipRule="evenodd"
+                                    />
                                   </svg>
-                                }
+                                )}
                                 <Avatar
                                   src={wallet.logo}
                                   alt={wallet.name}
@@ -368,10 +399,16 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                 </div>
                               </td>
                             )}
-                            <td className={`hidden sm:table-cell py-4
-                            ${index === 0 ? "rounded-tr-lg" : "0" } 
-                                ${index === transactions.length - 1 ? "rounded-bl-lg" : "0" }
-                            `}>
+                            <td
+                              className={`hidden sm:table-cell py-4
+                            ${index === 0 ? "rounded-tr-lg" : "0"} 
+                                ${
+                                  index === transactions.length - 1
+                                    ? "rounded-bl-lg"
+                                    : "0"
+                                }
+                            `}
+                            >
                               {isCompleted && (
                                 <div className="w-10 h-10 rounded-full flex items-center justify-end text-[#7C7C7C]">
                                   <svg

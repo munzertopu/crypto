@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import ConfigureModal from "./ConfigureModal";
@@ -14,9 +14,48 @@ interface TooltipProps {
 
 const Tooltip: React.FC<TooltipProps> = ({ text, children }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [style, setStyle] = useState<React.CSSProperties>({});
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (isVisible && containerRef.current && tooltipRef.current) {
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const tooltipRect = tooltipRef.current.getBoundingClientRect();
+      const padding = 8;
+
+      // Preferred position: bottom
+      let top = containerRect.bottom + 8;
+      let left =
+        containerRect.left + containerRect.width / 2 - tooltipRect.width / 2;
+
+      // Clamp horizontally
+      if (left < padding) left = padding;
+      if (left + tooltipRect.width > window.innerWidth - padding) {
+        left = window.innerWidth - tooltipRect.width - padding;
+      }
+
+      // If bottom overflows, place on top
+      if (top + tooltipRect.height > window.innerHeight - padding) {
+        top = containerRect.top - tooltipRect.height - 8;
+        if (top < padding) {
+          // If even top overflows, stick to top edge
+          top = padding;
+        }
+      }
+
+      setStyle({
+        position: "fixed",
+        top,
+        left,
+        zIndex: 50,
+      });
+    }
+  }, [isVisible]);
 
   return (
     <div
+      ref={containerRef}
       className="relative inline-block"
       onMouseEnter={() => setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
@@ -24,12 +63,9 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children }) => {
       {children}
       {isVisible && (
         <div
-          className="absolute z-50 px-3 py-2 text-base font-medium rounded-lg shadow-lg whitespace-nowrap bg-[#0E201E] dark:bg-[#2F3232] text-white"
-          style={{
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
+          ref={tooltipRef}
+          style={style}
+          className="hidden md:block px-3 py-2 text-base font-medium rounded-lg shadow-lg whitespace-nowrap bg-[#0E201E] dark:bg-[#2F3232] text-white"
         >
           {text}
         </div>
