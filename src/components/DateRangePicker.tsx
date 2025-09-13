@@ -159,7 +159,10 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   }, [selectedDateRange]);
 
   return (
-    <div className="relative datepicker-container" ref={containerRef}>
+    <div
+      className="relative datepicker-container dark:bg-[#0E201E]"
+      ref={containerRef}
+    >
       <button
         onClick={handleIconClick}
         className={`w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-transparent border-gray-150 text-gray-900
@@ -259,8 +262,8 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
 
       {isOpen && (
         <div
-          className={`absolute top-full left-[-175px] md:left-[-710px] mt-1 z-50 bg-white dark:bg-gray-800 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
-            isDrawer ? " left-[-10px]" : ""
+          className={`absolute top-full  md:left-[-710px] mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
+            isDrawer ? " left-[-10px]" : "left-[-175px]"
           }`}
         >
           {/* Left Sidebar for Filters */}
@@ -317,6 +320,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
               // ranges={dateRange}
               // editableDateInputs={false}
               // onChange={handleDateChange}
+
               direction={screenSize.width < 640 ? "vertical" : "horizontal"}
               rangeColors={["#6DA036"]}
               // className="react-date-range-custom"
@@ -330,8 +334,8 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
               locale={enUS} // Added locale prop to fix the error
             />
           </div>
-          <div className="w-full px-1 mt-[-10px] pb-5 md:hidden">
-            <div className="flex justify-between items-center gap-2 px-2 opacity-90 w-full">
+          <div className="w-full md:px-1 mt-[15px] md:mt-[-10px] pb-5 md:hidden">
+            <div className="flex justify-between items-center gap-2  md:px-2 opacity-90 w-full">
               <Dropdown
                 className="w-full flex-grow-1"
                 options={createShortcuts()
