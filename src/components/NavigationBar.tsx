@@ -117,7 +117,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               className={`opacity-80 px-1 lg:px-0 py-2 text-sm lg:text-base text-gray-900
                  dark:text-gray-250
                 ${
-                  currentPage === item.name.toLowerCase()
+                  currentPage === item.href.replace('/', '') || 
+                  currentPage === item.name.toLowerCase().replace(/\s+/g, '-')
                     ? "!text-green-700"
                     : ``
                 }`}
