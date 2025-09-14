@@ -19,7 +19,6 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
   };
 
   const handleAddKPI = () => {
-    console.log("Add KPI clicked");
     // Add KPI functionality would go here
   };
 

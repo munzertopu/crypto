@@ -37,7 +37,7 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
   return (
     <div className="relative">
       <div
-        className={`flex items-center px-4 py-3 my-0 sm:my-4 md:my-4 space-x-4 rounded-xl shadow-sm border bg-white border-default text-primary text-smh
+        className={`flex items-center px-4 py-4 my-0 sm:my-4 md:my-4 space-x-4 rounded-xl shadow-sm border bg-white border-default text-primary text-sm
           dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-[#F3F5F7]`}
         onClick={() => setIsOpen(!isOpen)}
       >
@@ -73,14 +73,14 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                   placeholder="0"
                   value={fromValue}
                   onChange={(e) => setFromValue(e.target.value)}
-                  className={`w-full rounded-lg text-sm font-semibold border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-1 focus:ring-border-gray-300
+                  className={`w-full rounded-lg text-sm font-semibold border-default bg-white text-gray-900 focus:outline-none focus:ring-1 focus:ring-border-gray-300
                     dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250`}
                 />
                 <button
                   onClick={() =>
                     setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
                   }
-                  className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-gray-300 text-gray-600 bg-white
+                  className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 bg-white focus:outline-none
                     dark:bg-[#0E201E] dark:border-[#4D5050]`}
                 >
                   <div className="flex items-center gap-1">
@@ -92,7 +92,7 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                 {/* Currency Dropdown */}
                 {showFromCurrencyDropdown && (
                   <div
-                    className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200
+                    className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-default
                       dark:bg-[#0E201E]`}
                   >
                     <div className="py-1">
@@ -133,14 +133,14 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                   placeholder="1000"
                   value={toValue}
                   onChange={(e) => setToValue(e.target.value)}
-                  className={`w-full rounded-lg text-sm font-semibold border-gray-300 bg-white text-gray-900
+                  className={`w-full rounded-lg text-sm font-semibold border-default bg-white text-gray-900
                     dark:bg-transparent dark:border-[#4D5050] dark:text-gray-250`}
                 />
                 <button
                   onClick={() =>
                     setShowToCurrencyDropdown(!showToCurrencyDropdown)
                   }
-                  className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-gray-300 text-gray-600 bg-white
+                  className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 bg-white
                     dark:bg-[#0E201E] dark:border-[#4D5050]`}
                 >
                   <div className="flex items-center gap-1">
@@ -152,7 +152,7 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                 {/* Currency Dropdown */}
                 {showToCurrencyDropdown && (
                   <div
-                    className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200
+                    className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-default
                       dark:bg-[#0E201E] dark:border-[#4D5050]`}
                   >
                     <div className="py-1">
