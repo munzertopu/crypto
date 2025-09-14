@@ -119,10 +119,10 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
                     <td className="pl-5 pr-8 py-3 whitespace-nowrap text-sm text-[#0E201E] dark:text-gray-250">
                       {item.allocation}
                     </td>
-                    <td className="px-5 py-3 whitespace-nowrap">
-                      <div className="w-2/3 h-5 bg-[#D8382C] dark:bg-[#4D5050] rounded-full">
+                    <td className="pl-3 pr-5 py-3 whitespace-nowrap">
+                      <div className="w-2/3 h-5 bg-[#D8382C] dark:bg-[#4D5050] rounded-md">
                         <div 
-                          className="bg-[#419F45] h-5 rounded-l-full" 
+                          className="bg-[#419F45] h-5 rounded-l-md" 
                           style={{ width: `${item.longTermGain}` }}
                         ></div>
                       </div>

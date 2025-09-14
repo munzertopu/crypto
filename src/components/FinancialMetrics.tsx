@@ -313,7 +313,7 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
           ></div>
 
           {/* Right Section - Cost Basic and Unrealized Gain */}
-          <div className="lg:ml-auto flex justify-between sm:justify-start  gap-4 sm:gap-6 lg:gap-8">
+          <div className="lg:ml-auto flex justify-between sm:justify-start gap-4 sm:gap-6 lg:gap-10">
             <MetricItem
               title="Cost Basic"
               value={costBasic}
@@ -339,9 +339,9 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
 
               {/* Unrealized Gain Dropdown */}
               {isUnrealizedGainDropdownOpen && (
-                <div className="absolute top-8 right-0 md:-ml-3 mt-1 bg-white rounded-lg shadow-lg p-4 z-50 border border-gray-200 flex flex-col justify-center">
+                <div className="absolute top-8 right-0 md:-ml-10 mt-1 bg-white rounded-lg shadow-sm p-6 z-50 border border-default flex flex-col justify-center">
                   {/* Short Term Gain */}
-                  <div className="px-3 py-2 hover:bg-gray-50 cursor-pointer">
+                  <div className="hover:bg-gray-50 cursor-pointer">
                     <div className="flex items-center mb-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -369,7 +369,7 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
                   </div>
 
                   {/* Long Term Gain */}
-                  <div className="px-3 py-2 hover:bg-gray-50 cursor-pointer">
+                  <div className="pt-6 hover:bg-gray-50 cursor-pointer">
                     <div className="flex items-center mb-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
