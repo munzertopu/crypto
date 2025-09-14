@@ -116,7 +116,7 @@ const Recommended: React.FC<RecommendedProps> = ({
                 </span>
               </p>
               <button
-                className={`flex items-center text-sm border border-gray-150 rounded-[8px] px-2.5 py-1.5 font-medium text-gray-900
+                className={`flex items-center text-sm border border-gray-150 rounded-[8px] px-2.5 py-1.5 mt-3 font-medium text-gray-900
                     dark:text-gray-250 `}
                 aria-label={`Add ${account.platform} account`}
               >
@@ -140,7 +140,7 @@ const Recommended: React.FC<RecommendedProps> = ({
                     stroke-linejoin="round"
                   />
                 </svg>
-                <span className="px-1">Add Account</span>
+                <span className="pr-1 text-sm">Add Account</span>
               </button>
             </div>
           </div>

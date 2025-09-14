@@ -14,7 +14,6 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
-  const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState("date");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [expandedTransactionId, setExpandedTransactionId] = useState<
@@ -62,7 +61,6 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
-
 
   const handleLogout = () => {
     if (onLogout) {
@@ -121,8 +119,6 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           setSelectedType={setSelectedType}
           selectedStatus={selectedStatus}
           setSelectedStatus={setSelectedStatus}
-          showFilters={showFilters}
-          setShowFilters={setShowFilters}
           hideTab={screenSize.width < 640}
         />
 
