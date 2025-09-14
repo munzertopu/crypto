@@ -164,6 +164,12 @@ const RulesTab: React.FC<RulesTabProps> = () => {
             dateFormat="MM/dd/yyyy"
             wrapperClassName="w-full"
             popperPlacement="bottom-start"
+            popperClassName="z-[9999]"
+            popperContainer={({ children }) => (
+              <div style={{ zIndex: 9999, position: 'relative' }}>
+                {children}
+              </div>
+            )}
             customInput={
               <div className="flex items-center justify-between w-full space-x-6">
                 <span className="flex-1 text-left">

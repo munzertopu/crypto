@@ -117,7 +117,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               className={`opacity-80 px-1 lg:px-0 py-2 text-sm lg:text-base text-gray-900
                  dark:text-gray-250
                 ${
-                  currentPage === item.name.toLowerCase()
+                  currentPage === item.href.replace('/', '') || 
+                  currentPage === item.name.toLowerCase().replace(/\s+/g, '-')
                     ? "!text-green-700"
                     : ``
                 }`}
@@ -200,7 +201,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           <div className="relative space-x-6 px-3 sm:px-0">
             <button
               onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-              className="flex items-center justify-between space-x-6 lg:border lg:border-[#E1E3E5] lg:px-3 lg:py-1.5 lg:rounded-xl
+              className="flex items-center justify-between space-x-3 lg:border lg:border-[#E1E3E5] lg:px-3 lg:py-1.5 lg:rounded-xl
               dark:border-[#4D5050] focus:border-green-400"
               aria-label="Open profile menu"
               aria-expanded={isProfileDropdownOpen}

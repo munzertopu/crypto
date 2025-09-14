@@ -37,8 +37,6 @@ interface FilterProps {
   setSelectedType: (type: string) => void;
   selectedStatus: string;
   setSelectedStatus: (status: string) => void;
-  showFilters: boolean;
-  setShowFilters: (show: boolean) => void;
   hideTab?: boolean;
 }
 const tabs = ["All", "Uncategorized", "Warnings"];
@@ -111,8 +109,6 @@ const Filter: React.FC<FilterProps> = ({
   setSelectedType,
   selectedStatus,
   setSelectedStatus,
-  showFilters,
-  setShowFilters,
   hideTab = false,
 }) => {
   const [showWarningBanner, setShowWarningBanner] = useState(true);
@@ -174,50 +170,6 @@ const Filter: React.FC<FilterProps> = ({
       });
     }
     return "";
-  };
-
-  // Create shortcuts with year dropdown
-  const createShortcuts = () => {
-    const shortcuts: any = {
-      today: "Today",
-      last7Days: {
-        text: "Last 7 days",
-        period: {
-          start: new Date(new Date().setDate(new Date().getDate() - 7)),
-          end: new Date(new Date().setDate(new Date().getDate() - 1)),
-        },
-      },
-      last30Days: {
-        text: "Last 30 days",
-        period: {
-          start: new Date(new Date().setDate(new Date().getDate() - 30)),
-          end: new Date(new Date().setDate(new Date().getDate() - 1)),
-        },
-      },
-      last6Months: {
-        text: "Last 6 months",
-        period: {
-          start: new Date(new Date().setMonth(new Date().getMonth() - 6)),
-          end: new Date(new Date().setDate(new Date().getDate() - 1)),
-        },
-      },
-      last12Months: {
-        text: "Last 12 months",
-        period: {
-          start: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
-          end: new Date(new Date().setDate(new Date().getDate() - 1)),
-        },
-      },
-      byYear: {
-        text: "By Year",
-        period: {
-          start: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
-          end: new Date(new Date().setDate(new Date().getDate() - 1)),
-        },
-      },
-    };
-
-    return shortcuts;
   };
 
   // Close dropdown when clicking outside
@@ -458,321 +410,262 @@ const Filter: React.FC<FilterProps> = ({
           </div>
         </div>
 
-        {/* Additional Filters - Only show when showFilters is true */}
-        {showFilters && (
-          <div className="flex items-center space-x-5 mt-4 md:mt-0">
-            {/* Custom Wallet Dropdown */}
-            <div className="relative" ref={walletDropdownRef}>
-              <button
-                onClick={() => setWalletDropdownOpen(!walletDropdownOpen)}
-                className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-primary
-                  dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-250`}
-              >
-                <span>Wallet</span>
-                <FontAwesomeIcon
-                  icon={walletDropdownOpen ? faChevronUp : faChevronDown}
-                  className="w-4 h-4"
-                />
-              </button>
-
-              {walletDropdownOpen && (
-                <div
-                  className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-sm z-50 bg-white border-gray-150
-                    dark:bg-[#0E201E]`}
-                >
-                  {/* Search Input */}
-                  <div className="px-3 border-b border-gray-150">
-                    <input
-                      type="text"
-                      placeholder="Type or paste wallet"
-                      value={walletSearchTerm}
-                      onChange={(e) => setWalletSearchTerm(e.target.value)}
-                      className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
-                        dark:bg-[#0E201E] dark:text-gray-250`}
-                    />
-                  </div>
-
-                  {/* Wallet Options List */}
-                  <div className="max-h-48 overflow-y-auto">
-                    {filteredWalletOptions.map((option) => {
-                      const isSelected = selectedWallets.includes(option.id);
-                      return (
-                        <div
-                          key={option.id}
-                          onClick={() => handleWalletToggle(option.id)}
-                          className={`flex items-center px-3 py-1.5 cursor-pointer`}
-                        >
-                          <div
-                            className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
-                              isSelected
-                                ? "bg-[#90C853] border-[#90C853]"
-                                : "border-gray-300"
-                            }`}
-                          >
-                            {isSelected && (
-                              <FontAwesomeIcon
-                                icon={faCheck}
-                                className="w-2.5 h-2.5 text-white"
-                              />
-                            )}
-                          </div>
-                          <img
-                            src={option.logo}
-                            className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}
-                          ></img>
-                          <span
-                            className={`text-sm text-gray-900
-                              dark:text-gray-250`}
-                          >
-                            {option.name}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Action Type Dropdown */}
-            <div className="relative" ref={actionTypeDropdownRef}>
-              <button
-                onClick={() =>
-                  setActionTypeDropdownOpen(!actionTypeDropdownOpen)
-                }
-                className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl 
-                  border bg-white border-default text-primary
-                  dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-250`}
-              >
-                <span>Action type</span>
-                <FontAwesomeIcon
-                  icon={actionTypeDropdownOpen ? faChevronUp : faChevronDown}
-                  className="w-3 h-3"
-                />
-              </button>
-
-              {actionTypeDropdownOpen && (
-                <div
-                  className={`absolute top-full left-0 mt-1 w-64 rounded-lg 
-                    border shadow-sm z-50 bg-white border-gray-150
-                    dark:bg-[#0E201E]`}
-                >
-                  {/* Search Input */}
-                  <div className="px-3 border-b border-gray-150">
-                    <input
-                      type="text"
-                      placeholder="Type or paste action type"
-                      value={actionTypeSearchTerm}
-                      onChange={(e) => setActionTypeSearchTerm(e.target.value)}
-                      className={`w-full px-3 py-2 rounded text-sm text-gray-900 dark:text-gray-150 placeholder-gray-500 focus:outline-none
-                        dark:bg-[#0E201E] dark:text-gray-50`}
-                    />
-                  </div>
-
-                  {/* Action Type Options List */}
-                  <div className="max-h-48 overflow-y-auto">
-                    {filteredActionTypeOptions.map((option) => {
-                      const isSelected = selectedActionTypes.includes(
-                        option.id
-                      );
-                      return (
-                        <div
-                          key={option.id}
-                          onClick={() => handleActionTypeToggle(option.id)}
-                          className={`flex items-center px-3 py-2 cursor-pointer`}
-                        >
-                          <div
-                            className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
-                              isSelected
-                                ? "bg-[#90C853] border-[#90C853]"
-                                : "border-gray-300"
-                            }`}
-                          >
-                            {isSelected && (
-                              <FontAwesomeIcon
-                                icon={faCheck}
-                                className="w-2.5 h-2.5 text-white"
-                              />
-                            )}
-                          </div>
-                          <span
-                            className={`text-sm text-gray-900 
-                              dark:text-gray-250`}
-                          >
-                            {option.name}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-            </div>
-            {/* Amount Sent Dropdown */}
-            <AmountRangeDropdown
-              fromValue={fromSentValue}
-              setFromValue={setFromSentValue}
-              toValue={toSentValue}
-              setToValue={setToSentValue}
-              fromCurrency={fromSentCurrency}
-              setFromCurrency={setFromSentCurrency}
-              toCurrency={toSentCurrency}
-              setToCurrency={setToSentCurrency}
-              isOpen={amountSentDropdownOpen}
-              setIsOpen={setAmountSentDropdownOpen}
-              title="Amount sent"
-            />
-
-            {/* Amount Received Dropdown */}
-            <AmountRangeDropdown
-              fromValue={fromReceivedValue}
-              setFromValue={setFromReceivedValue}
-              toValue={toReceivedValue}
-              setToValue={setToReceivedValue}
-              fromCurrency={fromReceivedCurrency}
-              setFromCurrency={setFromReceivedCurrency}
-              toCurrency={toReceivedCurrency}
-              setToCurrency={setToReceivedCurrency}
-              isOpen={amountReceivedDropdownOpen}
-              setIsOpen={setAmountReceivedDropdownOpen}
-              title="Amount received"
-            />
-            <div className={`max-w-[190px] flex items-center`}>
-              <DateRangePickerPopover
-                selectedDateRange={selectedDateRange}
-                onDateRangeChange={setSelectedDateRange}
-                buttonLabel="Date"
-                className="py-4"
-              />
-            </div>
-
-            {/* Custom Result Dropdown */}
-            <div className="relative" ref={resultDropdownRef}>
-              <button
-                onClick={() => setResultDropdownOpen(!resultDropdownOpen)}
-                className={`flex text-lg items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-[#0E201E] text-smh
-                  dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-250`}
-              >
-                <span>Result</span>
-                <FontAwesomeIcon
-                  icon={resultDropdownOpen ? faChevronUp : faChevronDown}
-                  className="w-3 h-3"
-                />
-              </button>
-
-              {resultDropdownOpen && (
-                <div
-                  className={`absolute top-full right-0 mt-1 w-64 rounded-lg 
-                    border shadow-sm z-50 bg-white border-gray-150
-                    dark:bg-[#0E201E]`}
-                >
-                  {/* Search Input */}
-                  <div className="px-3 border-b border-gray-150">
-                    <input
-                      type="text"
-                      placeholder="Type or paste result"
-                      value={resultSearchTerm}
-                      onChange={(e) => setResultSearchTerm(e.target.value)}
-                      className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
-                        dark:bg-[#0E201E] dark:text-gray-250`}
-                    />
-                  </div>
-
-                  {/* Result Options List */}
-                  <div className="max-h-48 overflow-y-auto">
-                    {filteredResultOptions.map((option) => {
-                      const isSelected = selectedResults.includes(option.id);
-                      return (
-                        <div
-                          key={option.id}
-                          onClick={() => handleResultToggle(option.id)}
-                          className={`flex items-center px-3 py-2 cursor-pointer`}
-                        >
-                          <div
-                            className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
-                              isSelected
-                                ? "bg-[#90C853] border-[#90C853]"
-                                : "border-gray-300"
-                            }`}
-                          >
-                            {isSelected && (
-                              <FontAwesomeIcon
-                                icon={faCheck}
-                                className="w-2.5 h-2.5 text-white"
-                              />
-                            )}
-                          </div>
-                          <span
-                            className={`text-sm text-gray-900
-                              dark:text-gray-250`}
-                          >
-                            {option.name}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* More Filters Button */}
-        {!showFilters && (
-          <div className="flex items-center justify-center">
+        <div className="flex items-center space-x-5 mt-4 md:mt-0">
+          {/* Custom Wallet Dropdown */}
+          <div className="relative" ref={walletDropdownRef}>
             <button
-              onClick={() => {
-                if (screenSize.width < 640) {
-                  setShowMobileFilters(true);
-                  return;
-                }
-                setShowFilters(!showFilters);
-              }}
-              className={`flex text-sm items-center p-3 rounded-[12px] border transition-colors bg-white border-gray-150 text-[#0E201E]
-                dark:bg-transparent dark:border-[#4D5050] dark:text-gray-250`}
-              aria-label="Toggle additional filters"
-              aria-expanded={showFilters}
+              onClick={() => setWalletDropdownOpen(!walletDropdownOpen)}
+              className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-primary
+                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-250`}
             >
-              <svg
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                width="20.000000"
-                height="20.000000"
-                fill="none"
-                className="w-5 h-5 sm:w-4 sm:h-4 sm:mr-2 text-[#0E201E]
-                  dark:text-gray-250"
-              >
-                <rect
-                  id="Property 2=filter"
-                  width="20.000000"
-                  height="20.000000"
-                  x="0.000000"
-                  y="0.000000"
-                  fill="rgb(255,255,255)"
-                  fillOpacity="0"
-                />
-                <g id="vuesax/linear/filter">
-                  <g id="filter">
-                    <path
-                      id="Vector"
-                      d="M15.4997 1.75C16.4163 1.75 17.1663 2.5 17.1663 3.41667L17.1663 5.25C17.1663 5.91667 16.7497 6.75 16.333 7.16667L12.7497 10.3333C12.2497 10.75 11.9163 11.5833 11.9163 12.25L11.9163 15.8333C11.9163 16.3333 11.583 17 11.1663 17.25L9.99967 18C8.91634 18.6667 7.41634 17.9167 7.41634 16.5833L7.41634 12.1667C7.41634 11.5833 7.08301 10.8333 6.74967 10.4167L3.58301 7.08333C3.16634 6.66667 2.83301 5.91667 2.83301 5.41667L2.83301 3.5C2.83301 2.5 3.58301 1.75 4.49967 1.75L15.4997 1.75Z"
-                      fillRule="nonzero"
-                      stroke="rgb(124,124,124)"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.20000005"
-                    />
-                    <path id="Vector" opacity="0" />
-                  </g>
-                </g>
-              </svg>
-
-              <span className="hidden sm:inline">Filters</span>
+              <span>Wallet</span>
+              <FontAwesomeIcon
+                icon={walletDropdownOpen ? faChevronUp : faChevronDown}
+                className="w-4 h-4"
+              />
             </button>
+
+            {walletDropdownOpen && (
+              <div
+                className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-sm z-50 bg-white border-gray-150
+                  dark:bg-[#0E201E]`}
+              >
+                {/* Search Input */}
+                <div className="px-3 border-b border-gray-150">
+                  <input
+                    type="text"
+                    placeholder="Type or paste wallet"
+                    value={walletSearchTerm}
+                    onChange={(e) => setWalletSearchTerm(e.target.value)}
+                    className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
+                      dark:bg-[#0E201E] dark:text-gray-250`}
+                  />
+                </div>
+
+                {/* Wallet Options List */}
+                <div className="max-h-48 overflow-y-auto">
+                  {filteredWalletOptions.map((option) => {
+                    const isSelected = selectedWallets.includes(option.id);
+                    return (
+                      <div
+                        key={option.id}
+                        onClick={() => handleWalletToggle(option.id)}
+                        className={`flex items-center px-3 py-1.5 cursor-pointer`}
+                      >
+                        <div
+                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                            isSelected
+                              ? "bg-[#90C853] border-[#90C853]"
+                              : "border-gray-300"
+                          }`}
+                        >
+                          {isSelected && (
+                            <FontAwesomeIcon
+                              icon={faCheck}
+                              className="w-2.5 h-2.5 text-white"
+                            />
+                          )}
+                        </div>
+                        <img
+                          src={option.logo}
+                          className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}
+                        ></img>
+                        <span
+                          className={`text-sm text-gray-900
+                            dark:text-gray-250`}
+                        >
+                          {option.name}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
-        )}
+
+          {/* Action Type Dropdown */}
+          <div className="relative" ref={actionTypeDropdownRef}>
+            <button
+              onClick={() =>
+                setActionTypeDropdownOpen(!actionTypeDropdownOpen)
+              }
+              className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl 
+                border bg-white border-default text-primary
+                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-250`}
+            >
+              <span>Action type</span>
+              <FontAwesomeIcon
+                icon={actionTypeDropdownOpen ? faChevronUp : faChevronDown}
+                className="w-3 h-3"
+              />
+            </button>
+
+            {actionTypeDropdownOpen && (
+              <div
+                className={`absolute top-full left-0 mt-1 w-64 rounded-lg 
+                  border shadow-sm z-50 bg-white border-gray-150
+                  dark:bg-[#0E201E]`}
+              >
+                {/* Search Input */}
+                <div className="px-3 border-b border-gray-150">
+                  <input
+                    type="text"
+                    placeholder="Type or paste action type"
+                    value={actionTypeSearchTerm}
+                    onChange={(e) => setActionTypeSearchTerm(e.target.value)}
+                    className={`w-full px-3 py-2 rounded text-sm text-gray-900 dark:text-gray-150 placeholder-gray-500 focus:outline-none
+                      dark:bg-[#0E201E] dark:text-gray-50`}
+                  />
+                </div>
+
+                {/* Action Type Options List */}
+                <div className="max-h-48 overflow-y-auto">
+                  {filteredActionTypeOptions.map((option) => {
+                    const isSelected = selectedActionTypes.includes(
+                      option.id
+                    );
+                    return (
+                      <div
+                        key={option.id}
+                        onClick={() => handleActionTypeToggle(option.id)}
+                        className={`flex items-center px-3 py-2 cursor-pointer`}
+                      >
+                        <div
+                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                            isSelected
+                              ? "bg-[#90C853] border-[#90C853]"
+                              : "border-gray-300"
+                          }`}
+                        >
+                          {isSelected && (
+                            <FontAwesomeIcon
+                              icon={faCheck}
+                              className="w-2.5 h-2.5 text-white"
+                            />
+                          )}
+                        </div>
+                        <span
+                          className={`text-sm text-gray-900 
+                            dark:text-gray-250`}
+                        >
+                          {option.name}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+          {/* Amount Sent Dropdown */}
+          <AmountRangeDropdown
+            fromValue={fromSentValue}
+            setFromValue={setFromSentValue}
+            toValue={toSentValue}
+            setToValue={setToSentValue}
+            fromCurrency={fromSentCurrency}
+            setFromCurrency={setFromSentCurrency}
+            toCurrency={toSentCurrency}
+            setToCurrency={setToSentCurrency}
+            isOpen={amountSentDropdownOpen}
+            setIsOpen={setAmountSentDropdownOpen}
+            title="Amount sent"
+          />
+
+          {/* Amount Received Dropdown */}
+          <AmountRangeDropdown
+            fromValue={fromReceivedValue}
+            setFromValue={setFromReceivedValue}
+            toValue={toReceivedValue}
+            setToValue={setToReceivedValue}
+            fromCurrency={fromReceivedCurrency}
+            setFromCurrency={setFromReceivedCurrency}
+            toCurrency={toReceivedCurrency}
+            setToCurrency={setToReceivedCurrency}
+            isOpen={amountReceivedDropdownOpen}
+            setIsOpen={setAmountReceivedDropdownOpen}
+            title="Amount received"
+          />
+          <div className={`max-w-[190px] flex items-center`}>
+            <DateRangePickerPopover
+              selectedDateRange={selectedDateRange}
+              onDateRangeChange={setSelectedDateRange}
+              buttonLabel="Date"
+              className="py-4"
+            />
+          </div>
+
+          {/* Custom Result Dropdown */}
+          <div className="relative" ref={resultDropdownRef}>
+            <button
+              onClick={() => setResultDropdownOpen(!resultDropdownOpen)}
+              className={`flex text-lg items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-[#0E201E] text-smh
+                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-250`}
+            >
+              <span>Result</span>
+              <FontAwesomeIcon
+                icon={resultDropdownOpen ? faChevronUp : faChevronDown}
+                className="w-3 h-3"
+              />
+            </button>
+
+            {resultDropdownOpen && (
+              <div
+                className={`absolute top-full right-0 mt-1 w-64 rounded-lg 
+                  border shadow-sm z-50 bg-white border-gray-150
+                  dark:bg-[#0E201E]`}
+              >
+                {/* Search Input */}
+                <div className="px-3 border-b border-gray-150">
+                  <input
+                    type="text"
+                    placeholder="Type or paste result"
+                    value={resultSearchTerm}
+                    onChange={(e) => setResultSearchTerm(e.target.value)}
+                    className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
+                      dark:bg-[#0E201E] dark:text-gray-250`}
+                  />
+                </div>
+
+                {/* Result Options List */}
+                <div className="max-h-48 overflow-y-auto">
+                  {filteredResultOptions.map((option) => {
+                    const isSelected = selectedResults.includes(option.id);
+                    return (
+                      <div
+                        key={option.id}
+                        onClick={() => handleResultToggle(option.id)}
+                        className={`flex items-center px-3 py-2 cursor-pointer`}
+                      >
+                        <div
+                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                            isSelected
+                              ? "bg-[#90C853] border-[#90C853]"
+                              : "border-gray-300"
+                          }`}
+                        >
+                          {isSelected && (
+                            <FontAwesomeIcon
+                              icon={faCheck}
+                              className="w-2.5 h-2.5 text-white"
+                            />
+                          )}
+                        </div>
+                        <span
+                          className={`text-sm text-gray-900
+                            dark:text-gray-250`}
+                        >
+                          {option.name}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
       <MobileDrawer
         isOpen={showMobileFilters}

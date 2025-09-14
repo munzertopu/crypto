@@ -20,3 +20,32 @@ body {
 .dark .rdrDayNumber span {
   color: #feffff;
 }
+
+/* Fix for react-datepicker calendar display issues */
+.react-datepicker-popper {
+  z-index: 9999 !important;
+}
+
+.react-datepicker {
+  z-index: 9999 !important;
+  position: relative !important;
+}
+
+.react-datepicker__triangle {
+  z-index: 9999 !important;
+}
+
+/* Additional fixes for modal calendar display */
+.react-datepicker-popper[data-placement^="bottom"] {
+  z-index: 10000 !important;
+}
+
+.react-datepicker-popper[data-placement^="top"] {
+  z-index: 10000 !important;
+}
+
+/* Ensure calendar is not clipped by modal containers */
+.fixed .react-datepicker-popper {
+  z-index: 10000 !important;
+  position: fixed !important;
+}
