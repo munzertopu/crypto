@@ -45,7 +45,7 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className={`relative max-w-md w-full mx-4 p-8 rounded-lg shadow-lg overflow-hidden ${
+      <div className={`relative max-w-md w-full mx-4 p-8 rounded-lg shadow-lg overflow-visible ${
         'bg-white text-gray-900 dark:text-gray-150 dark:bg-gray-800'
       }`}>
         {/* Header */}
@@ -103,6 +103,7 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
                 dateFormat="MM/dd/yyyy"
                 wrapperClassName="w-full"
                 popperPlacement="bottom-start"
+                popperClassName="z-[10000]"
                 customInput={
                   <div className="flex items-center justify-between w-full">
                     <svg className="text-[#7C7C7C] size-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

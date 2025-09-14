@@ -231,11 +231,11 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
           </nav>
           
           {/* Main Content */}
-          <div className="flex-1 px-10">
+          <div className="flex-1 px-10 overflow-visible">
             <Card
-              className={`border-transparent shadow-transparent bg-white dark:bg-transparent`}
+              className={`border-transparent shadow-transparent bg-white dark:bg-transparent overflow-visible`}
             >
-              <CardBody className="px-5 py-0">{renderTabContent()}</CardBody>
+              <CardBody className="px-5 py-0 overflow-visible">{renderTabContent()}</CardBody>
             </Card>
           </div>
         </div>

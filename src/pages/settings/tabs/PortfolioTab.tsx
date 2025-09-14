@@ -273,6 +273,12 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   dateFormat="MM/dd/yyyy"
                   wrapperClassName="w-full"
                   popperPlacement="bottom-start"
+                  popperClassName="z-[9999]"
+                  popperContainer={({ children }) => (
+                    <div style={{ zIndex: 9999, position: 'relative' }}>
+                      {children}
+                    </div>
+                  )}
                   customInput={
                     <div className="flex items-center justify-between w-full">
                       <span className="flex-1 text-left">
@@ -381,6 +387,12 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                    dateFormat="MM/dd/yyyy"
                    wrapperClassName="w-full"
                    popperPlacement="bottom-start"
+                   popperClassName="z-[9999]"
+                   popperContainer={({ children }) => (
+                     <div style={{ zIndex: 9999, position: 'relative' }}>
+                       {children}
+                     </div>
+                   )}
                    customInput={
                      <div className="flex items-center justify-between w-full">
                        <svg className="text-[#7C7C7C] size-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
