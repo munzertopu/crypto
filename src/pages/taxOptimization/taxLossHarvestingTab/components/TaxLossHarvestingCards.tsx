@@ -94,7 +94,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
         <FontAwesomeIcon icon={icon} className={`w-5 h-5 text-[#7C7C7C] dark:text-gray-250`} />
         <Typography variant="small" className="text-[#0E201E] dark:text-[#B6B8BA]">{label}</Typography>
       </div>
-      <Typography variant="small" className={`text-left text-h4 font-semibold ${valueColor}`}>{value}</Typography>
+      <Typography variant="small" className={`text-left !text-h4 font-semibold ${valueColor}`}>{value}</Typography>
     </div>
   );
 
@@ -106,21 +106,21 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
     <Card className={`py-6 bg-white dark:bg-transparent 
       border border-default dark:border-[#E1E3E5] overflow-hidden`}>
       <CardBody className="p-0 overflow-hidden">
-        <div className="flex items-center justify-between mb-4 px-8">
+        <div className="flex items-center justify-between pb-6 px-8">
           <div className="flex items-center space-x-2">
-            <Typography variant="h2" className={`text-h6 font-semibold text-gray-900 dark:text-gray-150`}>
+            <div className={`text-h6 font-semibold text-gray-900 dark:text-gray-150`}>
               {title}
-            </Typography>
+            </div>
             <svg className="w-5 h-5 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
             </svg>
           </div>
           {showDropdown && (
-             <div className="relative mb-4" ref={assetDropdownRef}>
+             <div className="relative" ref={assetDropdownRef}>
               <button
                 onClick={() => setAssetDropdownOpen(!assetDropdownOpen)}
-                className={`flex items-center space-x-2 px-3 py-1 border border-gray-300 rounded-lg text-sm 
+                className={`flex items-center space-x-2 px-3 py-2 -mb-3 border border-gray-300 rounded-lg text-sm 
                   bg-white border-gray-300 text-gray-700'
                   dark:bg-transparent
                 `}

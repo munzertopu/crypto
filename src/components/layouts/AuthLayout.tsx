@@ -10,12 +10,12 @@ const AuthLayout = ({ children }: ChildrenProps) => {
   return (
     <div className="flex flex-col-reverse lg:flex-row bg-white mx-1 sm:mx-14 my-6 sm:p-14">
       {/* Left Side - Login Form */}
-      <div className="flex-1 flex items-center px-5 sm:px-12 lg:px-16 text-left">
+      <div className="flex-1 flex items-center justify-end px-5 sm:px-12 md:px-0 lg:px-16 text-left">
         <div className="w-full max-w-md">{children}</div>
       </div>
 
       {/* Right Side - Lottie Animation with Stars */}
-      <div className="flex lg:w-1/2 items-center justify-center p-0.5 sm:p-8 relative overflow-hidden">
+      <div className="flex lg:w-1/2 items-center justify-start p-0.5 sm:p-8 md:p-0 relative overflow-hidden">
         <div className="text-center relative z-10">
           <div className="text-center relative z-10">
             <LottieAnimation

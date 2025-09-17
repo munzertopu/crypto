@@ -37,7 +37,9 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
 
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
+  const [showInnTooltip, setShowInnTooltip] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
@@ -55,6 +57,26 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
     // Handle save logic here
     console.log('Saving form info changes:', formData);
   };
+
+  // Handle clicks outside tooltip to close it
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        tooltipRef.current &&
+        !tooltipRef.current.contains(event.target as Node)
+      ) {
+        setShowInnTooltip(false);
+      }
+    };
+
+    if (showInnTooltip) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showInnTooltip]);
 
   return (
     <div className="space-y-6">
@@ -205,14 +227,34 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
           </div>
 
           <div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 relative">
               <label className="block text-sm font-medium text-left mb-1 text-[#2F3232] dark:text-gray-300">
                 INN
               </label>
-              <svg className="w-4 h-4 mx-2 -mt-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
-              </svg>
+              <div className="relative" ref={tooltipRef}>
+                <button
+                  type="button"
+                  onClick={() => setShowInnTooltip(!showInnTooltip)}
+                  className="w-4 h-4 mx-2 -mt-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  aria-label="INN help information"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
+                  </svg>
+                </button>
+                
+                {/* Tooltip */}
+                {showInnTooltip && (
+                  <div className="absolute z-50 w-64 p-3 mt-2 text-sm text-white bg-gray-900 dark:bg-gray-800 rounded-lg shadow-lg border border-gray-700 dark:border-gray-600 left-1/2 transform -translate-x-1/2">
+                    <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-900 dark:bg-gray-800 rotate-45 border-l border-t border-gray-700 dark:border-gray-600"></div>
+                    <p className="text-xs leading-relaxed">
+                      <strong>INN (Individual Taxpayer Identification Number)</strong> is a unique identifier used for tax purposes. 
+                      This field is optional and only required if you want this information to appear on your tax reports.
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
             <Input
               type="text"
