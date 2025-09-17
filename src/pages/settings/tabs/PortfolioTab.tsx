@@ -14,16 +14,13 @@ interface PortfolioTabProps {
 
 // Country data with flags and names
 const countries = [
-  { code: 'US', name: 'United States', flag: 'usa.png' },
-  { code: 'CA', name: 'Canada', flag: '🇨🇦' },
-  { code: 'GB', name: 'United Kingdom', flag: '🇬🇧' },
-  { code: 'AU', name: 'Australia', flag: '🇦🇺' },
-  { code: 'DE', name: 'Germany', flag: '🇩🇪' },
-  { code: 'FR', name: 'France', flag: '🇫🇷' },
-  { code: 'JP', name: 'Japan', flag: '🇯🇵' },
-  { code: 'IN', name: 'India', flag: '🇮🇳' },
-  { code: 'BR', name: 'Brazil', flag: '🇧🇷' },
-  { code: 'MX', name: 'Mexico', flag: '🇲🇽' }
+  { code: 'US', name: 'United States', flag: 'flags/usa.png' },
+  { code: 'CA', name: 'Canada', flag: 'flags/can.png' },
+  { code: 'GB', name: 'United Kingdom', flag: 'flags/uk.jpg' },
+  { code: 'AU', name: 'Australia', flag: 'flags/aus.jpg' },
+  { code: 'DE', name: 'Germany', flag: 'flags/ger.jpg' },
+  { code: 'JP', name: 'Japan', flag: 'flags/jap.png' },
+  { code: 'BN', name: 'Bangladesh', flag: 'flags/ban.jpg' }
 ];
 
 // Currency data
@@ -181,12 +178,12 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                     dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250`}
                 >
                   <div className="flex items-center">
-                    <img src={selectedCountry.flag} className="mr-3 py-1.5"></img>
+                    <img src={selectedCountry.flag} className="mr-3 w-4 h-3"></img>
                     <FontAwesomeIcon 
                       icon={faChevronDown} 
                       className={`w-3 h-3 transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`}
                     />
-                    <div className={`w-px h-10 my-0 bg-[#E1E3E5] bg-gray-600 mx-3`}></div>
+                    <div className={`w-px h-10 my-0 bg-[#E1E3E5] mx-3`}></div>
                     <span className="py-1.5 font-medium">{selectedCountry.name}</span>
                   </div>
                 </button>
@@ -200,12 +197,12 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                         key={country.code}
                         type="button"
                         onClick={() => handleCountrySelect(country)}
-                        className={`w-full px-3 border rounded-lg focus:outline-none flex items-center justify-between
-                          border-gray-150 bg-white text-gray-900
+                        className={`w-full px-3 border focus:outline-none flex items-center justify-between
+                          border-b-default bg-white text-gray-900
                           dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250
                         } ${selectedCountry.code === country.code ? 'bg-gray-100' : ''}`}
                       >
-                        <img src={country.flag} className="text-lg mr-3"></img>
+                        <img src={country.flag} className="text-lg mr-3 h-3 w-4"></img>
                         <span className="font-medium">{country.name}</span>
                       </button>
                     ))}
