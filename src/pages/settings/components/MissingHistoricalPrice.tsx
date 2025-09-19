@@ -109,7 +109,7 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
                 <div className={`w-4 h-4 border-2 rounded flex items-center justify-center ${
                   selectedPlatforms.includes(platform.id)
                     ? 'border-[#90C853] bg-[#90C853]'
-                    : 'border-gray-300'
+                    : 'border-default'
                 }`}>
                   {selectedPlatforms.includes(platform.id) && (
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
