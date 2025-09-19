@@ -300,13 +300,17 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                 <select
                   value={formData.timezone}
                   onChange={(e) => handleInputChange('timezone', e.target.value)}
-                  className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none bg-white text-gray-900
+                  className={`w-full appearance-none px-4 py-2 border border-default rounded-lg focus:outline-none bg-white text-gray-900
                     dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250`}
                 >
                   <option value="Pacific Daylight Time (GMT-7)">Pacific Daylight Time (GMT-7)</option>
                   <option value="Pacific Standard Time (GMT-8)">Pacific Standard Time (GMT-8)</option>
                   <option value="Eastern Daylight Time (GMT-4)">Eastern Daylight Time (GMT-4)</option>
                 </select>
+                <FontAwesomeIcon
+                  icon={faChevronDown} 
+                  className="absolute right-4 top-1/2 h-3 w-3 -translate-y-1/2 text-gray-500"
+                />
               </div>
             </div>
 
@@ -320,7 +324,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
                 </svg>
               </div>
-              <div className="flex space-x-0 pl-3 py-2 border border-[#E1E3E5] rounded-lg">
+              <div className="flex space-x-0 px-4 py-2 border border-[#E1E3E5] rounded-lg">
                   <input
                     type="text"
                     value={formData.dustValueThreshold}
@@ -332,7 +336,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                     <button
                       type="button"
                       onClick={() => setIsDustCurrencyDropdownOpen(!isDustCurrencyDropdownOpen)}
-                      className={`px-3 focus:outline-none flex items-center justify-between bg-white text-gray-900
+                      className={`focus:outline-none flex items-center justify-between bg-white text-gray-500
                         dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250`}
                     >
                     <div className="flex items-center justify-between w-full">
@@ -377,7 +381,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                  <DatePicker
                    selected={taxReportingYearDate} 
                    onChange={(date) => setTaxReportingYearDate(date)} 
-                   className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-white text-gray-900
+                   className={`w-full px-3 mt-{1px} py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-white text-gray-900
                       dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250
                    `}
                    placeholderText="MM/DD/YYYY"

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Button } from "@material-tailwind/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSearch, faChevronDown, faChevronUp, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Typography } from "@material-tailwind/react";
@@ -52,6 +53,10 @@ const RulesTab: React.FC<RulesTabProps> = () => {
   const handleRemoveTag = (ruleId: string, tagIndex: number) => {
     // Handle tag removal logic
     console.log('Remove tag', ruleId, tagIndex);
+  };
+  
+  const handleSaveChanges = () => {
+    console.log('Save changes clicked');
   };
 
   const handleDeleteRule = (ruleId: string) => {
@@ -131,25 +136,6 @@ const RulesTab: React.FC<RulesTabProps> = () => {
               className={`w-3 h-3 text-gray-500 transition-transform ${isTypeDropdownOpen ? 'rotate-180' : ''}`}
             />
           </button>
-          
-          {/* {isTypeDropdownOpen && (
-            <div className={`absolute top-full left-0 mt-1 w-32 border border-gray-300 rounded-lg shadow-lg py-1 z-50 ${
-              'bg-white border-gray-300 dark:bg-gray-800 dark:border-gray-600'
-            }`}>
-              {typeOptions.map((option) => (
-                <button
-                  key={option}
-                  className="w-full px-3 py-2 text-sm text-left hover:bg-gray-100 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-                  onClick={() => {
-                    setSelectedType(option);
-                    setIsTypeDropdownOpen(false);
-                  }}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-          )} */}
         </div>
 
         {/* Date Filter */}
@@ -172,8 +158,8 @@ const RulesTab: React.FC<RulesTabProps> = () => {
             )}
             customInput={
               <div className="flex items-center justify-between w-full space-x-6">
-                <span className="flex-1 text-left">
-                  {selectedDate ? selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) : 'MM/DD/YYYY'}
+                <span className={`flex-1 text-left ${!selectedDate ? 'text-gray-400 dark:text-gray-500' : ''}`}>
+                  {selectedDate ? selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) : 'Date'}
                 </span>
                 <svg className="text-[#7C7C7C] size-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z"/>
@@ -228,7 +214,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white divide-y divide-default">
             {rules.map((rule) => (
               <tr key={rule.id} className="hover:bg-gray-50">
                 <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-150">
@@ -247,7 +233,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
                   <div className="flex items-center space-x-2">
                     {rule.tags.map((tag, index) => (
                       <div key={index} className="flex items-center space-x-1 bg-gray-100 border border-default rounded-full px-3 py-1">
-                        <span className="text-sm text-gray-700">{tag}</span>
+                        <span className="text-sm text-gray-900">{tag}</span>
                         <button
                           onClick={() => handleRemoveTag(rule.id, index)}
                           className="text-gray-400 hover:text-gray-600"
@@ -279,6 +265,15 @@ const RulesTab: React.FC<RulesTabProps> = () => {
             ))}
           </tbody>
         </table>
+      </div>
+      {/* Action Buttons */}
+      <div className="flex justify-end pt-6 my-8">
+        <Button
+          onClick={handleSaveChanges}
+          className="bg-[#90C853] text-[#0E201E] px-5 py-3 rounded-lg font-medium border-0"
+        >
+          Save changes
+        </Button>
       </div>
 
       {/* Add Rule Modal */}

@@ -237,7 +237,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
           Tax Calculation Rules
         </Typography>
 
-        <div className="space-y-4">
+        <div className="space-y-2">
           {taxRules.map((rule) => (
             <div key={rule.id} className="flex items-center py-3">
               {/* Toggle Switch */}
@@ -262,7 +262,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex justify-between pt-6 border-t border-gray-200 my-8">
+      <div className="flex justify-between pt-6 my-8">
         <Button
           onClick={handleRecalculate}
           className={`border-[#E1E3E5] px-5 py-3 rounded-lg font-medium bg-white border-[#E1E3E5] text-[#0E201E]

@@ -225,7 +225,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                     activeTab === tab.id ? "text-gray-500" : "text-[#7C7C7C]"
                   }`}
                 />
-                <span className="font-medium">{tab.name}</span>
+                <span className="!mr-12 font-medium">{tab.name}</span>
               </button>
             ))}
           </nav>
