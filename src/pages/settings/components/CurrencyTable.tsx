@@ -51,9 +51,9 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
       name: 'Kraken',
       icon: 'crypto/kraken.png',
       currencies: [
-        { id: 'btc', name: 'Bitcoin', symbol: 'BTC', icon: 'crypto/bitcoin.png', customPrice: '125', date: 'Feb 7, 2025', gainLoss: '+296,48 USDT' },
-        { id: 'eth', name: 'Ethereum', symbol: 'ETH', icon: 'crypto/ethereum.png', customPrice: '523', date: 'Feb 7, 2025', gainLoss: '+156,23 USDT' },
-        { id: 'sol', name: 'Solana', symbol: 'SOL', icon: 'crypto/solana.png', customPrice: '87', date: 'Nov 27, 2024', gainLoss: '+89,12 USDT' }
+        { id: 'btc', name: 'Bitcoin', symbol: 'BTC', icon: 'crypto/bitcoin-btc-logo.png', customPrice: '125', date: 'Feb 7, 2025', gainLoss: '+296,48 USDT' },
+        { id: 'eth', name: 'Ethereum', symbol: 'ETH', icon: 'crypto/ethereum-eth-logo.png', customPrice: '523', date: 'Feb 7, 2025', gainLoss: '+156,23 USDT' },
+        { id: 'sol', name: 'Solana', symbol: 'SOL', icon: 'crypto/solana-sol-logo.png', customPrice: '87', date: 'Nov 27, 2024', gainLoss: '+89,12 USDT' }
       ]
     },
     {
@@ -61,7 +61,7 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
       name: 'Coinbase',
       icon: 'crypto/coinbase.png',
       currencies: [
-        { id: 'btc', name: 'Bitcoin', symbol: 'BTC', icon: 'crypto/bitcoin.png', customPrice: '125', date: 'Feb 7, 2025', gainLoss: '+296,48 USDT' }
+        { id: 'btc', name: 'Bitcoin', symbol: 'BTC', icon: 'crypto/bitcoin-btc-logo.png', customPrice: '125', date: 'Feb 7, 2025', gainLoss: '+296,48 USDT' }
       ]
     },
     {
@@ -69,8 +69,8 @@ const CurrencyTable: React.FC<CurrencyTableProps> = ({
       name: 'Gemini',
       icon: 'crypto/gemini.png',
       currencies: [
-        { id: 'eth', name: 'Ethereum', symbol: 'ETH', icon: 'crypto/ethereum.png', customPrice: '523', date: 'Feb 7, 2025', gainLoss: '+156,23 USDT' },
-        { id: 'sol', name: 'Solana', symbol: 'SOL', icon: 'crypto/solana.png', customPrice: '87', date: 'Nov 27, 2024', gainLoss: '+89,12 USDT' }
+        { id: 'eth', name: 'Ethereum', symbol: 'ETH', icon: 'crypto/ethereum-eth-logo.png', customPrice: '523', date: 'Feb 7, 2025', gainLoss: '+156,23 USDT' },
+        { id: 'sol', name: 'Solana', symbol: 'SOL', icon: 'crypto/solana-sol-logo.png', customPrice: '87', date: 'Nov 27, 2024', gainLoss: '+89,12 USDT' }
       ]
     }
   ];
