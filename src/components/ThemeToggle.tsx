@@ -6,22 +6,22 @@ interface ThemeToggleProps {
 
 const ThemeToggle: React.FC<ThemeToggleProps> = ({ onToggle }) => {
   const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem("theme") === "dark" || 
-    document.documentElement.classList.contains("dark")
+    localStorage.getItem("theme") === "dark" ||
+      document.documentElement.classList.contains("dark")
   );
 
   const handleToggle = () => {
     const newTheme = isDarkMode ? "light" : "dark";
     setIsDarkMode(!isDarkMode);
-    
+
     if (newTheme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-    
+
     localStorage.setItem("theme", newTheme);
-    
+
     if (onToggle) {
       onToggle();
     }
@@ -30,7 +30,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ onToggle }) => {
   return (
     <button
       onClick={handleToggle}
-      className={`relative inline-flex h-[22px] w-[62px] lg:w-[62px] lg:h-8 md:h-8 lg:w-14 items-center rounded-full transition-colors bg-[#E1E3E5]
+      className={`relative inline-flex h-[22px] w-[62px] lg:w-[62px] lg:h-8 md:h-8  items-center rounded-full transition-colors bg-[#E1E3E5]
         dark:bg-[#2F3232]`}
       role="switch"
       aria-checked={isDarkMode}
@@ -38,7 +38,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ onToggle }) => {
     >
       <span
         className={`inline-block h-[18px] w-[18px] md:h-7 md:w-7 transform rounded-full transition-transform translate-x-0.5 bg-[#FFFFFF]
-          dark:translate-x-7 dark:bg-[#4D5050]
+          dark:translate-x-11 dark:bg-[#4D5050]
           `}
       >
         <div
