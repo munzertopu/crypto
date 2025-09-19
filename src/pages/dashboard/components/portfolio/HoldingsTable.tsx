@@ -230,7 +230,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                   }`;
                   return (
                     <tr key={id}>
-                      <td className="p-1 sm:p-5">
+                      <td className="md:p-1 sm:p-5">
                         <div className="flex items-center gap-3">
                           <Avatar src={logo} alt={name} size="md" />
                           <div className="flex flex-col">
