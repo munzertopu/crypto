@@ -19,12 +19,19 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
   const [selectedToken, setSelectedToken] = useState('');
   const [quantity, setQuantity] = useState('');
   const [tag, setTag] = useState('');
+  const [tagInput, setTagInput] = useState('');
   const [isWalletDropdownOpen, setIsWalletDropdownOpen] = useState(false);
   const [isTokenDropdownOpen, setIsTokenDropdownOpen] = useState(false);
 
   if (!isOpen) return null;
 
-  const walletOptions = ['Metamask', 'Phantom', 'Coinbase', 'Kraken', 'Gemini'];
+  const walletOptions = [
+    { name: 'Metamask', image: '/crypto/metamask.png' },
+    { name: 'Phantom', image: '/crypto/Phantom.png' },
+    { name: 'Coinbase', image: '/crypto/coinbase.png' },
+    { name: 'Kraken', image: '/crypto/kraken.png' },
+    { name: 'Gemini', image: '/crypto/gemini.png' }
+  ];
   const tokenOptions = ['BTC', 'ETH', 'SOL', 'USDT', 'USDC', 'ADA', 'DOT'];
 
   const handleAddRule = () => {
@@ -89,9 +96,18 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
                   onClick={() => setIsWalletDropdownOpen(!isWalletDropdownOpen)}
                   className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-white text-[#0E201E] dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 >
-                  <span className={`text-left ${selectedWallet ? 'text-gray-900 dark:text-gray-150' : 'text-[#7C7C7C]'}`}>
-                    {selectedWallet || 'Choose wallet'}
-                  </span>
+                  <div className="flex items-center space-x-2">
+                    {selectedWallet && (
+                      <img 
+                        src={walletOptions.find(w => w.name === selectedWallet)?.image} 
+                        alt={selectedWallet}
+                        className="w-5 h-5 rounded-full"
+                      />
+                    )}
+                    <span className={`text-left ${selectedWallet ? 'text-gray-900 dark:text-gray-150' : 'text-[#7C7C7C]'}`}>
+                      {selectedWallet || 'Choose wallet'}
+                    </span>
+                  </div>
                   <FontAwesomeIcon 
                     icon={faChevronDown} 
                     className={`w-3 h-3 transition-transform ${isWalletDropdownOpen ? 'rotate-180' : ''}`}
@@ -104,14 +120,19 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
                   }`}>
                     {walletOptions.map((wallet) => (
                       <button
-                        key={wallet}
-                        className="w-full px-3 py-2 text-sm text-left hover:bg-gray-100 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                        key={wallet.name}
+                        className="w-full px-3 py-2 text-sm text-left hover:bg-gray-100 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 flex items-center space-x-2"
                         onClick={() => {
-                          setSelectedWallet(wallet);
+                          setSelectedWallet(wallet.name);
                           setIsWalletDropdownOpen(false);
                         }}
                       >
-                        {wallet}
+                        <img 
+                          src={wallet.image} 
+                          alt={wallet.name}
+                          className="w-4 h-4 rounded-full"
+                        />
+                        <span>{wallet.name}</span>
                       </button>
                     ))}
                   </div>
@@ -185,13 +206,52 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
             <label className="block text-sm font-medium mb-2 text-left text-gray-700 dark:text-gray-300">
               Tag
             </label>
-            <input
-              type="text"
-              value={tag}
-              onChange={(e) => setTag(e.target.value)}
-              placeholder="Start typing tag..."
-              className="w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none bg-white text-gray-900 placeholder-[#7C7C7C] dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250 dark:placeholder-gray-400"
-            />
+            <div className="w-full min-h-[40px] px-3 py-2 border border-[#E1E3E5] rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 flex items-center flex-wrap gap-2">
+              {tag ? (
+                <div className="flex items-center space-x-1 bg-gray-100 border border-default rounded-full px-3 py-1">
+                  <span className="text-sm text-gray-900">{tag}</span>
+                  <button
+                    onClick={() => {
+                      setTag('');
+                      setTagInput('');
+                    }}
+                    className="text-gray-400 hover:text-gray-600"
+                    type="button"
+                  >
+                    <svg
+                      className="w-3 h-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              ) : (
+                <input
+                  type="text"
+                  value={tagInput}
+                  onChange={(e) => setTagInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      if (tagInput.trim()) {
+                        setTag(tagInput.trim());
+                        setTagInput('');
+                      }
+                    }
+                  }}
+                  placeholder="Start typing tag..."
+                  className="flex-1 bg-transparent text-gray-900 placeholder-[#7C7C7C] dark:text-gray-250 dark:placeholder-gray-400 focus:outline-none"
+                />
+              )}
+            </div>
           </div>
         </div>
 
