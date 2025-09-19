@@ -19,6 +19,7 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
   const [selectedToken, setSelectedToken] = useState('');
   const [quantity, setQuantity] = useState('');
   const [tag, setTag] = useState('');
+  const [tagInput, setTagInput] = useState('');
   const [isWalletDropdownOpen, setIsWalletDropdownOpen] = useState(false);
   const [isTokenDropdownOpen, setIsTokenDropdownOpen] = useState(false);
 
@@ -205,13 +206,52 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
             <label className="block text-sm font-medium mb-2 text-left text-gray-700 dark:text-gray-300">
               Tag
             </label>
-            <input
-              type="text"
-              value={tag}
-              onChange={(e) => setTag(e.target.value)}
-              placeholder="Start typing tag..."
-              className="w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none bg-white text-gray-900 placeholder-[#7C7C7C] dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250 dark:placeholder-gray-400"
-            />
+            <div className="w-full min-h-[40px] px-3 py-2 border border-[#E1E3E5] rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 flex items-center flex-wrap gap-2">
+              {tag ? (
+                <div className="flex items-center space-x-1 bg-gray-100 border border-default rounded-full px-3 py-1">
+                  <span className="text-sm text-gray-900">{tag}</span>
+                  <button
+                    onClick={() => {
+                      setTag('');
+                      setTagInput('');
+                    }}
+                    className="text-gray-400 hover:text-gray-600"
+                    type="button"
+                  >
+                    <svg
+                      className="w-3 h-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              ) : (
+                <input
+                  type="text"
+                  value={tagInput}
+                  onChange={(e) => setTagInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      if (tagInput.trim()) {
+                        setTag(tagInput.trim());
+                        setTagInput('');
+                      }
+                    }
+                  }}
+                  placeholder="Start typing tag..."
+                  className="flex-1 bg-transparent text-gray-900 placeholder-[#7C7C7C] dark:text-gray-250 dark:placeholder-gray-400 focus:outline-none"
+                />
+              )}
+            </div>
           </div>
         </div>
 
