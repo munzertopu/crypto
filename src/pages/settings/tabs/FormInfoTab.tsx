@@ -102,7 +102,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
             placeholder="Type your name"
             value={formData.name}
             onChange={(e) => handleInputChange('name', e.target.value)}
-            className={`text-base bg-white border-[#E1E3E5] dark:bg-gray-700 dark:border-[#E1E3E5] text-white`}
+            className={`text-base bg-transparent border-[#E1E3E5] dark:border-gray-700 text-white`}
           />
         </div>
       </div>
@@ -120,7 +120,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
               placeholder="000000000"
               value={formData.personalId}
               onChange={(e) => handleInputChange('personalId', e.target.value)}
-              className="text-base bg-white border-[#E1E3E5] dark:bg-gray-700 dark:text-white"
+              className="text-base bg-transparent border-[#E1E3E5] dark:border-gray-700 dark:text-white"
             />
           </div>
 
@@ -133,7 +133,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
               placeholder="Type your city"
               value={formData.city}
               onChange={(e) => handleInputChange('city', e.target.value)}
-              className="text-base bg-white border-[#E1E3E5] dark:bg-gray-700 dark:text-white"
+              className="text-base bg-transparent border-[#E1E3E5] dark:border-gray-700 dark:text-white"
             />
           </div>
 
@@ -146,7 +146,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
               placeholder="00000"
               value={formData.postalCode}
               onChange={(e) => handleInputChange('postalCode', e.target.value)}
-              className="text-base bg-white border-[#E1E3E5] dark:bg-gray-700 dark:text-white"
+              className="text-base bg-transparent border-[#E1E3E5] dark:border-gray-700 dark:text-white"
             />
           </div>
         </div>
@@ -157,14 +157,16 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
             <label className="block text-sm font-medium text-left mb-2 text-[#2F3232] dark:text-gray-300">
               Phone number (optional)
             </label>
-            <div className="relative flex border border-[#E1E3E5] rounded-lg overflow-hidden">
+            <div className="relative flex border border-[#E1E3E5] rounded-lg overflow-hidden
+            bg-transparent dark:border-gray-700
+            ">
               {/* Country Dropdown Section */}
               <div className="relative flex" ref={dropdownRef}>
                 <button
                   type="button"
                   onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
                   className={`flex items-center px-3 py-2 focus:outline-none ${
-                    'bg-white text-gray-900 dark:text-gray-150 dark:bg-gray-700'
+                    'text-gray-900 dark:text-gray-150'
                   }`}
                 >
                   <img src={selectedCountry.flag} className="mr-2"></img>
@@ -183,9 +185,8 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
                     placeholder={`(${selectedCountry.dialCode}) 201-555-3333`}
                     value={formData.phoneNumber}
                     onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
-                    className={`w-full px-3 py-2 focus:outline-none ${
-                      'bg-white text-gray-900 dark:text-gray-150 dark:bg-gray-700'
-                    }`}
+                    className={`w-full px-3 py-2 focus:outline-none bg-transparent text-gray-900 
+                      dark:text-gray-150`}
                   />
                 </div>
               </div>
@@ -222,7 +223,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
               placeholder="00000"
               value={formData.state}
               onChange={(e) => handleInputChange('state', e.target.value)}
-              className="text-base bg-white border-[#E1E3E5] dark:bg-gray-700 dark:text-white"
+              className="text-base bg-transparent border-[#E1E3E5] dark:text-white dark:border-gray-700"
             />
           </div>
 
@@ -261,7 +262,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
               placeholder="000000000"
               value={formData.inn}
               onChange={(e) => handleInputChange('inn', e.target.value)}
-              className="text-base bg-white border-[#E1E3E5] dark:bg-gray-700 dark:text-white"
+              className="text-base bg-transparent border-[#E1E3E5] dark:text-white dark:border-gray-700"
             />
           </div>
         </div>

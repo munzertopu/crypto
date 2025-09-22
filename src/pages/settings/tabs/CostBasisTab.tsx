@@ -143,8 +143,8 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
               <div
                 key={method.id}
                 onClick={() => handleCostBasisMethodSelect(method.id)}
-                className={`relative cursor-pointer border rounded-lg px-5 py-4 transition-all shadow-sm border-default bg-white 
-                  dark:bg-gray-700
+                className={`relative cursor-pointer border rounded-lg px-5 py-4 transition-all shadow-sm border-default bg-transparent 
+                  dark:border-gray-700
                   `}
               >
                 {/* Radio Button */}
@@ -154,11 +154,11 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
                   </span>
                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                     method.selected 
-                      ? 'border-[#75AE46] bg-[#75AE46]' 
-                      : 'border-[#E1E3E5]'
+                      ? 'border-[#75AE46]' 
+                      : 'border-gray-700'
                   }`}>
                     {method.selected && (
-                      <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
+                      <div className="w-4 h-4 bg-transparent rounded-full flex items-center justify-center">
                         <div className='w-3 h-3 bg-[#75AE46] rounded-full' />
                       </div>
                     )}
