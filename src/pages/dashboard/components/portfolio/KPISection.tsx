@@ -22,7 +22,6 @@ const KPICard: React.FC<KPICardProps> = ({
   isPositive,
   icon,
   svgIcon,
-  centered = false,
   className = "",
 }) => (
   <div className={`flex flex-col gap-3 ${className}`}>
@@ -30,20 +29,22 @@ const KPICard: React.FC<KPICardProps> = ({
       <div className="flex items-center justify-center">
         {svgIcon ? (
           <div
-            className={`"text-gray-900 dark:text-gray-150 w-5 h-5 md:h-6 md:w-6 flex items-center justify-center`}
+            className={`"text-gray-900 w-5 h-5 md:h-6 md:w-6 flex items-center justify-center
+               dark:text-gray-200`}
           >
             {svgIcon}
           </div>
         ) : (
           <FontAwesomeIcon
             icon={icon}
-            className="text-[#0E201E] dark:text-gray-250 text-base"
+            className="text-[#0E201E] text-base
+             dark:text-gray-200"
           />
         )}
       </div>
       <div className="flex items-center">
         <span
-          className={`text-base sm:text-xl lg:text-base font-medium md:font-semibold text-gray-900 dark:text-gray-150 opacity-80`}
+          className={`text-base sm:text-xl lg:text-base font-medium md:font-semibold text-gray-900 dark:text-gray-200`}
         >
           {title}
         </span>
@@ -51,7 +52,7 @@ const KPICard: React.FC<KPICardProps> = ({
     </div>
 
     <div className="flex flex-col items-start sm:flex-row  sm:items-end sm:gap-2">
-      <span className="text-h6 sm:text-[32px] md:text-h4 font-semibold text-gray-900 dark:text-gray-150">
+      <span className="text-h6 sm:text-[32px] md:text-h4 font-semibold text-gray-900 dark:text-gray-200">
         {value}
       </span>
       <span
@@ -308,14 +309,14 @@ const KPISection: React.FC<KPISectionProps> = ({
   return (
     <div className="mb-8 md:mb-0 md:px-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-[#E1E3E5]">
+        <h3 className="text-lg md:text-xl font-semibold text-[#0E201E] dark:text-gray-150">
           KPI
         </h3>
         <div className="relative pr-0 sm:pr-8" ref={dropdownRef}>
           {/* Add KPI Button with Dropdown */}
           <button
             onClick={handleDropdownToggle}
-            className="p-2 md:p-3 text-[#7C7C7C] dark:text-[#B6B8BA] border-[#E1E3E5] dark:border-[#4D5050] rounded-[8px] md:rounded-[12px] bg-transparent flex items-center justify-center border shadow-sm
+            className="p-2 md:p-3 text-[#7C7C7C] dark:text-[#B6B8BA] border-gray-150 dark:border-[#4D5050] rounded-[8px] md:rounded-[12px] bg-transparent flex items-center justify-center border shadow-sm
             "
             aria-label="Add KPI"
             aria-expanded={isDropdownOpen}
@@ -432,7 +433,7 @@ const KPISection: React.FC<KPISectionProps> = ({
           svgIcon={incomeSvg}
         />
 
-        <div className="hidden xl:block flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 "></div>
+        <div className="hidden xl:block flex-shrink-0 w-px h-20 bg-gray-150 dark:bg-gray-700 mx-10 "></div>
 
         <KPICard
           title="Realized Gains"
@@ -442,7 +443,7 @@ const KPISection: React.FC<KPISectionProps> = ({
           svgIcon={realizedGainsSvg}
         />
 
-        <div className="flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 hidden xl:block"></div>
+        <div className="flex-shrink-0 w-px h-20 bg-gray-150 dark:bg-gray-700 mx-10 hidden xl:block"></div>
 
         <div
           className={`sm:hidden col-span-2 w-full h-px
@@ -457,7 +458,7 @@ const KPISection: React.FC<KPISectionProps> = ({
           svgIcon={shortTermsSvg}
         />
 
-        <div className="flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 hidden xl:block"></div>
+        <div className="flex-shrink-0 w-px h-20 bg-gray-150 dark:bg-gray-700 mx-10 hidden xl:block"></div>
 
         <KPICard
           title="Long Terms"
