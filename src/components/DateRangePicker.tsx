@@ -166,10 +166,10 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
       <button
         onClick={handleIconClick}
         className={`w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900
-          dark:text-gray-250  dark:bg-[#0E201E] dark:border-gray-700 min-w-[194px] ${className}`}
-        aria-label="Select date range"
-        aria-expanded={isOpen}
-        aria-haspopup="true"
+          dark:text-gray-100 dark:bg-[#0E201E] dark:border-gray-700 min-w-[194px] ${className}`}
+          aria-label="Select date range"
+          aria-expanded={isOpen}
+          aria-haspopup="true"
       >
         <div className="flex items-center space-x-2">
           <svg
@@ -181,70 +181,70 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
           >
             <path
               d="M5.3335 1.3335V3.3335"
-              stroke="#7C7C7C"
+              stroke="currentColor"
               stroke-miterlimit="10"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
             <path
               d="M10.6665 1.3335V3.3335"
-              stroke="#7C7C7C"
+              stroke="currentColor"
               stroke-miterlimit="10"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
             <path
               d="M2.3335 6.06006H13.6668"
-              stroke="#7C7C7C"
+              stroke="currentColor"
               stroke-miterlimit="10"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
             <path
               d="M14 5.66683V11.3335C14 13.3335 13 14.6668 10.6667 14.6668H5.33333C3 14.6668 2 13.3335 2 11.3335V5.66683C2 3.66683 3 2.3335 5.33333 2.3335H10.6667C13 2.3335 14 3.66683 14 5.66683Z"
-              stroke="#7C7C7C"
+              stroke="currentColor"
               stroke-miterlimit="10"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
             <path
               d="M10.463 9.13314H10.469"
-              stroke="#7C7C7C"
+              stroke="currentColor"
               stroke-width="1.2"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
             <path
               d="M10.463 11.1331H10.469"
-              stroke="#7C7C7C"
+              stroke="currentColor"
               stroke-width="1.2"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
             <path
               d="M7.99715 9.13314H8.00314"
-              stroke="#7C7C7C"
+              stroke="currentColor"
               stroke-width="1.2"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
             <path
               d="M7.99715 11.1331H8.00314"
-              stroke="#7C7C7C"
+              stroke="currentColor"
               stroke-width="1.2"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
             <path
               d="M5.52979 9.1333H5.53577"
-              stroke="#7C7C7C"
+              stroke="currentColor"
               stroke-width="1.2"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
             <path
               d="M5.52938 11.1331H5.53537"
-              stroke="#7C7C7C"
+              stroke="currentColor"
               stroke-width="1.2"
               stroke-linecap="round"
               stroke-linejoin="round"

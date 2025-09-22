@@ -238,7 +238,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                               variant="small"
                               className={`text-base ${
                                 onCryptoClick ? "cursor-pointer" : ""
-                              } text-[#0E201E] dark:text-gray-250`}
+                              } text-[#0E201E] dark:text-gray-100`}
                               onClick={() =>
                                 onCryptoClick && onCryptoClick(symbol)
                               }
@@ -250,12 +250,6 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                               }
                             >
                               {name}
-                            </Typography>
-                            <Typography
-                              variant="small"
-                              className={`text-sm font-normal text-[#666868] dark:text-[#B6B8BA]`}
-                            >
-                              {symbol}
                             </Typography>
                           </div>
                         </div>
@@ -273,7 +267,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                         <div className="flex flex-col items-center justify-end">
                           <Typography
                             variant="small"
-                            className={`font-normal text-base text-[#0E201E] dark:text-gray-250`}
+                            className={`font-normal text-base text-[#0E201E] dark:text-gray-100`}
                           >
                             ${balance}
                           </Typography>
@@ -340,7 +334,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                         <div className="flex flex-col">
                           <Typography
                             variant="small"
-                            className={`font-normal text-base text-[#0E201E] dark:text-gray-250`}
+                            className={`font-normal text-base text-[#0E201E] dark:text-gray-100`}
                           >
                             {balance}
                           </Typography>
@@ -359,7 +353,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                       <td className="hidden sm:table-cell">
                         <Typography
                           variant="small"
-                          className={`font-normal text-base text-[#0E201E] dark:text-gray-250`}
+                          className={`font-normal text-base text-[#0E201E] dark:text-gray-100`}
                         >
                           {marketValue}
                         </Typography>
@@ -371,7 +365,7 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                       </td>
                       <td className="hidden sm:table-cell">
                         <svg
-                          className="w-6 h-6 mr-4 flex-shrink-0"
+                          className="w-6 h-6 mr-4 flex-shrink-0 dark:text-gray-500 text-gray-500"
                           viewBox="0 0 16 16"
                           fill="none"
                         >
@@ -379,13 +373,13 @@ const HoldingsTable: React.FC<HoldingsTableProps> = ({
                             cx="8"
                             cy="8"
                             r="7"
-                            stroke="#9CA3AF"
+                            stroke="currentColor"
                             strokeWidth="1.5"
                             fill="none"
                           />
                           <path
                             d="M5 8L7 10L11 6"
-                            stroke="#9CA3AF"
+                            stroke="currentColor"
                             strokeWidth="1.5"
                             strokeLinecap="round"
                             strokeLinejoin="round"

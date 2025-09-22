@@ -10,7 +10,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
   const [activeTab, setActiveTab] = useState("Details");
 
   return (
-    <div className="space-y-2 md:mx-4 md:px-6 rounded-xl bg-background dark:bg-[#0E201E]">
+    <div className="space-y-2 md:mx-4 md:px-2 md:py-4 rounded-xl bg-background dark:bg-gray-800">
       {/* Tabs */}
       <div className="flex border-b border-gray-200">
         {["Details", "Ledger", "Cost analysis"].map((tab) => (
@@ -347,7 +347,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
       {activeTab === "Cost analysis" && (
         <div className="py-2">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-full table-auto text-left">
+            <table className="w-full min-w-full table-auto text-left ">
               <thead>
                 <tr>
                   <th className="py-3 px-4 font-normal text-sm text-left">
@@ -387,7 +387,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
               </thead>
               <tbody>
                 {costAnalysisData.map((row, index) => (
-                  <tr key={row.id} className={`bg-white`}>
+                  <tr key={row.id} className={`bg-white dark:bg-gray-900`}>
                     <td
                       className={`py-2.5 px-5
                         ${

@@ -88,7 +88,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         <div className="flex items-center">
           <Link to="/dashboard" className="flex items-center">
             <img
-              // src="/logo.png"
               src={
                 screenSize?.width < 640 ? "/logo-mobile-white.png" : "/logo.png"
               }
@@ -96,7 +95,6 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               className="h-8 w-[34px] md:w-[112px] sm:h-7 lg:h-7 md:h-[32px] block dark:hidden"
             />
             <img
-              // src="/logo-dark.png"
               src={
                 screenSize?.width < 640
                   ? "/logo-dark-mobile.png"
@@ -115,7 +113,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               key={item.name}
               to={item.href}
               className={`opacity-80 px-1 lg:px-0 py-2 text-sm lg:text-base text-gray-900
-                 dark:text-gray-250
+                 dark:text-gray-300
                 ${
                   currentPage === item.href.replace('/', '') || 
                   currentPage === item.name.toLowerCase().replace(/\s+/g, '-')
@@ -140,7 +138,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <button
               className="hidden lg:block bg-transparent border border-[#E1E3E5] text-[#7C7C7C] 
               px-3 py-1.5 lg:px-2 lg:py-2 rounded-xl
-              dark:text-[#B6B8BA] dark:border-[#4D5050]"
+              dark:text-gray-400 dark:border-gray-700"
               aria-label="Open settings"
             >
               <svg
@@ -167,7 +165,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
           <button
             className={`hidden  md:flex items-center justify-center gap-1.5 bg-transparent border border-gray-150 px-5 py-2.5 rounded-[12px] text-sm
-             text-[#75AE46] dark:border-[#4D5050]
+             text-[#75AE46] dark:border-gray-700
              `}
             aria-label="Upgrade to Pro plan"
           >
@@ -197,12 +195,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               Go Pro
             </span>
           </button>
+
           {/* Profile */}
           <div className="relative space-x-6 px-3 sm:px-0">
             <button
               onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
               className="flex items-center justify-between space-x-3 lg:border lg:border-[#E1E3E5] lg:px-3 lg:py-1.5 lg:rounded-xl
-              dark:border-[#4D5050] focus:border-green-400"
+              dark:border-gray-700"
               aria-label="Open profile menu"
               aria-expanded={isProfileDropdownOpen}
               aria-haspopup="true"
@@ -227,7 +226,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 <FontAwesomeIcon
                   icon={faChevronDown}
                   className={`w-3 h-3 text-[#7C7C7C]
-                    dark:text-[#CDCFD1]
+                    dark:text-gray-400
                   `}
                 />
               </div>
@@ -248,7 +247,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                     dark:bg-[#0E201E]"
                   >
                     <h3 className="text-sm font-medium text-gray-900 text-left
-                    dark:text-gray-150">
+                    dark:text-gray-200">
                       Switch account
                     </h3>
                   </div>
@@ -281,7 +280,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                               }}
                             />
                             <span className="text-xs font-medium mr-auto text-gray-900 
-                              dark:text-gray-150">
+                              dark:text-gray-100">
                               {user.name}
                             </span>
                           </div>

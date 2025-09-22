@@ -84,8 +84,8 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                     </span>
                   </div>
                   <span
-                    className={`md:text-smh  opacity-80 text-gray-900 opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left
-                      dark:text-gray-250`}
+                    className={`md:text-smh opacity-80 text-gray-900 opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left
+                      dark:text-gray-200`}
                   >
                     Connect Exchanges & Wallets
                   </span>
@@ -101,7 +101,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                   </div>
                   <span
                     className={`md:text-smh  opacity-80 text-gray-900
-                       dark:text-gray-250 opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
+                       dark:text-gray-200 text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
                   >
                     Reconcile Trades
                   </span>
@@ -117,7 +117,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                   </div>
                   <span
                     className={`md:text-smh  opacity-80 text-gray-900
-                       dark:text-gray-250 opacity-0.8  text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
+                       dark:text-gray-200 text-sm font-medium font-stretch-normal not-italic leading-[20px] tracking-[0px] text-left `}
                   >
                     Run Tax Reports
                   </span>
@@ -128,7 +128,7 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
 
           {/* Additional Savings Info */}
           <div
-            className={`text-sm lg:text-smh text-gray-600 dark:text-[#B6B8BA] text-left`}
+            className={`text-sm lg:text-smh text-gray-600 dark:text-gray-300 text-left`}
           >
             Also, you SAVE more when you{" "}
             <span className="font-bold text-[#75AE46]">Go Pro</span> with our
@@ -140,11 +140,11 @@ const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
         <button
           onClick={handleClose}
           className={`hidden w-22 h-8 md:flex flex-row justify-center items-center gap-1 py-[6px] px-2.5 rounded-lg shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border border-gray-150 bg-[#fff] 
-            dark:text-[#B6B8BA] dark:border-[#4D5050] dark:bg-transparent `}
+            dark:text-gray-200 dark:border-gray-700 dark:bg-transparent `}
           aria-label="Close banner"
         >
           <svg
-            className="w-2 h-2 lg:w-4 lg:h-4 text-gray-500"
+            className="w-2 h-2 lg:w-4 lg:h-4 text-gray-250"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

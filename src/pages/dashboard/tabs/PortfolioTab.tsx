@@ -38,7 +38,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
 
       {/* Horizontal Separator */}
       <div className="hidden md:block md:mb-6">
-        <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+        <div className="w-full h-px bg-gray-150 dark:bg-gray-800"></div>
       </div>
 
       {/* KPI Section */}

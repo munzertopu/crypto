@@ -55,8 +55,8 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
                     className={`px-3 sm:px-5 md:px-2.5 py-1 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl 
                       text-sm sm:text-lg md:text-sm ${
                       activeTab === tab
-                        ? 'bg-white dark:bg-[#0E201E] text-black dark:text-white'
-                        : 'text-[#0E201E] dark:text-[#FFFFFF]'
+                        ? "bg-white dark:bg-gray-0 text-gray-900 dark:text-gray-900"
+                        : "text-gray-900 dark:text-gray-200"
                     }`}
                   >
                     {tab}
