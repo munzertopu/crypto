@@ -145,7 +145,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
               type="text"
               value={formData.fullName}
               onChange={(e) => handleInputChange('fullName', e.target.value)}
-              className={`text-base bg-white border-default dark:bg-gray-700 dark:border-[#E1E3E5] dark:text-white`}
+              className={`text-base bg-white border-default dark:bg-gray-700 dark:border-gray-700 dark:text-white`}
             />
           </div>
           <div>
@@ -156,7 +156,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
               type="email"
               value={formData.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
-              className={`text-base bg-white border-default dark:bg-gray-700 dark:border-[#E1E3E5] dark:text-white`}
+              className={`text-base bg-white border-default dark:bg-gray-700 dark:border-gray-700 dark:text-white`}
             />
           </div>
         </div>
@@ -183,7 +183,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                       icon={faChevronDown} 
                       className={`w-3 h-3 transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`}
                     />
-                    <div className={`w-px h-10 my-0 bg-[#E1E3E5] mx-3`}></div>
+                    <div className={`w-px h-10 my-0 bg-gray-700 mx-3`}></div>
                     <span className="py-1.5 font-medium">{selectedCountry.name}</span>
                   </div>
                 </button>
@@ -219,7 +219,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                 <button
                   type="button"
                   onClick={() => setIsCurrencyDropdownOpen(!isCurrencyDropdownOpen)}
-                  className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between bg-white text-gray-900
+                  className={`w-full px-3 py-2 border border-gray-700 rounded-lg focus:outline-none flex items-center justify-between bg-white text-gray-900
                     dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250`}
                 >
                   <div className="flex items-center justify-between w-full">
@@ -263,7 +263,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                 <DatePicker
                   selected={startDate} 
                   onChange={(date) => setStartDate(date)} 
-                  className={`w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-white text-gray-900
+                  className={`w-full px-3 py-2 border border-gray-700 rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-white text-gray-900
                     dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250
                   `}
                   placeholderText="MM/DD/YYYY"
@@ -324,12 +324,12 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
                 </svg>
               </div>
-              <div className="flex space-x-0 px-4 py-2 border border-[#E1E3E5] rounded-lg">
+              <div className="flex space-x-0 px-4 py-2 border border-gray-700 rounded-lg">
                   <input
                     type="text"
                     value={formData.dustValueThreshold}
                     onChange={(e) => handleInputChange('dustValueThreshold', e.target.value)}
-                    className={`flex-1 focus:outline-none bg-white border-[#E1E3E5] 
+                    className={`flex-1 focus:outline-none bg-white border-gray-700 
                       dark:bg-gray-700 dark:border-gray-600 dark:text-white`}
                   />
                   <div className="relative" ref={dustCurrencyDropdownRef}>
@@ -381,7 +381,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                  <DatePicker
                    selected={taxReportingYearDate} 
                    onChange={(date) => setTaxReportingYearDate(date)} 
-                   className={`w-full px-3 mt-{1px} py-2 border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-white text-gray-900
+                   className={`w-full px-3 mt-{1px} py-2 border border-gray-700 rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-white text-gray-900
                       dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250
                    `}
                    placeholderText="MM/DD/YYYY"
