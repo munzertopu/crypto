@@ -143,8 +143,8 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
               <div
                 key={method.id}
                 onClick={() => handleCostBasisMethodSelect(method.id)}
-                className={`relative cursor-pointer border rounded-lg px-5 py-4 transition-all shadow-sm border-default bg-white 
-                  dark:bg-gray-700
+                className={`relative cursor-pointer border rounded-lg px-5 py-4 transition-all shadow-sm border-default bg-transparent 
+                  dark:border-gray-700
                   `}
               >
                 {/* Radio Button */}
@@ -154,11 +154,11 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
                   </span>
                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                     method.selected 
-                      ? 'border-[#75AE46] bg-[#75AE46]' 
-                      : 'border-[#E1E3E5]'
+                      ? 'border-[#75AE46]' 
+                      : 'border-gray-700'
                   }`}>
                     {method.selected && (
-                      <div className="w-4 h-4 bg-white rounded-full flex items-center justify-center">
+                      <div className="w-4 h-4 bg-transparent rounded-full flex items-center justify-center">
                         <div className='w-3 h-3 bg-[#75AE46] rounded-full' />
                       </div>
                     )}
@@ -244,11 +244,11 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
               <button
                 onClick={() => handleTaxRuleToggle(rule.id)}
                 className={`relative inline-flex h-6 w-11 mr-3 items-center rounded-full transition-colors ${
-                  rule.enabled ? 'bg-[#90C853]' : 'bg-[#CDCFD1]'
+                  rule.enabled ? 'bg-[#90C853]' : 'bg-[#CDCFD1] dark:bg-gray-700'
                 }`}
               >
                 <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform dark:bg-gray-900 ${
                     rule.enabled ? 'translate-x-6' : 'translate-x-1'
                   }`}
                 />
