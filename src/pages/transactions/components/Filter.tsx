@@ -301,7 +301,7 @@ const Filter: React.FC<FilterProps> = ({
       {!hideTab && (
         <div className={`border-gray-200 dark:border-gray-700`}>
           <Tabs>
-            <Tabs.List className="my-2 lg:my-2 bg-white dark:bg-[#2F3232]">
+            <Tabs.List className="my-2 lg:my-2 bg-white dark:bg-gray-800">
               {tabs.map((tab) => (
                 <Tabs.Trigger
                   key={tab}
@@ -309,8 +309,8 @@ const Filter: React.FC<FilterProps> = ({
                   onClick={() => onTabChange?.(tab)}
                   className={`px-3 sm:px-5 md:px-2.5 py-1 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${
                     activeTab === tab
-                      ? "bg-[#B3E277] dark:bg-[#0E201E] text-black dark:text-white"
-                      : "text-[#0E201E] dark:text-[#FFFFFF]"
+                      ? "bg-white dark:bg-gray-0 text-gray-900 dark:text-gray-900"
+                    : "text-gray-900 dark:text-gray-200"
                   }`}
                 >
                   {tab}

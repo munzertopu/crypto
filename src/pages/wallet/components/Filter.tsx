@@ -19,7 +19,7 @@ const Filter: React.FC<FilterProps> = ({
       {/* Tabs */}
       <div className="flex mb-4 mt-5 md:mt-0 sm:mb-0">
         <Tabs>
-          <Tabs.List className="my-2 lg:my-0 bg-[#F3F5F7] dark:bg-[#2F3232]">
+          <Tabs.List className="my-2 lg:my-0 bg-[#F3F5F7] dark:bg-gray-800">
             {["All", "Exchanges", "Blockchains"].map((tab) => (
               <Tabs.Trigger
                 key={tab}
@@ -27,8 +27,8 @@ const Filter: React.FC<FilterProps> = ({
                 onClick={() => setActiveTab(tab)}
                 className={`px-5 py-2 rounded-xl text-sm ${
                   activeTab === tab
-                    ? "bg-white dark:bg-[#0E201E] text-gray-900 dark:text-gray-150 dark:text-white"
-                    : "text-gray-900 dark:text-gray-150 dark:text-[#FFFFFF] opacity-70"
+                    ? "bg-white dark:bg-gray-0 text-gray-900 dark:text-gray-900"
+                    : "text-gray-900 dark:text-gray-200"
                 }`}
               >
                 {tab}
