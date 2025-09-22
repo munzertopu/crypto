@@ -244,11 +244,11 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
               <button
                 onClick={() => handleTaxRuleToggle(rule.id)}
                 className={`relative inline-flex h-6 w-11 mr-3 items-center rounded-full transition-colors ${
-                  rule.enabled ? 'bg-[#90C853]' : 'bg-[#CDCFD1]'
+                  rule.enabled ? 'bg-[#90C853]' : 'bg-[#CDCFD1] dark:bg-gray-700'
                 }`}
               >
                 <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform dark:bg-gray-900 ${
                     rule.enabled ? 'translate-x-6' : 'translate-x-1'
                   }`}
                 />
