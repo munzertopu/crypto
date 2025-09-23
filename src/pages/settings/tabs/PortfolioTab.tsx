@@ -7,33 +7,12 @@ import {
 import { Input, Button } from "@material-tailwind/react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { countriesData, currencies } from "../../../data/settingsAssets";
 
 interface PortfolioTabProps {
   
 }
 
-// Country data with flags and names
-const countries = [
-  { code: 'US', name: 'United States', flag: 'flags/usa.png' },
-  { code: 'CA', name: 'Canada', flag: 'flags/can.png' },
-  { code: 'GB', name: 'United Kingdom', flag: 'flags/uk.jpg' },
-  { code: 'AU', name: 'Australia', flag: 'flags/aus.jpg' },
-  { code: 'DE', name: 'Germany', flag: 'flags/ger.jpg' },
-  { code: 'JP', name: 'Japan', flag: 'flags/jap.png' },
-  { code: 'BN', name: 'Bangladesh', flag: 'flags/ban.jpg' }
-];
-
-// Currency data
-const currencies = [
-  { code: 'USD', name: 'USD' },
-  { code: 'EUR', name: 'EUR' },
-  { code: 'GBP', name: 'GBP' },
-  { code: 'CAD', name: 'CAD' },
-  { code: 'AUD', name: 'AUD' },
-  { code: 'JPY', name: 'JPY' },
-  { code: 'CHF', name: 'CHF' },
-  { code: 'CNY', name: 'CNY' }
-];
 
 const PortfolioTab: React.FC<PortfolioTabProps> = () => {
   const [formData, setFormData] = useState({
@@ -49,7 +28,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [taxReportingYearDate, setTaxReportingYearDate] = useState<Date | null>(new Date('2025-07-01'));
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState(countries[0]);
+  const [selectedCountry, setSelectedCountry] = useState(countriesData[0]);
   const [isCurrencyDropdownOpen, setIsCurrencyDropdownOpen] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
   const [isDustCurrencyDropdownOpen, setIsDustCurrencyDropdownOpen] = useState(false);
@@ -67,7 +46,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
     }));
   };
 
-  const handleCountrySelect = (country: typeof countries[0]) => {
+  const handleCountrySelect = (country: typeof countriesData[0]) => {
     setSelectedCountry(country);
     setFormData(prev => ({
       ...prev,
@@ -192,7 +171,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                 {isCountryDropdownOpen && (
                   <div className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg bg-white
                     dark:bg-gray-700 dark:border-gray-600`}>
-                    {countries.map((country) => (
+                    {countriesData.map((country) => (
                       <button
                         key={country.code}
                         type="button"
@@ -324,13 +303,13 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
                 </svg>
               </div>
-              <div className="flex space-x-0 px-4 py-2 border border-gray-700 rounded-lg">
+              <div className="flex space-x-0 px-4 py-2 border border-gray-700 rounded-lg dark:bg-gray-700">
                   <input
                     type="text"
                     value={formData.dustValueThreshold}
                     onChange={(e) => handleInputChange('dustValueThreshold', e.target.value)}
-                    className={`flex-1 focus:outline-none bg-white border-gray-700 
-                      dark:bg-gray-700 dark:border-gray-600 dark:text-white`}
+                    className={`flex-1 focus:outline-none bg-transparent border-gray-700 
+                      dark:border-gray-600 dark:text-white`}
                   />
                   <div className="relative" ref={dustCurrencyDropdownRef}>
                     <button

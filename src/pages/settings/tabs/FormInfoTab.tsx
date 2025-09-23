@@ -1,28 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faChevronDown,
-  faInfoCircle
-} from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { Typography, Input, Button } from "@material-tailwind/react";
+import { countriesData } from "../../../data/settingsAssets";
 
 interface FormInfoTabProps {
   
 }
 
-// Country data with flags and names
-const countries = [
-  { code: 'US', name: 'United States', flag: 'usa.png', dialCode: '+1' },
-  { code: 'CA', name: 'Canada', flag: '🇨🇦', dialCode: '+1' },
-  { code: 'GB', name: 'United Kingdom', flag: '🇬🇧', dialCode: '+44' },
-  { code: 'AU', name: 'Australia', flag: '🇦🇺', dialCode: '+61' },
-  { code: 'DE', name: 'Germany', flag: '🇩🇪', dialCode: '+49' },
-  { code: 'FR', name: 'France', flag: '🇫🇷', dialCode: '+33' },
-  { code: 'JP', name: 'Japan', flag: '🇯🇵', dialCode: '+81' },
-  { code: 'IN', name: 'India', flag: '🇮🇳', dialCode: '+91' },
-  { code: 'BR', name: 'Brazil', flag: '🇧🇷', dialCode: '+55' },
-  { code: 'MX', name: 'Mexico', flag: '🇲🇽', dialCode: '+52' }
-];
 
 const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
   const [formData, setFormData] = useState({
@@ -36,7 +21,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
   });
 
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState(countries[0]);
+  const [selectedCountry, setSelectedCountry] = useState(countriesData[0]);
   const [showInnTooltip, setShowInnTooltip] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -48,7 +33,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
     }));
   };
 
-  const handleCountrySelect = (country: typeof countries[0]) => {
+  const handleCountrySelect = (country: typeof countriesData[0]) => {
     setSelectedCountry(country);
     setIsCountryDropdownOpen(false);
   };
@@ -169,7 +154,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
                     'text-gray-900 dark:text-gray-150'
                   }`}
                 >
-                  <img src={selectedCountry.flag} className="mr-2"></img>
+                  <img src={selectedCountry.flag} className="mr-2 w-4 h-3"></img>
                   <FontAwesomeIcon 
                     icon={faChevronDown} 
                     className={`w-3 h-3 transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`}
@@ -196,7 +181,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
               <div className={`absolute z-50 w-full mt-1 border border-gray-300 rounded-lg ${
                 'bg-white dark:bg-gray-700 dark:border-gray-600'
               }`}>
-                {countries.map((country) => (
+                {countriesData.map((country) => (
                   <button
                     key={country.code}
                     type="button"
@@ -205,7 +190,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
                       'text-gray-900 dark:text-gray-150 dark:hover:bg-gray-600'
                     } ${selectedCountry.code === country.code ? 'bg-gray-100' : ''}`}
                   >
-                    <img src={country.flag} className="mr-2"></img>
+                    <img src={country.flag} className="mr-2 w-4 h-3"></img>
                     <span className="font-medium">{country.name}</span>
                     <span className="ml-auto text-sm text-gray-500">({country.dialCode})</span>
                   </button>

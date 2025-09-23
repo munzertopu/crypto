@@ -76,7 +76,7 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
           <button
             onClick={handleEditMultiplePricesToggle}
             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-              editMultiplePrices ? 'bg-[#90C853]' : 'bg-[#CDCFD1]'
+              editMultiplePrices ? 'bg-[#90C853]' : 'bg-[#CDCFD1] dark:bg-gray-700'
             }`}
           >
             <span
@@ -97,10 +97,10 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
             className={`relative flex flex-col items-center p-4 rounded-lg cursor-pointer border transition-all min-w-0}
             ${editMultiplePrices ? 
               selectedPlatforms.includes(platform.id) && editMultiplePrices
-                ? 'border-[#90C853]'
-                : 'border-[#E1E3E5]'
+                ? 'border-[#90C853] dark:border-gray-700'
+                : 'border-[#E1E3E5] dark:border-gray-700'
               : 
-              "border-white"}
+              "border-white dark:border-gray-700"}
             `}
           >
             {/* Checkbox - Only show when edit mode is on */}
@@ -131,7 +131,7 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
             </Typography>
             
             {/* Missing Prices Counter */}
-            <div className={`px-3 py-1 rounded-full text-xs font-medium border-[#E1E3E5] bg-[#F3F5F7] flex-shrink-0`}>
+            <div className={`px-3 py-1 rounded-full text-xs font-medium border-[#E1E3E5] bg-[#F3F5F7] flex-shrink-0 dark:bg-gray-800 dark:border-gray-700`}>
               {platform.missingPrices}/{platform.totalPrices}
             </div>
           </div>

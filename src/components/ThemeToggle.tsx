@@ -38,7 +38,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ onToggle }) => {
     >
       <span
         className={`inline-block h-[18px] w-[18px] md:h-7 md:w-7 transform rounded-full transition-transform translate-x-0.5 bg-[#FFFFFF]
-          dark:translate-x-11 dark:bg-[#4D5050]
+          dark:translate-x-8 dark:bg-[#4D5050]
           `}
       >
         <div

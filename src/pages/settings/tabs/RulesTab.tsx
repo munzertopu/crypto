@@ -190,7 +190,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
       </div>
 
       {/* Rules Table */}
-      <div className="bg-white rounded-lg border border-default overflow-hidden">
+      <div className="bg-transparent rounded-lg border border-default overflow-hidden">
         <table className="w-full">
           <thead className={`bg-table-header dark:bg-gray-800`}>
             <tr>
@@ -250,7 +250,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
               <th className="px-6 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider"></th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-default">
+          <tbody className="bg-transparent divide-y divide-default">
             {rules.map((rule) => (
               <tr key={rule.id} className="hover:bg-gray-50">
                 <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-150">
@@ -268,11 +268,11 @@ const RulesTab: React.FC<RulesTabProps> = () => {
                 <td className="text-left px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center space-x-2">
                     {rule.tags.map((tag, index) => (
-                      <div key={index} className="flex items-center space-x-1 bg-gray-100 border border-default rounded-full px-3 py-1">
-                        <span className="text-sm text-gray-900">{tag}</span>
+                      <div key={index} className="flex items-center space-x-1 bg-gray-100 border border-default rounded-full px-3 py-1 dark:bg-gray-800">
+                        <span className="text-sm text-gray-900 dark:text-gray-100">{tag}</span>
                         <button
                           onClick={() => handleRemoveTag(rule.id, index)}
-                          className="text-gray-400 hover:text-gray-600"
+                          className="text-gray-400 dark:text-gray-100 hover:text-gray-600"
                         >
                           <svg
                             className="w-3 h-3"
@@ -300,7 +300,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <button
                     onClick={() => handleDeleteRule(rule.id)}
-                    className="text-[#7C7C7C] border border-default p-1 rounded-md"
+                    className="text-[#7C7C7C] border border-default p-1 rounded-md dark:text-gray-700 dark:border-gray-700"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
