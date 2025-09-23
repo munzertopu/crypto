@@ -104,7 +104,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
     showDropdown?: boolean;
   }> = ({ title, metrics, showDropdown = false }) => (
     <Card className={`py-6 bg-white dark:bg-transparent 
-      border border-default dark:border-[#E1E3E5] overflow-hidden`}>
+      border border-default dark:border-gray-700 overflow-hidden`}>
       <CardBody className="p-0 overflow-hidden">
         <div className="flex items-center justify-between pb-6 px-8">
           <div className="flex items-center space-x-2">
@@ -146,7 +146,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                       value={assetSearchTerm}
                       onChange={(e) => setAssetSearchTerm(e.target.value)}
                       className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 
-                         dark:text-gray-250 dark:placeholder-gray-400 focus:outline-none`}
+                         dark:bg-transparent dark:text-gray-250 dark:placeholder-gray-400 focus:outline-none`}
                     />
                   </div>
                   

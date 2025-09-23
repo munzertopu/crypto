@@ -141,7 +141,7 @@ const SetHistoricalPriceModal: React.FC<SetHistoricalPriceModalProps> = ({
             className={`px-4 py-3 rounded-lg font-medium ${
               historicalPrice && selectedDate
                 ? 'bg-[#90C853] text-[#0E201E]'
-                : 'bg-[#E1E3E5] text-[#8C8E90] cursor-not-allowed'
+                : 'bg-[#E1E3E5] text-[#8C8E90] dark:bg-gray-700 dark:text-gray-300 cursor-not-allowed'
             }`}
             disabled={!historicalPrice || !selectedDate}
           >
