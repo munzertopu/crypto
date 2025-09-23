@@ -102,7 +102,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
 
         <button
           onClick={handleAddRuleClick}
-          className="flex items-center space-x-2 px-5 py-3 rounded-lg border border-[#E1E3E5] text-[#0E201E] dark:border-gray-600 dark:text-green-400 dark:hover:bg-gray-700"
+          className="flex items-center space-x-2 px-5 py-3 rounded-lg border border-[#E1E3E5] text-[#0E201E] dark:border-gray-600 dark:text-green-400"
         >
           <FontAwesomeIcon icon={faPlus} className="w-4 h-4 text-gray-500" />
           <span className="text-sm font-medium">Add rule</span>
@@ -135,7 +135,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
             onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}
             className={`flex items-center space-x-6 px-4 py-2.5 border rounded-xl 
               bg-white text-[#0E201E] border-default
-              dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:bg-gray-600`}
+              dark:bg-gray-700 dark:border-gray-600 dark:text-white`}
           >
             <span className="text-sm">{selectedType}</span>
             <FontAwesomeIcon
@@ -252,7 +252,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
           </thead>
           <tbody className="bg-transparent divide-y divide-default">
             {rules.map((rule) => (
-              <tr key={rule.id} className="hover:bg-gray-50">
+              <tr key={rule.id}>
                 <td className="text-left px-6 py-4 whitespace-nowrap text-base text-gray-900 dark:text-gray-150">
                   {rule.name}
                 </td>
