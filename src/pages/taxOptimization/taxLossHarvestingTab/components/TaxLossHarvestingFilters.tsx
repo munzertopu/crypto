@@ -109,7 +109,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
             className={`w-full pl-12 pr-4 text-lg py-2.5 border border-default rounded-xl focus:outline-none bg-white text-gray-900 
-              dark:bg-gray-700 dark:text-gray-250 dark:border-gray-600`}
+              dark:bg-transparent dark:text-gray-250 dark:border-gray-600`}
           />
         </div>
         {/* Market Value Dropdown */}

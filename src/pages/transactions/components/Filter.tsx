@@ -416,7 +416,7 @@ const Filter: React.FC<FilterProps> = ({
             <button
               onClick={() => setWalletDropdownOpen(!walletDropdownOpen)}
               className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-primary
-                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-250`}
+                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
             >
               <span>Wallet</span>
               <FontAwesomeIcon
@@ -492,7 +492,7 @@ const Filter: React.FC<FilterProps> = ({
               }
               className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl 
                 border bg-white border-default text-primary
-                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-250`}
+                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
             >
               <span>Action type</span>
               <FontAwesomeIcon
@@ -601,7 +601,7 @@ const Filter: React.FC<FilterProps> = ({
             <button
               onClick={() => setResultDropdownOpen(!resultDropdownOpen)}
               className={`flex text-lg items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-[#0E201E] text-smh
-                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-250`}
+                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
             >
               <span>Result</span>
               <FontAwesomeIcon
