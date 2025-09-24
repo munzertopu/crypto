@@ -37,7 +37,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
     { id: 'bitcoin', name: 'Bitcoin', logo: 'crypto/bitcoin-btc-logo.png' },
     { id: 'phantom', name: 'Phantom', logo: 'crypto/pahton.png' },
     { id: 'kraken', name: 'Kraken', logo: 'crypto/kraken.png' },
-    { id: 'metamask', name: 'Meta mask', logo: 'crypto/metamask.png' },
+    { id: 'metamask', name: 'MetaMask', logo: 'crypto/metamask.png' },
     { id: 'solana', name: 'Solana', logo: 'crypto/solana-sol-logo.png' }
   ];
 
@@ -103,9 +103,9 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
     metrics: MetricData;
     showDropdown?: boolean;
   }> = ({ title, metrics, showDropdown = false }) => (
-    <Card className={`py-6 bg-white dark:bg-transparent 
-      border border-default dark:border-gray-700 overflow-hidden`}>
-      <CardBody className="p-0 overflow-hidden">
+    <div className={`py-6 bg-white dark:bg-transparent 
+      border border-default dark:border-gray-700 overflow-visible`}>
+      <div className="p-0 overflow-visible">
         <div className="flex items-center justify-between pb-6 px-8">
           <div className="flex items-center space-x-2">
             <div className={`text-h6 font-semibold text-gray-900 dark:text-gray-150`}>
@@ -117,11 +117,10 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
             </svg>
           </div>
           {showDropdown && (
-             <div className="relative" ref={assetDropdownRef}>
+             <div className="relative overflow-visible" ref={assetDropdownRef}>
               <button
                 onClick={() => setAssetDropdownOpen(!assetDropdownOpen)}
-                className={`flex items-center space-x-2 px-3 py-2 -mb-3 border border-gray-300 rounded-lg text-sm 
-                  bg-white border-gray-300 text-gray-700'
+                className={`flex items-center space-x-2 px-3 py-2 -mb-3 border border-default rounded-lg text-sm bg-white text-gray-700'
                   dark:bg-transparent
                 `}
               >
@@ -134,10 +133,10 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                 />
               </button>
               
-              {assetDropdownOpen && (
-                <div className={`absolute top-full right-0 mt-1 w-52 rounded-lg border shadow-lg z-50 bg-white border-gray-300
-                  dark:bg-gray-800 dark:border-gray-600'
-                `}>
+                {assetDropdownOpen && (
+                 <div className={`absolute top-full right-0 mt-4 w-52 rounded-lg border shadow-lg z-[9999] bg-white border-default
+                   dark:bg-gray-800 dark:border-gray-600'
+                 `}>
                   {/* Search Input */}
                   <div className="px-3 border-b border-gray-200">
                     <input
@@ -150,8 +149,8 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                     />
                   </div>
                   
-                  {/* Wallet Options List */}
-                  <div className="max-h-48 overflow-y-auto">
+                  {/* Asset Options List */}
+                  <div className="overflow-visible">
                     {filteredAssetOptions.map((option) => {
                       const isSelected = selectedAssets.includes(option.id);
                       return (
@@ -163,7 +162,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                         >
                           <div className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
                             isSelected 
-                              ? 'bg-[#90C853] border-[#90C853]' 
+                              ? 'bg-green-500 border-green-500' 
                               : 'border-gray-300'
                           }`}>
                             {isSelected && (
@@ -221,8 +220,8 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
             value={metrics.netCapitalGainLoss}
           />
         </div>
-      </CardBody>
-    </Card>
+      </div>
+    </div>
   );
 
   return (

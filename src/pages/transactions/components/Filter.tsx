@@ -309,7 +309,7 @@ const Filter: React.FC<FilterProps> = ({
                   onClick={() => onTabChange?.(tab)}
                   className={`px-3 sm:px-5 md:px-2.5 py-1 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${
                     activeTab === tab
-                      ? "bg-white dark:bg-gray-0 text-gray-900 dark:text-gray-900"
+                      ? "bg-[#B3E277] dark:bg-gray-0 text-gray-900 dark:text-gray-900"
                     : "text-gray-900 dark:text-gray-200"
                   }`}
                 >
@@ -592,7 +592,7 @@ const Filter: React.FC<FilterProps> = ({
               selectedDateRange={selectedDateRange}
               onDateRangeChange={setSelectedDateRange}
               buttonLabel="Date"
-              className="py-4"
+              className="py-[13px] shadow-sm"
             />
           </div>
 
@@ -600,7 +600,7 @@ const Filter: React.FC<FilterProps> = ({
           <div className="relative" ref={resultDropdownRef}>
             <button
               onClick={() => setResultDropdownOpen(!resultDropdownOpen)}
-              className={`flex text-lg items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-[#0E201E] text-smh
+              className={`flex text-lg items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-[#0E201E] text-sm
                 dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
             >
               <span>Result</span>
