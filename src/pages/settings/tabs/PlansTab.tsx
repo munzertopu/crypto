@@ -83,7 +83,7 @@ const PlansTab: React.FC<PlansTabProps> = () => {
             <div className='py-10 px-8'>
               {/* Status Badge */}
               {plan.status && (
-                <div className={`absolute right-8 ${plan.statusColor} ${plan.textColor} px-3 py-1 rounded-full text-sm font-medium`}>
+                <div className={`absolute right-8 ${plan.statusColor} ${plan.textColor} px-3 py-1 rounded-lg text-sm font-medium`}>
                   {plan.status}
                 </div>
               )}
