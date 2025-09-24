@@ -16,6 +16,7 @@ const Toast = ({ variant, children, onClose }: ToastProps) => {
     success: 1500,
   };
 
+  console.log(" variant", variant);
   const [show, setShow] = useState(true);
 
   useEffect(() => {
