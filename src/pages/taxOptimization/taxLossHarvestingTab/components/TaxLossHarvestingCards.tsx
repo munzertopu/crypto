@@ -120,8 +120,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
              <div className="relative overflow-visible" ref={assetDropdownRef}>
               <button
                 onClick={() => setAssetDropdownOpen(!assetDropdownOpen)}
-                className={`flex items-center space-x-2 px-3 py-2 -mb-3 border border-gray-300 rounded-lg text-sm 
-                  bg-white border-gray-300 text-gray-700'
+                className={`flex items-center space-x-2 px-3 py-2 -mb-3 border border-default rounded-lg text-sm bg-white text-gray-700'
                   dark:bg-transparent
                 `}
               >
@@ -134,10 +133,10 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                 />
               </button>
               
-              {assetDropdownOpen && (
-                <div className={`absolute top-10 right-0 w-52 rounded-lg border shadow-lg z-[9999] bg-white border-default
-                  dark:bg-gray-800 dark:border-gray-600'
-                `}>
+                {assetDropdownOpen && (
+                 <div className={`absolute top-full right-0 mt-4 w-52 rounded-lg border shadow-lg z-[9999] bg-white border-default
+                   dark:bg-gray-800 dark:border-gray-600'
+                 `}>
                   {/* Search Input */}
                   <div className="px-3 border-b border-gray-200">
                     <input
@@ -151,7 +150,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
                   </div>
                   
                   {/* Asset Options List */}
-                  <div className="max-h-48 overflow-y-auto">
+                  <div className="overflow-visible">
                     {filteredAssetOptions.map((option) => {
                       const isSelected = selectedAssets.includes(option.id);
                       return (
