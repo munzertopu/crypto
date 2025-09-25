@@ -50,7 +50,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs }) => {
 
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1">
                     <span
                       className="text-sm text-left font-medium text-gray-600 dark:text-gray-400"
                     >
