@@ -18,7 +18,7 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
   const [selectedWallet, setSelectedWallet] = useState('');
   const [selectedToken, setSelectedToken] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [tag, setTag] = useState('');
+  const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState('');
   const [isWalletDropdownOpen, setIsWalletDropdownOpen] = useState(false);
   const [isTokenDropdownOpen, setIsTokenDropdownOpen] = useState(false);
@@ -36,7 +36,7 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
 
   const handleAddRule = () => {
     // Handle add rule logic here
-    console.log('Add rule:', { ruleName, selectedWallet, selectedToken, quantity, tag });
+    console.log('Add rule:', { ruleName, selectedWallet, selectedToken, quantity, tags });
     onClose();
     if (onRuleAdded) {
       onRuleAdded();
@@ -80,7 +80,7 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
               value={ruleName}
               onChange={(e) => setRuleName(e.target.value)}
               placeholder="Type rule name"
-              className="w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none bg-white text-[#0E201E] placeholder-[#7C7C7C] dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
+              className="w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none bg-transparent text-[#0E201E] placeholder-[#7C7C7C] dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
             />
           </div>
 
@@ -94,7 +94,7 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
               <div className="relative">
                 <button
                   onClick={() => setIsWalletDropdownOpen(!isWalletDropdownOpen)}
-                  className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-white text-[#0E201E] dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-transparent text-[#0E201E] dark:border-gray-600 dark:text-white"
                 >
                   <div className="flex items-center space-x-2">
                     {selectedWallet && (
@@ -148,7 +148,7 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
               <div className="relative">
                 <button
                   onClick={() => setIsTokenDropdownOpen(!isTokenDropdownOpen)}
-                  className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-white text-gray-900 dark:text-gray-150 dark:bg-gray-700 dark:border-gray-600"
+                  className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-transparent text-gray-900 dark:text-gray-150 dark:border-gray-600"
                 >
                   <span className={`text-left ${selectedToken ? 'text-gray-900 dark:text-gray-150' : 'text-[#7C7C7C]'}`}>
                     {selectedToken || 'Select the token'}
@@ -197,25 +197,25 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
               placeholder="Define an exact amount"
-              className="w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none bg-white text-[#0E201E] placeholder-[#7C7C7C] dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
+              className="w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none bg-transparent text-[#0E201E] placeholder-[#7C7C7C] dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
             />
           </div>
 
           {/* Tag Input */}
           <div className="mb-6">
             <label className="block text-sm font-medium mb-2 text-left text-gray-700 dark:text-gray-300">
-              Tag
+              Tags
             </label>
-            <div className="w-full min-h-[40px] px-3 py-2 border border-[#E1E3E5] rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 flex items-center flex-wrap gap-2">
-              {tag ? (
-                <div className="flex items-center space-x-1 bg-gray-100 border border-default rounded-full px-3 py-1">
-                  <span className="text-sm text-gray-900">{tag}</span>
+            <div className="w-full min-h-[40px] px-3 py-2 border border-[#E1E3E5] rounded-lg bg-transparent dark:border-gray-600 flex items-center flex-wrap gap-2">
+              {/* Display existing tags */}
+              {tags.map((tag, index) => (
+                <div key={index} className="flex items-center space-x-1 bg-transparent border border-default dark:border-gray-700 rounded-full px-3 py-1">
+                  <span className="text-sm text-gray-900 dark:text-gray-100">{tag}</span>
                   <button
                     onClick={() => {
-                      setTag('');
-                      setTagInput('');
+                      setTags(tags.filter((_, i) => i !== index));
                     }}
-                    className="text-gray-400 hover:text-gray-600"
+                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                     type="button"
                   >
                     <svg
@@ -233,24 +233,25 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
                     </svg>
                   </button>
                 </div>
-              ) : (
-                <input
-                  type="text"
-                  value={tagInput}
-                  onChange={(e) => setTagInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      e.preventDefault();
-                      if (tagInput.trim()) {
-                        setTag(tagInput.trim());
-                        setTagInput('');
-                      }
+              ))}
+              
+              {/* Input field */}
+              <input
+                type="text"
+                value={tagInput}
+                onChange={(e) => setTagInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (tagInput.trim() && !tags.includes(tagInput.trim())) {
+                      setTags([...tags, tagInput.trim()]);
+                      setTagInput('');
                     }
-                  }}
-                  placeholder="Start typing tag..."
-                  className="flex-1 bg-transparent text-gray-900 placeholder-[#7C7C7C] dark:text-gray-250 dark:placeholder-gray-400 focus:outline-none"
-                />
-              )}
+                  }
+                }}
+                placeholder={tags.length === 0 ? "Start typing tag..." : "Add another tag..."}
+                className="flex-1 bg-transparent text-gray-900 placeholder-[#7C7C7C] dark:text-gray-250 dark:placeholder-gray-400 focus:outline-none"
+              />
             </div>
           </div>
         </div>
@@ -268,7 +269,7 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
             className={`px-4 py-2 rounded-lg font-medium ${
               ruleName && selectedWallet && selectedToken
                 ? 'bg-[#90C853] text-[#0E201E] hover:bg-[#7AB342]'
-                : 'bg-[#E1E3E5] text-[#7C7C7C] cursor-not-allowed'
+                : 'bg-gray-700 text-gray-300 cursor-not-allowed'
             }`}
             disabled={!ruleName || !selectedWallet || !selectedToken}
           >
