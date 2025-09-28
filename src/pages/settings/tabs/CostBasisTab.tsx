@@ -239,10 +239,13 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
 
         <div className="space-y-2">
           {taxRules.map((rule) => (
-            <div key={rule.id} className="flex items-center py-3">
+            <div 
+              key={rule.id} 
+              onClick={() => handleTaxRuleToggle(rule.id)}
+              className="flex items-center py-3 cursor-pointer rounded-lg px-2 -mx-2 transition-colors"
+            >
               {/* Toggle Switch */}
-              <button
-                onClick={() => handleTaxRuleToggle(rule.id)}
+              <div
                 className={`relative inline-flex h-6 w-11 mr-3 items-center rounded-full transition-colors ${
                   rule.enabled ? 'bg-[#90C853]' : 'bg-[#CDCFD1] dark:bg-gray-700'
                 }`}
@@ -252,7 +255,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
                     rule.enabled ? 'translate-x-6' : 'translate-x-1'
                   }`}
                 />
-              </button>
+              </div>
               <span className={`text-base text-left text-[#0E201E] dark:text-gray-300`}>
                 {rule.name}
               </span>
@@ -265,8 +268,8 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
       <div className="flex justify-between pt-6 my-8">
         <Button
           onClick={handleRecalculate}
-          className={`border-[#E1E3E5] px-5 py-3 rounded-lg font-medium bg-white border-[#E1E3E5] text-[#0E201E]
-            dartk:border-gray-600 dartk:text-gray-300
+          className={`border-[#E1E3E5] px-5 py-3 rounded-lg font-medium bg-transparent border-[#E1E3E5] text-[#0E201E]
+            dark:border-gray-600 dark:text-gray-100
           `}
         >
           Recalculate
