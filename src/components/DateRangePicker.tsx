@@ -149,6 +149,13 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   };
 
   useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
     setDateRange([
       {
         startDate: selectedDateRange.startDate || new Date(),
@@ -167,9 +174,9 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
         onClick={handleIconClick}
         className={`w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900
           dark:text-gray-100 dark:bg-[#0E201E] dark:border-gray-700 min-w-[194px] ${className}`}
-          aria-label="Select date range"
-          aria-expanded={isOpen}
-          aria-haspopup="true"
+        aria-label="Select date range"
+        aria-expanded={isOpen}
+        aria-haspopup="true"
       >
         <div className="flex items-center space-x-2">
           <svg
@@ -279,6 +286,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
                       key: "selection",
                     },
                   });
+                  setIsOpen(false);
                 }}
                 className="cursor-pointer  hover:bg-gray-100 px-2 py-1 rounded text-sm"
               >
@@ -293,6 +301,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
                 }).map((_, i) => (2010 + i).toString())}
                 onSelect={(value) => {
                   handleYearSelect(parseInt(value));
+                  setIsOpen(false);
                 }}
                 defaultValue=""
               />
@@ -307,6 +316,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
                       key: "selection",
                     },
                   });
+                  setIsOpen(false);
                 }}
                 className="cursor-pointer  hover:bg-gray-100 px-2 py-1 rounded text-sm opacity-90"
               >
