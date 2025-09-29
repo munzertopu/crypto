@@ -87,7 +87,42 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({
     tooltip: {
       enabled: true,
       custom: function ({ series, seriesIndex, dataPointIndex, w }) {
-        return "<div>$ " + series[seriesIndex][dataPointIndex] + "</div>";
+        const value = series[seriesIndex][dataPointIndex];
+        const date = w.globals.labels[dataPointIndex];
+        
+        // Format the value with thousand separators
+        const formattedValue = new Intl.NumberFormat('en-US', {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }).format(value);
+        
+        return `
+          <div style="
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            font-family: 'Be Vietnam Pro', sans-serif;
+            min-width: 120px;
+          ">
+            <div style="
+              font-weight: 600;
+              font-size: 16px;
+              color: #111827;
+              margin-bottom: 4px;
+            ">
+              $${formattedValue}
+            </div>
+            <div style="
+              font-weight: 400;
+              font-size: 14px;
+              color: #6b7280;
+            ">
+              ${date}
+            </div>
+          </div>
+        `;
       },
     },
   };
