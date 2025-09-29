@@ -77,8 +77,8 @@ const PlansTab: React.FC<PlansTabProps> = () => {
         {plans.map((plan, index) => (
           <div
             key={plan.name}
-            className="relative bg-white text-left h-min rounded-lg shadow-sm border border-default 
-            dark:bg-gray-800 dark:border-gray-700"
+            className="relative bg-white text-left h-full rounded-lg shadow-sm border border-default 
+            dark:bg-gray-800 dark:border-gray-700 flex flex-col"
           >
             <div className='py-10 px-8'>
               {/* Status Badge */}
@@ -101,9 +101,9 @@ const PlansTab: React.FC<PlansTabProps> = () => {
               
             {/* Separator */}
             <div className={`border-t border-default dark:border-gray-700`}></div>
-            <div className='py-6 px-8'>
+            <div className='py-6 px-8 flex-1 flex flex-col'>
               {/* Features */}
-              <div className="mb-6">
+              <div className="mb-6 flex-1">
                 <h5 className={`text-lg font-medium mb-3 dark:text-gray-100`}>
                   Features:
                 </h5>
@@ -126,7 +126,7 @@ const PlansTab: React.FC<PlansTabProps> = () => {
               {plan.name !== 'Newbie' && (
                 <button 
                   onClick={() => handleUpgradeClick(plan.name)}
-                  className={`w-full py-2 px-4 text-base bg-white border border-default rounded-lg text-gray-700 font-semibold text-primary dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100`}
+                  className={`w-full py-2 px-4 text-base bg-white border border-default rounded-lg text-gray-700 font-semibold text-primary dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100 mt-auto`}
                 >
                   Upgrade
                 </button>

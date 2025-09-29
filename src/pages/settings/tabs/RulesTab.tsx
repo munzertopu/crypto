@@ -123,8 +123,8 @@ const RulesTab: React.FC<RulesTabProps> = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className={`w-full pl-10 text-sm pr-4 py-2.5 border rounded-xl focus:outline-none 
-              bg-white text-gray-900 placeholder-[#7C7C7C] border-default
-              dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250 dark:placeholder-gray-400
+              bg-transparent text-gray-900 placeholder-[#7C7C7C] border-default
+              dark:border-gray-600 dark:text-gray-250 dark:placeholder-gray-400
               `}
           />
         </div>
@@ -134,8 +134,8 @@ const RulesTab: React.FC<RulesTabProps> = () => {
           <button
             onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}
             className={`flex items-center space-x-6 px-4 py-2.5 border rounded-xl 
-              bg-white text-[#0E201E] border-default
-              dark:bg-gray-700 dark:border-gray-600 dark:text-white`}
+              bg-transparent text-[#0E201E] border-default
+              dark:border-gray-600 dark:text-white`}
           >
             <span className="text-sm">{selectedType}</span>
             <FontAwesomeIcon
@@ -152,7 +152,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
           <DatePicker
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date)}
-            className={`w-full px-3 py-[8px] text-sm border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer ${"bg-white text-[#0E201E] dark:bg-gray-700 dark:border-gray-600 dark:text-white"}`}
+            className={`w-full px-3 py-[8px] text-sm border border-[#E1E3E5] rounded-lg focus:outline-none flex items-center justify-between cursor-pointer ${"bg-transparent text-[#0E201E] dark:border-gray-600 dark:text-gray-100"}`}
             placeholderText="Date"
             dateFormat="MM/dd/yyyy"
             wrapperClassName="w-full"
@@ -165,7 +165,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
             )}
             customInput={
               <div className="flex items-center justify-between w-full space-x-6">
-                <span className={`flex-1 text-left ${!selectedDate ? 'text-gray-400 dark:text-gray-500' : ''}`}>
+                <span className={`flex-1 text-left ${!selectedDate ? 'text-gray-400 dark:text-gray-100' : ''}`}>
                   {selectedDate ? selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) : 'Date'}
                 </span>
                 <svg

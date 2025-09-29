@@ -592,7 +592,7 @@ const Filter: React.FC<FilterProps> = ({
               selectedDateRange={selectedDateRange}
               onDateRangeChange={setSelectedDateRange}
               buttonLabel="Date"
-              className="py-[13px] shadow-sm"
+              className="py-[13px] shadow-sm rounded-lg"
             />
           </div>
 
