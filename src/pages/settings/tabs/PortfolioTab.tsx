@@ -198,7 +198,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                 <button
                   type="button"
                   onClick={() => setIsCurrencyDropdownOpen(!isCurrencyDropdownOpen)}
-                  className={`w-full px-3 py-2 border border-gray-700 rounded-lg focus:outline-none flex items-center justify-between bg-transparent text-gray-900
+                  className={`w-full px-3 py-2 border border-default rounded-lg focus:outline-none flex items-center justify-between bg-transparent text-gray-900
                     dark:text-gray-250`}
                 >
                   <div className="flex items-center justify-between w-full">
@@ -242,7 +242,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                 <DatePicker
                   selected={startDate} 
                   onChange={(date) => setStartDate(date)} 
-                  className={`w-full px-3 py-2 border border-gray-700 rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-transparent text-gray-900
+                  className={`w-full px-3 py-2 border border-default rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-transparent text-gray-900
                     dark:border-gray-600 dark:text-gray-250
                   `}
                   placeholderText="MM/DD/YYYY"
@@ -303,7 +303,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
                 </svg>
               </div>
-              <div className="flex space-x-0 px-4 py-2 border border-gray-700 rounded-lg">
+              <div className="flex space-x-0 px-4 py-2 border border-default rounded-lg">
                   <input
                     type="text"
                     value={formData.dustValueThreshold}
@@ -360,7 +360,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                  <DatePicker
                    selected={taxReportingYearDate} 
                    onChange={(date) => setTaxReportingYearDate(date)} 
-                   className={`w-full px-3 mt-{1px} py-2 border border-gray-700 rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-transparent text-gray-900
+                   className={`w-full px-3 mt-{1px} py-2 border border-default rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-transparent text-gray-900
                       dark:border-gray-600 dark:text-gray-250
                    `}
                    placeholderText="MM/DD/YYYY"
