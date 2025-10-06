@@ -14,7 +14,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   activeTab = "Portfolio",
   onTabChange,
 }) => {
-  const tabs = ["Portfolio", "Crypto", "NFT"];
+  const tabs = ["Portfolio", "NFT"];
   const [selectedDateRange, setSelectedDateRange] = useState({
     startDate: new Date("2025-05-01") as Date | null,
     endDate: new Date("2025-05-29") as Date | null,
