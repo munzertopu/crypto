@@ -14,7 +14,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   activeTab = "Portfolio",
   onTabChange,
 }) => {
-  const tabs = ["Portfolio", "Crypto", "NFT"];
+  const tabs = ["Portfolio", "NFT"];
   const [selectedDateRange, setSelectedDateRange] = useState({
     startDate: new Date("2025-05-01") as Date | null,
     endDate: new Date("2025-05-29") as Date | null,
@@ -41,14 +41,14 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
       </div>
       {/* Tabs */}
       <div className="mt-4 md:mt-5 border-gray-200 dark:border-gray-800 md:mb-0 sm:mt-0">
-        <Tabs>
-          <Tabs.List className="p-1 bg-[#F3F5F7] dark:bg-gray-800 rounded-xl">
+        <Tabs className="">
+          <Tabs.List className="p-1 bg-[#F3F5F7] dark:bg-gray-800 rounded-xl w-full sm:w-[fit-content]">
             {tabs.map((tab) => (
               <Tabs.Trigger
                 key={tab}
                 value={tab}
                 onClick={() => onTabChange?.(tab)}
-                className={`px-1.5 sm:px-5 md:px-2.5 py-2.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-lg text-smh sm:text-smh md:smh ${
+                className={`w-full sm:w-[inherit] px-1.5 sm:px-5 md:px-2.5 py-2.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-lg text-smh sm:text-smh md:smh ${
                   activeTab === tab
                     ? "bg-white dark:bg-gray-0 text-gray-900 dark:text-gray-900"
                     : "text-gray-900 dark:text-gray-200"
