@@ -266,7 +266,6 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
           </span>
         </div>
       </button>
-
       {isOpen && (
         <div
           className={`absolute top-full  md:left-[-710px] mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
@@ -274,124 +273,16 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
           }`}
         >
           {/* Left Sidebar for Filters */}
-          <div className="hidden min-w-[200px] pr-4 border-r border-gray-150 md:flex flex-col justify-start items-start px-2 gap-2 ">
-            {createShortcuts().map((shortcut, index) => (
-              <div
-                key={index}
-                onClick={() => {
-                  handleDateChange({
-                    selection: {
-                      startDate: shortcut.range[0],
-                      endDate: shortcut.range[1],
-                      key: "selection",
-                    },
-                  });
-                  setIsOpen(false);
-                }}
-                className="cursor-pointer  hover:bg-gray-100 px-2 py-1 rounded text-sm"
-              >
-                {shortcut.label}
-              </div>
-            ))}
-            <div className="flex justify-start items-center gap-2 px-2 opacity-90">
-              <span className="text-sm ">By year</span>{" "}
-              <Dropdown
-                options={Array.from({
-                  length: new Date().getFullYear() - 2010 + 1,
-                }).map((_, i) => (2010 + i).toString())}
-                onSelect={(value) => {
-                  handleYearSelect(parseInt(value));
-                  setIsOpen(false);
-                }}
-                defaultValue=""
-              />
-            </div>
-            <div className="">
-              <div
-                onClick={() => {
-                  handleDateChange({
-                    selection: {
-                      startDate: new Date(2020, 0, 1),
-                      endDate: new Date(),
-                      key: "selection",
-                    },
-                  });
-                  setIsOpen(false);
-                }}
-                className="cursor-pointer  hover:bg-gray-100 px-2 py-1 rounded text-sm opacity-90"
-              >
-                All Time
-              </div>
-            </div>
-          </div>
-          {/* Datepicker */}
-          <div className="w-full">
-            <DateRange
-              // ranges={dateRange}
-              // editableDateInputs={false}
-              // onChange={handleDateChange}
-
-              direction={screenSize.width < 640 ? "vertical" : "horizontal"}
-              rangeColors={["#6DA036"]}
-              // className="react-date-range-custom"
-              // moveRangeOnFirstSelection={false}
-              months={screenSize.width < 640 ? 1 : 2}
-              editableDateInputs={false}
-              showDateDisplay={false}
-              onChange={handleDateChange}
-              moveRangeOnFirstSelection={false}
-              ranges={dateRange}
-              locale={enUS} // Added locale prop to fix the error
-            />
-          </div>
-          <div className="w-full md:px-1 mt-[15px] md:mt-[-10px] pb-5 md:hidden">
-            <div className="flex justify-between items-center gap-2  md:px-2 opacity-90 w-full">
-              <Dropdown
-                className="w-full flex-grow-1"
-                options={createShortcuts()
-                  .map((shortcut) => shortcut.label)
-                  .concat(["By year", "All time"])}
-                onSelect={(value) => {
-                  if (value === "All time") {
-                    handleDateChange({
-                      selection: {
-                        startDate: new Date(2020, 0, 1),
-                        endDate: new Date(),
-                        key: "selection",
-                      },
-                    });
-                    return;
-                  }
-                  setSelectedOption(value);
-                  if (value === "By year") return;
-                  console.log(value);
-                  const selectedShortcut = createShortcuts().find(
-                    (shortcut) => shortcut.label === value
-                  );
-                  if (selectedShortcut) {
-                    handleDateChange({
-                      selection: {
-                        startDate: selectedShortcut.range[0],
-                        endDate: selectedShortcut.range[1],
-                        key: "selection",
-                      },
-                    });
-                  }
-                }}
-              />
-              {selectedOption === "By year" && (
-                <Dropdown
-                  options={Array.from({
-                    length: new Date().getFullYear() - 2010 + 1,
-                  }).map((_, i) => (2010 + i).toString())}
-                  onSelect={(value) => {
-                    handleYearSelect(parseInt(value));
-                  }}
-                  defaultValue=""
-                />
-              )}
-            </div>
-          </div>
+          <RenderDateRange
+            dateRange={dateRange}
+            handleDateChange={handleDateChange}
+            handleYearSelect={handleYearSelect}
+            setIsOpen={setIsOpen}
+            createShortcuts={createShortcuts}
+            screenSize={screenSize}
+            setSelectedOption={setSelectedOption}
+            selectedOption={selectedOption}
+          />
         </div>
       )}
     </div>
@@ -399,3 +290,146 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
 };
 
 export default DateRangePickerPopover;
+
+const RenderDateRange = ({
+  dateRange,
+  handleDateChange,
+  handleYearSelect,
+  setIsOpen,
+  createShortcuts,
+  screenSize,
+  setSelectedOption,
+  selectedOption,
+}: {
+  dateRange: { startDate: Date | null; endDate: Date | null; key: string }[];
+  handleDateChange: (ranges: any, year?: number) => void;
+  handleYearSelect: (year: number) => void;
+  setIsOpen: (isOpen: boolean) => void;
+  createShortcuts: any;
+  screenSize: { width: number; height: number };
+  setSelectedOption: (option: string) => void;
+  selectedOption: string;
+}) => {
+  return (
+    <>
+      <div className="hidden min-w-[200px] pr-4 border-r border-gray-150 md:flex flex-col justify-start items-start px-2 gap-2 ">
+        {createShortcuts().map((shortcut, index) => (
+          <div
+            key={index}
+            onClick={() => {
+              handleDateChange({
+                selection: {
+                  startDate: shortcut.range[0],
+                  endDate: shortcut.range[1],
+                  key: "selection",
+                },
+              });
+              setIsOpen(false);
+            }}
+            className="cursor-pointer  hover:bg-gray-100 px-2 py-1 rounded text-sm"
+          >
+            {shortcut.label}
+          </div>
+        ))}
+        <div className="flex justify-start items-center gap-2 px-2 opacity-90">
+          <span className="text-sm ">By year</span>{" "}
+          <Dropdown
+            options={Array.from({
+              length: new Date().getFullYear() - 2010 + 1,
+            }).map((_, i) => (2010 + i).toString())}
+            onSelect={(value) => {
+              handleYearSelect(parseInt(value));
+              setIsOpen(false);
+            }}
+            defaultValue=""
+          />
+        </div>
+        <div className="">
+          <div
+            onClick={() => {
+              handleDateChange({
+                selection: {
+                  startDate: new Date(2020, 0, 1),
+                  endDate: new Date(),
+                  key: "selection",
+                },
+              });
+              setIsOpen(false);
+            }}
+            className="cursor-pointer  hover:bg-gray-100 px-2 py-1 rounded text-sm opacity-90"
+          >
+            All Time
+          </div>
+        </div>
+      </div>
+      {/* Datepicker */}
+      <div className="w-full">
+        <DateRange
+          // ranges={dateRange}
+          // editableDateInputs={false}
+          // onChange={handleDateChange}
+
+          direction={screenSize.width < 640 ? "vertical" : "horizontal"}
+          rangeColors={["#6DA036"]}
+          // className="react-date-range-custom"
+          // moveRangeOnFirstSelection={false}
+          months={screenSize.width < 640 ? 1 : 2}
+          editableDateInputs={false}
+          showDateDisplay={false}
+          onChange={handleDateChange}
+          moveRangeOnFirstSelection={false}
+          ranges={dateRange}
+          locale={enUS} // Added locale prop to fix the error
+        />
+      </div>
+      <div className="w-full md:px-1 mt-[15px] md:mt-[-10px] pb-5 md:hidden">
+        <div className="flex justify-between items-center gap-2  md:px-2 opacity-90 w-full">
+          <Dropdown
+            className="w-full flex-grow-1"
+            options={createShortcuts()
+              .map((shortcut) => shortcut.label)
+              .concat(["By year", "All time"])}
+            onSelect={(value) => {
+              if (value === "All time") {
+                handleDateChange({
+                  selection: {
+                    startDate: new Date(2020, 0, 1),
+                    endDate: new Date(),
+                    key: "selection",
+                  },
+                });
+                return;
+              }
+              setSelectedOption(value);
+              if (value === "By year") return;
+              console.log(value);
+              const selectedShortcut = createShortcuts().find(
+                (shortcut) => shortcut.label === value
+              );
+              if (selectedShortcut) {
+                handleDateChange({
+                  selection: {
+                    startDate: selectedShortcut.range[0],
+                    endDate: selectedShortcut.range[1],
+                    key: "selection",
+                  },
+                });
+              }
+            }}
+          />
+          {selectedOption === "By year" && (
+            <Dropdown
+              options={Array.from({
+                length: new Date().getFullYear() - 2010 + 1,
+              }).map((_, i) => (2010 + i).toString())}
+              onSelect={(value) => {
+                handleYearSelect(parseInt(value));
+              }}
+              defaultValue=""
+            />
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
