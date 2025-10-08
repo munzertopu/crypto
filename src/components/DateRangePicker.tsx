@@ -172,8 +172,8 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
     >
       <button
         onClick={handleIconClick}
-        className={`w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900
-          dark:text-gray-100 dark:bg-[#0E201E] dark:border-gray-700 min-w-[194px] ${className}`}
+        className={`w-full flex items-center justify-between p-2 md:p-0 md:px-4 md:py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900
+          dark:text-gray-100 dark:bg-[#0E201E] dark:border-gray-700 md:min-w-[194px] ${className}`}
         aria-label="Select date range"
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -258,7 +258,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
             />
           </svg>
 
-          <span className="text-xs font-medium">
+          <span className="hidden md:block text-xs font-medium">
             {formatDateRange(selectedDateRange)}
             {!selectedDateRange.startDate && !selectedDateRange.endDate && (
               <>{buttonLabel}</>
