@@ -5,6 +5,7 @@ import "react-date-range/dist/theme/default.css"; // Theme CSS file
 import useScreenSize from "../hooks/useScreenSize";
 import Dropdown from "./UI/Dropdown";
 import { enUS } from "date-fns/locale"; // Import enUS locale
+import MobileDrawer from "./Drawers/MobileDrawer";
 
 interface DateRangeSelectorProps {
   selectedDateRange: {
@@ -266,7 +267,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
           </span>
         </div>
       </button>
-      {isOpen && (
+      {isOpen && screenSize.width > 1024 ? (
         <div
           className={`absolute top-full  md:left-[-710px] mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
             isDrawer ? " left-[-10px]" : "left-[-175px]"
@@ -284,7 +285,32 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
             selectedOption={selectedOption}
           />
         </div>
-      )}
+      ) : isOpen && screenSize.width < 1024 ? (
+        <MobileDrawer
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          header="Select Date Range"
+          height={500}
+          onRightButtonClick={() => {
+            setIsOpen(false);
+            console.log("Apply clicked", dateRange);
+          }}
+          rightButtonText="Apply"
+        >
+          <div className="">
+            <RenderDateRange
+              dateRange={dateRange}
+              handleDateChange={handleDateChange}
+              handleYearSelect={handleYearSelect}
+              setIsOpen={setIsOpen}
+              createShortcuts={createShortcuts}
+              screenSize={screenSize}
+              setSelectedOption={setSelectedOption}
+              selectedOption={selectedOption}
+            />
+          </div>
+        </MobileDrawer>
+      ) : null}
     </div>
   );
 };
@@ -385,7 +411,9 @@ const RenderDateRange = ({
       <div className="w-full md:px-1 mt-[15px] md:mt-[-10px] pb-5 md:hidden">
         <div className="flex justify-between items-center gap-2  md:px-2 opacity-90 w-full">
           <Dropdown
-            className="w-full flex-grow-1"
+            className={`${
+              selectedOption === "By year" ? "w-[50%]" : "w-full"
+            }  flex-grow-1`}
             options={createShortcuts()
               .map((shortcut) => shortcut.label)
               .concat(["By year", "All time"])}
@@ -419,6 +447,7 @@ const RenderDateRange = ({
           />
           {selectedOption === "By year" && (
             <Dropdown
+              className="w-[50%] flex-grow-1"
               options={Array.from({
                 length: new Date().getFullYear() - 2010 + 1,
               }).map((_, i) => (2010 + i).toString())}
