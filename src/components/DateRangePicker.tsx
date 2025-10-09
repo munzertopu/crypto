@@ -389,7 +389,7 @@ const RenderDateRange = ({
         </div>
       </div>
       {/* Datepicker */}
-      <div className="w-full">
+      <div className="w-full border border-gray-150 rounded-[12px] shadow-sm md:shadow-none md:border-none">
         <DateRange
           // ranges={dateRange}
           // editableDateInputs={false}
