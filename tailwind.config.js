@@ -59,16 +59,17 @@ module.exports = {
         green: {
           400: "#B3E277",
           500: "#90c853",
+          600: "#75AE46",
         },
         error: {
           500: "#d8382c",
         },
         default: "#E1E3E5",
-        primary: "#0E201E",
+
         background: "#F7F8F9",
         table: {
-          header: "#F3F5F7"
-        }
+          header: "#F3F5F7",
+        },
       },
       fontFamily: {
         sans: [
