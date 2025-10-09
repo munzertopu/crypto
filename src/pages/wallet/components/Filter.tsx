@@ -20,7 +20,7 @@ const Filter: React.FC<FilterProps> = ({
       <div className="flex mb-4 mt-5 md:mt-0 sm:mb-0">
         <Tabs>
           <Tabs.List className="my-2 lg:my-0 bg-[#F3F5F7] dark:bg-gray-800">
-            {["All", "Exchanges", "Blockchains"].map((tab) => (
+            {["All", "Exchanges", "Exchanges vs Blockchains"].map((tab) => (
               <Tabs.Trigger
                 key={tab}
                 value={tab}

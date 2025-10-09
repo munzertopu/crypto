@@ -15,10 +15,7 @@ const WalletPage: React.FC<WalletPageProps> = ({ onLogout }) => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0E201E]">
-      <NavigationBar
-        onLogout={onLogout}
-        currentPage="wallets"
-      />
+      <NavigationBar onLogout={onLogout} currentPage="wallets" />
 
       <div className="px-4 md:px-10">
         <div className="pt-6 sm:pt-0 md:mx-auto md:px-0 md:py-5">
@@ -31,7 +28,7 @@ const WalletPage: React.FC<WalletPageProps> = ({ onLogout }) => {
           </h1>
 
           {/* Recommended Accounts Section */}
-          <div className="hidden sm:block">
+          <div className="">
             <Recommended
               showRecommendedAccounts={showRecommendedAccounts}
               setShowRecommendedAccounts={setShowRecommendedAccounts}
