@@ -1,5 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import CloseIcon from "../Icons/CloseIcon";
+import ArrowLeftIcon from "../Icons/ArrowLeftIcon";
 
 interface DrawerProps {
   isOpen: boolean;
@@ -13,6 +15,7 @@ interface DrawerProps {
   onRightButtonClick?: () => void;
   disableRightButton?: boolean;
   marginBottom?: boolean;
+  hideCloseIcon?: boolean;
 }
 
 const MobileDrawer: React.FC<DrawerProps> = ({
@@ -27,6 +30,7 @@ const MobileDrawer: React.FC<DrawerProps> = ({
   onRightButtonClick,
   disableRightButton = false,
   marginBottom = false,
+  hideCloseIcon = false,
 }) => {
   return (
     <>
@@ -47,17 +51,34 @@ const MobileDrawer: React.FC<DrawerProps> = ({
       >
         {/* Header */}
         <div className="flex justify-between items-start">
-          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-250">
-            {header}
-          </h2>
-          <button
-            onClick={onClose}
-            className={`flex-shrink-0 text-[#7C7C7C] transition-colors dark:text-gray-250 z-10 ${
-              marginBottom ? "-mb-[24px]" : ""
-            } `}
-          >
-            <FontAwesomeIcon icon={faTimes} className="w-4 h-4" />
-          </button>
+          <div className="flex items-center justify-start gap-2">
+            {/* Use ArrowLeftIcon for back navigation */}
+            {hideCloseIcon ? (
+              <button
+                onClick={onClose}
+                className={`flex-shrink-0 text-[#7C7C7C] transition-colors dark:text-gray-250 z-10 ${
+                  marginBottom ? "-mb-[24px]" : ""
+                } `}
+              >
+                <ArrowLeftIcon />
+              </button>
+            ) : null}
+
+            <h2 className="text-lg font-semibold text-gray-11 dark:text-gray-250">
+              {header}
+            </h2>
+          </div>
+          {/* Use CloseIcon for closing the drawer */}
+          {!hideCloseIcon && (
+            <button
+              onClick={onClose}
+              className={`flex-shrink-0 text-[#7C7C7C] transition-colors dark:text-gray-250 z-10 ${
+                marginBottom ? "-mb-[24px]" : ""
+              } `}
+            >
+              <CloseIcon />
+            </button>
+          )}
         </div>
 
         {/* Content */}

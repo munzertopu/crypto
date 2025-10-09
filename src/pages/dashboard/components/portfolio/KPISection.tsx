@@ -471,15 +471,15 @@ const KPISection: React.FC<KPISectionProps> = ({
       <MobileDrawer
         isOpen={openKPIFilter}
         onClose={() => setOpenKPIFilter(false)}
-        header=""
+        header="Add KPI"
+        hideCloseIcon={true}
         height={400}
         leftButtonText="Cancel"
         rightButtonText="Save"
         onLeftButtonClick={() => setOpenKPIFilter(false)}
         onRightButtonClick={() => setOpenKPIFilter(false)}
-        marginBottom
       >
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 pt-3">
           {Object.entries(selectedKPIs).map(([key, isSelected]) => {
             const kpiLabels: { [key: string]: string } = {
               longTerms: "Long Terms",
@@ -495,7 +495,7 @@ const KPISection: React.FC<KPISectionProps> = ({
             return (
               <div
                 key={key}
-                className="flex items-center justtify-start cursor-pointer gap-3 w-full"
+                className="flex items-center justtify-start cursor-pointer gap-2 w-full p-1.5"
                 onClick={() => handleKPIToggle(key)}
                 role="menuitemcheckbox"
                 aria-checked={isSelected}
@@ -504,7 +504,7 @@ const KPISection: React.FC<KPISectionProps> = ({
                 <div
                   className={`w-5 h-5 border-2 flex items-center justify-center rounded-[4px]  transition-colors border-[#90C853] ${
                     isSelected
-                      ? "bg-white dark:bg-[#5F9339]"
+                      ? "bg-green-600 dark:bg-[#5F9339]"
                       : "border-[rgba(124,124,124,0.15)]"
                   }`}
                 >
@@ -518,7 +518,7 @@ const KPISection: React.FC<KPISectionProps> = ({
                     >
                       <path
                         d="M1.5 4L4.49647 7L10.5 1"
-                        stroke="#90C853"
+                        stroke="#fff"
                         stroke-width="1.5"
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -526,7 +526,7 @@ const KPISection: React.FC<KPISectionProps> = ({
                     </svg>
                   )}
                 </div>
-                <span className="text-[#0E201E] dark:text-gray-250 text-base leading-5 opacity-80">
+                <span className="text-[#0E201E] dark:text-primary text-base leading-5 opacity-80">
                   {kpiLabels[key]}
                 </span>
               </div>
