@@ -49,18 +49,18 @@ const Recommended: React.FC<RecommendedProps> = ({
   }
 
   return (
-    <div className="mb-6">
-      <div className="flex items-center justify-between mb-3">
+    <div className="mb-0 md:mb-6 mt-5 md:mt-0">
+      <div className="flex items-center justify-between mb-2 md:mb-3">
         <h2
           className={`text-base font-semibold text-gray-900
-           dark:text-gray-250`}
+           dark:text-primary`}
         >
           Recommended accounts
         </h2>
         <button
           onClick={() => setShowRecommendedAccounts(false)}
           className={`ml-4 flex items-center space-x-1 px-3 py-2 lg:px-2.5 lg:py-1.5 text-sm border border-default text-[#7C7C7C] rounded-md 
-            dark:text-[#E1E3E5]`}
+            dark:text-[#E1E3E5] dark:border-gray-150`}
           aria-label="Close recommended accounts section"
         >
           <svg
@@ -78,19 +78,19 @@ const Recommended: React.FC<RecommendedProps> = ({
             />
           </svg>
           <span
-            className={`text-sm lg:text-sm font-normal text-gray-900 dark:text-gray-150`}
+            className={`text-sm lg:text-sm font-normal text-gray-900 dark:text-gray-150 hidden md:inline`}
           >
             Close
           </span>
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="flex flex-start justify-start gap-3 overflow-x-auto ">
         {recommendedAccounts.map((account) => (
           <div
             key={account.id}
-            className={`bg-transparent border-[#E1E3E5] border rounded-2xl px-5 py-4
-              dark:border-[#E1E3E5]`}
+            className={`bg-transparent border-[#E1E3E5] border rounded-2xl p-3 md:p-0 md:px-5 md:py-4
+              dark:border-[#E1E3E5] min-w-[280px]`}
           >
             <div className="flex items-center mb-1.5">
               <div
@@ -116,7 +116,7 @@ const Recommended: React.FC<RecommendedProps> = ({
                 </span>
               </p>
               <button
-                className={`flex items-center text-sm border border-gray-150 rounded-[8px] px-2.5 py-1.5 mt-3 font-medium text-gray-900
+                className={`hidden md:flex items-center text-sm border border-gray-150 rounded-[8px] px-2.5 py-1.5 mt-3 font-medium text-gray-900
                     dark:text-gray-250 `}
                 aria-label={`Add ${account.platform} account`}
               >
