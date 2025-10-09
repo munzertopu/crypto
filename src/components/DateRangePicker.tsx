@@ -408,7 +408,7 @@ const RenderDateRange = ({
           locale={enUS} // Added locale prop to fix the error
         />
       </div>
-      <div className="w-full md:px-1 mt-[15px] md:mt-[-10px] pb-5 md:hidden">
+      <div className="w-full md:px-1 mt-[15px] md:mt-[-10px] pb-4 md:hidden">
         <div className="flex justify-between items-center gap-2  md:px-2 opacity-90 w-full">
           <Dropdown
             className={`${
