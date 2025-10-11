@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { Typography } from "@material-tailwind/react";
 import NavigationBar from '../../../components/NavigationBar';
-import SimpleModal from '../../../components/UI/SimpleModal';
+import ImportTransactionsModal from '../../../components/UI/ImportTransactionsModal';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 interface WalletDetailsPageProps {}
@@ -284,11 +284,11 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
          </div>
       </div>
 
-      {/* Simple Modal */}
-      <SimpleModal
+      {/* Import Transactions Modal */}
+      <ImportTransactionsModal
         isOpen={isImportModalOpen}
         onClose={() => setIsImportModalOpen(false)}
-        title="Import File"
+        walletName={walletName}
       />
     </div>
   );
