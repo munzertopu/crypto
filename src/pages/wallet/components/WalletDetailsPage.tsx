@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
+import { Card, Typography, CardBody, Avatar } from "@material-tailwind/react";
 import { faChevronRight, faEye } from '@fortawesome/free-solid-svg-icons';
 import NavigationBar from '../../../components/NavigationBar';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
@@ -120,7 +122,7 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
            {/* Action Buttons */}
            <div className="flex space-x-3">
              <button className="flex items-center space-x-2 px-4 py-2 bg-transparent border border-default dark:border-default rounded-xl text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-[#2F3232] transition-colors">
-               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               </svg>
@@ -204,59 +206,79 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
            {/* Right Panel - Asset Details Table (3 columns) */}
            <div className="lg:col-span-3 space-y-6">
              {/* Assets Table */}
-             <div className="bg-white dark:bg-[#1A1D1E] rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-               <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                 <div className="grid grid-cols-3 gap-4 text-sm font-medium text-gray-600 dark:text-gray-400">
-                   <div className="flex items-center space-x-2">
-                     <span>Coin</span>
-                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                     </svg>
-                   </div>
-                   <div className="flex items-center space-x-2">
-                     <span>Balance</span>
-                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                     </svg>
-                   </div>
-                   <div className="flex items-center space-x-2">
-                     <span>Market Value</span>
-                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                     </svg>
-                   </div>
-                 </div>
-               </div>
-               
-               <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                 {cryptoAssets.map((asset, index) => (
-                   <div key={index} className="px-6 py-4 hover:bg-gray-50 dark:hover:bg-[#2F3232] transition-colors">
-                     <div className="grid grid-cols-3 gap-4 items-center">
-                       <div className="flex items-center space-x-3">
-                         <img 
-                           src={asset.logo} 
-                           alt={asset.name}
-                           className="w-8 h-8 rounded-full"
-                         />
-                         <span className="text-sm font-medium text-gray-900 dark:text-white">
-                           {asset.name}
-                         </span>
-                       </div>
-                       <div className="text-sm text-gray-600 dark:text-gray-400">
-                         {asset.balance}
-                       </div>
-                       <div className="flex items-center justify-between">
-                         <span className="text-sm font-medium text-gray-900 dark:text-white">
-                           ${asset.marketValue}
-                         </span>
-                         <FontAwesomeIcon 
-                           icon={faEye} 
-                           className="w-4 h-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 cursor-pointer" 
-                         />
-                       </div>
-                     </div>
-                   </div>
-                 ))}
+             <div className="h-full w-full border-transparent bg-transparent shadow-none">
+               <div className="px-0 rounded-lg sm:overflow-x-auto">
+                 <table className="w-full min-w-max table-auto text-left">
+                  <thead className="bg-table-header dark:bg-gray-800 hidden sm:table-header-group">
+                     <tr className="">
+                       {['Coin', 'Balance', 'Market Value', ''].map((head, index) => (
+                         <th
+                           key={head}
+                           className={`cursor-pointer px-5 py-3.5 ${
+                             index === 0 ? "rounded-l-xl" : ""
+                           } ${index === 3 ? "rounded-r-md" : ""}`}
+                         >
+                           <Typography
+                              variant="small"
+                              className="flex items-center justify-start gap-2 font-normal text-sm leading-none text-[#666868] dark:text-[#B6B8BA]"
+                            >
+                              {head}{" "}
+                              {head !== "" && (
+                                <ChevronUpDownIcon
+                                  strokeWidth={2}
+                                  className="h-4 w-4"
+                                  role="button"
+                                  aria-label={`Sort by ${head}`}
+                                />
+                              )}
+                            </Typography>
+                         </th>
+                       ))}
+                     </tr>
+                   </thead>
+                   <tbody>
+                     {cryptoAssets.map((asset, index) => (
+                       <tr key={index}>
+                         <td className="md:px-5 md:py-3 sm:p-5">
+                           <div className="flex items-center gap-3">
+                             <img 
+                               src={asset.logo} 
+                               alt={asset.name}
+                               className="w-12 h-12 rounded-full"
+                             />
+                             <div className="flex flex-col">
+                               <span className="text-base text-gray-900 dark:text-gray-100">
+                                 {asset.name}
+                               </span>
+                             </div>
+                           </div>
+                         </td>
+                         <td className="hidden sm:table-cell">
+                           <div className="flex flex-col">
+                             <span className="font-normal text-base text-gray-900 dark:text-gray-100">
+                               {asset.balance}
+                             </span>
+                           </div>
+                         </td>
+                         <td className="hidden sm:table-cell">
+                           <span className="font-normal text-base text-gray-900 dark:text-gray-100">
+                             ${asset.marketValue}
+                           </span>
+                         </td>
+                         <td className="hidden sm:table-cell text-gray-500">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                          </svg>
+                           {/* <FontAwesomeIcon 
+                             icon={faEye} 
+                             className="w-6 h-6 mr-4 flex-shrink-0 dark:text-gray-500 text-gray-500 cursor-pointer" 
+                           /> */}
+                         </td>
+                       </tr>
+                     ))}
+                   </tbody>
+                 </table>
                </div>
              </div>
            </div>
