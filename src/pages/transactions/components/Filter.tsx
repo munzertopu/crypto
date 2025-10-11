@@ -301,16 +301,16 @@ const Filter: React.FC<FilterProps> = ({
       {!hideTab && (
         <div className={`border-gray-200 dark:border-gray-700`}>
           <Tabs>
-            <Tabs.List className="my-2 lg:my-2 bg-white dark:bg-gray-800">
+            <Tabs.List className="my-0 mt-3 lg:my-2 bg-white dark:bg-gray-800  w-full sm:w-[fit-content]">
               {tabs.map((tab) => (
                 <Tabs.Trigger
                   key={tab}
                   value={tab}
                   onClick={() => onTabChange?.(tab)}
-                  className={`px-3 sm:px-5 md:px-2.5 py-1 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${
+                  className={`w-full sm:w-[inherit] px-2.5 sm:px-5 md:px-2.5 py-1.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${
                     activeTab === tab
-                      ? "bg-[#B3E277] dark:bg-gray-0 text-gray-900 dark:text-gray-900"
-                    : "text-gray-900 dark:text-gray-200"
+                      ? "bg-green-400 dark:bg-gray-0 text-primary dark:text-gray-900"
+                      : "text-gray-600 dark:text-gray-200"
                   }`}
                 >
                   {tab}
@@ -369,7 +369,7 @@ const Filter: React.FC<FilterProps> = ({
         </div>
       )}
 
-      <div className="flex flex-row justify-start lg:items-center gap-5 mt-[20px] sm:mt-0">
+      <div className="flex flex-row justify-start lg:items-center gap-5 mt-[24px] sm:mt-0">
         {/* Search */}
         <div
           className="flex flex-grow-1 sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border 
@@ -410,7 +410,7 @@ const Filter: React.FC<FilterProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center space-x-5 mt-4 md:mt-0">
+        <div className="hidden md:flex items-center space-x-5 mt-4 md:mt-0">
           {/* Custom Wallet Dropdown */}
           <div className="relative" ref={walletDropdownRef}>
             <button
@@ -487,9 +487,7 @@ const Filter: React.FC<FilterProps> = ({
           {/* Action Type Dropdown */}
           <div className="relative" ref={actionTypeDropdownRef}>
             <button
-              onClick={() =>
-                setActionTypeDropdownOpen(!actionTypeDropdownOpen)
-              }
+              onClick={() => setActionTypeDropdownOpen(!actionTypeDropdownOpen)}
               className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl 
                 border bg-white border-default text-primary
                 dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
@@ -522,9 +520,7 @@ const Filter: React.FC<FilterProps> = ({
                 {/* Action Type Options List */}
                 <div className="max-h-48 overflow-y-auto">
                   {filteredActionTypeOptions.map((option) => {
-                    const isSelected = selectedActionTypes.includes(
-                      option.id
-                    );
+                    const isSelected = selectedActionTypes.includes(option.id);
                     return (
                       <div
                         key={option.id}

@@ -100,7 +100,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   );
 
   return (
-    <div className="md:px-0 mde:mb-6 md:mt-6 sm:mt-0">
+    <div className="mt-[14px] md:px-0 mde:mb-6 md:mt-6 sm:mt-0">
       <Card className="h-full w-full border-transparent bg-transprent shadow-none">
         <CardBody className="px-0 sm:px-3.5 sm:py-2.5 md:px-0 md:py-0">
           <div className="overflow-x-auto">
