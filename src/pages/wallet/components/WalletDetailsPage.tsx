@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
-import { Card, Typography, CardBody, Avatar } from "@material-tailwind/react";
-import { faChevronRight, faEye } from '@fortawesome/free-solid-svg-icons';
+import { Typography } from "@material-tailwind/react";
 import NavigationBar from '../../../components/NavigationBar';
+import SimpleModal from '../../../components/UI/SimpleModal';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 interface WalletDetailsPageProps {}
@@ -22,6 +21,7 @@ interface CryptoAsset {
 const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
   const { platform } = useParams<{ platform: string }>();
   const navigate = useNavigate();
+  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   
   // Map platform to wallet details
   const getWalletDetails = (platform: string) => {
@@ -128,14 +128,17 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
               </svg>
                <span className="text-base font-medium">View History</span>
              </button>
-             <button className="flex items-center space-x-2 px-5 py-3 bg-green-500 text-gray-900 rounded-xl">
-               <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
-                  <path d="M10.96 5.93335C13.36 6.14002 14.34 7.37335 14.34 10.0733V10.16C14.34 13.14 13.1467 14.3333 10.1667 14.3333H5.82665C2.84665 14.3333 1.65332 13.14 1.65332 10.16V10.0733C1.65332 7.39335 2.61999 6.16002 4.97999 5.94002" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M8 10V2.41333" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M10.2333 3.89996L7.99994 1.66663L5.7666 3.89996" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-               <span className="text-base font-medium">Import File</span>
-             </button>
+               <button 
+                 onClick={() => setIsImportModalOpen(true)}
+                 className="flex items-center space-x-2 px-5 py-3 bg-green-500 text-gray-900 rounded-xl"
+               >
+                 <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
+                   <path d="M10.96 5.93335C13.36 6.14002 14.34 7.37335 14.34 10.0733V10.16C14.34 13.14 13.1467 14.3333 10.1667 14.3333H5.82665C2.84665 14.3333 1.65332 13.14 1.65332 10.16V10.0733C1.65332 7.39335 2.61999 6.16002 4.97999 5.94002" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                   <path d="M8 10V2.41333" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                   <path d="M10.2333 3.89996L7.99994 1.66663L5.7666 3.89996" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                 </svg>
+                 <span className="text-base font-medium">Import File</span>
+               </button>
            </div>
          </div>
 
@@ -280,6 +283,13 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
            </div>
          </div>
       </div>
+
+      {/* Simple Modal */}
+      <SimpleModal
+        isOpen={isImportModalOpen}
+        onClose={() => setIsImportModalOpen(false)}
+        title="Import File"
+      />
     </div>
   );
 };
