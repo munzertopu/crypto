@@ -124,7 +124,7 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               </svg>
-               <span className="text-md font-medium">View History</span>
+               <span className="text-base font-medium">View History</span>
              </button>
              <button className="flex items-center space-x-2 px-5 py-3 bg-green-500 text-gray-900 rounded-xl">
                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
@@ -132,27 +132,26 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
                   <path d="M8 10V2.41333" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M10.2333 3.89996L7.99994 1.66663L5.7666 3.89996" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-               {/* <img src="/icons/upload.svg" alt="Import" className="w-4 h-4" /> */}
-               <span className="text-md font-medium">Import File</span>
+               <span className="text-base font-medium">Import File</span>
              </button>
            </div>
          </div>
 
          {/* Content Row - Donut Chart and Asset Table */}
-         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-           {/* Left Panel - Portfolio Distribution */}
-           <div className="space-y-6">
+         <div className="relative grid grid-cols-1 lg:grid-cols-4 gap-10">
+           {/* Left Panel - Portfolio Distribution (1 column) */}
+           <div className="lg:col-span-1 relative">
              {/* Donut Chart */}
-             <div className="bg-white dark:bg-[#1A1D1E] rounded-2xl p-8 border border-gray-200 dark:border-gray-700">
+             <div className="bg-white dark:bg-[#1A1D1E] pl-3 mr-10">
                <div className="relative">
-                 <ResponsiveContainer width="100%" height={300}>
+                 <ResponsiveContainer width="100%" height={400}>
                    <PieChart>
                      <Pie
                        data={chartData}
                        cx="50%"
                        cy="50%"
-                       innerRadius={80}
-                       outerRadius={120}
+                       innerRadius="64%"
+                       outerRadius="100%"
                        paddingAngle={2}
                        dataKey="value"
                      >
@@ -170,7 +169,7 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
                      <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
                        {totalValue}
                      </div>
-                     <div className="text-sm text-gray-600 dark:text-gray-400">
+                     <div className="text-base text-gray-600 dark:text-gray-400">
                        {transactions} transactions
                      </div>
                    </div>
@@ -178,7 +177,7 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
                </div>
 
                {/* Legend */}
-               <div className="mt-6 space-y-3">
+               <div className="space-y-3">
                  {cryptoAssets.map((asset, index) => (
                    <div key={index} className="flex items-center justify-between">
                      <div className="flex items-center space-x-3">
@@ -186,21 +185,24 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
                          className="w-3 h-3 rounded-full" 
                          style={{ backgroundColor: asset.color }}
                        ></div>
-                       <span className="text-sm font-medium text-gray-900 dark:text-white">
+                       <span className="text-base font-medium text-gray-900 dark:text-white">
                          {asset.name}
                        </span>
                      </div>
-                     <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                     <span className="text-base font-medium text-gray-700 dark:text-gray-400">
                        {asset.percentage}%
                      </span>
                    </div>
                  ))}
                </div>
              </div>
+             
+             {/* Vertical Separator at right edge */}
+             <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-px bg-default"></div>
            </div>
 
-           {/* Right Panel - Asset Details Table */}
-           <div className="space-y-6">
+           {/* Right Panel - Asset Details Table (3 columns) */}
+           <div className="lg:col-span-3 space-y-6">
              {/* Assets Table */}
              <div className="bg-white dark:bg-[#1A1D1E] rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
