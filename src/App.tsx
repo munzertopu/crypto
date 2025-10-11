@@ -15,6 +15,7 @@ import WelcomePage from "./pages/WelcomePage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import CryptoDetailsPage from "./pages/cryptoDetails/CryptoDetailsPage";
 import WalletPage from "./pages/wallet/WalletPage";
+import WalletDetailsPage from "./pages/wallet/components/WalletDetailsPage";
 import TransactionPage from "./pages/transactions/TransactionPage";
 import TaxOptimizationPage from "./pages/taxOptimization/TaxOptimizationPage";
 import TaxReportsPage from "./pages/taxReports/TaxReportsPage";
@@ -134,6 +135,9 @@ const AppContent: React.FC = () => {
       <Route
         path="/crypto/:symbol" 
         element={<CryptoDetailsPage />} />
+      <Route
+        path="/wallet/:platform" 
+        element={<WalletDetailsPage />} />
 
       {/* Default redirect */}
       <Route path="/" element={<Navigate to="/login" replace />} />

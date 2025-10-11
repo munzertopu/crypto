@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import ConfigureModal from "./ConfigureModal";
@@ -84,6 +85,7 @@ interface CryptoPlatform {
 interface CryptoPlatformGridProps {}
 
 const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = () => {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState("");
   const [showNotification, setShowNotification] = useState(false);
@@ -91,17 +93,25 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = () => {
 
   const screenSize = useScreenSize();
   const [openConfigure, setOpenConfigure] = useState(false);
-  const handlePlatformClick = (platformName: string) => {
-    setSelectedPlatform(platformName);
-    if (screenSize.width < 640) {
-      setOpenConfigure(false);
-      setTimeout(() => {
-        setOpenConfigure(true);
-      }, 500);
 
-      return;
+  const handlePlatformClick = (platform: CryptoPlatform) => {
+    setSelectedPlatform(platform.name);
+    
+    // If status is error, show configure modal
+    if (platform.status === "error") {
+      if (screenSize.width < 640) {
+        setOpenConfigure(false);
+        setTimeout(() => {
+          setOpenConfigure(true);
+        }, 500);
+        return;
+      }
+      setIsModalOpen(true);
+    } else {
+      // Otherwise, navigate to wallet details page
+      const platformSlug = platform.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+      navigate(`/wallet/${platformSlug}`);
     }
-    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
@@ -242,7 +252,7 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = () => {
             <div
               className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity justify-center rounded-[12px] px-6 py-2 sm:px-0 sm:py-0 sm:px-6 md:px-5 sm:py-4 md:py-5 
               border border-gray-150 dark:border-[#B6B8BA]"
-              onClick={() => handlePlatformClick(platform.name)}
+              onClick={() => handlePlatformClick(platform)}
             >
               <div className="relative mb-6">
                 <div
