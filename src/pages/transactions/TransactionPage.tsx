@@ -3,6 +3,7 @@ import NavigationBar from "../../components/NavigationBar";
 import { TransactionTable, Filter } from "./components";
 import useScreenSize from "../../hooks/useScreenSize";
 import { mockTransactions } from "../../data/transactionAssets";
+import AddTransactionDrawer from "../../components/UI/AddTransactionDrawer";
 
 interface TransactionPageProps {
   onLogout?: () => void;
@@ -19,6 +20,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   const [expandedTransactionId, setExpandedTransactionId] = useState<
     string | null
   >(null);
+  const [isAddTransactionDrawerOpen, setIsAddTransactionDrawerOpen] = useState(false);
   const screenSize = useScreenSize();
 
 
@@ -100,6 +102,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           </div>
           <div className="flex items-center space-x-3 mt-4 sm:mt-0">
             <button
+              onClick={() => setIsAddTransactionDrawerOpen(true)}
               className={`text-base font-medium px-3 py-1 sm:px-6 sm:py-3 md:py-3 rounded-md sm:rounded-2xl bg-[#90C853] text-[#0E201E]`}
               aria-label="Add new transaction"
             >
@@ -131,6 +134,12 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           onToggleExpanded={handleToggleExpanded}
         />
       </div>
+
+      {/* Add Transaction Drawer */}
+      <AddTransactionDrawer
+        isOpen={isAddTransactionDrawerOpen}
+        onClose={() => setIsAddTransactionDrawerOpen(false)}
+      />
     </div>
   );
 };
