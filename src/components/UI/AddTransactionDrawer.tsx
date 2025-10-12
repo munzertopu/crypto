@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Input } from "@material-tailwind/react";
+import DatePicker from '../DatePicker';
 import Dropdown from './Dropdown';
-import CalendarIcon from '../../utils/icons/CalendarIcon';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+
 
 interface AddTransactionDrawerProps {
   isOpen: boolean;
@@ -21,6 +22,8 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
   const [showCoinDropdown, setShowCoinDropdown] = useState(false);
   const [coinCurrency, setCoinCurrency] = useState("USD");
+
+  const [dateValue, setDateValue] = useState(null as any);
 
   // Additional tags data
   const additionalTags = [
@@ -90,33 +93,22 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                   </div>
                 </div>
 
-                {/* Date (UTC) */}
-                <div className='text-left'>
-                  <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-300">
-                    Date (UTC)
-                  </label>
-                  <div className="mt-1.5">
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <CalendarIcon 
-                          width={16}
-                          height={16} 
-                          strokeColor="currentColor" 
-                          className="text-gray-500" 
+                 {/* Date (UTC) */}
+                 <div className='text-left'>
+                   <div className="items-center gap-3">
+                     <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-300 whitespace-nowrap">
+                       Date (UTC)
+                     </label>
+                      {/* Date input */}
+                      <div className='mt-1.5'>
+                        <DatePicker
+                          value={dateValue}
+                          onChange={setDateValue}
+                          placeholder="Set date"
                         />
                       </div>
-                      <input
-                        type="date"
-                        value={selectedDate}
-                        onChange={(e) => setSelectedDate(e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white focus:outline-none cursor-pointer"
-                        style={{
-                          colorScheme: 'light'
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
+                   </div>
+                 </div>
               </div>
               
               {/* Horizontal Separator */}
@@ -223,7 +215,12 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
           {/* Footer */}
           <button
             onClick={handleSave}
-            className="w-full px-5 py-3 bg-default text-gray-400 rounded-xl font-medium"
+            className={`w-full px-5 py-3 rounded-xl font-medium transition-colors ${
+              dateValue && selectedWallet 
+                ? 'bg-green-500 text-gray-900 hover:bg-green-500' 
+                : 'bg-default text-gray-400 cursor-not-allowed'
+            }`}
+            disabled={!dateValue || !selectedWallet}
           >
             Save
           </button>
