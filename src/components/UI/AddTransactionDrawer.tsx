@@ -58,27 +58,29 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
       
       {/* Drawer */}
       <div className="fixed left-0 top-0 h-full w-96 bg-white dark:bg-[#0E201E] z-50 transform transition-transform duration-300 ease-in-out shadow-xl">
-        <div className="flex flex-col h-full p-6 space-y-6">
+        <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between">
-            <h2 className="text-h5 font-bold text-gray-11 dark:text-white">
-              Add transaction
-            </h2>
-            <button
-              onClick={onClose}
-              className="text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+          <div className="p-6 pb-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-h5 font-bold text-gray-11 dark:text-white">
+                Add transaction
+              </h2>
+              <button
+                onClick={onClose}
+                className="text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
 
-          {/* Content */}
-          <div className="flex-1">
+          {/* Scrollable Content */}
+          <div className="flex-1 overflow-y-auto px-6 pb-6">
             <div className="space-y-5">
               <div className='space-y-3'>
-              {/* Transaction Type */}
+                {/* Transaction Type */}
                 <div className='text-left'>
                   <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-300">
                     Transaction type
@@ -93,22 +95,22 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                   </div>
                 </div>
 
-                 {/* Date (UTC) */}
-                 <div className='text-left'>
-                   <div className="items-center gap-3">
-                     <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-300 whitespace-nowrap">
-                       Date (UTC)
-                     </label>
-                      {/* Date input */}
-                      <div className='mt-1.5'>
-                        <DatePicker
-                          value={dateValue}
-                          onChange={setDateValue}
-                          placeholder="Set date"
-                        />
-                      </div>
-                   </div>
-                 </div>
+                {/* Date (UTC) */}
+                <div className='text-left'>
+                  <div className="items-center gap-3">
+                    <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-300 whitespace-nowrap">
+                      Date (UTC)
+                    </label>
+                    {/* Date input */}
+                    <div className='mt-1.5'>
+                      <DatePicker
+                        value={dateValue}
+                        onChange={setDateValue}
+                        placeholder="Set date"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
               
               {/* Horizontal Separator */}
@@ -137,59 +139,153 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                     </div>
                   </div>
 
-                   {/* Number of coins */}
+                  {/* Number of coins */}
+                  <div className="mt-4">
+                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Number of coins
+                    </label>
+                    <div className="mt-1.5">
+                      <div className="relative">
+                      <Input
+                        type="number"
+                        placeholder="0"
+                        className={`w-full rounded-lg text-sm font-semibold border-default bg-transparent text-gray-900 focus:outline-none
+                          dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250`}
+                      />
+                      <button
+                        onClick={() =>
+                          setShowCoinDropdown(!showCoinDropdown)
+                        }
+                        className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 bg-white focus:outline-none
+                          dark:bg-[#0E201E] dark:border-[#4D5050]`}
+                      >
+                        <div className="flex items-center gap-1">
+                          <span className="text-xs font-medium">{coinCurrency}</span>
+                          <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2" />
+                        </div>
+                      </button>
+
+                      {/* Currency Dropdown */}
+                      {showCoinDropdown && (
+                        <div
+                          className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-default
+                            dark:bg-[#0E201E]`}
+                        >
+                          <div className="py-1 px-2">
+                            {["USD", "EUR", "USDT"].map((currency) => (
+                              <button
+                                key={currency}
+                                onClick={() => {
+                                  setCoinCurrency(currency);
+                                  setShowCoinDropdown(false);
+                                }}
+                                className={`w-full px-3 py-1 text-left text-xs rounded-md ${
+                                  coinCurrency === currency
+                                    ? "bg-gray-100 dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                                    : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                                }`}
+                              >
+                                {currency}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Tag Fields */}
+                  <div className="mt-4">
+                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Tag
+                    </label>
+                    <div className="mt-1.5 flex items-center gap-2">
+                      <input
+                        type="text"
+                        placeholder="Type tag"
+                        className="flex-1 px-4 py-3 border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+                      />
+                      <button className="w-10 h-10 border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] flex items-center justify-center text-gray-400 hover:text-gray-600">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Tag
+                    </label>
+                    <div className="mt-1.5 flex items-center gap-2">
+                      <input
+                        type="text"
+                        placeholder="Type tag"
+                        className="flex-1 px-4 py-3 border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+                      />
+                      <button className="w-10 h-10 border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] flex items-center justify-center text-gray-400 hover:text-gray-600">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Transaction Hash */}
+                  <div className="mt-4">
+                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Transaction Hash
+                    </label>
+                    <div className="mt-1.5 flex items-center gap-2">
+                      <input
+                        type="text"
+                        placeholder="Type Hash"
+                        className="flex-1 px-4 py-3 border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+                      />
+                      <button className="w-10 h-10 border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] flex items-center justify-center text-gray-400 hover:text-gray-600">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                   {/* Transaction Destination */}
                    <div className="mt-4">
                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-300">
-                       Number of coins
+                       Transaction Destination
                      </label>
-                     <div className="mt-1.5">
-                       <div className="relative">
-                        <Input
-                          type="number"
-                          placeholder="0"
-                          className={`w-full rounded-lg text-sm font-semibold border-default bg-transparent text-gray-900 focus:outline-none
-                            dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250`}
-                        />
-                        <button
-                          onClick={() =>
-                            setShowCoinDropdown(!showCoinDropdown)
-                          }
-                          className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 bg-white focus:outline-none
-                            dark:bg-[#0E201E] dark:border-[#4D5050]`}
-                        >
-                          <div className="flex items-center gap-1">
-                            <span className="text-xs font-medium">{coinCurrency}</span>
-                            <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2" />
-                          </div>
-                        </button>
+                     <div className="mt-1.5 flex items-center gap-2">
+                       <input
+                         type="text"
+                         placeholder="Type Destination"
+                         className="flex-1 px-4 py-3 border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+                       />
+                       <button className="w-10 h-10 border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] flex items-center justify-center text-gray-400 hover:text-gray-600">
+                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                         </svg>
+                       </button>
+                     </div>
+                   </div>
 
-                        {/* Currency Dropdown */}
-                        {showCoinDropdown && (
-                          <div
-                            className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-default
-                              dark:bg-[#0E201E]`}
-                          >
-                            <div className="py-1 px-2">
-                              {["USD", "EUR", "USDT"].map((currency) => (
-                                <button
-                                  key={currency}
-                                  onClick={() => {
-                                    setCoinCurrency(currency);
-                                    setShowCoinDropdown(false);
-                                  }}
-                                  className={`w-full px-3 py-1 text-left text-xs rounded-md ${
-                                    coinCurrency === currency
-                                      ? "bg-gray-100 dark:bg-[#0E201E] dark:text-[#A1A3A5]"
-                                      : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
-                                  }`}
-                                >
-                                  {currency}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
+                   {/* Description */}
+                   <div className="mt-4">
+                     <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+                       Description
+                     </label>
+                     <div className="mt-1.5 flex items-center gap-2">
+                       <input
+                         type="text"
+                         placeholder="Ex: sent some crypto to..."
+                         className="flex-1 px-4 py-3 border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+                       />
+                       <button className="w-10 h-10 border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] flex items-center justify-center text-gray-400 hover:text-gray-600">
+                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                         </svg>
+                       </button>
                      </div>
                    </div>
                 </div>
@@ -213,17 +309,19 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
           </div>
 
           {/* Footer */}
-          <button
-            onClick={handleSave}
-            className={`w-full px-5 py-3 rounded-xl font-medium transition-colors ${
-              dateValue && selectedWallet 
-                ? 'bg-green-500 text-gray-900 hover:bg-green-500' 
-                : 'bg-default text-gray-400 cursor-not-allowed'
-            }`}
-            disabled={!dateValue || !selectedWallet}
-          >
-            Save
-          </button>
+          <div className="p-6 pt-4">
+            <button
+              onClick={handleSave}
+              className={`w-full px-5 py-3 rounded-xl font-medium transition-colors ${
+                dateValue && selectedWallet 
+                  ? 'bg-green-500 text-gray-900 hover:bg-green-500' 
+                  : 'bg-default text-gray-400 cursor-not-allowed'
+              }`}
+              disabled={!dateValue || !selectedWallet}
+            >
+              Save
+            </button>
+          </div>
         </div>
       </div>
     </>
