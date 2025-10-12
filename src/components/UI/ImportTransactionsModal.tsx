@@ -117,27 +117,35 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                   Upload from Google Drive
                 </button>
 
-                {/* Timezone Selector */}
-                <div className="space-y-2">
-                  <div className="flex items-center space-x-2">
-                    <label className="text-sm font-medium text-gray-900">
-                      Timezone
-                    </label>
-                    <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <select
-                    value={timezone}
-                    onChange={(e) => setTimezone(e.target.value)}
-                    className="w-full px-4 py-3 border border-default text-base rounded-xl bg-transparent text-gray-900 focus:ring-none focus:outline-none"
-                  >
-                    <option value="UTC">UTC</option>
-                    <option value="EST">EST</option>
-                    <option value="PST">PST</option>
-                    <option value="CST">CST</option>
-                  </select>
-                </div>
+                 {/* Timezone Selector */}
+                 <div className="space-y-2">
+                   <div className="flex items-center space-x-2">
+                     <label className="text-sm font-medium text-gray-900">
+                       Timezone
+                     </label>
+                     <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                     </svg>
+                   </div>
+                   <div className="relative">
+                     <select
+                       value={timezone}
+                       onChange={(e) => setTimezone(e.target.value)}
+                       className="w-full px-4 py-3 border border-default text-base rounded-xl bg-transparent text-gray-900 focus:ring-none focus:outline-none appearance-none pr-12"
+                     >
+                       <option value="UTC">UTC</option>
+                       <option value="EST">EST</option>
+                       <option value="PST">PST</option>
+                       <option value="CST">CST</option>
+                     </select>
+                     {/* Custom dropdown arrow with 16px margin from right */}
+                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                       <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                       </svg>
+                     </div>
+                   </div>
+                 </div>
               </div>
 
               {/* Right Section - Instructions */}
