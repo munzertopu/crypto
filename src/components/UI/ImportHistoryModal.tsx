@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Typography } from "@material-tailwind/react";
 import TrashIcon from '../../utils/icons/TrashIcon';
 import TableSortIcon from '../../utils/icons/TableSortIcon';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 
 interface ImportHistoryModalProps {
   isOpen: boolean;
@@ -94,6 +95,8 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
   const [sortBy, setSortBy] = useState('recent');
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<ImportHistoryItem | null>(null);
 
   if (!isOpen) return null;
 
@@ -102,9 +105,23 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
     console.log('Sort by:', column);
   };
 
-  const handleDelete = (id: string) => {
-    // Handle delete functionality
-    console.log('Delete item:', id);
+  const handleDeleteClick = (item: ImportHistoryItem) => {
+    setItemToDelete(item);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (itemToDelete) {
+      // Handle actual deletion logic here
+      console.log('Deleting item:', itemToDelete.id);
+      setIsDeleteModalOpen(false);
+      setItemToDelete(null);
+    }
+  };
+
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setItemToDelete(null);
   };
 
   return (
@@ -257,7 +274,7 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
                       </td>
                       <td className="hidden sm:table-cell">
                         <button
-                          onClick={() => handleDelete(item.id)}
+                          onClick={() => handleDeleteClick(item)}
                           className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                           aria-label="Delete import"
                         >
@@ -272,6 +289,14 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
           </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmationModal
+        isOpen={isDeleteModalOpen}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleConfirmDelete}
+        itemName={itemToDelete?.fileName}
+      />
     </div>
   );
 };
