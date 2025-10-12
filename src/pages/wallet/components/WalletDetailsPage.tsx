@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { Typography } from "@material-tailwind/react";
 import NavigationBar from '../../../components/NavigationBar';
 import ImportTransactionsModal from '../../../components/UI/ImportTransactionsModal';
+import ImportHistoryModal from '../../../components/UI/ImportHistoryModal';
+import TableSortIcon from '../../../utils/icons/TableSortIcon';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 interface WalletDetailsPageProps {}
@@ -22,6 +23,7 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
   const { platform } = useParams<{ platform: string }>();
   const navigate = useNavigate();
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+  const [isImportHistoryModalOpen, setIsImportHistoryModalOpen] = useState(false);
   
   // Map platform to wallet details
   const getWalletDetails = (platform: string) => {
@@ -121,7 +123,10 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
 
            {/* Action Buttons */}
            <div className="flex space-x-3">
-             <button className="flex items-center space-x-2 px-4 py-2 bg-transparent border border-default dark:border-default rounded-xl text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-[#2F3232] transition-colors">
+             <button 
+               onClick={() => setIsImportHistoryModalOpen(true)}
+               className="flex items-center space-x-2 px-4 py-2 bg-transparent border border-default dark:border-default rounded-xl text-gray-900 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-[#2F3232] transition-colors"
+             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -227,11 +232,11 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
                             >
                               {head}{" "}
                               {head !== "" && (
-                                <ChevronUpDownIcon
-                                  strokeWidth={2}
-                                  className="h-4 w-4"
-                                  role="button"
-                                  aria-label={`Sort by ${head}`}
+                                <TableSortIcon
+                                  width={8}
+                                  height={16}
+                                  fillColor="currentColor"
+                                  className="opacity-50"
                                 />
                               )}
                             </Typography>
@@ -288,6 +293,13 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
       <ImportTransactionsModal
         isOpen={isImportModalOpen}
         onClose={() => setIsImportModalOpen(false)}
+        walletName={walletName}
+      />
+
+      {/* Import History Modal */}
+      <ImportHistoryModal
+        isOpen={isImportHistoryModalOpen}
+        onClose={() => setIsImportHistoryModalOpen(false)}
         walletName={walletName}
       />
     </div>
