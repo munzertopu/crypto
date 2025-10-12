@@ -123,62 +123,67 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
           </button>
         </div>
 
-        {/* Search and Filters */}
-        <div className="flex items-center space-x-4">
-          {/* Search Bar */}
-          <div className="flex-1 relative">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full py-3 pl-10 border border-default rounded-xl focus:outline-none"
-            />
-          </div>
+         {/* Search and Filters */}
+         <div className="flex items-center justify-between">
+           {/* Left Column - Search and Import Type */}
+           <div className="flex items-center space-x-4">
+             {/* Search Bar */}
+             <div className="relative">
+               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                 <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                 </svg>
+               </div>
+               <input
+                 type="text"
+                 placeholder="Search"
+                 value={searchTerm}
+                 onChange={(e) => setSearchTerm(e.target.value)}
+                 className="w-80 py-3 pl-10 border border-default rounded-xl focus:outline-none"
+               />
+             </div>
 
-          {/* Import Type Dropdown */}
-          <div className="relative">
-            <select
-              value={importType}
-              onChange={(e) => setImportType(e.target.value)}
-              className="appearance-none bg-white border border-default rounded-xl px-4 py-3 pr-10 focus:outline-none"
-            >
-              <option value="All">Import type</option>
-              <option value="CSV">CSV</option>
-              <option value="Excel">Excel</option>
-              <option value="API">API</option>
-            </select>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-              <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
-          </div>
+             {/* Import Type Dropdown */}
+             <div className="relative">
+               <select
+                 value={importType}
+                 onChange={(e) => setImportType(e.target.value)}
+                 className="appearance-none bg-white border border-default rounded-xl px-4 py-3 pr-10 focus:outline-none"
+               >
+                 <option value="All">Import type</option>
+                 <option value="CSV">CSV</option>
+                 <option value="Excel">Excel</option>
+                 <option value="API">API</option>
+               </select>
+               <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                 <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                 </svg>
+               </div>
+             </div>
+           </div>
 
-          {/* Sort By Dropdown */}
-          <div className="relative">
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="appearance-none bg-white border border-default rounded-xl px-4 py-3 pr-10 focus:outline-none"
-            >
-              <option value="recent">Sort by recent</option>
-              <option value="oldest">Sort by oldest</option>
-              <option value="transactions">Sort by transactions</option>
-              <option value="wallet">Sort by wallet</option>
-            </select>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-              <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
-          </div>
-        </div>
+           {/* Right Column - Sort By */}
+           <div className="flex items-center">
+             <div className="relative">
+               <select
+                 value={sortBy}
+                 onChange={(e) => setSortBy(e.target.value)}
+                 className="appearance-none bg-white border border-default rounded-xl px-4 py-3 pr-10 focus:outline-none"
+               >
+                 <option value="recent">Sort by recent</option>
+                 <option value="oldest">Sort by oldest</option>
+                 <option value="transactions">Sort by transactions</option>
+                 <option value="wallet">Sort by wallet</option>
+               </select>
+               <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                 <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                 </svg>
+               </div>
+             </div>
+           </div>
+         </div>
         
 
         {/* Table */}
