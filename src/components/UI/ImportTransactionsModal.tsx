@@ -13,6 +13,14 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
 }) => {
   const [timezone, setTimezone] = useState("UTC");
   const [dragActive, setDragActive] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  // Clear selected file when modal closes
+  React.useEffect(() => {
+    if (!isOpen) {
+      setSelectedFile(null);
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -30,13 +38,35 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    // Handle file drop logic here
-    console.log("Files dropped:", e.dataTransfer.files);
+    
+    const files = e.dataTransfer.files;
+    if (files && files[0]) {
+      setSelectedFile(files[0]);
+    }
   };
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Handle file input logic here
-    console.log("Files selected:", e.target.files);
+    const files = e.target.files;
+    if (files && files[0]) {
+      setSelectedFile(files[0]);
+    }
+  };
+
+  const handleRemoveFile = () => {
+    setSelectedFile(null);
+    // Reset the file input
+    const fileInput = document.getElementById('file-upload') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  };
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
   };
 
   return (
@@ -78,29 +108,72 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
           {/* Content */}
           <div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
-              {/* Left Section - File Upload */}
-              <div className="space-y-6">
-                {/* File Upload Area */}
-                <div 
-                  className={`border-[1px] border-dashed rounded-lg p-6 text-center transition-colors border-gray-250 bg-transparent`}
-                  onDragEnter={handleDrag}
-                  onDragLeave={handleDrag}
-                  onDragOver={handleDrag}
-                  onDrop={handleDrop}
-                >
-                  <div className="flex flex-col items-center">
-                    {/* Green Folder Icon */}
-                    <div className="pb-3 rounded-lg flex items-center justify-center text-green-500">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="size-12" fill="currentColor">
-                        <path d="M128 512L512 512C547.3 512 576 483.3 576 448L576 208C576 172.7 547.3 144 512 144L362.7 144C355.8 144 349 141.8 343.5 137.6L305.1 108.8C294 100.5 280.5 96 266.7 96L128 96C92.7 96 64 124.7 64 160L64 448C64 483.3 92.7 512 128 512z"/>
-                      </svg>
-                    </div>
-                    
-                    <p className="text-gray-900 font-normal text-sm">
-                      Drag and drop your file or Browse
-                    </p>
-                  </div>
-                </div>
+               {/* Left Section - File Upload */}
+               <div className="space-y-6">
+                 {/* File Upload Area */}
+                 <div 
+                   className={`border-[1px] border-dashed rounded-lg p-6 text-center transition-colors border-gray-250 bg-transparent cursor-pointer`}
+                   onDragEnter={handleDrag}
+                   onDragLeave={handleDrag}
+                   onDragOver={handleDrag}
+                   onDrop={handleDrop}
+                   onClick={() => document.getElementById('file-upload')?.click()}
+                 >
+                   <input
+                     type="file"
+                     id="file-upload"
+                     className="hidden"
+                     onChange={handleFileInput}
+                     accept=".csv,.zip,.xlsx,.xls"
+                   />
+                   
+                   <div className="flex flex-col items-center">
+                     {/* Green Folder Icon */}
+                     <div className="pb-3 rounded-lg flex items-center justify-center text-green-500">
+                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="size-12" fill="currentColor">
+                         <path d="M128 512L512 512C547.3 512 576 483.3 576 448L576 208C576 172.7 547.3 144 512 144L362.7 144C355.8 144 349 141.8 343.5 137.6L305.1 108.8C294 100.5 280.5 96 266.7 96L128 96C92.7 96 64 124.7 64 160L64 448C64 483.3 92.7 512 128 512z"/>
+                       </svg>
+                     </div>
+                     
+                     <p className="text-gray-900 font-normal text-sm">
+                       Drag and drop your file or <span className="text-[#5F9339]">Browse</span>
+                     </p>
+                   </div>
+                 </div>
+
+                 {/* File Display Area - Shows after file selection */}
+                 {selectedFile && (
+                   <div className="border border-default rounded-xl p-4">
+                     <div className="flex items-center justify-between">
+                       <div className="flex items-center space-x-3">
+                         {/* Green Folder Icon */}
+                         <div className="w-8 h-8 text-green-500 rounded flex items-center justify-center">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="size-12" fill="currentColor">
+                            <path d="M128 512L512 512C547.3 512 576 483.3 576 448L576 208C576 172.7 547.3 144 512 144L362.7 144C355.8 144 349 141.8 343.5 137.6L305.1 108.8C294 100.5 280.5 96 266.7 96L128 96C92.7 96 64 124.7 64 160L64 448C64 483.3 92.7 512 128 512z"/>
+                          </svg>
+                         </div>
+                         
+                         <div>
+                           <p className="text-gray-900 font-medium text-sm">{selectedFile.name}</p>
+                           <p className="text-gray-700 text-xs text-left">{formatFileSize(selectedFile.size)}</p>
+                         </div>
+                       </div>
+                       
+                       {/* Remove File Button */}
+                       <button
+                         onClick={handleRemoveFile}
+                         className="text-gray-500"
+                         aria-label="Remove file"
+                       >
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M17.5 6.64994C14.725 6.37494 11.9333 6.23328 9.15 6.23328C7.5 6.23328 5.85 6.31661 4.2 6.48328L2.5 6.64994" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M7.08301 5.80837L7.26634 4.71671C7.39967 3.92504 7.49967 3.33337 8.90801 3.33337H11.0913C12.4997 3.33337 12.608 3.95837 12.733 4.72504L12.9163 5.80837" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M15.7087 6.78333L15.167 15.175C15.0753 16.4833 15.0003 17.5 12.6753 17.5H7.32533C5.00033 17.5 4.92533 16.4833 4.83366 15.175L4.29199 6.78333" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                       </button>
+                     </div>
+                   </div>
+                 )}
 
                 {/* OR Divider */}
                 <div className="relative">
