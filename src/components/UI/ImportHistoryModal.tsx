@@ -3,6 +3,7 @@ import { Typography } from "@material-tailwind/react";
 import TrashIcon from '../../utils/icons/TrashIcon';
 import TableSortIcon from '../../utils/icons/TableSortIcon';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
+import SuccessNotification from '../../components/SuccessNotification';
 
 interface ImportHistoryModalProps {
   isOpen: boolean;
@@ -97,6 +98,7 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<ImportHistoryItem | null>(null);
+  const [showNotification, setShowNotification] = useState(false);
 
   if (!isOpen) return null;
 
@@ -116,12 +118,19 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
       console.log('Deleting item:', itemToDelete.id);
       setIsDeleteModalOpen(false);
       setItemToDelete(null);
+      
+      // Show success notification
+      setShowNotification(true);
     }
   };
 
   const handleCloseDeleteModal = () => {
     setIsDeleteModalOpen(false);
     setItemToDelete(null);
+  };
+
+  const handleCloseNotification = () => {
+    setShowNotification(false);
   };
 
   return (
@@ -296,6 +305,13 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
         onClose={handleCloseDeleteModal}
         onConfirm={handleConfirmDelete}
         itemName={itemToDelete?.fileName}
+      />
+
+      {/* Success Notification */}
+      <SuccessNotification
+        message="File was deleted"
+        isVisible={showNotification}
+        onClose={handleCloseNotification}
       />
     </div>
   );

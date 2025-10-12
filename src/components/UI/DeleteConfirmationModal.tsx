@@ -46,16 +46,16 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
           >
             Cancel
           </button>
-          <button
-            onClick={onConfirm}
-            className="px-4 py-3 bg-red-500 text-white rounded-xl font-bold"
-          >
-            Delete
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+           <button
+             onClick={onConfirm}
+             className="px-4 py-3 bg-red-500 text-white rounded-xl font-bold"
+           >
+             Delete
+           </button>
+         </div>
+       </div>
+     </div>
+   );
+ };
 
 export default DeleteConfirmationModal;

@@ -28,14 +28,14 @@ const SuccessNotification: React.FC<SuccessNotificationProps> = ({
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 sm:top-4 right-4 left-4 z-50 animate-fade-in">
+    <div className="fixed bottom-4 sm:top-4 right-4 z-50 animate-fade-in">
       <div
-        className="flex items-start justify-between bg-white border border-success-500 rounded-xl px-4 py-3 shadow-lg
+        className="flex items-center justify-between bg-white border border-success-500 rounded-xl px-4 py-3 shadow-lg w-auto min-w-fit gap-4
       dark:bg-[#0E201E]"
       >
         {/* Success Icon */}
 
-        <div className="flex items-start justify-start gap-2 flex-grow-1">
+        <div className="flex items-center gap-2 flex-1">
           <svg
             width="20"
             height="20"
