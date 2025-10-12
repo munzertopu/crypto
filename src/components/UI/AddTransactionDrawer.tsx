@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Dropdown from './Dropdown';
 
 interface AddTransactionDrawerProps {
   isOpen: boolean;
@@ -47,29 +48,19 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
           <div className="flex-1">
             <div className="space-y-6">
               {/* Transaction Type */}
-              <div className='text-left'>
-                <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Transaction type
-                </label>
-                <div className="relative mt-1.5">
-                  <select
-                    value={transactionType}
-                    onChange={(e) => setTransactionType(e.target.value)}
-                    className="w-full text-sm px-4 py-3 border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] text-gray-900 dark:text-white focus:outline-none focus:outline-none focus:border-transparent appearance-none"
-                  >
-                    <option value="">Select type</option>
-                    <option value="buy">Buy</option>
-                    <option value="sell">Sell</option>
-                    <option value="swap">Swap</option>
-                    <option value="transfer">Transfer</option>
-                  </select>
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
+               <div className='text-left'>
+                 <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+                   Transaction type
+                 </label>
+                 <div className="mt-1.5">
+                   <Dropdown
+                     options={['Withdraw', 'Deposit', 'Trade with all the symbols', 'Transfer']}
+                     onSelect={setTransactionType}
+                     defaultValue="Select type"
+                     className="w-full"
+                   />
+                 </div>
+               </div>
             </div>
           </div>
 

@@ -83,23 +83,23 @@ const Dropdown: React.FC<DropdownProps> = ({
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         onClick={handleToggle}
-        className="flex flex-row justify-between items-center px-3 py-1.5 box-border border border-gray-150 rounded-lg shadow-[0_1px_2px_0_rgba(20,21,26,0.05)] bg-white md:min-w-24 min-w-[max-content] w-full dark:border-[#4D5050] dark:bg-gray-900"
+        className="flex flex-row justify-between items-center px-4 py-3 box-border border border-default rounded-lg bg-transparent gap-4 md:min-w-24 min-w-[max-content] w-full dark:border-[#4D5050] focus:ring-2 focus:ring-[#E3F3C7B2] focus:outline-none"
         aria-label="Toggle dropdown"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <span className="text-sm text-primary dark:text-white">
+        <span className="text-base text-gray-900 dark:text-white">
           {selectedValue}
         </span>
         {isOpen ? <ArrowUpSvg /> : <ArrowDownSvg />}
       </button>
       {isOpen && (
-        <div className="absolute top-full left-0 py-2 w-full  border border-gray-150 rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 flex flex-col items-start justify-start max-h-[200px] overflow-y-auto bg-white dark:bg-gray-900 dark:text-white">
+        <div className="absolute top-full left-0 px-1.5 py-2 mt-1 w-full border border-default rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 flex flex-col items-start justify-start max-h-[200px] overflow-y-auto bg-white dark:bg-gray-900 dark:text-white">
           {options.map((option) => (
             <div
               key={option}
               onClick={() => handleSelect(option)}
-              className="px-3 py-1.5 text-sm text-gray-900 hover:bg-gray-100 cursor-pointer rounded min-w-8
+              className="px-1.5 py-1.5 text-sm text-gray-900 text-left hover:bg-gray-100 cursor-pointer rounded-lg w-full
                dark:text-gray-250"
             >
               {option}

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Typography } from "@material-tailwind/react";
+import Dropdown from './Dropdown';
 import TrashIcon from '../../utils/icons/TrashIcon';
 import TableSortIcon from '../../utils/icons/TableSortIcon';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import SuccessNotification from '../../components/SuccessNotification';
+import { set } from 'date-fns';
 
 interface ImportHistoryModalProps {
   isOpen: boolean;
@@ -165,49 +167,26 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
                  placeholder="Search"
                  value={searchTerm}
                  onChange={(e) => setSearchTerm(e.target.value)}
-                 className="w-80 py-3 pl-10 border border-default rounded-xl focus:outline-none"
+                 className="w-80 py-2.5 pl-10 border border-default rounded-lg focus:outline-none"
                />
              </div>
-
              {/* Import Type Dropdown */}
-             <div className="relative">
-               <select
-                 value={importType}
-                 onChange={(e) => setImportType(e.target.value)}
-                 className="appearance-none bg-white border border-default rounded-xl px-4 py-3 pr-10 focus:outline-none"
-               >
-                 <option value="All">Import type</option>
-                 <option value="CSV">CSV</option>
-                 <option value="Excel">Excel</option>
-                 <option value="API">API</option>
-               </select>
-               <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-                 <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                 </svg>
-               </div>
-             </div>
+             <Dropdown
+                options={['CSV', 'API']}
+                onSelect={setImportType}
+                defaultValue="Select type"
+                className="w-full"
+              />
            </div>
 
            {/* Right Column - Sort By */}
            <div className="flex items-center">
-             <div className="relative">
-               <select
-                 value={sortBy}
-                 onChange={(e) => setSortBy(e.target.value)}
-                 className="appearance-none bg-white border border-default rounded-xl px-4 py-3 pr-10 focus:outline-none"
-               >
-                 <option value="recent">Sort by recent</option>
-                 <option value="oldest">Sort by oldest</option>
-                 <option value="transactions">Sort by transactions</option>
-                 <option value="wallet">Sort by wallet</option>
-               </select>
-               <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-                 <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                 </svg>
-               </div>
-             </div>
+             <Dropdown
+                options={['Sort by recent']}
+                onSelect={setSortBy}
+                defaultValue="Select type"
+                className="w-full"
+              />
            </div>
          </div>
         
