@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { Input } from "@material-tailwind/react";
 import Dropdown from './Dropdown';
 import CalendarIcon from '../../utils/icons/CalendarIcon';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 interface AddTransactionDrawerProps {
   isOpen: boolean;
@@ -16,6 +19,8 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
   const [selectedWallet, setSelectedWallet] = useState('');
   const [numberOfCoins, setNumberOfCoins] = useState('');
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
+  const [showCoinDropdown, setShowCoinDropdown] = useState(false);
+  const [coinCurrency, setCoinCurrency] = useState("USD");
 
   // Additional tags data
   const additionalTags = [
@@ -146,23 +151,53 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                        Number of coins
                      </label>
                      <div className="mt-1.5">
-                       <div className="relative flex items-center border border-default dark:border-gray-600 rounded-lg bg-white dark:bg-[#0E201E] overflow-hidden">
-                         <input
-                           type="text"
-                           placeholder="1,250"
-                           value={numberOfCoins}
-                           onChange={(e) => setNumberOfCoins(e.target.value)}
-                           className="flex-1 px-4 py-3 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none border-none"
-                         />
-                         <div className="flex items-center px-3 py-3 border-l border-gray-200 dark:border-gray-600">
-                           <Dropdown
-                             options={['USD', 'EUR', 'BTC', 'ETH', 'USDT']}
-                             onSelect={setSelectedCurrency}
-                             defaultValue="USD"
-                             className="min-w-0 border-none bg-transparent text-gray-700 dark:text-gray-300"
-                           />
-                         </div>
-                       </div>
+                       <div className="relative">
+                        <Input
+                          type="number"
+                          placeholder="0"
+                          className={`w-full rounded-lg text-sm font-semibold border-default bg-transparent text-gray-900 focus:outline-none
+                            dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250`}
+                        />
+                        <button
+                          onClick={() =>
+                            setShowCoinDropdown(!showCoinDropdown)
+                          }
+                          className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 bg-white focus:outline-none
+                            dark:bg-[#0E201E] dark:border-[#4D5050]`}
+                        >
+                          <div className="flex items-center gap-1">
+                            <span className="text-xs font-medium">{coinCurrency}</span>
+                            <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2" />
+                          </div>
+                        </button>
+
+                        {/* Currency Dropdown */}
+                        {showCoinDropdown && (
+                          <div
+                            className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-default
+                              dark:bg-[#0E201E]`}
+                          >
+                            <div className="py-1 px-2">
+                              {["USD", "EUR", "USDT"].map((currency) => (
+                                <button
+                                  key={currency}
+                                  onClick={() => {
+                                    setCoinCurrency(currency);
+                                    setShowCoinDropdown(false);
+                                  }}
+                                  className={`w-full px-3 py-1 text-left text-xs rounded-md ${
+                                    coinCurrency === currency
+                                      ? "bg-gray-100 dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                                      : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                                  }`}
+                                >
+                                  {currency}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
                      </div>
                    </div>
                 </div>
