@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from "@material-tailwind/react";
-import DatePicker from '../DatePicker';
-import Dropdown from './Dropdown';
+import DatePicker from '../../../components/DatePicker';
+import Dropdown from '../../../components/UI/Dropdown';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 

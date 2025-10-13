@@ -3,7 +3,7 @@ import NavigationBar from "../../components/NavigationBar";
 import { TransactionTable, Filter } from "./components";
 import useScreenSize from "../../hooks/useScreenSize";
 import { mockTransactions } from "../../data/transactionAssets";
-import AddTransactionDrawer from "../../components/UI/AddTransactionDrawer";
+import AddTransactionDrawer from "./components/AddTransactionDrawer";
 
 interface TransactionPageProps {
   onLogout?: () => void;
