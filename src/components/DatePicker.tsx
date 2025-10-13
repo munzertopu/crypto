@@ -24,7 +24,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
         className="text-gray-500" 
       />
       
-      <Datepicker          
+      <Datepicker
         value={value} 
         onChange={onChange}
         useRange={false}

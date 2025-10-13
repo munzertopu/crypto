@@ -187,7 +187,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
             strokeColor="currentColor" 
             className="text-gray-500" 
           />
-
+          
           <span className="hidden md:block text-xs font-medium">
             {formatDateRange(selectedDateRange)}
             {!selectedDateRange.startDate && !selectedDateRange.endDate && (
@@ -346,7 +346,7 @@ const RenderDateRange = ({
             options={createShortcuts()
               .map((shortcut) => shortcut.label)
               .concat(["By year", "All time"])}
-            onSelect={(value) => {
+              onSelect={(value) => {
               if (value === "All time") {
                 handleDateChange({
                   selection: {

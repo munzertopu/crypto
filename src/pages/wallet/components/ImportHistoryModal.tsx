@@ -5,7 +5,6 @@ import TrashIcon from '../../../utils/icons/TrashIcon';
 import TableSortIcon from '../../../utils/icons/TableSortIcon';
 import DeleteConfirmationModal from '../../../components/UI/DeleteConfirmationModal';
 import SuccessNotification from '../../../components/SuccessNotification';
-import { set } from 'date-fns';
 
 interface ImportHistoryModalProps {
   isOpen: boolean;
@@ -96,8 +95,6 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
   const [searchTerm, setSearchTerm] = useState('');
   const [importType, setImportType] = useState('All');
   const [sortBy, setSortBy] = useState('recent');
-  const [sortColumn, setSortColumn] = useState<string | null>(null);
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<ImportHistoryItem | null>(null);
   const [showNotification, setShowNotification] = useState(false);

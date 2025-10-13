@@ -1,20 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faSearch,
-  faFilter,
   faChevronUp,
   faChevronDown,
   faCheck,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { Input, Tabs } from "@material-tailwind/react";
-import Datepicker from "react-tailwindcss-datepicker";
 import AmountRangeDropdown from "../../../components/AmountRangeDropdown";
 import { Accordion, AccordionItem } from "../../../components/Accordion";
 import useScreenSize from "../../../hooks/useScreenSize";
 import MobileDrawer from "../../../components/Drawers/MobileDrawer";
 import DateRangePickerPopover from "../../../components/DateRangePicker";
+import SearchIcon from "../../../utils/icons/SearchIcon";
+import Dropdown from "../../../components/UI/Dropdown";
 
 interface WalletOption {
   id: string;
@@ -23,7 +22,7 @@ interface WalletOption {
   color: string;
 }
 
-interface ActionTypeOption {
+interface TagOption {
   id: string;
   name: string;
 }
@@ -86,7 +85,7 @@ const walletOptions: WalletOption[] = [
   },
 ];
 
-const actionTypeOptions: ActionTypeOption[] = [
+const tagOptions: TagOption[] = [
   { id: "all", name: "All" },
   { id: "buy", name: "Buy" },
   { id: "sell", name: "Sell" },
@@ -94,7 +93,7 @@ const actionTypeOptions: ActionTypeOption[] = [
   { id: "transfer", name: "Transfer" },
 ];
 
-const resultOptions: ActionTypeOption[] = [
+const resultOptions: TagOption[] = [
   { id: "completed", name: "Completed" },
   { id: "pending", name: "Pending" },
   { id: "failed", name: "Failed" },
@@ -105,22 +104,19 @@ const Filter: React.FC<FilterProps> = ({
   onTabChange,
   searchTerm,
   setSearchTerm,
-  selectedType,
-  setSelectedType,
-  selectedStatus,
-  setSelectedStatus,
   hideTab = false,
 }) => {
   const [showWarningBanner, setShowWarningBanner] = useState(true);
-  const [walletDropdownOpen, setWalletDropdownOpen] = useState(false);
   const [walletSearchTerm, setWalletSearchTerm] = useState("");
   const [selectedWallets, setSelectedWallets] = useState<string[]>([]);
   const walletDropdownRef = useRef<HTMLDivElement>(null);
 
-  const [actionTypeDropdownOpen, setActionTypeDropdownOpen] = useState(false);
-  const [actionTypeSearchTerm, setActionTypeSearchTerm] = useState("");
-  const [selectedActionTypes, setSelectedActionTypes] = useState<string[]>([]);
-  const actionTypeDropdownRef = useRef<HTMLDivElement>(null);
+  // Tag Dropdown
+  const [tagSearchTerm, setTagSearchTerm] = useState("");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  // Manual Dropdown
+  const [selectedManuals, setSelectedManuals] = useState<string[]>([]);
 
   // Result Dropdown
   const [resultDropdownOpen, setResultDropdownOpen] = useState(false);
@@ -176,18 +172,6 @@ const Filter: React.FC<FilterProps> = ({
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        walletDropdownRef.current &&
-        !walletDropdownRef.current.contains(event.target as Node)
-      ) {
-        setWalletDropdownOpen(false);
-      }
-      if (
-        actionTypeDropdownRef.current &&
-        !actionTypeDropdownRef.current.contains(event.target as Node)
-      ) {
-        setActionTypeDropdownOpen(false);
-      }
-      if (
         resultDropdownRef.current &&
         !resultDropdownRef.current.contains(event.target as Node)
       ) {
@@ -205,8 +189,8 @@ const Filter: React.FC<FilterProps> = ({
     option.name.toLowerCase().includes(walletSearchTerm.toLowerCase())
   );
 
-  const filteredActionTypeOptions = actionTypeOptions.filter((option) =>
-    option.name.toLowerCase().includes(actionTypeSearchTerm.toLowerCase())
+  const filteredTagOptions = tagOptions.filter((option) =>
+    option.name.toLowerCase().includes(tagSearchTerm.toLowerCase())
   );
 
   const filteredResultOptions = resultOptions.filter((option) =>
@@ -221,11 +205,11 @@ const Filter: React.FC<FilterProps> = ({
     );
   };
 
-  const handleActionTypeToggle = (actionTypeId: string) => {
-    setSelectedActionTypes((prev) =>
-      prev.includes(actionTypeId)
-        ? prev.filter((id) => id !== actionTypeId)
-        : [...prev, actionTypeId]
+  const handleTagToggle = (tagId: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tagId)
+        ? prev.filter((id) => id !== tagId)
+        : [...prev, tagId]
     );
   };
 
@@ -242,8 +226,8 @@ const Filter: React.FC<FilterProps> = ({
     setSelectedWallets((prev) => prev.filter((id) => id !== walletId));
   };
 
-  const removeActionTypeFilter = (actionTypeId: string) => {
-    setSelectedActionTypes((prev) => prev.filter((id) => id !== actionTypeId));
+  const removeTagFilter = (tagId: string) => {
+    setSelectedTags((prev) => prev.filter((id) => id !== tagId));
   };
 
   const removeResultFilter = (resultId: string) => {
@@ -270,7 +254,7 @@ const Filter: React.FC<FilterProps> = ({
 
   const clearAllFilters = () => {
     setSelectedWallets([]);
-    setSelectedActionTypes([]);
+    setSelectedTags([]);
     setSelectedResults([]);
     setFromSentValue("0");
     setToSentValue("0");
@@ -286,7 +270,7 @@ const Filter: React.FC<FilterProps> = ({
   // Check if any filters are active
   const hasActiveFilters =
     selectedWallets.length > 0 ||
-    selectedActionTypes.length > 0 ||
+    selectedTags.length > 0 ||
     selectedResults.length > 0 ||
     (fromSentValue !== "" && fromSentValue !== "0") ||
     (toSentValue !== "" && toSentValue !== "0") ||
@@ -376,29 +360,12 @@ const Filter: React.FC<FilterProps> = ({
           border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]"
         >
           <div className="flex flex-row justify-start items-center gap-3">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            <SearchIcon 
+              width={16}
+              height={16}
+              strokeColor="currentColor"
               className="text-gray-900 dark:text-gray-150 opacity-70"
-            >
-              <path
-                d="M9.6 17.2C13.7974 17.2 17.2 13.7974 17.2 9.6C17.2 5.40264 13.7974 2 9.6 2C5.40264 2 2 5.40264 2 9.6C2 13.7974 5.40264 17.2 9.6 17.2Z"
-                stroke="currentColor"
-                stroke-width="1.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M18.0004 17.9999L16.4004 16.3999"
-                stroke="currentColor"
-                stroke-width="1.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            />
             <input
               type="text"
               placeholder="Search"
@@ -411,155 +378,82 @@ const Filter: React.FC<FilterProps> = ({
         </div>
 
         <div className="flex items-center space-x-5 mt-4 md:mt-0">
-          {/* Custom Wallet Dropdown */}
-          <div className="relative" ref={walletDropdownRef}>
-            <button
-              onClick={() => setWalletDropdownOpen(!walletDropdownOpen)}
-              className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-primary
-                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
-            >
-              <span>Wallet</span>
-              <FontAwesomeIcon
-                icon={walletDropdownOpen ? faChevronUp : faChevronDown}
-                className="w-4 h-4"
-              />
-            </button>
-
-            {walletDropdownOpen && (
-              <div
-                className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-sm z-50 bg-white border-gray-150
-                  dark:bg-[#0E201E]`}
-              >
-                {/* Search Input */}
-                <div className="px-3 border-b border-gray-150">
-                  <input
-                    type="text"
-                    placeholder="Type or paste wallet"
-                    value={walletSearchTerm}
-                    onChange={(e) => setWalletSearchTerm(e.target.value)}
-                    className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
-                      dark:bg-[#0E201E] dark:text-gray-250`}
-                  />
-                </div>
-
-                {/* Wallet Options List */}
-                <div className="max-h-48 overflow-y-auto">
-                  {filteredWalletOptions.map((option) => {
-                    const isSelected = selectedWallets.includes(option.id);
-                    return (
-                      <div
-                        key={option.id}
-                        onClick={() => handleWalletToggle(option.id)}
-                        className={`flex items-center px-3 py-1.5 cursor-pointer`}
-                      >
-                        <div
-                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
-                            isSelected
-                              ? "bg-[#90C853] border-[#90C853]"
-                              : "border-gray-300"
-                          }`}
-                        >
-                          {isSelected && (
-                            <FontAwesomeIcon
-                              icon={faCheck}
-                              className="w-2.5 h-2.5 text-white"
-                            />
-                          )}
-                        </div>
-                        <img
-                          src={option.logo}
-                          className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}
-                        ></img>
-                        <span
-                          className={`text-sm text-gray-900
-                            dark:text-gray-250`}
-                        >
-                          {option.name}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Action Type Dropdown */}
-          <div className="relative" ref={actionTypeDropdownRef}>
-            <button
-              onClick={() =>
-                setActionTypeDropdownOpen(!actionTypeDropdownOpen)
+          {/* Wallet Dropdown */}
+          <Dropdown
+            options={[
+              ...walletOptions.map(w => ({ 
+                label: w.name, 
+                value: w.id,
+                logo: w.logo 
+              }))
+            ]}
+            onSelect={(value) => {
+              if (value === 'all') {
+                setSelectedWallets([]);
+              } else {
+                setSelectedWallets([value]);
               }
-              className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl 
-                border bg-white border-default text-primary
-                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
-            >
-              <span>Action type</span>
-              <FontAwesomeIcon
-                icon={actionTypeDropdownOpen ? faChevronUp : faChevronDown}
-                className="w-3 h-3"
-              />
-            </button>
+            }}
+            searchable={true}
+            searchPlaceholder="Search wallet type"
+            defaultValue="Type"
+            className="min-w-[120px]"
+          />
 
-            {actionTypeDropdownOpen && (
-              <div
-                className={`absolute top-full left-0 mt-1 w-64 rounded-lg 
-                  border shadow-sm z-50 bg-white border-gray-150
-                  dark:bg-[#0E201E]`}
-              >
-                {/* Search Input */}
-                <div className="px-3 border-b border-gray-150">
-                  <input
-                    type="text"
-                    placeholder="Type or paste action type"
-                    value={actionTypeSearchTerm}
-                    onChange={(e) => setActionTypeSearchTerm(e.target.value)}
-                    className={`w-full px-3 py-2 rounded text-sm text-gray-900 dark:text-gray-150 placeholder-gray-500 focus:outline-none
-                      dark:bg-[#0E201E] dark:text-gray-50`}
-                  />
-                </div>
+          {/* Tag Dropdown */}
+          <Dropdown
+            options={[
+              { label: 'All', value: 'all' },
+              { label: 'Buy', value: 'buy' },
+              { label: 'Sell', value: 'sell' },
+              { label: 'Swap', value: 'swap' },
+              { label: 'Transfer', value: 'transfer' }
+            ]}
+            onSelect={(value) => {
+              if (value === 'all') {
+                setSelectedTags([]);
+              } else {
+                setSelectedTags([value]);
+              }
+            }}
+            defaultValue="Tag"
+            className="min-w-[140px]"
+          />
 
-                {/* Action Type Options List */}
-                <div className="max-h-48 overflow-y-auto">
-                  {filteredActionTypeOptions.map((option) => {
-                    const isSelected = selectedActionTypes.includes(
-                      option.id
-                    );
-                    return (
-                      <div
-                        key={option.id}
-                        onClick={() => handleActionTypeToggle(option.id)}
-                        className={`flex items-center px-3 py-2 cursor-pointer`}
-                      >
-                        <div
-                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
-                            isSelected
-                              ? "bg-[#90C853] border-[#90C853]"
-                              : "border-gray-300"
-                          }`}
-                        >
-                          {isSelected && (
-                            <FontAwesomeIcon
-                              icon={faCheck}
-                              className="w-2.5 h-2.5 text-white"
-                            />
-                          )}
-                        </div>
-                        <span
-                          className={`text-sm text-gray-900 
-                            dark:text-gray-250`}
-                        >
-                          {option.name}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
+          {/* Manual Dropdown */}
+          <Dropdown
+            options={[
+              { label: 'All', value: 'all' }
+            ]}
+            onSelect={(value) => {
+              if (value === 'all') {
+                setSelectedManuals([]);
+              } else {
+                setSelectedManuals([value]);
+              }
+            }}
+            defaultValue="Manual"
+            className="min-w-[140px]"
+          />
+
+          {/* Result Dropdown */}
+          <Dropdown
+            options={[
+              { label: 'All', value: 'all' }
+            ]}
+            onSelect={(value) => {
+              if (value === 'all') {
+                setSelectedResults([]);
+              } else {
+                setSelectedResults([value]);
+              }
+            }}
+            defaultValue="Result"
+            className="min-w-[140px]"
+          />
+          
           {/* Amount Sent Dropdown */}
-          <AmountRangeDropdown
+          {/* <AmountRangeDropdown
             fromValue={fromSentValue}
             setFromValue={setFromSentValue}
             toValue={toSentValue}
@@ -571,10 +465,10 @@ const Filter: React.FC<FilterProps> = ({
             isOpen={amountSentDropdownOpen}
             setIsOpen={setAmountSentDropdownOpen}
             title="Amount sent"
-          />
+          /> */}
 
           {/* Amount Received Dropdown */}
-          <AmountRangeDropdown
+          {/* <AmountRangeDropdown
             fromValue={fromReceivedValue}
             setFromValue={setFromReceivedValue}
             toValue={toReceivedValue}
@@ -586,7 +480,7 @@ const Filter: React.FC<FilterProps> = ({
             isOpen={amountReceivedDropdownOpen}
             setIsOpen={setAmountReceivedDropdownOpen}
             title="Amount received"
-          />
+          /> */}
           <div className={`max-w-[190px] flex items-center`}>
             <DateRangePickerPopover
               selectedDateRange={selectedDateRange}
@@ -736,7 +630,7 @@ const Filter: React.FC<FilterProps> = ({
             </div>
           </AccordionItem>
           <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-          <AccordionItem title="Action Type">
+          <AccordionItem title="Tag">
             {" "}
             <div
               className={`w-full z-50 bg-white border-gray-300 
@@ -745,14 +639,14 @@ const Filter: React.FC<FilterProps> = ({
             >
               {/* Search Input */}
 
-              {/* Action Type Options List */}
+              {/* Tag Options List */}
               <div className="max-h-48 overflow-y-auto  mt-3 flex flex-col gap-4">
-                {filteredActionTypeOptions.map((option) => {
-                  const isSelected = selectedActionTypes.includes(option.id);
+                {filteredTagOptions.map((option) => {
+                  const isSelected = selectedTags.includes(option.id);
                   return (
                     <div
                       key={option.id}
-                      onClick={() => handleActionTypeToggle(option.id)}
+                      onClick={() => handleTagToggle(option.id)}
                       className={`flex items-center  cursor-pointer hover:bg-gray-100 
                         dark:hover:bg-gray-700
                       `}
@@ -1088,23 +982,23 @@ const Filter: React.FC<FilterProps> = ({
               ) : null;
             })}
 
-            {/* Action Type Filters */}
-            {selectedActionTypes.map((actionTypeId) => {
-              const actionType = actionTypeOptions.find(
-                (a) => a.id === actionTypeId
+            {/* Tag Filters */}
+            {selectedTags.map((tagId) => {
+              const tag = tagOptions.find(
+                (a) => a.id === tagId
               );
-              return actionType ? (
+              return tag ? (
                 <div
-                  key={`action-${actionTypeId}`}
+                  key={`tag-${tagId}`}
                   className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
                     bg-gray-100 text-gray-800 border border-default
                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
                 >
-                  <span>{actionType.name}</span>
+                  <span>{tag.name}</span>
                   <button
-                    onClick={() => removeActionTypeFilter(actionTypeId)}
+                    onClick={() => removeTagFilter(tagId)}
                     className="transition-colors"
-                    aria-label={`Remove ${actionType.name} filter`}
+                    aria-label={`Remove ${tag.name} filter`}
                   >
                     <FontAwesomeIcon
                       icon={faTimes}
