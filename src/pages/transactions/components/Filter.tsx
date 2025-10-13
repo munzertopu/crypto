@@ -14,6 +14,7 @@ import MobileDrawer from "../../../components/Drawers/MobileDrawer";
 import DateRangePickerPopover from "../../../components/DateRangePicker";
 import SearchIcon from "../../../utils/icons/SearchIcon";
 import Dropdown from "../../../components/UI/Dropdown";
+import CheckboxDropdown from "../../../components/UI/CheckboxDropdown";
 
 interface WalletOption {
   id: string;
@@ -32,8 +33,12 @@ interface FilterProps {
   onTabChange?: (tab: string) => void;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
-  selectedType: string;
-  setSelectedType: (type: string) => void;
+  selectedType: string[];
+  setSelectedType: (type: string[] | ((prev: string[]) => string[])) => void;
+  selectedTags: string[];
+  setSelectedTags: (tags: string[] | ((prev: string[]) => string[])) => void;
+  selectedManuals: string[];
+  setSelectedManuals: (manuals: string[] | ((prev: string[]) => string[])) => void;
   selectedStatus: string;
   setSelectedStatus: (status: string) => void;
   hideTab?: boolean;
@@ -99,6 +104,44 @@ const resultOptions: TagOption[] = [
   { id: "failed", name: "Failed" },
 ];
 
+const typeOptions = [
+  { label: "All trades", value: "all_trades" },
+  { label: "Withdrawals", value: "withdrawals" },
+  { label: "Deposit", value: "deposit" },
+  { label: "Trade: Fiat-Crypto", value: "trade_fiat_crypto" },
+  { label: "Trade: Crypto-Fiat", value: "trade_crypto_fiat" },
+  { label: "Trade: Crypto-Crypto", value: "trade_crypto_crypto" },
+  { label: "Transfer", value: "transfer" },
+];
+
+const tagOptionsData = [
+  { label: "Token Migration", value: "token_migration" },
+  { label: "Capital Contribution", value: "capital_contribution" },
+  { label: "Collateral Deposit", value: "collateral_deposit" },
+  { label: "Collateral Withdrawal", value: "collateral_withdrawal" },
+  { label: "Spend", value: "spend" },
+  { label: "Stolen", value: "stolen" },
+  { label: "Reward", value: "reward" },
+];
+
+const manualOptionsData = [
+  { label: "All", value: "all" },
+  { label: "Receive", value: "receive" },
+  { label: "Sent", value: "sent" },
+  { label: "Transfer", value: "transfer" },
+  { label: "Simulate", value: "simulate" },
+  { label: "Deploy", value: "deploy" }
+];
+
+const resultOptionsData = [
+  { label: "All", value: "all" },
+  { label: "Receive", value: "receive" },
+  { label: "Sent", value: "sent" },
+  { label: "Transfer", value: "transfer" },
+  { label: "Simulate", value: "simulate" },
+  { label: "Deploy", value: "deploy" }
+];
+
 const searchOptions = [
   { id: "bitcoin", name: "Bitcoin", logo: "crypto/bitcoin-btc-logo.png", color: "bg-orange-500" },
   { id: "bybit", name: "Bybit", logo: "crypto/bybit.png", color: "bg-blue-600" },
@@ -112,19 +155,19 @@ const Filter: React.FC<FilterProps> = ({
   onTabChange,
   searchTerm,
   setSearchTerm,
+  selectedType,
+  setSelectedType,
+  selectedTags,
+  setSelectedTags,
+  selectedManuals,
+  setSelectedManuals,
   hideTab = false,
 }) => {
   const [showWarningBanner, setShowWarningBanner] = useState(true);
   const [walletSearchTerm, setWalletSearchTerm] = useState("");
-  const [selectedWallets, setSelectedWallets] = useState<string[]>([]);
-  const walletDropdownRef = useRef<HTMLDivElement>(null);
-
+  
   // Tag Dropdown
   const [tagSearchTerm, setTagSearchTerm] = useState("");
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-
-  // Manual Dropdown
-  const [selectedManuals, setSelectedManuals] = useState<string[]>([]);
 
   // Result Dropdown
   const [resultDropdownOpen, setResultDropdownOpen] = useState(false);
@@ -267,8 +310,8 @@ const Filter: React.FC<FilterProps> = ({
     };
   }, [searchSuggestionsRef]);
 
-  const filteredWalletOptions = walletOptions.filter((option) =>
-    option.name.toLowerCase().includes(walletSearchTerm.toLowerCase())
+  const filteredTypeOptions = typeOptions.filter((option) =>
+    option.label.toLowerCase().includes(walletSearchTerm.toLowerCase())
   );
 
   const filteredSearchOptions = searchOptions.filter((option) =>
@@ -289,19 +332,19 @@ const Filter: React.FC<FilterProps> = ({
     );
   };
 
-  const filteredTagOptions = tagOptions.filter((option) =>
-    option.name.toLowerCase().includes(tagSearchTerm.toLowerCase())
+  const filteredTagOptions = tagOptionsData.filter((option) =>
+    option.label.toLowerCase().includes(tagSearchTerm.toLowerCase())
   );
 
   const filteredResultOptions = resultOptions.filter((option) =>
     option.name.toLowerCase().includes(resultSearchTerm.toLowerCase())
   );
 
-  const handleWalletToggle = (walletId: string) => {
-    setSelectedWallets((prev) =>
-      prev.includes(walletId)
-        ? prev.filter((id) => id !== walletId)
-        : [...prev, walletId]
+  const handleTypeToggle = (typeId: string) => {
+    setSelectedType((prev) =>
+      prev.includes(typeId)
+        ? prev.filter((id) => id !== typeId)
+        : [...prev, typeId]
     );
   };
 
@@ -322,16 +365,24 @@ const Filter: React.FC<FilterProps> = ({
   };
 
   // Helper functions to remove individual filters
-  const removeWalletFilter = (walletId: string) => {
-    setSelectedWallets((prev) => prev.filter((id) => id !== walletId));
+  const removeTypeFilter = (typeId: string) => {
+    setSelectedType((prev) => prev.filter((id) => id !== typeId));
   };
 
   const removeTagFilter = (tagId: string) => {
     setSelectedTags((prev) => prev.filter((id) => id !== tagId));
   };
 
+  const removeManualFilter = (manualId: string) => {
+    setSelectedManuals((prev) => prev.filter((id) => id !== manualId));
+  };
+
   const removeResultFilter = (resultId: string) => {
     setSelectedResults((prev) => prev.filter((id) => id !== resultId));
+  };
+
+  const removeSearchFilter = (searchId: string) => {
+    setSelectedSearchItems((prev) => prev.filter((id) => id !== searchId));
   };
 
   const removeAmountSentFilter = () => {
@@ -353,9 +404,11 @@ const Filter: React.FC<FilterProps> = ({
   };
 
   const clearAllFilters = () => {
-    setSelectedWallets([]);
+    setSelectedType([]);
     setSelectedTags([]);
+    setSelectedManuals([]);
     setSelectedResults([]);
+    setSelectedSearchItems([]);
     setFromSentValue("0");
     setToSentValue("0");
     setFromSentCurrency("USD");
@@ -369,9 +422,11 @@ const Filter: React.FC<FilterProps> = ({
 
   // Check if any filters are active
   const hasActiveFilters =
-    selectedWallets.length > 0 ||
+    selectedType.length > 0 ||
     selectedTags.length > 0 ||
+    selectedManuals.length > 0 ||
     selectedResults.length > 0 ||
+    selectedSearchItems.length > 0 ||
     (fromSentValue !== "" && fromSentValue !== "0") ||
     (toSentValue !== "" && toSentValue !== "0") ||
     fromReceivedValue !== "0" ||
@@ -452,53 +507,53 @@ const Filter: React.FC<FilterProps> = ({
           </div>
         </div>
       )}
-      
+
       
       <div className="flex flex-row justify-between lg:items-center gap-5 mt-[20px] sm:mt-0">
         <div className="flex items-center space-x-5 mt-4 md:mt-0">
            {/* Search Input with Suggestions */}
            <div className="relative" ref={setSearchSuggestionsRef}>
              <div className="flex flex-row justify-start items-center px-4 py-3 box-border border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]">
-               <div className="flex flex-row justify-start items-center gap-3">
+          <div className="flex flex-row justify-start items-center gap-3">
                  <SearchIcon 
                    width={16}
                    height={16}
                    strokeColor="currentColor"
-                   className="text-gray-900 dark:text-gray-150 opacity-70"
+              className="text-gray-900 dark:text-gray-150 opacity-70"
                  />
-                 <input
-                   type="text"
+            <input
+              type="text"
                    placeholder={selectedSearchItems.length > 0 ? `${selectedSearchItems.length} selected` : "Search"}
-                   value={searchTerm}
+              value={searchTerm}
                    onChange={handleSearchInputChange}
                    onFocus={() => setIsSearchSuggestionsOpen(true)}
                    className="text-sm w-full border-gray-700 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none bg-transparent dark:bg-transparent dark:border-[#4D5050]"
-                 />
-               </div>
-             </div>
-             
+            />
+          </div>
+        </div>
+
              {/* Search Suggestions */}
              {isSearchSuggestionsOpen && filteredSearchOptions.length > 0 && (
                <div className="absolute top-full left-0 mt-1 w-full bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50">
-                 <div className="max-h-48 overflow-y-auto">
+                <div className="max-h-48 overflow-y-auto">
                    {filteredSearchOptions.map((option) => {
                      const isSelected = selectedSearchItems.includes(option.id);
-                     return (
-                       <div
-                         key={option.id}
+                    return (
+                      <div
+                        key={option.id}
                          onClick={() => handleSearchItemToggle(option.id)}
                          className="flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
-                       >
-                         <div
-                           className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
-                             isSelected
+                      >
+                        <div
+                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                            isSelected
                                ? "bg-green-600 border-green-600"
-                               : "border-gray-300"
-                           }`}
-                         >
-                           {isSelected && (
+                              : "border-gray-300"
+                          }`}
+                        >
+                          {isSelected && (
                              <svg
-                               className="w-2.5 h-2.5 text-white"
+                              className="w-2.5 h-2.5 text-white"
                                fill="currentColor"
                                viewBox="0 0 20 20"
                              >
@@ -508,93 +563,68 @@ const Filter: React.FC<FilterProps> = ({
                                  clipRule="evenodd"
                                />
                              </svg>
-                           )}
-                         </div>
-                         <img
-                           src={option.logo}
+                          )}
+                        </div>
+                        <img
+                          src={option.logo}
                            alt={option.name}
-                           className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}
+                          className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}
                          />
                          <span className="text-sm text-gray-900 dark:text-gray-250">
-                           {option.name}
-                         </span>
-                       </div>
-                     );
-                   })}
-                 </div>
-               </div>
-             )}
-           </div>
-          {/* Wallet Dropdown */}
-          <Dropdown
-            options={[
-              ...walletOptions.map(w => ({ 
-                label: w.name, 
-                value: w.id,
-                logo: w.logo 
-              }))
-            ]}
-            onSelect={(value) => {
-              if (value === 'all') {
-                setSelectedWallets([]);
-              } else {
-                setSelectedWallets([value]);
-              }
+                          {option.name}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+          {/* Type Dropdown */}
+          <CheckboxDropdown
+            options={typeOptions}
+            onSelect={(values) => {
+              setSelectedType(values);
             }}
-            searchable={true}
-            searchPlaceholder="Search wallet type"
+            selectedValues={selectedType}
             defaultValue="Type"
             className="min-w-[120px]"
           />
 
           {/* Tag Dropdown */}
-          <Dropdown
-            options={[
-              { label: 'All', value: 'all' },
-              { label: 'Buy', value: 'buy' },
-              { label: 'Sell', value: 'sell' },
-              { label: 'Swap', value: 'swap' },
-              { label: 'Transfer', value: 'transfer' }
-            ]}
-            onSelect={(value) => {
-              if (value === 'all') {
-                setSelectedTags([]);
-              } else {
-                setSelectedTags([value]);
-              }
+          <CheckboxDropdown
+            options={tagOptionsData}
+            onSelect={(values) => {
+              setSelectedTags(values);
             }}
+            searchable={true}
+            searchPlaceholder="search tag"
+            selectedValues={selectedTags}
             defaultValue="Tag"
             className="min-w-[140px]"
           />
 
           {/* Manual Dropdown */}
-          <Dropdown
-            options={[
-              { label: 'All', value: 'all' }
-            ]}
-            onSelect={(value) => {
-              if (value === 'all') {
-                setSelectedManuals([]);
-              } else {
-                setSelectedManuals([value]);
-              }
+          <CheckboxDropdown
+            options={manualOptionsData}
+            onSelect={(values) => {
+              setSelectedManuals(values);
             }}
+            selectedValues={selectedManuals}
             defaultValue="Manual"
             className="min-w-[140px]"
           />
 
           {/* Result Dropdown */}
-          <Dropdown
-            options={[
-              { label: 'All', value: 'all' }
-            ]}
-            onSelect={(value) => {
-              if (value === 'all') {
-                setSelectedResults([]);
-              } else {
-                setSelectedResults([value]);
-              }
+          
+
+          {/* Manual Dropdown */}
+          <CheckboxDropdown
+            options={resultOptionsData}
+            onSelect={(values) => {
+              setSelectedResults(values);
             }}
+            selectedValues={selectedResults}
             defaultValue="Result"
             className="min-w-[140px]"
           />
@@ -634,7 +664,7 @@ const Filter: React.FC<FilterProps> = ({
               onDateRangeChange={setSelectedDateRange}
               iconPosition="right"
               buttonLabel="Date"
-              className="md:px-4 md:py-3 shadow-sm rounded-lg"
+              className="md:px-4 md:py-3 shadow-sm rounded-lg w-max"
               buttonClassName="md:text-base md:font-normal"
             />
           </div>
@@ -766,8 +796,8 @@ const Filter: React.FC<FilterProps> = ({
                   </div>
                 </div>
               </div>
-            )}
-          </div>
+                          )}
+                        </div>
         </div>
         {/* View Dropdown - Right End */}
         <div className="relative" ref={viewDropdownRef}>
@@ -837,9 +867,9 @@ const Filter: React.FC<FilterProps> = ({
               </div>
                 </div>
               </div>
-          )}
+            )}
+          </div>
         </div>
-      </div>
 
       <MobileDrawer
         isOpen={showMobileFilters}
@@ -869,14 +899,14 @@ const Filter: React.FC<FilterProps> = ({
                 />
               </div>
 
-              {/* Wallet Options List */}
+              {/* Type Options List */}
               <div className="max-h-48 overflow-y-auto mt-3 flex flex-col gap-4 ">
-                {filteredWalletOptions.map((option) => {
-                  const isSelected = selectedWallets.includes(option.id);
+                {filteredTypeOptions.map((option) => {
+                  const isSelected = selectedType.includes(option.value);
                   return (
                     <div
-                      key={option.id}
-                      onClick={() => handleWalletToggle(option.id)}
+                      key={option.value}
+                      onClick={() => handleTypeToggle(option.value)}
                       className={`flex items-center px-3 gap-2 cursor-pointer hover:bg-gray-100 
                         dark:hover:bg-gray-700`}
                     >
@@ -894,14 +924,10 @@ const Filter: React.FC<FilterProps> = ({
                           />
                         )}
                       </div>
-                      <img
-                        src={option.logo}
-                        className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold ml-3`}
-                      ></img>
                       <span
                         className={`text-base text-gray-900 dark:text-gray-150`}
                       >
-                        {option.name}
+                        {option.label}
                       </span>
                     </div>
                   );
@@ -922,11 +948,11 @@ const Filter: React.FC<FilterProps> = ({
               {/* Tag Options List */}
               <div className="max-h-48 overflow-y-auto  mt-3 flex flex-col gap-4">
                 {filteredTagOptions.map((option) => {
-                  const isSelected = selectedTags.includes(option.id);
+                  const isSelected = selectedTags.includes(option.value);
                   return (
                     <div
-                      key={option.id}
-                      onClick={() => handleTagToggle(option.id)}
+                      key={option.value}
+                      onClick={() => handleTagToggle(option.value)}
                       className={`flex items-center  cursor-pointer hover:bg-gray-100 
                         dark:hover:bg-gray-700
                       `}
@@ -948,7 +974,7 @@ const Filter: React.FC<FilterProps> = ({
                       <span
                         className={`text-base text-gray-900 dark:text-gray-150`}
                       >
-                        {option.name}
+                        {option.label}
                       </span>
                     </div>
                   );
@@ -1236,21 +1262,21 @@ const Filter: React.FC<FilterProps> = ({
       {hasActiveFilters && (
         <div className="pt-4 md:pt-0">
           <div className="flex flex-wrap gap-2">
-            {/* Wallet Filters */}
-            {selectedWallets.map((walletId) => {
-              const wallet = walletOptions.find((w) => w.id === walletId);
-              return wallet ? (
+            {/* Type Filters */}
+            {selectedType.map((typeId) => {
+              const type = typeOptions.find((t) => t.value === typeId);
+              return type ? (
                 <div
-                  key={`wallet-${walletId}`}
+                  key={`type-${typeId}`}
                   className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
                     bg-gray-100 text-gray-800 border border-default
                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
                 >
-                  <span>{wallet.name}</span>
+                  <span>{type.label}</span>
                   <button
-                    onClick={() => removeWalletFilter(walletId)}
+                    onClick={() => removeTypeFilter(typeId)}
                     className="transition-colors"
-                    aria-label={`Remove ${wallet.name} filter`}
+                    aria-label={`Remove ${type.label} filter`}
                   >
                     <FontAwesomeIcon
                       icon={faTimes}
@@ -1264,8 +1290,8 @@ const Filter: React.FC<FilterProps> = ({
 
             {/* Tag Filters */}
             {selectedTags.map((tagId) => {
-              const tag = tagOptions.find(
-                (a) => a.id === tagId
+              const tag = tagOptionsData.find(
+                (a) => a.value === tagId
               );
               return tag ? (
                 <div
@@ -1274,11 +1300,100 @@ const Filter: React.FC<FilterProps> = ({
                     bg-gray-100 text-gray-800 border border-default
                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
                 >
-                  <span>{tag.name}</span>
+                  <span>{tag.label}</span>
                   <button
                     onClick={() => removeTagFilter(tagId)}
                     className="transition-colors"
-                    aria-label={`Remove ${tag.name} filter`}
+                    aria-label={`Remove ${tag.label} filter`}
+                  >
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      className="w-3 h-3"
+                      aria-hidden="true"
+                    />
+                  </button>
+                </div>
+              ) : null;
+            })}
+
+            {/* Manual Filters */}
+            {selectedManuals.map((manualId) => {
+              const manual = manualOptionsData.find(
+                (m) => m.value === manualId
+              );
+              return manual ? (
+                <div
+                  key={`manual-${manualId}`}
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+                    bg-gray-100 text-gray-800 border border-default
+                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+                >
+                  <span>{manual.label}</span>
+                  <button
+                    onClick={() => removeManualFilter(manualId)}
+                    className="transition-colors"
+                    aria-label={`Remove ${manual.label} filter`}
+                  >
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      className="w-3 h-3"
+                      aria-hidden="true"
+                    />
+                  </button>
+                </div>
+              ) : null;
+            })}
+
+            {/* Result Filters */}
+            {selectedResults.map((resultId) => {
+              const result = resultOptionsData.find(
+                (r) => r.value === resultId
+              );
+              return result ? (
+                <div
+                  key={`result-${resultId}`}
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+                    bg-gray-100 text-gray-800 border border-default
+                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+                >
+                  <span>{result.label}</span>
+                  <button
+                    onClick={() => removeResultFilter(resultId)}
+                    className="transition-colors"
+                    aria-label={`Remove ${result.label} filter`}
+                  >
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      className="w-3 h-3"
+                      aria-hidden="true"
+                    />
+                  </button>
+                </div>
+              ) : null;
+            })}
+
+            {/* Search Filters */}
+            {selectedSearchItems.map((searchId) => {
+              const searchItem = searchOptions.find(
+                (s) => s.id === searchId
+              );
+              return searchItem ? (
+                <div
+                  key={`search-${searchId}`}
+                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+                    bg-gray-100 text-gray-800 border border-default
+                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+                >
+                  <img
+                    src={searchItem.logo}
+                    alt={searchItem.name}
+                    className={`w-4 h-4 rounded-full ${searchItem.color} flex items-center justify-center text-white text-xs font-bold`}
+                  />
+                  <span>{searchItem.name}</span>
+                  <button
+                    onClick={() => removeSearchFilter(searchId)}
+                    className="transition-colors"
+                    aria-label={`Remove ${searchItem.name} filter`}
                   >
                     <FontAwesomeIcon
                       icon={faTimes}

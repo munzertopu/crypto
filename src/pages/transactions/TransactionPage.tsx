@@ -14,7 +14,9 @@ interface TransactionPageProps {
 const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   const [activeTab, setActiveTab] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedType, setSelectedType] = useState("all");
+  const [selectedType, setSelectedType] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedManuals, setSelectedManuals] = useState<string[]>([]);
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [sortBy, setSortBy] = useState("date");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
@@ -37,7 +39,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
         .includes(searchTerm.toLowerCase()) ||
       transaction.platform.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType =
-      selectedType === "all" || transaction.type === selectedType;
+      selectedType.length === 0 || selectedType.includes(transaction.type);
     const matchesStatus =
       selectedStatus === "all" || transaction.status === selectedStatus;
 
@@ -133,6 +135,10 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           setSearchTerm={setSearchTerm}
           selectedType={selectedType}
           setSelectedType={setSelectedType}
+          selectedTags={selectedTags}
+          setSelectedTags={setSelectedTags}
+          selectedManuals={selectedManuals}
+          setSelectedManuals={setSelectedManuals}
           selectedStatus={selectedStatus}
           setSelectedStatus={setSelectedStatus}
           hideTab={screenSize.width < 640}
