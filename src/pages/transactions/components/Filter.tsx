@@ -99,6 +99,14 @@ const resultOptions: TagOption[] = [
   { id: "failed", name: "Failed" },
 ];
 
+const searchOptions = [
+  { id: "bitcoin", name: "Bitcoin", logo: "crypto/bitcoin-btc-logo.png", color: "bg-orange-500" },
+  { id: "bybit", name: "Bybit", logo: "crypto/bybit.png", color: "bg-blue-600" },
+  { id: "bldget", name: "Bldget", logo: "crypto/theta-fuel-tfuel-logo.png", color: "bg-cyan-500" },
+  { id: "ethereum", name: "Ethereum", logo: "crypto/ethereum-eth-logo.png", color: "bg-blue-500" },
+  { id: "metamask", name: "MetaMask", logo: "crypto/metamask.png", color: "bg-orange-400" },
+];
+
 const Filter: React.FC<FilterProps> = ({
   activeTab = "Portfolio",
   onTabChange,
@@ -160,6 +168,11 @@ const Filter: React.FC<FilterProps> = ({
   const [showDeleted, setShowDeleted] = useState(true);
   const [showSoftDeletedOnly, setShowSoftDeletedOnly] = useState(false);
   const viewDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Search Suggestions
+  const [isSearchSuggestionsOpen, setIsSearchSuggestionsOpen] = useState(false);
+  const [searchSuggestionsRef, setSearchSuggestionsRef] = useState<HTMLDivElement | null>(null);
+  const [selectedSearchItems, setSelectedSearchItems] = useState<string[]>([]);
 
   // Count active advanced filters
   const activeAdvancedFiltersCount = advancedFilters.filter(filter => 
@@ -237,9 +250,44 @@ const Filter: React.FC<FilterProps> = ({
     };
   }, []);
 
+  // Close search suggestions when clicking outside
+  useEffect(() => {
+    const handleSearchSuggestionsClickOutside = (event: MouseEvent) => {
+      if (
+        searchSuggestionsRef &&
+        !searchSuggestionsRef.contains(event.target as Node)
+      ) {
+        setIsSearchSuggestionsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleSearchSuggestionsClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleSearchSuggestionsClickOutside);
+    };
+  }, [searchSuggestionsRef]);
+
   const filteredWalletOptions = walletOptions.filter((option) =>
     option.name.toLowerCase().includes(walletSearchTerm.toLowerCase())
   );
+
+  const filteredSearchOptions = searchOptions.filter((option) =>
+    option.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    setIsSearchSuggestionsOpen(value.length > 0);
+  };
+
+  const handleSearchItemToggle = (itemId: string) => {
+    setSelectedSearchItems((prev) =>
+      prev.includes(itemId)
+        ? prev.filter((id) => id !== itemId)
+        : [...prev, itemId]
+    );
+  };
 
   const filteredTagOptions = tagOptions.filter((option) =>
     option.name.toLowerCase().includes(tagSearchTerm.toLowerCase())
@@ -408,28 +456,75 @@ const Filter: React.FC<FilterProps> = ({
       
       <div className="flex flex-row justify-between lg:items-center gap-5 mt-[20px] sm:mt-0">
         <div className="flex items-center space-x-5 mt-4 md:mt-0">
-          {/* Search */}
-          <div
-            className="flex flex-grow-1 sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border 
-            border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]"
-          >
-            <div className="flex flex-row justify-start items-center gap-3">
-              <SearchIcon 
-                width={16}
-                height={16}
-                strokeColor="currentColor"
-                className="text-gray-900 dark:text-gray-150 opacity-70"
-              />
-              <input
-                type="text"
-                placeholder="Search"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className={`text-sm w-full  border-gray-700 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none bg-transparent
-              dark:bg-transparent dark:border-[#4D5050]`}
-              />
-            </div>
-          </div>
+           {/* Search Input with Suggestions */}
+           <div className="relative" ref={setSearchSuggestionsRef}>
+             <div className="flex flex-row justify-start items-center px-4 py-3 box-border border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]">
+               <div className="flex flex-row justify-start items-center gap-3">
+                 <SearchIcon 
+                   width={16}
+                   height={16}
+                   strokeColor="currentColor"
+                   className="text-gray-900 dark:text-gray-150 opacity-70"
+                 />
+                 <input
+                   type="text"
+                   placeholder={selectedSearchItems.length > 0 ? `${selectedSearchItems.length} selected` : "Search"}
+                   value={searchTerm}
+                   onChange={handleSearchInputChange}
+                   onFocus={() => setIsSearchSuggestionsOpen(true)}
+                   className="text-sm w-full border-gray-700 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none bg-transparent dark:bg-transparent dark:border-[#4D5050]"
+                 />
+               </div>
+             </div>
+             
+             {/* Search Suggestions */}
+             {isSearchSuggestionsOpen && filteredSearchOptions.length > 0 && (
+               <div className="absolute top-full left-0 mt-1 w-full bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50">
+                 <div className="max-h-48 overflow-y-auto">
+                   {filteredSearchOptions.map((option) => {
+                     const isSelected = selectedSearchItems.includes(option.id);
+                     return (
+                       <div
+                         key={option.id}
+                         onClick={() => handleSearchItemToggle(option.id)}
+                         className="flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
+                       >
+                         <div
+                           className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                             isSelected
+                               ? "bg-green-600 border-green-600"
+                               : "border-gray-300"
+                           }`}
+                         >
+                           {isSelected && (
+                             <svg
+                               className="w-2.5 h-2.5 text-white"
+                               fill="currentColor"
+                               viewBox="0 0 20 20"
+                             >
+                               <path
+                                 fillRule="evenodd"
+                                 d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                 clipRule="evenodd"
+                               />
+                             </svg>
+                           )}
+                         </div>
+                         <img
+                           src={option.logo}
+                           alt={option.name}
+                           className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}
+                         />
+                         <span className="text-sm text-gray-900 dark:text-gray-250">
+                           {option.name}
+                         </span>
+                       </div>
+                     );
+                   })}
+                 </div>
+               </div>
+             )}
+           </div>
           {/* Wallet Dropdown */}
           <Dropdown
             options={[
