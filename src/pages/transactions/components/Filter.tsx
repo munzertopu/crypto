@@ -404,32 +404,32 @@ const Filter: React.FC<FilterProps> = ({
           </div>
         </div>
       )}
-
-      <div className="flex flex-row justify-start lg:items-center gap-5 mt-[20px] sm:mt-0">
-        {/* Search */}
-        <div
-          className="flex flex-grow-1 sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border 
-          border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]"
-        >
-          <div className="flex flex-row justify-start items-center gap-3">
-            <SearchIcon 
-              width={16}
-              height={16}
-              strokeColor="currentColor"
-              className="text-gray-900 dark:text-gray-150 opacity-70"
-            />
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className={`text-sm w-full  border-gray-700 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none bg-transparent
-            dark:bg-transparent dark:border-[#4D5050]`}
-            />
-          </div>
-        </div>
-
+      
+      
+      <div className="flex flex-row justify-between lg:items-center gap-5 mt-[20px] sm:mt-0">
         <div className="flex items-center space-x-5 mt-4 md:mt-0">
+          {/* Search */}
+          <div
+            className="flex flex-grow-1 sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border 
+            border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]"
+          >
+            <div className="flex flex-row justify-start items-center gap-3">
+              <SearchIcon 
+                width={16}
+                height={16}
+                strokeColor="currentColor"
+                className="text-gray-900 dark:text-gray-150 opacity-70"
+              />
+              <input
+                type="text"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className={`text-sm w-full  border-gray-700 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none bg-transparent
+              dark:bg-transparent dark:border-[#4D5050]`}
+              />
+            </div>
+          </div>
           {/* Wallet Dropdown */}
           <Dropdown
             options={[
@@ -673,77 +673,76 @@ const Filter: React.FC<FilterProps> = ({
               </div>
             )}
           </div>
-
-          {/* View Dropdown - Right End */}
-          <div className="relative" ref={viewDropdownRef}>
-            <button
-              onClick={() => setIsViewDropdownOpen(!isViewDropdownOpen)}
-              className="flex items-center justify-between px-4 py-3 rounded-lg border border-transparent bg-transparent text-gray-700 hover:bg-gray-50 focus:bg-white focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none dark:border-gray-700 dark:bg-[#0E201E] dark:text-gray-300 min-w-[100px]"
+        </div>
+        {/* View Dropdown - Right End */}
+        <div className="relative" ref={viewDropdownRef}>
+          <button
+            onClick={() => setIsViewDropdownOpen(!isViewDropdownOpen)}
+            className="flex items-center justify-between px-4 py-3 rounded-lg border border-default bg-white text-gray-700 hover:bg-gray-50 focus:bg-white focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none dark:border-gray-700 dark:bg-[#0E201E] dark:text-gray-300 min-w-[100px]"
+          >
+            <span className="text-sm font-medium">View</span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={`w-4 h-4 transform transition-transform ${isViewDropdownOpen ? 'rotate-180' : ''}`}
             >
-              <span className="text-sm font-medium">View</span>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className={`w-4 h-4 transform transition-transform ${isViewDropdownOpen ? 'rotate-180' : ''}`}
-              >
-                <path
-                  d="m19.5 8.25-7.5 7.5-7.5-7.5"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            
-            {/* View Dropdown Content */}
-            {isViewDropdownOpen && (
-            <div className="absolute top-full right-0 mt-1 w-64 bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50 p-4">
-              <div className="space-y-4">
-                {/* Show deleted toggle */}
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Show deleted
-                          </span>
-                  <button
-                    onClick={() => setShowDeleted(!showDeleted)}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      showDeleted ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
+              <path
+                d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          
+          {/* View Dropdown Content */}
+          {isViewDropdownOpen && (
+          <div className="absolute top-full right-0 mt-1 w-64 bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50 p-4">
+            <div className="space-y-4">
+              {/* Show deleted toggle */}
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Show deleted
+                        </span>
+                <button
+                  onClick={() => setShowDeleted(!showDeleted)}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                    showDeleted ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      showDeleted ? 'translate-x-6' : 'translate-x-1'
                     }`}
-                  >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        showDeleted ? 'translate-x-6' : 'translate-x-1'
-                      }`}
-                    />
-                  </button>
-                        </div>
+                  />
+                </button>
+                      </div>
 
-                {/* Show soft deleted only toggle */}
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Show soft deleted only
-                  </span>
-                  <button
-                    onClick={() => setShowSoftDeletedOnly(!showSoftDeletedOnly)}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      showSoftDeletedOnly ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
+              {/* Show soft deleted only toggle */}
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Show soft deleted only
+                </span>
+                <button
+                  onClick={() => setShowSoftDeletedOnly(!showSoftDeletedOnly)}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                    showSoftDeletedOnly ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      showSoftDeletedOnly ? 'translate-x-6' : 'translate-x-1'
                     }`}
-                  >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        showSoftDeletedOnly ? 'translate-x-6' : 'translate-x-1'
-                      }`}
-                    />
-                  </button>
+                  />
+                </button>
+              </div>
                 </div>
-                  </div>
-                </div>
-            )}
-          </div>
+              </div>
+          )}
         </div>
       </div>
 
