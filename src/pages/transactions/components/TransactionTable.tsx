@@ -219,7 +219,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                               onClick={(e) => e.stopPropagation()}
                             >
                               <div
-                                className="hidden sm:flex sm:items-center sm:justify-center
+                                className=" sm:flex sm:items-center sm:justify-center
                               "
                               >
                                 <input
@@ -267,7 +267,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                   size="sm"
                                   className={`h-12 w-12 flex items-center justify-center text-white text-xs font-bold`}
                                 />
-                                <div className="flex flex-col">
+                                <div className="flex flex-col gap-1">
                                   <Typography
                                     variant="small"
                                     className={`text-base font-normal text-gray-900
@@ -275,19 +275,19 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                   >
                                     {wallet.name}
                                   </Typography>
+                                  <Typography
+                                    variant="small"
+                                    className={`sm:hidden text-sm font-normal text-gray-900
+                                    dark:text-gray-250 opacity-70`}
+                                  >
+                                    {action}
+                                  </Typography>
                                 </div>
                               </div>
                             </td>
                             <td className="sm:hidden table-cell w-full">
                               <div className="flex flex-col justify-center items-end ">
                                 {" "}
-                                <Typography
-                                  variant="small"
-                                  className={`text-base font-normal text-gray-900
-                                    dark:text-gray-250`}
-                                >
-                                  {action}
-                                </Typography>
                                 {sent && (
                                   <div className="flex items-center gap-2">
                                     <Typography
