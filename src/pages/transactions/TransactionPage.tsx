@@ -4,6 +4,7 @@ import { TransactionTable, Filter } from "./components";
 import useScreenSize from "../../hooks/useScreenSize";
 import { mockTransactions } from "../../data/transactionAssets";
 import AddTransactionDrawer from "./components/AddTransactionDrawer";
+import EditTransactionDrawer from "./components/EditTransactionDrawer";
 
 interface TransactionPageProps {
   onLogout?: () => void;
@@ -21,6 +22,8 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
     string | null
   >(null);
   const [isAddTransactionDrawerOpen, setIsAddTransactionDrawerOpen] = useState(false);
+  const [isEditTransactionDrawerOpen, setIsEditTransactionDrawerOpen] = useState(false);
+  const [selectedTransactions, setSelectedTransactions] = useState<string[]>([]);
   const screenSize = useScreenSize();
 
 
@@ -102,12 +105,22 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           </div>
           <div className="flex items-center space-x-3 mt-4 sm:mt-0">
             <button
-              onClick={() => setIsAddTransactionDrawerOpen(true)}
+              onClick={() => {
+                if (selectedTransactions.length > 0) {
+                  setIsEditTransactionDrawerOpen(true);
+                } else {
+                  setIsAddTransactionDrawerOpen(true);
+                }
+              }}
               className={`text-base font-medium px-3 py-1 sm:px-6 sm:py-3 md:py-3 rounded-md sm:rounded-2xl bg-[#90C853] text-[#0E201E]`}
-              aria-label="Add new transaction"
+              aria-label={selectedTransactions.length > 0 ? "Edit selected transactions" : "Add new transaction"}
             >
-              <span className="hidden sm:inline">Add Transaction</span>
-              <span className="block sm:hidden text-white">+</span>
+              <span className="hidden sm:inline">
+                {selectedTransactions.length > 0 ? "Edit Transaction" : "Add Transaction"}
+              </span>
+              <span className="block sm:hidden text-white">
+                {selectedTransactions.length > 0 ? "✏️" : "+"}
+              </span>
             </button>
           </div>
         </div>
@@ -132,6 +145,8 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           activeTab={activeTab}
           expandedTransactionId={expandedTransactionId}
           onToggleExpanded={handleToggleExpanded}
+          selectedTransactions={selectedTransactions}
+          onSelectedTransactionsChange={setSelectedTransactions}
         />
       </div>
 
@@ -139,6 +154,12 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
       <AddTransactionDrawer
         isOpen={isAddTransactionDrawerOpen}
         onClose={() => setIsAddTransactionDrawerOpen(false)}
+      />
+
+      {/* Edit Transaction Drawer */}
+      <EditTransactionDrawer
+        isOpen={isEditTransactionDrawerOpen}
+        onClose={() => setIsEditTransactionDrawerOpen(false)}
       />
     </div>
   );

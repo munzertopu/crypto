@@ -14,6 +14,8 @@ interface TransactionTableProps {
   onTransactionClick?: (transaction: Transaction) => void;
   expandedTransactionId?: string | null;
   onToggleExpanded?: (transactionId: string) => void;
+  selectedTransactions?: string[];
+  onSelectedTransactionsChange?: (selected: string[]) => void;
 }
 
 const TransactionTable: React.FC<TransactionTableProps> = ({
@@ -22,10 +24,9 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   onTransactionClick,
   expandedTransactionId,
   onToggleExpanded,
+  selectedTransactions = [],
+  onSelectedTransactionsChange,
 }) => {
-  const [selectedTransactions, setSelectedTransactions] = useState<string[]>(
-    []
-  );
 
   const TABLE_HEAD = getTableHeaders(activeTab);
 
@@ -64,19 +65,22 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   };
 
   const handleSelectAll = () => {
-    if (selectedTransactions.length === data.length) {
-      setSelectedTransactions([]);
-    } else {
-      setSelectedTransactions(data.map((transaction) => transaction.id));
+    if (onSelectedTransactionsChange) {
+      if (selectedTransactions.length === data.length) {
+        onSelectedTransactionsChange([]);
+      } else {
+        onSelectedTransactionsChange(data.map((transaction) => transaction.id));
+      }
     }
   };
 
   const handleSelectTransaction = (transactionId: string) => {
-    setSelectedTransactions((prev) =>
-      prev.includes(transactionId)
-        ? prev.filter((id) => id !== transactionId)
-        : [...prev, transactionId]
-    );
+    if (onSelectedTransactionsChange) {
+      const newSelection = selectedTransactions.includes(transactionId)
+        ? selectedTransactions.filter((id) => id !== transactionId)
+        : [...selectedTransactions, transactionId];
+      onSelectedTransactionsChange(newSelection);
+    }
   };
 
   const isAllSelected =
@@ -564,7 +568,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       </MobileFormDrawer>
       <TransactionFooter
         selectedTransactions={selectedTransactions}
-        onClearSelection={() => setSelectedTransactions([])}
+        onClearSelection={() => onSelectedTransactionsChange?.([])}
       />
     </div>
   );
