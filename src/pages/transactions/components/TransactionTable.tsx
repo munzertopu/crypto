@@ -6,6 +6,7 @@ import useScreenSize from "../../../hooks/useScreenSize";
 import MobileFormDrawer from "../../../components/Drawers/MobileFormDrawer";
 import type { Transaction } from "../../../data/transactionAssets";
 import { getTableHeaders } from "../../../data/transactionAssets";
+import Checkbox from "../../../components/UI/Checkbox";
 
 interface TransactionTableProps {
   transactions: Transaction[];
@@ -222,12 +223,16 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                 className=" sm:flex sm:items-center sm:justify-center
                               "
                               >
-                                <input
+                                {/* <input
                                   type="checkbox"
                                   checked={selectedTransactions.includes(id)}
                                   onChange={() => handleSelectTransaction(id)}
                                   className={`w-4 h-4 rounded-lg accent-green-600 focus:outline-none`}
                                   aria-label={`Select transaction ${transactionId}`}
+                                /> */}
+                                <Checkbox
+                                  checked={selectedTransactions.includes(id)}
+                                  onChange={() => handleSelectTransaction(id)}
                                 />
                               </div>
                             </td>
