@@ -409,6 +409,7 @@ const Filter: React.FC<FilterProps> = ({
     setSelectedManuals([]);
     setSelectedResults([]);
     setSelectedSearchItems([]);
+    setAdvancedFilters([{ account: '', condition: '', value: '' }]);
     setFromSentValue("0");
     setToSentValue("0");
     setFromSentCurrency("USD");
@@ -427,6 +428,7 @@ const Filter: React.FC<FilterProps> = ({
     selectedManuals.length > 0 ||
     selectedResults.length > 0 ||
     selectedSearchItems.length > 0 ||
+    activeAdvancedFiltersCount > 0 ||
     (fromSentValue !== "" && fromSentValue !== "0") ||
     (toSentValue !== "" && toSentValue !== "0") ||
     fromReceivedValue !== "0" ||
@@ -1260,7 +1262,7 @@ const Filter: React.FC<FilterProps> = ({
 
       {/* Active Filters Display */}
       {hasActiveFilters && (
-        <div className="pt-4 md:pt-0">
+        <div className="pt-4 md:pt-2">
           <div className="flex flex-wrap gap-2">
             {/* Type Filters */}
             {selectedType.map((typeId) => {
@@ -1403,6 +1405,57 @@ const Filter: React.FC<FilterProps> = ({
                   </button>
                 </div>
               ) : null;
+            })}
+
+            {/* Advanced Filters */}
+            {advancedFilters.map((filter, index) => {
+              if (filter.account && filter.condition && filter.value) {
+                const getConditionLabel = (condition: string) => {
+                  switch (condition) {
+                    case 'is': return 'Is';
+                    case 'is_not': return 'Is not';
+                    case 'gt': return 'Greater than';
+                    case 'lt': return 'Less than';
+                    default: return condition;
+                  }
+                };
+
+                const getAccountLabel = (account: string) => {
+                  switch (account) {
+                    case 'account': return 'Account';
+                    case 'wallet': return 'Wallet';
+                    default: return account;
+                  }
+                };
+
+                return (
+                  <div
+                    key={`advanced-${index}`}
+                    className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+                      bg-gray-100 text-gray-800 border border-default
+                      dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+                  >
+                    <span>
+                      {getAccountLabel(filter.account)} {getConditionLabel(filter.condition)} {filter.value.toUpperCase()}
+                    </span>
+                    <button
+                      onClick={() => {
+                        const newFilters = advancedFilters.filter((_, i) => i !== index);
+                        setAdvancedFilters(newFilters);
+                      }}
+                      className="transition-colors"
+                      aria-label={`Remove advanced filter`}
+                    >
+                      <FontAwesomeIcon
+                        icon={faTimes}
+                        className="w-3 h-3"
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </div>
+                );
+              }
+              return null;
             })}
 
             {/* Amount Sent Filter */}
