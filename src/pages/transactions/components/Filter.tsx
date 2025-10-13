@@ -155,6 +155,12 @@ const Filter: React.FC<FilterProps> = ({
   ]);
   const advancedFilterRef = useRef<HTMLDivElement>(null);
 
+  // View Options
+  const [isViewDropdownOpen, setIsViewDropdownOpen] = useState(false);
+  const [showDeleted, setShowDeleted] = useState(true);
+  const [showSoftDeletedOnly, setShowSoftDeletedOnly] = useState(false);
+  const viewDropdownRef = useRef<HTMLDivElement>(null);
+
   // Count active advanced filters
   const activeAdvancedFiltersCount = advancedFilters.filter(filter => 
     filter.account && filter.condition && filter.value
@@ -211,6 +217,23 @@ const Filter: React.FC<FilterProps> = ({
     document.addEventListener("mousedown", handleAdvancedFilterClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleAdvancedFilterClickOutside);
+    };
+  }, []);
+
+  // Close view dropdown when clicking outside
+  useEffect(() => {
+    const handleViewDropdownClickOutside = (event: MouseEvent) => {
+      if (
+        viewDropdownRef.current &&
+        !viewDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsViewDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleViewDropdownClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleViewDropdownClickOutside);
     };
   }, []);
 
@@ -309,7 +332,7 @@ const Filter: React.FC<FilterProps> = ({
       selectedDateRange.startDate &&
       selectedDateRange.endDate);
   return (
-    <div className={`p-0 sm:p-4 md:px-0 md:pt-5 md:pb-6 rounded-lg `}>
+    <div className={`relative p-0 sm:p-4 md:px-0 md:pt-5 md:pb-6 rounded-lg `}>
       {/* Tabs */}
       {!hideTab && (
         <div className={`border-gray-200 dark:border-gray-700`}>
@@ -554,7 +577,7 @@ const Filter: React.FC<FilterProps> = ({
                 )}
               </div>
             </button>
-            
+
             {/* Advanced Filter Dropdown Content */}
             {isAdvancedFilterOpen && (
               <div className="absolute top-full right-0 mt-1 w-min bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50 p-4">
@@ -618,7 +641,7 @@ const Filter: React.FC<FilterProps> = ({
                             </svg>
                           </button>
                         )}
-                      </div>
+                </div>
                     ))}
                   
                   <div className="flex items-center justify-between dark:border-gray-700">
@@ -648,6 +671,77 @@ const Filter: React.FC<FilterProps> = ({
                   </div>
                 </div>
               </div>
+            )}
+          </div>
+
+          {/* View Dropdown - Right End */}
+          <div className="relative" ref={viewDropdownRef}>
+            <button
+              onClick={() => setIsViewDropdownOpen(!isViewDropdownOpen)}
+              className="flex items-center justify-between px-4 py-3 rounded-lg border border-transparent bg-transparent text-gray-700 hover:bg-gray-50 focus:bg-white focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none dark:border-gray-700 dark:bg-[#0E201E] dark:text-gray-300 min-w-[100px]"
+            >
+              <span className="text-sm font-medium">View</span>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className={`w-4 h-4 transform transition-transform ${isViewDropdownOpen ? 'rotate-180' : ''}`}
+              >
+                <path
+                  d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            
+            {/* View Dropdown Content */}
+            {isViewDropdownOpen && (
+            <div className="absolute top-full right-0 mt-1 w-64 bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50 p-4">
+              <div className="space-y-4">
+                {/* Show deleted toggle */}
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Show deleted
+                          </span>
+                  <button
+                    onClick={() => setShowDeleted(!showDeleted)}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                      showDeleted ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
+                    }`}
+                  >
+                    <span
+                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                        showDeleted ? 'translate-x-6' : 'translate-x-1'
+                      }`}
+                    />
+                  </button>
+                        </div>
+
+                {/* Show soft deleted only toggle */}
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Show soft deleted only
+                  </span>
+                  <button
+                    onClick={() => setShowSoftDeletedOnly(!showSoftDeletedOnly)}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                      showSoftDeletedOnly ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
+                    }`}
+                  >
+                    <span
+                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                        showSoftDeletedOnly ? 'translate-x-6' : 'translate-x-1'
+                      }`}
+                    />
+                  </button>
+                </div>
+                  </div>
+                </div>
             )}
           </div>
         </div>
