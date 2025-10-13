@@ -20,8 +20,10 @@ interface DateRangeSelectorProps {
 
   variant?: "dropdown" | "inline";
   buttonLabel?: string;
+  buttonClassName?: string;
   className?: string;
   isDrawer?: boolean;
+  iconPosition?: "left" | "right";
 }
 
 const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
@@ -29,7 +31,9 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   onDateRangeChange,
   buttonLabel,
   className = "",
+  buttonClassName = "",
   isDrawer = false,
+  iconPosition = "left",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dateRange, setDateRange] = useState([
@@ -174,27 +178,44 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
     >
       <button
         onClick={handleIconClick}
-        className={`w-full flex items-center justify-between p-2 md:p-0 md:px-4 md:py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900
+        className={`w-full flex items-center ${iconPosition === "right" ? "justify-between" : "justify-start"} p-2 md:p-0 md:px-4 md:py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900
           dark:text-gray-100 dark:bg-[#0E201E] dark:border-gray-700 md:min-w-[194px] ${className}`}
         aria-label="Select date range"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <div className="flex items-center space-x-2">
-          <CalendarIcon 
-            width={16} 
-            height={16} 
-            strokeColor="currentColor" 
-            className="text-gray-500" 
-          />
-          
-          <span className="hidden md:block text-xs font-medium">
-            {formatDateRange(selectedDateRange)}
-            {!selectedDateRange.startDate && !selectedDateRange.endDate && (
-              <>{buttonLabel}</>
-            )}
-          </span>
-        </div>
+        {iconPosition === "right" ? (
+          <>
+            <span className={`hidden md:block text-xs font-medium ${buttonClassName}`}>
+              {formatDateRange(selectedDateRange)}
+              {!selectedDateRange.startDate && !selectedDateRange.endDate && (
+                <>{buttonLabel}</>
+              )}
+            </span>
+            <CalendarIcon 
+              width={16} 
+              height={16} 
+              strokeColor="currentColor" 
+              className="text-gray-500" 
+            />
+          </>
+        ) : (
+          <div className="flex items-center space-x-2">
+            <CalendarIcon 
+              width={16} 
+              height={16} 
+              strokeColor="currentColor" 
+              className="text-gray-500" 
+            />
+            
+            <span className="hidden md:block text-xs font-medium">
+              {formatDateRange(selectedDateRange)}
+              {!selectedDateRange.startDate && !selectedDateRange.endDate && (
+                <>{buttonLabel}</>
+              )}
+            </span>
+          </div>
+        )}
       </button>
       {isOpen && screenSize.width > 1024 ? (
         <div

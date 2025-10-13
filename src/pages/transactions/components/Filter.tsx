@@ -485,8 +485,10 @@ const Filter: React.FC<FilterProps> = ({
             <DateRangePickerPopover
               selectedDateRange={selectedDateRange}
               onDateRangeChange={setSelectedDateRange}
+              iconPosition="right"
               buttonLabel="Date"
-              className="py-[13px] shadow-sm rounded-lg"
+              className="md:px-4 md:py-3 shadow-sm rounded-lg"
+              buttonClassName="md:text-base md:font-normal"
             />
           </div>
 
