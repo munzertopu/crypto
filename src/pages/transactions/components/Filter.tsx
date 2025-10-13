@@ -148,6 +148,18 @@ const Filter: React.FC<FilterProps> = ({
     endDate: null,
   });
 
+  // Advanced Filter
+  const [isAdvancedFilterOpen, setIsAdvancedFilterOpen] = useState(false);
+  const [advancedFilters, setAdvancedFilters] = useState([
+    { account: '', condition: '', value: '' }
+  ]);
+  const advancedFilterRef = useRef<HTMLDivElement>(null);
+
+  // Count active advanced filters
+  const activeAdvancedFiltersCount = advancedFilters.filter(filter => 
+    filter.account && filter.condition && filter.value
+  ).length;
+
   const [showMobileFilters, setShowMobileFilters] = useState(false);
   const screenSize = useScreenSize();
   const [showFromCurrencyDropdown, setShowFromCurrencyDropdown] =
@@ -182,6 +194,23 @@ const Filter: React.FC<FilterProps> = ({
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Close advanced filter when clicking outside
+  useEffect(() => {
+    const handleAdvancedFilterClickOutside = (event: MouseEvent) => {
+      if (
+        advancedFilterRef.current &&
+        !advancedFilterRef.current.contains(event.target as Node)
+      ) {
+        setIsAdvancedFilterOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleAdvancedFilterClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleAdvancedFilterClickOutside);
     };
   }, []);
 
@@ -492,77 +521,138 @@ const Filter: React.FC<FilterProps> = ({
             />
           </div>
 
-          {/* Custom Result Dropdown */}
-          <div className="relative" ref={resultDropdownRef}>
+          {/* Advanced Filter Dropdown */}
+          <div className="relative" ref={advancedFilterRef}>
             <button
-              onClick={() => setResultDropdownOpen(!resultDropdownOpen)}
-              className={`flex text-lg items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-[#0E201E] text-sm
-                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
+              onClick={() => setIsAdvancedFilterOpen(!isAdvancedFilterOpen)}
+              className="flex items-center justify-between px-4 py-3 rounded-lg border border-transparent bg-transparent text-gray-700 hover:bg-gray-50 focus:bg-white focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none dark:border-gray-700 dark:bg-[#0E201E] dark:text-gray-300 min-w-[140px]"
             >
-              <span>Result</span>
-              <FontAwesomeIcon
-                icon={resultDropdownOpen ? faChevronUp : faChevronDown}
-                className="w-3 h-3"
-              />
-            </button>
-
-            {resultDropdownOpen && (
-              <div
-                className={`absolute top-full right-0 mt-1 w-64 rounded-lg 
-                  border shadow-sm z-50 bg-white border-gray-150
-                  dark:bg-[#0E201E]`}
-              >
-                {/* Search Input */}
-                <div className="px-3 border-b border-gray-150">
-                  <input
-                    type="text"
-                    placeholder="Type or paste result"
-                    value={resultSearchTerm}
-                    onChange={(e) => setResultSearchTerm(e.target.value)}
-                    className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
-                      dark:bg-[#0E201E] dark:text-gray-250`}
+              <div className="flex items-center gap-2">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-4 h-4"
+                >
+                  <path
+                    d="M12 5V19M5 12H19"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
-                </div>
-
-                {/* Result Options List */}
-                <div className="max-h-48 overflow-y-auto">
-                  {filteredResultOptions.map((option) => {
-                    const isSelected = selectedResults.includes(option.id);
-                    return (
-                      <div
-                        key={option.id}
-                        onClick={() => handleResultToggle(option.id)}
-                        className={`flex items-center px-3 py-2 cursor-pointer`}
-                      >
-                        <div
-                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
-                            isSelected
-                              ? "bg-[#90C853] border-[#90C853]"
-                              : "border-gray-300"
-                          }`}
-                        >
-                          {isSelected && (
-                            <FontAwesomeIcon
-                              icon={faCheck}
-                              className="w-2.5 h-2.5 text-white"
-                            />
-                          )}
-                        </div>
-                        <span
-                          className={`text-sm text-gray-900
-                            dark:text-gray-250`}
-                        >
-                          {option.name}
-                        </span>
+                </svg>
+                <span className="text-sm font-medium">Advanced Filter</span>
+                {activeAdvancedFiltersCount > 0 && (
+                  <div className="flex items-center justify-center w-4 h-4 bg-green-600 border border-white rounded-full">
+                    <span className="text-[10px] font-medium text-white">
+                      {activeAdvancedFiltersCount}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </button>
+            
+            {/* Advanced Filter Dropdown Content */}
+            {isAdvancedFilterOpen && (
+              <div className="absolute top-full right-0 mt-1 w-min bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50 p-4">
+                <div className="space-y-3">
+                    {advancedFilters.map((filter, index) => (
+                      <div key={index} className="flex items-center gap-3">
+                        <Dropdown
+                          options={[
+                            { label: 'Account', value: 'account' },
+                            { label: 'Wallet', value: 'wallet' }
+                          ]}
+                          onSelect={(value) => {
+                            const newFilters = [...advancedFilters];
+                            newFilters[index].account = value;
+                            setAdvancedFilters(newFilters);
+                          }}
+                          defaultValue={filter.account || 'Account'}
+                        />
+                        
+                        <Dropdown
+                          options={[
+                            { label: 'Is', value: 'is' },
+                            { label: 'Is not', value: 'is_not' },
+                            { label: 'Contains', value: 'contains' },
+                            { label: 'Greater than', value: 'gt' },
+                            { label: 'Less than', value: 'lt' }
+                          ]}
+                          onSelect={(value) => {
+                            const newFilters = [...advancedFilters];
+                            newFilters[index].condition = value;
+                            setAdvancedFilters(newFilters);
+                          }}
+                          defaultValue={filter.condition || 'Is'}
+                        />
+                        
+                        <Dropdown
+                          options={[
+                            { label: 'BTC', value: 'btc' },
+                            { label: 'ETH', value: 'eth' },
+                            { label: 'USD', value: 'usd' }
+                          ]}
+                          onSelect={(value) => {
+                            const newFilters = [...advancedFilters];
+                            newFilters[index].value = value;
+                            setAdvancedFilters(newFilters);
+                          }}
+                          defaultValue={filter.value || 'Set Value'}
+                          className="w-max"
+                        />
+                        
+                        {advancedFilters.length > 1 && (
+                          <button
+                            onClick={() => {
+                              const newFilters = advancedFilters.filter((_, i) => i !== index);
+                              setAdvancedFilters(newFilters);
+                            }}
+                            className="ml-auto p-3 border border-default rounded-lg text-gray-400 hover:text-red-500 transition-colors"
+                          >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </button>
+                        )}
                       </div>
-                    );
-                  })}
+                    ))}
+                  
+                  <div className="flex items-center justify-between dark:border-gray-700">
+                    <button
+                      onClick={() => {
+                        setAdvancedFilters([...advancedFilters, { account: '', condition: '', value: '' }]);
+                      }}
+                      className="flex items-center gap-2 px-2.5 py-1.5 text-gray-600 rounded-lg border border-default hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 5V19M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      <span className="text-sm font-medium">Add Filter</span>
+                    </button>
+                    
+                    <button
+                      onClick={() => {
+                        setAdvancedFilters([{ account: '', condition: '', value: '' }]);
+                      }}
+                      className="flex items-center gap-2 px-4 py-2 text-gray-400 hover:text-red-500 transition-colors"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      <span className="text-sm font-medium">Clear all</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
           </div>
         </div>
       </div>
+
       <MobileDrawer
         isOpen={showMobileFilters}
         onClose={() => setShowMobileFilters(false)}
