@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
@@ -6,6 +6,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import CloseIcon from "../../../components/Icons/CloseIcon";
 
 interface TransactionFooterProps {
   selectedTransactions: string[];
@@ -75,21 +76,24 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
     };
   }, [isTagDropdownOpen]);
 
+  //  className={`mt-4 px-8 py-4
+  //       dark:bg-transparent`}
+
   return (
     <div
-      className={`hidden sm:block mt-4 px-8 py-4
+      className={`fixed sm:static bottom-[20px] left-0 w-full px-1 sm:px-8 sm:py-4 
         dark:bg-transparent`}
     >
       <div className="flex items-center justify-between">
         {/* Left side - Show on page dropdown */}
-        <div className="flex items-center space-x-2">
+        <div className="hidden sm:flex items-center space-x-2">
           <span
             className={`text-sm text-gray-700
               dark:text-gray-250`}
           >
             Show on page
           </span>
-          <div className="relative" ref={dropdownRef}>
+          <div className=" relative" ref={dropdownRef}>
             <button
               className={`px-3 py-1 rounded rounded-lg border flex items-center space-x-2 text-base
                 text-gray-700 bg-white border-default
@@ -141,123 +145,131 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
         {/* Center - Conditional actions when transactions are selected */}
         {selectedTransactions.length > 0 && (
           <div
-            className={`flex items-center space-x-3 px-6 py-3 rounded-xl border shadow-sm
+            className={`w-full sm:w-[auto] flex flex-col gap-2 sm:gap-0 sm:flex-row items-center sm:space-x-3 p-3 sm:p-0 sm:px-6 sm:py-3 rounded-xl border shadow-sm
               bg-white border-default dark:border-[#4D5050]`}
           >
-            <span
-              className={`text-sm font-normal text-gray-700
+            <div className="w-full sm:w-[auto] flex items-center justify-around gap-3 sm:gap-0 sm:space-x-3">
+              <span
+                className={`text-sm font-normal text-gray-700
                dark:text-gray-250`}
-            >
-              {selectedTransactions.length} selected
-            </span>
-            <div
-              className={`w-px h-4 bg-default
+              >
+                {selectedTransactions.length} selected
+              </span>
+              <div
+                className={`w-px h-4 bg-default
                 dark:bg-[#F3F5F7]`}
-              role="separator"
-            ></div>
-            <span
-              className={`text-sm text-[#4D5050] font-medium
+                role="separator"
+              ></div>
+              <span
+                className={`text-sm text-[#4D5050] font-medium
                 dark:text-gray-250`}
-            >
-              Tag as:
-            </span>
-            <div className={`relative inline-block`} ref={tagDropdownRef}>
-              <button
-                className={`px-4 py-1 text-sm rounded border flex items-center space-x-16 
+              >
+                Tag as:
+              </span>
+              <div className={`relative inline-block `} ref={tagDropdownRef}>
+                <button
+                  className={`w-full sm:w-[auto] px-4 py-1 text-sm rounded border flex items-center space-x-16 
                   border-default text-gray-900
                    dark:text-gray-250`}
-                onClick={() => setIsTagDropdownOpen(!isTagDropdownOpen)}
-                aria-label="Select tag type for selected transactions"
-                aria-haspopup="true"
-                aria-expanded={isTagDropdownOpen}
-              >
-                <span>{selectedTag}</span>
-                <FontAwesomeIcon
-                  icon={faChevronDown}
-                  className={`w-3 h-3 transition-transform ${
-                    isTagDropdownOpen ? "rotate-180" : ""
-                  }`}
-                  aria-hidden="true"
-                />
-              </button>
-
-              {/* Tag Dropdown Menu */}
-              {isTagDropdownOpen && (
-                <div
-                  className={`absolute bottom-full left-0 mb-1 px-1.5 border rounded-lg shadow-lg py-1 z-50 max-h-40 overflow-y-auto bg-white border-gray-300
-                    dark:bg-gray-800 dark:border-gray-600`}
+                  onClick={() => setIsTagDropdownOpen(!isTagDropdownOpen)}
+                  aria-label="Select tag type for selected transactions"
+                  aria-haspopup="true"
+                  aria-expanded={isTagDropdownOpen}
                 >
-                  {tagOptions.map((option) => (
-                    <button
-                      key={option}
-                      className={`w-full px-3 py-2 text-sm text-left rounded-lg flex items-center justify-between ${
-                        selectedTag === option ? "bg-gray-100" : ""
-                      }`}
-                      onClick={() => {
-                        setSelectedTag(option);
-                        setIsTagDropdownOpen(false);
-                      }}
-                      aria-label={`Select ${option} tag`}
-                    >
-                      <span>{option}</span>
-                      {selectedTag === option && (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={2}
-                          stroke="currentColor"
-                          className="w-4 h-4"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M4.5 12.75l6 6 9-13.5"
-                          />
-                        </svg>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              )}
+                  <span>{selectedTag}</span>
+                  <FontAwesomeIcon
+                    icon={faChevronDown}
+                    className={`w-3 h-3 transition-transform ${
+                      isTagDropdownOpen ? "rotate-180" : ""
+                    }`}
+                    aria-hidden="true"
+                  />
+                </button>
+
+                {/* Tag Dropdown Menu */}
+                {isTagDropdownOpen && (
+                  <div
+                    className={`absolute bottom-full left-0 mb-1 px-1.5 border rounded-lg shadow-lg py-1 z-50 max-h-40 overflow-y-auto bg-white border-gray-300
+                    dark:bg-gray-800 dark:border-gray-600`}
+                  >
+                    {tagOptions.map((option) => (
+                      <button
+                        key={option}
+                        className={`w-full px-3 py-2 text-sm text-left rounded-lg flex items-center justify-between ${
+                          selectedTag === option ? "bg-gray-100" : ""
+                        }`}
+                        onClick={() => {
+                          setSelectedTag(option);
+                          setIsTagDropdownOpen(false);
+                        }}
+                        aria-label={`Select ${option} tag`}
+                      >
+                        <span>{option}</span>
+                        {selectedTag === option && (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                            stroke="currentColor"
+                            className="w-4 h-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M4.5 12.75l6 6 9-13.5"
+                            />
+                          </svg>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-            <div
-              className={`w-px h-4 bg-default
+            <div className="w-full sm:w-[auto] flex items-center sm:space-x-3 gap-3 sm:gap-0">
+              <div
+                className={`hidden sm:flex  w-px h-4 bg-default
                 dark:bg-[#F3F5F7]`}
-              role="separator"
-            ></div>
-            <button
-              className={`px-2.5 py-1 text-sm rounded border 
+                role="separator"
+              ></div>
+              <button
+                className={` sm:hidden px-2 py-1 text-sm rounded rounded-lg border border-default text-gray-700
+              dark:text-gray-250`}
+                onClick={onClearSelection}
+                aria-label="Clear selection"
+              >
+                <CloseIcon />
+              </button>
+              <button
+                className={`w-full sm:w-[auto] px-2.5 py-1.5 text-sm rounded border 
                 border-default text-gray-900
                  dark:text-gray-250`}
-              aria-label="Merge selected transactions"
-            >
-              Merge
-            </button>
-            <div
-              className={`w-px h-4 bg-default
+                aria-label="Merge selected transactions"
+              >
+                Merge
+              </button>
+              <div
+                className={`hidden sm:flex w-px h-4 bg-default
                 dark:bg-[#F3F5F7]`}
-              role="separator"
-            ></div>
-            <button
-              className={`px-3 py-1 text-sm rounded rounded-lg 
+                role="separator"
+              ></div>
+              <button
+                className={`w-full sm:w-[auto] px-2.5 py-1.5 text-sm rounded rounded-lg 
                 bg-green-500 text-[#0E201E]`}
-              aria-label="Apply actions to selected transactions"
-            >
-              Apply
-            </button>
-            <button
-              className={`px-2 py-1 text-sm rounded rounded-lg border border-default text-gray-700
+                aria-label="Apply actions to selected transactions"
+              >
+                Apply
+              </button>
+              <button
+                className={`hidden sm:flex px-2 py-1 text-sm rounded rounded-lg border border-default text-gray-700
               dark:text-gray-250`}
-              onClick={onClearSelection}
-              aria-label="Clear selection"
-            >
-              <FontAwesomeIcon
-                icon={faXmark}
-                className="w-3 h-3"
-                aria-hidden="true"
-              />
-            </button>
+                onClick={onClearSelection}
+                aria-label="Clear selection"
+              >
+                <CloseIcon />
+              </button>
+            </div>
           </div>
         )}
 
