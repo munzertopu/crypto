@@ -5,6 +5,7 @@ import TransactionFooter from "./TransactionFooter";
 import useScreenSize from "../../../hooks/useScreenSize";
 import MobileFormDrawer from "../../../components/Drawers/MobileFormDrawer";
 import type { Transaction } from "../../../data/transactionAssets";
+import TableSortIcon from '../../../utils/icons/TableSortIcon';
 import { getTableHeaders } from "../../../data/transactionAssets";
 
 interface TransactionTableProps {
@@ -141,18 +142,12 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                               role="button"
                               aria-label={`Sort by ${head}`}
                             >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                                className="size-6"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M11.47 4.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06L12 6.31 8.78 9.53a.75.75 0 0 1-1.06-1.06l3.75-3.75Zm-3.75 9.75a.75.75 0 0 1 1.06 0L12 17.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 0 1 0-1.06Z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
+                              <TableSortIcon
+                                width={8}
+                                height={16}
+                                fillColor="currentColor"
+                                className="opacity-50"
+                              />
                             </div>
                           )}
                         </div>

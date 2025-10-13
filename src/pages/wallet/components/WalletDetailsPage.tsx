@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Typography } from "@material-tailwind/react";
 import NavigationBar from '../../../components/NavigationBar';
-import ImportTransactionsModal from '../../../components/UI/ImportTransactionsModal';
-import ImportHistoryModal from '../../../components/UI/ImportHistoryModal';
+import ImportTransactionsModal from './ImportTransactionsModal';
+import ImportHistoryModal from './ImportHistoryModal';
 import TableSortIcon from '../../../utils/icons/TableSortIcon';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Typography } from "@material-tailwind/react";
-import Dropdown from './Dropdown';
-import TrashIcon from '../../utils/icons/TrashIcon';
-import TableSortIcon from '../../utils/icons/TableSortIcon';
-import DeleteConfirmationModal from './DeleteConfirmationModal';
-import SuccessNotification from '../../components/SuccessNotification';
+import Dropdown from '../../../components/UI/Dropdown';
+import TrashIcon from '../../../utils/icons/TrashIcon';
+import TableSortIcon from '../../../utils/icons/TableSortIcon';
+import DeleteConfirmationModal from '../../../components/UI/DeleteConfirmationModal';
+import SuccessNotification from '../../../components/SuccessNotification';
 import { set } from 'date-fns';
 
 interface ImportHistoryModalProps {
