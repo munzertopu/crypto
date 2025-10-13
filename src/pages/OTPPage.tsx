@@ -16,6 +16,8 @@ const OTPPage: React.FC<OTPPageProps> = ({
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
+  console.log("Rendering OTPPage");
+
   // Initialize the refs array
   useEffect(() => {
     inputRefs.current = inputRefs.current.slice(0, 6);
@@ -71,8 +73,10 @@ const OTPPage: React.FC<OTPPageProps> = ({
 
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left
-         dark:text-gray-250">
+        <h1
+          className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left
+         dark:text-gray-250"
+        >
           Enter 6 digit code we sent you
         </h1>
         <p className="text-base sm:text-lg text-[#2F3232] text-left">

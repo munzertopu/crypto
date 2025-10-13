@@ -515,10 +515,11 @@ const KPISection: React.FC<KPISectionProps> = ({
                       viewBox="0 0 12 8"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
+                      className="text-white dark:text-gray-900"
                     >
                       <path
                         d="M1.5 4L4.49647 7L10.5 1"
-                        stroke="#fff"
+                        stroke="currentColor"
                         stroke-width="1.5"
                         stroke-linecap="round"
                         stroke-linejoin="round"

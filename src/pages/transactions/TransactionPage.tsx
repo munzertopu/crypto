@@ -8,7 +8,6 @@ interface TransactionPageProps {
   onLogout?: () => void;
 }
 
-
 const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   const [activeTab, setActiveTab] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,7 +19,6 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
     string | null
   >(null);
   const screenSize = useScreenSize();
-
 
   const filteredTransactions = mockTransactions.filter((transaction) => {
     const matchesSearch =
@@ -76,10 +74,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
 
   return (
     <div className="min-h-screen bg-background dark:bg-[#0E201E]">
-      <NavigationBar
-        onLogout={handleLogout}
-        currentPage="transactions"
-      />
+      <NavigationBar onLogout={handleLogout} currentPage="transactions" />
 
       <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full">
         {/* Header */}
@@ -119,7 +114,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           setSelectedType={setSelectedType}
           selectedStatus={selectedStatus}
           setSelectedStatus={setSelectedStatus}
-          hideTab={screenSize.width < 640}
+          // hideTab={screenSize.width < 640}
         />
 
         {/* Transactions Table */}

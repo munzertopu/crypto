@@ -6,6 +6,7 @@ import useScreenSize from "../../../hooks/useScreenSize";
 import MobileFormDrawer from "../../../components/Drawers/MobileFormDrawer";
 import type { Transaction } from "../../../data/transactionAssets";
 import { getTableHeaders } from "../../../data/transactionAssets";
+import Checkbox from "../../../components/UI/Checkbox";
 
 interface TransactionTableProps {
   transactions: Transaction[];
@@ -100,7 +101,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   );
 
   return (
-    <div className="md:px-0 mde:mb-6 md:mt-6 sm:mt-0">
+    <div className="mt-[14px] md:px-0 mde:mb-6 md:mt-6 sm:mt-0">
       <Card className="h-full w-full border-transparent bg-transprent shadow-none">
         <CardBody className="px-0 sm:px-3.5 sm:py-2.5 md:px-0 md:py-0">
           <div className="overflow-x-auto">
@@ -219,15 +220,19 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                               onClick={(e) => e.stopPropagation()}
                             >
                               <div
-                                className="hidden sm:flex sm:items-center sm:justify-center
+                                className=" sm:flex sm:items-center sm:justify-center
                               "
                               >
-                                <input
+                                {/* <input
                                   type="checkbox"
                                   checked={selectedTransactions.includes(id)}
                                   onChange={() => handleSelectTransaction(id)}
                                   className={`w-4 h-4 rounded-lg accent-green-600 focus:outline-none`}
                                   aria-label={`Select transaction ${transactionId}`}
+                                /> */}
+                                <Checkbox
+                                  checked={selectedTransactions.includes(id)}
+                                  onChange={() => handleSelectTransaction(id)}
                                 />
                               </div>
                             </td>
@@ -267,7 +272,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                   size="sm"
                                   className={`h-12 w-12 flex items-center justify-center text-white text-xs font-bold`}
                                 />
-                                <div className="flex flex-col">
+                                <div className="flex flex-col gap-1">
                                   <Typography
                                     variant="small"
                                     className={`text-base font-normal text-gray-900
@@ -275,19 +280,19 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                   >
                                     {wallet.name}
                                   </Typography>
+                                  <Typography
+                                    variant="small"
+                                    className={`sm:hidden text-sm font-normal text-gray-900
+                                    dark:text-gray-250 opacity-70`}
+                                  >
+                                    {action}
+                                  </Typography>
                                 </div>
                               </div>
                             </td>
                             <td className="sm:hidden table-cell w-full">
                               <div className="flex flex-col justify-center items-end ">
                                 {" "}
-                                <Typography
-                                  variant="small"
-                                  className={`text-base font-normal text-gray-900
-                                    dark:text-gray-250`}
-                                >
-                                  {action}
-                                </Typography>
                                 {sent && (
                                   <div className="flex items-center gap-2">
                                     <Typography
