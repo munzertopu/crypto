@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Dropdown from "../../../components/UI/Dropdown";
-import DatePicker from "../../../components/DatePicker";
+import DateRangePicker from "../../../components/DateRangePicker";
 
 const TaxWizardTab: React.FC = () => {
   // Sales Wizard state
@@ -10,9 +10,9 @@ const TaxWizardTab: React.FC = () => {
   const [selectedOptimization, setSelectedOptimization] = useState("Minimize Tax");
   const [selectedTimeline, setSelectedTimeline] = useState("23/09/2025");
   const [maxTrades, setMaxTrades] = useState("3");
-  const [dateValue, setDateValue] = useState({
+  const [dateRange, setDateRange] = useState({
     startDate: new Date("2025-09-23"),
-    endDate: null,
+    endDate: new Date("2025-12-31"),
   });
 
   // Constrains state
@@ -208,12 +208,12 @@ const TaxWizardTab: React.FC = () => {
                 What is your timeline?
               </label>
               <div className="space-y-3">
-                <DatePicker
-                  value={dateValue}
-                  onChange={setDateValue}
-                  placeholder="23/09/2025"
-                  className="w-max"
-                />
+                <div className="w-max">
+                  <DateRangePicker
+                    selectedDateRange={dateRange}
+                    onDateRangeChange={setDateRange}
+                  />
+                </div>
                 <div className="grid grid-cols-4 gap-3">
                   {timelineOptions.map((option) => (
                     <OptionButton
