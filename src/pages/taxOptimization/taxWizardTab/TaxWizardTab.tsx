@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Dropdown from "../../../components/UI/Dropdown";
 import DateRangePicker from "../../../components/DateRangePicker";
+import OptimizationModal from "./components/OptimizationModal";
 
 const TaxWizardTab: React.FC = () => {
   // Sales Wizard state
@@ -17,6 +18,9 @@ const TaxWizardTab: React.FC = () => {
 
   // Constrains state
   const [isConstrainsOpen, setIsConstrainsOpen] = useState(false);
+
+  // Modal state
+  const [isOptimizationModalOpen, setIsOptimizationModalOpen] = useState(false);
 
   // Mode toggle component
   const ModeToggle = () => (
@@ -85,8 +89,12 @@ const TaxWizardTab: React.FC = () => {
   // Timeline quick select buttons
   const timelineOptions = ["Today", "1 Week", "1 Month", "3 Months"];
 
+  const handleFindBestPlan = () => {
+    setIsOptimizationModalOpen(true);
+  };
+
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 mb-8">
       {/* Sales Wizard Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="text-left">
@@ -380,10 +388,19 @@ const TaxWizardTab: React.FC = () => {
 
       {/* Find Best Plan Button */}
       <div className="flex justify-end">
-        <button className="bg-green-500 hover:bg-green-700 text-gray-900 px-5 py-3 rounded-lg font-medium">
+        <button 
+          onClick={handleFindBestPlan}
+          className="bg-green-500 hover:bg-green-700 text-gray-900 px-5 py-3 rounded-lg font-medium"
+        >
           Find Best Plan
         </button>
       </div>
+
+      {/* Optimization Modal */}
+      <OptimizationModal 
+        isOpen={isOptimizationModalOpen}
+        onClose={() => setIsOptimizationModalOpen(false)}
+      />
     </div>
   );
 };
