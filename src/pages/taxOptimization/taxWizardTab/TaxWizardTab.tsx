@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Dropdown from "../../../components/UI/Dropdown";
 import DateRangePicker from "../../../components/DateRangePicker";
 import OptimizationModal from "./components/OptimizationModal";
+import OptimizationResults from "./components/OptimizationResults";
 
 const TaxWizardTab: React.FC = () => {
   // Sales Wizard state
@@ -21,6 +22,7 @@ const TaxWizardTab: React.FC = () => {
 
   // Modal state
   const [isOptimizationModalOpen, setIsOptimizationModalOpen] = useState(false);
+  const [showResults, setShowResults] = useState(false);
 
   // Mode toggle component
   const ModeToggle = () => (
@@ -92,6 +94,16 @@ const TaxWizardTab: React.FC = () => {
   const handleFindBestPlan = () => {
     setIsOptimizationModalOpen(true);
   };
+
+  const handleModalClose = () => {
+    setIsOptimizationModalOpen(false);
+    setShowResults(true);
+  };
+
+  // Show results if optimization is complete
+  if (showResults) {
+    return <OptimizationResults />;
+  }
 
   return (
     <div className="space-y-5 mb-8">
@@ -399,7 +411,7 @@ const TaxWizardTab: React.FC = () => {
       {/* Optimization Modal */}
       <OptimizationModal 
         isOpen={isOptimizationModalOpen}
-        onClose={() => setIsOptimizationModalOpen(false)}
+        onClose={handleModalClose}
       />
     </div>
   );
