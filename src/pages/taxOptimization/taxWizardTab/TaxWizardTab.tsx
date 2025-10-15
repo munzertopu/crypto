@@ -68,14 +68,15 @@ const TaxWizardTab: React.FC = () => {
     label: string;
     isSelected: boolean;
     onClick: () => void;
-  }> = ({ label, isSelected, onClick }) => (
+    className?: string;
+  }> = ({ label, isSelected, onClick, className = "" }) => (
     <button
       onClick={onClick}
       className={`px-2.5 py-2 w-full rounded-lg text-sm font-medium transition-colors border ${
         isSelected
           ? "bg-green-200 text-gray-900 dark:bg-green-900 dark:text-green-300 border-green-700 dark:border-green-700"
           : "bg-white text-gray-600 dark:bg-gray-800 dark:text-gray-400 border-white dark:border-gray-600"
-      }`}
+      } ${className}`}
     >
       {label}
     </button>
@@ -255,10 +256,124 @@ const TaxWizardTab: React.FC = () => {
           </svg>
         </button>
         {isConstrainsOpen && (
-          <div className="px-6 pb-4 border-t border-gray-200 dark:border-gray-700">
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              Additional constraints and preferences will be available here.
-            </p>
+          <div className="px-8 pb-8 space-y-6">
+            {/* Quick Exclusions */}
+            <div className="text-left pt-5">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Quick Exclusions
+              </label>
+              <div className="flex gap-3 w-max">
+                <OptionButton
+                  label="Exclude BTC"
+                  isSelected={false}
+                  onClick={() => {}}
+                  className="px-5 py-3 w-max"
+                />
+                <OptionButton
+                  label="Exclude ETH"
+                  isSelected={true}
+                  onClick={() => {}}
+                  className="px-5 py-3 w-max"
+                />
+                <OptionButton
+                  label="Cold Storage"
+                  isSelected={false}
+                  onClick={() => {}}
+                  className="px-5 py-3 w-max"
+                />
+              </div>
+            </div>
+
+            {/* Wallets & Exchanges */}
+            <div className="text-left">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Wallets & Exchanges
+              </label>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+                {[
+                  { name: "Coinbase Pro", amount: "$24,350", status: "Synced 30 min ago", selected: false },
+                  { name: "Kraken", amount: "$12,500", status: "Synced 2 h ago", selected: true },
+                  { name: "MetaMask", amount: "$8,930", status: "Synced 8 h ago", selected: false },
+                  { name: "Solana", amount: "$5,900", status: "Synced 1 d ago", selected: false },
+                ].map((wallet) => (
+                  <div key={wallet.name} className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-default dark:border-gray-700">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-900 dark:text-white text-sm">{wallet.name}</h4>
+                        <div className="flex items-center gap-2 mt-1">
+                          <p className="text-sm text-gray-700 dark:text-white">{wallet.amount}</p>
+                          <div className="w-px h-4 bg-default dark:bg-gray-600"></div>
+                          <p className="text-xs text-gray-700">{wallet.status}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center">
+                        <div className={`w-4 h-4 rounded-full border-2 ${
+                          wallet.selected 
+                            ? "bg-green-500 border-green-500" 
+                            : "border-gray-300 dark:border-gray-600"
+                        }`}>
+                          {wallet.selected && (
+                            <div className="w-full h-full rounded-full bg-white scale-50"></div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Assets */}
+            <div className="text-left">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                Assets
+              </label>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { name: "Bitcoin", amount: "+$1,250", status: "Available", selected: false },
+                  { name: "Ethereum", amount: "+$5,320", status: "Excluded", selected: true },
+                  { name: "Solana", amount: "+$2,100", status: "Available", selected: false },
+                  { name: "Polygon", amount: "+$850", status: "Available", selected: false },
+                ].map((asset) => (
+                  <div key={asset.name} className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-900 dark:text-white text-base">{asset.name}</h4>
+                        <div className="flex items-center gap-2 mt-1">
+                          <p className="text-sm text-gray-700 dark:text-white">{asset.amount}</p>
+                          <div className="w-px h-4 bg-default dark:bg-gray-600"></div>
+                          <p className="text-xs text-gray-700">{asset.status}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center">
+                        <div className={`w-4 h-4 rounded-full border-2 ${
+                          asset.selected 
+                            ? "bg-green-500 border-green-500" 
+                            : "border-gray-300 dark:border-gray-600"
+                        }`}>
+                          {asset.selected && (
+                            <div className="w-full h-full rounded-full bg-white scale-50"></div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="flex items-center justify-between pt-5 border-t border-gray-200 dark:border-gray-700">
+              <span className="text-sm text-gray-900 dark:text-gray-400">
+                <span className="font-bold">Last updated:</span> <span className="font-medium text-gray-700">1-4h ago</span>
+              </span>
+              <button className="flex bg-white items-center gap-2 px-5 py-3 text-base font-medium text-gray-700 rounded-lg dark:text-gray-300">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Refresh All
+              </button>
+            </div>
           </div>
         )}
       </div>
