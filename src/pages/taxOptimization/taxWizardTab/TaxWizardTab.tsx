@@ -20,33 +20,46 @@ const TaxWizardTab: React.FC = () => {
 
   // Mode toggle component
   const ModeToggle = () => (
-    <div className="flex items-center gap-2">
-      <button
-        onClick={() => setIncludeOnlyMode(false)}
-        className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
-          !includeOnlyMode
-            ? "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300"
-            : "bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400"
-        }`}
-      >
-        Include only Mode
-        <svg className="w-4 h-4 ml-1 inline" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-        </svg>
-      </button>
-      <button
-        onClick={() => setIncludeOnlyMode(true)}
-        className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
-          includeOnlyMode
-            ? "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300"
-            : "bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400"
-        }`}
-      >
-        Exclude Mode
-        <svg className="w-4 h-4 ml-1 inline" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-        </svg>
-      </button>
+    <div className="bg-gray-100 dark:bg-gray-700 rounded-2xl px-5 py-3 flex items-center justify-between gap-4">
+      {/* Left side - Include only Mode */}
+      <div className="flex items-center gap-2">
+        <span className={`text-sm font-medium ${includeOnlyMode ? "text-gray-900" : "#4D5050"} dark:text-gray-300`}>
+          Include only Mode
+        </span>
+        <button className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+          </svg>
+        </button>
+      </div>
+      
+      {/* Toggle Switch */}
+      <div className="relative">
+        <button
+          onClick={() => setIncludeOnlyMode(!includeOnlyMode)}
+          className={`relative inline-flex h-6 w-12 items-center rounded-full transition-colors ${
+            includeOnlyMode ? "bg-green-700" : "bg-gray-300"
+          }`}
+        >
+          <span
+            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm ${
+              includeOnlyMode ? "translate-x-7" : "translate-x-1"
+            }`}
+          />
+        </button>
+      </div>
+
+      {/* Right side - Exclude Mode */}
+      <div className="flex items-center gap-2">
+        <span className={`text-sm font-medium ${includeOnlyMode ? "#4D5050" : "text-gray-900"} dark:text-gray-300`}>
+          Exclude Mode
+        </span>
+        <button className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+          </svg>
+        </button>
+      </div>
     </div>
   );
 
@@ -58,10 +71,10 @@ const TaxWizardTab: React.FC = () => {
   }> = ({ label, isSelected, onClick }) => (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+      className={`px-2.5 py-2 w-full rounded-lg text-sm font-medium transition-colors border ${
         isSelected
-          ? "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 border border-green-200 dark:border-green-700"
-          : "bg-white text-gray-600 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600"
+          ? "bg-green-200 text-gray-900 dark:bg-green-900 dark:text-green-300 border-green-700 dark:border-green-700"
+          : "bg-white text-gray-600 dark:bg-gray-800 dark:text-gray-400 border-white dark:border-gray-600"
       }`}
     >
       {label}
@@ -72,14 +85,14 @@ const TaxWizardTab: React.FC = () => {
   const timelineOptions = ["Today", "1 Week", "1 Month", "3 Months"];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Sales Wizard Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h2 className="text-left text-xl font-semibold text-gray-900 dark:text-white">
+        <div className="text-left">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             Sales Wizard
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
             Turn portfolio into cash, tax-optimized.
           </p>
         </div>
@@ -87,20 +100,172 @@ const TaxWizardTab: React.FC = () => {
       </div>
 
       {/* Main Card */}
-      <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6">
+      <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-8">
         <div className="text-left mb-6">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-h6 font-semibold text-gray-900 dark:text-white mb-2">
             How much cash do you need?
           </h3>
           <p className="text-gray-600 dark:text-gray-400">
             We'll help you find the most tax-efficient way to get it.
           </p>
         </div>
+
+        {/* Six Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 text-left">
+          {/* Left Section - Columns 1-2 (colspan 2) */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* What is your goal? */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                What is your goal?
+              </label>
+              <div className="flex bg-white p-1 rounded-lg justify-between">
+                <OptionButton
+                  label="Cash Target"
+                  isSelected={selectedGoal === "Cash Target"}
+                  onClick={() => setSelectedGoal("Cash Target")}
+                />
+                <OptionButton
+                  label="Crypto Amount"
+                  isSelected={selectedGoal === "Crypto Amount"}
+                  onClick={() => setSelectedGoal("Crypto Amount")}
+                />
+              </div>
+            </div>
+
+            {/* What is your preference? (Optimization) */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                What is your preference?
+              </label>
+              <div className="flex gap-3 bg-white p-1 rounded-lg">
+                <OptionButton
+                  label="Minimize Tax"
+                  isSelected={selectedOptimization === "Minimize Tax"}
+                  onClick={() => setSelectedOptimization("Minimize Tax")}
+                />
+                <OptionButton
+                  label="Maximize Gain"
+                  isSelected={selectedOptimization === "Maximize Gain"}
+                  onClick={() => setSelectedOptimization("Maximize Gain")}
+                />
+              </div>
+            </div>
+
+            {/* Max Trades */}
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Max Trades
+                </label>
+                <div className="flex items-center gap-1">
+                  <button className="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                    FIFO Method
+                  </span>
+                </div>
+              </div>
+              <Dropdown
+                options={["1", "2", "3", "4", "5", "10", "15", "20"]}
+                onSelect={setMaxTrades}
+                defaultValue={maxTrades}
+              />
+            </div>
+          </div>
+
+          {/* Column 3 - Vertical Separator */}
+          <div className="hidden lg:flex lg:col-span-1 justify-center pt-2 pb-6">
+            <div className="w-px h-full bg-default dark:bg-gray-600"></div>
+          </div>
+
+          {/* Right Section - Columns 4-6 (colspan 3) */}
+          <div className="lg:col-span-3 space-y-8">
+            {/* What is your preference? (Amount) */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                What is your preference?
+              </label>
+              <div className="grid grid-cols-4 gap-3">
+                {["$1,000", "$5,000", "$10,000", "Custom"].map((amount) => (
+                  <OptionButton
+                    key={amount}
+                    label={amount}
+                    isSelected={selectedAmount === amount}
+                    onClick={() => setSelectedAmount(amount)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* What is your timeline? */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                What is your timeline?
+              </label>
+              <div className="space-y-3">
+                <DatePicker
+                  value={dateValue}
+                  onChange={setDateValue}
+                  placeholder="23/09/2025"
+                  className="w-max"
+                />
+                <div className="grid grid-cols-4 gap-3">
+                  {timelineOptions.map((option) => (
+                    <OptionButton
+                      key={option}
+                      label={option}
+                      isSelected={selectedTimeline === option}
+                      onClick={() => setSelectedTimeline(option)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Constrains Section */}
+      <div className="bg-gray-100 dark:bg-gray-900 rounded-lg border border-gray-100 dark:border-gray-700">
+        <button
+          onClick={() => setIsConstrainsOpen(!isConstrainsOpen)}
+          className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        >
+          <span className="text-h6 font-medium text-gray-900 dark:text-white">
+            Constrains
+          </span>
+          <svg
+            className={`w-5 h-5 text-gray-400 transition-transform ${
+              isConstrainsOpen ? "rotate-180" : ""
+            }`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+        {isConstrainsOpen && (
+          <div className="px-6 pb-4 border-t border-gray-200 dark:border-gray-700">
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
+              Additional constraints and preferences will be available here.
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Find Best Plan Button */}
       <div className="flex justify-end">
-        <button className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm">
+        <button className="bg-green-500 hover:bg-green-700 text-gray-900 px-5 py-3 rounded-lg font-medium">
           Find Best Plan
         </button>
       </div>

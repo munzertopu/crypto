@@ -16,7 +16,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   className = "",
 }) => {
   return (
-    <div className={`flex flex-1 pl-2 border border-default rounded-lg items-center ${className}`}>
+    <div className={`flex flex-1 pl-2 bg-white border border-default rounded-lg items-center ${className}`}>
       <CalendarIcon 
         width={16}
         height={16} 
