@@ -70,6 +70,22 @@ module.exports = {
         table: {
           header: "#F3F5F7",
         },
+        text_badge_orange: {
+          light: "#AE590A",
+          dark: "#AE590A",
+        },
+        background_badge_orange: {
+          light: "#FDEAD8",
+          dark: "#FDD7A5",
+        },
+        text_badge_blue: {
+          light: "#133A9A",
+          dark: "#133A9A",
+        },
+        background_badge_blue: {
+          light: "#E3EAFD",
+          dark: "#90B6FF",
+        },
       },
       fontFamily: {
         sans: [
