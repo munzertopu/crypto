@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import NavigationBar from "../../components/NavigationBar";
 import SearchField from "../../components/UI/SearchField";
 import Dropdown from "../../components/UI/Dropdown";
-import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
+import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Typography, Card, CardBody } from "@material-tailwind/react";
 import RedirectWindowIcon from "../../utils/icons/RedirectWindowIcon";
+import TickCircleIcon from "../../utils/icons/TickCircleIcon";
+import CrossIcon from "../../utils/icons/CrossIcon";
 
 interface ClientsPageProps {
   onLogout: () => void;
@@ -29,6 +31,8 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [selectedSort, setSelectedSort] = useState("Recently added");
+  const [isUnassignedFilterActive, setIsUnassignedFilterActive] = useState(false);
+  const [isUnlicensedFilterActive, setIsUnlicensedFilterActive] = useState(false);
 
   const TABLE_HEAD = ["Client", "Last Active", "License Status", "Transactions", "Assigned To", "Ownership"];
 
@@ -90,7 +94,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
       email: "emily.rodriguez@email.com",
       avatar: "/avatars/green.png",
       lastActive: "1 day ago",
-      licenseStatus: "Licensed",
+      licenseStatus: "Unlicensed",
       transactions: 3200,
       assignedTo: {
         name: "Daniel Foster",
@@ -104,17 +108,31 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
       email: "david.kim@email.com",
       avatar: "/avatars/white.png",
       lastActive: "3 days ago",
-      licenseStatus: "Unlicensed",
+      licenseStatus: "Licensed",
       transactions: 750,
       ownership: "Owned by Client"
     }
   ];
 
-  const filteredClients = clients.filter(client =>
-    client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.id.includes(searchTerm)
-  );
+  const filteredClients = clients.filter(client => {
+    // Search filter
+    const matchesSearch = client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      client.id.includes(searchTerm);
+
+    // Assignee filter
+    const matchesAssignee = selectedFilter === "All" || 
+      (selectedFilter === "Daniel Foster" && client.assignedTo?.name === "Daniel Foster") ||
+      (selectedFilter === "Arman Lelevier" && client.assignedTo?.name === "Arman Lelevier");
+
+    // Unassigned filter
+    const matchesUnassignedFilter = !isUnassignedFilterActive || !client.assignedTo;
+
+    // Unlicensed filter
+    const matchesUnlicensedFilter = !isUnlicensedFilterActive || client.licenseStatus === "Unlicensed";
+
+    return matchesSearch && matchesAssignee && matchesUnassignedFilter && matchesUnlicensedFilter;
+  });
 
   return (
     <div className="min-h-screen bg-background dark:bg-[#0E201E]">
@@ -168,12 +186,34 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
                 inputClassName="!py-2.5"
               />
               
-              <button className="px-4 py-2 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              <button 
+                onClick={() => setIsUnassignedFilterActive(!isUnassignedFilterActive)}
+                className={`flex items-center gap-2 px-4 py-2 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}
+              >
+                {isUnassignedFilterActive && (
+                  <TickCircleIcon className="text-gray-500 dark:text-green-400" />
+                )}
                 Unassigned
+                {isUnassignedFilterActive && (
+                  <CrossIcon 
+                  className="text-gray-500 dark:text-gray-400"
+                  />
+                )}
               </button>
               
-              <button className="px-4 py-2 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              <button 
+                onClick={() => setIsUnlicensedFilterActive(!isUnlicensedFilterActive)}
+                className={`flex items-center gap-2 px-4 py-2 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white`}
+              >
+                {isUnlicensedFilterActive && (
+                  <TickCircleIcon className="text-gray-500 dark:text-green-400" />
+                )}
                 Unlicensed
+                {isUnlicensedFilterActive && (
+                  <CrossIcon 
+                    className="text-gray-500 dark:text-gray-400"
+                  />
+                )}
               </button>
             </div>
           </div>

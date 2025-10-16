@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import TickCircleIcon from "../../../../utils/icons/TickCircleIcon";
+import TickCircleFilledIcon from "../../../../utils/icons/TickCircleFilledIcon";
 
 interface OptimizationModalProps {
   isOpen: boolean;
@@ -81,9 +81,9 @@ const OptimizationModal: React.FC<OptimizationModalProps> = ({ isOpen, onClose }
               <div key={step.id} className="flex items-center justify-center gap-3">
                 <div className="relative w-8 h-8">
                   {step.completed ? (
-                    /* TickCircleIcon for completed steps */
+                    /* TickCircleFilledIcon for completed steps */
                     <div className="flex items-center justify-center">
-                      <TickCircleIcon width={24} height={24} />
+                      <TickCircleFilledIcon width={24} height={24} />
                     </div>
                   ) : (
                     /* Progress circle for incomplete steps */
