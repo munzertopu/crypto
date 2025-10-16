@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import CloudUploadIcon from "../../../../utils/icons/CloudUploadIcon";
 import ButtonArrowCircleIcon from "../../../../utils/icons/ButtonArrowCircleIcon";
 import BitcoinIcon from "../../../../utils/icons/BitcoinIcon";
 import StackedCoinIcon from "../../../../utils/icons/StackedCoinIcon";
 import ChartBoxIcon from "../../../../utils/icons/ChartBoxIcon";
 import PercentCircleIcon from "../../../../utils/icons/PercentCircleIcon";
-import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
+import { ChevronUpDownIcon, ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Typography } from "@material-tailwind/react";
+import TradeDetailsTable from "./TradeDetailsTable";
 
 const OptimizationResults: React.FC = () => {
+  const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
   const TABLE_HEAD = [
     "Asset",
     "Wallet/Exchange",
@@ -57,7 +59,13 @@ const OptimizationResults: React.FC = () => {
       estProceeds: "$4,570",
       gainLoss: "+$1,307",
       isGain: true,
-      period: "May 25, 2025"
+      period: "May 25, 2025",
+      details: [
+        { acquiredOn: "Jan 5, 2025, 5:57 PM", holdingPeriod: "212 days (Short)", amount: "8.2500 USDT", costUSD: "403.26", gainUSD: "+234.90" },
+        { acquiredOn: "Feb 21, 2025, 1:39 PM", holdingPeriod: "80 days (Short)", amount: "12.400000 USDT", costUSD: "579.56", gainUSD: "+200.21" },
+        { acquiredOn: "Mar 12, 2025, 9:19 AM", holdingPeriod: "55 days (Short)", amount: "5.20000 USDT", costUSD: "520.10", gainUSD: "+189" },
+        { acquiredOn: "May 31, 2025, 2:31 PM", holdingPeriod: "35 days (Short)", amount: "3.40000 USDT", costUSD: "289.10", gainUSD: "+155.30" }
+      ]
     },
     {
       asset: "Coinbase",
@@ -67,7 +75,12 @@ const OptimizationResults: React.FC = () => {
       estProceeds: "$900",
       gainLoss: "-$720",
       isGain: false,
-      period: "Jul 13, 2025"
+      period: "Jul 13, 2025",
+      details: [
+        { acquiredOn: "Jan 5, 2025, 5:57 PM", holdingPeriod: "212 days (Short)", amount: "8.2500 USDT", costUSD: "403.26", gainUSD: "+234.90" },
+        { acquiredOn: "Feb 21, 2025, 1:39 PM", holdingPeriod: "80 days (Short)", amount: "12.400000 USDT", costUSD: "579.56", gainUSD: "+200.21" },
+        { acquiredOn: "Mar 12, 2025, 9:19 AM", holdingPeriod: "55 days (Short)", amount: "5.20000 USDT", costUSD: "520.10", gainUSD: "+189" }
+      ]
     },
     {
       asset: "Tether",
@@ -77,7 +90,13 @@ const OptimizationResults: React.FC = () => {
       estProceeds: "$5,700",
       gainLoss: "+$1,900",
       isGain: true,
-      period: "May 8, 2025"
+      period: "May 8, 2025",
+      details: [
+        { acquiredOn: "Jan 5, 2025, 5:57 PM", holdingPeriod: "212 days (Short)", amount: "8.2500 USDT", costUSD: "403.26", gainUSD: "+234.90" },
+        { acquiredOn: "Feb 21, 2025, 1:39 PM", holdingPeriod: "80 days (Short)", amount: "12.400000 USDT", costUSD: "579.56", gainUSD: "+200.21" },
+        { acquiredOn: "Mar 12, 2025, 9:19 AM", holdingPeriod: "55 days (Short)", amount: "5.20000 USDT", costUSD: "520.10", gainUSD: "+189" },
+        { acquiredOn: "May 31, 2025, 2:31 PM", holdingPeriod: "35 days (Short)", amount: "3.40000 USDT", costUSD: "289.10", gainUSD: "+155.30" }
+      ]
     },
     {
       asset: "Kraken",
@@ -87,9 +106,24 @@ const OptimizationResults: React.FC = () => {
       estProceeds: "$590",
       gainLoss: "-$500.60",
       isGain: false,
-      period: "Jun 13, 2025"
+      period: "Jun 13, 2025",
+      details: [
+        { acquiredOn: "Jan 5, 2025, 5:57 PM", holdingPeriod: "212 days (Short)", amount: "8.2500 USDT", costUSD: "403.26", gainUSD: "+234.90" },
+        { acquiredOn: "Feb 21, 2025, 1:39 PM", holdingPeriod: "80 days (Short)", amount: "12.400000 USDT", costUSD: "579.56", gainUSD: "+200.21" },
+        { acquiredOn: "Mar 12, 2025, 9:19 AM", holdingPeriod: "55 days (Short)", amount: "5.20000 USDT", costUSD: "520.10", gainUSD: "+189" }
+      ]
     }
   ];
+
+  const toggleRowExpansion = (index: number) => {
+    const newExpandedRows = new Set(expandedRows);
+    if (newExpandedRows.has(index)) {
+      newExpandedRows.delete(index);
+    } else {
+      newExpandedRows.add(index);
+    }
+    setExpandedRows(newExpandedRows);
+  };
 
   return (
     <div className="space-y-6">
@@ -197,42 +231,58 @@ const OptimizationResults: React.FC = () => {
             </thead>
             <tbody>
               {tradePlan.map((trade, index) => (
-                <tr key={index} className="">
-                  <td className="py-3.5 px-5">
-                    <div className="flex items-center gap-3">
-                      <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                      <img 
-                        src={trade.assetLogo} 
-                        alt={trade.asset}
-                        className="w-6 h-6 rounded-full"
-                      />
-                      <span className="text-base font-medium text-gray-900 dark:text-white">
-                        {trade.asset}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-300">
-                    {trade.walletExchange}
-                  </td>
-                  <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-300">
-                    {trade.quantity}
-                  </td>
-                  <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-300">
-                    {trade.estProceeds}
-                  </td>
-                  <td className={`py-3.5 px-5 text-base font-medium ${
-                    trade.isGain 
-                      ? "text-green-600 dark:text-green-400" 
-                      : "text-red-600 dark:text-red-400"
-                  }`}>
-                    {trade.gainLoss}
-                  </td>
-                  <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-300">
-                    {trade.period}
-                  </td>
-                </tr>
+                <React.Fragment key={index}>
+                  <tr 
+                    className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                    onClick={() => toggleRowExpansion(index)}
+                  >
+                    <td className="py-3.5 px-5">
+                      <div className="flex items-center gap-3">
+                        {expandedRows.has(index) ? (
+                          <ChevronDownIcon className="w-4 h-4 text-gray-500" />
+                        ) : (
+                          <ChevronRightIcon className="w-4 h-4 text-gray-500" />
+                        )}
+                        <img 
+                          src={trade.assetLogo} 
+                          alt={trade.asset}
+                          className="w-6 h-6 rounded-full"
+                        />
+                        <span className="text-base font-medium text-gray-900 dark:text-white">
+                          {trade.asset}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-300">
+                      {trade.walletExchange}
+                    </td>
+                    <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-300">
+                      {trade.quantity}
+                    </td>
+                    <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-300">
+                      {trade.estProceeds}
+                    </td>
+                    <td className={`py-3.5 px-5 text-base font-medium ${
+                      trade.isGain 
+                        ? "text-green-600 dark:text-green-400" 
+                        : "text-red-600 dark:text-red-400"
+                    }`}>
+                      {trade.gainLoss}
+                    </td>
+                    <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-300">
+                      {trade.period}
+                    </td>
+                  </tr>
+                  
+                  {/* Expanded Row Content */}
+                  {expandedRows.has(index) && (
+                    <tr>
+                      <td colSpan={6} className="p-0">
+                        <TradeDetailsTable details={trade.details} />
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
               ))}
             </tbody>
           </table>
