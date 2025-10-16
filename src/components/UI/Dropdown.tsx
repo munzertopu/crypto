@@ -12,6 +12,7 @@ interface DropdownProps {
   onSelect: (value: string) => void;
   defaultValue?: string;
   className?: string;
+  inputClassName?: string;
   searchable?: boolean;
   searchPlaceholder?: string;
 }
@@ -21,6 +22,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   onSelect,
   defaultValue,
   className = "",
+  inputClassName = "",
   searchable = false,
   searchPlaceholder = "Search...",
 }) => {
@@ -89,7 +91,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         onClick={handleToggle}
-        className="flex flex-row justify-between items-center px-4 py-3 box-border border border-default rounded-lg bg-white gap-4 md:min-w-24 min-w-[max-content] w-full dark:border-[#4D5050] focus:ring-2 focus:ring-[#E3F3C7B2] focus:outline-none"
+        className={`flex flex-row justify-between items-center px-4 py-3 box-border border border-default rounded-lg bg-white gap-4 md:min-w-24 min-w-[max-content] w-full dark:border-[#4D5050] focus:ring-2 focus:ring-[#E3F3C7B2] focus:outline-none ${inputClassName}`}
         aria-label="Toggle dropdown"
         aria-expanded={isOpen}
         aria-haspopup="true"

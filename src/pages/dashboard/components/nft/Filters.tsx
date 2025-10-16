@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import EstimatedValueDropdown from "../../../../components/AmountRangeDropdown";
+import SearchField from "../../../../components/UI/SearchField";
 
 import {
-  faSearch,
   faChevronDown,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
@@ -44,21 +44,14 @@ const Filters: React.FC<FiltersProps> = ({
       <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
         {/* Search Bar - 1/3 width */}
         <div>
-          <div className="relative">
-            <FontAwesomeIcon
-              icon={faSearch}
-              className="absolute left-3 top-1/2 transform text-xl -translate-y-1/2 text-gray-500 dark:text-gray-250"
-            />
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-2.5 text-lg border rounded-2xl focus:outline-none bg-transparent border-[#14151A2F] text-[#0E201E] placeholder-gray-500
-                dark:border-[#4D5050] dark:text-white dark:placeholder-[#CDCFD1]"
-              aria-label="Search NFTs"
-            />
-          </div>
+          <SearchField
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            placeholder="Search"
+            ariaLabel="Search NFTs"
+            className="!py-2 border-default dark:border-[#4D5050]"
+            size="lg"
+          />
         </div>
 
         {/* Filters - 1/3 width */}
