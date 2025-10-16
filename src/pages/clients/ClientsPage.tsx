@@ -37,16 +37,16 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
   const TABLE_HEAD = ["Client", "Last Active", "License Status", "Transactions", "Assigned To", "Ownership"];
 
   const assigneesOptions = [
-    { label: "All", value: "All" },
-    { label: "Daniel Foster", value: "Daniel Foster" },
-    { label: "Arman Lelevier", value: "Arman Lelevier" }
+    { label: "Daniel Foster", value: "Daniel Foster", subtitle: "daniel@gmail.com" },
+    { label: "Arman Lelevier", value: "Arman Lelevier", subtitle: "arman@gmail.com" },
+    { label: "Brendan Lammond", value: "Brendan Lammond", subtitle: "btlammond@gmail.com" },
+    { label: "Jonathan Porush", value: "Jonathan Porush", subtitle: "jonathanp@gmail.com" }
   ];
 
   const sortOptions = [
     { label: "Recently added", value: "Recently added" },
-    { label: "Name A-Z", value: "Name A-Z" },
-    { label: "Last Active", value: "Last Active" },
-    { label: "Transaction Count", value: "Transaction Count" }
+    { label: "Most transactions", value: "Most transactions" },
+    { label: "Name ASC", value: "Name ASC" }
   ];
 
   const clients: Client[] = [
@@ -182,8 +182,12 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
               <Dropdown
                 options={assigneesOptions}
                 onSelect={(value) => setSelectedFilter(value)}
+                searchable={true}
+                searchPlaceholder="Type name"
                 defaultValue="Assignees"
                 inputClassName="!py-2.5"
+                multiline={true}
+                showTickMark={true}
               />
               
               <button 

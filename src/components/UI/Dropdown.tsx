@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
+import TickIcon from "../../utils/icons/TickIcon";
 
 export interface DropdownOption {
   label: string;
   value: string;
   icon?: string;
   logo?: string;
+  subtitle?: string;
+  multiline?: boolean;
 }
 
 interface DropdownProps {
@@ -15,6 +18,9 @@ interface DropdownProps {
   inputClassName?: string;
   searchable?: boolean;
   searchPlaceholder?: string;
+  multiline?: boolean;
+  showTickMark?: boolean;
+  selectedValue?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -24,7 +30,10 @@ const Dropdown: React.FC<DropdownProps> = ({
   className = "",
   inputClassName = "",
   searchable = false,
+  multiline = false,
   searchPlaceholder = "Search...",
+  showTickMark = false,
+  selectedValue,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -45,7 +54,10 @@ const Dropdown: React.FC<DropdownProps> = ({
   
   // Set default value based on normalized options
   const initialValue = defaultValue || normalizedOptions[0]?.label || '';
-  const [selectedValue, setSelectedValue] = useState(initialValue);
+  const [internalSelectedValue, setInternalSelectedValue] = useState(initialValue);
+  
+  // Use external selectedValue if provided, otherwise use internal state
+  const currentSelectedValue = selectedValue !== undefined ? selectedValue : internalSelectedValue;
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => {
@@ -53,7 +65,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   };
 
   const handleSelect = (option: DropdownOption) => {
-    setSelectedValue(option.label);
+    setInternalSelectedValue(option.label);
     onSelect(option.value);
     setIsOpen(false);
     setSearchTerm(""); // Clear search when selecting
@@ -97,7 +109,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         aria-haspopup="true"
       >
         <span className="text-base text-gray-900 dark:text-white">
-          {selectedValue}
+          {currentSelectedValue}
         </span>
         {isOpen ? <ArrowUpSvg /> : <ArrowDownSvg />}
       </button>
@@ -119,16 +131,27 @@ const Dropdown: React.FC<DropdownProps> = ({
               <div
                 key={option.value + index}
                 onClick={() => handleSelect(option)}
-                className="px-1.5 py-1.5 text-sm text-gray-900 text-left hover:bg-gray-100 cursor-pointer rounded-lg w-full flex items-center gap-2
-                 dark:text-gray-250"
+                className={`px-1.5 py-1.5 text-sm text-gray-900 text-left hover:bg-gray-100 cursor-pointer rounded-lg w-full flex items-center gap-2 dark:text-gray-250 ${
+                  showTickMark && currentSelectedValue === option.label ? 'bg-gray-100 dark:bg-gray-800' : ''
+                }`}
               >
                 {option.logo && (
-                  <img src={option.logo} alt={option.label} className="w-5 h-5 rounded-full" />
+                  <img src={option.logo} alt={option.label} className="w-5 h-5 rounded-full flex-shrink-0 mt-0.5" />
                 )}
                 {option.icon && (
-                  <span className="text-xs">{option.icon}</span>
+                  <span className="text-xs flex-shrink-0 mt-0.5">{option.icon}</span>
                 )}
-                {option.label}
+                <div className="flex flex-col min-w-0 flex-1">
+                  <span className="font-medium">{option.label}</span>
+                  {multiline && option.subtitle && (
+                    <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                      {option.subtitle}
+                    </span>
+                  )}
+                </div>
+                {showTickMark && currentSelectedValue === option.label && (
+                  <TickIcon className="text-gray-500 dark:text-green-400 flex-shrink-0" />
+                )}
               </div>
             ))}
           </div>
