@@ -379,7 +379,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                               </Typography>
                             </td>
                             {activeTab === "Warnings" && (
-                              <td className="py-4">
+                              <td className="hidden sm:table-cell py-4">
                                 <div className="flex items-center gap-2">
                                   {transaction.error &&
                                   transaction.error !== "---" ? (
@@ -387,11 +387,11 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                       <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                                       <div
                                         className={`px-3 py-1 rounded-lg border bg-red-50 border-red-200 text-red-700
-                                          dark:bg-red-900/20 dark:border-red-600 dark:text-red-400`}
+                                          dark:bg-red-900/20 dark:border-red-600 dark:text-red-400 `}
                                       >
                                         <Typography
                                           variant="small"
-                                          className="text-sm font-normal"
+                                          className="hidden sm:table-cell text-sm font-normal"
                                         >
                                           {transaction.error}
                                         </Typography>
@@ -400,7 +400,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                   ) : (
                                     <Typography
                                       variant="small"
-                                      className={`text-xl font-normal text-[#0E201E] 
+                                      className={`hidden sm:table-cell text-xl font-normal text-[#0E201E] 
                                         dark:text-gray-250`}
                                     >
                                       {transaction.error || "---"}

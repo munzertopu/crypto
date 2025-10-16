@@ -18,6 +18,8 @@ import DateRangePickerPopover from "../../../components/DateRangePicker";
 import SecondaryButton from "../../../components/UI/Buttons/SecondaryButton";
 import FilterIcon from "../../../components/Icons/FilterIcon";
 import EyeIcon from "../../../components/Icons/EyeIcon";
+import BlueCheckedIcon from "../../../components/Icons/BlueCheckedIcon";
+import CloseIcon from "../../../components/Icons/CloseIcon";
 
 interface WalletOption {
   id: string;
@@ -103,6 +105,22 @@ const resultOptions: ActionTypeOption[] = [
   { id: "failed", name: "Failed" },
 ];
 
+const checkedIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={2}
+    stroke="currentColor"
+    className="w-4 h-4 text-white"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M4.5 12.75l6 6 9-13.5"
+    />
+  </svg>
+);
 const Filter: React.FC<FilterProps> = ({
   activeTab = "Portfolio",
   onTabChange,
@@ -328,27 +346,42 @@ const Filter: React.FC<FilterProps> = ({
       {/* Blue Alert Banner for Warnings Tab */}
       {activeTab === "Warnings" && showWarningBanner && (
         <div
-          className={`my-2 px-6 py-4 rounded-lg border border-info-500 text-[#2186D7]
+          className={`sm:my-2 px-4 py-3 sm:px-6 sm:py-4 rounded-lg border border-info-500 text-[#2186D7]
             dark:border-blue-600 dark:text-blue-300`}
         >
-          <div className="flex items-center justify-between mx-2">
-            <div className="flex items-center gap-3">
-              <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-4 h-4 text-white"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
-                </svg>
+          <div className="sm:hidden">
+            <div className="flex justify-between items-start">
+              <div className="w-5 h-5">
+                <BlueCheckedIcon />
               </div>
+              <button
+                className={`text-sm font-medium text-[#4D5050] 
+                  dark:text-gray-400`}
+                onClick={() => setShowWarningBanner(false)}
+              >
+                <CloseIcon />
+              </button>
+            </div>
+            <div className="mt-1.5 flex justify-start items-center">
+              <span className="text-base font-medium text-gray-900 text-left">
+                You have 10 missing pricing, match them at the setting
+              </span>
+            </div>
+            <div className="flex justify-end items-center mt-1.5 ">
+              <button
+                className={`text-sm font-medium text-[#5F9339] 
+                  dark:text-green-400`}
+              >
+                Match price
+              </button>
+            </div>
+          </div>
+          <div className="hidden sm:flex items-center justify-between mx-2">
+            <div className="flex items-center gap-3">
+              <div className="w-5 h-5">
+                <BlueCheckedIcon />
+              </div>
+
               <span className="text-base font-medium">
                 You have 10 missing pricing, match them at the setting
               </span>
