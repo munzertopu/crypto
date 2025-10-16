@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavigationBar from "../../components/NavigationBar";
 import SearchField from "../../components/UI/SearchField";
 import Dropdown from "../../components/UI/Dropdown";
+import AddClientDrawer from "./components/AddClientDrawer";
 import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Typography, Card, CardBody } from "@material-tailwind/react";
 import RedirectWindowIcon from "../../utils/icons/RedirectWindowIcon";
@@ -33,6 +34,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
   const [selectedSort, setSelectedSort] = useState("Recently added");
   const [isUnassignedFilterActive, setIsUnassignedFilterActive] = useState(false);
   const [isUnlicensedFilterActive, setIsUnlicensedFilterActive] = useState(false);
+  const [isAddClientDrawerOpen, setIsAddClientDrawerOpen] = useState(false);
 
   const TABLE_HEAD = ["Client", "Last Active", "License Status", "Transactions", "Assigned To", "Ownership"];
 
@@ -155,12 +157,15 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
               (258)
             </h1>{" "}
           </div>
-          <button className="text-base bg-green-500 text-gray-900 px-5 py-3 rounded-lg font-medium flex items-center gap-2">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-            </svg>
-            Add Client
-          </button>
+            <button 
+              onClick={() => setIsAddClientDrawerOpen(true)}
+              className="text-base bg-green-500 text-gray-900 px-5 py-3 rounded-lg font-medium flex items-center gap-2 hover:bg-green-600 transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              Add Client
+            </button>
         </div>
 
         {/* Filter and Search Bar */}
@@ -401,10 +406,16 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
               </svg>
             </button>
           </div>
+          </div>
         </div>
+
+        {/* Add Client Drawer */}
+        <AddClientDrawer
+          isOpen={isAddClientDrawerOpen}
+          onClose={() => setIsAddClientDrawerOpen(false)}
+        />
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 export default ClientsPage;
