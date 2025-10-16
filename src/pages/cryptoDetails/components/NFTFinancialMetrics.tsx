@@ -272,7 +272,11 @@ const NFTSection: React.FC<NFTSectionProps> = ({
           value={totalNFTs}
           svgIcon={totalNFTsSvg}
         />
-
+        <div
+          className={`sm:hidden  w-full h-px
+            dark:bg-gray-700  bg-gray-150
+            `}
+        ></div>
         {/* Divider */}
         <div className="hidden xl:block flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 "></div>
 
@@ -281,7 +285,11 @@ const NFTSection: React.FC<NFTSectionProps> = ({
           value={totalPurchaseValue}
           svgIcon={totalPurchaseValueSvg}
         />
-
+        <div
+          className={`sm:hidden  w-full h-px
+            dark:bg-gray-700  bg-gray-150
+            `}
+        ></div>
         {/* Divider */}
         <div className="hidden xl:block flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 "></div>
 
@@ -290,7 +298,11 @@ const NFTSection: React.FC<NFTSectionProps> = ({
           value={totalEstimatedValue}
           svgIcon={totalEstimatedValueSvg}
         />
-
+        <div
+          className={`sm:hidden  w-full h-px
+            dark:bg-gray-700  bg-gray-150
+            `}
+        ></div>
         {/* Divider */}
         <div className="hidden xl:block flex-shrink-0 w-px h-20 bg-[#E1E3E5] dark:bg-[#8C8E90] mx-10 "></div>
 
