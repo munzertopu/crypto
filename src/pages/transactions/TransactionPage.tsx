@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import NavigationBar from "../../components/NavigationBar";
-import { TransactionTable, Filter } from "./components";
+import { Filter, TransactionTable } from "./components";
 import useScreenSize from "../../hooks/useScreenSize";
 import { mockTransactions } from "../../data/transactionAssets";
 import AddTransactionDrawer from "./components/AddTransactionDrawer";
@@ -22,9 +22,13 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   const [expandedTransactionId, setExpandedTransactionId] = useState<
     string | null
   >(null);
-  const [isAddTransactionDrawerOpen, setIsAddTransactionDrawerOpen] = useState(false);
-  const [isEditTransactionDrawerOpen, setIsEditTransactionDrawerOpen] = useState(false);
-  const [selectedTransactions, setSelectedTransactions] = useState<string[]>([]);
+  const [isAddTransactionDrawerOpen, setIsAddTransactionDrawerOpen] =
+    useState(false);
+  const [isEditTransactionDrawerOpen, setIsEditTransactionDrawerOpen] =
+    useState(false);
+  const [selectedTransactions, setSelectedTransactions] = useState<string[]>(
+    []
+  );
   const screenSize = useScreenSize();
 
   const filteredTransactions = mockTransactions.filter((transaction) => {
@@ -110,10 +114,16 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
                 }
               }}
               className={`text-base font-medium px-3 py-1 sm:px-6 sm:py-3 md:py-3 rounded-md sm:rounded-2xl bg-[#90C853] text-[#0E201E]`}
-              aria-label={selectedTransactions.length > 0 ? "Edit selected transactions" : "Add new transaction"}
+              aria-label={
+                selectedTransactions.length > 0
+                  ? "Edit selected transactions"
+                  : "Add new transaction"
+              }
             >
               <span className="hidden sm:inline">
-                {selectedTransactions.length > 0 ? "Edit Transaction" : "Add Transaction"}
+                {selectedTransactions.length > 0
+                  ? "Edit Transaction"
+                  : "Add Transaction"}
               </span>
               <span className="block sm:hidden text-white">
                 {selectedTransactions.length > 0 ? "✏️" : "+"}

@@ -8,7 +8,14 @@ export interface Transaction {
     color: string;
   };
   type: "buy" | "sell" | "swap" | "transfer";
-  action: "Trade" | "Receive" | "Transfer" | "Swap" | "Send" | "Deploy";
+  action:
+    | "Trade"
+    | "Receive"
+    | "Transfer"
+    | "Swap"
+    | "Send"
+    | "Deploy"
+    | "Deposit";
   sent: string;
   received: string;
   transactionId: string;
@@ -135,7 +142,7 @@ export const mockTransactions: Transaction[] = [
       logo: "crypto/solana-sol-logo.png",
       color: "bg-purple-500",
     },
-    action: "Trade",
+    action: "Deposit",
     type: "buy",
     sent: "-500 USDT",
     received: "+25 SOL",
@@ -273,53 +280,53 @@ export interface CostAnalysisData {
 export const ledgerData: LedgerData[] = [
   {
     id: 1,
-    identifier: { icon: '₿', color: 'bg-orange-500', text: 'View txn' },
-    date: '4 Jan, 2025, 17:47',
-    type: 'Send',
-    ledger: 'ETH - Bitocion',
-    change: '-0.32348600',
-    balance: '+23.9830191'
+    identifier: { icon: "₿", color: "bg-orange-500", text: "View txn" },
+    date: "4 Jan, 2025, 17:47",
+    type: "Send",
+    ledger: "ETH - Bitocion",
+    change: "-0.32348600",
+    balance: "+23.9830191",
   },
   {
     id: 2,
-    identifier: { icon: '♦', color: 'bg-blue-500', text: 'View txn' },
-    date: '21 Nov, 2024, 13:09',
-    type: 'Receive',
-    ledger: 'ETH - Phantom',
-    change: '+0.292096470',
-    balance: '+23.9830191'
+    identifier: { icon: "♦", color: "bg-blue-500", text: "View txn" },
+    date: "21 Nov, 2024, 13:09",
+    type: "Receive",
+    ledger: "ETH - Phantom",
+    change: "+0.292096470",
+    balance: "+23.9830191",
   },
   {
     id: 3,
-    identifier: { icon: '☰', color: 'bg-purple-600', text: 'View txn' },
-    date: '19 Sep, 2024, 08:23',
-    type: 'Send',
-    ledger: 'ETH - Metamask',
-    change: '-0.1',
-    balance: '-2.903724'
-  }
+    identifier: { icon: "☰", color: "bg-purple-600", text: "View txn" },
+    date: "19 Sep, 2024, 08:23",
+    type: "Send",
+    ledger: "ETH - Metamask",
+    change: "-0.1",
+    balance: "-2.903724",
+  },
 ];
 
 // Cost analysis data for transaction details
 export const costAnalysisData: CostAnalysisData[] = [
   {
     id: 1,
-    date: '4 Jan, 2025, 17:47',
-    info: 'Own transfer',
-    holdingPeriod: '212 days (Short)',
-    amount: '-0.2535',
-    costUSD: '579.56',
-    gainUSD: '0.00',
-    isMarked: false
+    date: "4 Jan, 2025, 17:47",
+    info: "Own transfer",
+    holdingPeriod: "212 days (Short)",
+    amount: "-0.2535",
+    costUSD: "579.56",
+    gainUSD: "0.00",
+    isMarked: false,
   },
   {
     id: 2,
-    date: '4 Jan, 2025, 17:49',
-    info: 'Invested in ETH',
-    holdingPeriod: '212 days (Short)',
-    amount: '-0.2535',
-    costUSD: '579.56',
-    gainUSD: '0.00',
-    isMarked: true
-  }
+    date: "4 Jan, 2025, 17:49",
+    info: "Invested in ETH",
+    holdingPeriod: "212 days (Short)",
+    amount: "-0.2535",
+    costUSD: "579.56",
+    gainUSD: "0.00",
+    isMarked: true,
+  },
 ];
