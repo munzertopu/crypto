@@ -263,9 +263,9 @@ const NFTSection: React.FC<NFTSectionProps> = ({
     </svg>
   );
   return (
-    <div className="px-2 my-6 md:my-0">
+    <div className="sm:px-2 my-4 md:my-6 lg:my-0">
       <div
-        className={`grid grid-cols-2 gap-8 md:gap-0 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
+        className={`grid grid-cols-1 gap-4 sm:gap-6  md:gap-0 md:grid md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] lg:flex lg:flex-row lg:justify-between lg:items-stretch lg:flex-wrap `}
       >
         <Card
           title="Total number of NFTs"

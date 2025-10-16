@@ -16,7 +16,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
   placeholder = "Search",
   ariaLabel,
   className = "",
-  size = "md"
+  size = "md",
 }) => {
   const getSizeClasses = () => {
     switch (size) {
@@ -52,7 +52,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
   };
 
   return (
-    <div className={`relative`}>
+    <div className={`relative w-full`}>
       <SearchIcon
         width={getIconSize()}
         height={getIconSize()}
@@ -64,7 +64,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
         placeholder={placeholder}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className={`w-full border border-default rounded-xl focus:outline-none bg-transparent text-gray-900 placeholder-gray-500 dark:text-white dark:placeholder-gray-400 ${getSizeClasses()} ${className}`}
+        className={`w-full border border-default rounded-xl focus:outline-none bg-white text-gray-900 placeholder-gray-500 dark:text-white dark:placeholder-gray-400 ${getSizeClasses()} ${className}`}
         aria-label={ariaLabel || placeholder}
       />
     </div>

@@ -4,11 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EstimatedValueDropdown from "../../../../components/AmountRangeDropdown";
 import SearchField from "../../../../components/UI/SearchField";
 
-import {
-  faChevronDown,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faXmark } from "@fortawesome/free-solid-svg-icons";
 import DateRangePickerPopover from "../../../../components/DateRangePicker";
+import SecondaryButton from "../../../../components/UI/Buttons/SecondaryButton";
+import FilterIcon from "../../../../components/Icons/FilterIcon";
 
 interface FiltersProps {
   searchTerm: string;
@@ -17,10 +16,7 @@ interface FiltersProps {
   setSortBy: (sort: string) => void;
 }
 
-const Filters: React.FC<FiltersProps> = ({
-  searchTerm,
-  setSearchTerm
-}) => {
+const Filters: React.FC<FiltersProps> = ({ searchTerm, setSearchTerm }) => {
   const [showEstimatedValueDropdown, setShowEstimatedValueDropdown] =
     useState(false);
   const [fromCurrency, setFromCurrency] = useState("USDT");
@@ -40,22 +36,21 @@ const Filters: React.FC<FiltersProps> = ({
   // Create shortcuts with year dropdown
 
   return (
-    <div className="mx-8 md:mx-6 mt-8">
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-2">
+    <div className="sm:mx-8 md:mx-6 mt-8">
+      <div className="w-full flex flex-row justify-between items-center gap-2">
         {/* Search Bar - 1/3 width */}
-        <div>
-          <SearchField
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            placeholder="Search"
-            ariaLabel="Search NFTs"
-            className="!py-2 border-default dark:border-[#4D5050]"
-            size="lg"
-          />
-        </div>
+        <SearchField
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          placeholder="Search"
+          ariaLabel="Search NFTs"
+          className="!w-full border-default dark:border-[#4D5050]"
+          size="lg"
+        />
+        <SecondaryButton icon={<FilterIcon />} className="flex sm:hidden" />
 
         {/* Filters - 1/3 width */}
-        <div className="flex gap-3 flex-col sm:flex-row">
+        <div className="hidden sm:flex gap-3 flex-col sm:flex-row">
           <EstimatedValueDropdown
             fromValue={fromValue}
             setFromValue={setFromValue}
@@ -137,7 +132,7 @@ const Filters: React.FC<FiltersProps> = ({
         toValue !== "0" ||
         selectedDateRange ||
         selectedGain !== "Highest gain") && (
-        <div className="mb-3 py-2">
+        <div className="hidden sm:flex mb-3 py-2">
           <div className="flex flex-wrap gap-2">
             {/* Currency Range Filter Tag */}
             {(fromValue !== "0" || toValue !== "0") && (
@@ -176,7 +171,9 @@ const Filters: React.FC<FiltersProps> = ({
                     : "Date selected"}
                 </span>
                 <button
-                  onClick={() => setSelectedDateRange({ startDate: null, endDate: null })}
+                  onClick={() =>
+                    setSelectedDateRange({ startDate: null, endDate: null })
+                  }
                   className="text-black dark:text-gray-300"
                 >
                   <FontAwesomeIcon icon={faXmark} className="w-3 h-3" />
