@@ -3,6 +3,8 @@ import NavigationBar from "../../components/NavigationBar";
 import SearchField from "../../components/UI/SearchField";
 import Dropdown from "../../components/UI/Dropdown";
 import AddClientDrawer from "./components/AddClientDrawer";
+import SuccessNotification from "../../components/SuccessNotification";
+import ErrorNotification from "../../components/ErrorNotification";
 import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Typography, Card, CardBody } from "@material-tailwind/react";
 import RedirectWindowIcon from "../../utils/icons/RedirectWindowIcon";
@@ -35,6 +37,30 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
   const [isUnassignedFilterActive, setIsUnassignedFilterActive] = useState(false);
   const [isUnlicensedFilterActive, setIsUnlicensedFilterActive] = useState(false);
   const [isAddClientDrawerOpen, setIsAddClientDrawerOpen] = useState(false);
+  const [showSuccessNotification, setShowSuccessNotification] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [showErrorNotification, setShowErrorNotification] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleClientAdded = (clientName: string) => {
+    if (clientName.toLowerCase() === "priya kapoor") {
+      // Show success notification for Priya Kapoor
+      setSuccessMessage(`"${clientName}" successfully added`);
+      setShowSuccessNotification(true);
+    } else {
+      // Show error notification for other names
+      setErrorMessage(`"${clientName}" wasn't added`);
+      setShowErrorNotification(true);
+    }
+  };
+
+  const handleCloseNotification = () => {
+    setShowSuccessNotification(false);
+  };
+
+  const handleCloseErrorNotification = () => {
+    setShowErrorNotification(false);
+  };
 
   const TABLE_HEAD = ["Client", "Last Active", "License Status", "Transactions", "Assigned To", "Ownership"];
 
@@ -413,6 +439,23 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
         <AddClientDrawer
           isOpen={isAddClientDrawerOpen}
           onClose={() => setIsAddClientDrawerOpen(false)}
+          onClientAdded={handleClientAdded}
+        />
+
+        {/* Success Notification */}
+        <SuccessNotification
+          message={successMessage}
+          onClose={handleCloseNotification}
+          isVisible={showSuccessNotification}
+          duration={3000}
+        />
+
+        {/* Error Notification */}
+        <ErrorNotification
+          message={errorMessage}
+          onClose={handleCloseErrorNotification}
+          isVisible={showErrorNotification}
+          duration={5000}
         />
       </div>
     );

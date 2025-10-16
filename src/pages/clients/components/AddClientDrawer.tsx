@@ -7,11 +7,13 @@ import Dropdown from '../../../components/UI/Dropdown';
 interface AddClientDrawerProps {
   isOpen: boolean;
   onClose: () => void;
+  onClientAdded: (clientName: string) => void;
 }
 
 const AddClientDrawer: React.FC<AddClientDrawerProps> = ({
   isOpen,
   onClose,
+  onClientAdded,
 }) => {
   const [clientName, setClientName] = useState('');
   const [shareAccess, setShareAccess] = useState('');
@@ -40,6 +42,11 @@ const AddClientDrawer: React.FC<AddClientDrawerProps> = ({
       assignedTo,
       assignLicense
     });
+    
+    // Notify parent component about successful client addition
+    onClientAdded(clientName);
+    
+    // Close drawer immediately
     onClose();
   };
 
@@ -198,11 +205,11 @@ const AddClientDrawer: React.FC<AddClientDrawerProps> = ({
             >
               Add client
             </button>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
+           </div>
+         </div>
+       </div>
+     </>
+   );
+ };
 
 export default AddClientDrawer;
