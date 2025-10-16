@@ -3,6 +3,7 @@ import { Tabs } from "@material-tailwind/react";
 import NavigationBar from "../../components/NavigationBar";
 import TaxOptimizationTab from "./taxOptimizationTab/TaxOptimizationTab";
 import TaxLossHarvestingTab from "./taxLossHarvestingTab/TaxLossHarvestingTab";
+import TaxWizardTab from "./taxWizardTab/TaxWizardTab";
 
 interface TaxOptimizationPageProps {
   onLogout?: () => void;
@@ -11,7 +12,7 @@ interface TaxOptimizationPageProps {
 const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
   onLogout,
 }) => {
-  const tabs = ["Tax Optimization", "Tax Loss Harvesting"];
+  const tabs = ["Tax Optimization", "Tax Loss Harvesting", "Tax Wizard"];
   const [activeTab, setActiveTab] = useState("Tax Optimization");
 
   const handleTabChange = (tab: string) => {
@@ -73,6 +74,10 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
 
         {activeTab === "Tax Loss Harvesting" && (
           <TaxLossHarvestingTab />
+        )}
+
+        {activeTab === "Tax Wizard" && (
+          <TaxWizardTab />
         )}
       </div>
     </div>

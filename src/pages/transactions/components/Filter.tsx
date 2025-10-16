@@ -1,1257 +1,1631 @@
-import React, { useState, useRef, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSearch,
-  faFilter,
-  faChevronUp,
-  faChevronDown,
-  faCheck,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
-import { Input, Tabs } from "@material-tailwind/react";
-import Datepicker from "react-tailwindcss-datepicker";
-import AmountRangeDropdown from "../../../components/AmountRangeDropdown";
-import { Accordion, AccordionItem } from "../../../components/Accordion";
-import useScreenSize from "../../../hooks/useScreenSize";
-import MobileDrawer from "../../../components/Drawers/MobileDrawer";
-import DateRangePickerPopover from "../../../components/DateRangePicker";
-import SecondaryButton from "../../../components/UI/Buttons/SecondaryButton";
-import FilterIcon from "../../../components/Icons/FilterIcon";
-import EyeIcon from "../../../components/Icons/EyeIcon";
-import BlueCheckedIcon from "../../../components/Icons/BlueCheckedIcon";
-import CloseIcon from "../../../components/Icons/CloseIcon";
+// import React, { useState, useRef, useEffect } from "react";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   faChevronUp,
+//   faChevronDown,
+//   faCheck,
+//   faTimes,
+// } from "@fortawesome/free-solid-svg-icons";
+// import { Input, Tabs } from "@material-tailwind/react";
+// import AmountRangeDropdown from "../../../components/AmountRangeDropdown";
+// import { Accordion, AccordionItem } from "../../../components/Accordion";
+// import useScreenSize from "../../../hooks/useScreenSize";
+// import MobileDrawer from "../../../components/Drawers/MobileDrawer";
+// import DateRangePickerPopover from "../../../components/DateRangePicker";
+// import SearchIcon from "../../../utils/icons/SearchIcon";
+// import Dropdown from "../../../components/UI/Dropdown";
+// import CheckboxDropdown from "../../../components/UI/CheckboxDropdown";
+// import SecondaryButton from "../../../components/UI/Buttons/SecondaryButton";
+// import FilterIcon from "../../../components/Icons/FilterIcon";
+// import EyeIcon from "../../../components/Icons/EyeIcon";
 
-interface WalletOption {
-  id: string;
-  name: string;
-  logo: string;
-  color: string;
-}
+// interface WalletOption {
+//   id: string;
+//   name: string;
+//   logo: string;
+//   color: string;
+// }
 
-interface ActionTypeOption {
-  id: string;
-  name: string;
-}
+// interface TagOption {
+//   id: string;
+//   name: string;
+// }
 
-interface FilterProps {
-  activeTab?: string;
-  onTabChange?: (tab: string) => void;
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
-  selectedType: string;
-  setSelectedType: (type: string) => void;
-  selectedStatus: string;
-  setSelectedStatus: (status: string) => void;
-  hideTab?: boolean;
-}
-const tabs = ["All", "Uncategorized", "Warnings"];
+// interface FilterProps {
+//   activeTab?: string;
+//   onTabChange?: (tab: string) => void;
+//   searchTerm: string;
+//   setSearchTerm: (term: string) => void;
+//   selectedType: string[];
+//   setSelectedType: (type: string[] | ((prev: string[]) => string[])) => void;
+//   selectedTags: string[];
+//   setSelectedTags: (tags: string[] | ((prev: string[]) => string[])) => void;
+//   selectedManuals: string[];
+//   setSelectedManuals: (manuals: string[] | ((prev: string[]) => string[])) => void;
+//   selectedStatus: string;
+//   setSelectedStatus: (status: string) => void;
+//   hideTab?: boolean;
+// }
+// const tabs = ["All", "Uncategorized", "Warnings"];
 
-const walletOptions: WalletOption[] = [
-  {
-    id: "bitcoin",
-    name: "Bitcoin",
-    logo: "crypto/bitcoin-btc-logo.png",
-    color: "bg-orange-500",
-  },
-  {
-    id: "metamask",
-    name: "MetaMask",
-    logo: "crypto/metamask.png",
-    color: "bg-orange-400",
-  },
-  {
-    id: "ethereum",
-    name: "Ethereum",
-    logo: "crypto/ethereum-eth-logo.png",
-    color: "bg-blue-500",
-  },
-  {
-    id: "gemini",
-    name: "Gemini",
-    logo: "crypto/gemini.png",
-    color: "bg-black",
-  },
-  {
-    id: "avalanche",
-    name: "Avalanche Avax",
-    logo: "crypto/kraken.png",
-    color: "bg-red-500",
-  },
-  {
-    id: "bldget",
-    name: "Bldget",
-    logo: "crypto/theta-fuel-tfuel-logo.png",
-    color: "bg-cyan-500",
-  },
-  {
-    id: "coinbase",
-    name: "Coinbase",
-    logo: "crypto/coinbase.png",
-    color: "bg-blue-600",
-  },
-];
+// const walletOptions: WalletOption[] = [
+//   {
+//     id: "bitcoin",
+//     name: "Bitcoin",
+//     logo: "crypto/bitcoin-btc-logo.png",
+//     color: "bg-orange-500",
+//   },
+//   {
+//     id: "metamask",
+//     name: "MetaMask",
+//     logo: "crypto/metamask.png",
+//     color: "bg-orange-400",
+//   },
+//   {
+//     id: "ethereum",
+//     name: "Ethereum",
+//     logo: "crypto/ethereum-eth-logo.png",
+//     color: "bg-blue-500",
+//   },
+//   {
+//     id: "gemini",
+//     name: "Gemini",
+//     logo: "crypto/gemini.png",
+//     color: "bg-black",
+//   },
+//   {
+//     id: "avalanche",
+//     name: "Avalanche Avax",
+//     logo: "crypto/kraken.png",
+//     color: "bg-red-500",
+//   },
+//   {
+//     id: "bldget",
+//     name: "Bldget",
+//     logo: "crypto/theta-fuel-tfuel-logo.png",
+//     color: "bg-cyan-500",
+//   },
+//   {
+//     id: "coinbase",
+//     name: "Coinbase",
+//     logo: "crypto/coinbase.png",
+//     color: "bg-blue-600",
+//   },
+// ];
 
-const actionTypeOptions: ActionTypeOption[] = [
-  { id: "all", name: "All" },
-  { id: "buy", name: "Buy" },
-  { id: "sell", name: "Sell" },
-  { id: "swap", name: "Swap" },
-  { id: "transfer", name: "Transfer" },
-];
+// const tagOptions: TagOption[] = [
+//   { id: "all", name: "All" },
+//   { id: "buy", name: "Buy" },
+//   { id: "sell", name: "Sell" },
+//   { id: "swap", name: "Swap" },
+//   { id: "transfer", name: "Transfer" },
+// ];
 
-const resultOptions: ActionTypeOption[] = [
-  { id: "completed", name: "Completed" },
-  { id: "pending", name: "Pending" },
-  { id: "failed", name: "Failed" },
-];
+// const resultOptions: TagOption[] = [
+//   { id: "completed", name: "Completed" },
+//   { id: "pending", name: "Pending" },
+//   { id: "failed", name: "Failed" },
+// ];
 
-const checkedIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={2}
-    stroke="currentColor"
-    className="w-4 h-4 text-white"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M4.5 12.75l6 6 9-13.5"
-    />
-  </svg>
-);
-const Filter: React.FC<FilterProps> = ({
-  activeTab = "Portfolio",
-  onTabChange,
-  searchTerm,
-  setSearchTerm,
-  selectedType,
-  setSelectedType,
-  selectedStatus,
-  setSelectedStatus,
-  hideTab = false,
-}) => {
-  const [showWarningBanner, setShowWarningBanner] = useState(true);
-  const [walletDropdownOpen, setWalletDropdownOpen] = useState(false);
-  const [walletSearchTerm, setWalletSearchTerm] = useState("");
-  const [selectedWallets, setSelectedWallets] = useState<string[]>([]);
-  const walletDropdownRef = useRef<HTMLDivElement>(null);
+// const typeOptions = [
+//   { label: "All trades", value: "all_trades" },
+//   { label: "Withdrawals", value: "withdrawals" },
+//   { label: "Deposit", value: "deposit" },
+//   { label: "Trade: Fiat-Crypto", value: "trade_fiat_crypto" },
+//   { label: "Trade: Crypto-Fiat", value: "trade_crypto_fiat" },
+//   { label: "Trade: Crypto-Crypto", value: "trade_crypto_crypto" },
+//   { label: "Transfer", value: "transfer" },
+// ];
 
-  const [actionTypeDropdownOpen, setActionTypeDropdownOpen] = useState(false);
-  const [actionTypeSearchTerm, setActionTypeSearchTerm] = useState("");
-  const [selectedActionTypes, setSelectedActionTypes] = useState<string[]>([]);
-  const actionTypeDropdownRef = useRef<HTMLDivElement>(null);
+// const tagOptionsData = [
+//   { label: "Token Migration", value: "token_migration" },
+//   { label: "Capital Contribution", value: "capital_contribution" },
+//   { label: "Collateral Deposit", value: "collateral_deposit" },
+//   { label: "Collateral Withdrawal", value: "collateral_withdrawal" },
+//   { label: "Spend", value: "spend" },
+//   { label: "Stolen", value: "stolen" },
+//   { label: "Reward", value: "reward" },
+// ];
 
-  // Result Dropdown
-  const [resultDropdownOpen, setResultDropdownOpen] = useState(false);
-  const [resultSearchTerm, setResultSearchTerm] = useState("");
-  const [selectedResults, setSelectedResults] = useState<string[]>([]);
-  const resultDropdownRef = useRef<HTMLDivElement>(null);
+// const manualOptionsData = [
+//   { label: "All", value: "all" },
+//   { label: "Receive", value: "receive" },
+//   { label: "Sent", value: "sent" },
+//   { label: "Transfer", value: "transfer" },
+//   { label: "Simulate", value: "simulate" },
+//   { label: "Deploy", value: "deploy" }
+// ];
 
-  // Amount Sent Dropdown
-  const [amountSentDropdownOpen, setAmountSentDropdownOpen] = useState(false);
-  const [fromSentCurrency, setFromSentCurrency] = useState("USD");
-  const [toSentCurrency, setToSentCurrency] = useState("USD");
-  const [fromSentValue, setFromSentValue] = useState("");
-  const [toSentValue, setToSentValue] = useState("");
+// const resultOptionsData = [
+//   { label: "All", value: "all" },
+//   { label: "Receive", value: "receive" },
+//   { label: "Sent", value: "sent" },
+//   { label: "Transfer", value: "transfer" },
+//   { label: "Simulate", value: "simulate" },
+//   { label: "Deploy", value: "deploy" }
+// ];
 
-  // Amount Received Dropdown
-  const [amountReceivedDropdownOpen, setAmountReceivedDropdownOpen] =
-    useState(false);
-  const [fromReceivedCurrency, setFromReceivedCurrency] = useState("USD");
-  const [toReceivedCurrency, setToReceivedCurrency] = useState("USD");
-  const [fromReceivedValue, setFromReceivedValue] = useState("0");
-  const [toReceivedValue, setToReceivedValue] = useState("0");
+// const searchOptions = [
+//   { id: "bitcoin", name: "Bitcoin", logo: "crypto/bitcoin-btc-logo.png", color: "bg-orange-500" },
+//   { id: "bybit", name: "Bybit", logo: "crypto/bybit.png", color: "bg-blue-600" },
+//   { id: "bldget", name: "Bldget", logo: "crypto/theta-fuel-tfuel-logo.png", color: "bg-cyan-500" },
+//   { id: "ethereum", name: "Ethereum", logo: "crypto/ethereum-eth-logo.png", color: "bg-blue-500" },
+//   { id: "metamask", name: "MetaMask", logo: "crypto/metamask.png", color: "bg-orange-400" },
+// ];
 
-  // Date
-  const [selectedDateRange, setSelectedDateRange] = useState<{
-    startDate: Date | null;
-    endDate: Date | null;
-  }>({
-    startDate: null,
-    endDate: null,
-  });
+// const Filter: React.FC<FilterProps> = ({
+//   activeTab = "Portfolio",
+//   onTabChange,
+//   searchTerm,
+//   setSearchTerm,
+//   selectedType,
+//   setSelectedType,
+//   selectedTags,
+//   setSelectedTags,
+//   selectedManuals,
+//   setSelectedManuals,
+//   hideTab = false,
+// }) => {
+//   const [showWarningBanner, setShowWarningBanner] = useState(true);
+//   const [walletSearchTerm, setWalletSearchTerm] = useState("");
 
-  const [showMobileFilters, setShowMobileFilters] = useState(false);
-  const screenSize = useScreenSize();
-  const [showFromCurrencyDropdown, setShowFromCurrencyDropdown] =
-    useState(false);
-  const [showToCurrencyDropdown, setShowToCurrencyDropdown] = useState(false);
-  // Helper function to format dates
-  const formatDate = (date: Date | string) => {
-    if (typeof date === "string") {
-      return date;
-    }
-    if (date instanceof Date) {
-      return date.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      });
-    }
-    return "";
-  };
+//   // Tag Dropdown
+//   const [tagSearchTerm, setTagSearchTerm] = useState("");
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        walletDropdownRef.current &&
-        !walletDropdownRef.current.contains(event.target as Node)
-      ) {
-        setWalletDropdownOpen(false);
-      }
-      if (
-        actionTypeDropdownRef.current &&
-        !actionTypeDropdownRef.current.contains(event.target as Node)
-      ) {
-        setActionTypeDropdownOpen(false);
-      }
-      if (
-        resultDropdownRef.current &&
-        !resultDropdownRef.current.contains(event.target as Node)
-      ) {
-        setResultDropdownOpen(false);
-      }
-    };
+//   // Result Dropdown
+//   const [resultDropdownOpen, setResultDropdownOpen] = useState(false);
+//   const [resultSearchTerm, setResultSearchTerm] = useState("");
+//   const [selectedResults, setSelectedResults] = useState<string[]>([]);
+//   const resultDropdownRef = useRef<HTMLDivElement>(null);
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+//   // Amount Sent Dropdown
+//   const [amountSentDropdownOpen, setAmountSentDropdownOpen] = useState(false);
+//   const [fromSentCurrency, setFromSentCurrency] = useState("USD");
+//   const [toSentCurrency, setToSentCurrency] = useState("USD");
+//   const [fromSentValue, setFromSentValue] = useState("");
+//   const [toSentValue, setToSentValue] = useState("");
 
-  const filteredWalletOptions = walletOptions.filter((option) =>
-    option.name.toLowerCase().includes(walletSearchTerm.toLowerCase())
-  );
+//   // Amount Received Dropdown
+//   const [amountReceivedDropdownOpen, setAmountReceivedDropdownOpen] =
+//     useState(false);
+//   const [fromReceivedCurrency, setFromReceivedCurrency] = useState("USD");
+//   const [toReceivedCurrency, setToReceivedCurrency] = useState("USD");
+//   const [fromReceivedValue, setFromReceivedValue] = useState("0");
+//   const [toReceivedValue, setToReceivedValue] = useState("0");
 
-  const filteredActionTypeOptions = actionTypeOptions.filter((option) =>
-    option.name.toLowerCase().includes(actionTypeSearchTerm.toLowerCase())
-  );
+//   // Date
+//   const [selectedDateRange, setSelectedDateRange] = useState<{
+//     startDate: Date | null;
+//     endDate: Date | null;
+//   }>({
+//     startDate: null,
+//     endDate: null,
+//   });
 
-  const filteredResultOptions = resultOptions.filter((option) =>
-    option.name.toLowerCase().includes(resultSearchTerm.toLowerCase())
-  );
+//   // Advanced Filter
+//   const [isAdvancedFilterOpen, setIsAdvancedFilterOpen] = useState(false);
+//   const [advancedFilters, setAdvancedFilters] = useState([
+//     { account: '', condition: '', value: '' }
+//   ]);
+//   const advancedFilterRef = useRef<HTMLDivElement>(null);
 
-  const handleWalletToggle = (walletId: string) => {
-    setSelectedWallets((prev) =>
-      prev.includes(walletId)
-        ? prev.filter((id) => id !== walletId)
-        : [...prev, walletId]
-    );
-  };
+//   // View Options
+//   const [isViewDropdownOpen, setIsViewDropdownOpen] = useState(false);
+//   const [showDeleted, setShowDeleted] = useState(true);
+//   const [showSoftDeletedOnly, setShowSoftDeletedOnly] = useState(false);
+//   const viewDropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleActionTypeToggle = (actionTypeId: string) => {
-    setSelectedActionTypes((prev) =>
-      prev.includes(actionTypeId)
-        ? prev.filter((id) => id !== actionTypeId)
-        : [...prev, actionTypeId]
-    );
-  };
+//   // Search Suggestions
+//   const [isSearchSuggestionsOpen, setIsSearchSuggestionsOpen] = useState(false);
+//   const [searchSuggestionsRef, setSearchSuggestionsRef] = useState<HTMLDivElement | null>(null);
+//   const [selectedSearchItems, setSelectedSearchItems] = useState<string[]>([]);
 
-  const handleResultToggle = (resultId: string) => {
-    setSelectedResults((prev) =>
-      prev.includes(resultId)
-        ? prev.filter((id) => id !== resultId)
-        : [...prev, resultId]
-    );
-  };
+//   // Count active advanced filters
+//   const activeAdvancedFiltersCount = advancedFilters.filter(filter =>
+//     filter.account && filter.condition && filter.value
+//   ).length;
 
-  // Helper functions to remove individual filters
-  const removeWalletFilter = (walletId: string) => {
-    setSelectedWallets((prev) => prev.filter((id) => id !== walletId));
-  };
+//   const [showMobileFilters, setShowMobileFilters] = useState(false);
+//   const screenSize = useScreenSize();
+//   const [showFromCurrencyDropdown, setShowFromCurrencyDropdown] =
+//     useState(false);
+//   const [showToCurrencyDropdown, setShowToCurrencyDropdown] = useState(false);
+//   // Helper function to format dates
+//   const formatDate = (date: Date | string) => {
+//     if (typeof date === "string") {
+//       return date;
+//     }
+//     if (date instanceof Date) {
+//       return date.toLocaleDateString("en-US", {
+//         year: "numeric",
+//         month: "short",
+//         day: "numeric",
+//       });
+//     }
+//     return "";
+//   };
 
-  const removeActionTypeFilter = (actionTypeId: string) => {
-    setSelectedActionTypes((prev) => prev.filter((id) => id !== actionTypeId));
-  };
+//   // Close dropdown when clicking outside
+//   useEffect(() => {
+//     const handleClickOutside = (event: MouseEvent) => {
+//       if (
+//         resultDropdownRef.current &&
+//         !resultDropdownRef.current.contains(event.target as Node)
+//       ) {
+//         setResultDropdownOpen(false);
+//       }
+//     };
 
-  const removeResultFilter = (resultId: string) => {
-    setSelectedResults((prev) => prev.filter((id) => id !== resultId));
-  };
+//     document.addEventListener("mousedown", handleClickOutside);
+//     return () => {
+//       document.removeEventListener("mousedown", handleClickOutside);
+//     };
+//   }, []);
 
-  const removeAmountSentFilter = () => {
-    setFromSentValue("0");
-    setToSentValue("0");
-    setFromSentCurrency("USD");
-    setToSentCurrency("USD");
-  };
+//   // Close advanced filter when clicking outside
+//   useEffect(() => {
+//     const handleAdvancedFilterClickOutside = (event: MouseEvent) => {
+//       if (
+//         advancedFilterRef.current &&
+//         !advancedFilterRef.current.contains(event.target as Node)
+//       ) {
+//         setIsAdvancedFilterOpen(false);
+//       }
+//     };
 
-  const removeAmountReceivedFilter = () => {
-    setFromReceivedValue("0");
-    setToReceivedValue("0");
-    setFromReceivedCurrency("USD");
-    setToReceivedCurrency("USD");
-  };
+//     document.addEventListener("mousedown", handleAdvancedFilterClickOutside);
+//     return () => {
+//       document.removeEventListener("mousedown", handleAdvancedFilterClickOutside);
+//     };
+//   }, []);
 
-  const removeDateFilter = () => {
-    setSelectedDateRange({ startDate: null, endDate: null });
-  };
+//   // Close view dropdown when clicking outside
+//   useEffect(() => {
+//     const handleViewDropdownClickOutside = (event: MouseEvent) => {
+//       if (
+//         viewDropdownRef.current &&
+//         !viewDropdownRef.current.contains(event.target as Node)
+//       ) {
+//         setIsViewDropdownOpen(false);
+//       }
+//     };
 
-  const clearAllFilters = () => {
-    setSelectedWallets([]);
-    setSelectedActionTypes([]);
-    setSelectedResults([]);
-    setFromSentValue("0");
-    setToSentValue("0");
-    setFromSentCurrency("USD");
-    setToSentCurrency("USD");
-    setFromReceivedValue("0");
-    setToReceivedValue("0");
-    setFromReceivedCurrency("USD");
-    setToReceivedCurrency("USD");
-    setSelectedDateRange({ startDate: null, endDate: null });
-  };
+//     document.addEventListener("mousedown", handleViewDropdownClickOutside);
+//     return () => {
+//       document.removeEventListener("mousedown", handleViewDropdownClickOutside);
+//     };
+//   }, []);
 
-  // Check if any filters are active
-  const hasActiveFilters =
-    selectedWallets.length > 0 ||
-    selectedActionTypes.length > 0 ||
-    selectedResults.length > 0 ||
-    (fromSentValue !== "" && fromSentValue !== "0") ||
-    (toSentValue !== "" && toSentValue !== "0") ||
-    fromReceivedValue !== "0" ||
-    toReceivedValue !== "0" ||
-    (selectedDateRange &&
-      selectedDateRange.startDate &&
-      selectedDateRange.endDate);
-  return (
-    <div className={`p-0 sm:p-4 md:px-0 md:pt-5 md:pb-6 rounded-lg `}>
-      {/* Tabs */}
-      {!hideTab && (
-        <div className={`border-gray-200 dark:border-gray-700`}>
-          <Tabs>
-            <Tabs.List className="my-0 mt-3 lg:my-2 bg-white dark:bg-gray-800  w-full sm:w-[fit-content]">
-              {tabs.map((tab) => (
-                <Tabs.Trigger
-                  key={tab}
-                  value={tab}
-                  onClick={() => onTabChange?.(tab)}
-                  className={`w-full sm:w-[inherit] px-2.5 sm:px-5 md:px-2.5 py-1.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${
-                    activeTab === tab
-                      ? "bg-green-400 dark:bg-gray-0 text-primary dark:text-gray-900"
-                      : "text-gray-600 dark:text-gray-200"
-                  }`}
-                >
-                  {tab}
-                </Tabs.Trigger>
-              ))}
-              <Tabs.TriggerIndicator />
-            </Tabs.List>
-          </Tabs>
-        </div>
-      )}
+//   // Close search suggestions when clicking outside
+//   useEffect(() => {
+//     const handleSearchSuggestionsClickOutside = (event: MouseEvent) => {
+//       if (
+//         searchSuggestionsRef &&
+//         !searchSuggestionsRef.contains(event.target as Node)
+//       ) {
+//         setIsSearchSuggestionsOpen(false);
+//       }
+//     };
 
-      {/* Blue Alert Banner for Warnings Tab */}
-      {activeTab === "Warnings" && showWarningBanner && (
-        <div
-          className={`sm:my-2 px-4 py-3 sm:px-6 sm:py-4 rounded-lg border border-info-500 text-[#2186D7]
-            dark:border-blue-600 dark:text-blue-300`}
-        >
-          <div className="sm:hidden">
-            <div className="flex justify-between items-start">
-              <div className="w-5 h-5">
-                <BlueCheckedIcon />
-              </div>
-              <button
-                className={`text-sm font-medium text-[#4D5050] 
-                  dark:text-gray-400`}
-                onClick={() => setShowWarningBanner(false)}
-              >
-                <CloseIcon />
-              </button>
-            </div>
-            <div className="mt-1.5 flex justify-start items-center">
-              <span className="text-base font-medium text-gray-900 text-left">
-                You have 10 missing pricing, match them at the setting
-              </span>
-            </div>
-            <div className="flex justify-end items-center mt-1.5 ">
-              <button
-                className={`text-sm font-medium text-[#5F9339] 
-                  dark:text-green-400`}
-              >
-                Match price
-              </button>
-            </div>
-          </div>
-          <div className="hidden sm:flex items-center justify-between mx-2">
-            <div className="flex items-center gap-3">
-              <div className="w-5 h-5">
-                <BlueCheckedIcon />
-              </div>
+//     document.addEventListener("mousedown", handleSearchSuggestionsClickOutside);
+//     return () => {
+//       document.removeEventListener("mousedown", handleSearchSuggestionsClickOutside);
+//     };
+//   }, [searchSuggestionsRef]);
 
-              <span className="text-base font-medium">
-                You have 10 missing pricing, match them at the setting
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <button
-                className={`text-sm font-medium text-[#5F9339] 
-                  dark:text-green-400`}
-              >
-                Match price
-              </button>
-              <button
-                className={`text-sm font-medium text-[#4D5050] 
-                  dark:text-gray-400`}
-                onClick={() => setShowWarningBanner(false)}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+//   const filteredTypeOptions = typeOptions.filter((option) =>
+//     option.label.toLowerCase().includes(walletSearchTerm.toLowerCase())
+//   );
 
-      <div className="flex flex-row justify-start lg:items-center gap-2 md:gap-5 mt-[24px] sm:mt-0">
-        {/* Search */}
-        <div
-          className="flex w-full md:flex-grow-1 sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border 
-          border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]"
-        >
-          <div className="flex flex-row justify-start items-center gap-3">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-gray-900 dark:text-gray-150 opacity-70"
-            >
-              <path
-                d="M9.6 17.2C13.7974 17.2 17.2 13.7974 17.2 9.6C17.2 5.40264 13.7974 2 9.6 2C5.40264 2 2 5.40264 2 9.6C2 13.7974 5.40264 17.2 9.6 17.2Z"
-                stroke="currentColor"
-                stroke-width="1.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M18.0004 17.9999L16.4004 16.3999"
-                stroke="currentColor"
-                stroke-width="1.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            <input
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className={`text-sm w-full  border-gray-700 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none bg-transparent
-            dark:bg-transparent dark:border-[#4D5050]`}
-            />
-          </div>
-        </div>
-        <SecondaryButton icon={<FilterIcon />} className="flex sm:hidden" />
-        <SecondaryButton icon={<EyeIcon />} className="flex sm:hidden" />
-        <div className="hidden md:flex items-center space-x-5 mt-4 md:mt-0">
-          {/* Custom Wallet Dropdown */}
-          <div className="relative" ref={walletDropdownRef}>
-            <button
-              onClick={() => setWalletDropdownOpen(!walletDropdownOpen)}
-              className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-primary
-                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
-            >
-              <span>Wallet</span>
-              <FontAwesomeIcon
-                icon={walletDropdownOpen ? faChevronUp : faChevronDown}
-                className="w-4 h-4"
-              />
-            </button>
+//   const filteredSearchOptions = searchOptions.filter((option) =>
+//     option.name.toLowerCase().includes(searchTerm.toLowerCase())
+//   );
 
-            {walletDropdownOpen && (
-              <div
-                className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-sm z-50 bg-white border-gray-150
-                  dark:bg-[#0E201E]`}
-              >
-                {/* Search Input */}
-                <div className="px-3 border-b border-gray-150">
-                  <input
-                    type="text"
-                    placeholder="Type or paste wallet"
-                    value={walletSearchTerm}
-                    onChange={(e) => setWalletSearchTerm(e.target.value)}
-                    className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
-                      dark:bg-[#0E201E] dark:text-gray-250`}
-                  />
-                </div>
+//   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const value = e.target.value;
+//     setSearchTerm(value);
+//     setIsSearchSuggestionsOpen(value.length > 0);
+//   };
 
-                {/* Wallet Options List */}
-                <div className="max-h-48 overflow-y-auto">
-                  {filteredWalletOptions.map((option) => {
-                    const isSelected = selectedWallets.includes(option.id);
-                    return (
-                      <div
-                        key={option.id}
-                        onClick={() => handleWalletToggle(option.id)}
-                        className={`flex items-center px-3 py-1.5 cursor-pointer`}
-                      >
-                        <div
-                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
-                            isSelected
-                              ? "bg-[#90C853] border-[#90C853]"
-                              : "border-gray-300"
-                          }`}
-                        >
-                          {isSelected && (
-                            <FontAwesomeIcon
-                              icon={faCheck}
-                              className="w-2.5 h-2.5 text-white"
-                            />
-                          )}
-                        </div>
-                        <img
-                          src={option.logo}
-                          className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}
-                        ></img>
-                        <span
-                          className={`text-sm text-gray-900
-                            dark:text-gray-250`}
-                        >
-                          {option.name}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
+//   const handleSearchItemToggle = (itemId: string) => {
+//     setSelectedSearchItems((prev) =>
+//       prev.includes(itemId)
+//         ? prev.filter((id) => id !== itemId)
+//         : [...prev, itemId]
+//     );
+//   };
 
-          {/* Action Type Dropdown */}
-          <div className="relative" ref={actionTypeDropdownRef}>
-            <button
-              onClick={() => setActionTypeDropdownOpen(!actionTypeDropdownOpen)}
-              className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl 
-                border bg-white border-default text-primary
-                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
-            >
-              <span>Action type</span>
-              <FontAwesomeIcon
-                icon={actionTypeDropdownOpen ? faChevronUp : faChevronDown}
-                className="w-3 h-3"
-              />
-            </button>
+//   const filteredTagOptions = tagOptionsData.filter((option) =>
+//     option.label.toLowerCase().includes(tagSearchTerm.toLowerCase())
+//   );
 
-            {actionTypeDropdownOpen && (
-              <div
-                className={`absolute top-full left-0 mt-1 w-64 rounded-lg 
-                  border shadow-sm z-50 bg-white border-gray-150
-                  dark:bg-[#0E201E]`}
-              >
-                {/* Search Input */}
-                <div className="px-3 border-b border-gray-150">
-                  <input
-                    type="text"
-                    placeholder="Type or paste action type"
-                    value={actionTypeSearchTerm}
-                    onChange={(e) => setActionTypeSearchTerm(e.target.value)}
-                    className={`w-full px-3 py-2 rounded text-sm text-gray-900 dark:text-gray-150 placeholder-gray-500 focus:outline-none
-                      dark:bg-[#0E201E] dark:text-gray-50`}
-                  />
-                </div>
+//   const filteredResultOptions = resultOptions.filter((option) =>
+//     option.name.toLowerCase().includes(resultSearchTerm.toLowerCase())
+//   );
 
-                {/* Action Type Options List */}
-                <div className="max-h-48 overflow-y-auto">
-                  {filteredActionTypeOptions.map((option) => {
-                    const isSelected = selectedActionTypes.includes(option.id);
-                    return (
-                      <div
-                        key={option.id}
-                        onClick={() => handleActionTypeToggle(option.id)}
-                        className={`flex items-center px-3 py-2 cursor-pointer`}
-                      >
-                        <div
-                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
-                            isSelected
-                              ? "bg-[#90C853] border-[#90C853]"
-                              : "border-gray-300"
-                          }`}
-                        >
-                          {isSelected && (
-                            <FontAwesomeIcon
-                              icon={faCheck}
-                              className="w-2.5 h-2.5 text-white"
-                            />
-                          )}
-                        </div>
-                        <span
-                          className={`text-sm text-gray-900 
-                            dark:text-gray-250`}
-                        >
-                          {option.name}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-          {/* Amount Sent Dropdown */}
-          <AmountRangeDropdown
-            fromValue={fromSentValue}
-            setFromValue={setFromSentValue}
-            toValue={toSentValue}
-            setToValue={setToSentValue}
-            fromCurrency={fromSentCurrency}
-            setFromCurrency={setFromSentCurrency}
-            toCurrency={toSentCurrency}
-            setToCurrency={setToSentCurrency}
-            isOpen={amountSentDropdownOpen}
-            setIsOpen={setAmountSentDropdownOpen}
-            title="Amount sent"
-          />
+//   const handleTypeToggle = (typeId: string) => {
+//     setSelectedType((prev) =>
+//       prev.includes(typeId)
+//         ? prev.filter((id) => id !== typeId)
+//         : [...prev, typeId]
+//     );
+//   };
 
-          {/* Amount Received Dropdown */}
-          <AmountRangeDropdown
-            fromValue={fromReceivedValue}
-            setFromValue={setFromReceivedValue}
-            toValue={toReceivedValue}
-            setToValue={setToReceivedValue}
-            fromCurrency={fromReceivedCurrency}
-            setFromCurrency={setFromReceivedCurrency}
-            toCurrency={toReceivedCurrency}
-            setToCurrency={setToReceivedCurrency}
-            isOpen={amountReceivedDropdownOpen}
-            setIsOpen={setAmountReceivedDropdownOpen}
-            title="Amount received"
-          />
-          <div className={`max-w-[190px] flex items-center`}>
-            <DateRangePickerPopover
-              selectedDateRange={selectedDateRange}
-              onDateRangeChange={setSelectedDateRange}
-              buttonLabel="Date"
-              className="py-[13px] shadow-sm rounded-lg"
-            />
-          </div>
+//   const handleTagToggle = (tagId: string) => {
+//     setSelectedTags((prev) =>
+//       prev.includes(tagId)
+//         ? prev.filter((id) => id !== tagId)
+//         : [...prev, tagId]
+//     );
+//   };
 
-          {/* Custom Result Dropdown */}
-          <div className="relative" ref={resultDropdownRef}>
-            <button
-              onClick={() => setResultDropdownOpen(!resultDropdownOpen)}
-              className={`flex text-lg items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-[#0E201E] text-sm
-                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
-            >
-              <span>Result</span>
-              <FontAwesomeIcon
-                icon={resultDropdownOpen ? faChevronUp : faChevronDown}
-                className="w-3 h-3"
-              />
-            </button>
+//   const handleResultToggle = (resultId: string) => {
+//     setSelectedResults((prev) =>
+//       prev.includes(resultId)
+//         ? prev.filter((id) => id !== resultId)
+//         : [...prev, resultId]
+//     );
+//   };
 
-            {resultDropdownOpen && (
-              <div
-                className={`absolute top-full right-0 mt-1 w-64 rounded-lg 
-                  border shadow-sm z-50 bg-white border-gray-150
-                  dark:bg-[#0E201E]`}
-              >
-                {/* Search Input */}
-                <div className="px-3 border-b border-gray-150">
-                  <input
-                    type="text"
-                    placeholder="Type or paste result"
-                    value={resultSearchTerm}
-                    onChange={(e) => setResultSearchTerm(e.target.value)}
-                    className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
-                      dark:bg-[#0E201E] dark:text-gray-250`}
-                  />
-                </div>
+//   // Helper functions to remove individual filters
+//   const removeTypeFilter = (typeId: string) => {
+//     setSelectedType((prev) => prev.filter((id) => id !== typeId));
+//   };
 
-                {/* Result Options List */}
-                <div className="max-h-48 overflow-y-auto">
-                  {filteredResultOptions.map((option) => {
-                    const isSelected = selectedResults.includes(option.id);
-                    return (
-                      <div
-                        key={option.id}
-                        onClick={() => handleResultToggle(option.id)}
-                        className={`flex items-center px-3 py-2 cursor-pointer`}
-                      >
-                        <div
-                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
-                            isSelected
-                              ? "bg-[#90C853] border-[#90C853]"
-                              : "border-gray-300"
-                          }`}
-                        >
-                          {isSelected && (
-                            <FontAwesomeIcon
-                              icon={faCheck}
-                              className="w-2.5 h-2.5 text-white"
-                            />
-                          )}
-                        </div>
-                        <span
-                          className={`text-sm text-gray-900
-                            dark:text-gray-250`}
-                        >
-                          {option.name}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      <MobileDrawer
-        isOpen={showMobileFilters}
-        onClose={() => setShowMobileFilters(false)}
-        header="Filters"
-        height={screenSize.height - 100}
-        leftButtonText="Clear All"
-        rightButtonText="Apply"
-        onLeftButtonClick={() => setShowMobileFilters(false)}
-        onRightButtonClick={() => setShowMobileFilters(false)}
-      >
-        <Accordion>
-          <AccordionItem title="Wallet">
-            {" "}
-            <div
-              className={`w-full  z-50 bg-white border-gray-300 
-                dark:bg-gray-800 dark:border-gray-600`}
-            >
-              {/* Search Input */}
-              <div className="">
-                <input
-                  type="text"
-                  placeholder="Type or paste wallet"
-                  value={walletSearchTerm}
-                  onChange={(e) => setWalletSearchTerm(e.target.value)}
-                  className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
-                />
-              </div>
+//   const removeTagFilter = (tagId: string) => {
+//     setSelectedTags((prev) => prev.filter((id) => id !== tagId));
+//   };
 
-              {/* Wallet Options List */}
-              <div className="max-h-48 overflow-y-auto mt-3 flex flex-col gap-4 ">
-                {filteredWalletOptions.map((option) => {
-                  const isSelected = selectedWallets.includes(option.id);
-                  return (
-                    <div
-                      key={option.id}
-                      onClick={() => handleWalletToggle(option.id)}
-                      className={`flex items-center px-3 gap-2 cursor-pointer hover:bg-gray-100 
-                        dark:hover:bg-gray-700`}
-                    >
-                      <div
-                        className={`w-5 h-5 border-2 rounded flex items-center justify-center  transition-colors ${
-                          isSelected
-                            ? "bg-[#90C853] border-[#90C853]"
-                            : "border-gray-150"
-                        }`}
-                      >
-                        {isSelected && (
-                          <FontAwesomeIcon
-                            icon={faCheck}
-                            className="w-2.5 h-2.5 text-white"
-                          />
-                        )}
-                      </div>
-                      <img
-                        src={option.logo}
-                        className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold ml-3`}
-                      ></img>
-                      <span
-                        className={`text-base text-gray-900 dark:text-gray-150`}
-                      >
-                        {option.name}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </AccordionItem>
-          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-          <AccordionItem title="Action Type">
-            {" "}
-            <div
-              className={`w-full z-50 bg-white border-gray-300 
-                dark:bg-[#0E201E] dark:border-gray-600
-                `}
-            >
-              {/* Search Input */}
+//   const removeManualFilter = (manualId: string) => {
+//     setSelectedManuals((prev) => prev.filter((id) => id !== manualId));
+//   };
 
-              {/* Action Type Options List */}
-              <div className="max-h-48 overflow-y-auto  mt-3 flex flex-col gap-4">
-                {filteredActionTypeOptions.map((option) => {
-                  const isSelected = selectedActionTypes.includes(option.id);
-                  return (
-                    <div
-                      key={option.id}
-                      onClick={() => handleActionTypeToggle(option.id)}
-                      className={`flex items-center  cursor-pointer hover:bg-gray-100 
-                        dark:hover:bg-gray-700
-                      `}
-                    >
-                      <div
-                        className={`w-5 h-5 border-2 rounded flex mr-3 items-center justify-center  transition-colors ${
-                          isSelected
-                            ? "bg-[#90C853] border-[#90C853]"
-                            : "border-gray-150"
-                        }`}
-                      >
-                        {isSelected && (
-                          <FontAwesomeIcon
-                            icon={faCheck}
-                            className="w-2.5 h-2.5 text-white"
-                          />
-                        )}
-                      </div>
-                      <span
-                        className={`text-base text-gray-900 dark:text-gray-150`}
-                      >
-                        {option.name}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </AccordionItem>
-          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-          <AccordionItem title="Amount Sent">
-            {" "}
-            <div className={`w-full  z-50 mt-2`}>
-              <div className="flex flex-col gap-3">
-                {/* From Input */}
-                <div className="flex items-center gap-3 ">
-                  <span
-                    className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
-                  >
-                    From:
-                  </span>
+//   const removeResultFilter = (resultId: string) => {
+//     setSelectedResults((prev) => prev.filter((id) => id !== resultId));
+//   };
 
-                  <div className="relative flex-1">
-                    <Input
-                      type="number"
-                      placeholder="Amount"
-                      value={fromSentValue}
-                      onChange={(e) => setFromSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
-                    />
-                    <button
-                      onClick={() =>
-                        setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
-                      }
-                      className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
-                    >
-                      <div className="flex items-center gap-1">
-                        <span className="text-caption font-medium">
-                          {fromSentCurrency}
-                        </span>
-                        <FontAwesomeIcon
-                          icon={faChevronDown}
-                          className="w-2 h-2"
-                        />
-                      </div>
-                    </button>
+//   const removeSearchFilter = (searchId: string) => {
+//     setSelectedSearchItems((prev) => prev.filter((id) => id !== searchId));
+//   };
 
-                    {/* Currency Dropdown */}
-                    {showFromCurrencyDropdown && (
-                      <div
-                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200 
-                          dark:bg-gray-800 dark:border-gray-600`}
-                      >
-                        <div className="py-1">
-                          {["USD", "EUR", "USDT"].map((currency) => (
-                            <button
-                              key={currency}
-                              onClick={() => {
-                                setFromSentCurrency(currency);
-                                setShowFromCurrencyDropdown(false);
-                              }}
-                              className={`w-full px-3 py-1 text-left text-xs ${
-                                fromSentCurrency === currency
-                                  ? "bg-blue-50 text-blue-600"
-                                  : ""
-                              }`}
-                            >
-                              {currency}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
+//   const removeAmountSentFilter = () => {
+//     setFromSentValue("0");
+//     setToSentValue("0");
+//     setFromSentCurrency("USD");
+//     setToSentCurrency("USD");
+//   };
 
-                {/* To Input */}
-                <div className="flex items-center gap-3 ">
-                  <span
-                    className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
-                  >
-                    To:
-                  </span>
+//   const removeAmountReceivedFilter = () => {
+//     setFromReceivedValue("0");
+//     setToReceivedValue("0");
+//     setFromReceivedCurrency("USD");
+//     setToReceivedCurrency("USD");
+//   };
 
-                  <div className="relative flex-1">
-                    <Input
-                      type="number"
-                      placeholder="Amount"
-                      value={toSentValue}
-                      onChange={(e) => setToSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
-                    />
-                    <button
-                      onClick={() =>
-                        setShowToCurrencyDropdown(!showToCurrencyDropdown)
-                      }
-                      className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
-                    >
-                      <div className="flex items-center gap-1">
-                        <span className="text-caption font-medium">
-                          {toSentCurrency}
-                        </span>
-                        <FontAwesomeIcon
-                          icon={faChevronDown}
-                          className="w-2 h-2"
-                        />
-                      </div>
-                    </button>
+//   const removeDateFilter = () => {
+//     setSelectedDateRange({ startDate: null, endDate: null });
+//   };
 
-                    {/* Currency Dropdown */}
-                    {showToCurrencyDropdown && (
-                      <div
-                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200 
-                          dark:bg-gray-800 dark:border-gray-600`}
-                      >
-                        <div className="py-1">
-                          {["USD", "EUR", "USDT"].map((currency) => (
-                            <button
-                              key={currency}
-                              onClick={() => {
-                                setToSentCurrency(currency);
-                                setShowToCurrencyDropdown(false);
-                              }}
-                              className={`w-full px-3 py-1 text-left text-xs ${
-                                toSentCurrency === currency
-                                  ? "bg-blue-50 text-blue-600"
-                                  : ""
-                              }`}
-                            >
-                              {currency}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AccordionItem>
-          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-          <AccordionItem title="Amount Received">
-            {" "}
-            <div className={`w-full  z-50 mt-2`}>
-              <div className="flex flex-col gap-3">
-                {/* From Input */}
-                <div className="flex items-center gap-3 ">
-                  <span
-                    className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
-                  >
-                    From:
-                  </span>
+//   const clearAllFilters = () => {
+//     setSelectedType([]);
+//     setSelectedTags([]);
+//     setSelectedManuals([]);
+//     setSelectedResults([]);
+//     setSelectedSearchItems([]);
+//     setAdvancedFilters([{ account: '', condition: '', value: '' }]);
+//     setFromSentValue("0");
+//     setToSentValue("0");
+//     setFromSentCurrency("USD");
+//     setToSentCurrency("USD");
+//     setFromReceivedValue("0");
+//     setToReceivedValue("0");
+//     setFromReceivedCurrency("USD");
+//     setToReceivedCurrency("USD");
+//     setSelectedDateRange({ startDate: null, endDate: null });
+//   };
 
-                  <div className="relative flex-1">
-                    <Input
-                      type="number"
-                      placeholder="Amount"
-                      value={fromSentValue}
-                      onChange={(e) => setFromSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
-                    />
-                    <button
-                      onClick={() =>
-                        setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
-                      }
-                      className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
-                    >
-                      <div className="flex items-center gap-1">
-                        <span className="text-caption font-medium">
-                          {fromSentCurrency}
-                        </span>
-                        <FontAwesomeIcon
-                          icon={faChevronDown}
-                          className="w-2 h-2"
-                        />
-                      </div>
-                    </button>
+//   // Check if any filters are active
+//   const hasActiveFilters =
+//     selectedType.length > 0 ||
+//     selectedTags.length > 0 ||
+//     selectedManuals.length > 0 ||
+//     selectedResults.length > 0 ||
+//     selectedSearchItems.length > 0 ||
+//     activeAdvancedFiltersCount > 0 ||
+//     (fromSentValue !== "" && fromSentValue !== "0") ||
+//     (toSentValue !== "" && toSentValue !== "0") ||
+//     fromReceivedValue !== "0" ||
+//     toReceivedValue !== "0" ||
+//     (selectedDateRange &&
+//       selectedDateRange.startDate &&
+//       selectedDateRange.endDate);
+//   return (
+//     <div className={`relative p-0 sm:p-4 md:px-0 md:pt-5 md:pb-6 rounded-lg `}>
+//       {/* Tabs */}
+//       {!hideTab && (
+//         <div className={`border-gray-200 dark:border-gray-700`}>
+//           <Tabs>
+//             <Tabs.List className="my-0 mt-3 lg:my-2 bg-white dark:bg-gray-800  w-full sm:w-[fit-content]">
+//               {tabs.map((tab) => (
+//                 <Tabs.Trigger
+//                   key={tab}
+//                   value={tab}
+//                   onClick={() => onTabChange?.(tab)}
+//                   className={`w-full sm:w-[inherit] px-2.5 sm:px-5 md:px-2.5 py-1.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${
+//                     activeTab === tab
+//                       ? "bg-green-400 dark:bg-gray-0 text-primary dark:text-gray-900"
+//                       : "text-gray-600 dark:text-gray-200"
+//                   }`}
+//                 >
+//                   {tab}
+//                 </Tabs.Trigger>
+//               ))}
+//               <Tabs.TriggerIndicator />
+//             </Tabs.List>
+//           </Tabs>
+//         </div>
+//       )}
 
-                    {/* Currency Dropdown */}
-                    {showFromCurrencyDropdown && (
-                      <div
-                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200 
-                          dark:bg-gray-800 dark:border-gray-600`}
-                      >
-                        <div className="py-1">
-                          {["USD", "EUR", "USDT"].map((currency) => (
-                            <button
-                              key={currency}
-                              onClick={() => {
-                                setFromSentCurrency(currency);
-                                setShowFromCurrencyDropdown(false);
-                              }}
-                              className={`w-full px-3 py-1 text-left text-xs ${
-                                fromSentCurrency === currency
-                                  ? "bg-blue-50 text-blue-600"
-                                  : ""
-                              }`}
-                            >
-                              {currency}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
+//       {/* Blue Alert Banner for Warnings Tab */}
+//       {activeTab === "Warnings" && showWarningBanner && (
+//         <div
+//           className={`my-2 px-6 py-4 rounded-lg border border-info-500 text-[#2186D7]
+//             dark:border-blue-600 dark:text-blue-300`}
+//         >
+//           <div className="flex items-center justify-between mx-2">
+//             <div className="flex items-center gap-3">
+//               <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
+//                 <svg
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   fill="none"
+//                   viewBox="0 0 24 24"
+//                   strokeWidth={2}
+//                   stroke="currentColor"
+//                   className="w-4 h-4 text-white"
+//                 >
+//                   <path
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                     d="M4.5 12.75l6 6 9-13.5"
+//                   />
+//                 </svg>
+//               </div>
+//               <span className="text-base font-medium">
+//                 You have 10 missing pricing, match them at the setting
+//               </span>
+//             </div>
+//             <div className="flex items-center gap-3">
+//               <button
+//                 className={`text-sm font-medium text-[#5F9339]
+//                   dark:text-green-400`}
+//               >
+//                 Match price
+//               </button>
+//               <button
+//                 className={`text-sm font-medium text-[#4D5050]
+//                   dark:text-gray-400`}
+//                 onClick={() => setShowWarningBanner(false)}
+//               >
+//                 Close
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       )}
 
-                {/* To Input */}
-                <div className="flex items-center gap-3 ">
-                  <span
-                    className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
-                  >
-                    To:
-                  </span>
+//       <div className="flex flex-row justify-start lg:items-center gap-2 md:gap-5 mt-[24px] sm:mt-0">
+//         {/* Search */}
+//         <div
+//           className="flex w-full md:flex-grow-1 sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border
+//           border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]"
+//         >
+//           <div className="flex flex-row justify-start items-center gap-3">
+//                  <SearchIcon
+//                    width={16}
+//                    height={16}
+//                    strokeColor="currentColor"
+//               className="text-gray-900 dark:text-gray-150 opacity-70"
+//                  />
+//             <input
+//               type="text"
+//                    placeholder={selectedSearchItems.length > 0 ? `${selectedSearchItems.length} selected` : "Search"}
+//               value={searchTerm}
+//                    onChange={handleSearchInputChange}
+//                    onFocus={() => setIsSearchSuggestionsOpen(true)}
+//                    className="text-sm w-full border-gray-700 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none bg-transparent dark:bg-transparent dark:border-[#4D5050]"
+//             />
+//           </div>
+//         </div>
+//         <SecondaryButton icon={<FilterIcon />} className="flex sm:hidden" />
+//         <SecondaryButton icon={<EyeIcon />} className="flex sm:hidden" />
+//         <div className="hidden md:flex items-center space-x-5 mt-4 md:mt-0">
+//           {/* Custom Wallet Dropdown */}
+//           <div className="relative" ref={walletDropdownRef}>
+//             <button
+//               onClick={() => setWalletDropdownOpen(!walletDropdownOpen)}
+//               className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-primary
+//                 dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
+//             >
+//               <span>Wallet</span>
+//               <FontAwesomeIcon
+//                 icon={walletDropdownOpen ? faChevronUp : faChevronDown}
+//                 className="w-4 h-4"
+//               />
+//             </button>
 
-                  <div className="relative flex-1">
-                    <Input
-                      type="number"
-                      placeholder="Amount"
-                      value={toSentValue}
-                      onChange={(e) => setToSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
-                    />
-                    <button
-                      onClick={() =>
-                        setShowToCurrencyDropdown(!showToCurrencyDropdown)
-                      }
-                      className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
-                    >
-                      <div className="flex items-center gap-1">
-                        <span className="text-caption font-medium">
-                          {toSentCurrency}
-                        </span>
-                        <FontAwesomeIcon
-                          icon={faChevronDown}
-                          className="w-2 h-2"
-                        />
-                      </div>
-                    </button>
+//             {walletDropdownOpen && (
+//               <div
+//                 className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-sm z-50 bg-white border-gray-150
+//                   dark:bg-[#0E201E]`}
+//               >
+//                 {/* Search Input */}
+//                 <div className="px-3 border-b border-gray-150">
+//                   <input
+//                     type="text"
+//                     placeholder="Type or paste wallet"
+//                     value={walletSearchTerm}
+//                     onChange={(e) => setWalletSearchTerm(e.target.value)}
+//                     className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
+//                       dark:bg-[#0E201E] dark:text-gray-250`}
+//                   />
+//                 </div>
 
-                    {/* Currency Dropdown */}
-                    {showToCurrencyDropdown && (
-                      <div
-                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200
-                          dark:bg-gray-800 dark:border-gray-600`}
-                      >
-                        <div className="py-1">
-                          {["USD", "EUR", "USDT"].map((currency) => (
-                            <button
-                              key={currency}
-                              onClick={() => {
-                                setToSentCurrency(currency);
-                                setShowToCurrencyDropdown(false);
-                              }}
-                              className={`w-full px-3 py-1 text-left text-xs ${
-                                toSentCurrency === currency
-                                  ? "bg-blue-50 text-blue-600"
-                                  : ""
-                              }`}
-                            >
-                              {currency}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AccordionItem>
-          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-          <AccordionItem title="Date">
-            {" "}
-            <DateRangePickerPopover
-              selectedDateRange={selectedDateRange}
-              onDateRangeChange={setSelectedDateRange}
-              buttonLabel="Select Date"
-              className="py-2.5"
-              isDrawer
-            />
-          </AccordionItem>
-        </Accordion>
-      </MobileDrawer>
+//                 {/* Wallet Options List */}
+//                 <div className="max-h-48 overflow-y-auto">
+//                    {filteredSearchOptions.map((option) => {
+//                      const isSelected = selectedSearchItems.includes(option.id);
+//                     return (
+//                       <div
+//                         key={option.id}
+//                          onClick={() => handleSearchItemToggle(option.id)}
+//                          className="flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
+//                       >
+//                         <div
+//                           className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+//                             isSelected
+//                                ? "bg-green-600 border-green-600"
+//                               : "border-gray-300"
+//                           }`}
+//                         >
+//                           {isSelected && (
+//                              <svg
+//                               className="w-2.5 h-2.5 text-white"
+//                                fill="currentColor"
+//                                viewBox="0 0 20 20"
+//                              >
+//                                <path
+//                                  fillRule="evenodd"
+//                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+//                                  clipRule="evenodd"
+//                                />
+//                              </svg>
+//                           )}
+//                         </div>
+//                         <img
+//                           src={option.logo}
+//                            alt={option.name}
+//                           className={`w-6 h-6 rounded-full ${option.color} flex items-center justify-center text-white text-xs font-bold mr-3`}
+//                          />
+//                          <span className="text-sm text-gray-900 dark:text-gray-250">
+//                           {option.name}
+//                         </span>
+//                       </div>
+//                     );
+//                   })}
+//                 </div>
+//               </div>
+//             )}
+//           </div>
+//           {/* Type Dropdown */}
+//           <CheckboxDropdown
+//             options={typeOptions}
+//             onSelect={(values) => {
+//               setSelectedType(values);
+//             }}
+//             selectedValues={selectedType}
+//             defaultValue="Type"
+//             className="min-w-[120px]"
+//           />
 
-      {/* Active Filters Display */}
-      {hasActiveFilters && (
-        <div className="pt-4 md:pt-0">
-          <div className="flex flex-wrap gap-2">
-            {/* Wallet Filters */}
-            {selectedWallets.map((walletId) => {
-              const wallet = walletOptions.find((w) => w.id === walletId);
-              return wallet ? (
-                <div
-                  key={`wallet-${walletId}`}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
-                    bg-gray-100 text-gray-800 border border-default
-                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
-                >
-                  <span>{wallet.name}</span>
-                  <button
-                    onClick={() => removeWalletFilter(walletId)}
-                    className="transition-colors"
-                    aria-label={`Remove ${wallet.name} filter`}
-                  >
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      className="w-3 h-3"
-                      aria-hidden="true"
-                    />
-                  </button>
-                </div>
-              ) : null;
-            })}
+//           {/* Action Type Dropdown */}
+//           <div className="relative" ref={actionTypeDropdownRef}>
+//             <button
+//               onClick={() => setActionTypeDropdownOpen(!actionTypeDropdownOpen)}
+//               className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl
+//                 border bg-white border-default text-primary
+//                 dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
+//             >
+//               <span>Action type</span>
+//               <FontAwesomeIcon
+//                 icon={actionTypeDropdownOpen ? faChevronUp : faChevronDown}
+//                 className="w-3 h-3"
+//               />
+//             </button>
 
-            {/* Action Type Filters */}
-            {selectedActionTypes.map((actionTypeId) => {
-              const actionType = actionTypeOptions.find(
-                (a) => a.id === actionTypeId
-              );
-              return actionType ? (
-                <div
-                  key={`action-${actionTypeId}`}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
-                    bg-gray-100 text-gray-800 border border-default
-                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
-                >
-                  <span>{actionType.name}</span>
-                  <button
-                    onClick={() => removeActionTypeFilter(actionTypeId)}
-                    className="transition-colors"
-                    aria-label={`Remove ${actionType.name} filter`}
-                  >
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      className="w-3 h-3"
-                      aria-hidden="true"
-                    />
-                  </button>
-                </div>
-              ) : null;
-            })}
+//           {/* Manual Dropdown */}
+//           <CheckboxDropdown
+//             options={manualOptionsData}
+//             onSelect={(values) => {
+//               setSelectedManuals(values);
+//             }}
+//             selectedValues={selectedManuals}
+//             defaultValue="Manual"
+//             className="min-w-[140px]"
+//           />
 
-            {/* Amount Sent Filter */}
-            {(fromSentValue !== "0" || toSentValue !== "0") && (
-              <div
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
-                    bg-gray-100 text-gray-800 border border-default
-                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
-              >
-                <span>
-                  {fromSentValue} - {toSentValue} {fromSentCurrency}
-                </span>
-                <button
-                  onClick={removeAmountSentFilter}
-                  className="transition-colors"
-                >
-                  <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
-                </button>
-              </div>
-            )}
+//                 {/* Action Type Options List */}
+//                 <div className="max-h-48 overflow-y-auto">
+//                   {filteredActionTypeOptions.map((option) => {
+//                     const isSelected = selectedActionTypes.includes(option.id);
+//                     return (
+//                       <div
+//                         key={option.id}
+//                         onClick={() => handleActionTypeToggle(option.id)}
+//                         className={`flex items-center px-3 py-2 cursor-pointer`}
+//                       >
+//                         <div
+//                           className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+//                             isSelected
+//                               ? "bg-[#90C853] border-[#90C853]"
+//                               : "border-gray-300"
+//                           }`}
+//                         >
+//                           {isSelected && (
+//                             <FontAwesomeIcon
+//                               icon={faCheck}
+//                               className="w-2.5 h-2.5 text-white"
+//                             />
+//                           )}
+//                         </div>
+//                         <span
+//                           className={`text-sm text-gray-900
+//                             dark:text-gray-250`}
+//                         >
+//                           {option.name}
+//                         </span>
+//                       </div>
+//                     );
+//                   })}
+//                 </div>
+//               </div>
+//             )}
+//           </div>
+//           {/* Amount Sent Dropdown */}
+//           {/* <AmountRangeDropdown
+//             fromValue={fromSentValue}
+//             setFromValue={setFromSentValue}
+//             toValue={toSentValue}
+//             setToValue={setToSentValue}
+//             fromCurrency={fromSentCurrency}
+//             setFromCurrency={setFromSentCurrency}
+//             toCurrency={toSentCurrency}
+//             setToCurrency={setToSentCurrency}
+//             isOpen={amountSentDropdownOpen}
+//             setIsOpen={setAmountSentDropdownOpen}
+//             title="Amount sent"
+//           /> */}
 
-            {/* Amount Received Filter */}
-            {(fromReceivedValue !== "0" || toReceivedValue !== "0") && (
-              <div
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
-                    bg-gray-100 text-gray-800 border border-default
-                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
-              >
-                <span>
-                  {fromReceivedValue} - {toReceivedValue} {fromReceivedCurrency}
-                </span>
-                <button
-                  onClick={removeAmountReceivedFilter}
-                  className="transition-colors"
-                >
-                  <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
-                </button>
-              </div>
-            )}
+//           {/* Amount Received Dropdown */}
+//           {/* <AmountRangeDropdown
+//             fromValue={fromReceivedValue}
+//             setFromValue={setFromReceivedValue}
+//             toValue={toReceivedValue}
+//             setToValue={setToReceivedValue}
+//             fromCurrency={fromReceivedCurrency}
+//             setFromCurrency={setFromReceivedCurrency}
+//             toCurrency={toReceivedCurrency}
+//             setToCurrency={setToReceivedCurrency}
+//             isOpen={amountReceivedDropdownOpen}
+//             setIsOpen={setAmountReceivedDropdownOpen}
+//             title="Amount received"
+//           /> */}
+//           <div className={`max-w-[190px] flex items-center`}>
+//             <DateRangePickerPopover
+//               selectedDateRange={selectedDateRange}
+//               onDateRangeChange={setSelectedDateRange}
+//               iconPosition="right"
+//               buttonLabel="Date"
+//               className="md:px-4 md:py-3 shadow-sm rounded-lg w-max"
+//               buttonClassName="md:text-base md:font-normal"
+//             />
+//           </div>
 
-            {/* Date Filter */}
-            {selectedDateRange &&
-              selectedDateRange.startDate &&
-              selectedDateRange.endDate && (
-                <div
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
-                    bg-gray-100 text-gray-800 border border-default
-                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
-                >
-                  <span>
-                    {formatDate(selectedDateRange.startDate)} -{" "}
-                    {formatDate(selectedDateRange.endDate)}
-                  </span>
-                  <button
-                    onClick={removeDateFilter}
-                    className="transition-colors"
-                  >
-                    <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
-                  </button>
-                </div>
-              )}
+//           {/* Advanced Filter Dropdown */}
+//           <div className="relative" ref={advancedFilterRef}>
+//             <button
+//               onClick={() => setIsAdvancedFilterOpen(!isAdvancedFilterOpen)}
+//               className="flex items-center justify-between px-4 py-3 rounded-lg border border-transparent bg-transparent text-gray-700 hover:bg-gray-50 focus:bg-white focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none dark:border-gray-700 dark:bg-[#0E201E] dark:text-gray-300 min-w-[140px]"
+//             >
+//               <div className="flex items-center gap-2">
+//                 <svg
+//                   width="16"
+//                   height="16"
+//                   viewBox="0 0 24 24"
+//                   fill="none"
+//                   xmlns="http://www.w3.org/2000/svg"
+//                   className="w-4 h-4"
+//                 >
+//                   <path
+//                     d="M12 5V19M5 12H19"
+//                     stroke="currentColor"
+//                     strokeWidth="2"
+//                     strokeLinecap="round"
+//                     strokeLinejoin="round"
+//                   />
+//                 </svg>
+//                 <span className="text-sm font-medium">Advanced Filter</span>
+//                 {activeAdvancedFiltersCount > 0 && (
+//                   <div className="flex items-center justify-center w-4 h-4 bg-green-600 border border-white rounded-full">
+//                     <span className="text-[10px] font-medium text-white">
+//                       {activeAdvancedFiltersCount}
+//                     </span>
+//                   </div>
+//                 )}
+//               </div>
+//             </button>
 
-            {/* Result Filters */}
-            {selectedResults.map((resultId) => {
-              const result = resultOptions.find((r) => r.id === resultId);
-              return result ? (
-                <div
-                  key={`result-${resultId}`}
-                  className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
-                    bg-gray-100 text-gray-800 border border-default
-                    dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
-                >
-                  <span>{result.name}</span>
-                  <button
-                    onClick={() => removeResultFilter(resultId)}
-                    className="transition-colors"
-                    aria-label={`Remove ${result.name} filter`}
-                  >
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      className="w-3 h-3"
-                      aria-hidden="true"
-                    />
-                  </button>
-                </div>
-              ) : null;
-            })}
-            <div className="flex items-center justify-between">
-              <button
-                onClick={clearAllFilters}
-                className={`text-sm md:mx-2.5 md:my-1.5 text-[#5F9339] font-medium transition-colors`}
-              >
-                <FontAwesomeIcon
-                  icon={faTimes}
-                  className="w-3 h-3 mx-2"
-                  aria-hidden="true"
-                />
-                <span>Clear All</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+//             {/* Advanced Filter Dropdown Content */}
+//             {isAdvancedFilterOpen && (
+//               <div className="absolute top-full right-0 mt-1 w-min bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50 p-4">
+//                 <div className="space-y-3">
+//                     {advancedFilters.map((filter, index) => (
+//                       <div key={index} className="flex items-center gap-3">
+//                         <Dropdown
+//                           options={[
+//                             { label: 'Account', value: 'account' },
+//                             { label: 'Wallet', value: 'wallet' }
+//                           ]}
+//                           onSelect={(value) => {
+//                             const newFilters = [...advancedFilters];
+//                             newFilters[index].account = value;
+//                             setAdvancedFilters(newFilters);
+//                           }}
+//                           defaultValue={filter.account || 'Account'}
+//                         />
+
+//                         <Dropdown
+//                           options={[
+//                             { label: 'Is', value: 'is' },
+//                             { label: 'Is not', value: 'is_not' },
+//                             { label: 'Contains', value: 'contains' },
+//                             { label: 'Greater than', value: 'gt' },
+//                             { label: 'Less than', value: 'lt' }
+//                           ]}
+//                           onSelect={(value) => {
+//                             const newFilters = [...advancedFilters];
+//                             newFilters[index].condition = value;
+//                             setAdvancedFilters(newFilters);
+//                           }}
+//                           defaultValue={filter.condition || 'Is'}
+//                         />
+
+//                         <Dropdown
+//                           options={[
+//                             { label: 'BTC', value: 'btc' },
+//                             { label: 'ETH', value: 'eth' },
+//                             { label: 'USD', value: 'usd' }
+//                           ]}
+//                           onSelect={(value) => {
+//                             const newFilters = [...advancedFilters];
+//                             newFilters[index].value = value;
+//                             setAdvancedFilters(newFilters);
+//                           }}
+//                           defaultValue={filter.value || 'Set Value'}
+//                           className="w-max"
+//                         />
+
+//                         {advancedFilters.length > 1 && (
+//                           <button
+//                             onClick={() => {
+//                               const newFilters = advancedFilters.filter((_, i) => i !== index);
+//                               setAdvancedFilters(newFilters);
+//                             }}
+//                             className="ml-auto p-3 border border-default rounded-lg text-gray-400 hover:text-red-500 transition-colors"
+//                           >
+//                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+//                               <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+//                             </svg>
+//                           </button>
+//                         )}
+//                 </div>
+//                     ))}
+
+//                   <div className="flex items-center justify-between dark:border-gray-700">
+//                     <button
+//                       onClick={() => {
+//                         setAdvancedFilters([...advancedFilters, { account: '', condition: '', value: '' }]);
+//                       }}
+//                       className="flex items-center gap-2 px-2.5 py-1.5 text-gray-600 rounded-lg border border-default hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+//                     >
+//                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+//                         <path d="M12 5V19M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+//                       </svg>
+//                       <span className="text-sm font-medium">Add Filter</span>
+//                     </button>
+
+//                     <button
+//                       onClick={() => {
+//                         setAdvancedFilters([{ account: '', condition: '', value: '' }]);
+//                       }}
+//                       className="flex items-center gap-2 px-4 py-2 text-gray-400 hover:text-red-500 transition-colors"
+//                     >
+//                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+//                         <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+//                       </svg>
+//                       <span className="text-sm font-medium">Clear all</span>
+//                     </button>
+//                   </div>
+//                 </div>
+//               </div>
+//                           )}
+//                         </div>
+//         </div>
+//         {/* View Dropdown - Right End */}
+//         <div className="relative" ref={viewDropdownRef}>
+//           <button
+//             onClick={() => setIsViewDropdownOpen(!isViewDropdownOpen)}
+//             className="flex items-center justify-between px-4 py-3 rounded-lg border border-default bg-white text-gray-700 hover:bg-gray-50 focus:bg-white focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none dark:border-gray-700 dark:bg-[#0E201E] dark:text-gray-300 min-w-[100px]"
+//           >
+//             <span className="text-sm font-medium">View</span>
+//             <svg
+//               width="16"
+//               height="16"
+//               viewBox="0 0 24 24"
+//               fill="none"
+//               xmlns="http://www.w3.org/2000/svg"
+//               className={`w-4 h-4 transform transition-transform ${isViewDropdownOpen ? 'rotate-180' : ''}`}
+//             >
+//               <path
+//                 d="m19.5 8.25-7.5 7.5-7.5-7.5"
+//                 stroke="currentColor"
+//                 strokeWidth="1.5"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//               />
+//             </svg>
+//           </button>
+
+//           {/* View Dropdown Content */}
+//           {isViewDropdownOpen && (
+//           <div className="absolute top-full right-0 mt-1 w-64 bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50 p-4">
+//             <div className="space-y-4">
+//               {/* Show deleted toggle */}
+//               <div className="flex items-center justify-between">
+//                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+//                   Show deleted
+//                         </span>
+//                 <button
+//                   onClick={() => setShowDeleted(!showDeleted)}
+//                   className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+//                     showDeleted ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
+//                   }`}
+//                 >
+//                   <span
+//                     className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+//                       showDeleted ? 'translate-x-6' : 'translate-x-1'
+//                     }`}
+//                   />
+//                 </button>
+//                       </div>
+
+//               {/* Show soft deleted only toggle */}
+//               <div className="flex items-center justify-between">
+//                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+//                   Show soft deleted only
+//                 </span>
+//                 <button
+//                   onClick={() => setShowSoftDeletedOnly(!showSoftDeletedOnly)}
+//                   className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+//                     showSoftDeletedOnly ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'
+//                   }`}
+//                 >
+//                   <span
+//                     className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+//                       showSoftDeletedOnly ? 'translate-x-6' : 'translate-x-1'
+//                     }`}
+//                   />
+//                 </button>
+//               </div>
+//                 </div>
+//               </div>
+//             )}
+//           </div>
+//         </div>
+
+//       <MobileDrawer
+//         isOpen={showMobileFilters}
+//         onClose={() => setShowMobileFilters(false)}
+//         header="Filters"
+//         height={screenSize.height - 100}
+//         leftButtonText="Clear All"
+//         rightButtonText="Apply"
+//         onLeftButtonClick={() => setShowMobileFilters(false)}
+//         onRightButtonClick={() => setShowMobileFilters(false)}
+//       >
+//         <Accordion>
+//           <AccordionItem title="Wallet">
+//             {" "}
+//             <div
+//               className={`w-full  z-50 bg-white border-gray-300
+//                 dark:bg-gray-800 dark:border-gray-600`}
+//             >
+//               {/* Search Input */}
+//               <div className="">
+//                 <input
+//                   type="text"
+//                   placeholder="Type or paste wallet"
+//                   value={walletSearchTerm}
+//                   onChange={(e) => setWalletSearchTerm(e.target.value)}
+//                   className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+//                 />
+//               </div>
+
+//               {/* Type Options List */}
+//               <div className="max-h-48 overflow-y-auto mt-3 flex flex-col gap-4 ">
+//                 {filteredTypeOptions.map((option) => {
+//                   const isSelected = selectedType.includes(option.value);
+//                   return (
+//                     <div
+//                       key={option.value}
+//                       onClick={() => handleTypeToggle(option.value)}
+//                       className={`flex items-center px-3 gap-2 cursor-pointer hover:bg-gray-100
+//                         dark:hover:bg-gray-700`}
+//                     >
+//                       <div
+//                         className={`w-5 h-5 border-2 rounded flex items-center justify-center  transition-colors ${
+//                           isSelected
+//                             ? "bg-[#90C853] border-[#90C853]"
+//                             : "border-gray-150"
+//                         }`}
+//                       >
+//                         {isSelected && (
+//                           <FontAwesomeIcon
+//                             icon={faCheck}
+//                             className="w-2.5 h-2.5 text-white"
+//                           />
+//                         )}
+//                       </div>
+//                       <span
+//                         className={`text-base text-gray-900 dark:text-gray-150`}
+//                       >
+//                         {option.label}
+//                       </span>
+//                     </div>
+//                   );
+//                 })}
+//               </div>
+//             </div>
+//           </AccordionItem>
+//           <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+//           <AccordionItem title="Tag">
+//             {" "}
+//             <div
+//               className={`w-full z-50 bg-white border-gray-300
+//                 dark:bg-[#0E201E] dark:border-gray-600
+//                 `}
+//             >
+//               {/* Search Input */}
+
+//               {/* Tag Options List */}
+//               <div className="max-h-48 overflow-y-auto  mt-3 flex flex-col gap-4">
+//                 {filteredTagOptions.map((option) => {
+//                   const isSelected = selectedTags.includes(option.value);
+//                   return (
+//                     <div
+//                       key={option.value}
+//                       onClick={() => handleTagToggle(option.value)}
+//                       className={`flex items-center  cursor-pointer hover:bg-gray-100
+//                         dark:hover:bg-gray-700
+//                       `}
+//                     >
+//                       <div
+//                         className={`w-5 h-5 border-2 rounded flex mr-3 items-center justify-center  transition-colors ${
+//                           isSelected
+//                             ? "bg-[#90C853] border-[#90C853]"
+//                             : "border-gray-150"
+//                         }`}
+//                       >
+//                         {isSelected && (
+//                           <FontAwesomeIcon
+//                             icon={faCheck}
+//                             className="w-2.5 h-2.5 text-white"
+//                           />
+//                         )}
+//                       </div>
+//                       <span
+//                         className={`text-base text-gray-900 dark:text-gray-150`}
+//                       >
+//                         {option.label}
+//                       </span>
+//                     </div>
+//                   );
+//                 })}
+//               </div>
+//             </div>
+//           </AccordionItem>
+//           <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+//           <AccordionItem title="Amount Sent">
+//             {" "}
+//             <div className={`w-full  z-50 mt-2`}>
+//               <div className="flex flex-col gap-3">
+//                 {/* From Input */}
+//                 <div className="flex items-center gap-3 ">
+//                   <span
+//                     className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
+//                   >
+//                     From:
+//                   </span>
+
+//                   <div className="relative flex-1">
+//                     <Input
+//                       type="number"
+//                       placeholder="Amount"
+//                       value={fromSentValue}
+//                       onChange={(e) => setFromSentValue(e.target.value)}
+//                       className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+//                     />
+//                     <button
+//                       onClick={() =>
+//                         setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
+//                       }
+//                       className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
+//                     >
+//                       <div className="flex items-center gap-1">
+//                         <span className="text-caption font-medium">
+//                           {fromSentCurrency}
+//                         </span>
+//                         <FontAwesomeIcon
+//                           icon={faChevronDown}
+//                           className="w-2 h-2"
+//                         />
+//                       </div>
+//                     </button>
+
+//                     {/* Currency Dropdown */}
+//                     {showFromCurrencyDropdown && (
+//                       <div
+//                         className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200
+//                           dark:bg-gray-800 dark:border-gray-600`}
+//                       >
+//                         <div className="py-1">
+//                           {["USD", "EUR", "USDT"].map((currency) => (
+//                             <button
+//                               key={currency}
+//                               onClick={() => {
+//                                 setFromSentCurrency(currency);
+//                                 setShowFromCurrencyDropdown(false);
+//                               }}
+//                               className={`w-full px-3 py-1 text-left text-xs ${
+//                                 fromSentCurrency === currency
+//                                   ? "bg-blue-50 text-blue-600"
+//                                   : ""
+//                               }`}
+//                             >
+//                               {currency}
+//                             </button>
+//                           ))}
+//                         </div>
+//                       </div>
+//                     )}
+//                   </div>
+//                 </div>
+
+//                 {/* To Input */}
+//                 <div className="flex items-center gap-3 ">
+//                   <span
+//                     className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
+//                   >
+//                     To:
+//                   </span>
+
+//                   <div className="relative flex-1">
+//                     <Input
+//                       type="number"
+//                       placeholder="Amount"
+//                       value={toSentValue}
+//                       onChange={(e) => setToSentValue(e.target.value)}
+//                       className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+//                     />
+//                     <button
+//                       onClick={() =>
+//                         setShowToCurrencyDropdown(!showToCurrencyDropdown)
+//                       }
+//                       className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
+//                     >
+//                       <div className="flex items-center gap-1">
+//                         <span className="text-caption font-medium">
+//                           {toSentCurrency}
+//                         </span>
+//                         <FontAwesomeIcon
+//                           icon={faChevronDown}
+//                           className="w-2 h-2"
+//                         />
+//                       </div>
+//                     </button>
+
+//                     {/* Currency Dropdown */}
+//                     {showToCurrencyDropdown && (
+//                       <div
+//                         className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200
+//                           dark:bg-gray-800 dark:border-gray-600`}
+//                       >
+//                         <div className="py-1">
+//                           {["USD", "EUR", "USDT"].map((currency) => (
+//                             <button
+//                               key={currency}
+//                               onClick={() => {
+//                                 setToSentCurrency(currency);
+//                                 setShowToCurrencyDropdown(false);
+//                               }}
+//                               className={`w-full px-3 py-1 text-left text-xs ${
+//                                 toSentCurrency === currency
+//                                   ? "bg-blue-50 text-blue-600"
+//                                   : ""
+//                               }`}
+//                             >
+//                               {currency}
+//                             </button>
+//                           ))}
+//                         </div>
+//                       </div>
+//                     )}
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </AccordionItem>
+//           <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+//           <AccordionItem title="Amount Received">
+//             {" "}
+//             <div className={`w-full  z-50 mt-2`}>
+//               <div className="flex flex-col gap-3">
+//                 {/* From Input */}
+//                 <div className="flex items-center gap-3 ">
+//                   <span
+//                     className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
+//                   >
+//                     From:
+//                   </span>
+
+//                   <div className="relative flex-1">
+//                     <Input
+//                       type="number"
+//                       placeholder="Amount"
+//                       value={fromSentValue}
+//                       onChange={(e) => setFromSentValue(e.target.value)}
+//                       className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+//                     />
+//                     <button
+//                       onClick={() =>
+//                         setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
+//                       }
+//                       className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
+//                     >
+//                       <div className="flex items-center gap-1">
+//                         <span className="text-caption font-medium">
+//                           {fromSentCurrency}
+//                         </span>
+//                         <FontAwesomeIcon
+//                           icon={faChevronDown}
+//                           className="w-2 h-2"
+//                         />
+//                       </div>
+//                     </button>
+
+//                     {/* Currency Dropdown */}
+//                     {showFromCurrencyDropdown && (
+//                       <div
+//                         className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200
+//                           dark:bg-gray-800 dark:border-gray-600`}
+//                       >
+//                         <div className="py-1">
+//                           {["USD", "EUR", "USDT"].map((currency) => (
+//                             <button
+//                               key={currency}
+//                               onClick={() => {
+//                                 setFromSentCurrency(currency);
+//                                 setShowFromCurrencyDropdown(false);
+//                               }}
+//                               className={`w-full px-3 py-1 text-left text-xs ${
+//                                 fromSentCurrency === currency
+//                                   ? "bg-blue-50 text-blue-600"
+//                                   : ""
+//                               }`}
+//                             >
+//                               {currency}
+//                             </button>
+//                           ))}
+//                         </div>
+//                       </div>
+//                     )}
+//                   </div>
+//                 </div>
+
+//                 {/* To Input */}
+//                 <div className="flex items-center gap-3 ">
+//                   <span
+//                     className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
+//                   >
+//                     To:
+//                   </span>
+
+//                   <div className="relative flex-1">
+//                     <Input
+//                       type="number"
+//                       placeholder="Amount"
+//                       value={toSentValue}
+//                       onChange={(e) => setToSentValue(e.target.value)}
+//                       className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
+//                     />
+//                     <button
+//                       onClick={() =>
+//                         setShowToCurrencyDropdown(!showToCurrencyDropdown)
+//                       }
+//                       className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
+//                     >
+//                       <div className="flex items-center gap-1">
+//                         <span className="text-caption font-medium">
+//                           {toSentCurrency}
+//                         </span>
+//                         <FontAwesomeIcon
+//                           icon={faChevronDown}
+//                           className="w-2 h-2"
+//                         />
+//                       </div>
+//                     </button>
+
+//                     {/* Currency Dropdown */}
+//                     {showToCurrencyDropdown && (
+//                       <div
+//                         className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200
+//                           dark:bg-gray-800 dark:border-gray-600`}
+//                       >
+//                         <div className="py-1">
+//                           {["USD", "EUR", "USDT"].map((currency) => (
+//                             <button
+//                               key={currency}
+//                               onClick={() => {
+//                                 setToSentCurrency(currency);
+//                                 setShowToCurrencyDropdown(false);
+//                               }}
+//                               className={`w-full px-3 py-1 text-left text-xs ${
+//                                 toSentCurrency === currency
+//                                   ? "bg-blue-50 text-blue-600"
+//                                   : ""
+//                               }`}
+//                             >
+//                               {currency}
+//                             </button>
+//                           ))}
+//                         </div>
+//                       </div>
+//                     )}
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </AccordionItem>
+//           <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+//           <AccordionItem title="Date">
+//             {" "}
+//             <DateRangePickerPopover
+//               selectedDateRange={selectedDateRange}
+//               onDateRangeChange={setSelectedDateRange}
+//               buttonLabel="Select Date"
+//               className="py-2.5"
+//               isDrawer
+//             />
+//           </AccordionItem>
+//         </Accordion>
+//       </MobileDrawer>
+
+//       {/* Active Filters Display */}
+//       {hasActiveFilters && (
+//         <div className="pt-4 md:pt-2">
+//           <div className="flex flex-wrap gap-2">
+//             {/* Type Filters */}
+//             {selectedType.map((typeId) => {
+//               const type = typeOptions.find((t) => t.value === typeId);
+//               return type ? (
+//                 <div
+//                   key={`type-${typeId}`}
+//                   className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+//                     bg-gray-100 text-gray-800 border border-default
+//                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+//                 >
+//                   <span>{type.label}</span>
+//                   <button
+//                     onClick={() => removeTypeFilter(typeId)}
+//                     className="transition-colors"
+//                     aria-label={`Remove ${type.label} filter`}
+//                   >
+//                     <FontAwesomeIcon
+//                       icon={faTimes}
+//                       className="w-3 h-3"
+//                       aria-hidden="true"
+//                     />
+//                   </button>
+//                 </div>
+//               ) : null;
+//             })}
+
+//             {/* Tag Filters */}
+//             {selectedTags.map((tagId) => {
+//               const tag = tagOptionsData.find(
+//                 (a) => a.value === tagId
+//               );
+//               return tag ? (
+//                 <div
+//                   key={`tag-${tagId}`}
+//                   className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+//                     bg-gray-100 text-gray-800 border border-default
+//                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+//                 >
+//                   <span>{tag.label}</span>
+//                   <button
+//                     onClick={() => removeTagFilter(tagId)}
+//                     className="transition-colors"
+//                     aria-label={`Remove ${tag.label} filter`}
+//                   >
+//                     <FontAwesomeIcon
+//                       icon={faTimes}
+//                       className="w-3 h-3"
+//                       aria-hidden="true"
+//                     />
+//                   </button>
+//                 </div>
+//               ) : null;
+//             })}
+
+//             {/* Manual Filters */}
+//             {selectedManuals.map((manualId) => {
+//               const manual = manualOptionsData.find(
+//                 (m) => m.value === manualId
+//               );
+//               return manual ? (
+//                 <div
+//                   key={`manual-${manualId}`}
+//                   className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+//                     bg-gray-100 text-gray-800 border border-default
+//                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+//                 >
+//                   <span>{manual.label}</span>
+//                   <button
+//                     onClick={() => removeManualFilter(manualId)}
+//                     className="transition-colors"
+//                     aria-label={`Remove ${manual.label} filter`}
+//                   >
+//                     <FontAwesomeIcon
+//                       icon={faTimes}
+//                       className="w-3 h-3"
+//                       aria-hidden="true"
+//                     />
+//                   </button>
+//                 </div>
+//               ) : null;
+//             })}
+
+//             {/* Result Filters */}
+//             {selectedResults.map((resultId) => {
+//               const result = resultOptionsData.find(
+//                 (r) => r.value === resultId
+//               );
+//               return result ? (
+//                 <div
+//                   key={`result-${resultId}`}
+//                   className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+//                     bg-gray-100 text-gray-800 border border-default
+//                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+//                 >
+//                   <span>{result.label}</span>
+//                   <button
+//                     onClick={() => removeResultFilter(resultId)}
+//                     className="transition-colors"
+//                     aria-label={`Remove ${result.label} filter`}
+//                   >
+//                     <FontAwesomeIcon
+//                       icon={faTimes}
+//                       className="w-3 h-3"
+//                       aria-hidden="true"
+//                     />
+//                   </button>
+//                 </div>
+//               ) : null;
+//             })}
+
+//             {/* Search Filters */}
+//             {selectedSearchItems.map((searchId) => {
+//               const searchItem = searchOptions.find(
+//                 (s) => s.id === searchId
+//               );
+//               return searchItem ? (
+//                 <div
+//                   key={`search-${searchId}`}
+//                   className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+//                     bg-gray-100 text-gray-800 border border-default
+//                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+//                 >
+//                   <img
+//                     src={searchItem.logo}
+//                     alt={searchItem.name}
+//                     className={`w-4 h-4 rounded-full ${searchItem.color} flex items-center justify-center text-white text-xs font-bold`}
+//                   />
+//                   <span>{searchItem.name}</span>
+//                   <button
+//                     onClick={() => removeSearchFilter(searchId)}
+//                     className="transition-colors"
+//                     aria-label={`Remove ${searchItem.name} filter`}
+//                   >
+//                     <FontAwesomeIcon
+//                       icon={faTimes}
+//                       className="w-3 h-3"
+//                       aria-hidden="true"
+//                     />
+//                   </button>
+//                 </div>
+//               ) : null;
+//             })}
+
+//             {/* Advanced Filters */}
+//             {advancedFilters.map((filter, index) => {
+//               if (filter.account && filter.condition && filter.value) {
+//                 const getConditionLabel = (condition: string) => {
+//                   switch (condition) {
+//                     case 'is': return 'Is';
+//                     case 'is_not': return 'Is not';
+//                     case 'gt': return 'Greater than';
+//                     case 'lt': return 'Less than';
+//                     default: return condition;
+//                   }
+//                 };
+
+//                 const getAccountLabel = (account: string) => {
+//                   switch (account) {
+//                     case 'account': return 'Account';
+//                     case 'wallet': return 'Wallet';
+//                     default: return account;
+//                   }
+//                 };
+
+//                 return (
+//                   <div
+//                     key={`advanced-${index}`}
+//                     className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+//                       bg-gray-100 text-gray-800 border border-default
+//                       dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+//                   >
+//                     <span>
+//                       {getAccountLabel(filter.account)} {getConditionLabel(filter.condition)} {filter.value.toUpperCase()}
+//                     </span>
+//                     <button
+//                       onClick={() => {
+//                         const newFilters = advancedFilters.filter((_, i) => i !== index);
+//                         setAdvancedFilters(newFilters);
+//                       }}
+//                       className="transition-colors"
+//                       aria-label={`Remove advanced filter`}
+//                     >
+//                       <FontAwesomeIcon
+//                         icon={faTimes}
+//                         className="w-3 h-3"
+//                         aria-hidden="true"
+//                       />
+//                     </button>
+//                   </div>
+//                 );
+//               }
+//               return null;
+//             })}
+
+//             {/* Amount Sent Filter */}
+//             {(fromSentValue !== "0" || toSentValue !== "0") && (
+//               <div
+//                 className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+//                     bg-gray-100 text-gray-800 border border-default
+//                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+//               >
+//                 <span>
+//                   {fromSentValue} - {toSentValue} {fromSentCurrency}
+//                 </span>
+//                 <button
+//                   onClick={removeAmountSentFilter}
+//                   className="transition-colors"
+//                 >
+//                   <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
+//                 </button>
+//               </div>
+//             )}
+
+//             {/* Amount Received Filter */}
+//             {(fromReceivedValue !== "0" || toReceivedValue !== "0") && (
+//               <div
+//                 className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+//                     bg-gray-100 text-gray-800 border border-default
+//                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+//               >
+//                 <span>
+//                   {fromReceivedValue} - {toReceivedValue} {fromReceivedCurrency}
+//                 </span>
+//                 <button
+//                   onClick={removeAmountReceivedFilter}
+//                   className="transition-colors"
+//                 >
+//                   <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
+//                 </button>
+//               </div>
+//             )}
+
+//             {/* Date Filter */}
+//             {selectedDateRange &&
+//               selectedDateRange.startDate &&
+//               selectedDateRange.endDate && (
+//                 <div
+//                   className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+//                     bg-gray-100 text-gray-800 border border-default
+//                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+//                 >
+//                   <span>
+//                     {formatDate(selectedDateRange.startDate)} -{" "}
+//                     {formatDate(selectedDateRange.endDate)}
+//                   </span>
+//                   <button
+//                     onClick={removeDateFilter}
+//                     className="transition-colors"
+//                   >
+//                     <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
+//                   </button>
+//                 </div>
+//               )}
+
+//             {/* Result Filters */}
+//             {selectedResults.map((resultId) => {
+//               const result = resultOptions.find((r) => r.id === resultId);
+//               return result ? (
+//                 <div
+//                   key={`result-${resultId}`}
+//                   className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium space-x-1
+//                     bg-gray-100 text-gray-800 border border-default
+//                     dark:bg-[#2F3232] dark:border-[#4D5050] dark:text-[#B6B8BA]`}
+//                 >
+//                   <span>{result.name}</span>
+//                   <button
+//                     onClick={() => removeResultFilter(resultId)}
+//                     className="transition-colors"
+//                     aria-label={`Remove ${result.name} filter`}
+//                   >
+//                     <FontAwesomeIcon
+//                       icon={faTimes}
+//                       className="w-3 h-3"
+//                       aria-hidden="true"
+//                     />
+//                   </button>
+//                 </div>
+//               ) : null;
+//             })}
+//             <div className="flex items-center justify-between">
+//               <button
+//                 onClick={clearAllFilters}
+//                 className={`text-sm md:mx-2.5 md:my-1.5 text-[#5F9339] font-medium transition-colors`}
+//               >
+//                 <FontAwesomeIcon
+//                   icon={faTimes}
+//                   className="w-3 h-3 mx-2"
+//                   aria-hidden="true"
+//                 />
+//                 <span>Clear All</span>
+//               </button>
+//             </div>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Filter;
+
+const Filter = () => {
+  return <div>Filter</div>;
 };
 
 export default Filter;
