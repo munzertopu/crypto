@@ -105,7 +105,7 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                           }}
                           className={`w-full px-3 py-1 text-left text-xs ${
                             fromCurrency === currency
-                              ? "bg-blue-50 text-blue-600 dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                              ? "bg-gray-100 dark:text-[#A1A3A5]"
                               : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
                           }`}
                         >

@@ -1,30 +1,74 @@
 import React, { useState, useEffect, useRef } from "react";
+import TickIcon from "../../utils/icons/TickIcon";
+
+export interface DropdownOption {
+  label: string;
+  value: string;
+  icon?: string;
+  logo?: string;
+  subtitle?: string;
+  multiline?: boolean;
+}
 
 interface DropdownProps {
-  options: string[];
+  options: string[] | DropdownOption[];
   onSelect: (value: string) => void;
   defaultValue?: string;
   className?: string;
+  inputClassName?: string;
+  searchable?: boolean;
+  searchPlaceholder?: string;
+  multiline?: boolean;
+  showTickMark?: boolean;
+  selectedValue?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
   options,
   onSelect,
-  defaultValue = options[0],
+  defaultValue,
   className = "",
+  inputClassName = "",
+  searchable = false,
+  multiline = false,
+  searchPlaceholder = "Search...",
+  showTickMark = false,
+  selectedValue,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
+  const [searchTerm, setSearchTerm] = useState("");
+  
+  // Normalize options to always be objects
+  const normalizedOptions: DropdownOption[] = options.map(opt => 
+    typeof opt === 'string' 
+      ? { label: opt, value: opt } 
+      : opt
+  );
+  
+  // Filter options based on search term
+  const filteredOptions = searchable && searchTerm
+    ? normalizedOptions.filter(option => 
+        option.label.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : normalizedOptions;
+  
+  // Set default value based on normalized options
+  const initialValue = defaultValue || normalizedOptions[0]?.label || '';
+  const [internalSelectedValue, setInternalSelectedValue] = useState(initialValue);
+  
+  // Use external selectedValue if provided, otherwise use internal state
+  const currentSelectedValue = selectedValue !== undefined ? selectedValue : internalSelectedValue;
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSelect = (value: string) => {
-    setSelectedValue(value);
-    onSelect(value);
+  const handleSelect = (option: DropdownOption) => {
+    setInternalSelectedValue(option.label);
+    onSelect(option.value);
     setIsOpen(false);
+    setSearchTerm(""); // Clear search when selecting
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -44,38 +88,14 @@ const Dropdown: React.FC<DropdownProps> = ({
   }, []);
 
   const ArrowDownSvg = () => (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M13.2797 5.9668L8.93306 10.3135C8.41973 10.8268 7.57973 10.8268 7.06639 10.3135L2.71973 5.9668"
-        stroke="#7C7C7C"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
     </svg>
   );
 
   const ArrowUpSvg = () => (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M13.2797 10.0334L8.93306 5.68676C8.41973 5.17342 7.57973 5.17342 7.06639 5.68676L2.71973 10.0334"
-        stroke="#7C7C7C"
-        stroke-miterlimit="10"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
     </svg>
   );
 
@@ -83,28 +103,58 @@ const Dropdown: React.FC<DropdownProps> = ({
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         onClick={handleToggle}
-        className="flex flex-row justify-between items-center px-3 py-1.5 box-border border border-gray-150 rounded-lg shadow-[0_1px_2px_0_rgba(20,21,26,0.05)] bg-white md:min-w-24 min-w-[max-content] w-full dark:border-[#4D5050] dark:bg-gray-900"
+        className={`flex flex-row justify-between items-center px-4 py-3 box-border border border-default rounded-lg bg-white gap-4 md:min-w-24 min-w-[max-content] w-full dark:border-[#4D5050] focus:ring-2 focus:ring-[#E3F3C7B2] focus:outline-none ${inputClassName}`}
         aria-label="Toggle dropdown"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <span className="text-sm text-primary dark:text-white">
-          {selectedValue}
+        <span className="text-base text-gray-900 dark:text-white">
+          {currentSelectedValue}
         </span>
         {isOpen ? <ArrowUpSvg /> : <ArrowDownSvg />}
       </button>
       {isOpen && (
-        <div className="absolute top-full left-0 py-2 w-full  border border-gray-150 rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 flex flex-col items-start justify-start max-h-[200px] overflow-y-auto bg-white dark:bg-gray-900 dark:text-white">
-          {options.map((option) => (
-            <div
-              key={option}
-              onClick={() => handleSelect(option)}
-              className="px-3 py-1.5 text-sm text-gray-900 hover:bg-gray-100 cursor-pointer rounded min-w-8
-               dark:text-gray-250"
-            >
-              {option}
+        <div className="absolute top-full left-0 mt-1 w-full border border-default rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 bg-white dark:bg-gray-900 dark:text-white">
+          {searchable && (
+            <div className="px-3 border-b border-gray-150 dark:border-gray-700">
+              <input
+                type="text"
+                placeholder={searchPlaceholder}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full px-3 py-2 rounded text-sm text-gray-900 dark:text-gray-150 placeholder-gray-500 focus:outline-none dark:bg-[#0E201E] dark:text-gray-50"
+              />
             </div>
-          ))}
+          )}
+          <div className="px-1.5 py-2 flex flex-col items-start justify-start max-h-[200px] overflow-y-auto">
+            {filteredOptions.map((option, index) => (
+              <div
+                key={option.value + index}
+                onClick={() => handleSelect(option)}
+                className={`px-1.5 py-1.5 text-sm text-gray-900 text-left hover:bg-gray-100 cursor-pointer rounded-lg w-full flex items-center gap-2 dark:text-gray-250 ${
+                  showTickMark && currentSelectedValue === option.label ? 'bg-gray-100 dark:bg-gray-800' : ''
+                }`}
+              >
+                {option.logo && (
+                  <img src={option.logo} alt={option.label} className="w-5 h-5 rounded-full flex-shrink-0 mt-0.5" />
+                )}
+                {option.icon && (
+                  <span className="text-xs flex-shrink-0 mt-0.5">{option.icon}</span>
+                )}
+                <div className="flex flex-col min-w-0 flex-1">
+                  <span className="font-medium">{option.label}</span>
+                  {multiline && option.subtitle && (
+                    <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                      {option.subtitle}
+                    </span>
+                  )}
+                </div>
+                {showTickMark && currentSelectedValue === option.label && (
+                  <TickIcon className="text-gray-500 dark:text-green-400 flex-shrink-0" />
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

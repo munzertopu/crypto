@@ -3,6 +3,8 @@ import NavigationBar from "../../components/NavigationBar";
 import { TransactionTable, Filter } from "./components";
 import useScreenSize from "../../hooks/useScreenSize";
 import { mockTransactions } from "../../data/transactionAssets";
+import AddTransactionDrawer from "./components/AddTransactionDrawer";
+import EditTransactionDrawer from "./components/EditTransactionDrawer";
 
 interface TransactionPageProps {
   onLogout?: () => void;
@@ -11,13 +13,18 @@ interface TransactionPageProps {
 const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   const [activeTab, setActiveTab] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedType, setSelectedType] = useState("all");
+  const [selectedType, setSelectedType] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedManuals, setSelectedManuals] = useState<string[]>([]);
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [sortBy, setSortBy] = useState("date");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [expandedTransactionId, setExpandedTransactionId] = useState<
     string | null
   >(null);
+  const [isAddTransactionDrawerOpen, setIsAddTransactionDrawerOpen] = useState(false);
+  const [isEditTransactionDrawerOpen, setIsEditTransactionDrawerOpen] = useState(false);
+  const [selectedTransactions, setSelectedTransactions] = useState<string[]>([]);
   const screenSize = useScreenSize();
 
   const filteredTransactions = mockTransactions.filter((transaction) => {
@@ -30,7 +37,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
         .includes(searchTerm.toLowerCase()) ||
       transaction.platform.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType =
-      selectedType === "all" || transaction.type === selectedType;
+      selectedType.length === 0 || selectedType.includes(transaction.type);
     const matchesStatus =
       selectedStatus === "all" || transaction.status === selectedStatus;
 
@@ -95,11 +102,22 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           </div>
           <div className="flex items-center space-x-3 mt-4 sm:mt-0">
             <button
+              onClick={() => {
+                if (selectedTransactions.length > 0) {
+                  setIsEditTransactionDrawerOpen(true);
+                } else {
+                  setIsAddTransactionDrawerOpen(true);
+                }
+              }}
               className={`text-base font-medium px-3 py-1 sm:px-6 sm:py-3 md:py-3 rounded-md sm:rounded-2xl bg-[#90C853] text-[#0E201E]`}
-              aria-label="Add new transaction"
+              aria-label={selectedTransactions.length > 0 ? "Edit selected transactions" : "Add new transaction"}
             >
-              <span className="hidden sm:inline">Add Transaction</span>
-              <span className="block sm:hidden text-white">+</span>
+              <span className="hidden sm:inline">
+                {selectedTransactions.length > 0 ? "Edit Transaction" : "Add Transaction"}
+              </span>
+              <span className="block sm:hidden text-white">
+                {selectedTransactions.length > 0 ? "✏️" : "+"}
+              </span>
             </button>
           </div>
         </div>
@@ -112,6 +130,10 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           setSearchTerm={setSearchTerm}
           selectedType={selectedType}
           setSelectedType={setSelectedType}
+          selectedTags={selectedTags}
+          setSelectedTags={setSelectedTags}
+          selectedManuals={selectedManuals}
+          setSelectedManuals={setSelectedManuals}
           selectedStatus={selectedStatus}
           setSelectedStatus={setSelectedStatus}
           // hideTab={screenSize.width < 640}
@@ -124,8 +146,22 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           activeTab={activeTab}
           expandedTransactionId={expandedTransactionId}
           onToggleExpanded={handleToggleExpanded}
+          selectedTransactions={selectedTransactions}
+          onSelectedTransactionsChange={setSelectedTransactions}
         />
       </div>
+
+      {/* Add Transaction Drawer */}
+      <AddTransactionDrawer
+        isOpen={isAddTransactionDrawerOpen}
+        onClose={() => setIsAddTransactionDrawerOpen(false)}
+      />
+
+      {/* Edit Transaction Drawer */}
+      <EditTransactionDrawer
+        isOpen={isEditTransactionDrawerOpen}
+        onClose={() => setIsEditTransactionDrawerOpen(false)}
+      />
     </div>
   );
 };

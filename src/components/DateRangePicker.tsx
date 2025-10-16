@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { DateRange } from "react-date-range";
+import CalendarIcon from "../utils/icons/CalendarIcon";
 import "react-date-range/dist/styles.css"; // Main style file
 import "react-date-range/dist/theme/default.css"; // Theme CSS file
 import useScreenSize from "../hooks/useScreenSize";
@@ -19,8 +20,10 @@ interface DateRangeSelectorProps {
 
   variant?: "dropdown" | "inline";
   buttonLabel?: string;
+  buttonClassName?: string;
   className?: string;
   isDrawer?: boolean;
+  iconPosition?: "left" | "right";
 }
 
 const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
@@ -28,7 +31,9 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   onDateRangeChange,
   buttonLabel,
   className = "",
+  buttonClassName = "",
   isDrawer = false,
+  iconPosition = "left",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dateRange, setDateRange] = useState([
@@ -173,99 +178,44 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
     >
       <button
         onClick={handleIconClick}
-        className={`w-full flex items-center justify-between p-2 md:p-0 md:px-4 md:py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900
+        className={`w-full flex items-center ${iconPosition === "right" ? "justify-between" : "justify-start"} p-2 md:p-0 md:px-4 md:py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900
           dark:text-gray-100 dark:bg-[#0E201E] dark:border-gray-700 md:min-w-[194px] ${className}`}
         aria-label="Select date range"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <div className="flex items-center space-x-2">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5.3335 1.3335V3.3335"
-              stroke="currentColor"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+        {iconPosition === "right" ? (
+          <>
+            <span className={`hidden md:block text-xs font-medium ${buttonClassName}`}>
+              {formatDateRange(selectedDateRange)}
+              {!selectedDateRange.startDate && !selectedDateRange.endDate && (
+                <>{buttonLabel}</>
+              )}
+            </span>
+            <CalendarIcon 
+              width={16} 
+              height={16} 
+              strokeColor="currentColor" 
+              className="text-gray-500" 
             />
-            <path
-              d="M10.6665 1.3335V3.3335"
-              stroke="currentColor"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+          </>
+        ) : (
+          <div className="flex items-center space-x-2">
+            <CalendarIcon 
+              width={16} 
+              height={16} 
+              strokeColor="currentColor" 
+              className="text-gray-500" 
             />
-            <path
-              d="M2.3335 6.06006H13.6668"
-              stroke="currentColor"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M14 5.66683V11.3335C14 13.3335 13 14.6668 10.6667 14.6668H5.33333C3 14.6668 2 13.3335 2 11.3335V5.66683C2 3.66683 3 2.3335 5.33333 2.3335H10.6667C13 2.3335 14 3.66683 14 5.66683Z"
-              stroke="currentColor"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M10.463 9.13314H10.469"
-              stroke="currentColor"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M10.463 11.1331H10.469"
-              stroke="currentColor"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M7.99715 9.13314H8.00314"
-              stroke="currentColor"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M7.99715 11.1331H8.00314"
-              stroke="currentColor"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M5.52979 9.1333H5.53577"
-              stroke="currentColor"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M5.52938 11.1331H5.53537"
-              stroke="currentColor"
-              stroke-width="1.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-
-          <span className="hidden md:block text-xs font-medium">
-            {formatDateRange(selectedDateRange)}
-            {!selectedDateRange.startDate && !selectedDateRange.endDate && (
-              <>{buttonLabel}</>
-            )}
-          </span>
-        </div>
+            
+            <span className="hidden md:block text-xs font-medium">
+              {formatDateRange(selectedDateRange)}
+              {!selectedDateRange.startDate && !selectedDateRange.endDate && (
+                <>{buttonLabel}</>
+              )}
+            </span>
+          </div>
+        )}
       </button>
       {isOpen && screenSize.width > 1024 ? (
         <div
@@ -417,7 +367,7 @@ const RenderDateRange = ({
             options={createShortcuts()
               .map((shortcut) => shortcut.label)
               .concat(["By year", "All time"])}
-            onSelect={(value) => {
+              onSelect={(value) => {
               if (value === "All time") {
                 handleDateChange({
                   selection: {

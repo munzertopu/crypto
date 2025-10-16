@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-interface SuccessNotificationProps {
+interface ErrorNotificationProps {
   message: string;
   isVisible: boolean;
   onClose: () => void;
   duration?: number;
 }
 
-const SuccessNotification: React.FC<SuccessNotificationProps> = ({
+const ErrorNotification: React.FC<ErrorNotificationProps> = ({
   message,
   isVisible,
   onClose,
@@ -30,7 +30,7 @@ const SuccessNotification: React.FC<SuccessNotificationProps> = ({
   return (
     <div className="fixed bottom-4 sm:top-4 right-4 z-50 animate-fade-in">
       <div
-        className="flex items-center justify-between bg-white border border-success-500 rounded-xl px-4 py-3 shadow-lg w-auto min-w-fit gap-4
+        className="flex items-center justify-between bg-white border border-error-500 rounded-xl px-4 py-3 shadow-lg w-auto min-w-fit gap-4
       dark:bg-[#0E201E]"
       >
         {/* Success Icon */}
@@ -45,8 +45,8 @@ const SuccessNotification: React.FC<SuccessNotificationProps> = ({
           >
             <path
               d="M10.0003 18.3334C14.5837 18.3334 18.3337 14.5834 18.3337 10.0001C18.3337 5.41675 14.5837 1.66675 10.0003 1.66675C5.41699 1.66675 1.66699 5.41675 1.66699 10.0001C1.66699 14.5834 5.41699 18.3334 10.0003 18.3334Z"
-              fill="#419F45"
-              stroke="#419F45"
+              fill="#D8382C"
+              stroke="#D8382C"
               stroke-width="1.2"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -74,7 +74,7 @@ const SuccessNotification: React.FC<SuccessNotificationProps> = ({
           <FontAwesomeIcon icon={faTimes} className="w-4 h-4" />
         </button>
         {/* <div className="flex-shrink-0 mr-3">
-          <div className="w-4 h-4 bg-[#419F45] rounded-full flex items-center justify-center">
+          <div className="w-4 h-4 bg-[#D8382C] rounded-full flex items-center justify-center">
          
           </div>
         </div> */}
@@ -87,4 +87,4 @@ const SuccessNotification: React.FC<SuccessNotificationProps> = ({
   );
 };
 
-export default SuccessNotification;
+export default ErrorNotification;
