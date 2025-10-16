@@ -15,6 +15,9 @@ import DateRangePickerPopover from "../../../components/DateRangePicker";
 import SearchIcon from "../../../utils/icons/SearchIcon";
 import Dropdown from "../../../components/UI/Dropdown";
 import CheckboxDropdown from "../../../components/UI/CheckboxDropdown";
+import SecondaryButton from "../../../components/UI/Buttons/SecondaryButton";
+import FilterIcon from "../../../components/Icons/FilterIcon";
+import EyeIcon from "../../../components/Icons/EyeIcon";
 
 interface WalletOption {
   id: string;
@@ -442,16 +445,16 @@ const Filter: React.FC<FilterProps> = ({
       {!hideTab && (
         <div className={`border-gray-200 dark:border-gray-700`}>
           <Tabs>
-            <Tabs.List className="my-2 lg:my-2 bg-white dark:bg-gray-800">
+            <Tabs.List className="my-0 mt-3 lg:my-2 bg-white dark:bg-gray-800  w-full sm:w-[fit-content]">
               {tabs.map((tab) => (
                 <Tabs.Trigger
                   key={tab}
                   value={tab}
                   onClick={() => onTabChange?.(tab)}
-                  className={`px-3 sm:px-5 md:px-2.5 py-1 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${
+                  className={`w-full sm:w-[inherit] px-2.5 sm:px-5 md:px-2.5 py-1.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${
                     activeTab === tab
-                      ? "bg-[#B3E277] dark:bg-gray-0 text-gray-900 dark:text-gray-900"
-                    : "text-gray-900 dark:text-gray-200"
+                      ? "bg-green-400 dark:bg-gray-0 text-primary dark:text-gray-900"
+                      : "text-gray-600 dark:text-gray-200"
                   }`}
                 >
                   {tab}
@@ -510,12 +513,12 @@ const Filter: React.FC<FilterProps> = ({
         </div>
       )}
 
-      
-      <div className="flex flex-row justify-between lg:items-center gap-5 mt-[20px] sm:mt-0">
-        <div className="flex items-center space-x-5 mt-4 md:mt-0">
-           {/* Search Input with Suggestions */}
-           <div className="relative" ref={setSearchSuggestionsRef}>
-             <div className="flex flex-row justify-start items-center px-4 py-3 box-border border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]">
+      <div className="flex flex-row justify-start lg:items-center gap-2 md:gap-5 mt-[24px] sm:mt-0">
+        {/* Search */}
+        <div
+          className="flex w-full md:flex-grow-1 sm:flex-grow-0 flex-row justify-start items-center px-4 py-3 box-border 
+          border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]"
+        >
           <div className="flex flex-row justify-start items-center gap-3">
                  <SearchIcon 
                    width={16}
@@ -533,10 +536,41 @@ const Filter: React.FC<FilterProps> = ({
             />
           </div>
         </div>
+        <SecondaryButton icon={<FilterIcon />} className="flex sm:hidden" />
+        <SecondaryButton icon={<EyeIcon />} className="flex sm:hidden" />
+        <div className="hidden md:flex items-center space-x-5 mt-4 md:mt-0">
+          {/* Custom Wallet Dropdown */}
+          <div className="relative" ref={walletDropdownRef}>
+            <button
+              onClick={() => setWalletDropdownOpen(!walletDropdownOpen)}
+              className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl border bg-white border-default text-primary
+                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
+            >
+              <span>Wallet</span>
+              <FontAwesomeIcon
+                icon={walletDropdownOpen ? faChevronUp : faChevronDown}
+                className="w-4 h-4"
+              />
+            </button>
 
-             {/* Search Suggestions */}
-             {isSearchSuggestionsOpen && filteredSearchOptions.length > 0 && (
-               <div className="absolute top-full left-0 mt-1 w-full bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50">
+            {walletDropdownOpen && (
+              <div
+                className={`absolute top-full left-0 mt-1 w-64 rounded-lg border shadow-sm z-50 bg-white border-gray-150
+                  dark:bg-[#0E201E]`}
+              >
+                {/* Search Input */}
+                <div className="px-3 border-b border-gray-150">
+                  <input
+                    type="text"
+                    placeholder="Type or paste wallet"
+                    value={walletSearchTerm}
+                    onChange={(e) => setWalletSearchTerm(e.target.value)}
+                    className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none
+                      dark:bg-[#0E201E] dark:text-gray-250`}
+                  />
+                </div>
+
+                {/* Wallet Options List */}
                 <div className="max-h-48 overflow-y-auto">
                    {filteredSearchOptions.map((option) => {
                      const isSelected = selectedSearchItems.includes(option.id);
@@ -593,18 +627,20 @@ const Filter: React.FC<FilterProps> = ({
             className="min-w-[120px]"
           />
 
-          {/* Tag Dropdown */}
-          <CheckboxDropdown
-            options={tagOptionsData}
-            onSelect={(values) => {
-              setSelectedTags(values);
-            }}
-            searchable={true}
-            searchPlaceholder="search tag"
-            selectedValues={selectedTags}
-            defaultValue="Tag"
-            className="min-w-[140px]"
-          />
+          {/* Action Type Dropdown */}
+          <div className="relative" ref={actionTypeDropdownRef}>
+            <button
+              onClick={() => setActionTypeDropdownOpen(!actionTypeDropdownOpen)}
+              className={`flex text-smh items-center px-4 py-3 space-x-4 rounded-xl 
+                border bg-white border-default text-primary
+                dark:bg-transparent dark:placeholder-[#CDCFD1] dark:border-[#4D5050] dark:text-gray-100`}
+            >
+              <span>Action type</span>
+              <FontAwesomeIcon
+                icon={actionTypeDropdownOpen ? faChevronUp : faChevronDown}
+                className="w-3 h-3"
+              />
+            </button>
 
           {/* Manual Dropdown */}
           <CheckboxDropdown
@@ -617,20 +653,43 @@ const Filter: React.FC<FilterProps> = ({
             className="min-w-[140px]"
           />
 
-          {/* Result Dropdown */}
-          
-
-          {/* Manual Dropdown */}
-          <CheckboxDropdown
-            options={resultOptionsData}
-            onSelect={(values) => {
-              setSelectedResults(values);
-            }}
-            selectedValues={selectedResults}
-            defaultValue="Result"
-            className="min-w-[140px]"
-          />
-          
+                {/* Action Type Options List */}
+                <div className="max-h-48 overflow-y-auto">
+                  {filteredActionTypeOptions.map((option) => {
+                    const isSelected = selectedActionTypes.includes(option.id);
+                    return (
+                      <div
+                        key={option.id}
+                        onClick={() => handleActionTypeToggle(option.id)}
+                        className={`flex items-center px-3 py-2 cursor-pointer`}
+                      >
+                        <div
+                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                            isSelected
+                              ? "bg-[#90C853] border-[#90C853]"
+                              : "border-gray-300"
+                          }`}
+                        >
+                          {isSelected && (
+                            <FontAwesomeIcon
+                              icon={faCheck}
+                              className="w-2.5 h-2.5 text-white"
+                            />
+                          )}
+                        </div>
+                        <span
+                          className={`text-sm text-gray-900 
+                            dark:text-gray-250`}
+                        >
+                          {option.name}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
           {/* Amount Sent Dropdown */}
           {/* <AmountRangeDropdown
             fromValue={fromSentValue}
