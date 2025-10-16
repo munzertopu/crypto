@@ -1,23 +1,44 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGhost, faExchange } from "@fortawesome/free-solid-svg-icons";
-import { Card, Typography, CardBody } from "@material-tailwind/react";
+import { Card, Typography, CardBody, Avatar } from "@material-tailwind/react";
 import { ledgerData, costAnalysisData } from "../../../data/transactionAssets";
+import useScreenSize from "../../../hooks/useScreenSize";
 
-interface TransactionDetailProps {}
+interface TransactionDetailProps {
+  selectedRow?: {
+    status: string;
+    sent: string;
+    received: string;
+    wallet: {
+      address: string;
+    };
+    date: string;
+    result: string;
+    transactionId: string;
+  } | null;
+}
 
-const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
-  const [activeTab, setActiveTab] = useState("Details");
-
+const TransactionDetail: React.FC<TransactionDetailProps> = ({
+  selectedRow,
+}) => {
+  const screenSize = useScreenSize();
+  const defaultTabs = ["Details", "Ledger", "Cost analysis"];
+  const mobileTabs = ["Transaction"];
+  const [activeTab, setActiveTab] = useState(
+    screenSize.width <= 768 ? "Transaction" : "Details"
+  );
+  const tabs =
+    screenSize.width <= 768 ? [...mobileTabs, ...defaultTabs] : defaultTabs;
   return (
-    <div className="space-y-2 md:mx-4 md:px-2 md:py-4 rounded-xl bg-background dark:bg-gray-800">
+    <div className="w-full sm:w-[auto] md:space-y-2 md:mx-4 md:px-2 md:py-4 rounded-xl bg-background dark:bg-gray-800">
       {/* Tabs */}
-      <div className="flex border-b border-gray-200">
-        {["Details", "Ledger", "Cost analysis"].map((tab) => (
+      <div className="w-full sm:w-[auto] flex border-b border-gray-200 ">
+        {tabs.map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`mx-6 py-3 font-medium text-sm border-b-2 transition-colors ${
+            className={`"w-full sm:w-[auto] mx-4 md:mx-6 py-3 font-medium text-sm border-b-2 transition-colors ${
               activeTab === tab
                 ? "border-[#75AE46] dark:text-gray-250"
                 : `border-transparent text-gray-500 hover:text-gray-700 dark: text-gray-400 dark: hover:text-gray-300`
@@ -30,10 +51,78 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
       </div>
 
       {/* Tab Content */}
+      <div className="pb-6 sm:pb-0"></div>
+      {activeTab === "Transaction" && (
+        <div className="flex flex-col gap-6 w-full">
+          <>
+            <div className="flex flex-col justify-start items-start w-full px-4">
+              <div className="flex justify-between items-center w-full ">
+                <span className="text-base  text-[#4D5050] dark:text-gray-250">
+                  Sent Amount:
+                </span>
+                <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
+                  {"-1,000 USDT"}
+                </span>
+              </div>
+            </div>
+          </>
+
+          {selectedRow?.received !== "" && (
+            <>
+              <div className="flex flex-col justify-start items-start w-full px-4">
+                <div className="flex justify-between items-center w-full ">
+                  <span className="text-base  text-[#4D5050] dark:text-gray-250">
+                    Receive Amount:
+                  </span>
+                  <div className="flex flex-col gap-0.5 justify-start items-end">
+                    <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
+                      {selectedRow?.received}
+                    </span>
+                    <span className="text-base font-medium text-gray-600 dark:text-gray-250 transform capitalize">
+                      = $50,000
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          <div className="flex flex-col justify-start items-start w-full px-4">
+            <div className="flex justify-between items-center w-full ">
+              <span className="text-base  text-[#4D5050] dark:text-gray-250">
+                Result:
+              </span>
+              <span className="text-base font-medium text-green-500 dark:text-gray-250 transform capitalize">
+                {selectedRow?.result}
+              </span>
+            </div>
+          </div>
+          <div className="flex flex-col justify-start items-start w-full px-4">
+            <div className="flex justify-between items-center w-full ">
+              <span className="text-base  text-[#4D5050] dark:text-gray-250">
+                Date & Time:
+              </span>
+              <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
+                May 15, 2025, 12:38 AM
+              </span>
+            </div>
+          </div>
+          <div className="flex flex-col justify-start items-start w-full px-4">
+            <div className="flex justify-between items-center w-full ">
+              <span className="text-base  text-[#4D5050] dark:text-gray-250">
+                Transaction ID:
+              </span>
+              <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
+                {selectedRow?.transactionId}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
       {activeTab === "Details" && (
-        <div className="flex justify-between items-start py-2">
+        <div className="flex flex-col md:flex-row justify-start md:justify-between items-start py-2 px-4 md:px-0">
           {/* Transaction Type and Date - Left Side */}
-          <div className="w-1/4">
+          <div className="md:w-1/4 flex flex-col items-start md:items-start">
             <h3 className="text-lg font-semibold mb-2 dark:text-gray-250">
               Transfer
             </h3>
@@ -44,19 +133,14 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
 
           {/* Transfer Card - Right Side */}
           <Card
-            className={`bg-white border border-gray-200 w-2/4 dark:bg-transparent`}
+            className={`md:bg-white mt-3 md:mt-0 border-none md:border border-gray-200 w-full md:w-2/4 dark:bg-transparent shadow-none md:shadow-lg`}
           >
-            <CardBody className="p-6">
+            <CardBody className="md:p-6 px-0 py-0">
               <div className="flex items-center justify-between">
                 {/* Phantom (Sent) */}
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
-                    <FontAwesomeIcon
-                      icon={faGhost}
-                      className="w-6 h-6 text-white"
-                    />
-                  </div>
-                  <div className="flex flex-col">
+                <div className="flex flex-col items-start justify-start md:flex-row md:items-center md:space-x-3 gap-2 md:gap-0">
+                  <Avatar src="crypto/Phantom.png" />
+                  <div className="flex flex-col items-start gap-2 md:gap-0 ">
                     <Typography
                       variant="small"
                       className="font-normal dark:text-gray-250"
@@ -80,8 +164,8 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
                 </div>
 
                 {/* Bitcoin (Received) */}
-                <div className="flex items-center space-x-3">
-                  <div className="flex flex-col">
+                <div className="flex flex-col-reverse md:flex-row items-end md:items-center md:space-x-3 gap-2 md:gap-0">
+                  <div className="flex flex-col items-end gap-2 md:gap-0">
                     <Typography
                       variant="small"
                       className="font-normal dark:text-gray-250"
@@ -92,9 +176,11 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
                       +0.292096470 ETH
                     </Typography>
                   </div>
-                  <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
+                  <Avatar src="crypto/bitcoin-btc-logo.png" />
+
+                  {/* <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
                     <span className="text-white text-xl font-bold">₿</span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
@@ -155,10 +241,10 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
       )}
 
       {activeTab === "Ledger" && (
-        <div className="py-2">
+        <div className="sm:py-2">
           <div className="overflow-x-auto">
             <table className="w-full min-w-full table-auto text-left">
-              <thead>
+              <thead className="hidden md:table-header-group">
                 <tr>
                   <th className="py-3 px-4 font-normal text-sm">
                     <span className={`text-gray-600 dark:text-[#B6B8BA]`}>
@@ -251,13 +337,42 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="">
                 {ledgerData.map((row) => (
-                  <tr key={row.id} className={`border-b border-gray-100`}>
-                    <td className="py-3 px-4">
+                  <tr key={row.id} className={`border-b border-gray-100 `}>
+                    <td className="sm:hidden py-3 pl-4 sm:pl-0 sm:px-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="flex justify-center items-center">
+                          <div
+                            className={`w-11 h-11 sm:w-8 sm:h-8 ${row.identifier.color} rounded-full flex items-center justify-center`}
+                          >
+                            <span className="text-white text-sm font-bold">
+                              {row.identifier.icon}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex flex-col">
+                          <span
+                            className={`text-abse font-medium ${
+                              row.type === "Send"
+                                ? "text-red-600"
+                                : "text-green-600"
+                            }`}
+                          >
+                            {row.type}
+                          </span>
+                          <span
+                            className={`sm:hidden text-base opacity-70 sm:opacity-100  text-gray-900 dark:text-gray-150`}
+                          >
+                            {row.date}
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="hidden sm:table-cell py-3 pl-4 ">
                       <div className="flex items-center space-x-3">
                         <div
-                          className={`w-8 h-8 ${row.identifier.color} rounded-full flex items-center justify-center`}
+                          className={`w-11 h-11 sm:w-8 sm:h-8 ${row.identifier.color} rounded-full flex items-center justify-center`}
                         >
                           <span className="text-white text-sm font-bold">
                             {row.identifier.icon}
@@ -270,25 +385,32 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
                         </span>
                       </div>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="hidden sm:table-cell py-3 px-4">
                       <span
                         className={`text-base text-gray-900 dark:text-gray-150`}
                       >
                         {row.date}
                       </span>
                     </td>
-                    <td className="py-3 px-4">
-                      <span
-                        className={`text-abse font-medium ${
-                          row.type === "Send"
-                            ? "text-red-600"
-                            : "text-green-600"
-                        }`}
-                      >
-                        {row.type}
-                      </span>
+                    <td className="hidden sm:table-cell md:py-3 md:px-4">
+                      <div className="flex flex-col">
+                        <span
+                          className={`text-abse font-medium ${
+                            row.type === "Send"
+                              ? "text-red-600"
+                              : "text-green-600"
+                          }`}
+                        >
+                          {row.type}
+                        </span>
+                        <span
+                          className={`sm:hidden text-base text-gray-900 dark:text-gray-150`}
+                        >
+                          {row.date}
+                        </span>
+                      </div>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="hidden sm:table-cell py-3 px-4">
                       <span
                         className={`text-base text-gray-900 dark:text-gray-150`}
                       >
@@ -296,13 +418,24 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span
-                        className={`text-base text-gray-900 dark:text-gray-150`}
-                      >
-                        {row.change}
-                      </span>
+                      <div className="flex flex-col">
+                        <span
+                          className={`text-base text-gray-900 dark:text-gray-150 text-right sm:text-left`}
+                        >
+                          {row.change}
+                        </span>
+                        <span
+                          className={`sm:hidden text-base font-medium text-right sm:text-left ${
+                            row.balance.startsWith("-")
+                              ? "text-red-600"
+                              : "text-green-600"
+                          }`}
+                        >
+                          {row.balance}
+                        </span>
+                      </div>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="hidden sm:table-cell py-3 px-4">
                       <span
                         className={`text-base font-medium ${
                           row.balance.startsWith("-")
@@ -313,7 +446,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
                         {row.balance}
                       </span>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="hidden sm:table-cell py-3 px-4">
                       <div className="w-6 h-6 flex items-center justify-center text-gray-500">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -348,7 +481,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
         <div className="py-2">
           <div className="overflow-x-auto">
             <table className="w-full min-w-full table-auto text-left ">
-              <thead>
+              <thead className="hidden sm:table-header-group">
                 <tr>
                   <th className="py-3 px-4 font-normal text-sm text-left">
                     <span className={`text-gray-700 dark:text-[#B6B8BA]`}>
@@ -389,7 +522,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
                 {costAnalysisData.map((row, index) => (
                   <tr key={row.id} className={`bg-white dark:bg-gray-900`}>
                     <td
-                      className={`py-2.5 px-5
+                      className={`hidden sm:table-cell py-2.5 px-5
                         ${
                           index === costAnalysisData.length - 1
                             ? "rounded-bl-lg"
@@ -404,13 +537,20 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span
-                        className={`text-base text-gray-700 dark:text-[#B6B8BA]`}
-                      >
-                        {row.info}
-                      </span>
+                      <div className="flex flex-col">
+                        <span
+                          className={`text-base text-gray-900 dark:text-[#B6B8BA]`}
+                        >
+                          {row.info}
+                        </span>
+                        <span
+                          className={`sm:hidden text-base text-gray-900 dark:text-gray-150 opacity-70`}
+                        >
+                          {row.holdingPeriod}
+                        </span>
+                      </div>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="hidden sm:table-cell py-3 px-4">
                       <span
                         className={`text-base text-gray-700 dark:text-[#B6B8BA]`}
                       >
@@ -418,20 +558,40 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
                       </span>
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <span
-                        className={`text-base font-medium text-gray-700 dark:text-[#B6B8BA]`}
-                      >
-                        {row.amount}
-                      </span>
+                      <div className="flex flex-col">
+                        <div className="flex gap-1 w-full justify-end sm:justify-start items-center">
+                          <span
+                            className={`text-base text-gray-900 dark:text-[#B6B8BA]`}
+                          >
+                            {row.amount}
+                          </span>
+                          {index === 0 && (
+                            <>
+                              {" "}
+                              <span
+                                className={`sm:hidden text-base text-green-500 dark:text-[#B6B8BA]`}
+                              >
+                                +2.5%
+                              </span>
+                            </>
+                          )}
+                        </div>
+
+                        <span
+                          className={`sm:hidden font-medium text-base text-gray-900 dark:text-gray-150 opacity-70`}
+                        >
+                          {row.costUSD}
+                        </span>
+                      </div>
                     </td>
-                    <td className="py-3 px-4 text-right">
+                    <td className="hidden sm:table-cell py-3 px-4 text-right">
                       <span
                         className={`text-base text-gray-700 dark:text-[#B6B8BA]`}
                       >
                         {row.costUSD}
                       </span>
                     </td>
-                    <td className="py-3 px-4 text-right">
+                    <td className="hidden sm:table-cell py-3 px-4 text-right">
                       <span
                         className={`text-base font-medium ${
                           row.gainUSD === "0.00"
@@ -445,7 +605,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({}) => {
                       </span>
                     </td>
                     <td
-                      className={`py-3 px-4 text-right
+                      className={`hidden sm:table-cell py-3 px-4 text-right
                         ${
                           index === costAnalysisData.length - 1
                             ? "rounded-br-lg"
