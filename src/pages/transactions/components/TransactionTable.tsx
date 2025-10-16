@@ -7,6 +7,9 @@ import MobileFormDrawer from "../../../components/Drawers/MobileFormDrawer";
 import type { Transaction } from "../../../data/transactionAssets";
 import { getTableHeaders } from "../../../data/transactionAssets";
 import Checkbox from "../../../components/UI/Checkbox";
+import Badge from "../../../components/Badge";
+import TradeIcon from "../../../components/Icons/TradeIcon";
+import DepositIcon from "../../../components/Icons/DepositIcon";
 
 interface TransactionTableProps {
   transactions: Transaction[];
@@ -87,6 +90,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
   const screenSize = useScreenSize();
   const [selectedRow, setSelectedRow] = useState<Transaction | null>(null);
+
+  console.log("selectedRow", selectedRow);
 
   const renderExpandedDetails = (transaction: Transaction) => (
     <tr
@@ -455,121 +460,54 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         noPadding
         noChildPadding
       >
-        <div className="flex flex-col justify-start items-center w-full gap-8 dark:bg-[#0E201E] pt-2">
-          <div className="flex flex-col justify-start items-center w-full gap-3">
+        <div className="flex flex-col justify-start items-center w-full gap-6 dark:bg-[#0E201E] pt-2">
+          <div className="flex flex-col justify-start items-center w-full gap-2">
             {" "}
             <Avatar
               src={selectedRow?.wallet.logo}
               alt={selectedRow?.wallet.name}
               size="sm"
-              className={`h-12 w-12 flex items-center justify-center text-white text-xs font-bold`}
+              className={`h-[60px] w-[60px] flex items-center justify-center text-white text-xs font-bold`}
             />
             <div className="flex flex-col justify-start items-center gap-2">
-              <span className="text-lg font-semibold text-[#0E201E] dark:text-gray-250">
-                {selectedRow?.wallet.name}
-              </span>
+              <div className="flex justify-center items-center gap-3">
+                <span className="text-lg font-semibold text-gray-11 dark:text-gray-250">
+                  {selectedRow?.wallet.name}
+                </span>
+
+                {selectedRow?.sent === "" && selectedRow?.received !== "" ? (
+                  <Badge label={"Deposit"} variant="blue" />
+                ) : (
+                  <Badge label={"Trade"} variant="orange" />
+                )}
+              </div>
+              {/* <div className="flex justify-center items-center gap-3">
+                <span className="text-lg font-semibold  text-error-500">
+                  {selectedRow?.sent}
+                </span>
+                <TradeIcon />
+                <span className="text-lg font-semibold  text-green-600">
+                  {selectedRow?.received}
+                </span>
+              </div> */}
               <div className="flex justify-start items-center gap-2">
                 <span className="text-lg font-semibold  text-error-500">
                   {selectedRow?.sent}
                 </span>
-                {selectedRow?.sent !== "" && selectedRow?.received !== "" && (
-                  <span className=" flex-shrink-0 w-[2px] h-4 bg-gray-150 dark:bg-[#8C8E90]"></span>
-                )}
-
+                {selectedRow?.sent !== "" && selectedRow?.received !== "" ? (
+                  <TradeIcon />
+                ) : null}
                 <span className="text-lg font-semibold  text-green-600">
                   {selectedRow?.received}
                 </span>
+
+                {selectedRow?.sent === "" && selectedRow?.received !== "" ? (
+                  <DepositIcon />
+                ) : null}
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-5 w-full">
-            <div className="flex flex-col justify-start items-start w-full px-4">
-              <div className="flex justify-between items-center w-full ">
-                <span className="text-base  text-gray-700 dark:text-gray-250">
-                  Action Type:
-                </span>
-                <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
-                  {selectedRow?.status}
-                </span>
-              </div>
-            </div>
-
-            {selectedRow?.sent !== "" && (
-              <>
-                <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-                <div className="flex flex-col justify-start items-start w-full px-4">
-                  <div className="flex justify-between items-center w-full ">
-                    <span className="text-base  text-[#4D5050] dark:text-gray-250">
-                      Sent Amount:
-                    </span>
-                    <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
-                      {selectedRow?.sent}
-                    </span>
-                  </div>
-                </div>
-              </>
-            )}
-
-            {selectedRow?.received !== "" && (
-              <>
-                <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-                <div className="flex flex-col justify-start items-start w-full px-4">
-                  <div className="flex justify-between items-center w-full ">
-                    <span className="text-base  text-[#4D5050] dark:text-gray-250">
-                      Receive Amount:
-                    </span>
-                    <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
-                      {selectedRow?.received}
-                    </span>
-                  </div>
-                </div>
-              </>
-            )}
-            <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
-            <div className="flex flex-col justify-start items-start w-full px-4">
-              <div className="flex justify-between items-center w-full ">
-                <span className="text-base  text-[#4D5050] dark:text-gray-250">
-                  Wallet Address:
-                </span>
-                <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
-                  {selectedRow?.wallet.address}
-                </span>
-              </div>
-            </div>
-            <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
-            <div className="flex flex-col justify-start items-start w-full px-4">
-              <div className="flex justify-between items-center w-full ">
-                <span className="text-base  text-[#4D5050] dark:text-gray-250">
-                  Date:
-                </span>
-                <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
-                  {selectedRow?.date}
-                </span>
-              </div>
-            </div>
-            <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
-            <div className="flex flex-col justify-start items-start w-full px-4">
-              <div className="flex justify-between items-center w-full ">
-                <span className="text-base  text-[#4D5050] dark:text-gray-250">
-                  Result:
-                </span>
-                <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
-                  {selectedRow?.result}
-                </span>
-              </div>
-            </div>
-            <div className="w-full h-px bg-gray-200 dark:bg-[#2F3232]"></div>
-            <div className="flex flex-col justify-start items-start w-full px-4">
-              <div className="flex justify-between items-center w-full ">
-                <span className="text-base  text-[#4D5050] dark:text-gray-250">
-                  Transaction ID:
-                </span>
-                <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
-                  {selectedRow?.transactionId}
-                </span>
-              </div>
-            </div>
-          </div>
+          <TransactionDetail selectedRow={selectedRow} />
         </div>
       </MobileFormDrawer>
       <TransactionFooter
