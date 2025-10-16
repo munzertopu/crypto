@@ -4,6 +4,7 @@ type BadgeProps = {
   max?: number;
   invisible?: boolean;
   children?: React.ReactNode;
+  className?: string;
 };
 
 const TopBadge = ({
@@ -12,12 +13,13 @@ const TopBadge = ({
   max = 99,
   invisible = false,
   children,
+  className,
 }: BadgeProps) => {
   // Handle content display (e.g., cap at max value)
   const displayContent = content > max ? `${max}+` : content;
 
   return (
-    <div className="relative inline-flex">
+    <div className={`relative inline-flex ${className}`}>
       {children}
       {!invisible && (
         <span

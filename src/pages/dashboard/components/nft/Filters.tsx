@@ -26,7 +26,7 @@ const Filters: React.FC<FiltersProps> = ({ searchTerm, setSearchTerm }) => {
   const [fromCurrency, setFromCurrency] = useState("USDT");
   const [toCurrency, setToCurrency] = useState("USDT");
   const [showGainDropdown, setShowGainDropdown] = useState(false);
-  const [selectedGain, setSelectedGain] = useState("Highest gain");
+  const [selectedGain, setSelectedGain] = useState("");
   const [fromValue, setFromValue] = useState("0");
   const [toValue, setToValue] = useState("0");
   const [showMobileFilters, setShowMobileFilters] = useState(false);
@@ -56,11 +56,19 @@ const Filters: React.FC<FiltersProps> = ({ searchTerm, setSearchTerm }) => {
           className="!w-full border-default dark:border-[#4D5050]"
           size="lg"
         />
+
         <TopBadge
           content={1}
           max={99}
           color="green"
-          // invisible={!paymentReminderData}
+          className="sm:hidden"
+          invisible={
+            !selectedDateRange.endDate &&
+            !selectedDateRange.startDate &&
+            fromValue === "0" &&
+            toValue === "0" &&
+            selectedGain === ""
+          }
         >
           <SecondaryButton
             onClick={() => setShowMobileFilters(true)}
@@ -175,7 +183,7 @@ const Filters: React.FC<FiltersProps> = ({ searchTerm, setSearchTerm }) => {
             )}
 
             {/* Date Range Filter Tag */}
-            {selectedDateRange && (
+            {!!selectedDateRange.endDate && !!selectedDateRange.startDate && (
               <div className="flex items-center gap-2 px-3 py-1 bg-gray-100 border border-[#E1E3E5] dark:bg-gray-700 rounded-full">
                 <span className="text-sm font-semibold text-black-800 dark:text-white">
                   {selectedDateRange.startDate && selectedDateRange.endDate
@@ -202,7 +210,7 @@ const Filters: React.FC<FiltersProps> = ({ searchTerm, setSearchTerm }) => {
             )}
 
             {/* Gain Filter Tag */}
-            {selectedGain !== "Highest gain" && (
+            {selectedGain !== "" && (
               <div className="flex items-center gap-2 px-3 py-1 bg-gray-100 border border-[#E1E3E5] dark:bg-gray-700 rounded-full">
                 <span className="text-sm font-semibold text-black dark:text-white">
                   {selectedGain}
@@ -215,24 +223,29 @@ const Filters: React.FC<FiltersProps> = ({ searchTerm, setSearchTerm }) => {
                 </button>
               </div>
             )}
-
             {/* Clear All Button */}
-            <div className="flex items-center justify-between mx-2">
-              <button
-                onClick={() => {
-                  setFromValue("0");
-                  setToValue("0");
-                  setSelectedDateRange({ startDate: null, endDate: null });
-                  setSelectedGain("Highest gain");
-                  setFromCurrency("USDT");
-                  setToCurrency("USDT");
-                }}
-                className="flex items-center gap-1 text-[#5F9339] text-sm"
-              >
-                <FontAwesomeIcon icon={faXmark} className="w-3 h-3" />
-                <span>Clear all</span>
-              </button>
-            </div>
+            {(selectedDateRange.endDate ||
+              selectedDateRange.startDate ||
+              fromValue !== "0" ||
+              toValue !== "0" ||
+              selectedGain !== "") && (
+              <div className="flex items-center justify-between mx-2">
+                <button
+                  onClick={() => {
+                    setFromValue("0");
+                    setToValue("0");
+                    setSelectedDateRange({ startDate: null, endDate: null });
+                    setSelectedGain("");
+                    setFromCurrency("USDT");
+                    setToCurrency("USDT");
+                  }}
+                  className="flex items-center gap-1 text-[#5F9339] text-sm"
+                >
+                  <FontAwesomeIcon icon={faXmark} className="w-3 h-3" />
+                  <span>Clear all</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
