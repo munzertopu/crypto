@@ -204,7 +204,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
                 setSearchTerm={setSearchTerm}
                 placeholder="Search"
                 ariaLabel="Search clients"
-                className="bg-white rounded-xl py-2.5"
+                className="!bg-transparent rounded-xl py-2.5"
               />
             </div>
 
@@ -223,30 +223,32 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
               
               <button 
                 onClick={() => setIsUnassignedFilterActive(!isUnassignedFilterActive)}
-                className={`flex items-center gap-2 px-4 py-2 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg
+                  border border-default dark:border-gray-700 bg-white dark:bg-transparent text-gray-11 dark:text-white`}
               >
                 {isUnassignedFilterActive && (
-                  <TickCircleIcon className="text-gray-500 dark:text-green-400" />
+                  <TickCircleIcon className="text-gray-500 dark:text-gray-300" />
                 )}
                 Unassigned
                 {isUnassignedFilterActive && (
                   <CrossIcon 
-                  className="text-gray-500 dark:text-gray-400"
+                  className="text-gray-500 dark:text-gray-300"
                   />
                 )}
               </button>
               
               <button 
                 onClick={() => setIsUnlicensedFilterActive(!isUnlicensedFilterActive)}
-                className={`flex items-center gap-2 px-4 py-2 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg
+                  border border-default dark:border-gray-700 bg-white dark:bg-transparent text-gray-11 dark:text-white`}
               >
                 {isUnlicensedFilterActive && (
-                  <TickCircleIcon className="text-gray-500 dark:text-green-400" />
+                  <TickCircleIcon className="text-gray-500 dark:text-gray-300" />
                 )}
                 Unlicensed
                 {isUnlicensedFilterActive && (
                   <CrossIcon 
-                    className="text-gray-500 dark:text-gray-400"
+                    className="text-gray-500 dark:text-gray-300"
                   />
                 )}
               </button>
@@ -353,7 +355,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
         </div>
 
         {/* Desktop Clients Table */}
-        <Card className="hidden sm:block h-full w-full border-default bg-transparent shadow-sm">
+        <Card className="hidden sm:block h-full w-full border-default dark:border-gray-700 bg-transparent shadow-sm">
           <CardBody className="px-0 py-0 rounded-lg sm:overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left">
               <thead className="bg-table-header dark:bg-gray-800">
