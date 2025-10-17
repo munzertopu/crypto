@@ -5,7 +5,7 @@ import Dropdown from "../../components/UI/Dropdown";
 import AddClientDrawer from "./components/AddClientDrawer";
 import SuccessNotification from "../../components/SuccessNotification";
 import ErrorNotification from "../../components/ErrorNotification";
-import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { Typography, Card, CardBody } from "@material-tailwind/react";
 import RedirectWindowIcon from "../../components/Icons/RedirectWindowIcon";
 import TickCircleIcon from "../../components/Icons/TickCircleIcon";
@@ -33,7 +33,7 @@ interface Client {
 const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("All");
-  const [selectedSort, setSelectedSort] = useState("Recently added");
+  const [, setSelectedSort] = useState("Recently added");
   const [isUnassignedFilterActive, setIsUnassignedFilterActive] = useState(false);
   const [isUnlicensedFilterActive, setIsUnlicensedFilterActive] = useState(false);
   const [isAddClientDrawerOpen, setIsAddClientDrawerOpen] = useState(false);
@@ -264,11 +264,99 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
           </div>
         </div>
 
-        {/* Clients Table */}
-        <Card className="h-full w-full border-default bg-transparent shadow-sm">
+        {/* Mobile Client Cards */}
+        <div className="sm:hidden space-y-4">
+          {filteredClients.map((client) => (
+            <div
+              key={client.id}
+              className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm"
+            >
+              {/* Header Section */}
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-semibold text-sm">
+                    {client.avatar ? (
+                      <img src={client.avatar} alt={client.name} className="w-12 h-12 rounded-full object-cover" />
+                    ) : (
+                      client.name.charAt(0)
+                    )}
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <Typography variant="small" className="text-lg font-bold text-[#0E201E] dark:text-gray-100">
+                        {client.name}
+                      </Typography>
+                      <Typography variant="small" className="text-sm font-bold text-[#0E201E] dark:text-gray-400">
+                        | {client.id}
+                      </Typography>
+                    </div>
+                    <Typography variant="small" className="text-sm text-gray-600 dark:text-gray-400">
+                      {client.email}
+                    </Typography>
+                  </div>
+                </div>
+                <RedirectWindowIcon 
+                  width={16} 
+                  height={16} 
+                  strokeColor="#9CA3AF" 
+                  className="cursor-pointer mt-1" 
+                />
+              </div>
+
+              {/* Details Section */}
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Transactions:</span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                    {client.transactions.toLocaleString()}
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Last Active:</span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                    {client.lastActive}
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600 dark:text-gray-400">License Status:</span>
+                  <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-lg ${
+                    client.licenseStatus === "Licensed"
+                      ? "bg-green-200 text-[#4D772F] dark:bg-green-900 dark:text-green-200"
+                      : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+                  }`}>
+                    {client.licenseStatus}
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Assigned To:</span>
+                  <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                    {client.assignedTo ? client.assignedTo.name : "Unassigned"}
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Ownership:</span>
+                  <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-lg ${
+                    client.ownership === "Owned by Client"
+                      ? "bg-[#ECDFFB] text-[#5314A3] dark:bg-purple-900 dark:text-purple-200"
+                      : "bg-[#E3EAFD] text-[#133A9A] dark:bg-blue-900 dark:text-blue-200"
+                  }`}>
+                    {client.ownership}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop Clients Table */}
+        <Card className="hidden sm:block h-full w-full border-default bg-transparent shadow-sm">
           <CardBody className="px-0 py-0 rounded-lg sm:overflow-x-auto">
             <table className="w-full min-w-max table-auto text-left">
-              <thead className="bg-table-header dark:bg-gray-800 hidden sm:table-header-group">
+              <thead className="bg-table-header dark:bg-gray-800">
                 <tr>
                   {TABLE_HEAD.map((head, index) => (
                     <th
@@ -296,7 +384,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
                 </tr>
               </thead>
               <tbody className="bg-white dark:bg-[#0E201E] divide-gray-200 dark:divide-[#2F3232]">
-                {filteredClients.map((client, index) => (
+                {filteredClients.map((client) => (
                   <tr key={client.id}>
                     {/* Client */}
                     <td className="px-5 py-2.5">
