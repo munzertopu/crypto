@@ -3,6 +3,7 @@ import Dropdown from "../../../components/UI/Dropdown";
 import DateRangePicker from "../../../components/DateRangePicker";
 import OptimizationModal from "./components/OptimizationModal";
 import OptimizationResults from "./components/OptimizationResults";
+import RefreshIcon from "../../../components/Icons/RefreshIcon";
 
 const TaxWizardTab: React.FC = () => {
   // Sales Wizard state
@@ -26,13 +27,13 @@ const TaxWizardTab: React.FC = () => {
 
   // Mode toggle component
   const ModeToggle = () => (
-    <div className="bg-gray-100 dark:bg-gray-700 rounded-2xl px-5 py-3 flex items-center justify-between gap-4">
+    <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl px-5 py-3 flex items-center justify-between gap-4">
       {/* Left side - Include only Mode */}
-      <div className="flex items-center gap-2">
-        <span className={`text-sm font-medium ${includeOnlyMode ? "text-gray-900" : "#4D5050"} dark:text-gray-300`}>
+      <div className={`flex items-center gap-2 ${includeOnlyMode ? "text-gray-900 dark:text-gray-100" : "text-gray-500 dark:text-gray-300"}`}>
+        <span className={`text-sm font-medium`}>
           Include only Mode
         </span>
-        <button className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+        <button>
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
           </svg>
@@ -56,11 +57,11 @@ const TaxWizardTab: React.FC = () => {
       </div>
 
       {/* Right side - Exclude Mode */}
-      <div className="flex items-center gap-2">
-        <span className={`text-sm font-medium ${includeOnlyMode ? "#4D5050" : "text-gray-900"} dark:text-gray-300`}>
+      <div className={`flex items-center gap-2  ${includeOnlyMode ? "text-gray-500 dark:text-gray-300" : "text-gray-900 dark:text-gray-100"}`}>
+        <span className={`text-sm font-medium`}>
           Exclude Mode
         </span>
-        <button className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+        <button className="">
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
           </svg>
@@ -80,8 +81,8 @@ const TaxWizardTab: React.FC = () => {
       onClick={onClick}
       className={`px-2.5 py-2 w-full rounded-lg text-sm font-medium transition-colors border ${
         isSelected
-          ? "bg-green-200 text-gray-900 dark:bg-green-900 dark:text-green-300 border-green-700 dark:border-green-700"
-          : "bg-white text-gray-600 dark:bg-gray-800 dark:text-gray-400 border-white dark:border-gray-600"
+          ? "bg-green-200 text-gray-900 dark:bg-green-500 dark:text-gray-900 border-green-700 dark:border-green-600"
+          : "bg-white text-gray-600 dark:bg-gray-900 dark:text-gray-300 border-transparent"
       } ${className}`}
     >
       {label}
@@ -110,10 +111,10 @@ const TaxWizardTab: React.FC = () => {
       {/* Sales Wizard Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="text-left">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
             Sales Wizard
           </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
             Turn portfolio into cash, tax-optimized.
           </p>
         </div>
@@ -123,10 +124,10 @@ const TaxWizardTab: React.FC = () => {
       {/* Main Card */}
       <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-8">
         <div className="text-left mb-6">
-          <h3 className="text-h6 font-semibold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-h6 font-semibold text-gray-900 dark:text-gray-100 mb-2">
             How much cash do you need?
           </h3>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-gray-300">
             We'll help you find the most tax-efficient way to get it.
           </p>
         </div>
@@ -137,10 +138,10 @@ const TaxWizardTab: React.FC = () => {
           <div className="lg:col-span-2 space-y-8">
             {/* What is your goal? */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-3">
                 What is your goal?
               </label>
-              <div className="flex bg-white p-1 rounded-lg justify-between">
+              <div className="flex bg-white dark:bg-gray-900 p-1 rounded-lg justify-between">
                 <OptionButton
                   label="Cash Target"
                   isSelected={selectedGoal === "Cash Target"}
@@ -156,10 +157,10 @@ const TaxWizardTab: React.FC = () => {
 
             {/* What is your preference? (Optimization) */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-3">
                 What is your preference?
               </label>
-              <div className="flex gap-3 bg-white p-1 rounded-lg">
+              <div className="flex bg-white dark:bg-gray-900 p-1 rounded-lg justify-between">
                 <OptionButton
                   label="Minimize Tax"
                   isSelected={selectedOptimization === "Minimize Tax"}
@@ -176,16 +177,16 @@ const TaxWizardTab: React.FC = () => {
             {/* Max Trades */}
             <div>
               <div className="flex items-center justify-between mb-3">
-                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-100">
                   Max Trades
                 </label>
                 <div className="flex items-center gap-1">
-                  <button className="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300">
+                  <button className="text-gray-400 dark:text-gray-300">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
                     </svg>
                   </button>
-                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                  <span className="text-sm text-gray-600 dark:text-gray-300">
                     FIFO Method
                   </span>
                 </div>
@@ -207,7 +208,7 @@ const TaxWizardTab: React.FC = () => {
           <div className="lg:col-span-3 space-y-8">
             {/* What is your preference? (Amount) */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-3">
                 What is your preference?
               </label>
               <div className="grid grid-cols-4 gap-3">
@@ -224,7 +225,7 @@ const TaxWizardTab: React.FC = () => {
 
             {/* What is your timeline? */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-3">
                 What is your timeline?
               </label>
               <div className="space-y-3">
@@ -232,6 +233,7 @@ const TaxWizardTab: React.FC = () => {
                   <DateRangePicker
                     selectedDateRange={dateRange}
                     onDateRangeChange={setDateRange}
+                    className="dark:!border-gray-700"
                   />
                 </div>
                 <div className="grid grid-cols-4 gap-3">
@@ -251,10 +253,10 @@ const TaxWizardTab: React.FC = () => {
       </div>
 
       {/* Constrains Section */}
-      <div className="bg-gray-100 dark:bg-gray-900 rounded-lg border border-gray-100 dark:border-gray-700">
+      <div className="bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700">
         <button
           onClick={() => setIsConstrainsOpen(!isConstrainsOpen)}
-          className="w-full p-8 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+          className="w-full p-8 flex items-center justify-between text-left"
         >
           <span className="text-h6 font-medium text-gray-900 dark:text-white">
             Constrains
@@ -279,9 +281,6 @@ const TaxWizardTab: React.FC = () => {
           <div className="px-8 pb-8 space-y-6">
             {/* Quick Exclusions */}
             <div className="text-left pt-5">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Quick Exclusions
-              </label>
               <div className="flex gap-3 w-max">
                 <OptionButton
                   label="Exclude BTC"
@@ -316,24 +315,24 @@ const TaxWizardTab: React.FC = () => {
                   { name: "MetaMask", amount: "$8,930", status: "Synced 8 h ago", selected: false },
                   { name: "Solana", amount: "$5,900", status: "Synced 1 d ago", selected: false },
                 ].map((wallet) => (
-                  <div key={wallet.name} className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-default dark:border-gray-700">
+                  <div key={wallet.name} className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-default dark:border-gray-700">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 dark:text-white text-sm">{wallet.name}</h4>
+                        <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm">{wallet.name}</h4>
                         <div className="flex items-center gap-2 mt-1">
-                          <p className="text-sm text-gray-700 dark:text-white">{wallet.amount}</p>
-                          <div className="w-px h-4 bg-default dark:bg-gray-600"></div>
-                          <p className="text-xs text-gray-700">{wallet.status}</p>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">{wallet.amount}</p>
+                          <div className="w-px h-4 bg-default dark:bg-gray-300"></div>
+                          <p className="text-xs text-gray-700 dark:text-gray-300">{wallet.status}</p>
                         </div>
                       </div>
                       <div className="flex items-center">
-                        <div className={`w-4 h-4 rounded-full border-2 ${
+                        <div className={`w-4 h-4 rounded-full border-2 border-green-500 ${
                           wallet.selected 
-                            ? "bg-green-500 border-green-500" 
+                            ? "bg-transparent border-green-500" 
                             : "border-gray-300 dark:border-gray-600"
                         }`}>
                           {wallet.selected && (
-                            <div className="w-full h-full rounded-full bg-white scale-50"></div>
+                            <div className="w-full h-full rounded-full bg-green-500 scale-75"></div>
                           )}
                         </div>
                       </div>
@@ -355,24 +354,24 @@ const TaxWizardTab: React.FC = () => {
                   { name: "Solana", amount: "+$2,100", status: "Available", selected: false },
                   { name: "Polygon", amount: "+$850", status: "Available", selected: false },
                 ].map((asset) => (
-                  <div key={asset.name} className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                  <div key={asset.name} className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 dark:text-white text-base">{asset.name}</h4>
+                        <h4 className="font-medium text-gray-900 dark:text-gray-100 text-base">{asset.name}</h4>
                         <div className="flex items-center gap-2 mt-1">
-                          <p className="text-sm text-gray-700 dark:text-white">{asset.amount}</p>
-                          <div className="w-px h-4 bg-default dark:bg-gray-600"></div>
-                          <p className="text-xs text-gray-700">{asset.status}</p>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">{asset.amount}</p>
+                          <div className="w-px h-4 bg-default dark:text-gray-300"></div>
+                          <p className="text-xs text-gray-700 dark:text-gray-300">{asset.status}</p>
                         </div>
                       </div>
                       <div className="flex items-center">
-                        <div className={`w-4 h-4 rounded-full border-2 ${
+                        <div className={`w-4 h-4 rounded-full border-2 border-green-500 ${
                           asset.selected 
-                            ? "bg-green-500 border-green-500" 
+                            ? "bg-transparent border-green-500" 
                             : "border-gray-300 dark:border-gray-600"
                         }`}>
                           {asset.selected && (
-                            <div className="w-full h-full rounded-full bg-white scale-50"></div>
+                            <div className="w-full h-full rounded-full bg-green-500 scale-75"></div>
                           )}
                         </div>
                       </div>
@@ -385,14 +384,12 @@ const TaxWizardTab: React.FC = () => {
             {/* Footer */}
             <div className="flex items-center justify-between pt-5 border-t border-gray-200 dark:border-gray-700">
               <span className="text-sm text-gray-900 dark:text-gray-400">
-                <span className="font-bold">Last updated:</span> <span className="font-medium text-gray-700">1-4h ago</span>
+                <span className="dark:text-gray-100 font-bold">Last updated:</span> <span className="font-medium text-gray-700 dark:text-gray-300">1-4h ago</span>
               </span>
-              <button className="flex bg-white items-center gap-2 px-5 py-3 text-base font-medium text-gray-700 rounded-lg dark:text-gray-300">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                Refresh All
-              </button>
+               <button className="flex bg-white items-center gap-2 px-5 py-3 text-base font-medium text-gray-700 rounded-lg dark:text-gray-500 dark:bg-gray-900 dark:border-gray-700">
+                 <RefreshIcon width={16} height={16} />
+                 <span className="dark:text-gray-100">Refresh All</span>
+               </button>
             </div>
           </div>
         )}

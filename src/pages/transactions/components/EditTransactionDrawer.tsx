@@ -4,6 +4,7 @@ import DatePicker from '../../../components/DatePicker';
 import Dropdown from '../../../components/UI/Dropdown';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import CrossIcon from '../../../components/Icons/CrossIcon';
 
 
 interface EditTransactionDrawerProps {
@@ -57,21 +58,22 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
       />
       
       {/* Drawer */}
-      <div className="fixed left-0 top-0 h-full w-96 bg-white dark:bg-[#0E201E] z-50 transform transition-transform duration-300 ease-in-out shadow-xl">
+      <div className="fixed left-0 top-0 h-full w-96 bg-white dark:bg-gray-800 z-50 transform transition-transform duration-300 ease-in-out shadow-xl">
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="p-6 pb-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-h5 font-bold text-gray-11 dark:text-white">
+              <h2 className="text-h5 font-bold text-gray-11 dark:text-gray-100">
                 Edit transaction
               </h2>
               <button
                 onClick={onClose}
-                className="text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                className="text-gray-500 dark:text-gray-400"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <CrossIcon
+                  height={20}
+                  width={20}
+                />
               </button>
             </div>
           </div>
@@ -82,7 +84,7 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
               <div className='space-y-3'>
                 {/* Transaction Type */}
                 <div className='text-left'>
-                  <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
                     Transaction type
                   </label>
                   <div className="mt-1.5">
@@ -91,6 +93,7 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
                       onSelect={setTransactionType}
                       defaultValue="Deposit"
                       className="w-full"
+                      inputClassName='dark:bg-transparent'
                     />
                   </div>
                 </div>
@@ -98,7 +101,7 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
                 {/* Date (UTC) */}
                 <div className='text-left'>
                   <div className="items-center gap-3">
-                    <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-300 whitespace-nowrap">
+                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
                       Date (UTC)
                     </label>
                     {/* Date input */}
@@ -107,6 +110,8 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
                         value={dateValue}
                         onChange={setDateValue}
                         placeholder="Set date"
+                        className='dark:bg-transparent'
+                        datePickerClass=''
                       />
                     </div>
                   </div>
@@ -118,7 +123,7 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
               
               <div className='space-y-3'>
                 <div className='text-left'>
-                  <label className="text-left text-base font-semibold text-gray-900 dark:text-white">
+                  <label className="text-left text-base font-semibold text-gray-900 dark:text-gray-100">
                     Receive
                   </label>
                 </div>
@@ -126,7 +131,7 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
                 <div className='text-left'>
                   {/* Wallet */}
                   <div className="mt-1.5">
-                    <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-300">
+                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
                       Wallet
                     </label>
                     <div className="mt-1.5">
@@ -135,13 +140,14 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
                         onSelect={setSelectedWallet}
                         defaultValue="Select wallet"
                         className="w-full"
+                        inputClassName='dark:bg-transparent'
                       />
                     </div>
                   </div>
 
                   {/* Number of coins */}
                   <div className="mt-4">
-                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
                       Number of coins
                     </label>
                     <div className="mt-1.5">
@@ -157,7 +163,7 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
                             setShowCoinDropdown(!showCoinDropdown)
                           }
                           className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 bg-white focus:outline-none
-                            dark:bg-[#0E201E] dark:border-[#4D5050]`}
+                            dark:bg-transparent dark:border-[#4D5050]`}
                         >
                           <div className="flex items-center gap-1">
                             <span className="text-xs font-medium">{coinCurrency}</span>
@@ -204,7 +210,8 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
                      {additionalTags.map((tag, index) => (
                        <button 
                          key={index}
-                         className="flex items-center gap-3 px-3 py-1.5 bg-gray-100 border border-default dark:border-gray-600 rounded-full text-sm text-gray-900 dark:text-gray-400"
+                         className="flex items-center gap-3 px-3 py-1.5 rounded-full text-sm 
+                          border border-default dark:border-transparent dark:bg-gray-900 text-gray-900 dark:text-gray-100 bg-gray-100"
                        >
                          <span className="text-xs">+</span>
                          <span>{tag}</span>

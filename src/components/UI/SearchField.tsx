@@ -64,7 +64,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
         placeholder={placeholder}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className={`w-full border border-default rounded-xl focus:outline-none bg-white text-gray-900 placeholder-gray-500 dark:text-white dark:placeholder-gray-400 ${getSizeClasses()} ${className}`}
+        className={`w-full border border-default dark:border-gray-700 rounded-xl focus:outline-none bg-white text-gray-900 placeholder-gray-500 dark:text-white dark:placeholder-gray-400 ${getSizeClasses()} ${className}`}
         aria-label={ariaLabel || placeholder}
       />
     </div>

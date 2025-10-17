@@ -182,7 +182,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
 
   return (
     <div
-      className="relative datepicker-container dark:bg-[#0E201E]"
+      className="relative datepicker-container"
       ref={containerRef}
     >
       {!hideDateInput && (
