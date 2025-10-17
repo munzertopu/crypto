@@ -24,6 +24,8 @@ interface DateRangeSelectorProps {
   className?: string;
   isDrawer?: boolean;
   iconPosition?: "left" | "right";
+  hideDateInput?: boolean;
+  openByDefault?: boolean;
 }
 
 const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
@@ -34,6 +36,8 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   buttonClassName = "",
   isDrawer = false,
   iconPosition = "left",
+  hideDateInput = false,
+  openByDefault = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dateRange, setDateRange] = useState([
@@ -47,6 +51,11 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   const screenSize = useScreenSize();
   const [selectedOption, setSelectedOption] = useState("");
 
+  useEffect(() => {
+    if (openByDefault) {
+      setIsOpen(true);
+    }
+  }, [openByDefault]);
   const createShortcuts = () => {
     const today = new Date();
     return [
@@ -176,47 +185,54 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
       className="relative datepicker-container dark:bg-[#0E201E]"
       ref={containerRef}
     >
-      <button
-        onClick={handleIconClick}
-        className={`w-full flex items-center ${iconPosition === "right" ? "justify-between" : "justify-start"} p-2 md:p-0 md:px-4 md:py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900
+      {!hideDateInput && (
+        <button
+          onClick={handleIconClick}
+          className={`w-full flex items-center ${
+            iconPosition === "right" ? "justify-between" : "justify-start"
+          } p-2 md:p-0 md:px-4 md:py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900
           dark:text-gray-100 dark:bg-[#0E201E] dark:border-gray-700 md:min-w-[194px] ${className}`}
-        aria-label="Select date range"
-        aria-expanded={isOpen}
-        aria-haspopup="true"
-      >
-        {iconPosition === "right" ? (
-          <>
-            <span className={`hidden md:block text-xs font-medium ${buttonClassName}`}>
-              {formatDateRange(selectedDateRange)}
-              {!selectedDateRange.startDate && !selectedDateRange.endDate && (
-                <>{buttonLabel}</>
-              )}
-            </span>
-            <CalendarIcon 
-              width={16} 
-              height={16} 
-              strokeColor="currentColor" 
-              className="text-gray-500" 
-            />
-          </>
-        ) : (
-          <div className="flex items-center space-x-2">
-            <CalendarIcon 
-              width={16} 
-              height={16} 
-              strokeColor="currentColor" 
-              className="text-gray-500" 
-            />
-            
-            <span className="hidden md:block text-xs font-medium">
-              {formatDateRange(selectedDateRange)}
-              {!selectedDateRange.startDate && !selectedDateRange.endDate && (
-                <>{buttonLabel}</>
-              )}
-            </span>
-          </div>
-        )}
-      </button>
+          aria-label="Select date range"
+          aria-expanded={isOpen}
+          aria-haspopup="true"
+        >
+          {iconPosition === "right" ? (
+            <>
+              <span
+                className={`hidden md:block text-xs font-medium ${buttonClassName}`}
+              >
+                {formatDateRange(selectedDateRange)}
+                {!selectedDateRange.startDate && !selectedDateRange.endDate && (
+                  <>{buttonLabel}</>
+                )}
+              </span>
+              <CalendarIcon
+                width={16}
+                height={16}
+                strokeColor="currentColor"
+                className="text-gray-500"
+              />
+            </>
+          ) : (
+            <div className="flex items-center space-x-2">
+              <CalendarIcon
+                width={16}
+                height={16}
+                strokeColor="currentColor"
+                className="text-gray-500"
+              />
+
+              <span className="hidden md:block text-xs font-medium">
+                {formatDateRange(selectedDateRange)}
+                {!selectedDateRange.startDate && !selectedDateRange.endDate && (
+                  <>{buttonLabel}</>
+                )}
+              </span>
+            </div>
+          )}
+        </button>
+      )}
+
       {isOpen && screenSize.width > 1024 ? (
         <div
           className={`absolute top-full  md:left-[-710px] mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
@@ -235,7 +251,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
             selectedOption={selectedOption}
           />
         </div>
-      ) : isOpen && screenSize.width < 1024 ? (
+      ) : isOpen && !isDrawer && screenSize.width < 1024 ? (
         <MobileDrawer
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
@@ -260,6 +276,26 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
             />
           </div>
         </MobileDrawer>
+      ) : isOpen && isDrawer && screenSize.width < 640 ? (
+        <>
+          <div
+            className={`absolute top-full w-full mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
+              isDrawer ? " " : "left-[-175px]"
+            }`}
+          >
+            {/* Left Sidebar for Filters */}
+            <RenderDateRange
+              dateRange={dateRange}
+              handleDateChange={handleDateChange}
+              handleYearSelect={handleYearSelect}
+              setIsOpen={setIsOpen}
+              createShortcuts={createShortcuts}
+              screenSize={screenSize}
+              setSelectedOption={setSelectedOption}
+              selectedOption={selectedOption}
+            />
+          </div>
+        </>
       ) : null}
     </div>
   );
@@ -367,7 +403,7 @@ const RenderDateRange = ({
             options={createShortcuts()
               .map((shortcut) => shortcut.label)
               .concat(["By year", "All time"])}
-              onSelect={(value) => {
+            onSelect={(value) => {
               if (value === "All time") {
                 handleDateChange({
                   selection: {
