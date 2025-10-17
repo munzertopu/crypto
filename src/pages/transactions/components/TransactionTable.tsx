@@ -5,7 +5,7 @@ import TransactionFooter from "./TransactionFooter";
 import useScreenSize from "../../../hooks/useScreenSize";
 import MobileFormDrawer from "../../../components/Drawers/MobileFormDrawer";
 import type { Transaction } from "../../../data/transactionAssets";
-import TableSortIcon from '../../../utils/icons/TableSortIcon';
+import TableSortIcon from '../../../components/Icons/TableSortIcon';
 import { getTableHeaders } from "../../../data/transactionAssets";
 import Checkbox from "../../../components/UI/Checkbox";
 import Badge from "../../../components/Badge";

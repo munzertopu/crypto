@@ -7,9 +7,9 @@ import SuccessNotification from "../../components/SuccessNotification";
 import ErrorNotification from "../../components/ErrorNotification";
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { Typography, Card, CardBody } from "@material-tailwind/react";
-import RedirectWindowIcon from "../../utils/icons/RedirectWindowIcon";
-import TickCircleIcon from "../../utils/icons/TickCircleIcon";
-import CrossIcon from "../../utils/icons/CrossIcon";
+import RedirectWindowIcon from "../../components/Icons/RedirectWindowIcon";
+import TickCircleIcon from "../../components/Icons/TickCircleIcon";
+import CrossIcon from "../../components/Icons/CrossIcon";
 
 interface ClientsPageProps {
   onLogout: () => void;

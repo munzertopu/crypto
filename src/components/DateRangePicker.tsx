@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { DateRange } from "react-date-range";
-import CalendarIcon from "../utils/icons/CalendarIcon";
+import CalendarIcon from "./Icons/CalendarIcon";
 import "react-date-range/dist/styles.css"; // Main style file
 import "react-date-range/dist/theme/default.css"; // Theme CSS file
 import useScreenSize from "../hooks/useScreenSize";

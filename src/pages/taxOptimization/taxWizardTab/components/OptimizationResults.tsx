@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import CloudUploadIcon from "../../../../utils/icons/CloudUploadIcon";
-import ButtonArrowCircleIcon from "../../../../utils/icons/ButtonArrowCircleIcon";
-import BitcoinIcon from "../../../../utils/icons/BitcoinIcon";
-import StackedCoinIcon from "../../../../utils/icons/StackedCoinIcon";
-import ChartBoxIcon from "../../../../utils/icons/ChartBoxIcon";
-import PercentCircleIcon from "../../../../utils/icons/PercentCircleIcon";
+import CloudUploadIcon from "../../../../components/Icons/CloudUploadIcon";
+import ButtonArrowCircleIcon from "../../../../components/Icons/ButtonArrowCircleIcon";
+import BitcoinIcon from "../../../../components/Icons/BitcoinIcon";
+import StackedCoinIcon from "../../../../components/Icons/StackedCoinIcon";
+import ChartBoxIcon from "../../../../components/Icons/ChartBoxIcon";
+import PercentCircleIcon from "../../../../components/Icons/PercentCircleIcon";
 import { ChevronUpDownIcon, ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Typography } from "@material-tailwind/react";
 import TradeDetailsTable from "./TradeDetailsTable";

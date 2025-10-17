@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import TickIcon from "../../utils/icons/TickIcon";
+import TickIcon from "../Icons/TickIcon";
 
 export interface DropdownOption {
   label: string;
@@ -103,7 +103,8 @@ const Dropdown: React.FC<DropdownProps> = ({
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         onClick={handleToggle}
-        className={`flex flex-row justify-between items-center px-4 py-3 box-border border border-default rounded-lg bg-white gap-4 md:min-w-24 min-w-[max-content] w-full dark:border-[#4D5050] focus:ring-2 focus:ring-[#E3F3C7B2] focus:outline-none ${inputClassName}`}
+        className={`flex flex-row justify-between items-center px-4 py-3 rounded-lg gap-4 md:min-w-24 min-w-[max-content] w-full
+          box-border border border-default bg-white dark:bg-gray-900 dark:border-gray-700 focus:outline-none ${inputClassName}`}
         aria-label="Toggle dropdown"
         aria-expanded={isOpen}
         aria-haspopup="true"

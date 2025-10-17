@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CalendarIcon from '../utils/icons/CalendarIcon';
+import CalendarIcon from './Icons/CalendarIcon';
 import Datepicker from "react-tailwindcss-datepicker";
 
 interface DatePickerProps {
