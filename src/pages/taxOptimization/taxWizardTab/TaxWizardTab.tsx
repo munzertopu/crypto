@@ -326,13 +326,13 @@ const TaxWizardTab: React.FC = () => {
                         </div>
                       </div>
                       <div className="flex items-center">
-                        <div className={`w-4 h-4 rounded-full border-2 ${
+                        <div className={`w-4 h-4 rounded-full border-2 border-green-500 ${
                           wallet.selected 
-                            ? "bg-green-500 border-green-500" 
-                            : "border-gray-300 dark:border-gray-700"
+                            ? "bg-transparent border-green-500" 
+                            : "border-gray-300 dark:border-gray-600"
                         }`}>
                           {wallet.selected && (
-                            <div className="w-full h-full rounded-full bg-white scale-50"></div>
+                            <div className="w-full h-full rounded-full bg-green-500 scale-75"></div>
                           )}
                         </div>
                       </div>
@@ -365,13 +365,13 @@ const TaxWizardTab: React.FC = () => {
                         </div>
                       </div>
                       <div className="flex items-center">
-                        <div className={`w-4 h-4 rounded-full border-2 ${
+                        <div className={`w-4 h-4 rounded-full border-2 border-green-500 ${
                           asset.selected 
-                            ? "bg-green-500 border-green-500" 
+                            ? "bg-transparent border-green-500" 
                             : "border-gray-300 dark:border-gray-600"
                         }`}>
                           {asset.selected && (
-                            <div className="w-full h-full rounded-full bg-white scale-50"></div>
+                            <div className="w-full h-full rounded-full bg-green-500 scale-75"></div>
                           )}
                         </div>
                       </div>
