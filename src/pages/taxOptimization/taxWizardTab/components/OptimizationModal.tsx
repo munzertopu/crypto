@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import TickCircleFilledIcon from "../../../../utils/icons/TickCircleFilledIcon";
+import TickCircleFilledIcon from "../../../../components/Icons/TickCircleFilledIcon";
 
 interface OptimizationModalProps {
   isOpen: boolean;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from "@material-tailwind/react";
-import CrossIcon from '../../../utils/icons/CrossIcon';
-import InfoCircleIcon from '../../../utils/icons/InfoCircleIcon';
+import CrossIcon from '../../../components/Icons/CrossIcon';
+import InfoCircleIcon from '../../../components/Icons/InfoCircleIcon';
 import Dropdown from '../../../components/UI/Dropdown';
 
 interface AddClientDrawerProps {

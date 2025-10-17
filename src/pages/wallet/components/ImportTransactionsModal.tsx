@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TrashIcon from '../../../utils/icons/TrashIcon';
+import TrashIcon from '../../../components/Icons/TrashIcon';
 
 interface ImportTransactionsModalProps {
   isOpen: boolean;

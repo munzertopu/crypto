@@ -4,7 +4,7 @@ import { Typography } from "@material-tailwind/react";
 import NavigationBar from '../../../components/NavigationBar';
 import ImportTransactionsModal from './ImportTransactionsModal';
 import ImportHistoryModal from './ImportHistoryModal';
-import TableSortIcon from '../../../utils/icons/TableSortIcon';
+import TableSortIcon from '../../../components/Icons/TableSortIcon';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 interface WalletDetailsPageProps {}
