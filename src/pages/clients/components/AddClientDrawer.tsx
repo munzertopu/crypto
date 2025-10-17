@@ -118,7 +118,19 @@ const AddClientDrawer: React.FC<AddClientDrawerProps> = ({
                   <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
                     Share access
                   </label>
-                  <InfoCircleIcon className="text-gray-500 dark:text-gray-500" />
+                  <div className="relative group">
+                    <InfoCircleIcon className="text-gray-500 dark:text-gray-500" />
+                    {/* Tooltip */}
+                    <div className="absolute top-full -left-2 transform mt-2 px-3 py-2 text-sm rounded-lg
+                    bg-gray-900 dark:bg-gray-700 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50 w-max">
+                      {/* Arrow pointing up */}
+                      <div className="absolute bottom-full left-3 transform border-4 border-transparent border-b-gray-900 dark:border-b-gray-700"></div>
+                      <div className="text-center leading-tight">
+                        <div>There should be an explanation</div>
+                        <div>of what shared access is.</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="sm:mt-1.5">
                   <Input
@@ -215,7 +227,12 @@ const AddClientDrawer: React.FC<AddClientDrawerProps> = ({
           <div className="flex-shrink-0 p-6 pt-4 sm:pt-0 sm:border-t-0 border-t border-gray-200 dark:border-gray-700">
             <button
               onClick={handleSave}
-              className="w-full px-5 py-3 rounded-xl font-medium transition-colors bg-default dark:bg-gray-700 text-gray-400 dark:text-gray-300 cursor-not-allowed"
+              className={`w-full px-5 py-3 rounded-xl font-medium transition-colors ${
+                clientName && shareAccess
+                  ? 'bg-green-500 text-gray-900 hover:bg-green-500' 
+                  : 'bg-default dark:bg-gray-700 text-gray-400 dark:text-gray-300 cursor-not-allowed'
+              }`}
+              disabled={!clientName || !shareAccess}
             >
               Add client
             </button>
