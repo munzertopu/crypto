@@ -8,6 +8,7 @@ import PercentCircleIcon from "../../../../components/Icons/PercentCircleIcon";
 import { ChevronUpDownIcon, ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Typography } from "@material-tailwind/react";
 import TradeDetailsTable from "./TradeDetailsTable";
+import TickCircleIcon from "../../../../components/Icons/TickCircleIcon";
 
 const OptimizationResults: React.FC = () => {
   const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
@@ -22,28 +23,28 @@ const OptimizationResults: React.FC = () => {
   const metrics = [
     {
       icon: (
-        <BitcoinIcon width={20} height={20} className="text-gray-600 dark:text-gray-400" />
+        <BitcoinIcon width={24} height={24} />
       ),
       label: "Transactions",
       value: "3"
     },
     {
       icon: (
-        <StackedCoinIcon width={20} height={20} className="text-gray-600 dark:text-gray-400" />
+        <StackedCoinIcon width={24} height={24}/>
       ),
       label: "Est. Short-term Tax",
       value: "$420"
     },
     {
       icon: (
-        <ChartBoxIcon width={20} height={20} className="text-gray-600 dark:text-gray-400" />
+        <ChartBoxIcon width={24} height={24}/>
       ),
       label: "Est. Long-term Tax",
       value: "$37"
     },
     {
       icon: (
-        <PercentCircleIcon width={20} height={20} className="text-gray-600 dark:text-gray-400" />
+        <PercentCircleIcon width={24} height={24}/>
       ),
       label: "Total tax impact",
       value: "+$458"
@@ -142,7 +143,7 @@ const OptimizationResults: React.FC = () => {
              <CloudUploadIcon width={16} height={16} className="text-gray-600 dark:text-gray-400" />
              Export CSV/JSON
            </button>
-           <button className="flex items-center gap-2 bg-green-500 hover:bg-green-500 text-gray-900 px-5 py-3 rounded-lg font-medium transition-colors">
+           <button className="flex items-center gap-2 bg-green-500 text-gray-900 px-5 py-3 rounded-lg font-medium">
              <ButtonArrowCircleIcon width={16} height={16} className="text-gray-900" />
              Recalculate
            </button>
@@ -152,15 +153,15 @@ const OptimizationResults: React.FC = () => {
       {/* Optimization Results */}
       <div className="text-left bg-gray-100 dark:bg-gray-800 rounded-xl p-8">
         <div className="flex items-center mb-1 gap-4">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
             Optimization Results
           </h3>
-          <div className="flex items-center gap-2 px-1.5 py-1 bg-green-200 dark:bg-green-900 rounded-full text-[#4D772F]">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8.00065 14.6668C11.6673 14.6668 14.6673 11.6668 14.6673 8.00016C14.6673 4.3335 11.6673 1.3335 8.00065 1.3335C4.33398 1.3335 1.33398 4.3335 1.33398 8.00016C1.33398 11.6668 4.33398 14.6668 8.00065 14.6668Z" stroke="currentColo" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M5.16602 7.99995L7.05268 9.88661L10.8327 6.11328" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span className="text-sm font-medium text-green-700 dark:text-green-300">
+          <div className="flex items-center gap-2 px-1.5 py-1 bg-green-200 dark:bg-[#4D772F] rounded-full text-[#F4FAEB]">
+            <TickCircleIcon
+              height={16}
+              width={16}
+            />
+            <span className="text-sm font-medium text-green-700 dark:text-[#F4FAEB]">
               High Confidence
             </span>
           </div>
@@ -173,18 +174,14 @@ const OptimizationResults: React.FC = () => {
         {/* Metrics */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {metrics.map((metric, index) => (
-            <div key={index} className="bg-white dark:bg-gray-700 rounded-lg px-8 py-4">
+            <div key={index} className="bg-white dark:bg-gray-900 rounded-lg px-8 py-4">
               <div className="flex items-center gap-3 mb-3">
-                <div className="text-gray-600 dark:text-gray-400">
+                <div className="opacity-80 text-gray-900 dark:text-gray-100">
                   {metric.icon}
                 </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{metric.label}</p>
+                <p className="text-base opacity-80 text-gray-500 dark:text-gray-100">{metric.label}</p>
               </div>
-              <p className={`text-lg font-semibold ${
-                metric.label === "Total tax impact" 
-                  ? "text-gray-900 dark:text-white" 
-                  : "text-gray-700 dark:text-gray-300"
-              }`}>
+              <p className={`text-lg font-semibold text-gray-900 dark:text-gray-100`}>
                 {metric.value}
               </p>
             </div>
@@ -194,22 +191,22 @@ const OptimizationResults: React.FC = () => {
 
       {/* Proposed Trade Plan */}
       <div className="text-left bg-gray-100 dark:bg-gray-800 rounded-xl p-8">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
           Proposed Trade Plan
         </h3>
-        <p className="text-gray-600 dark:text-gray-400 mb-5">
+        <p className="text-gray-600 dark:text-gray-300 mb-5">
           You'll keep your BTC and ETH untouched.
         </p>
 
         {/* Trade Table */}
         <div className="overflow-x-auto">
-          <table className="w-full bg-white dark:bg-gray-700 rounded-lg">
+          <table className="w-full bg-white dark:bg-gray-900 rounded-lg">
             <thead>
               <tr className="border-b border-default dark:border-gray-700">
                 {TABLE_HEAD.map((head, index) => (
                   <th
                     key={head}
-                    className={`cursor-pointer p-6 ${
+                    className={`cursor-pointer px-5 py-3.5 ${
                       index === 0 ? "rounded-l-xl" : ""
                     } ${index === TABLE_HEAD.length - 1 ? "rounded-r-md" : ""}`}
                   >
@@ -233,13 +230,13 @@ const OptimizationResults: React.FC = () => {
               {tradePlan.map((trade, index) => (
                 <React.Fragment key={index}>
                   <tr 
-                    className="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+                    className="cursor-pointer"
                     onClick={() => toggleRowExpansion(index)}
                   >
                     <td className="py-3.5 px-5">
                       <div className="flex items-center gap-3">
                         {expandedRows.has(index) ? (
-                          <ChevronDownIcon className="w-4 h-4 text-gray-500" />
+                          <ChevronDownIcon className="w-4 h-4 text-gray-500 dark:text-gray-500" />
                         ) : (
                           <ChevronRightIcon className="w-4 h-4 text-gray-500" />
                         )}
@@ -253,13 +250,13 @@ const OptimizationResults: React.FC = () => {
                         </span>
                       </div>
                     </td>
-                    <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-300">
+                    <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-100">
                       {trade.walletExchange}
                     </td>
-                    <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-300">
+                    <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-100">
                       {trade.quantity}
                     </td>
-                    <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-300">
+                    <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-100">
                       {trade.estProceeds}
                     </td>
                     <td className={`py-3.5 px-5 text-base font-medium ${
@@ -269,7 +266,7 @@ const OptimizationResults: React.FC = () => {
                     }`}>
                       {trade.gainLoss}
                     </td>
-                    <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-300">
+                    <td className="py-3.5 px-5 text-base text-gray-900 dark:text-gray-100">
                       {trade.period}
                     </td>
                   </tr>
@@ -291,15 +288,15 @@ const OptimizationResults: React.FC = () => {
 
       {/* What If Analysis */}
       <div className="text-left bg-gray-100 dark:bg-gray-800 rounded-xl p-6">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6">
           What IF Analysis
         </h3>
         
         <div className="space-y-4">
           <div className="relative">
-            <div className="flex justify-between text-xs text-gray-700 dark:text-gray-400 mb-2">
+            <div className="flex justify-between text-xs text-gray-700 dark:text-gray-300 mb-2">
               <span>$8,000</span>
-              <span className="text-base ">Target: <span className="text-gray-900">$10,000</span></span>
+              <span className="text-base ">Target: <span className="text-gray-900 dark:text-gray-100">$10,000</span></span>
               <span>$12,000</span>
             </div>
             
