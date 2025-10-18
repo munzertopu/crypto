@@ -8,6 +8,7 @@ import {
 import TaxLossHarvestingRangeDropdown from "./TaxLossHarvestingRangeDropdown";
 import SecondaryButton from "../../../../components/UI/Buttons/SecondaryButton";
 import FilterIcon from "../../../../components/Icons/FilterIcon";
+import MobileDrawer from "../../../../components/Drawers/MobileDrawer";
 
 interface TaxLossHarvestingFiltersProps {
   isDarkMode?: boolean;
@@ -309,6 +310,73 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
           </div>
         </div>
       )}
+      <MobileDrawer
+        isOpen={showMobileFilters}
+        onClose={() => setShowMobileFilters(false)}
+        header={"Filters"}
+        height={600}
+        leftButtonText="Clear All"
+        rightButtonText="Apply"
+      >
+        {/* Market Value Dropdown */}
+        <div className="flex flex-col gap-2">
+          <TaxLossHarvestingRangeDropdown
+            fromValue={marketValueFromValue}
+            setFromValue={setMarketValueFromValue}
+            toValue={marketValueToValue}
+            setToValue={setMarketValueToValue}
+            isOpen={marketValueDropdownOpen}
+            setIsOpen={setMarketValueDropdownOpen}
+            title="Market value"
+          />
+
+          {/* Amount Held Dropdown */}
+          <TaxLossHarvestingRangeDropdown
+            fromValue={amountHeldFromValue}
+            setFromValue={setAmountHeldFromValue}
+            toValue={amountHeldToValue}
+            setToValue={setAmountHeldToValue}
+            isOpen={amountHeldDropdownOpen}
+            setIsOpen={setAmountHeldDropdownOpen}
+            title="Amount held"
+          />
+
+          {/* Cost Basis Dropdown */}
+          <TaxLossHarvestingRangeDropdown
+            fromValue={costBasisFromValue}
+            setFromValue={setCostBasisFromValue}
+            toValue={costBasisToValue}
+            setToValue={setCostBasisToValue}
+            isOpen={costBasisDropdownOpen}
+            setIsOpen={setCostBasisDropdownOpen}
+            title="Cost basis"
+          />
+
+          {/* Gains/Losses Dropdown */}
+          <TaxLossHarvestingRangeDropdown
+            fromValue={gainsLossesFromValue}
+            setFromValue={setGainsLossesFromValue}
+            toValue={gainsLossesToValue}
+            setToValue={setGainsLossesToValue}
+            isOpen={gainsLossesDropdownOpen}
+            setIsOpen={setGainsLossesDropdownOpen}
+            title="Gains/losses"
+            isRight={true}
+          />
+
+          {/* Potential Loss Dropdown */}
+          <TaxLossHarvestingRangeDropdown
+            fromValue={potentialLossFromValue}
+            setFromValue={setPotentialLossFromValue}
+            toValue={potentialLossToValue}
+            setToValue={setPotentialLossToValue}
+            isOpen={potentialLossDropdownOpen}
+            setIsOpen={setPotentialLossDropdownOpen}
+            title="Potential Loss"
+            isRight={true}
+          />
+        </div>
+      </MobileDrawer>
     </div>
   );
 };

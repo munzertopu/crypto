@@ -104,14 +104,14 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({}) => {
         />
         <Typography
           variant="small"
-          className="text-[#0E201E] dark:text-[#B6B8BA]"
+          className="text-[#0E201E] dark:text-[#B6B8BA] text-base font-medium opacity-80 md:opacity-100"
         >
           {label}
         </Typography>
       </div>
       <Typography
         variant="small"
-        className={`text-left !text-h4 font-semibold ${valueColor}`}
+        className={`text-left text-lg md:!text-h4 font-semibold ${valueColor}`}
       >
         {value}
       </Typography>
@@ -133,7 +133,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({}) => {
           <div className="flex flex-col gap-3 md:gap-0 md:flex-row md:items-center md:justify-between pb-4 md:pb-6 px-4 md:px-8">
             <div className="flex items-center md:space-x-2">
               <div
-                className={`text-h6 font-semibold text-gray-900 dark:text-gray-150`}
+                className={`text-xl md:text-h6 font-semibold text-gray-900 dark:text-gray-150`}
               >
                 {title}
               </div>
