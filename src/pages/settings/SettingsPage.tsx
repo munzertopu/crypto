@@ -192,10 +192,10 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onLogout }) => {
   return (
     <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-gray-150">
       <NavigationBar onLogout={handleLogout} currentPage="settings" />
-      <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full">
+      <div className="px-4 md:px-10 sm:px-6 pt-6 md:pt-5 w-full">
         <Typography
           variant="h4"
-          className={`text-xl font-semibold mb-6 text-left ${"text-[#0E201E] dark:text-white"}`}
+          className={`text-xl font-semibold mb-3 md:mb-6 text-left ${"text-[#0E201E] dark:text-white"}`}
         >
           Settings
         </Typography>
@@ -221,7 +221,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onLogout }) => {
               </button>
             ))}
           </nav>
-          <div className="border-gray-200 dark:border-gray-700 md:hidden">
+          <div className="border-gray-200 dark:border-gray-700 md:hidden mb-3">
             <Tabs className="overflow-x-auto">
               <Tabs.List className="my-2 lg:my-0 bg-[#F3F5F7] dark:bg-[#2F3232] ">
                 {settingsTabs.map((tab) => (
