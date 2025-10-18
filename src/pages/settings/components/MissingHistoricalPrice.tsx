@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Typography } from "@material-tailwind/react";
 import SetHistoricalPriceModal from "./SetHistoricalPriceModal";
 import useScreenSize from "../../../hooks/useScreenSize";
+import SuccessNotification from "../../../components/SuccessNotification";
 
 interface Platform {
   id: string;
@@ -257,8 +258,17 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
         selectedPlatforms={selectedPlatforms}
         onSaveSuccess={() => {
           setIsAddPriceModalOpen(false);
+          setSelectedPlatforms([]);
+          setShowSuccessNotification(true);
+          setEditMultiplePrices(false);
           setShowSuccessNotification(true);
         }}
+      />
+      <SuccessNotification
+        message="New Coinbase price has been added"
+        isVisible={showSuccessNotification}
+        onClose={() => setShowSuccessNotification(false)}
+        duration={3000}
       />
     </div>
   );
