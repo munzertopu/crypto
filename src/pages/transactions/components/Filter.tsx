@@ -5,6 +5,7 @@ import {
   faChevronDown,
   faCheck,
   faTimes,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { Input, Tabs } from "@material-tailwind/react";
 import AmountRangeDropdown from "../../../components/AmountRangeDropdown";
@@ -197,6 +198,7 @@ const Filter: React.FC<FilterProps> = ({
 }) => {
   const [showWarningBanner, setShowWarningBanner] = useState(true);
   const [walletSearchTerm, setWalletSearchTerm] = useState("");
+  const [enabledManual, setEnabledManual] = useState(false);
 
   // Tag Dropdown
   const [tagSearchTerm, setTagSearchTerm] = useState("");
@@ -475,6 +477,22 @@ const Filter: React.FC<FilterProps> = ({
     (selectedDateRange &&
       selectedDateRange.startDate &&
       selectedDateRange.endDate);
+  const howManyFilters =
+    Object.values({
+      selectedType,
+      selectedTags,
+      selectedManuals,
+      selectedResults,
+      selectedSearchItems,
+      activeAdvancedFiltersCount,
+      fromSentValue,
+      toSentValue,
+      fromReceivedValue,
+      toReceivedValue,
+      selectedDateRange: selectedDateRange ? 1 : 0,
+    }).filter((filter) => filter !== "" && filter !== 0 && filter !== null)
+      .length / 2;
+
   return (
     <div className={`p-0 sm:p-4 md:px-0 md:pt-5 md:pb-6 rounded-lg `}>
       {/* Tabs */}
@@ -643,7 +661,7 @@ const Filter: React.FC<FilterProps> = ({
             )}
           </div>
           <SecondaryButton
-            // onClick={() => setShowMobileFilters(true)}
+            onClick={() => setShowMobileFilters(true)}
             icon={<FilterIcon />}
             className="flex sm:hidden"
           />
@@ -997,386 +1015,95 @@ const Filter: React.FC<FilterProps> = ({
         onLeftButtonClick={() => setShowMobileFilters(false)}
         onRightButtonClick={() => setShowMobileFilters(false)}
       >
-        <Accordion>
-          <AccordionItem title="Wallet">
-            {" "}
-            <div
-              className={`w-full  z-50 bg-white border-gray-300 
-                dark:bg-gray-800 dark:border-gray-600`}
-            >
-              {/* Search Input */}
-              <div className="">
-                <input
-                  type="text"
-                  placeholder="Type or paste wallet"
-                  value={walletSearchTerm}
-                  onChange={(e) => setWalletSearchTerm(e.target.value)}
-                  className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
-                />
-              </div>
+        {/* Type Dropdown */}
+        <div className="flex flex-col gap-2 items-start">
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300 text-left">
+            Type
+          </span>
+          <CheckboxDropdown
+            options={typeOptions}
+            onSelect={(values) => {
+              setSelectedType(values);
+            }}
+            selectedValues={selectedType}
+            defaultValue="Select Type"
+            className="w-full"
+          />
+          {/* Tag Dropdown */}
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300 text-left">
+            Tag
+          </span>
+          <CheckboxDropdown
+            options={tagOptionsData}
+            onSelect={(values) => {
+              setSelectedTags(values);
+            }}
+            searchable={true}
+            searchPlaceholder="search tag"
+            selectedValues={selectedTags}
+            defaultValue="Select Tag"
+            className="w-full"
+          />
 
-              {/* Type Options List */}
-              <div className="max-h-48 overflow-y-auto mt-3 flex flex-col gap-4 ">
-                {filteredTypeOptions.map((option) => {
-                  const isSelected = selectedType.includes(option.value);
-                  return (
-                    <div
-                      key={option.value}
-                      onClick={() => handleTypeToggle(option.value)}
-                      className={`flex items-center px-3 gap-2 cursor-pointer hover:bg-gray-100 
-                        dark:hover:bg-gray-700`}
-                    >
-                      <div
-                        className={`w-5 h-5 border-2 rounded flex items-center justify-center  transition-colors ${
-                          isSelected
-                            ? "bg-[#90C853] border-[#90C853]"
-                            : "border-gray-150"
-                        }`}
-                      >
-                        {isSelected && (
-                          <FontAwesomeIcon
-                            icon={faCheck}
-                            className="w-2.5 h-2.5 text-white"
-                          />
-                        )}
-                      </div>
-                      <span
-                        className={`text-base text-gray-900 dark:text-gray-150`}
-                      >
-                        {option.label}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </AccordionItem>
-          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-          <AccordionItem title="Tag">
-            {" "}
-            <div
-              className={`w-full z-50 bg-white border-gray-300 
-                dark:bg-[#0E201E] dark:border-gray-600
-                `}
-            >
-              {/* Search Input */}
-
-              {/* Tag Options List */}
-              <div className="max-h-48 overflow-y-auto  mt-3 flex flex-col gap-4">
-                {filteredTagOptions.map((option) => {
-                  const isSelected = selectedTags.includes(option.value);
-                  return (
-                    <div
-                      key={option.value}
-                      onClick={() => handleTagToggle(option.value)}
-                      className={`flex items-center  cursor-pointer hover:bg-gray-100 
-                        dark:hover:bg-gray-700
-                      `}
-                    >
-                      <div
-                        className={`w-5 h-5 border-2 rounded flex mr-3 items-center justify-center  transition-colors ${
-                          isSelected
-                            ? "bg-[#90C853] border-[#90C853]"
-                            : "border-gray-150"
-                        }`}
-                      >
-                        {isSelected && (
-                          <FontAwesomeIcon
-                            icon={faCheck}
-                            className="w-2.5 h-2.5 text-white"
-                          />
-                        )}
-                      </div>
-                      <span
-                        className={`text-base text-gray-900 dark:text-gray-150`}
-                      >
-                        {option.label}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </AccordionItem>
-          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-          <AccordionItem title="Amount Sent">
-            {" "}
-            <div className={`w-full  z-50 mt-2`}>
-              <div className="flex flex-col gap-3">
-                {/* From Input */}
-                <div className="flex items-center gap-3 ">
-                  <span
-                    className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
-                  >
-                    From:
-                  </span>
-
-                  <div className="relative flex-1">
-                    <Input
-                      type="number"
-                      placeholder="Amount"
-                      value={fromSentValue}
-                      onChange={(e) => setFromSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
-                    />
-                    <button
-                      onClick={() =>
-                        setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
-                      }
-                      className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
-                    >
-                      <div className="flex items-center gap-1">
-                        <span className="text-caption font-medium">
-                          {fromSentCurrency}
-                        </span>
-                        <FontAwesomeIcon
-                          icon={faChevronDown}
-                          className="w-2 h-2"
-                        />
-                      </div>
-                    </button>
-
-                    {/* Currency Dropdown */}
-                    {showFromCurrencyDropdown && (
-                      <div
-                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200 
-                          dark:bg-gray-800 dark:border-gray-600`}
-                      >
-                        <div className="py-1">
-                          {["USD", "EUR", "USDT"].map((currency) => (
-                            <button
-                              key={currency}
-                              onClick={() => {
-                                setFromSentCurrency(currency);
-                                setShowFromCurrencyDropdown(false);
-                              }}
-                              className={`w-full px-3 py-1 text-left text-xs ${
-                                fromSentCurrency === currency
-                                  ? "bg-blue-50 text-blue-600"
-                                  : ""
-                              }`}
-                            >
-                              {currency}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* To Input */}
-                <div className="flex items-center gap-3 ">
-                  <span
-                    className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
-                  >
-                    To:
-                  </span>
-
-                  <div className="relative flex-1">
-                    <Input
-                      type="number"
-                      placeholder="Amount"
-                      value={toSentValue}
-                      onChange={(e) => setToSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
-                    />
-                    <button
-                      onClick={() =>
-                        setShowToCurrencyDropdown(!showToCurrencyDropdown)
-                      }
-                      className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
-                    >
-                      <div className="flex items-center gap-1">
-                        <span className="text-caption font-medium">
-                          {toSentCurrency}
-                        </span>
-                        <FontAwesomeIcon
-                          icon={faChevronDown}
-                          className="w-2 h-2"
-                        />
-                      </div>
-                    </button>
-
-                    {/* Currency Dropdown */}
-                    {showToCurrencyDropdown && (
-                      <div
-                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200 
-                          dark:bg-gray-800 dark:border-gray-600`}
-                      >
-                        <div className="py-1">
-                          {["USD", "EUR", "USDT"].map((currency) => (
-                            <button
-                              key={currency}
-                              onClick={() => {
-                                setToSentCurrency(currency);
-                                setShowToCurrencyDropdown(false);
-                              }}
-                              className={`w-full px-3 py-1 text-left text-xs ${
-                                toSentCurrency === currency
-                                  ? "bg-blue-50 text-blue-600"
-                                  : ""
-                              }`}
-                            >
-                              {currency}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AccordionItem>
-          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-          <AccordionItem title="Amount Received">
-            {" "}
-            <div className={`w-full  z-50 mt-2`}>
-              <div className="flex flex-col gap-3">
-                {/* From Input */}
-                <div className="flex items-center gap-3 ">
-                  <span
-                    className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
-                  >
-                    From:
-                  </span>
-
-                  <div className="relative flex-1">
-                    <Input
-                      type="number"
-                      placeholder="Amount"
-                      value={fromSentValue}
-                      onChange={(e) => setFromSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
-                    />
-                    <button
-                      onClick={() =>
-                        setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
-                      }
-                      className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
-                    >
-                      <div className="flex items-center gap-1">
-                        <span className="text-caption font-medium">
-                          {fromSentCurrency}
-                        </span>
-                        <FontAwesomeIcon
-                          icon={faChevronDown}
-                          className="w-2 h-2"
-                        />
-                      </div>
-                    </button>
-
-                    {/* Currency Dropdown */}
-                    {showFromCurrencyDropdown && (
-                      <div
-                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200 
-                          dark:bg-gray-800 dark:border-gray-600`}
-                      >
-                        <div className="py-1">
-                          {["USD", "EUR", "USDT"].map((currency) => (
-                            <button
-                              key={currency}
-                              onClick={() => {
-                                setFromSentCurrency(currency);
-                                setShowFromCurrencyDropdown(false);
-                              }}
-                              className={`w-full px-3 py-1 text-left text-xs ${
-                                fromSentCurrency === currency
-                                  ? "bg-blue-50 text-blue-600"
-                                  : ""
-                              }`}
-                            >
-                              {currency}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* To Input */}
-                <div className="flex items-center gap-3 ">
-                  <span
-                    className={`min-w-[50px] text-sm font-semibold text-gray-800 dark:text-[#B6B8BA] text-left`}
-                  >
-                    To:
-                  </span>
-
-                  <div className="relative flex-1">
-                    <Input
-                      type="number"
-                      placeholder="Amount"
-                      value={toSentValue}
-                      onChange={(e) => setToSentValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]`}
-                    />
-                    <button
-                      onClick={() =>
-                        setShowToCurrencyDropdown(!showToCurrencyDropdown)
-                      }
-                      className={`absolute right-0 top-0 h-full px-2    rounded-r-lg border-r border-t border-b border-gray-150 rounded-l-none`}
-                    >
-                      <div className="flex items-center gap-1">
-                        <span className="text-caption font-medium">
-                          {toSentCurrency}
-                        </span>
-                        <FontAwesomeIcon
-                          icon={faChevronDown}
-                          className="w-2 h-2"
-                        />
-                      </div>
-                    </button>
-
-                    {/* Currency Dropdown */}
-                    {showToCurrencyDropdown && (
-                      <div
-                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-gray-200
-                          dark:bg-gray-800 dark:border-gray-600`}
-                      >
-                        <div className="py-1">
-                          {["USD", "EUR", "USDT"].map((currency) => (
-                            <button
-                              key={currency}
-                              onClick={() => {
-                                setToSentCurrency(currency);
-                                setShowToCurrencyDropdown(false);
-                              }}
-                              className={`w-full px-3 py-1 text-left text-xs ${
-                                toSentCurrency === currency
-                                  ? "bg-blue-50 text-blue-600"
-                                  : ""
-                              }`}
-                            >
-                              {currency}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AccordionItem>
-          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
-          <AccordionItem title="Date">
-            {" "}
+          {/* Result Dropdown */}
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300 text-left">
+            Result
+          </span>
+          <CheckboxDropdown
+            options={resultOptionsData}
+            onSelect={(values) => {
+              setSelectedResults(values);
+            }}
+            selectedValues={selectedResults}
+            defaultValue="Select Result"
+            className="w-full"
+          />
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300 text-left">
+            Date
+          </span>
+          <div className="w-full">
             <DateRangePickerPopover
               selectedDateRange={selectedDateRange}
               onDateRangeChange={setSelectedDateRange}
-              buttonLabel="Select Date"
-              className="py-2.5"
+              buttonLabel="Set Date"
+              className="shadow-sm rounded-lg w-full !py-3"
+              buttonLabelClassName="!text-base  w-full "
+              openByDefault
               isDrawer
+              popOverClassName="!p-0"
             />
-          </AccordionItem>
-        </Accordion>
+          </div>
+          <div className="flex justify-between px-4 py-2.5 border border-gray-150 dark:border-gray-700 rounded-[12px] w-full">
+            <span className={`text-base  text-gray-900 dark:text-gray-150`}>
+              Manual
+            </span>
+            <button
+              onClick={() => setEnabledManual(!enabledManual)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                enabledManual ? "bg-[#90C853]" : "bg-[#CDCFD1] dark:bg-gray-700"
+              }`}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  enabledManual ? "translate-x-6" : "translate-x-1"
+                }`}
+              />
+            </button>
+          </div>
+
+          <button
+            // onClick={handleAddRuleClick}
+            className="flex items-center justify-center md:justify-start space-x-2 px-5 py-3 rounded-lg border border-[#E1E3E5] text-[#0E201E] dark:border-gray-600 dark:text-green-400"
+          >
+            <FontAwesomeIcon icon={faPlus} className="w-4 h-4 text-gray-500" />
+            <span className="text-sm font-medium">Add Filter</span>
+          </button>
+        </div>
       </MobileDrawer>
 
       {/* Active Filters Display */}
       {hasActiveFilters && (
-        <div className="pt-4 md:pt-2">
+        <div className="hidden md:block pt-4 md:pt-2">
           <div className="flex flex-wrap gap-2">
             {/* Type Filters */}
             {selectedType.map((typeId) => {
