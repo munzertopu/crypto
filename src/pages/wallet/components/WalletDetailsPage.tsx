@@ -203,6 +203,10 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
         currentPage="wallets"
       />
 
+      <span className="px-4 pt-6 pb-5 md:hidden flex items-start justify-start text-lg font-medium text-gray-900 dark:text-white">
+        Wallets
+      </span>
+
       <div className="grid grid-row gap-6 px-4 md:px-10 sm:px-6 md:pt-5 mb-15 md:pb-15 w-full">
         {/* Breadcrumb */}
         <nav className="flex mb-2" aria-label="Breadcrumb">
@@ -309,7 +313,11 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
               >
                 <EyeIcon />
               </button> */}
-            <SecondaryButton icon={<EyeIcon />} className="flex " />
+            <SecondaryButton
+              onClick={() => setIsImportHistoryModalOpen(true)}
+              icon={<EyeIcon />}
+              className="flex "
+            />
             <PrimaryButton
               onClick={() => setIsImportModalOpen(true)}
               icon={<ExportIcon />}
@@ -323,7 +331,7 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
           {/* Left Panel - Portfolio Distribution (1 column) */}
           <div className="lg:col-span-1 relative">
             {/* Donut Chart */}
-            <div className="bg-white dark:bg-[#1A1D1E] pl-3 mr-10">
+            <div className="bg-white dark:bg-[#1A1D1E] sm:pl-3 sm:mr-10">
               <div className="relative">
                 <ResponsiveContainer width="100%" height={400}>
                   <PieChart>
@@ -423,7 +431,7 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
                   <tbody>
                     {cryptoAssets.map((asset, index) => (
                       <tr key={index}>
-                        <td className="md:px-5 md:py-3 sm:p-5">
+                        <td className="md:px-5 md:py-3 sm:p-5 pb-4 sm:pb-0">
                           <div className="flex items-center gap-3">
                             <img
                               src={asset.logo}
@@ -437,10 +445,13 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
                             </div>
                           </div>
                         </td>
-                        <td className="hidden sm:table-cell">
-                          <div className="flex flex-col">
-                            <span className="font-normal text-base text-gray-900 dark:text-gray-100">
+                        <td className="table-cell">
+                          <div className="flex flex-col gap-1 sm:gap-0">
+                            <span className="text-right sm:text-left font-normal text-base text-gray-900 dark:text-gray-100">
                               {asset.balance}
+                            </span>
+                            <span className="sm:hidden text-right sm:text-left font-normal text-base text-gray-900 dark:text-gray-100 opacity-70">
+                              ${asset.marketValue}
                             </span>
                           </div>
                         </td>
