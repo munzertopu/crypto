@@ -107,7 +107,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         {isOpen ? <ArrowUpIcon height={16} width={16} /> : <ArrowDownIcon height={16} width={16} />}
       </button>
       {isOpen && (
-        <div className={`absolute top-full left-0 mt-1 w-full rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 
+        <div className={`absolute top-full left-0 mt-1 w-full rounded-lg shadow-sm z-50 min-w-[max-content] md:min-w-25 
           border border-default dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-white ${menuClassName}`}>
           {searchable && (
             <div className="px-3 border-b border-gray-150 dark:border-gray-700">
@@ -125,7 +125,7 @@ const Dropdown: React.FC<DropdownProps> = ({
               <div
                 key={option.value + index}
                 onClick={() => handleSelect(option)}
-                className={`px-1.5 py-1.5 text-sm text-gray-900 text-left hover:bg-gray-800 cursor-pointer rounded-lg w-full flex items-center gap-2 dark:text-gray-250 ${
+                className={`px-1.5 py-1.5 text-sm text-gray-900 text-left hover:bg-gray-100 cursor-pointer rounded-lg w-full flex items-center gap-2 dark:text-gray-250 ${
                   showTickMark && currentSelectedValue === option.label ? 'bg-gray-100 dark:bg-gray-800' : ''
                 }`}
               >
