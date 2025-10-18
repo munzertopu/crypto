@@ -1,23 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { countriesData } from "../../../data/settingsAssets";
 
-interface FormInfoTabProps {
-  
-}
+interface FormInfoTabProps {}
 
-
-const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
+const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
   const [formData, setFormData] = useState({
-    name: '',
-    personalId: '',
-    city: '',
-    postalCode: '',
-    phoneNumber: '201-555-3333',
-    state: '',
-    inn: ''
+    name: "",
+    personalId: "",
+    city: "",
+    postalCode: "",
+    phoneNumber: "201-555-3333",
+    state: "",
+    inn: "",
   });
 
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
@@ -27,20 +24,20 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
-  const handleCountrySelect = (country: typeof countriesData[0]) => {
+  const handleCountrySelect = (country: (typeof countriesData)[0]) => {
     setSelectedCountry(country);
     setIsCountryDropdownOpen(false);
   };
 
   const handleSaveChanges = () => {
     // Handle save logic here
-    console.log('Saving form info changes:', formData);
+    console.log("Saving form info changes:", formData);
   };
 
   // Handle clicks outside tooltip to close it
@@ -67,11 +64,18 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
     <div className="space-y-6">
       {/* Header Section */}
       <div>
-        <Typography variant="h4" className="font-bold text-lg text-left mb-2 text-gray-900 dark:text-gray-150">
+        <Typography
+          variant="h4"
+          className="font-bold text-lg text-left mb-2 text-gray-900 dark:text-gray-150"
+        >
           Form Info
         </Typography>
-        <Typography variant="small" className="text-left text-sm text-gray-600 dark:text-gray-400">
-          You do not need to fill in anything on this page unless you want this information to be shown on your tax reports
+        <Typography
+          variant="small"
+          className="text-left text-sm text-gray-600 dark:text-gray-400"
+        >
+          You do not need to fill in anything on this page unless you want this
+          information to be shown on your tax reports
         </Typography>
       </div>
 
@@ -79,14 +83,16 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
       {/* Name Field - Full Width */}
       <div className="space-y-6">
         <div>
-          <label className={`block text-sm font-medium text-left mb-2 text-[#2F3232] dark:text-gray-300`}>
+          <label
+            className={`block text-sm font-medium text-left mb-2 text-[#2F3232] dark:text-gray-300`}
+          >
             Name (optional)
           </label>
           <Input
             type="text"
             placeholder="Type your name"
             value={formData.name}
-            onChange={(e) => handleInputChange('name', e.target.value)}
+            onChange={(e) => handleInputChange("name", e.target.value)}
             className={`text-base bg-transparent border-[#E1E3E5] dark:border-gray-700 text-white`}
           />
         </div>
@@ -104,7 +110,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
               type="text"
               placeholder="000000000"
               value={formData.personalId}
-              onChange={(e) => handleInputChange('personalId', e.target.value)}
+              onChange={(e) => handleInputChange("personalId", e.target.value)}
               className="text-base bg-transparent border-[#E1E3E5] dark:border-gray-700 dark:text-white"
             />
           </div>
@@ -117,7 +123,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
               type="text"
               placeholder="Type your city"
               value={formData.city}
-              onChange={(e) => handleInputChange('city', e.target.value)}
+              onChange={(e) => handleInputChange("city", e.target.value)}
               className="text-base bg-transparent border-[#E1E3E5] dark:border-gray-700 dark:text-white"
             />
           </div>
@@ -130,7 +136,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
               type="text"
               placeholder="00000"
               value={formData.postalCode}
-              onChange={(e) => handleInputChange('postalCode', e.target.value)}
+              onChange={(e) => handleInputChange("postalCode", e.target.value)}
               className="text-base bg-transparent border-[#E1E3E5] dark:border-gray-700 dark:text-white"
             />
           </div>
@@ -138,26 +144,33 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
 
         {/* Right Column */}
         <div className="space-y-4">
-          <div className='relative'>
+          <div className="relative">
             <label className="block text-sm font-medium text-left mb-2 text-[#2F3232] dark:text-gray-300">
               Phone number (optional)
             </label>
-            <div className="relative flex border border-[#E1E3E5] rounded-lg overflow-hidden
+            <div
+              className="relative flex border border-[#E1E3E5] rounded-lg overflow-hidden
             bg-transparent dark:border-gray-700
-            ">
+            "
+            >
               {/* Country Dropdown Section */}
               <div className="relative flex" ref={dropdownRef}>
                 <button
                   type="button"
-                  onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
-                  className={`flex items-center px-3 py-2 focus:outline-none ${
-                    'text-gray-900 dark:text-gray-150'
-                  }`}
+                  onClick={() =>
+                    setIsCountryDropdownOpen(!isCountryDropdownOpen)
+                  }
+                  className={`flex items-center px-3 py-2 focus:outline-none ${"text-gray-900 dark:text-gray-150"}`}
                 >
-                  <img src={selectedCountry.flag} className="mr-2 w-4 h-3"></img>
-                  <FontAwesomeIcon 
-                    icon={faChevronDown} 
-                    className={`w-3 h-3 transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`}
+                  <img
+                    src={selectedCountry.flag}
+                    className="mr-2 w-4 h-3"
+                  ></img>
+                  <FontAwesomeIcon
+                    icon={faChevronDown}
+                    className={`w-3 h-3 transition-transform ${
+                      isCountryDropdownOpen ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
                 {/* Vertical Separator */}
@@ -169,7 +182,9 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
                     type="tel"
                     placeholder={`(${selectedCountry.dialCode}) 201-555-3333`}
                     value={formData.phoneNumber}
-                    onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("phoneNumber", e.target.value)
+                    }
                     className={`w-full px-3 py-2 focus:outline-none bg-transparent text-gray-900 
                       dark:text-gray-150`}
                   />
@@ -178,21 +193,23 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
             </div>
             {/* Country Dropdown Menu */}
             {isCountryDropdownOpen && (
-              <div className={`absolute z-50 w-full mt-1 border border-gray-300 rounded-lg ${
-                'bg-white dark:bg-gray-700 dark:border-gray-600'
-              }`}>
+              <div
+                className={`absolute z-50 w-full mt-1 border border-gray-300 rounded-lg ${"bg-white dark:bg-gray-700 dark:border-gray-600"}`}
+              >
                 {countriesData.map((country) => (
                   <button
                     key={country.code}
                     type="button"
                     onClick={() => handleCountrySelect(country)}
-                    className={`w-full px-3 py-2 flex items-center hover:bg-gray-50 ${
-                      'text-gray-900 dark:text-gray-150 dark:hover:bg-gray-600'
-                    } ${selectedCountry.code === country.code ? 'bg-gray-100' : ''}`}
+                    className={`w-full px-3 py-2 flex items-center hover:bg-gray-50 ${"text-gray-900 dark:text-gray-150 dark:hover:bg-gray-600"} ${
+                      selectedCountry.code === country.code ? "bg-gray-100" : ""
+                    }`}
                   >
                     <img src={country.flag} className="mr-2 w-4 h-3"></img>
                     <span className="font-medium">{country.name}</span>
-                    <span className="ml-auto text-sm text-gray-500">({country.dialCode})</span>
+                    <span className="ml-auto text-sm text-gray-500">
+                      ({country.dialCode})
+                    </span>
                   </button>
                 ))}
               </div>
@@ -207,7 +224,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
               type="text"
               placeholder="00000"
               value={formData.state}
-              onChange={(e) => handleInputChange('state', e.target.value)}
+              onChange={(e) => handleInputChange("state", e.target.value)}
               className="text-base bg-transparent border-[#E1E3E5] dark:text-white dark:border-gray-700"
             />
           </div>
@@ -224,19 +241,39 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
                   className="w-4 h-4 mx-2 -mt-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                   aria-label="INN help information"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 9v2m0 4h.01"
+                    />
                   </svg>
                 </button>
-                
+
                 {/* Tooltip */}
                 {showInnTooltip && (
                   <div className="absolute z-50 w-64 p-3 mt-2 text-sm text-white bg-gray-900 dark:bg-gray-800 rounded-lg shadow-lg border border-gray-700 dark:border-gray-600 left-1/2 transform -translate-x-1/2">
                     <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-900 dark:bg-gray-800 rotate-45 border-l border-t border-gray-700 dark:border-gray-600"></div>
                     <p className="text-xs leading-relaxed">
-                      <strong>INN (Individual Taxpayer Identification Number)</strong> is a unique identifier used for tax purposes. 
-                      This field is optional and only required if you want this information to appear on your tax reports.
+                      <strong>
+                        INN (Individual Taxpayer Identification Number)
+                      </strong>{" "}
+                      is a unique identifier used for tax purposes. This field
+                      is optional and only required if you want this information
+                      to appear on your tax reports.
                     </p>
                   </div>
                 )}
@@ -246,7 +283,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
               type="text"
               placeholder="000000000"
               value={formData.inn}
-              onChange={(e) => handleInputChange('inn', e.target.value)}
+              onChange={(e) => handleInputChange("inn", e.target.value)}
               className="text-base bg-transparent border-[#E1E3E5] dark:text-white dark:border-gray-700"
             />
           </div>
@@ -254,10 +291,10 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({ }) => {
       </div>
 
       {/* Save Button */}
-      <div className="flex justify-end pt-6">
+      <div className="flex md:justify-end pt-6">
         <Button
           onClick={handleSaveChanges}
-          className="bg-[#90C853] text-[#0E201E] px-6 py-2 rounded-lg font-medium border-0"
+          className="w-full md:w-auto bg-[#90C853] text-[#0E201E] px-6 py-2 rounded-lg font-medium border-0"
         >
           Save changes
         </Button>
