@@ -222,7 +222,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onLogout }) => {
             ))}
           </nav>
           <div className="border-gray-200 dark:border-gray-700 md:hidden mb-3">
-            <Tabs className="overflow-x-auto">
+            <Tabs className="overflow-x-auto scrollbar-hide">
               <Tabs.List className="my-2 lg:my-0 bg-[#F3F5F7] dark:bg-[#2F3232] ">
                 {settingsTabs.map((tab) => (
                   <Tabs.Trigger
