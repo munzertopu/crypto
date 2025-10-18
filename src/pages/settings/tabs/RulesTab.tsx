@@ -1,12 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 import { Button } from "@material-tailwind/react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faSearch, faChevronDown, faChevronUp, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlus,
+  faSearch,
+  faChevronDown,
+  faChevronUp,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { Typography } from "@material-tailwind/react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import AddRuleModal from "../components/AddRuleModal";
 import SuccessNotification from "../../../components/SuccessNotification";
+import SearchField from "../../../components/UI/SearchField";
+import SecondaryButton from "../../../components/UI/Buttons/SecondaryButton";
+import FilterIcon from "../../../components/Icons/FilterIcon";
 
 interface Rule {
   id: string;
@@ -26,6 +35,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
   const [isTypeDropdownOpen, setIsTypeDropdownOpen] = useState(false);
   const [isAddRuleModalOpen, setIsAddRuleModalOpen] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
   const datePickerRef = useRef<HTMLDivElement>(null);
 
   // Mock data for rules
@@ -52,11 +62,11 @@ const RulesTab: React.FC<RulesTabProps> = () => {
 
   const handleRemoveTag = (ruleId: string, tagIndex: number) => {
     // Handle tag removal logic
-    console.log('Remove tag', ruleId, tagIndex);
+    console.log("Remove tag", ruleId, tagIndex);
   };
-  
+
   const handleSaveChanges = () => {
-    console.log('Save changes clicked');
+    console.log("Save changes clicked");
   };
 
   const handleDeleteRule = (ruleId: string) => {
@@ -83,7 +93,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
   return (
     <div>
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row items-center md:justify-between gap-3 md:gap-0">
         <div>
           <Typography
             variant="h5"
@@ -102,7 +112,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
 
         <button
           onClick={handleAddRuleClick}
-          className="flex items-center space-x-2 px-5 py-3 rounded-lg border border-[#E1E3E5] text-[#0E201E] dark:border-gray-600 dark:text-green-400"
+          className="w-full md:w-auto flex items-center justify-center md:justify-start space-x-2 px-5 py-3 rounded-lg border border-[#E1E3E5] text-[#0E201E] dark:border-gray-600 dark:text-green-400"
         >
           <FontAwesomeIcon icon={faPlus} className="w-4 h-4 text-gray-500" />
           <span className="text-sm font-medium">Add rule</span>
@@ -112,25 +122,25 @@ const RulesTab: React.FC<RulesTabProps> = () => {
       {/* Search and Filter Section */}
       <div className="flex items-center space-x-5 my-6">
         {/* Search Bar */}
-        <div className="relative w-80">
-          <FontAwesomeIcon
-            icon={faSearch}
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400"
-          />
-          <input
-            type="text"
+        <div className="flex-1 md:flex-none">
+          <SearchField
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
             placeholder="Search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className={`w-full pl-10 text-sm pr-4 py-2.5 border rounded-xl focus:outline-none 
-              bg-transparent text-gray-900 placeholder-[#7C7C7C] border-default
-              dark:border-gray-600 dark:text-gray-250 dark:placeholder-gray-400
-              `}
+            ariaLabel="Search"
+            className=" border-default dark:border-[#4D5050]"
+            size="lg"
           />
         </div>
 
+        <SecondaryButton
+          onClick={() => setShowMobileFilters(true)}
+          icon={<FilterIcon />}
+          className="flex sm:hidden"
+        />
+
         {/* Type Filter */}
-        <div className="relative">
+        <div className="relative hidden md:block" ref={datePickerRef}>
           <button
             onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}
             className={`flex items-center space-x-6 px-4 py-2.5 border rounded-xl 
@@ -148,7 +158,7 @@ const RulesTab: React.FC<RulesTabProps> = () => {
         </div>
 
         {/* Date Filter */}
-        <div className="relative" ref={datePickerRef}>
+        <div className="relative hidden md:block" ref={datePickerRef}>
           <DatePicker
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date)}
@@ -165,8 +175,18 @@ const RulesTab: React.FC<RulesTabProps> = () => {
             )}
             customInput={
               <div className="flex items-center justify-between w-full space-x-6">
-                <span className={`flex-1 text-left ${!selectedDate ? 'text-gray-400 dark:text-gray-100' : ''}`}>
-                  {selectedDate ? selectedDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) : 'Date'}
+                <span
+                  className={`flex-1 text-left ${
+                    !selectedDate ? "text-gray-400 dark:text-gray-100" : ""
+                  }`}
+                >
+                  {selectedDate
+                    ? selectedDate.toLocaleDateString("en-US", {
+                        month: "2-digit",
+                        day: "2-digit",
+                        year: "numeric",
+                      })
+                    : "Date"}
                 </span>
                 <svg
                   className="text-[#7C7C7C] size-5"
@@ -268,8 +288,13 @@ const RulesTab: React.FC<RulesTabProps> = () => {
                 <td className="text-left px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center space-x-2">
                     {rule.tags.map((tag, index) => (
-                      <div key={index} className="flex items-center space-x-1 bg-gray-100 border border-default rounded-full px-3 py-1 dark:bg-gray-800">
-                        <span className="text-sm text-gray-900 dark:text-gray-100">{tag}</span>
+                      <div
+                        key={index}
+                        className="flex items-center space-x-1 bg-gray-100 border border-default rounded-full px-3 py-1 dark:bg-gray-800"
+                      >
+                        <span className="text-sm text-gray-900 dark:text-gray-100">
+                          {tag}
+                        </span>
                         <button
                           onClick={() => handleRemoveTag(rule.id, index)}
                           className="text-gray-400 dark:text-gray-100 hover:text-gray-600"
