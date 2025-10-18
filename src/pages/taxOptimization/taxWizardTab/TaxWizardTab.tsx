@@ -220,14 +220,20 @@ const TaxWizardTab: React.FC = () => {
                 What is your preference?
               </label>
               <div className="grid grid-cols-5 gap-3">
-                {["$1,000", "$5,000", "$10,000", "Custom"].map((amount) => (
-                  <OptionButton
-                    key={amount}
-                    label={amount}
-                    isSelected={selectedAmount === amount}
-                    onClick={() => setSelectedAmount(amount)}
-                  />
-                ))}
+                {["$1,000", "$5,000", "$10,000", "Custom"].map((amount) => {
+                  const displayLabel = amount === "Custom" && customAmount 
+                    ? `Custom: ${selectedCurrency === "USD" ? "$" : selectedCurrency}${customAmount}` 
+                    : amount;
+                  
+                  return (
+                    <OptionButton
+                      key={amount}
+                      label={displayLabel}
+                      isSelected={selectedAmount === amount}
+                      onClick={() => setSelectedAmount(amount)}
+                    />
+                  );
+                })}
                 {/* Custom Amount Input */}
               {selectedAmount === "Custom" && (
                 <div className="relative">
