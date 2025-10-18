@@ -527,12 +527,12 @@ const RulesTab: React.FC<RulesTabProps> = () => {
         onRuleAdded={handleRuleAdded}
       />
 
-      {/* Add Rule Modal */}
+      {/* Add Rule Modal
       <AddRuleModal
         isOpen={isAddRuleModalOpen}
         onClose={handleCloseAddRuleModal}
         onRuleAdded={handleRuleAdded}
-      />
+      /> */}
 
       {/* Success Notification */}
       <SuccessNotification
