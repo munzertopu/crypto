@@ -21,6 +21,7 @@ interface DateRangeSelectorProps {
   variant?: "dropdown" | "inline";
   buttonLabel?: string;
   buttonClassName?: string;
+  buttonLabelClassName?: string;
   className?: string;
   isDrawer?: boolean;
   iconPosition?: "left" | "right";
@@ -28,6 +29,7 @@ interface DateRangeSelectorProps {
   openByDefault?: boolean;
   openingPosition?: "left" | "right";
   showSelectedDate?: boolean;
+  popOverClassName?: string;
 }
 
 const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
@@ -35,13 +37,15 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   onDateRangeChange,
   buttonLabel,
   className = "",
-  buttonClassName = "",
+  buttonLabelClassName = "",
   isDrawer = false,
   iconPosition = "left",
   openingPosition = "right",
   hideDateInput = false,
   openByDefault = false,
   showSelectedDate = true,
+  popOverClassName = "",
+  buttonClassName = "",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dateRange, setDateRange] = useState([
@@ -200,7 +204,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
           {iconPosition === "right" ? (
             <>
               <span
-                className={`hidden md:block text-xs font-medium ${buttonClassName}`}
+                className={`hidden md:block text-xs font-medium ${buttonLabelClassName}`}
               >
                 {formatDateRange(selectedDateRange)}
                 {!selectedDateRange.startDate && !selectedDateRange.endDate && (
@@ -223,7 +227,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
                 className="text-gray-500"
               />
               {showSelectedDate ? (
-                <span className="text-xs font-medium">
+                <span className={`text-xs font-medium ${buttonLabelClassName}`}>
                   {formatDateRange(selectedDateRange)}
                   {!selectedDateRange.startDate &&
                     !selectedDateRange.endDate && <>{buttonLabel}</>}
@@ -286,7 +290,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
           <div
             className={`absolute top-full w-full mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
               isDrawer ? " " : "left-[-175px]"
-            }`}
+            } ${popOverClassName}`}
           >
             {/* Left Sidebar for Filters */}
             <RenderDateRange
