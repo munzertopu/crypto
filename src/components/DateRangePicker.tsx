@@ -26,6 +26,8 @@ interface DateRangeSelectorProps {
   iconPosition?: "left" | "right";
   hideDateInput?: boolean;
   openByDefault?: boolean;
+  openingPosition?: "left" | "right";
+  showSelectedDate?: boolean;
 }
 
 const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
@@ -36,8 +38,10 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   buttonClassName = "",
   isDrawer = false,
   iconPosition = "left",
+  openingPosition = "right",
   hideDateInput = false,
   openByDefault = false,
+  showSelectedDate = true,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dateRange, setDateRange] = useState([
@@ -181,10 +185,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   }, [selectedDateRange]);
 
   return (
-    <div
-      className="relative datepicker-container"
-      ref={containerRef}
-    >
+    <div className="relative datepicker-container" ref={containerRef}>
       {!hideDateInput && (
         <button
           onClick={handleIconClick}
@@ -221,13 +222,15 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
                 strokeColor="currentColor"
                 className="text-gray-500"
               />
-
-              <span className="hidden md:block text-xs font-medium">
-                {formatDateRange(selectedDateRange)}
-                {!selectedDateRange.startDate && !selectedDateRange.endDate && (
-                  <>{buttonLabel}</>
-                )}
-              </span>
+              {showSelectedDate ? (
+                <span className="text-xs font-medium">
+                  {formatDateRange(selectedDateRange)}
+                  {!selectedDateRange.startDate &&
+                    !selectedDateRange.endDate && <>{buttonLabel}</>}
+                </span>
+              ) : (
+                <></>
+              )}
             </div>
           )}
         </button>
@@ -235,7 +238,9 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
 
       {isOpen && screenSize.width > 1024 ? (
         <div
-          className={`absolute top-full  md:left-[-710px] mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
+          className={`absolute top-full ${
+            openingPosition === "right" ? "md:left-[-710px]" : "md:left-0"
+          } mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
             isDrawer ? " left-[-10px]" : "left-[-175px]"
           }`}
         >
