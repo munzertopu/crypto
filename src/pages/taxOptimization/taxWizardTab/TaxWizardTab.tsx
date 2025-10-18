@@ -115,7 +115,7 @@ const TaxWizardTab: React.FC = () => {
   }
 
   return (
-    <div className="space-y-5 mb-8">
+    <div className="space-y-5 pb-8">
       {/* Sales Wizard Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="text-left">
@@ -235,55 +235,55 @@ const TaxWizardTab: React.FC = () => {
                   );
                 })}
                 {/* Custom Amount Input */}
-              {selectedAmount === "Custom" && (
-                <div className="relative">
-                  <Input
-                    type="number"
-                    placeholder="0"
-                    value={customAmount}
-                    onChange={(e) => setCustomAmount(e.target.value)}
-                    className={`w-full rounded-lg text-sm px-4 py-3 font-medium
-                      border-default bg-white text-gray-900 dark:text-gray-100 focus:outline-none dark:bg-gray-900 dark:border-gray-700`}
-                  />
-                  <button
-                    onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
-                    className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b focus:outline-none
-                      border-default text-gray-600 bg-white dark:bg-transparent dark:border-[#4D5050]`}
-                  >
-                    <div className="flex items-center gap-1">
-                      <span className="text-xs font-medium">{selectedCurrency}</span>
-                      <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2" />
-                    </div>
-                  </button>
-
-                  {/* Currency Dropdown */}
-                  {showCurrencyDropdown && (
-                    <div
-                      className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20
-                        border-default dark:border-gray-700 bg-white dark:bg-[#0E201E]`}
+                {selectedAmount === "Custom" && (
+                  <div className="relative">
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      value={customAmount}
+                      onChange={(e) => setCustomAmount(e.target.value)}
+                      className={`w-full rounded-lg text-sm px-4 py-3 font-medium
+                        border-default bg-white text-gray-900 dark:text-gray-100 focus:outline-none dark:bg-gray-900 dark:border-gray-700`}
+                    />
+                    <button
+                      onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
+                      className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b focus:outline-none
+                        border-default text-gray-600 bg-white dark:bg-transparent dark:border-[#4D5050]`}
                     >
-                      <div className="py-1 px-2">
-                        {["USD", "EUR", "USDT"].map((currency) => (
-                          <button
-                            key={currency}
-                            onClick={() => {
-                              setSelectedCurrency(currency);
-                              setShowCurrencyDropdown(false);
-                            }}
-                            className={`w-full px-3 py-1 text-left text-xs rounded-md ${
-                              selectedCurrency === currency
-                                ? "bg-gray-100 dark:bg-[#0E201E] dark:text-gray-500"
-                                : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
-                            }`}
-                          >
-                            {currency}
-                          </button>
-                        ))}
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-medium">{selectedCurrency}</span>
+                        <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2" />
                       </div>
-                    </div>
-                  )}
-                </div>
-              )}
+                    </button>
+
+                    {/* Currency Dropdown */}
+                    {showCurrencyDropdown && (
+                      <div
+                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20
+                          border-default dark:border-gray-700 bg-white dark:bg-[#0E201E]`}
+                      >
+                        <div className="py-1 px-2">
+                          {["USD", "EUR", "USDT"].map((currency) => (
+                            <button
+                              key={currency}
+                              onClick={() => {
+                                setSelectedCurrency(currency);
+                                setShowCurrencyDropdown(false);
+                              }}
+                              className={`w-full px-3 py-1 text-left text-xs rounded-md ${
+                                selectedCurrency === currency
+                                  ? "bg-gray-100 dark:bg-[#0E201E] dark:text-gray-500"
+                                  : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                              }`}
+                            >
+                              {currency}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 
