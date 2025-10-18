@@ -12,7 +12,7 @@ import { Accordion, AccordionItem } from "../../../components/Accordion";
 import useScreenSize from "../../../hooks/useScreenSize";
 import MobileDrawer from "../../../components/Drawers/MobileDrawer";
 import DateRangePickerPopover from "../../../components/DateRangePicker";
-import SearchIcon from "../../../utils/icons/SearchIcon";
+import SearchIcon from "../../../components/Icons/SearchIcon";
 import Dropdown from "../../../components/UI/Dropdown";
 import CheckboxDropdown from "../../../components/UI/CheckboxDropdown";
 import BlueCheckedIcon from "../../../components/Icons/BlueCheckedIcon";

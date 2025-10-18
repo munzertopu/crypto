@@ -4,12 +4,12 @@ import { Typography } from "@material-tailwind/react";
 import NavigationBar from "../../../components/NavigationBar";
 import ImportTransactionsModal from "./ImportTransactionsModal";
 import ImportHistoryModal from "./ImportHistoryModal";
-import TableSortIcon from "../../../utils/icons/TableSortIcon";
+import TableSortIcon from "../../../components/Icons/TableSortIcon";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import SecondaryButton from "../../../components/UI/Buttons/SecondaryButton";
 import EyeIcon from "../../../components/Icons/EyeIcon";
-import ExportIcon from "../../../components/Icons/ExportIcon";
 import PrimaryButton from "../../../components/UI/Buttons/PrimaryButton";
+import ExportIcon from "../../../components/Icons/ExportIcon";
 
 interface WalletDetailsPageProps {}
 

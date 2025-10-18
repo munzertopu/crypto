@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import TickIcon from "../../utils/icons/TickIcon";
+import TickIcon from "../Icons/TickIcon";
+import ArrowUpIcon from "../Icons/ArrowUpIcon";
+import ArrowDownIcon from "../Icons/ArrowDownIcon";
 
 export interface DropdownOption {
   label: string;
@@ -16,6 +18,7 @@ interface DropdownProps {
   defaultValue?: string;
   className?: string;
   inputClassName?: string;
+  menuClassName?:string;
   searchable?: boolean;
   searchPlaceholder?: string;
   multiline?: boolean;
@@ -29,6 +32,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   defaultValue,
   className = "",
   inputClassName = "",
+  menuClassName = "",
   searchable = false,
   multiline = false,
   searchPlaceholder = "Search...",
@@ -87,23 +91,12 @@ const Dropdown: React.FC<DropdownProps> = ({
     };
   }, []);
 
-  const ArrowDownSvg = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-      <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-    </svg>
-  );
-
-  const ArrowUpSvg = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-    </svg>
-  );
-
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         onClick={handleToggle}
-        className={`flex flex-row justify-between items-center px-4 py-3 box-border border border-default rounded-lg bg-white gap-4 md:min-w-24 min-w-[max-content] w-full dark:border-[#4D5050] focus:ring-2 focus:ring-[#E3F3C7B2] focus:outline-none ${inputClassName}`}
+        className={`flex flex-row justify-between items-center px-4 py-3 rounded-lg gap-4 md:min-w-24 min-w-[max-content] w-full
+          box-border border border-default dark:text-gray-400 bg-white dark:bg-gray-900 dark:border-gray-700 focus:outline-none ${inputClassName}`}
         aria-label="Toggle dropdown"
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -111,10 +104,11 @@ const Dropdown: React.FC<DropdownProps> = ({
         <span className="text-base text-gray-900 dark:text-white">
           {currentSelectedValue}
         </span>
-        {isOpen ? <ArrowUpSvg /> : <ArrowDownSvg />}
+        {isOpen ? <ArrowUpIcon height={16} width={16} /> : <ArrowDownIcon height={16} width={16} />}
       </button>
       {isOpen && (
-        <div className="absolute top-full left-0 mt-1 w-full border border-default rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 bg-white dark:bg-gray-900 dark:text-white">
+        <div className={`absolute top-full left-0 mt-1 w-full rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 
+          border border-default dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-white ${menuClassName}`}>
           {searchable && (
             <div className="px-3 border-b border-gray-150 dark:border-gray-700">
               <input
@@ -131,7 +125,7 @@ const Dropdown: React.FC<DropdownProps> = ({
               <div
                 key={option.value + index}
                 onClick={() => handleSelect(option)}
-                className={`px-1.5 py-1.5 text-sm text-gray-900 text-left hover:bg-gray-100 cursor-pointer rounded-lg w-full flex items-center gap-2 dark:text-gray-250 ${
+                className={`px-1.5 py-1.5 text-sm text-gray-900 text-left hover:bg-gray-800 cursor-pointer rounded-lg w-full flex items-center gap-2 dark:text-gray-250 ${
                   showTickMark && currentSelectedValue === option.label ? 'bg-gray-100 dark:bg-gray-800' : ''
                 }`}
               >

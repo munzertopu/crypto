@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import TrashIcon from "../../../utils/icons/TrashIcon";
 import { Accordion, AccordionItem } from "../../../components/Accordion";
+import TrashIcon from "../../../components/Icons/TrashIcon";
 
 interface ImportTransactionsModalProps {
   isOpen: boolean;
@@ -82,9 +82,9 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
         aria-hidden="true"
       />
 
-        {/* Modal */}
-        <div className="flex min-h-full md:items-center md:justify-center md:p-4">
-          <div className="relative bg-white dark:bg-gray-100 rounded-t-2xl md:rounded-2xl shadow-xl max-w-4xl w-full p-3 md:p-8 flex flex-col">
+      {/* Modal */}
+      <div className="flex min-h-full md:items-center md:justify-center md:p-4">
+        <div className="relative bg-white dark:bg-gray-100 rounded-t-2xl md:rounded-2xl shadow-xl max-w-4xl w-full p-3 md:p-8 flex flex-col">
           {/* Header */}
           <div className="flex items-start justify-between">
             <div>
@@ -380,21 +380,19 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                 </div>
               </div>
             </div>
-
-
           </div>
-                       {/* Bottom Actions */}
-                       <div className="flex flex-row-reverse md:flex-row justify-between mt-4 md:mt-6">
-               <button className="px-4 md:px-5 py-2 md:py-3 border-2 border-default text-sm md:text-base font-medium rounded-lg bg-transparent text-gray-700">
-                 View history
-               </button>
-               <button
-                 onClick={onClose}
-                 className="px-4 md:px-5 py-2 md:py-3 bg-green-500 text-gray-900 rounded-xl text-sm md:text-base font-medium"
-               >
-                 Import
-               </button>
-             </div>
+          {/* Bottom Actions */}
+          <div className="flex flex-row-reverse md:flex-row justify-between mt-4 md:mt-6">
+            <button className="px-4 md:px-5 py-2 md:py-3 border-2 border-default text-sm md:text-base font-medium rounded-lg bg-transparent text-gray-700">
+              View history
+            </button>
+            <button
+              onClick={onClose}
+              className="px-4 md:px-5 py-2 md:py-3 bg-green-500 text-gray-900 rounded-xl text-sm md:text-base font-medium"
+            >
+              Import
+            </button>
+          </div>
         </div>
       </div>
     </div>

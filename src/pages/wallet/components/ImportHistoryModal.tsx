@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Typography } from "@material-tailwind/react";
 import Dropdown from '../../../components/UI/Dropdown';
-import TrashIcon from '../../../utils/icons/TrashIcon';
-import TableSortIcon from '../../../utils/icons/TableSortIcon';
+import TrashIcon from '../../../components/Icons/TrashIcon';
+import TableSortIcon from '../../../components/Icons/TableSortIcon';
 import DeleteConfirmationModal from '../../../components/UI/DeleteConfirmationModal';
 import SuccessNotification from '../../../components/SuccessNotification';
 

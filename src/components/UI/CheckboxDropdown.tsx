@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import SearchIcon from "../../utils/icons/SearchIcon";
+import SearchIcon from "../Icons/SearchIcon";
+import ArrowUpIcon from "../Icons/ArrowUpIcon";
+import ArrowDownIcon from "../Icons/ArrowDownIcon";
 
 export interface CheckboxDropdownOption {
   label: string;
@@ -82,18 +84,6 @@ const CheckboxDropdown: React.FC<CheckboxDropdownProps> = ({
     setInternalSelectedValues(selectedValues);
   }, [selectedValues]);
 
-  const ArrowDownSvg = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-      <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-    </svg>
-  );
-
-  const ArrowUpSvg = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
-      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-    </svg>
-  );
-
   const getButtonText = () => {
     if (internalSelectedValues.length > 0) {
       return `${internalSelectedValues.length} selected`;
@@ -105,15 +95,16 @@ const CheckboxDropdown: React.FC<CheckboxDropdownProps> = ({
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         onClick={handleToggle}
-        className="flex flex-row justify-between items-center px-4 py-3 box-border border border-default rounded-lg bg-white gap-4 md:min-w-24 min-w-[max-content] w-full dark:border-[#4D5050] focus:ring-2 focus:ring-[#E3F3C7B2] focus:outline-none"
+        className="flex flex-row justify-between items-center px-4 py-3 rounded-lg md:min-w-24 min-w-[max-content] w-full gap-4
+          text-gray-900 dark:text-gray-400 box-border border border-default bg-white dark:bg-gray-900 dark:border-gray-700 focus:ring-2 focus:ring-[#E3F3C7B2] focus:outline-none"
         aria-label="Toggle dropdown"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <span className="text-base text-gray-900 dark:text-white">
+        <span className="text-base text-gray-900 dark:text-gray-100">
           {getButtonText()}
         </span>
-        {isOpen ? <ArrowUpSvg /> : <ArrowDownSvg />}
+        {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
       </button>
       {isOpen && (
         <div className="absolute top-full left-0 mt-1 w-full border border-default rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 bg-white dark:bg-gray-900 dark:text-white">
