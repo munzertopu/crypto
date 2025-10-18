@@ -54,10 +54,9 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
 
       {/* Modal Container */}
       <div className="flex min-h-full md:items-center md:justify-center md:p-4">
-        {/* Mobile Drawer */}
-        <div className="md:hidden relative bg-white dark:bg-gray-800 rounded-t-2xl shadow-xl max-w-md w-full p-3 md:p-8 flex flex-col">
-          {/* Mobile Header */}
-          <div className="flex items-center justify-between mb-4">
+        <div className="relative bg-white dark:bg-gray-800 rounded-t-2xl md:rounded-lg shadow-xl max-w-md w-full p-3 md:p-6 flex flex-col">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-4 md:mb-6">
             <Typography variant="h5" className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               Add rule
             </Typography>
@@ -71,8 +70,8 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
             </button>
           </div>
 
-          {/* Mobile Content */}
-          <div className="flex-1">
+          {/* Content */}
+          <div className="flex-1 md:mb-6">
             {/* Introductory Text */}
             <Typography variant="small" className="text-left text-sm mb-6 text-gray-600 dark:text-gray-300">
               Create a rule that automatically applies tagging to specific tokens across your wallets.
@@ -92,97 +91,100 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
               />
             </div>
 
-            {/* Wallet Dropdown */}
-            <div className="mb-4">
-              <label className="block text-sm mb-2 text-left text-[#4D5050] dark:text-gray-300">
-                Wallet
-              </label>
-              <div className="relative">
-                <button
-                  onClick={() => setIsWalletDropdownOpen(!isWalletDropdownOpen)}
-                  className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-transparent text-[#0E201E] dark:border-gray-600 dark:text-white"
-                >
-                  <div className="flex items-center space-x-2">
-                    {selectedWallet && (
-                      <img 
-                        src={walletOptions.find(w => w.name === selectedWallet)?.image} 
-                        alt={selectedWallet}
-                        className="w-5 h-5 rounded-full"
-                      />
-                    )}
-                    <span className={`text-left ${selectedWallet ? 'text-gray-900 dark:text-gray-150' : 'text-[#7C7C7C]'}`}>
-                      {selectedWallet || 'Choose wallet'}
-                    </span>
-                  </div>
-                  <FontAwesomeIcon 
-                    icon={faChevronDown} 
-                    className={`w-3 h-3 transition-transform ${isWalletDropdownOpen ? 'rotate-180' : ''}`}
-                  />
-                </button>
-                
-                {isWalletDropdownOpen && (
-                  <div className={`absolute top-full left-0 right-0 mt-1 border border-gray-300 rounded-lg shadow-lg py-1 z-50 ${
-'bg-white border-gray-300 dark:bg-gray-800 dark:border-gray-600'
-                  }`}>
-                    {walletOptions.map((wallet) => (
-                      <button
-                        key={wallet.name}
-                        className="w-full px-3 py-2 text-sm text-left hover:bg-gray-100 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 flex items-center space-x-2"
-                        onClick={() => {
-                          setSelectedWallet(wallet.name);
-                          setIsWalletDropdownOpen(false);
-                        }}
-                      >
+            {/* Wallet and Token Dropdowns - Responsive Layout */}
+            <div className="flex flex-col md:flex-row md:space-x-4 mb-4 space-y-4 md:space-y-0">
+              {/* Wallet Dropdown */}
+              <div className="flex-1">
+                <label className="block text-sm mb-2 text-left text-[#4D5050] dark:text-gray-300">
+                  Wallet
+                </label>
+                <div className="relative">
+                  <button
+                    onClick={() => setIsWalletDropdownOpen(!isWalletDropdownOpen)}
+                    className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-transparent text-[#0E201E] dark:border-gray-600 dark:text-white"
+                  >
+                    <div className="flex items-center space-x-2">
+                      {selectedWallet && (
                         <img 
-                          src={wallet.image} 
-                          alt={wallet.name}
-                          className="w-4 h-4 rounded-full"
+                          src={walletOptions.find(w => w.name === selectedWallet)?.image} 
+                          alt={selectedWallet}
+                          className="w-5 h-5 rounded-full"
                         />
-                        <span>{wallet.name}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Token Dropdown */}
-            <div className="mb-4">
-              <label className="block text-sm mb-2 text-left text-[#4D5050] dark:text-gray-300">
-                Token
-              </label>
-              <div className="relative">
-                <button
-                  onClick={() => setIsTokenDropdownOpen(!isTokenDropdownOpen)}
-                  className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-transparent text-gray-900 dark:text-gray-150 dark:border-gray-600"
-                >
-                  <span className={`text-left ${selectedToken ? 'text-gray-900 dark:text-gray-150' : 'text-[#7C7C7C]'}`}>
-                    {selectedToken || 'Select the token'}
-                  </span>
-                  <FontAwesomeIcon 
-                    icon={faChevronDown} 
-                    className={`w-3 h-3 transition-transform ${isTokenDropdownOpen ? 'rotate-180' : ''}`}
-                  />
-                </button>
-                
-                {isTokenDropdownOpen && (
-                  <div className={`absolute top-full left-0 right-0 mt-1 border border-gray-300 rounded-lg shadow-lg py-1 z-50 ${
+                      )}
+                      <span className={`text-left ${selectedWallet ? 'text-gray-900 dark:text-gray-150' : 'text-[#7C7C7C]'}`}>
+                        {selectedWallet || 'Choose wallet'}
+                      </span>
+                    </div>
+                    <FontAwesomeIcon 
+                      icon={faChevronDown} 
+                      className={`w-3 h-3 transition-transform ${isWalletDropdownOpen ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                  
+                  {isWalletDropdownOpen && (
+                    <div className={`absolute top-full left-0 right-0 mt-1 border border-gray-300 rounded-lg shadow-lg py-1 z-50 ${
 'bg-white border-gray-300 dark:bg-gray-800 dark:border-gray-600'
-                  }`}>
-                    {tokenOptions.map((token) => (
-                      <button
-                        key={token}
-                        className="w-full px-3 py-2 text-sm text-left hover:bg-gray-100 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-                        onClick={() => {
-                          setSelectedToken(token);
-                          setIsTokenDropdownOpen(false);
-                        }}
-                      >
-                        {token}
-                      </button>
-                    ))}
-                  </div>
-                )}
+                    }`}>
+                      {walletOptions.map((wallet) => (
+                        <button
+                          key={wallet.name}
+                          className="w-full px-3 py-2 text-sm text-left hover:bg-gray-100 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 flex items-center space-x-2"
+                          onClick={() => {
+                            setSelectedWallet(wallet.name);
+                            setIsWalletDropdownOpen(false);
+                          }}
+                        >
+                          <img 
+                            src={wallet.image} 
+                            alt={wallet.name}
+                            className="w-4 h-4 rounded-full"
+                          />
+                          <span>{wallet.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Token Dropdown */}
+              <div className="flex-1">
+                <label className="block text-sm mb-2 text-left text-[#4D5050] dark:text-gray-300">
+                  Token
+                </label>
+                <div className="relative">
+                  <button
+                    onClick={() => setIsTokenDropdownOpen(!isTokenDropdownOpen)}
+                    className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-transparent text-gray-900 dark:text-gray-150 dark:border-gray-600"
+                  >
+                    <span className={`text-left ${selectedToken ? 'text-gray-900 dark:text-gray-150' : 'text-[#7C7C7C]'}`}>
+                      {selectedToken || 'Select the token'}
+                    </span>
+                    <FontAwesomeIcon 
+                      icon={faChevronDown} 
+                      className={`w-3 h-3 transition-transform ${isTokenDropdownOpen ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                  
+                  {isTokenDropdownOpen && (
+                    <div className={`absolute top-full left-0 right-0 mt-1 border border-gray-300 rounded-lg shadow-lg py-1 z-50 ${
+'bg-white border-gray-300 dark:bg-gray-800 dark:border-gray-600'
+                    }`}>
+                      {tokenOptions.map((token) => (
+                        <button
+                          key={token}
+                          className="w-full px-3 py-2 text-sm text-left hover:bg-gray-100 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                          onClick={() => {
+                            setSelectedToken(token);
+                            setIsTokenDropdownOpen(false);
+                          }}
+                        >
+                          {token}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -261,7 +263,7 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
             </div>
           </div>
 
-          {/* Mobile Footer */}
+          {/* Footer */}
           <div className="flex justify-between items-center pt-4">
             <button
               onClick={onClose}
@@ -280,238 +282,6 @@ const AddRuleModal: React.FC<AddRuleModalProps> = ({
             >
               Add rule
             </button>
-          </div>
-        </div>
-
-        {/* Desktop Modal */}
-        <div className="hidden md:block relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
-          {/* Desktop Header */}
-          <div className="flex items-center justify-between mb-6">
-          <Typography variant="h5" className="text-lg font-semibold text-gray-900 dark:text-gray-150">
-            Add rule
-          </Typography>
-          <button
-            onClick={onClose}
-            className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-
-          {/* Desktop Content */}
-          <div className="mb-6">
-          {/* Introductory Text */}
-          <Typography variant="small" className="text-left text-sm mb-6 text-gray-600 dark:text-gray-300">
-            Create a rule that automatically applies tagging to specific tokens across your wallets.
-          </Typography>
-
-          {/* Rule Name Input */}
-            <div className="mb-4">
-            <label className="block text-sm mb-2 text-left text-[#4D5050] dark:text-gray-300">
-              Rule Name
-            </label>
-            <input
-              type="text"
-              value={ruleName}
-              onChange={(e) => setRuleName(e.target.value)}
-              placeholder="Type rule name"
-              className="w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none bg-transparent text-[#0E201E] placeholder-[#7C7C7C] dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
-            />
-          </div>
-
-          {/* Wallet and Token Dropdowns in Same Row */}
-          <div className="flex space-x-4 mb-4">
-            {/* Wallet Dropdown */}
-            <div className="flex-1">
-              <label className="block text-sm mb-2 text-left text-[#4D5050] dark:text-gray-300">
-                Wallet
-              </label>
-              <div className="relative">
-                <button
-                  onClick={() => setIsWalletDropdownOpen(!isWalletDropdownOpen)}
-                  className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-transparent text-[#0E201E] dark:border-gray-600 dark:text-white"
-                >
-                  <div className="flex items-center space-x-2">
-                    {selectedWallet && (
-                      <img 
-                        src={walletOptions.find(w => w.name === selectedWallet)?.image} 
-                        alt={selectedWallet}
-                        className="w-5 h-5 rounded-full"
-                      />
-                    )}
-                    <span className={`text-left ${selectedWallet ? 'text-gray-900 dark:text-gray-150' : 'text-[#7C7C7C]'}`}>
-                      {selectedWallet || 'Choose wallet'}
-                    </span>
-                  </div>
-                  <FontAwesomeIcon 
-                    icon={faChevronDown} 
-                    className={`w-3 h-3 transition-transform ${isWalletDropdownOpen ? 'rotate-180' : ''}`}
-                  />
-                </button>
-                
-                {isWalletDropdownOpen && (
-                  <div className={`absolute top-full left-0 right-0 mt-1 border border-gray-300 rounded-lg shadow-lg py-1 z-50 ${
-'bg-white border-gray-300 dark:bg-gray-800 dark:border-gray-600'
-                  }`}>
-                    {walletOptions.map((wallet) => (
-                      <button
-                        key={wallet.name}
-                        className="w-full px-3 py-2 text-sm text-left hover:bg-gray-100 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700 flex items-center space-x-2"
-                        onClick={() => {
-                          setSelectedWallet(wallet.name);
-                          setIsWalletDropdownOpen(false);
-                        }}
-                      >
-                        <img 
-                          src={wallet.image} 
-                          alt={wallet.name}
-                          className="w-4 h-4 rounded-full"
-                        />
-                        <span>{wallet.name}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Token Dropdown */}
-            <div className="flex-1">
-              <label className="block text-sm mb-2 text-left text-[#4D5050] dark:text-gray-300">
-                Token
-              </label>
-              <div className="relative">
-                <button
-                  onClick={() => setIsTokenDropdownOpen(!isTokenDropdownOpen)}
-                  className="w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg bg-transparent text-gray-900 dark:text-gray-150 dark:border-gray-600"
-                >
-                  <span className={`text-left ${selectedToken ? 'text-gray-900 dark:text-gray-150' : 'text-[#7C7C7C]'}`}>
-                    {selectedToken || 'Select the token'}
-                  </span>
-                  <FontAwesomeIcon 
-                    icon={faChevronDown} 
-                    className={`w-3 h-3 transition-transform ${isTokenDropdownOpen ? 'rotate-180' : ''}`}
-                  />
-                </button>
-                
-                {isTokenDropdownOpen && (
-                  <div className={`absolute top-full left-0 right-0 mt-1 border border-gray-300 rounded-lg shadow-lg py-1 z-50 ${
-'bg-white border-gray-300 dark:bg-gray-800 dark:border-gray-600'
-                  }`}>
-                    {tokenOptions.map((token) => (
-                      <button
-                        key={token}
-                        className="w-full px-3 py-2 text-sm text-left hover:bg-gray-100 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-                        onClick={() => {
-                          setSelectedToken(token);
-                          setIsTokenDropdownOpen(false);
-                        }}
-                      >
-                        {token}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Quantity Input */}
-          <div className="mb-4">
-              <div className="flex items-center mb-2">
-                <label className="block text-sm text-left text-[#4D5050] dark:text-gray-300">
-                  Quantity (optional)
-              </label>
-                <svg className="w-4 h-4 mx-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
-              </svg>
-            </div>
-            <input
-              type="text"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-              placeholder="Define an exact amount"
-              className="w-full px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none bg-transparent text-[#0E201E] placeholder-[#7C7C7C] dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
-            />
-          </div>
-
-          {/* Tag Input */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium mb-2 text-left text-gray-700 dark:text-gray-300">
-              Tags
-            </label>
-            <div className="w-full min-h-[40px] px-3 py-2 border border-[#E1E3E5] rounded-lg bg-transparent dark:border-gray-600 flex items-center flex-wrap gap-2">
-              {/* Display existing tags */}
-              {tags.map((tag, index) => (
-                <div key={index} className="flex items-center space-x-1 bg-transparent border border-default dark:border-gray-700 rounded-full px-3 py-1">
-                  <span className="text-sm text-gray-900 dark:text-gray-100">{tag}</span>
-                  <button
-                    onClick={() => {
-                      setTags(tags.filter((_, i) => i !== index));
-                    }}
-                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                    type="button"
-                  >
-                    <svg
-                      className="w-3 h-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              ))}
-              
-              {/* Input field */}
-              <input
-                type="text"
-                value={tagInput}
-                onChange={(e) => setTagInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    if (tagInput.trim() && !tags.includes(tagInput.trim())) {
-                      setTags([...tags, tagInput.trim()]);
-                      setTagInput('');
-                    }
-                  }
-                }}
-                placeholder={tags.length === 0 ? "Start typing tag..." : "Add another tag..."}
-                className="flex-1 bg-transparent text-gray-900 placeholder-[#7C7C7C] dark:text-gray-250 dark:placeholder-gray-400 focus:outline-none"
-              />
-            </div>
-          </div>
-        </div>
-
-          {/* Desktop Footer */}
-          <div className="flex justify-between items-center">
-          <button
-            onClick={onClose}
-              className="px-4 py-2 font-medium text-[#7C7C7C] dark:text-gray-300 dark:hover:text-white"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleAddRule}
-            className={`px-4 py-2 rounded-lg font-medium ${
-              ruleName && selectedWallet && selectedToken
-                ? 'bg-[#90C853] text-[#0E201E] hover:bg-[#7AB342]'
-                : 'bg-gray-700 text-gray-300 cursor-not-allowed'
-            }`}
-            disabled={!ruleName || !selectedWallet || !selectedToken}
-          >
-            Add rule
-          </button>
           </div>
         </div>
       </div>
