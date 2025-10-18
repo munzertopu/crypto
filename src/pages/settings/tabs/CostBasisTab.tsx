@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import OverrideCostModal from "../components/OverrideCostModal";
-import { tr } from "date-fns/locale";
 
 interface CostBasisTabProps {}
 
@@ -26,7 +25,7 @@ interface OverrideCard {
 const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
   const [isOverrideModalOpen, setIsOverrideModalOpen] = useState(false);
   const [isLoadingModalOpen, setIsLoadingModalOpen] = useState(false);
-  const [showNotification, setShowNotification] = useState(true);
+  const [showNotification, setShowNotification] = useState(false);
   const [overrideCard, setOverrideCard] = useState<OverrideCard | null>(null);
   const [costBasisMethods, setCostBasisMethods] = useState<CostBasisMethod[]>([
     {
@@ -221,9 +220,9 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
                   `}
               >
                 {/* Radio Button */}
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center md:justify-between mb-2 gap-2 md:gap-0 ">
                   <span
-                    className={`font-semibold text-base text-[#0E201E] dark:text-white`}
+                    className={`hidden md:block font-semibold text-base text-[#0E201E] dark:text-white`}
                   >
                     {method.name}
                   </span>
@@ -238,6 +237,11 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
                       </div>
                     )}
                   </div>
+                  <span
+                    className={`md:hidden font-semibold text-base text-[#0E201E] dark:text-white`}
+                  >
+                    {method.name}
+                  </span>
                 </div>
                 <div
                   className={`text-sm text-left text-[#4D5050] dark:text-gray-300`}
@@ -383,10 +387,10 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex justify-between pt-6 my-8">
+      <div className="flex justify-between pt-6 my-8 gap-4 md:gap-0">
         <Button
           onClick={handleRecalculate}
-          className={`border-[#E1E3E5] px-5 py-3 rounded-lg font-medium bg-transparent border-[#E1E3E5] text-[#0E201E]
+          className={`w-[50%] md:w-auto border-gray-150 px-5 py-3 rounded-lg font-medium bg-transparent  text-[#0E201E]
             dark:border-gray-600 dark:text-gray-100
           `}
         >
@@ -395,7 +399,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
 
         <Button
           onClick={handleSaveChanges}
-          className="bg-[#90C853] text-[#0E201E] px-5 py-3 rounded-lg font-medium border-0"
+          className={`w-[50%] md:w-auto border-gray-150 bg-[#90C853] text-[#0E201E] px-5 py-3 rounded-lg font-medium border-0`}
         >
           Save changes
         </Button>
