@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import DateRangeSelector from "../../../components/DateRangeSelector";
-import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
+import { ChevronUpDownIcon, EyeIcon } from "@heroicons/react/24/outline";
 import {
   cryptoAssets,
   formatCurrency,
@@ -9,6 +9,8 @@ import {
 } from "../../../data/cryptoAssets";
 import AssetDetailModal from "../components/AssetDetailModal";
 import DateRangePickerPopover from "../../../components/DateRangePicker";
+import { Accordion, AccordionItem } from "../../../components/Accordion";
+import SecondaryButton from "../../../components/UI/Buttons/SecondaryButton";
 
 interface TaxOptimizationTabProps {}
 
@@ -135,15 +137,15 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
             className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm"
           >
             {/* Header Section */}
-            <div className="flex items-start justify-between mb-4">
-              <div className="flex items-center gap-3">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-start gap-3">
                 <img
                   src={asset.logo}
                   alt={`${asset.name} logo`}
                   className="w-12 h-12 rounded-full"
                 />
                 <div>
-                  <Typography variant="small" className="text-lg font-bold text-[#0E201E] dark:text-gray-100">
+                  <Typography variant="small" className="text-left text-lg font-bold text-[#0E201E] dark:text-gray-100">
                     {asset.name}
                   </Typography>
                   <Typography variant="small" className="text-sm text-gray-600 dark:text-gray-400">
@@ -151,7 +153,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
                   </Typography>
                 </div>
               </div>
-              <svg
+              {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -176,64 +178,59 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
                   strokeLinejoin="round"
                   d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                 />
-              </svg>
+              </svg> */}
+              <SecondaryButton   onClick={(e:any) => handleEyeClick(asset, e)} icon={<EyeIcon />} className="flex sm:hidden" />
             </div>
 
             {/* Categorized Sections */}
-            <div className="space-y-3 mb-4">
-              {/* Short term section */}
-              <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-3">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-900 dark:text-gray-100">Short term</span>
-                  <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">Potential Gains:</span>
-                    <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                      {formatCurrency(asset.shortTerm.potentialGains)}
-                    </span>
+            <div className="mb-4">
+              <Accordion className="rounded-xl h-min ">
+                <AccordionItem
+                  title="Short term"
+                  className="!bg-gray-100 dark:!bg-gray-700 !px-3 !py-2"
+                >
+                  <div className="space-y-2 pt-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">Potential Gains:</span>
+                      <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                        {formatCurrency(asset.shortTerm.potentialGains)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">Amount held:</span>
+                      <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                        {formatCryptoAmount(
+                          asset.shortTerm.amountHeldValue,
+                          asset.shortTerm.amountHeldUnit
+                        )}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">Amount held:</span>
-                    <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                      {formatCryptoAmount(
-                        asset.shortTerm.amountHeldValue,
-                        asset.shortTerm.amountHeldUnit
-                      )}
-                    </span>
-                  </div>
-                </div>
-              </div>
+                </AccordionItem>
 
-              {/* Long term section */}
-              <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-3">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-900 dark:text-gray-100">Long term</span>
-                  <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">Potential Gains:</span>
-                    <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                      {formatCurrency(asset.longTerm.potentialGains)}
-                    </span>
+                <AccordionItem
+                  title="Long term"
+                className="!bg-gray-100 dark:!bg-gray-700 !px-3 !py-2"
+                >
+                  <div className="space-y-2 pt-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">Potential Gains:</span>
+                      <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                        {formatCurrency(asset.longTerm.potentialGains)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">Amount held:</span>
+                      <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                        {formatCryptoAmount(
+                          asset.longTerm.amountHeldValue,
+                          asset.longTerm.amountHeldUnit
+                        )}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">Amount held:</span>
-                    <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                      {formatCryptoAmount(
-                        asset.longTerm.amountHeldValue,
-                        asset.longTerm.amountHeldUnit
-                      )}
-                    </span>
-                  </div>
-                </div>
-              </div>
+                </AccordionItem>
+              </Accordion>
             </div>
 
             {/* Progress Bar */}

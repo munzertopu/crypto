@@ -1,6 +1,6 @@
 type SecondaryButtonProps = {
   icon: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e:any) => void;
   className?: string;
 };
 
