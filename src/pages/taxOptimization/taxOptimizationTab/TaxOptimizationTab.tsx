@@ -6,6 +6,7 @@ import {
   cryptoAssets,
   formatCurrency,
   formatCryptoAmount,
+  modalTableData,
 } from "../../../data/cryptoAssets";
 import AssetDetailModal from "../components/AssetDetailModal";
 import DateRangePickerPopover from "../../../components/DateRangePicker";
@@ -550,15 +551,53 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
         modalPosition={modalPosition}
         onClose={handleCloseModal}
       />
-      {/* Detail Drawer for Mobile */}
-      <MobileDrawer
-        isOpen={openDetailDrawer}
-        onClose={() => setOpenDetailDrawer(false)}
-        header="Details"
-        height={400}
-      >
-        <h1>helo</h1>
-      </MobileDrawer>
+       {/* Detail Drawer for Mobile */}
+       <MobileDrawer
+         isOpen={openDetailDrawer}
+         onClose={() => setOpenDetailDrawer(false)}
+         header={selectedAsset?.name || "Asset Details"}
+         height={400}
+         hideFooter={true}
+        
+       >
+         {selectedAsset && (
+           <div className="space-y-4">
+
+             {/* Account/Wallet List */}
+             <div className="space-y-3">
+               {modalTableData.map((wallet) => (
+                 <div key={wallet.id} className="flex items-center justify-between py-3">
+                   <div className="flex items-center gap-3">
+                     <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden">
+                       <img 
+                         src={wallet.logo} 
+                         alt={`${wallet.wallet} logo`}
+                         className="w-full h-full object-contain"
+                       />
+                     </div>
+                     <div>
+                       <Typography variant="small" className="text-left text-base font-bold text-[#0E201E] dark:text-gray-100">
+                         {wallet.wallet}
+                       </Typography>
+                       <Typography variant="small" className="text-sm text-gray-600 dark:text-gray-400">
+                         Balance: {wallet.balance}
+                       </Typography>
+                     </div>
+                   </div>
+                   <div className="text-right">
+                     <Typography variant="small" className="text-base font-bold text-[#0E201E] dark:text-gray-100">
+                       {wallet.price}
+                     </Typography>
+                     <Typography variant="small" className="text-sm text-gray-600 dark:text-gray-400">
+                       Value: {wallet.value}
+                     </Typography>
+                   </div>
+                 </div>
+               ))}
+             </div>
+           </div>
+         )}
+       </MobileDrawer>
     </div>
   );
 };
