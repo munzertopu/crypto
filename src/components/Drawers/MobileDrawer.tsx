@@ -17,6 +17,7 @@ interface DrawerProps {
   marginBottom?: boolean;
   hideCloseIcon?: boolean;
   hideFooter?: boolean;
+  className?: string;
 }
 
 const MobileDrawer: React.FC<DrawerProps> = ({
@@ -33,6 +34,7 @@ const MobileDrawer: React.FC<DrawerProps> = ({
   marginBottom = false,
   hideCloseIcon = false,
   hideFooter = false,
+  className = "",
 }) => {
   return (
     <>
@@ -48,7 +50,7 @@ const MobileDrawer: React.FC<DrawerProps> = ({
       <div
         className={`fixed bottom-0 left-0 w-[99.8%] bg-white z-50 transition-transform duration-300 transform ${
           isOpen ? "translate-y-0" : "translate-y-full"
-        } rounded-t-[24px] sm:hidden py-6 px-5 dark:bg-[#0E201E] flex flex-col`}
+        } rounded-t-[24px] sm:hidden py-6 px-5 dark:bg-[#0E201E] flex flex-col ${className}`}
         style={{ height: `${height}px` }}
       >
         {/* Header */}
