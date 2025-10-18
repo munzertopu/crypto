@@ -1,14 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
+import React, { useState, useRef, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
   faChevronDown,
   faChevronUp,
   faCheck,
   faClock,
   faChartBar,
   faPercent,
-  faChartLine
-} from '@fortawesome/free-solid-svg-icons';
+  faChartLine,
+} from "@fortawesome/free-solid-svg-icons";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 
 interface TaxLossHarvestingCardsProps {
@@ -22,212 +22,281 @@ interface MetricData {
   netCapitalGainLoss: string;
 }
 
-const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({
-}) => {
-  const [selectedAsset, setSelectedAsset] = useState('All Assets');
+const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({}) => {
+  const [selectedAsset, setSelectedAsset] = useState("All Assets");
   const [assetDropdownOpen, setAssetDropdownOpen] = useState(false);
-  const [assetSearchTerm, setAssetSearchTerm] = useState('');
+  const [assetSearchTerm, setAssetSearchTerm] = useState("");
   const [selectedAssets, setSelectedAssets] = useState<string[]>([]);
   const assetDropdownRef = useRef<HTMLDivElement>(null);
 
   // Asset options for the dropdown
   const assetOptions = [
-    { id: 'all', name: 'All'},
-    { id: 'ethereum', name: 'Ethereum', logo: 'crypto/ethereum-eth-logo.png' },
-    { id: 'bitcoin', name: 'Bitcoin', logo: 'crypto/bitcoin-btc-logo.png' },
-    { id: 'phantom', name: 'Phantom', logo: 'crypto/pahton.png' },
-    { id: 'kraken', name: 'Kraken', logo: 'crypto/kraken.png' },
-    { id: 'metamask', name: 'MetaMask', logo: 'crypto/metamask.png' },
-    { id: 'solana', name: 'Solana', logo: 'crypto/solana-sol-logo.png' }
+    { id: "all", name: "All" },
+    { id: "ethereum", name: "Ethereum", logo: "crypto/ethereum-eth-logo.png" },
+    { id: "bitcoin", name: "Bitcoin", logo: "crypto/bitcoin-btc-logo.png" },
+    { id: "phantom", name: "Phantom", logo: "crypto/pahton.png" },
+    { id: "kraken", name: "Kraken", logo: "crypto/kraken.png" },
+    { id: "metamask", name: "MetaMask", logo: "crypto/metamask.png" },
+    { id: "solana", name: "Solana", logo: "crypto/solana-sol-logo.png" },
   ];
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (assetDropdownRef.current && !assetDropdownRef.current.contains(event.target as Node)) {
+      if (
+        assetDropdownRef.current &&
+        !assetDropdownRef.current.contains(event.target as Node)
+      ) {
         setAssetDropdownOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
-  const filteredAssetOptions = assetOptions.filter(option =>
+  const filteredAssetOptions = assetOptions.filter((option) =>
     option.name.toLowerCase().includes(assetSearchTerm.toLowerCase())
   );
 
   const handleAssetToggle = (assetId: string) => {
-    setSelectedAssets(prev => 
-      prev.includes(assetId) 
-        ? prev.filter(id => id !== assetId)
+    setSelectedAssets((prev) =>
+      prev.includes(assetId)
+        ? prev.filter((id) => id !== assetId)
         : [...prev, assetId]
     );
   };
 
   // Mock data for the cards
   const realizedGains: MetricData = {
-    shortTermGains: '$45,000',
-    longTermGains: '$160,000',
-    totalCapitalLosses: '$18,300',
-    netCapitalGainLoss: '$186,700'
+    shortTermGains: "$45,000",
+    longTermGains: "$160,000",
+    totalCapitalLosses: "$18,300",
+    netCapitalGainLoss: "$186,700",
   };
 
   const postHarvestGains: MetricData = {
-    shortTermGains: '$42,000',
-    longTermGains: '$155,000',
-    totalCapitalLosses: '$23,500',
-    netCapitalGainLoss: '$173,500'
+    shortTermGains: "$42,000",
+    longTermGains: "$155,000",
+    totalCapitalLosses: "$23,500",
+    netCapitalGainLoss: "$173,500",
   };
 
-  // Reusable metric item component
+  // Reusable metric item component for desktop
   const MetricItem: React.FC<{
     icon: any;
     label: string;
     value: string;
     valueColor?: string;
-  }> = ({ icon, label, value, valueColor = "text-gray-900 dark:text-gray-150" }) => (
-    <div className='space-y-3'>
+  }> = ({
+    icon,
+    label,
+    value,
+    valueColor = "text-gray-900 dark:text-gray-150",
+  }) => (
+    <div className="space-y-3 ">
       <div className="flex items-center space-x-3">
-        <FontAwesomeIcon icon={icon} className={`w-5 h-5 text-[#7C7C7C] dark:text-gray-250`} />
-        <Typography variant="small" className="text-[#0E201E] dark:text-[#B6B8BA]">{label}</Typography>
+        <FontAwesomeIcon
+          icon={icon}
+          className={`w-5 h-5 text-[#7C7C7C] dark:text-gray-250`}
+        />
+        <Typography
+          variant="small"
+          className="text-[#0E201E] dark:text-[#B6B8BA]"
+        >
+          {label}
+        </Typography>
       </div>
-      <Typography variant="small" className={`text-left !text-h4 font-semibold ${valueColor}`}>{value}</Typography>
+      <Typography
+        variant="small"
+        className={`text-left !text-h4 font-semibold ${valueColor}`}
+      >
+        {value}
+      </Typography>
     </div>
   );
 
-  const MetricCard: React.FC<{ 
-    title: string; 
+  const MetricCard: React.FC<{
+    title: string;
     metrics: MetricData;
     showDropdown?: boolean;
   }> = ({ title, metrics, showDropdown = false }) => (
-    <div className={`py-6 bg-white dark:bg-transparent 
-      border border-default dark:border-gray-700 overflow-visible`}>
-      <div className="p-0 overflow-visible">
-        <div className="flex items-center justify-between pb-6 px-8">
-          <div className="flex items-center space-x-2">
-            <div className={`text-h6 font-semibold text-gray-900 dark:text-gray-150`}>
-              {title}
-            </div>
-            <svg className="w-5 h-5 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
-            </svg>
-          </div>
-          {showDropdown && (
-             <div className="relative overflow-visible" ref={assetDropdownRef}>
-              <button
-                onClick={() => setAssetDropdownOpen(!assetDropdownOpen)}
-                className={`flex items-center space-x-2 px-3 py-2 -mb-3 border border-default rounded-lg text-sm bg-white text-gray-700'
-                  dark:bg-transparent
-                `}
+    <>
+      {/* Desktop Layout */}
+      <div
+        className={`py-4 md:py-6 bg-white dark:bg-transparent 
+        border border-default dark:border-gray-700 overflow-visible`}
+      >
+        <div className="p-0 overflow-visible">
+          <div className="flex flex-col gap-3 md:gap-0 md:flex-row md:items-center md:justify-between pb-4 md:pb-6 px-4 md:px-8">
+            <div className="flex items-center md:space-x-2">
+              <div
+                className={`text-h6 font-semibold text-gray-900 dark:text-gray-150`}
               >
-                <span className={'text-gray-700  dark:text-gray-250'}>
-                   All Assets
-                 </span>
-                <FontAwesomeIcon 
-                  icon={assetDropdownOpen ? faChevronUp : faChevronDown} 
-                  className="w-3 h-3 text-gray-500 dark:text-gray-250" 
+                {title}
+              </div>
+              <svg
+                className="w-5 h-5 mx-2 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
                 />
-              </button>
-              
-                {assetDropdownOpen && (
-                 <div className={`absolute top-full right-0 mt-4 w-52 rounded-lg border shadow-lg z-[9999] bg-white border-default
-                   dark:bg-gray-800 dark:border-gray-600'
-                 `}>
-                  {/* Search Input */}
-                  <div className="px-3 border-b border-gray-200">
-                    <input
-                      type="text"
-                      placeholder="Type asset name"
-                      value={assetSearchTerm}
-                      onChange={(e) => setAssetSearchTerm(e.target.value)}
-                      className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 
-                         dark:bg-transparent dark:text-gray-250 dark:placeholder-gray-400 focus:outline-none`}
-                    />
-                  </div>
-                  
-                  {/* Asset Options List */}
-                  <div className="overflow-visible">
-                    {filteredAssetOptions.map((option) => {
-                      const isSelected = selectedAssets.includes(option.id);
-                      return (
-                        <div
-                          key={option.id}
-                          onClick={() => handleAssetToggle(option.id)}
-                          className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 hover:bg-gray-50
-                          `}
-                        >
-                          <div className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
-                            isSelected 
-                              ? 'bg-green-500 border-green-500' 
-                              : 'border-gray-300'
-                          }`}>
-                            {isSelected && (
-                              <FontAwesomeIcon 
-                                icon={faCheck} 
-                                className="w-2.5 h-2.5 text-white" 
-                              />
-                            )}
-                          </div>
-                          {option.name !== 'All' &&
-                            <img src={option.logo} className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold mr-3`}>
-                            </img>
-                          }
-                          <span className={`text-sm text-gray-900 dark:text-gray-150`}>
-                            {option.name}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 9v2m0 4h.01"
+                />
+              </svg>
             </div>
-          )}
-        </div>
-        
-        <div className="grid grid-cols-2 gap-4 px-8">
-          <MetricItem
-            icon={faClock}
-            label="Short Terms Gains"
-            value={metrics.shortTermGains}
-          />
-          <MetricItem
-            icon={faChartBar}
-            label="Long Terms Gains"
-            value={metrics.longTermGains}
-          />
-        </div>
-        
-        {/* Horizontal Separator */}
-        <div className="py-4">
-          <div className={`w-full h-px bg-default dark:bg-gray-700`}></div>
-        </div>
+            {showDropdown && (
+              <div
+                className="w-full md:w-auto relative overflow-visible mb-4 md:mb-0"
+                ref={assetDropdownRef}
+              >
+                <button
+                  onClick={() => setAssetDropdownOpen(!assetDropdownOpen)}
+                  className={`w-full md:w-auto flex items-center space-x-2 px-3 py-2 -mb-3 border border-default rounded-lg text-sm bg-white text-gray-700
+                    dark:bg-transparent`}
+                >
+                  <span
+                    className={
+                      "w-full md:w-auto text-gray-700 dark:text-gray-250 text-left"
+                    }
+                  >
+                    All Assets
+                  </span>
+                  <FontAwesomeIcon
+                    icon={assetDropdownOpen ? faChevronUp : faChevronDown}
+                    className="w-3 h-3 text-gray-500 dark:text-gray-250"
+                  />
+                </button>
 
-        <div className="grid grid-cols-2 gap-4 px-8">
-          <MetricItem
-            icon={faPercent}
-            label="Total Capital Losses"
-            value={metrics.totalCapitalLosses}
-          />
-          
-          <MetricItem
-            icon={faChartLine}
-            label="Net Capital Gain/Loss"
-            value={metrics.netCapitalGainLoss}
-          />
+                {assetDropdownOpen && (
+                  <div
+                    className={`w-full absolute top-full md:right-0 mt-4 md:w-52 rounded-lg border shadow-lg z-[9999] bg-white border-default
+                     dark:bg-gray-800 dark:border-gray-600`}
+                  >
+                    {/* Search Input */}
+                    <div className="px-3 border-b border-gray-200">
+                      <input
+                        type="text"
+                        placeholder="Type asset name"
+                        value={assetSearchTerm}
+                        onChange={(e) => setAssetSearchTerm(e.target.value)}
+                        className={`w-full px-3 py-2 rounded text-sm text-gray-900 placeholder-gray-500 
+                           dark:bg-transparent dark:text-gray-250 dark:placeholder-gray-400 focus:outline-none`}
+                      />
+                    </div>
+
+                    {/* Asset Options List */}
+                    <div className="overflow-visible">
+                      {filteredAssetOptions.map((option) => {
+                        const isSelected = selectedAssets.includes(option.id);
+                        return (
+                          <div
+                            key={option.id}
+                            onClick={() => handleAssetToggle(option.id)}
+                            className={`flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 hover:bg-gray-50`}
+                          >
+                            <div
+                              className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
+                                isSelected
+                                  ? "bg-green-500 border-green-500"
+                                  : "border-gray-300"
+                              }`}
+                            >
+                              {isSelected && (
+                                <FontAwesomeIcon
+                                  icon={faCheck}
+                                  className="w-2.5 h-2.5 text-white"
+                                />
+                              )}
+                            </div>
+                            {option.name !== "All" && (
+                              <img
+                                src={option.logo}
+                                className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold mr-3`}
+                              ></img>
+                            )}
+                            <span
+                              className={`text-sm text-gray-900 dark:text-gray-150`}
+                            >
+                              {option.name}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 md:px-8">
+            <MetricItem
+              icon={faClock}
+              label="Short Terms Gains"
+              value={metrics.shortTermGains}
+            />
+            <div
+              className={`block md:hidden w-full h-px bg-default dark:bg-gray-700`}
+            ></div>
+            <MetricItem
+              icon={faChartBar}
+              label="Long Terms Gains"
+              value={metrics.longTermGains}
+            />
+            <div
+              className={`block md:hidden w-full h-px bg-default dark:bg-gray-700`}
+            ></div>
+          </div>
+
+          {/* Horizontal Separator */}
+          <div className="py-4">
+            <div
+              className={`hidden md:block w-full h-px bg-default dark:bg-gray-700`}
+            ></div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4 md:px-8">
+            <MetricItem
+              icon={faPercent}
+              label="Total Capital Losses"
+              value={metrics.totalCapitalLosses}
+            />
+            <div
+              className={`block md:hidden w-full h-px bg-default dark:bg-gray-700`}
+            ></div>
+            <MetricItem
+              icon={faChartLine}
+              label="Net Capital Gain/Loss"
+              value={metrics.netCapitalGainLoss}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="space-y-4 md:space-y-0 md:grid md:grid-cols-1 lg:grid-cols-2 md:gap-6">
       <MetricCard title="Realized Capital Gains" metrics={realizedGains} />
-      <MetricCard title="Post-Harvest Capital Gains" metrics={postHarvestGains} showDropdown={true} />
+      <MetricCard
+        title="Post-Harvest Capital Gains"
+        metrics={postHarvestGains}
+        showDropdown={true}
+      />
     </div>
   );
 };

@@ -19,7 +19,6 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
     setActiveTab(tab);
   };
 
-
   const handleLogout = () => {
     if (onLogout) {
       onLogout();
@@ -28,10 +27,7 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-gray-150">
-      <NavigationBar
-        onLogout={handleLogout}
-        currentPage="tax-optimization"
-      />
+      <NavigationBar onLogout={handleLogout} currentPage="tax-optimization" />
 
       <div className="mx-auto px-4 sm:px-6 lg:px-8 mt-8 md:mt-5">
         {/* Header */}
@@ -53,10 +49,10 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
                     onClick={() => handleTabChange?.(tab)}
                     className={`px-3 sm:px-5 md:px-2.5 py-1 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl 
                       text-sm sm:text-lg md:text-sm ${
-                      activeTab === tab
-                        ? "bg-white dark:bg-gray-0 text-gray-900 dark:text-gray-900"
-                        : "text-gray-900 dark:text-gray-200"
-                    }`}
+                        activeTab === tab
+                          ? "bg-white dark:bg-gray-0 text-gray-900 dark:text-gray-900"
+                          : "text-gray-900 dark:text-gray-200"
+                      }`}
                   >
                     {tab}
                   </Tabs.Trigger>
@@ -68,17 +64,11 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
         </div>
 
         {/* Main Content */}
-        {activeTab === "Tax Optimization" && (
-          <TaxOptimizationTab />
-        )}
+        {activeTab === "Tax Optimization" && <TaxOptimizationTab />}
 
-        {activeTab === "Tax Loss Harvesting" && (
-          <TaxLossHarvestingTab />
-        )}
+        {activeTab === "Tax Loss Harvesting" && <TaxLossHarvestingTab />}
 
-        {activeTab === "Tax Wizard" && (
-          <TaxWizardTab />
-        )}
+        {activeTab === "Tax Wizard" && <TaxWizardTab />}
       </div>
     </div>
   );
