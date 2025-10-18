@@ -11,6 +11,7 @@ import AssetDetailModal from "../components/AssetDetailModal";
 import DateRangePickerPopover from "../../../components/DateRangePicker";
 import { Accordion, AccordionItem } from "../../../components/Accordion";
 import SecondaryButton from "../../../components/UI/Buttons/SecondaryButton";
+import MobileDrawer from "../../../components/Drawers/MobileDrawer";
 
 interface TaxOptimizationTabProps {}
 
@@ -23,6 +24,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
   const [selectedAsset, setSelectedAsset] = useState<any>(null);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
   const [tooltipOpen, setTooltipOpen] = useState<string | null>(null);
+  const [openDetailDrawer, setOpenDetailDrawer] = useState(false);
 
   const TABLE_HEAD = [
     "Asset",
@@ -145,10 +147,16 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
                   className="w-12 h-12 rounded-full"
                 />
                 <div>
-                  <Typography variant="small" className="text-left text-lg font-bold text-[#0E201E] dark:text-gray-100">
+                  <Typography
+                    variant="small"
+                    className="text-left text-lg font-bold text-[#0E201E] dark:text-gray-100"
+                  >
                     {asset.name}
                   </Typography>
-                  <Typography variant="small" className="text-sm text-gray-600 dark:text-gray-400">
+                  <Typography
+                    variant="small"
+                    className="text-sm text-gray-600 dark:text-gray-400"
+                  >
                     Value: {formatCurrency(asset.marketValue)}
                   </Typography>
                 </div>
@@ -179,7 +187,14 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
                   d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                 />
               </svg> */}
-              <SecondaryButton   onClick={(e:any) => handleEyeClick(asset, e)} icon={<EyeIcon />} className="flex sm:hidden" />
+              <SecondaryButton
+                onClick={() => {
+                  setOpenDetailDrawer(true);
+                  setSelectedAsset(asset);
+                }}
+                icon={<EyeIcon />}
+                className="flex sm:hidden"
+              />
             </div>
 
             {/* Categorized Sections */}
@@ -191,13 +206,17 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
                 >
                   <div className="space-y-2 pt-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Potential Gains:</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        Potential Gains:
+                      </span>
                       <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                         {formatCurrency(asset.shortTerm.potentialGains)}
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Amount held:</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        Amount held:
+                      </span>
                       <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                         {formatCryptoAmount(
                           asset.shortTerm.amountHeldValue,
@@ -210,17 +229,21 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
 
                 <AccordionItem
                   title="Long term"
-                className="!bg-gray-100 dark:!bg-gray-700 !px-3 !py-2"
+                  className="!bg-gray-100 dark:!bg-gray-700 !px-3 !py-2"
                 >
                   <div className="space-y-2 pt-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Potential Gains:</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        Potential Gains:
+                      </span>
                       <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                         {formatCurrency(asset.longTerm.potentialGains)}
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Amount held:</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        Amount held:
+                      </span>
                       <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
                         {formatCryptoAmount(
                           asset.longTerm.amountHeldValue,
@@ -245,7 +268,9 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
       </div>
 
       {/* Desktop Table */}
-      <Card className={`hidden md:block h-full w-full border-transparent bg-transparent`}>
+      <Card
+        className={`hidden md:block h-full w-full border-transparent bg-transparent`}
+      >
         <CardBody className="p-0">
           <div className="overflow-x-auto">
             <table
@@ -525,6 +550,15 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
         modalPosition={modalPosition}
         onClose={handleCloseModal}
       />
+      {/* Detail Drawer for Mobile */}
+      <MobileDrawer
+        isOpen={openDetailDrawer}
+        onClose={() => setOpenDetailDrawer(false)}
+        header="Details"
+        height={400}
+      >
+        <h1>helo</h1>
+      </MobileDrawer>
     </div>
   );
 };
