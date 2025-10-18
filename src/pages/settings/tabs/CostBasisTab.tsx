@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import OverrideCostModal from "../components/OverrideCostModal";
+import { tr } from "date-fns/locale";
 
 interface CostBasisTabProps {}
 
@@ -25,7 +26,7 @@ interface OverrideCard {
 const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
   const [isOverrideModalOpen, setIsOverrideModalOpen] = useState(false);
   const [isLoadingModalOpen, setIsLoadingModalOpen] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
+  const [showNotification, setShowNotification] = useState(true);
   const [overrideCard, setOverrideCard] = useState<OverrideCard | null>(null);
   const [costBasisMethods, setCostBasisMethods] = useState<CostBasisMethod[]>([
     {
@@ -290,12 +291,12 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
         {/* Override Card */}
         {overrideCard && (
           <div
-            className={`relative w-full sm:w/2 lg:w-1/4 bg-white border border-[#E1E3E5] rounded-lg px-5 py-4 mt-2`}
+            className={`relative w-full sm:w/2 lg:w-1/4 bg-white border border-[#E1E3E5] rounded-lg px-5 py-4 mt-2 `}
           >
             <div className="flex items-center justify-between">
               <div>
                 <div
-                  className={`font-bold text-lg text-[#0E201E] dark:text-white`}
+                  className={`font-bold text-lg text-[#0E201E] dark:text-white text-left`}
                 >
                   {overrideCard.costBasisMethod}
                 </div>
@@ -324,7 +325,17 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
             </div>
           </div>
         )}
-
+        {overrideCard && (
+          // Add Override Button
+          <div className="md:hidden flex items-center pt-3 mb-3">
+            <button
+              onClick={handleAddOverride}
+              className="text-[#5F9339] font-medium hover:underline"
+            >
+              + Add override
+            </button>
+          </div>
+        )}
         {/* Horizontal Separator */}
         <div className="py-6 hidden md:block">
           <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
@@ -399,29 +410,56 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
 
       {/* Loading Modal */}
       {isLoadingModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg px-16 py-8 flex flex-col items-center">
-            {/* Loading Spinner */}
-            <div className="w-14 h-14 border-8 border-gray-200 border-t-[#90C853] rounded-full animate-spin mb-4"></div>
+        <>
+          {/* Mobile Loading Drawer */}
+          <div className="md:hidden fixed inset-0 z-50">
+            {/* Backdrop */}
+            <div className="fixed inset-0 bg-black bg-opacity-30" />
 
-            {/* Title */}
-            <h2 className="text-xl font-bold text-[#191919] mb-2">
-              Recalculating the value
-            </h2>
+            {/* Mobile Drawer */}
+            <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl shadow-xl">
+              <div className="px-6 py-8 flex flex-col items-center">
+                {/* Loading Spinner */}
+                <div className="w-12 h-12 border-4 border-gray-200 border-t-gray-400 rounded-full animate-spin mb-4"></div>
 
-            {/* Description */}
-            <p className="text-[#191919]">
-              Hold on, this may take few seconds.
-            </p>
+                {/* Title */}
+                <h2 className="text-lg font-bold text-gray-900 mb-2 text-center">
+                  Recalculating the value
+                </h2>
+
+                {/* Description */}
+                <p className="text-sm text-gray-600 text-center">
+                  Hold on, this may take few seconds.
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
+
+          {/* Desktop Loading Modal */}
+          <div className="hidden md:block fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg px-16 py-8 flex flex-col items-center">
+              {/* Loading Spinner */}
+              <div className="w-14 h-14 border-8 border-gray-200 border-t-[#90C853] rounded-full animate-spin mb-4"></div>
+
+              {/* Title */}
+              <h2 className="text-xl font-bold text-[#191919] mb-2">
+                Recalculating the value
+              </h2>
+
+              {/* Description */}
+              <p className="text-[#191919]">
+                Hold on, this may take few seconds.
+              </p>
+            </div>
+          </div>
+        </>
       )}
 
       {/* Success Notification */}
       {showNotification && (
-        <div className="fixed top-px right-4 bg-white border border-[#419F45] rounded-xl shadow-lg z-50 py-3 max-w-sm">
+        <div className="fixed w-[calc(100%-32px)] md:w-auto bottom-3 md:top-px md:right-4 bg-white border border-[#419F45] rounded-xl shadow-lg z-50 py-3 px-4 md:px-0 md:max-w-sm">
           <div className="flex items-start justify-between">
-            <div className="flex-1 px-4">
+            <div className="flex-1 md:px-4">
               {/* First row: Tick mark and text */}
               <div className="flex items-center space-x-3 mb-2">
                 {/* Green checkmark icon */}
@@ -463,7 +501,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
             </div>
 
             {/* Dismiss X button */}
-            <div className="px-3">
+            <div className="md:px-3">
               <button
                 onClick={() => setShowNotification(false)}
                 className="text-[#7C7C7C]"
