@@ -309,12 +309,17 @@ const OptimizationResults: React.FC = () => {
                 defaultValue="10000"
                 className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
                 style={{
-                  background: 'linear-gradient(to right, #5F9339 0%, #5F9339 50%, #e5e7eb 50%, #e5e7eb 100%)',
                   WebkitAppearance: 'none',
                   appearance: 'none'
                 }}
               />
               <style jsx>{`
+                .slider {
+                  background: linear-gradient(to right, #5F9339 0%, #5F9339 50%, #e5e7eb 50%, #e5e7eb 100%);
+                }
+                .dark .slider {
+                  background: linear-gradient(to right, #5F9339 0%, #5F9339 50%, #4D5050 50%, #4D5050 100%);
+                }
                 .slider::-webkit-slider-thumb {
                   appearance: none;
                   height: 20px;
