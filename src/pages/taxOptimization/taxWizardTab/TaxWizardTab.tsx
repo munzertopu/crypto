@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { Input } from "@material-tailwind/react";
 import Dropdown from "../../../components/UI/Dropdown";
 import DateRangePicker from "../../../components/DateRangePicker";
 import OptimizationModal from "./components/OptimizationModal";
 import OptimizationResults from "./components/OptimizationResults";
 import RefreshIcon from "../../../components/Icons/RefreshIcon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 const TaxWizardTab: React.FC = () => {
   // Sales Wizard state
@@ -13,6 +16,11 @@ const TaxWizardTab: React.FC = () => {
   const [selectedOptimization, setSelectedOptimization] = useState("Minimize Tax");
   const [selectedTimeline, setSelectedTimeline] = useState("23/09/2025");
   const [maxTrades, setMaxTrades] = useState("3");
+  
+  // Custom amount state
+  const [customAmount, setCustomAmount] = useState('');
+  const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false);
+  const [selectedCurrency, setSelectedCurrency] = useState("USD");
   const [dateRange, setDateRange] = useState({
     startDate: new Date("2025-09-23"),
     endDate: new Date("2025-12-31"),
@@ -107,7 +115,7 @@ const TaxWizardTab: React.FC = () => {
   }
 
   return (
-    <div className="space-y-5 mb-8">
+    <div className="space-y-5 pb-8">
       {/* Sales Wizard Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="text-left">
@@ -211,15 +219,71 @@ const TaxWizardTab: React.FC = () => {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-3">
                 What is your preference?
               </label>
-              <div className="grid grid-cols-4 gap-3">
-                {["$1,000", "$5,000", "$10,000", "Custom"].map((amount) => (
-                  <OptionButton
-                    key={amount}
-                    label={amount}
-                    isSelected={selectedAmount === amount}
-                    onClick={() => setSelectedAmount(amount)}
-                  />
-                ))}
+              <div className="grid grid-cols-5 gap-3">
+                {["$1,000", "$5,000", "$10,000", "Custom"].map((amount) => {
+                  const displayLabel = amount === "Custom" && customAmount 
+                    ? `Custom: ${selectedCurrency === "USD" ? "$" : selectedCurrency}${customAmount}` 
+                    : amount;
+                  
+                  return (
+                    <OptionButton
+                      key={amount}
+                      label={displayLabel}
+                      isSelected={selectedAmount === amount}
+                      onClick={() => setSelectedAmount(amount)}
+                    />
+                  );
+                })}
+                {/* Custom Amount Input */}
+                {selectedAmount === "Custom" && (
+                  <div className="relative">
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      value={customAmount}
+                      onChange={(e) => setCustomAmount(e.target.value)}
+                      className={`w-full rounded-lg text-sm px-4 py-3 font-medium
+                        border-default bg-white text-gray-900 dark:text-gray-100 focus:outline-none dark:bg-gray-900 dark:border-gray-700`}
+                    />
+                    <button
+                      onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
+                      className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b focus:outline-none
+                        border-default text-gray-600 bg-white dark:bg-transparent dark:border-[#4D5050]`}
+                    >
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs font-medium">{selectedCurrency}</span>
+                        <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2" />
+                      </div>
+                    </button>
+
+                    {/* Currency Dropdown */}
+                    {showCurrencyDropdown && (
+                      <div
+                        className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20
+                          border-default dark:border-gray-700 bg-white dark:bg-[#0E201E]`}
+                      >
+                        <div className="py-1 px-2">
+                          {["USD", "EUR", "USDT"].map((currency) => (
+                            <button
+                              key={currency}
+                              onClick={() => {
+                                setSelectedCurrency(currency);
+                                setShowCurrencyDropdown(false);
+                              }}
+                              className={`w-full px-3 py-1 text-left text-xs rounded-md ${
+                                selectedCurrency === currency
+                                  ? "bg-gray-100 dark:bg-[#0E201E] dark:text-gray-500"
+                                  : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                              }`}
+                            >
+                              {currency}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -233,7 +297,7 @@ const TaxWizardTab: React.FC = () => {
                   <DateRangePicker
                     selectedDateRange={dateRange}
                     onDateRangeChange={setDateRange}
-                    className="dark:!border-gray-700"
+                    className="dark:!border-gray-700 md:py-3"
                   />
                 </div>
                 <div className="grid grid-cols-4 gap-3">
@@ -243,6 +307,7 @@ const TaxWizardTab: React.FC = () => {
                       label={option}
                       isSelected={selectedTimeline === option}
                       onClick={() => setSelectedTimeline(option)}
+                      className="!text-[13px] md:py-1.5"
                     />
                   ))}
                 </div>
