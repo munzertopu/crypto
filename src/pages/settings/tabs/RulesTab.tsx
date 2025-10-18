@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Button } from "@material-tailwind/react";
+import { Avatar, Button } from "@material-tailwind/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
@@ -224,15 +224,19 @@ const RulesTab: React.FC<RulesTabProps> = () => {
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-start gap-3">
                 {/* Crypto Icon - using a generic icon for now */}
-                <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">
+                {/* <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold ">
                     {rule.token.charAt(0)}
                   </span>
-                </div>
+                </div> */}
+                <Avatar
+                  src={"/crypto/bitcoin-btc-logo.png"}
+                  className="w-12 h-12 rounded-full flex items-center justify-center"
+                />
                 <div className="flex-1">
                   <Typography
                     variant="small"
-                    className="text-lg font-bold text-gray-900 dark:text-gray-100"
+                    className="text-base  text-gray-900 dark:text-gray-100"
                   >
                     {rule.wallet} ({rule.token})
                   </Typography>

@@ -28,9 +28,9 @@ const SuccessNotification: React.FC<SuccessNotificationProps> = ({
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 sm:top-4 right-4 z-50 animate-fade-in">
+    <div className="fixed w-[calc(100%-32px)] md:w-auto bottom-4 sm:top-4 right-4 z-50 animate-fade-in">
       <div
-        className="flex items-center justify-between bg-white border border-success-500 rounded-xl px-4 py-3 shadow-lg w-auto min-w-fit gap-4
+        className="flex items-center justify-between bg-white border border-success-500 rounded-xl px-4 py-3 shadow-lg w-full md:w-auto min-w-fit gap-4
       dark:bg-[#0E201E]"
       >
         {/* Success Icon */}
