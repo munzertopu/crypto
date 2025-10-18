@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Typography, Button } from "@material-tailwind/react";
-import OverrideCostModal from '../components/OverrideCostModal';
+import OverrideCostModal from "../components/OverrideCostModal";
 
-interface CostBasisTabProps {
-  
-}
+interface CostBasisTabProps {}
 
 interface CostBasisMethod {
   id: string;
@@ -24,53 +22,99 @@ interface OverrideCard {
   taxYears: string[];
 }
 
-const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
+const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
   const [isOverrideModalOpen, setIsOverrideModalOpen] = useState(false);
   const [isLoadingModalOpen, setIsLoadingModalOpen] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [overrideCard, setOverrideCard] = useState<OverrideCard | null>(null);
   const [costBasisMethods, setCostBasisMethods] = useState<CostBasisMethod[]>([
-    { id: 'acb', name: 'ACB', description: 'Average Cost Basic', selected: false },
-    { id: 'fifo', name: 'FIFO', description: 'First in First Out', selected: true },
-    { id: 'lifo', name: 'LIFO', description: 'Last in Fist Out', selected: false },
-    { id: 'hifo', name: 'HIFO', description: 'Highest in First Out', selected: false }
+    {
+      id: "acb",
+      name: "ACB",
+      description: "Average Cost Basic",
+      selected: false,
+    },
+    {
+      id: "fifo",
+      name: "FIFO",
+      description: "First in First Out",
+      selected: true,
+    },
+    {
+      id: "lifo",
+      name: "LIFO",
+      description: "Last in Fist Out",
+      selected: false,
+    },
+    {
+      id: "hifo",
+      name: "HIFO",
+      description: "Highest in First Out",
+      selected: false,
+    },
   ]);
 
   const [taxRules, setTaxRules] = useState<TaxRule[]>([
-    { id: 'wallet-cost-tracking', name: 'Wallet based cost-tracking', enabled: false },
-    { id: 'crypto-trades', name: 'Realize gains on crypto -> crypto trades?', enabled: false },
-    { id: 'liquidity-transactions', name: 'Realize gains on liquidity transactions?', enabled: false },
-    { id: 'transfer-fees', name: 'Realize gains on transfer fees?', enabled: false },
-    { id: 'deductible-costs', name: 'Treat transfer fees as deductible costs?', enabled: false },
-    { id: 'capital-gains', name: 'Treat other gains as capital gains', enabled: false },
-    { id: 'cashbacks-refunds', name: 'Treat cashbacks and fee refunds as zero-cost deposits?', enabled: false }
+    {
+      id: "wallet-cost-tracking",
+      name: "Wallet based cost-tracking",
+      enabled: false,
+    },
+    {
+      id: "crypto-trades",
+      name: "Realize gains on crypto -> crypto trades?",
+      enabled: false,
+    },
+    {
+      id: "liquidity-transactions",
+      name: "Realize gains on liquidity transactions?",
+      enabled: false,
+    },
+    {
+      id: "transfer-fees",
+      name: "Realize gains on transfer fees?",
+      enabled: false,
+    },
+    {
+      id: "deductible-costs",
+      name: "Treat transfer fees as deductible costs?",
+      enabled: false,
+    },
+    {
+      id: "capital-gains",
+      name: "Treat other gains as capital gains",
+      enabled: false,
+    },
+    {
+      id: "cashbacks-refunds",
+      name: "Treat cashbacks and fee refunds as zero-cost deposits?",
+      enabled: false,
+    },
   ]);
 
   const handleCostBasisMethodSelect = (methodId: string) => {
-    setCostBasisMethods(prev => 
-      prev.map(method => ({
+    setCostBasisMethods((prev) =>
+      prev.map((method) => ({
         ...method,
-        selected: method.id === methodId
+        selected: method.id === methodId,
       }))
     );
   };
 
   const handleTaxRuleToggle = (ruleId: string) => {
-    setTaxRules(prev => 
-      prev.map(rule => 
-        rule.id === ruleId 
-          ? { ...rule, enabled: !rule.enabled }
-          : rule
+    setTaxRules((prev) =>
+      prev.map((rule) =>
+        rule.id === ruleId ? { ...rule, enabled: !rule.enabled } : rule
       )
     );
   };
 
   const handleRecalculate = () => {
-    console.log('Recalculate clicked');
+    console.log("Recalculate clicked");
   };
 
   const handleSaveChanges = () => {
-    console.log('Save changes clicked');
+    console.log("Save changes clicked");
   };
 
   const handleAddOverride = () => {
@@ -81,14 +125,17 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
     setIsOverrideModalOpen(false);
   };
 
-  const handleOverrideSubmit = (selectedTaxYears: string[], selectedCostBasisMethod: string) => {
+  const handleOverrideSubmit = (
+    selectedTaxYears: string[],
+    selectedCostBasisMethod: string
+  ) => {
     const newOverride: OverrideCard = {
       costBasisMethod: selectedCostBasisMethod,
-      taxYears: selectedTaxYears
+      taxYears: selectedTaxYears,
     };
     setOverrideCard(newOverride);
     setIsOverrideModalOpen(false);
-    
+
     // Show loading modal for 2 seconds
     setIsLoadingModalOpen(true);
     setTimeout(() => {
@@ -117,10 +164,16 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
       {/* Cost Basis Section */}
       <div className="space-y-4">
         <div>
-          <Typography variant="h4" className={`font-medium text-sm text-left mb-2 text-gray-900 dark:text-gray-150`}>
+          <Typography
+            variant="h4"
+            className={`font-medium text-sm text-left mb-2 text-gray-900 dark:text-gray-150`}
+          >
             Cost Basis
           </Typography>
-          <Typography variant="small" className={`text-left text-sm text-700 dark:text-gray-400`}>
+          <Typography
+            variant="small"
+            className={`text-left text-sm text-700 dark:text-gray-400`}
+          >
             This affects how your crypto gains and losses are calculated.
           </Typography>
         </div>
@@ -128,12 +181,31 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
         {/* Cost Basis Method */}
         <div>
           <div className="flex items-center mt-6 mb-2 space-x-2">
-            <Typography variant="h6" className={`font-medium text-[#2F3232] dark:text-white`}>
+            <Typography
+              variant="h6"
+              className={`font-medium text-[#2F3232] dark:text-white`}
+            >
               Cost Basis Method
             </Typography>
-            <svg className="size-4 text-[#7C7C7C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
+            <svg
+              className="size-4 text-[#7C7C7C]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 9v2m0 4h.01"
+              />
             </svg>
           </div>
 
@@ -149,22 +221,26 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
               >
                 {/* Radio Button */}
                 <div className="flex items-center justify-between mb-2">
-                  <span className={`font-semibold text-base text-[#0E201E] dark:text-white`}>
+                  <span
+                    className={`font-semibold text-base text-[#0E201E] dark:text-white`}
+                  >
                     {method.name}
                   </span>
-                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                    method.selected 
-                      ? 'border-[#75AE46]' 
-                      : 'border-gray-700'
-                  }`}>
+                  <div
+                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      method.selected ? "border-[#75AE46]" : "border-gray-700"
+                    }`}
+                  >
                     {method.selected && (
                       <div className="w-4 h-4 bg-transparent rounded-full flex items-center justify-center">
-                        <div className='w-3 h-3 bg-[#75AE46] rounded-full' />
+                        <div className="w-3 h-3 bg-[#75AE46] rounded-full" />
                       </div>
                     )}
                   </div>
                 </div>
-                <div className={`text-sm text-left text-[#4D5050] dark:text-gray-300`}>
+                <div
+                  className={`text-sm text-left text-[#4D5050] dark:text-gray-300`}
+                >
                   {method.description}
                 </div>
               </div>
@@ -172,33 +248,45 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
           </div>
         </div>
       </div>
-      
+
       {/* Horizontal Separator */}
-      <div className="py-6 hidden md:block">
+      <div className="py-5 md:py-6  md:block">
         <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
       </div>
 
       {/* Override Cost Section */}
       <div>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row md:items-center justify-start md:justify-between">
           <div>
-            <Typography variant="h4" className={`font-bold text-lg text-left mb-2 text-gray-900 dark:text-gray-150`}>
+            <Typography
+              variant="h4"
+              className={`font-bold text-lg text-left mb-2 text-gray-900 dark:text-gray-150`}
+            >
               Override cost
             </Typography>
-            <Typography variant="small" className={`text-left text-sm text-gray-500 dark:text-gray-400`}>
-              You can override the cost basis method for previous years by creating migrations.
+            <Typography
+              variant="small"
+              className={`text-left text-sm text-gray-500 dark:text-gray-400`}
+            >
+              You can override the cost basis method for previous years by
+              creating migrations.
             </Typography>
           </div>
           {!overrideCard && (
-            <button 
-              onClick={handleAddOverride}
-              className="text-[#5F9339] font-medium hover:underline"
-            >
-              + Add override
-            </button>
+            // Add Override Button
+            <div className="flex items-center pt-3">
+              <button
+                onClick={handleAddOverride}
+                className="text-[#5F9339] font-medium hover:underline"
+              >
+                + Add override
+              </button>
+            </div>
           )}
         </div>
-
+        <div className="py-5 md:py-6  md:hidden">
+          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+        </div>
         {/* Override Card */}
         {overrideCard && (
           <div
@@ -206,7 +294,9 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
           >
             <div className="flex items-center justify-between">
               <div>
-                <div className={`font-bold text-lg text-[#0E201E] dark:text-white`}>
+                <div
+                  className={`font-bold text-lg text-[#0E201E] dark:text-white`}
+                >
                   {overrideCard.costBasisMethod}
                 </div>
                 <div className={`text-sm text-[#0E201E] dark:text-gray-300`}>
@@ -217,8 +307,18 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
                 onClick={handleRemoveOverride}
                 className={`p-2 rounded-full hover:bg-gray-100 hover:bg-gray-100 dark:hover:bg-gray-600`}
               >
-                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                <svg
+                  className="w-4 h-4 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
                 </svg>
               </button>
             </div>
@@ -233,30 +333,37 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
 
       {/* Tax Calculation Rules Section */}
       <div className="space-y-4 mb-5">
-        <Typography variant="h4" className={`font-bold text-left mb-4 text-[#0E201E] dark:text-white`}>
+        <Typography
+          variant="h4"
+          className={`font-bold text-left mb-4 text-[#0E201E] dark:text-white`}
+        >
           Tax Calculation Rules
         </Typography>
 
         <div className="space-y-2">
           {taxRules.map((rule) => (
-            <div 
-              key={rule.id} 
+            <div
+              key={rule.id}
               onClick={() => handleTaxRuleToggle(rule.id)}
               className="flex items-center py-3 cursor-pointer rounded-lg px-2 -mx-2 transition-colors"
             >
               {/* Toggle Switch */}
               <div
                 className={`relative inline-flex h-6 w-11 mr-3 items-center rounded-full transition-colors ${
-                  rule.enabled ? 'bg-[#90C853]' : 'bg-[#CDCFD1] dark:bg-gray-700'
+                  rule.enabled
+                    ? "bg-[#90C853]"
+                    : "bg-[#CDCFD1] dark:bg-gray-700"
                 }`}
               >
                 <span
                   className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform dark:bg-gray-900 ${
-                    rule.enabled ? 'translate-x-6' : 'translate-x-1'
+                    rule.enabled ? "translate-x-6" : "translate-x-1"
                   }`}
                 />
               </div>
-              <span className={`text-base text-left text-[#0E201E] dark:text-gray-300`}>
+              <span
+                className={`text-base text-left text-[#0E201E] dark:text-gray-300`}
+              >
                 {rule.name}
               </span>
             </div>
@@ -274,7 +381,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
         >
           Recalculate
         </Button>
-        
+
         <Button
           onClick={handleSaveChanges}
           className="bg-[#90C853] text-[#0E201E] px-5 py-3 rounded-lg font-medium border-0"
@@ -296,12 +403,12 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
           <div className="bg-white rounded-lg px-16 py-8 flex flex-col items-center">
             {/* Loading Spinner */}
             <div className="w-14 h-14 border-8 border-gray-200 border-t-[#90C853] rounded-full animate-spin mb-4"></div>
-            
+
             {/* Title */}
             <h2 className="text-xl font-bold text-[#191919] mb-2">
               Recalculating the value
             </h2>
-            
+
             {/* Description */}
             <p className="text-[#191919]">
               Hold on, this may take few seconds.
@@ -319,26 +426,34 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
               <div className="flex items-center space-x-3 mb-2">
                 {/* Green checkmark icon */}
                 <div className="w-6 h-6 bg-[#419F45] rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  <svg
+                    className="w-4 h-4 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </div>
-                
+
                 {/* Main message */}
                 <p className="text-[#0E201E] font-medium">
                   The tax was recalculated
                 </p>
               </div>
-              
+
               {/* Second row: Action buttons */}
               <div className="flex space-x-4 text-sm">
-                <button 
+                <button
                   onClick={() => setShowNotification(false)}
                   className="text-[#5F9339] font-medium"
                 >
                   Refresh
                 </button>
-                <button 
+                <button
                   onClick={() => setShowNotification(false)}
                   className="text-[#4D5050] font-medium"
                 >
@@ -346,15 +461,25 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({  }) => {
                 </button>
               </div>
             </div>
-            
+
             {/* Dismiss X button */}
-            <div className='px-3'>
-              <button 
+            <div className="px-3">
+              <button
                 onClick={() => setShowNotification(false)}
                 className="text-[#7C7C7C]"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
