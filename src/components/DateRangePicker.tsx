@@ -220,12 +220,15 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
             </>
           ) : (
             <div className="flex items-center space-x-2">
-              <CalendarIcon
-                width={16}
-                height={16}
-                strokeColor="currentColor"
-                className="text-gray-500"
-              />
+              <div className="w-4 h-4">
+                <CalendarIcon
+                  width={16}
+                  height={16}
+                  strokeColor="currentColor"
+                  className="text-gray-500"
+                />
+              </div>
+
               {showSelectedDate ? (
                 <span className={`text-xs font-medium ${buttonLabelClassName}`}>
                   {formatDateRange(selectedDateRange)}
