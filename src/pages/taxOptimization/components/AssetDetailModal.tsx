@@ -1,6 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { modalTableData } from '../../../data/cryptoAssets';
 
 interface AssetDetailModalProps {
@@ -45,7 +43,7 @@ const AssetDetailModal: React.FC<AssetDetailModalProps> = ({
       ref={modalRef}
       className={`fixed z-50 w-1/2 rounded-lg shadow-sm border bg-white 
         border-gray-500 border-opacity-15 text-gray-900
-        dark:text-gray-250dark:bg-[#0E201E] dark:border-[#0E201E] `}
+        dark:text-gray-250 dark:bg-gray-900 dark:border-gray-700 `}
       style={{
         top: `${modalPosition.top}px`
       }}
