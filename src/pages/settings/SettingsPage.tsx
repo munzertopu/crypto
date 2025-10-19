@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardBody, Typography } from "@material-tailwind/react";
+import { Card, CardBody, Tabs, Typography } from "@material-tailwind/react";
 import NavigationBar from "../../components/NavigationBar";
 import PortfolioTab from "./tabs/PortfolioTab";
 import TaxTab from "./tabs/TaxTab";
@@ -141,9 +141,7 @@ interface SettingsTab {
   component: React.ComponentType<{}>;
 }
 
-const SettingsPage: React.FC<SettingsPageProps> = ({
-  onLogout,
-}) => {
+const SettingsPage: React.FC<SettingsPageProps> = ({ onLogout }) => {
   const [activeTab, setActiveTab] = useState("portfolio");
 
   const settingsTabs: SettingsTab[] = [
@@ -153,13 +151,13 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
       icon: PortfolioIcon,
       component: PortfolioTab,
     },
-    { id: "tax", name: "Tax", icon: TaxIcon, component: TaxTab },
-    {
-      id: "formInfo",
-      name: "Form Info",
-      icon: FormInfoIcon,
-      component: FormInfoTab,
-    },
+    { id: "tax", name: "Tax", icon: TaxIcon, component: FormInfoTab },
+    // {
+    //   id: "formInfo",
+    //   name: "Form Info",
+    //   icon: FormInfoIcon,
+    //   component: FormInfoTab,
+    // },
     {
       id: "costBasis",
       name: "Cost Basis",
@@ -175,7 +173,6 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
     },
     { id: "plans", name: "Plans", icon: PlansIcon, component: PlansTab },
   ];
-
 
   const handleLogout = () => {
     if (onLogout) {
@@ -194,30 +191,25 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-gray-150">
-      <NavigationBar
-        onLogout={handleLogout}
-        currentPage="settings"
-      />
-      <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full">
+      <NavigationBar onLogout={handleLogout} currentPage="settings" />
+      <div className="px-4 md:px-10 sm:px-6 pt-6 md:pt-5 w-full">
         <Typography
           variant="h4"
-          className={`text-xl font-semibold mb-6 text-left ${
-            "text-[#0E201E] dark:text-white"
-          }`}
+          className={`text-xl font-semibold mb-3 md:mb-6 text-left ${"text-[#0E201E] dark:text-white"}`}
         >
           Settings
         </Typography>
-        <div className="flex">
+        <div className="flex flex-col md:flex-row">
           {/* Left Sidebar */}
-          <nav className="space-y-2">
+          <nav className="space-y-2 hidden md:block">
             {settingsTabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`w-full flex items-center space-x-2 px-4 py-3 rounded-lg text-left text-sm ${
-                  activeTab === tab.id ? 
-                  `text-gray-900 dark:text-gray-150 bg-gray-100 dark:bg-gray-700 dark:border-gray-600` : 
-                  `text-[#0E201E]  hover:bg-[#F3F5F7] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white`
+                  activeTab === tab.id
+                    ? `text-gray-900 dark:text-gray-150 bg-gray-100 dark:bg-gray-700 dark:border-gray-600`
+                    : `text-[#0E201E]  hover:bg-[#F3F5F7] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white`
                 }`}
               >
                 <tab.icon
@@ -229,13 +221,36 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
               </button>
             ))}
           </nav>
-          
+          <div className="border-gray-200 dark:border-gray-700 md:hidden mb-3">
+            <Tabs className="overflow-x-auto scrollbar-hide">
+              <Tabs.List className="my-2 lg:my-0 bg-[#F3F5F7] dark:bg-[#2F3232] ">
+                {settingsTabs.map((tab) => (
+                  <Tabs.Trigger
+                    key={tab.id}
+                    value={tab.name}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`px-3 sm:px-5 md:px-2.5 py-1 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl 
+                      text-sm sm:text-lg md:text-sm ${
+                        activeTab === tab.id
+                          ? "bg-white dark:bg-gray-0 text-gray-900 dark:text-gray-900"
+                          : "text-gray-900 dark:text-gray-200"
+                      }`}
+                  >
+                    {tab.name}
+                  </Tabs.Trigger>
+                ))}
+                <Tabs.TriggerIndicator />
+              </Tabs.List>
+            </Tabs>
+          </div>
           {/* Main Content */}
-          <div className="flex-1 px-10 overflow-visible">
+          <div className="flex-1 md:px-10 overflow-visible">
             <Card
               className={`border-transparent shadow-transparent bg-white dark:bg-transparent overflow-visible`}
             >
-              <CardBody className="px-5 py-0 overflow-visible">{renderTabContent()}</CardBody>
+              <CardBody className="md:px-5 py-0 overflow-visible px-0">
+                {renderTabContent()}
+              </CardBody>
             </Card>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Tabs } from "@material-tailwind/react";
 
 import DateRangePickerPopover from "../../../components/DateRangePicker";
+import useScreenSize from "../../../hooks/useScreenSize";
 
 interface DashboardHeaderProps {
   activeTab?: string;
@@ -19,7 +20,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     startDate: new Date("2025-05-01") as Date | null,
     endDate: new Date("2025-05-29") as Date | null,
   });
-
+  const screenSize = useScreenSize();
   return (
     <div className="sm:px-4 lg:px-6 lg:pt-0 md:pb-8 pt-8">
       <div className="flex flex-row items-center justify-between gap-4 ">
@@ -36,6 +37,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           <DateRangePickerPopover
             selectedDateRange={selectedDateRange}
             onDateRangeChange={setSelectedDateRange}
+            showSelectedDate={screenSize.width >= 640}
           />
         </div>
       </div>

@@ -2,25 +2,35 @@ import React, { useState, type ReactNode } from "react";
 
 interface AccordionProps {
   children: ReactNode;
+  className?: string;
 }
 
-export const Accordion: React.FC<AccordionProps> = ({ children }) => {
-  return <div className="w-full flex flex-col gap-4 pt-3">{children}</div>;
+export const Accordion: React.FC<AccordionProps> = ({
+  children,
+  className,
+}) => {
+  return (
+    <div className={`w-full flex flex-col gap-4 pt-3 ${className}`}>
+      {children}
+    </div>
+  );
 };
 
 interface AccordionItemProps {
   title: string;
   children: ReactNode;
+  className?: string;
 }
 
 export const AccordionItem: React.FC<AccordionItemProps> = ({
   title,
   children,
+  className,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-white dark:bg-[#0E201E]">
+    <div className={`bg-white dark:bg-[#0E201E] ${className}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center py-1.5 text-left focus:outline-none opacity-80"

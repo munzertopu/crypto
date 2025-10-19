@@ -1,38 +1,37 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faPencil,
-  faChevronDown
-} from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { Input, Button } from "@material-tailwind/react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { countriesData, currencies } from "../../../data/settingsAssets";
 
-interface PortfolioTabProps {
-  
-}
-
+interface PortfolioTabProps {}
 
 const PortfolioTab: React.FC<PortfolioTabProps> = () => {
   const [formData, setFormData] = useState({
-    fullName: 'Kristin Watson',
-    email: 'kristin.watson@gmail.com',
-    country: 'United States',
-    currency: 'USD',
-    timezone: 'Pacific Daylight Time (GMT-7)',
-    lockTransactionDate: '',
-    dustValueThreshold: '1.00',
-    taxReportingYear: '07/01/2025'
+    fullName: "Kristin Watson",
+    email: "kristin.watson@gmail.com",
+    country: "United States",
+    currency: "USD",
+    timezone: "Pacific Daylight Time (GMT-7)",
+    lockTransactionDate: "",
+    dustValueThreshold: "1.00",
+    taxReportingYear: "07/01/2025",
   });
   const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [taxReportingYearDate, setTaxReportingYearDate] = useState<Date | null>(new Date('2025-07-01'));
+  const [taxReportingYearDate, setTaxReportingYearDate] = useState<Date | null>(
+    new Date("2025-07-01")
+  );
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(countriesData[0]);
   const [isCurrencyDropdownOpen, setIsCurrencyDropdownOpen] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
-  const [isDustCurrencyDropdownOpen, setIsDustCurrencyDropdownOpen] = useState(false);
-  const [selectedDustCurrency, setSelectedDustCurrency] = useState(currencies[0]);
+  const [isDustCurrencyDropdownOpen, setIsDustCurrencyDropdownOpen] =
+    useState(false);
+  const [selectedDustCurrency, setSelectedDustCurrency] = useState(
+    currencies[0]
+  );
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const currencyDropdownRef = useRef<HTMLDivElement>(null);
@@ -40,31 +39,31 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
   const datePickerRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
-  const handleCountrySelect = (country: typeof countriesData[0]) => {
+  const handleCountrySelect = (country: (typeof countriesData)[0]) => {
     setSelectedCountry(country);
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      country: country.name
+      country: country.name,
     }));
     setIsCountryDropdownOpen(false);
   };
 
-  const handleCurrencySelect = (currency: typeof currencies[0]) => {
+  const handleCurrencySelect = (currency: (typeof currencies)[0]) => {
     setSelectedCurrency(currency);
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      currency: currency.code
+      currency: currency.code,
     }));
     setIsCurrencyDropdownOpen(false);
   };
 
-  const handleDustCurrencySelect = (currency: typeof currencies[0]) => {
+  const handleDustCurrencySelect = (currency: (typeof currencies)[0]) => {
     setSelectedDustCurrency(currency);
     setIsDustCurrencyDropdownOpen(false);
   };
@@ -72,43 +71,58 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsCountryDropdownOpen(false);
       }
-      if (currencyDropdownRef.current && !currencyDropdownRef.current.contains(event.target as Node)) {
+      if (
+        currencyDropdownRef.current &&
+        !currencyDropdownRef.current.contains(event.target as Node)
+      ) {
         setIsCurrencyDropdownOpen(false);
       }
-      if (dustCurrencyDropdownRef.current && !dustCurrencyDropdownRef.current.contains(event.target as Node)) {
+      if (
+        dustCurrencyDropdownRef.current &&
+        !dustCurrencyDropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDustCurrencyDropdownOpen(false);
       }
-      if (datePickerRef.current && !datePickerRef.current.contains(event.target as Node)) {
+      if (
+        datePickerRef.current &&
+        !datePickerRef.current.contains(event.target as Node)
+      ) {
         setIsDatePickerOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
   const handleSaveChanges = () => {
     // Handle save logic here
-    console.log('Saving changes:', formData);
+    console.log("Saving changes:", formData);
   };
 
   return (
-    <div className="space-y-8">
+    <div className="md:space-y-8 mt-5 md:mt-0">
       {/* User Avatar Section */}
-      <div className="flex items-start">
+      <div className="flex items-center md:items-start justify-center md:justify-start mb-3 md:mb-0">
         <div className="relative">
-          <img 
-            src="/kristin.png" 
-            alt="Kristin Watson" 
+          <img
+            src="/kristin.png"
+            alt="Kristin Watson"
             className="w-[100px] h-[100px] rounded-full object-cover"
           />
           <button className="absolute bottom-0 right-0 w-8 h-8 bg-[#F3F5F7] border-2 border-white rounded-full flex items-center justify-center">
-            <FontAwesomeIcon icon={faPencil} className="w-3 h-3 text-[#7C7C7C]" />
+            <FontAwesomeIcon
+              icon={faPencil}
+              className="w-3 h-3 text-[#7C7C7C]"
+            />
           </button>
         </div>
       </div>
@@ -117,24 +131,28 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
-            <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
+            <label
+              className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
+            >
               Full name
             </label>
             <Input
               type="text"
               value={formData.fullName}
-              onChange={(e) => handleInputChange('fullName', e.target.value)}
+              onChange={(e) => handleInputChange("fullName", e.target.value)}
               className={`text-base bg-transparent py-2.5 border-default dark:border-gray-700 dark:text-white`}
             />
           </div>
           <div>
-            <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
+            <label
+              className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
+            >
               Email
             </label>
             <Input
               type="email"
               value={formData.email}
-              onChange={(e) => handleInputChange('email', e.target.value)}
+              onChange={(e) => handleInputChange("email", e.target.value)}
               className={`text-base bg-transparent py-2.5 border-default dark:border-gray-700 dark:text-white`}
             />
           </div>
@@ -145,32 +163,47 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div>
-              <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
+              <label
+                className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
+              >
                 Country
               </label>
               <div className="relative" ref={dropdownRef}>
                 <button
                   type="button"
-                  onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+                  onClick={() =>
+                    setIsCountryDropdownOpen(!isCountryDropdownOpen)
+                  }
                   className={`w-full px-3 border rounded-lg focus:outline-none flex items-center justify-between
                     border-default bg-transparent text-gray-900
                     dark:border-gray-700 dark:text-gray-250`}
                 >
                   <div className="flex items-center">
-                    <img src={selectedCountry.flag} className="mr-3 w-4 h-3"></img>
-                    <FontAwesomeIcon 
-                      icon={faChevronDown} 
-                      className={`w-3 h-3 transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`}
+                    <img
+                      src={selectedCountry.flag}
+                      className="mr-3 w-4 h-3"
+                    ></img>
+                    <FontAwesomeIcon
+                      icon={faChevronDown}
+                      className={`w-3 h-3 transition-transform ${
+                        isCountryDropdownOpen ? "rotate-180" : ""
+                      }`}
                     />
-                    <div className={`w-px h-10 my-0 bg-default mx-3 dark:bg-gray-700`}></div>
-                    <span className="py-1.5 font-medium">{selectedCountry.name}</span>
+                    <div
+                      className={`w-px h-10 my-0 bg-default mx-3 dark:bg-gray-700`}
+                    ></div>
+                    <span className="py-1.5 font-medium">
+                      {selectedCountry.name}
+                    </span>
                   </div>
                 </button>
-                
+
                 {/* Dropdown Menu */}
                 {isCountryDropdownOpen && (
-                  <div className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg bg-white
-                    dark:bg-gray-700 dark:border-gray-600`}>
+                  <div
+                    className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg bg-white
+                    dark:bg-gray-700 dark:border-gray-600`}
+                  >
                     {countriesData.map((country) => (
                       <button
                         key={country.code}
@@ -179,9 +212,16 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                         className={`w-full px-3 border focus:outline-none flex items-center justify-between
                           border-b-default bg-white text-gray-900
                           dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250
-                        } ${selectedCountry.code === country.code ? 'bg-gray-100' : ''}`}
+                        } ${
+                          selectedCountry.code === country.code
+                            ? "bg-gray-100"
+                            : ""
+                        }`}
                       >
-                        <img src={country.flag} className="text-lg mr-3 h-3 w-4"></img>
+                        <img
+                          src={country.flag}
+                          className="text-lg mr-3 h-3 w-4"
+                        ></img>
                         <span className="font-medium">{country.name}</span>
                       </button>
                     ))}
@@ -191,32 +231,42 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
             </div>
 
             <div>
-              <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
+              <label
+                className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
+              >
                 Currency
               </label>
               <div className="relative" ref={currencyDropdownRef}>
                 <button
                   type="button"
-                  onClick={() => setIsCurrencyDropdownOpen(!isCurrencyDropdownOpen)}
+                  onClick={() =>
+                    setIsCurrencyDropdownOpen(!isCurrencyDropdownOpen)
+                  }
                   className={`w-full px-3 py-2 border border-default rounded-lg focus:outline-none flex items-center justify-between bg-transparent text-gray-900
                     dark:text-gray-250`}
                 >
                   <div className="flex items-center justify-between w-full">
                     <div className="flex items-center">
-                      <span className="font-medium">{selectedCurrency.name}</span>
+                      <span className="font-medium">
+                        {selectedCurrency.name}
+                      </span>
                     </div>
                     <FontAwesomeIcon
-                      icon={faChevronDown} 
-                      className={`w-3 h-3 transition-transform ${isCurrencyDropdownOpen ? 'rotate-180' : ''}`}
+                      icon={faChevronDown}
+                      className={`w-3 h-3 transition-transform ${
+                        isCurrencyDropdownOpen ? "rotate-180" : ""
+                      }`}
                     />
                   </div>
                 </button>
-                
+
                 {/* Currency Dropdown Menu */}
                 {isCurrencyDropdownOpen && (
-                  <div className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg bg-white 
+                  <div
+                    className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg bg-white 
                     dark:bg-gray-700 dark:border-gray-600
-                  `}>
+                  `}
+                  >
                     {currencies.map((currency) => (
                       <button
                         key={currency.code}
@@ -224,7 +274,11 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                         onClick={() => handleCurrencySelect(currency)}
                         className={`w-full px-3 py-2 flex items-center hover:bg-gray-50 text-gray-900
                           dark:hover:bg-gray-600 dark:text-gray-250 
-                          ${selectedCurrency.code === currency.code ? 'bg-gray-100' : ''}`}
+                          ${
+                            selectedCurrency.code === currency.code
+                              ? "bg-gray-100"
+                              : ""
+                          }`}
                       >
                         <span className="font-medium">{currency.name}</span>
                       </button>
@@ -233,15 +287,17 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                 )}
               </div>
             </div>
-            
+
             <div>
-              <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
+              <label
+                className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
+              >
                 Lock transaction prior to this date
               </label>
               <div className="relative" ref={datePickerRef}>
                 <DatePicker
-                  selected={startDate} 
-                  onChange={(date) => setStartDate(date)} 
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
                   className={`w-full px-3 py-2 border border-default rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-transparent text-gray-900
                     dark:border-gray-600 dark:text-gray-250
                   `}
@@ -251,17 +307,23 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   popperPlacement="bottom-start"
                   popperClassName="z-[9999]"
                   popperContainer={({ children }) => (
-                    <div style={{ zIndex: 9999, position: 'relative' }}>
+                    <div style={{ zIndex: 9999, position: "relative" }}>
                       {children}
                     </div>
                   )}
                   customInput={
                     <div className="flex items-center justify-between w-full">
                       <span className="flex-1 text-left">
-                        {startDate ? startDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) : 'MM/DD/YYYY'}
+                        {startDate
+                          ? startDate.toLocaleDateString("en-US", {
+                              month: "2-digit",
+                              day: "2-digit",
+                              year: "numeric",
+                            })
+                          : "MM/DD/YYYY"}
                       </span>
                       <FontAwesomeIcon
-                        icon={faChevronDown} 
+                        icon={faChevronDown}
                         className="w-3 h-3"
                       />
                     </div>
@@ -272,22 +334,32 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
           </div>
           <div className="space-y-4">
             <div>
-              <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
+              <label
+                className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
+              >
                 California Time zone
               </label>
               <div className="relative">
                 <select
                   value={formData.timezone}
-                  onChange={(e) => handleInputChange('timezone', e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("timezone", e.target.value)
+                  }
                   className={`w-full appearance-none px-4 py-2 border border-default rounded-lg focus:outline-none bg-transparent text-gray-900
                     dark:border-gray-600 dark:text-gray-250`}
                 >
-                  <option value="Pacific Daylight Time (GMT-7)">Pacific Daylight Time (GMT-7)</option>
-                  <option value="Pacific Standard Time (GMT-8)">Pacific Standard Time (GMT-8)</option>
-                  <option value="Eastern Daylight Time (GMT-4)">Eastern Daylight Time (GMT-4)</option>
+                  <option value="Pacific Daylight Time (GMT-7)">
+                    Pacific Daylight Time (GMT-7)
+                  </option>
+                  <option value="Pacific Standard Time (GMT-8)">
+                    Pacific Standard Time (GMT-8)
+                  </option>
+                  <option value="Eastern Daylight Time (GMT-4)">
+                    Eastern Daylight Time (GMT-4)
+                  </option>
                 </select>
                 <FontAwesomeIcon
-                  icon={faChevronDown} 
+                  icon={faChevronDown}
                   className="absolute right-4 top-1/2 h-3 w-3 -translate-y-1/2 text-gray-500"
                 />
               </div>
@@ -295,45 +367,73 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
 
             <div>
               <div className="flex space-x-2">
-                <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
+                <label
+                  className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
+                >
                   Dust valur threshold
                 </label>
-                <svg className="w-5 h-5 mx-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01" />
+                <svg
+                  className="w-5 h-5 mx-2 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 9v2m0 4h.01"
+                  />
                 </svg>
               </div>
               <div className="flex space-x-0 px-4 py-2 border border-default rounded-lg">
-                  <input
-                    type="text"
-                    value={formData.dustValueThreshold}
-                    onChange={(e) => handleInputChange('dustValueThreshold', e.target.value)}
-                    className={`flex-1 focus:outline-none bg-transparent border-gray-700 
+                <input
+                  type="text"
+                  value={formData.dustValueThreshold}
+                  onChange={(e) =>
+                    handleInputChange("dustValueThreshold", e.target.value)
+                  }
+                  className={`flex-1 focus:outline-none bg-transparent border-gray-700 
                       dark:border-gray-600 dark:text-white`}
-                  />
-                  <div className="relative" ref={dustCurrencyDropdownRef}>
-                    <button
-                      type="button"
-                      onClick={() => setIsDustCurrencyDropdownOpen(!isDustCurrencyDropdownOpen)}
-                      className={`focus:outline-none flex items-center justify-between bg-transparent text-gray-500
+                />
+                <div className="relative" ref={dustCurrencyDropdownRef}>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setIsDustCurrencyDropdownOpen(!isDustCurrencyDropdownOpen)
+                    }
+                    className={`focus:outline-none flex items-center justify-between bg-transparent text-gray-500
                         dark:border-gray-600 dark:text-gray-250`}
-                    >
+                  >
                     <div className="flex items-center justify-between w-full">
                       <div className="flex items-center">
-                        <span className="px-3 font-medium">{selectedDustCurrency.name}</span>
+                        <span className="px-3 font-medium">
+                          {selectedDustCurrency.name}
+                        </span>
                       </div>
                       <FontAwesomeIcon
-                        icon={faChevronDown} 
-                        className={`w-3 h-3 transition-transform ${isDustCurrencyDropdownOpen ? 'rotate-180' : ''}`}
+                        icon={faChevronDown}
+                        className={`w-3 h-3 transition-transform ${
+                          isDustCurrencyDropdownOpen ? "rotate-180" : ""
+                        }`}
                       />
                     </div>
                   </button>
-                  
+
                   {/* Dust Currency Dropdown Menu */}
                   {isDustCurrencyDropdownOpen && (
-                    <div className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg bg-white
+                    <div
+                      className={`absolute z-10 w-full mt-1 border border-gray-300 rounded-lg bg-white
                       dark:bg-gray-700 dark:border-gray-600
-                    `}>
+                    `}
+                    >
                       {currencies.map((currency) => (
                         <button
                           key={currency.code}
@@ -341,7 +441,11 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                           onClick={() => handleDustCurrencySelect(currency)}
                           className={`w-full px-3 py-2 flex items-center text-gray-900
                             dark:text-gray-250
-                            ${selectedDustCurrency.code === currency.code ? 'bg-gray-100' : ''}`}
+                            ${
+                              selectedDustCurrency.code === currency.code
+                                ? "bg-gray-100"
+                                : ""
+                            }`}
                         >
                           <span className="font-medium">{currency.name}</span>
                         </button>
@@ -351,54 +455,77 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                 </div>
               </div>
             </div>
-            
+
             <div>
-               <label className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}>
-                 Beginning of tax reporting year
-               </label>
-               <div className="relative">
-                 <DatePicker
-                   selected={taxReportingYearDate} 
-                   onChange={(date) => setTaxReportingYearDate(date)} 
-                   className={`w-full px-3 mt-{1px} py-2 border border-default rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-transparent text-gray-900
+              <label
+                className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
+              >
+                Beginning of tax reporting year
+              </label>
+              <div className="relative">
+                <DatePicker
+                  selected={taxReportingYearDate}
+                  onChange={(date) => setTaxReportingYearDate(date)}
+                  className={`w-full px-3 mt-{1px} py-2 border border-default rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-transparent text-gray-900
                       dark:border-gray-600 dark:text-gray-250
                    `}
-                   placeholderText="MM/DD/YYYY"
-                   dateFormat="MM/dd/yyyy"
-                   wrapperClassName="w-full"
-                   popperPlacement="bottom-start"
-                   popperClassName="z-[9999]"
-                   popperContainer={({ children }) => (
-                     <div style={{ zIndex: 9999, position: 'relative' }}>
-                       {children}
-                     </div>
-                   )}
-                   customInput={
-                     <div className="flex items-center justify-between w-full">
-                       <svg className="text-[#7C7C7C] size-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z"/>
-                        </svg>
+                  placeholderText="MM/DD/YYYY"
+                  dateFormat="MM/dd/yyyy"
+                  wrapperClassName="w-full"
+                  popperPlacement="bottom-start"
+                  popperClassName="z-[9999]"
+                  popperContainer={({ children }) => (
+                    <div style={{ zIndex: 9999, position: "relative" }}>
+                      {children}
+                    </div>
+                  )}
+                  customInput={
+                    <div className="flex items-center justify-between w-full">
+                      <svg
+                        className="text-[#7C7C7C] size-5"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z"
+                        />
+                      </svg>
 
-                       <span className="flex-1 text-left ml-3">
-                         {taxReportingYearDate ? taxReportingYearDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) : 'MM/DD/YYYY'}
-                       </span>
-                     </div>
-                   }
-                 />
-               </div>
-             </div>
+                      <span className="flex-1 text-left ml-3">
+                        {taxReportingYearDate
+                          ? taxReportingYearDate.toLocaleDateString("en-US", {
+                              month: "2-digit",
+                              day: "2-digit",
+                              year: "numeric",
+                            })
+                          : "MM/DD/YYYY"}
+                      </span>
+                    </div>
+                  }
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Separator */}
-      <div className="border-t border-default my-8 dark:border-gray-700" role="separator"></div>
+      <div
+        className="hidden md:block border-t border-default my-8 dark:border-gray-700"
+        role="separator"
+      ></div>
 
       {/* Save Button */}
-      <div className="flex justify-end pt-2">
+      <div className="flex md:justify-end pt-8 md:pt-2">
         <Button
           onClick={handleSaveChanges}
-          className="text-base bg-[#90C853] text-[#0E201E] px-5 py-3 border-0 rounded-lg font-medium"
+          className="w-full md:w-auto text-base bg-[#90C853] text-[#0E201E] px-5 py-3 border-0 rounded-lg font-medium"
         >
           Save changes
         </Button>

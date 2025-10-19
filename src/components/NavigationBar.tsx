@@ -115,8 +115,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               className={`opacity-80 px-1 lg:px-0 py-2 text-sm lg:text-base text-gray-900
                  dark:text-gray-300
                 ${
-                  currentPage === item.href.replace('/', '') || 
-                  currentPage === item.name.toLowerCase().replace(/\s+/g, '-')
+                  currentPage === item.href.replace("/", "") ||
+                  currentPage === item.name.toLowerCase().replace(/\s+/g, "-")
                     ? "!text-green-700"
                     : ``
                 }`}
@@ -243,11 +243,14 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 aria-label="Profile menu"
               >
                 <div className="flex flex-col justify-center items-start gap-2 w-full">
-                  <div className="w-full px-4 pb-0.5 opacity-70 bg-white 
+                  <div
+                    className="w-full px-4 pb-0.5 opacity-70 bg-white 
                     dark:bg-[#0E201E]"
                   >
-                    <h3 className="text-sm font-medium text-gray-900 text-left
-                    dark:text-gray-200">
+                    <h3
+                      className="text-sm font-medium text-gray-900 text-left
+                    dark:text-gray-200"
+                    >
                       Switch account
                     </h3>
                   </div>
@@ -279,8 +282,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                                 );
                               }}
                             />
-                            <span className="text-xs font-medium mr-auto text-gray-900 
-                              dark:text-gray-100">
+                            <span
+                              className="text-xs font-medium mr-auto text-gray-900 
+                              dark:text-gray-100"
+                            >
                               {user.name}
                             </span>
                           </div>
@@ -454,9 +459,17 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
                 </svg>
               </span>
 
-              <p className="text-gray-900 dark:text-gray-150 text-sm">
+              {/* <p className="text-gray-900 dark:text-gray-150 text-sm">
                 Settings
-              </p>
+              </p> */}
+              <Link
+                to={"/settings"}
+                className={`text-gray-900 dark:text-gray-150 text-sm`}
+                role="menuitem"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Settings
+              </Link>
             </div>
             <button
               className="bg-transparent  text-[#7C7C7C] px-1 py-1.5 rounded-xl

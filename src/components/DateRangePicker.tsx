@@ -21,11 +21,15 @@ interface DateRangeSelectorProps {
   variant?: "dropdown" | "inline";
   buttonLabel?: string;
   buttonClassName?: string;
+  buttonLabelClassName?: string;
   className?: string;
   isDrawer?: boolean;
   iconPosition?: "left" | "right";
   hideDateInput?: boolean;
   openByDefault?: boolean;
+  openingPosition?: "left" | "right";
+  showSelectedDate?: boolean;
+  popOverClassName?: string;
 }
 
 const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
@@ -33,11 +37,15 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   onDateRangeChange,
   buttonLabel,
   className = "",
-  buttonClassName = "",
+  buttonLabelClassName = "",
   isDrawer = false,
   iconPosition = "left",
+  openingPosition = "right",
   hideDateInput = false,
   openByDefault = false,
+  showSelectedDate = true,
+  popOverClassName = "",
+  buttonClassName = "",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dateRange, setDateRange] = useState([
@@ -181,10 +189,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
   }, [selectedDateRange]);
 
   return (
-    <div
-      className="relative datepicker-container"
-      ref={containerRef}
-    >
+    <div className="relative datepicker-container" ref={containerRef}>
       {!hideDateInput && (
         <button
           onClick={handleIconClick}
@@ -199,7 +204,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
           {iconPosition === "right" ? (
             <>
               <span
-                className={`hidden md:block text-xs font-medium ${buttonClassName}`}
+                className={`hidden md:block text-xs font-medium ${buttonLabelClassName}`}
               >
                 {formatDateRange(selectedDateRange)}
                 {!selectedDateRange.startDate && !selectedDateRange.endDate && (
@@ -215,19 +220,24 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
             </>
           ) : (
             <div className="flex items-center space-x-2">
-              <CalendarIcon
-                width={16}
-                height={16}
-                strokeColor="currentColor"
-                className="text-gray-500"
-              />
+              <div className="w-4 h-4">
+                <CalendarIcon
+                  width={16}
+                  height={16}
+                  strokeColor="currentColor"
+                  className="text-gray-500"
+                />
+              </div>
 
-              <span className="hidden md:block text-xs font-medium">
-                {formatDateRange(selectedDateRange)}
-                {!selectedDateRange.startDate && !selectedDateRange.endDate && (
-                  <>{buttonLabel}</>
-                )}
-              </span>
+              {showSelectedDate ? (
+                <span className={`text-xs font-medium ${buttonLabelClassName}`}>
+                  {formatDateRange(selectedDateRange)}
+                  {!selectedDateRange.startDate &&
+                    !selectedDateRange.endDate && <>{buttonLabel}</>}
+                </span>
+              ) : (
+                <></>
+              )}
             </div>
           )}
         </button>
@@ -235,7 +245,9 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
 
       {isOpen && screenSize.width > 1024 ? (
         <div
-          className={`absolute top-full  md:left-[-710px] mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-700 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
+          className={`absolute top-full ${
+            openingPosition === "right" ? "md:left-[-710px]" : "md:left-0"
+          } mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-700 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
             isDrawer ? " left-[-10px]" : "left-[-175px]"
           }`}
         >
@@ -281,7 +293,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
           <div
             className={`absolute top-full w-full mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
               isDrawer ? " " : "left-[-175px]"
-            }`}
+            } ${popOverClassName}`}
           >
             {/* Left Sidebar for Filters */}
             <RenderDateRange

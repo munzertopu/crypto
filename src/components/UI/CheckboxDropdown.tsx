@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import SearchIcon from "../Icons/SearchIcon";
 import ArrowUpIcon from "../Icons/ArrowUpIcon";
 import ArrowDownIcon from "../Icons/ArrowDownIcon";
+import useScreenSize from "../../hooks/useScreenSize";
 
 export interface CheckboxDropdownOption {
   label: string;
@@ -31,22 +32,22 @@ const CheckboxDropdown: React.FC<CheckboxDropdownProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [internalSelectedValues, setInternalSelectedValues] = useState<string[]>(selectedValues);
-  
+  const [internalSelectedValues, setInternalSelectedValues] =
+    useState<string[]>(selectedValues);
+  const screenSize = useScreenSize();
   // Normalize options to always be objects
-  const normalizedOptions: CheckboxDropdownOption[] = options.map(opt => 
-    typeof opt === 'string' 
-      ? { label: opt, value: opt } 
-      : opt
+  const normalizedOptions: CheckboxDropdownOption[] = options.map((opt) =>
+    typeof opt === "string" ? { label: opt, value: opt } : opt
   );
-  
+
   // Filter options based on search term
-  const filteredOptions = searchable && searchTerm
-    ? normalizedOptions.filter(option => 
-        option.label.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : normalizedOptions;
-  
+  const filteredOptions =
+    searchable && searchTerm
+      ? normalizedOptions.filter((option) =>
+          option.label.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      : normalizedOptions;
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => {
@@ -56,9 +57,9 @@ const CheckboxDropdown: React.FC<CheckboxDropdownProps> = ({
   const handleSelect = (option: CheckboxDropdownOption) => {
     // Multi-select with checkboxes
     const newSelectedValues = internalSelectedValues.includes(option.value)
-      ? internalSelectedValues.filter(v => v !== option.value)
+      ? internalSelectedValues.filter((v) => v !== option.value)
       : [...internalSelectedValues, option.value];
-    
+
     setInternalSelectedValues(newSelectedValues);
     onSelect(newSelectedValues);
   };
@@ -95,7 +96,7 @@ const CheckboxDropdown: React.FC<CheckboxDropdownProps> = ({
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         onClick={handleToggle}
-        className="flex flex-row justify-between items-center px-4 py-3 rounded-lg md:min-w-24 min-w-[max-content] w-full gap-4
+        className="flex flex-row justify-between items-center px-4 py-2.5 md:py-3 rounded-lg md:min-w-24 min-w-[max-content] w-full gap-4
           text-gray-900 dark:text-gray-400 box-border border border-default bg-white dark:bg-gray-900 dark:border-gray-700 focus:ring-2 focus:ring-[#E3F3C7B2] focus:outline-none"
         aria-label="Toggle dropdown"
         aria-expanded={isOpen}
@@ -104,14 +105,23 @@ const CheckboxDropdown: React.FC<CheckboxDropdownProps> = ({
         <span className="text-base text-gray-900 dark:text-gray-100">
           {getButtonText()}
         </span>
-        {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
+        {isOpen ? (
+          <ArrowUpIcon
+            width={screenSize.width > 640 ? 24 : 16}
+            height={screenSize.width > 640 ? 24 : 16}
+          />
+        ) : (
+          <ArrowDownIcon
+            width={screenSize.width > 640 ? 24 : 16}
+            height={screenSize.width > 640 ? 24 : 16}
+          />
+        )}
       </button>
       {isOpen && (
         <div className="absolute top-full left-0 mt-1 w-full border border-default rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 bg-white dark:bg-gray-900 dark:text-white">
           {searchable && (
             <div className="flex px-3 items-center border-b border-gray-150 dark:border-gray-700">
-              <SearchIcon 
-              />
+              <SearchIcon />
               <input
                 type="text"
                 placeholder={searchPlaceholder}
@@ -124,7 +134,7 @@ const CheckboxDropdown: React.FC<CheckboxDropdownProps> = ({
           <div className="px-1.5 py-2 flex flex-col items-start justify-start max-h-[200px] overflow-y-auto">
             {filteredOptions.map((option, index) => {
               const isSelected = internalSelectedValues.includes(option.value);
-              
+
               return (
                 <div
                   key={option.value + index}
@@ -154,7 +164,11 @@ const CheckboxDropdown: React.FC<CheckboxDropdownProps> = ({
                     )}
                   </div>
                   {option.logo && (
-                    <img src={option.logo} alt={option.label} className="w-5 h-5 rounded-full" />
+                    <img
+                      src={option.logo}
+                      alt={option.label}
+                      className="w-5 h-5 rounded-full"
+                    />
                   )}
                   {option.icon && (
                     <span className="text-xs">{option.icon}</span>

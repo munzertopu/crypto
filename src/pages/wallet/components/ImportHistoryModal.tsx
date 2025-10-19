@@ -133,67 +133,107 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg w-[90%] max-w-6xl flex flex-col p-8 space-y-6">
+    <div className="fixed top-[150px] md:top-0 inset-0 z-50 overflow-y-auto">
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Modal */}
+      <div className="flex min-h-full md:items-center md:justify-center md:p-4">
+        <div className="relative bg-white dark:bg-gray-100 rounded-t-2xl md:rounded-2xl shadow-xl max-w-6xl w-full p-3 md:p-8 flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-semibold text-gray-11">Import History</h2>
+          <h2 className="text-lg md:text-2xl font-semibold text-gray-11">Import History</h2>
           <button
             onClick={onClose}
             className="text-gray-500"
           >
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
          {/* Search and Filters */}
-         <div className="flex items-center justify-between">
-           {/* Left Column - Search and Import Type */}
-           <div className="flex items-center space-x-4">
-             {/* Search Bar */}
-             <div className="relative">
-               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                 <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                 </svg>
-               </div>
-               <input
-                 type="text"
-                 placeholder="Search"
-                 value={searchTerm}
-                 onChange={(e) => setSearchTerm(e.target.value)}
-                 className="w-80 py-2.5 pl-10 border border-default rounded-lg focus:outline-none"
-               />
+         <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0">
+           {/* Search Bar */}
+           <div className="relative w-full md:w-auto">
+             <div className="absolute inset-y-0 left-0 pl-3 md:pl-4 flex items-center pointer-events-none">
+               <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+               </svg>
              </div>
-             {/* Import Type Dropdown */}
+             <input
+               type="text"
+               placeholder="Search"
+               value={searchTerm}
+               onChange={(e) => setSearchTerm(e.target.value)}
+               className="w-full md:w-80 py-2 md:py-2.5 pl-9 md:pl-10 pr-3 md:pr-4 border border-default rounded-lg focus:outline-none text-sm md:text-base"
+             />
+           </div>
+
+           {/* Import Type and Sort By - Flex Row */}
+           <div className="flex flex-row items-center md:space-x-3 w-full md:w-auto">
              <Dropdown
                 options={['CSV', 'API']}
                 onSelect={setImportType}
-                defaultValue="Select type"
-                className="w-full"
+                defaultValue="Import type"
+                className="w-full md:w-auto"
               />
-           </div>
-
-           {/* Right Column - Sort By */}
-           <div className="flex items-center">
              <Dropdown
                 options={['Sort by recent']}
                 onSelect={setSortBy}
-                defaultValue="Select type"
-                className="w-full"
+                defaultValue="Sort by: Recent"
+                className="w-full md:w-auto"
               />
            </div>
          </div>
         
 
-        {/* Table */}
-        <div className="flex-1 overflow-auto">
+        {/* Mobile Card Layout */}
+        <div className="flex-1 overflow-auto block md:hidden">
+          <div className="space-y-3">
+            {mockImportHistory.map((item, index) => (
+              <div key={index} className="bg-white rounded-lg p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 ${item.wallet.color} rounded-full flex items-center justify-center text-white text-sm font-medium`}>
+                      <img src={item.wallet.img} alt={item.wallet.name} className="w-6 h-6" />
+                    </div>
+                    <div className="flex flex-col justify-start items-start">
+                      <span className="text-sm font-medium text-gray-900">
+                        {item.wallet.name}
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        {item.fileName}.csv
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        {item.transactionsAdded} transactions
+                      </span>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleDeleteClick(item)}
+                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                    aria-label="Delete import"
+                  >
+                    <TrashIcon strokeColor="currentColor" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Table */}
+        <div className="flex-1 overflow-auto hidden md:block">
           <div className="h-full w-full border-transparent bg-transparent shadow-none">
-            <div className="rounded-lg sm:overflow-x-auto">
+            <div className="rounded-lg overflow-x-auto">
               <table className="w-full min-w-max table-auto text-left">
-                <thead className="bg-table-header dark:bg-gray-800 hidden sm:table-header-group">
+                <thead className="bg-table-header dark:bg-gray-800">
                   <tr className="">
                     {['Wallet', 'File Name', 'Transactions Added', 'Date Range', ''].map((head, index) => (
                       <th
@@ -228,10 +268,10 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
                 <tbody>
                   {mockImportHistory.map((item, index) => (
                     <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                      <td className="md:px-5 md:py-3 sm:p-5">
+                      <td className="px-5 py-3">
                         <div className="flex items-center gap-3">
                           <div className={`w-12 h-12 ${item.wallet.color} rounded-full flex items-center justify-center text-white text-sm font-medium`}>
-                            <img src={item.wallet.img} />
+                            <img src={item.wallet.img} alt={item.wallet.name} />
                           </div>
                           <div className="flex flex-col">
                             <span className="text-base text-gray-900 dark:text-gray-100">
@@ -240,24 +280,24 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
                           </div>
                         </div>
                       </td>
-                      <td className="hidden sm:table-cell">
+                      <td className="px-5 py-3">
                         <div className="flex flex-col">
                           <span className="font-normal text-base text-gray-900 dark:text-gray-100">
                             {item.fileName}
                           </span>
                         </div>
                       </td>
-                      <td className="hidden sm:table-cell">
+                      <td className="px-5 py-3">
                         <span className="font-normal text-base text-gray-900 dark:text-gray-100">
                           {item.transactionsAdded} transactions
                         </span>
                       </td>
-                      <td className="hidden sm:table-cell">
+                      <td className="px-5 py-3">
                         <span className="font-normal text-base text-gray-900 dark:text-gray-100">
                           {item.dateRange.start} → {item.dateRange.end}
                         </span>
                       </td>
-                      <td className="hidden sm:table-cell">
+                      <td className="px-5 py-3">
                         <button
                           onClick={() => handleDeleteClick(item)}
                           className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
@@ -272,6 +312,7 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({ isOpen, onClose
               </table>
             </div>
           </div>
+        </div>
         </div>
       </div>
 
