@@ -12,6 +12,12 @@ import TickCircleIcon from "../../components/Icons/TickCircleIcon";
 import CrossIcon from "../../components/Icons/CrossIcon";
 import SecondaryButton from "../../components/UI/Buttons/SecondaryButton";
 import FilterIcon from "../../components/Icons/FilterIcon";
+import MobileDrawer from "../../components/Drawers/MobileDrawer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { set } from "date-fns";
+import OpenedDropdown from "../../components/UI/OpenedDropdown";
+import { Toggle } from "../../components";
 
 interface ClientsPageProps {
   onLogout: () => void;
@@ -35,7 +41,7 @@ interface Client {
 const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("All");
-  const [, setSelectedSort] = useState("Recently added");
+  const [selectedSort, setSelectedSort] = useState("Recently added");
   const [isUnassignedFilterActive, setIsUnassignedFilterActive] =
     useState(false);
   const [isUnlicensedFilterActive, setIsUnlicensedFilterActive] =
@@ -46,6 +52,9 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
   const [showErrorNotification, setShowErrorNotification] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const [selectedAssignee, setSelectedAssignee] = useState<any | null>(null);
+  const [openAssigneeDropdown, setOpenAssigneeDropdown] = useState(false);
+  const [openSortDropdown, setOpenSortDropdown] = useState(false);
 
   const handleClientAdded = (clientName: string) => {
     if (clientName.toLowerCase() === "priya kapoor") {
@@ -689,6 +698,99 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
         isVisible={showErrorNotification}
         duration={5000}
       />
+      <MobileDrawer
+        header="Filters"
+        isOpen={showMobileFilters}
+        onClose={() => setShowMobileFilters(false)}
+        onLeftButtonClick={() => setShowMobileFilters(false)}
+        onRightButtonClick={() => setShowMobileFilters(false)}
+        // disableRightButton={isSubmitDisabled}
+        leftButtonText="Clear All"
+        rightButtonText="Apply"
+        height={500}
+      >
+        <div className="text-left space-y-2">
+          <label className="text-left text-sm font-medium text-[#4D5050] dark:text-gray-300">
+            Assignee
+          </label>
+          <button
+            onClick={() => setOpenAssigneeDropdown(!openAssigneeDropdown)}
+            className={`w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none ${"bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250"}`}
+          >
+            <span className={selectedAssignee ? "" : "text-gray-500"}>
+              {selectedAssignee ? selectedAssignee : "Select Assignee"}
+            </span>
+            <FontAwesomeIcon
+              icon={faChevronDown}
+              className={`w-3 h-3 transition-transform ${
+                openAssigneeDropdown ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+        </div>
+        <div className="w-full flex items-center justify-between px-4 py-2.5 border border-gray-150 dark:border-gray-700 rounded-[12px] my-2">
+          <span className="text-gray-900 dark:text-gray-100 text-base">
+            Unassigned
+          </span>
+          <Toggle
+            enabled={isUnassignedFilterActive}
+            onChange={(enabled) => setIsUnassignedFilterActive(enabled)}
+          />
+        </div>
+        <div className="w-full flex items-center justify-between px-4 py-2.5 border border-gray-150 dark:border-gray-700 rounded-[12px] my-2">
+          <span className="text-gray-900 dark:text-gray-100 text-base">
+            Unlicensed
+          </span>
+          <Toggle
+            enabled={isUnlicensedFilterActive}
+            onChange={(enabled) => setIsUnlicensedFilterActive(enabled)}
+          />
+        </div>
+        <div className="py-4">
+          <div className="w-full h-px bg-gray-150 dark:bg-[#2F3232]"></div>
+        </div>
+        <button
+          onClick={() => setOpenSortDropdown(!openSortDropdown)}
+          className={`w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none ${"bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250"}`}
+        >
+          <span className={selectedSort ? "" : "text-gray-500"}>
+            Sort by : {selectedSort ? selectedSort : ""}
+          </span>
+          <FontAwesomeIcon
+            icon={faChevronDown}
+            className={`w-3 h-3 transition-transform ${
+              openSortDropdown ? "rotate-180" : ""
+            }`}
+          />
+        </button>
+        {openSortDropdown && (
+          <OpenedDropdown
+            options={sortOptions}
+            onSelect={(value) => setSelectedSort(value)}
+            menuClassName="border border-gray-150 dark:border-gray-700 rounded-lg shadow-lg bg-white dark:bg-gray-700 z-50 px-1.5 mt-2"
+          />
+        )}
+      </MobileDrawer>
+      <MobileDrawer
+        isOpen={openAssigneeDropdown}
+        header="Select Assignee"
+        onClose={() => setOpenAssigneeDropdown(false)}
+        hideCloseIcon={true}
+        disableRightButton={!selectedAssignee}
+        className="z-51"
+        rightButtonText="Apply"
+        height={500}
+      >
+        <OpenedDropdown
+          options={assigneesOptions}
+          onSelect={(value) => setSelectedAssignee(value)}
+          searchable={true}
+          defaultValue="Assignees"
+          inputClassName="!py-2.5"
+          multiline={true}
+          showTickMark={true}
+        />
+      </MobileDrawer>
     </div>
   );
 };
