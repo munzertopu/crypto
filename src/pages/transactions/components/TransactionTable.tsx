@@ -17,6 +17,7 @@ import EyeIcon from "../../../components/Icons/EyeIcon";
 import DeleteIcon from "../../../components/Icons/DeleteIcon";
 import DeleteConfirmationModal from "../../../components/UI/DeleteConfirmationModal";
 import MobileBottomSheet from "../../../components/UI/MobileBottomSheet";
+import EditTransactionDrawer from "./EditTransactionDrawer";
 
 interface TransactionTableProps {
   transactions: Transaction[];
@@ -68,7 +69,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   );
   const [selectedBottomContext, setSelectedBottomContext] =
     useState<Transaction | null>(null);
-
+  const [isEditTransactionDrawerOpen, setIsEditTransactionDrawerOpen] =
+    useState(false);
   // Format date for display
   const formatDateForDisplay = (dateString: string) => {
     const date = new Date(dateString);
@@ -470,7 +472,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         showMoreIcon
         showMoreContent={
           <>
-            <div className="flex gap-2 items-center py-1.5 cursor-pointer">
+            <div
+              onClick={() => setIsEditTransactionDrawerOpen(true)}
+              className="flex gap-2 items-center py-1.5 cursor-pointer"
+            >
               <EditIcon />
               <span className="text-sm text-gray-900 dark:text-gray-100">
                 Edit
@@ -749,6 +754,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         isOpen={selectedBottomContext !== null}
         onClose={() => setSelectedBottomContext(null)}
         transaction={selectedBottomContext}
+      />
+      <EditTransactionDrawer
+        isOpen={isEditTransactionDrawerOpen}
+        onClose={() => setIsEditTransactionDrawerOpen(false)}
       />
     </div>
   );

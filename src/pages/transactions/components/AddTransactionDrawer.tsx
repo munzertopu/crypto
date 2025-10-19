@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Input } from "@material-tailwind/react";
-import DatePicker from '../../../components/DatePicker';
-import Dropdown from '../../../components/UI/Dropdown';
+import DatePicker from "../../../components/DatePicker";
+import Dropdown from "../../../components/UI/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import CrossIcon from '../../../components/Icons/CrossIcon';
-
+import CrossIcon from "../../../components/Icons/CrossIcon";
 
 interface AddTransactionDrawerProps {
   isOpen: boolean;
@@ -16,33 +15,27 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [transactionType, setTransactionType] = useState('');
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedWallet, setSelectedWallet] = useState('');
-  const [numberOfCoins, setNumberOfCoins] = useState('');
-  const [selectedCurrency, setSelectedCurrency] = useState('USD');
+  const [transactionType, setTransactionType] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedWallet, setSelectedWallet] = useState("");
+  const [numberOfCoins, setNumberOfCoins] = useState("");
+  const [selectedCurrency, setSelectedCurrency] = useState("USD");
   const [showCoinDropdown, setShowCoinDropdown] = useState(false);
   const [coinCurrency, setCoinCurrency] = useState("USD");
 
   const [dateValue, setDateValue] = useState(null as any);
 
   // Additional tags data
-  const additionalTags = [
-    'TxHash',
-    'TxSrc', 
-    'TxDest',
-    'Description',
-    'Tag'
-  ];
+  const additionalTags = ["TxHash", "TxSrc", "TxDest", "Description", "Tag"];
 
   const handleSave = () => {
     // Handle save logic here
-    console.log('Saving transaction:', {
+    console.log("Saving transaction:", {
       transactionType,
       selectedDate,
       selectedWallet,
       numberOfCoins,
-      selectedCurrency
+      selectedCurrency,
     });
     onClose();
   };
@@ -52,13 +45,17 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
   return (
     <>
       {/* Backdrop */}
-      <div 
+      <div
         className="fixed inset-0 bg-black bg-opacity-50 z-40"
         onClick={onClose}
       />
-      
+
       {/* Drawer - Mobile Bottom Sheet / Desktop Sidebar */}
-      <div className={`fixed bottom-0 left-0 right-0 md:left-0 md:right-auto md:top-0 md:bottom-auto h-[93vh] md:h-full w-full md:w-96 bg-white dark:bg-gray-800 z-50 transform transition-transform duration-300 ease-in-out shadow-xl rounded-t-3xl md:rounded-none ${isOpen ? 'translate-y-0' : 'translate-y-full'} md:translate-y-0 md:translate-x-0`}>
+      <div
+        className={`fixed bottom-0 left-0 right-0 md:left-0 md:right-auto md:top-0 md:bottom-auto h-[93vh] md:h-full w-full md:w-96 bg-white dark:bg-gray-800 z-50 transform transition-transform duration-300 ease-in-out shadow-xl rounded-t-3xl md:rounded-none ${
+          isOpen ? "translate-y-0" : "translate-y-full"
+        } md:translate-y-0 md:translate-x-0`}
+      >
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="p-4 md:p-6 pb-4">
@@ -70,10 +67,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                 onClick={onClose}
                 className="text-gray-500 dark:text-gray-400 p-1"
               >
-                <CrossIcon
-                  height={20}
-                  width={20}
-                />
+                <CrossIcon height={20} width={20} />
               </button>
             </div>
           </div>
@@ -81,93 +75,100 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
           {/* Scrollable Content */}
           <div className="flex-1 overflow-y-auto px-4 md:px-6 pb-6">
             <div className="space-y-4 md:space-y-5">
-              <div className='space-y-3'>
+              <div className="space-y-3">
                 {/* Transaction Type */}
-                <div className='text-left'>
+                <div className="text-left">
                   <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
                     Transaction type
                   </label>
                   <div className="mt-1.5">
                     <Dropdown
-                      options={['Deposit', 'Withdrawal', 'Buy', 'Sell', 'Swap', 'Transfer']}
+                      options={[
+                        "Deposit",
+                        "Withdrawal",
+                        "Buy",
+                        "Sell",
+                        "Swap",
+                        "Transfer",
+                      ]}
                       onSelect={setTransactionType}
                       defaultValue="Deposit"
                       className="w-full"
-                      inputClassName='dark:bg-transparent text-sm md:text-base'
+                      inputClassName="dark:bg-transparent text-sm md:text-base"
                     />
                   </div>
                 </div>
                 {/* Date (UTC) */}
                 {transactionType && (
-                  <div className='text-left'>
+                  <div className="text-left">
                     <div className="items-center gap-3">
                       <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
                         Date (UTC)
                       </label>
                       {/* Date input */}
-                      <div className='mt-1.5'>
+                      <div className="mt-1.5">
                         <DatePicker
                           value={dateValue}
                           onChange={setDateValue}
                           placeholder="Set date"
-                          className='dark:bg-transparent text-sm md:text-base'
-                          datePickerClass=''
+                          className="dark:bg-transparent text-sm md:text-base"
+                          datePickerClass=""
                         />
                       </div>
                     </div>
                   </div>
                 )}
               </div>
-              
+
               {/* Horizontal Separator - Only show after transaction type is selected */}
               {transactionType && (
                 <>
                   <div className="border-t border-default dark:border-gray-700"></div>
-                  
-                  <div className='space-y-3'>
-                    <div className='text-left'>
+
+                  <div className="space-y-3">
+                    <div className="text-left">
                       <label className="text-left text-base font-semibold text-gray-900 dark:text-gray-100">
                         Receive
                       </label>
                     </div>
                     {/* Receive Section */}
-                    <div className='text-left'>
+                    <div className="text-left">
                       {/* Wallet */}
                       <div className="mt-1.5">
                         <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
                           Wallet
                         </label>
-                         <div className="mt-1.5">
-                           <Dropdown
-                             options={[
-                               { 
-                                 label: 'Bitcoin Wallet', 
-                                 value: 'Bitcoin Wallet',
-                                 logo: '/crypto/bitcoin-btc-logo.png'
-                               },
-                               { 
-                                 label: 'Ethereum', 
-                                 value: 'Ethereum',
-                                 logo: '/crypto/ethereum-eth-logo.png'
-                               },
-                               { 
-                                 label: 'MetaMask', 
-                                 value: 'MetaMask',
-                                 logo: '/crypto/metamask.png'
-                               },
-                               { 
-                                 label: 'Coinbase', 
-                                 value: 'Coinbase',
-                                 logo: '/crypto/coinbase.png'
-                               }
-                             ]}
-                             onSelect={setSelectedWallet}
-                             defaultValue="Select wallet"
-                             className="w-full"
-                             inputClassName='dark:bg-transparent text-sm md:text-base'
-                             showLogo={true}
-                           />
-                         </div>
+                        <div className="mt-1.5">
+                          <Dropdown
+                            options={[
+                              {
+                                label: "Bitcoin Wallet",
+                                value: "Bitcoin Wallet",
+                                logo: "/crypto/bitcoin-btc-logo.png",
+                              },
+                              {
+                                label: "Ethereum",
+                                value: "Ethereum",
+                                logo: "/crypto/ethereum-eth-logo.png",
+                              },
+                              {
+                                label: "MetaMask",
+                                value: "MetaMask",
+                                logo: "/crypto/metamask.png",
+                              },
+                              {
+                                label: "Coinbase",
+                                value: "Coinbase",
+                                logo: "/crypto/coinbase.png",
+                              },
+                            ]}
+                            onSelect={setSelectedWallet}
+                            defaultValue="Select wallet"
+                            className="w-full"
+                            inputClassName="dark:bg-transparent text-sm md:text-base"
+                            showLogo={true}
+                          />
+                        </div>
                       </div>
 
                       {/* Number of coins */}
@@ -180,7 +181,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                             <Input
                               type="number"
                               placeholder="Type number"
-                              className={`w-full rounded-lg text-sm md:text-base px-4 py-3 font-semibold border-default bg-transparent text-gray-900 focus:outline-none
+                              className={`w-full rounded-lg text-sm md:text-base px-4 py-3 font-semibold border-default bg-transparent text-gray-900 !focus:outline-none
                                 dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250`}
                             />
                             <button
@@ -191,8 +192,13 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                                 dark:bg-transparent dark:border-[#4D5050]`}
                             >
                               <div className="flex items-center gap-1">
-                                <span className="text-xs font-medium">{coinCurrency}</span>
-                                <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2" />
+                                <span className="text-xs font-medium">
+                                  {coinCurrency}
+                                </span>
+                                <FontAwesomeIcon
+                                  icon={faChevronDown}
+                                  className="w-2 h-2"
+                                />
                               </div>
                             </button>
 
@@ -227,11 +233,11 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                       </div>
                     </div>
                   </div>
-                
+
                   {/* Horizontal Separator */}
                   <div className="border-t border-default dark:border-gray-700"></div>
-                
-                  <div className='space-y-3'>
+
+                  <div className="space-y-3">
                     {/* Tag Fields */}
                     <div className="text-left">
                       <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
@@ -245,10 +251,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                           bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
                         />
                         <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
-                          <CrossIcon
-                            height={20}
-                            width={20}
-                          />
+                          <CrossIcon height={20} width={20} />
                         </button>
                       </div>
                     </div>
@@ -264,10 +267,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                           className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
                         />
                         <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
-                          <CrossIcon
-                            height={20}
-                            width={20}
-                          />
+                          <CrossIcon height={20} width={20} />
                         </button>
                       </div>
                     </div>
@@ -284,10 +284,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                           className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
                         />
                         <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
-                          <CrossIcon
-                            height={20}
-                            width={20}
-                          />
+                          <CrossIcon height={20} width={20} />
                         </button>
                       </div>
                     </div>
@@ -304,10 +301,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                           className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
                         />
                         <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
-                          <CrossIcon
-                            height={20}
-                            width={20}
-                          />
+                          <CrossIcon height={20} width={20} />
                         </button>
                       </div>
                     </div>
@@ -324,10 +318,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                           className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
                         />
                         <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
-                          <CrossIcon
-                            height={20}
-                            width={20}
-                          />
+                          <CrossIcon height={20} width={20} />
                         </button>
                       </div>
                     </div>
@@ -336,7 +327,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                     <div className="space-y-3">
                       <div className="flex flex-wrap gap-2">
                         {additionalTags.map((tag, index) => (
-                          <button 
+                          <button
                             key={index}
                             className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm 
                             border border-default dark:border-transparent dark:bg-gray-900 text-gray-900 dark:text-gray-100 bg-gray-100"
@@ -358,9 +349,9 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
             <button
               onClick={handleSave}
               className={`w-full px-5 py-3 rounded-lg md:rounded-xl font-medium transition-colors text-base ${
-                dateValue && selectedWallet 
-                  ? 'bg-green-500 text-gray-900 hover:bg-green-500' 
-                  : 'bg-default dark:bg-gray-700 text-gray-400 dark:text-gray-300 cursor-not-allowed'
+                dateValue && selectedWallet
+                  ? "bg-green-500 text-gray-900 hover:bg-green-500"
+                  : "bg-default dark:bg-gray-700 text-gray-400 dark:text-gray-300 cursor-not-allowed"
               }`}
               disabled={!dateValue || !selectedWallet}
             >
