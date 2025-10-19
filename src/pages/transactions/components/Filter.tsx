@@ -23,6 +23,7 @@ import FilterIcon from "../../../components/Icons/FilterIcon";
 import EyeIcon from "../../../components/Icons/EyeIcon";
 import { set } from "date-fns";
 import { tr } from "date-fns/locale";
+import { Popover, Toggle } from "../../../components";
 
 interface WalletOption {
   id: string;
@@ -218,6 +219,7 @@ const Filter: React.FC<FilterProps> = ({
   const [toSentCurrency, setToSentCurrency] = useState("USD");
   const [fromSentValue, setFromSentValue] = useState("");
   const [toSentValue, setToSentValue] = useState("");
+  const [showDeleted, setShowDeleted] = useState(true);
 
   // Amount Received Dropdown
   const [amountReceivedDropdownOpen, setAmountReceivedDropdownOpen] =
@@ -245,7 +247,7 @@ const Filter: React.FC<FilterProps> = ({
 
   // View Options
   const [isViewDropdownOpen, setIsViewDropdownOpen] = useState(false);
-  const [showDeleted, setShowDeleted] = useState(true);
+
   const [showSoftDeletedOnly, setShowSoftDeletedOnly] = useState(false);
   const viewDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -668,7 +670,36 @@ const Filter: React.FC<FilterProps> = ({
             icon={<FilterIcon />}
             className="flex sm:hidden"
           />
-          <SecondaryButton icon={<EyeIcon />} className="flex sm:hidden" />
+          <Popover
+            trigger={
+              <SecondaryButton icon={<EyeIcon />} className="flex sm:hidden" />
+            }
+            position="bottom-right"
+          >
+            <div className="py-2 px-3 min-w-[250px] flex flex-col gap-2">
+              <div className="flex flex-row w-full  items-center">
+                <span className="text-sm text-gray-900 px-1 flex-1 text-left">
+                  Show deleted
+                </span>
+                <Toggle enabled={showDeleted} onChange={setShowDeleted} />
+              </div>
+              <div className="flex flex-row w-full  items-center">
+                <span className="text-sm text-gray-900 px-1 flex-1 text-left">
+                  Show soft deleted only
+                </span>
+                <Toggle
+                  enabled={showSoftDeletedOnly}
+                  onChange={setShowSoftDeletedOnly}
+                />
+              </div>
+            </div>
+
+            {/* <PopoverItem onClick={handleEdit}>Edit</PopoverItem>
+  <PopoverItem onClick={handleShare}>Share</PopoverItem>
+  <PopoverDivider />
+  <PopoverItem onClick={handleDelete}>Delete</PopoverItem> */}
+          </Popover>
+
           {/* Type Dropdown */}
           <CheckboxDropdown
             options={typeOptions}
