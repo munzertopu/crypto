@@ -16,7 +16,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [transactionType, setTransactionType] = useState('Deposit');
+  const [transactionType, setTransactionType] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedWallet, setSelectedWallet] = useState('');
   const [numberOfCoins, setNumberOfCoins] = useState('');
@@ -97,232 +97,237 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                     />
                   </div>
                 </div>
-
                 {/* Date (UTC) */}
-                <div className='text-left'>
-                  <div className="items-center gap-3">
-                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
-                      Date (UTC)
-                    </label>
-                    {/* Date input */}
-                    <div className='mt-1.5'>
-                      <DatePicker
-                        value={dateValue}
-                        onChange={setDateValue}
-                        placeholder="Set date"
-                        className='dark:bg-transparent'
-                        datePickerClass=''
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Horizontal Separator */}
-              <div className="border-t border-default dark:border-gray-700"></div>
-              
-              <div className='space-y-3'>
-                <div className='text-left'>
-                  <label className="text-left text-base font-semibold text-gray-900 dark:text-gray-100">
-                    Receive
-                  </label>
-                </div>
-                {/* Receive Section */}
-                <div className='text-left'>
-                  {/* Wallet */}
-                  <div className="mt-1.5">
-                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
-                      Wallet
-                    </label>
-                    <div className="mt-1.5">
-                      <Dropdown
-                        options={['Bitcoin Wallet', 'Ethereum', 'MetaMask', 'Coinbase']}
-                        onSelect={setSelectedWallet}
-                        defaultValue="Select wallet"
-                        className="w-full"
-                        inputClassName='dark:bg-transparent'
-                      />
-                    </div>
-                  </div>
-
-                  {/* Number of coins */}
-                  <div className="mt-4">
-                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
-                      Number of coins
-                    </label>
-                    <div className="mt-1.5">
-                      <div className="relative">
-                        <Input
-                          type="number"
-                          placeholder="0"
-                          className={`w-full rounded-lg text-sm px-4 py-3 font-semibold border-default bg-transparent text-gray-900 focus:outline-none
-                            dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250`}
+                {transactionType && (
+                  <div className='text-left'>
+                    <div className="items-center gap-3">
+                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                        Date (UTC)
+                      </label>
+                      {/* Date input */}
+                      <div className='mt-1.5'>
+                        <DatePicker
+                          value={dateValue}
+                          onChange={setDateValue}
+                          placeholder="Set date"
+                          className='dark:bg-transparent'
+                          datePickerClass=''
                         />
-                        <button
-                          onClick={() =>
-                            setShowCoinDropdown(!showCoinDropdown)
-                          }
-                          className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 bg-white focus:outline-none
-                            dark:bg-transparent dark:border-[#4D5050]`}
-                        >
-                          <div className="flex items-center gap-1">
-                            <span className="text-xs font-medium">{coinCurrency}</span>
-                            <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2" />
-                          </div>
-                        </button>
-
-                        {/* Currency Dropdown */}
-                        {showCoinDropdown && (
-                          <div
-                            className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-default
-                              dark:bg-[#0E201E]`}
-                          >
-                            <div className="py-1 px-2">
-                              {["USD", "EUR", "USDT"].map((currency) => (
-                                <button
-                                  key={currency}
-                                  onClick={() => {
-                                    setCoinCurrency(currency);
-                                    setShowCoinDropdown(false);
-                                  }}
-                                  className={`w-full px-3 py-1 text-left text-xs rounded-md ${
-                                    coinCurrency === currency
-                                      ? "bg-gray-100 dark:bg-[#0E201E] dark:text-[#A1A3A5]"
-                                      : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
-                                  }`}
-                                >
-                                  {currency}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                        )}
                       </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
               
-              {/* Horizontal Separator */}
-              <div className="border-t border-default dark:border-gray-700"></div>
-              
-              <div className='space-y-3'>
-                {/* Tag Fields */}
-                <div className="text-left">
-                  <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
-                    Tag
-                  </label>
-                  <div className="mt-1.5 flex items-center gap-2">
-                    <input
-                      type="text"
-                      placeholder="Type tag"
-                      className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg 
-                      bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
-                    />
-                    <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
-                      <CrossIcon
-                        height={20}
-                        width={20}
-                      />
-                    </button>
-                  </div>
-                </div>
+              {/* Horizontal Separator - Only show after transaction type is selected */}
+              {transactionType && (
+                <>
+                  <div className="border-t border-default dark:border-gray-700"></div>
+                  
+                  <div className='space-y-3'>
+                    <div className='text-left'>
+                      <label className="text-left text-base font-semibold text-gray-900 dark:text-gray-100">
+                        Receive
+                      </label>
+                    </div>
+                    {/* Receive Section */}
+                    <div className='text-left'>
+                      {/* Wallet */}
+                      <div className="mt-1.5">
+                        <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                          Wallet
+                        </label>
+                        <div className="mt-1.5">
+                          <Dropdown
+                            options={['Bitcoin Wallet', 'Ethereum', 'MetaMask', 'Coinbase']}
+                            onSelect={setSelectedWallet}
+                            defaultValue="Select wallet"
+                            className="w-full"
+                            inputClassName='dark:bg-transparent'
+                          />
+                        </div>
+                      </div>
 
-                <div className="text-left">
-                  <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
-                    Tag
-                  </label>
-                  <div className="mt-1.5 flex items-center gap-2">
-                    <input
-                      type="text"
-                      placeholder="Type tag"
-                      className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
-                    />
-                    <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
-                      <CrossIcon
-                        height={20}
-                        width={20}
-                      />
-                    </button>
-                  </div>
-                </div>
+                      {/* Number of coins */}
+                      <div className="mt-4">
+                        <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                          Number of coins
+                        </label>
+                        <div className="mt-1.5">
+                          <div className="relative">
+                            <Input
+                              type="number"
+                              placeholder="0"
+                              className={`w-full rounded-lg text-sm px-4 py-3 font-semibold border-default bg-transparent text-gray-900 focus:outline-none
+                                dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250`}
+                            />
+                            <button
+                              onClick={() =>
+                                setShowCoinDropdown(!showCoinDropdown)
+                              }
+                              className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 bg-white focus:outline-none
+                                dark:bg-transparent dark:border-[#4D5050]`}
+                            >
+                              <div className="flex items-center gap-1">
+                                <span className="text-xs font-medium">{coinCurrency}</span>
+                                <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2" />
+                              </div>
+                            </button>
 
-                {/* Transaction Hash */}
-                <div className="text-left">
-                  <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
-                    Transaction Hash
-                  </label>
-                  <div className="mt-1.5 flex items-center gap-2">
-                    <input
-                      type="text"
-                      placeholder="Type Hash"
-                      className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
-                    />
-                    <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
-                      <CrossIcon
-                        height={20}
-                        width={20}
-                      />
-                    </button>
-                  </div>
-                </div>
-
-                  {/* Transaction Destination */}
-                  <div className="text-left">
-                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
-                      Transaction Destination
-                    </label>
-                    <div className="mt-1.5 flex items-center gap-2">
-                      <input
-                        type="text"
-                        placeholder="Type Destination"
-                        className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
-                      />
-                      <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
-                        <CrossIcon
-                          height={20}
-                          width={20}
-                        />
-                      </button>
+                            {/* Currency Dropdown */}
+                            {showCoinDropdown && (
+                              <div
+                                className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-default
+                                  dark:bg-[#0E201E]`}
+                              >
+                                <div className="py-1 px-2">
+                                  {["USD", "EUR", "USDT"].map((currency) => (
+                                    <button
+                                      key={currency}
+                                      onClick={() => {
+                                        setCoinCurrency(currency);
+                                        setShowCoinDropdown(false);
+                                      }}
+                                      className={`w-full px-3 py-1 text-left text-xs rounded-md ${
+                                        coinCurrency === currency
+                                          ? "bg-gray-100 dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                                          : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                                      }`}
+                                    >
+                                      {currency}
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  {/* Description */}
-                  <div className="text-left">
-                    <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
-                      Description
-                    </label>
-                    <div className="mt-1.5 flex items-start gap-2">
-                      <textarea
-                        placeholder="Ex: sent some crypto to..."
-                        rows={3}
-                        className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
-                      />
-                      <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
-                        <CrossIcon
-                          height={20}
-                          width={20}
+                
+                  {/* Horizontal Separator */}
+                  <div className="border-t border-default dark:border-gray-700"></div>
+                
+                  <div className='space-y-3'>
+                    {/* Tag Fields */}
+                    <div className="text-left">
+                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                        Tag
+                      </label>
+                      <div className="mt-1.5 flex items-center gap-2">
+                        <input
+                          type="text"
+                          placeholder="Type tag"
+                          className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg 
+                          bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
                         />
-                      </button>
+                        <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
+                          <CrossIcon
+                            height={20}
+                            width={20}
+                          />
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="text-left">
+                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                        Tag
+                      </label>
+                      <div className="mt-1.5 flex items-center gap-2">
+                        <input
+                          type="text"
+                          placeholder="Type tag"
+                          className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+                        />
+                        <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
+                          <CrossIcon
+                            height={20}
+                            width={20}
+                          />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Transaction Hash */}
+                    <div className="text-left">
+                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                        Transaction Hash
+                      </label>
+                      <div className="mt-1.5 flex items-center gap-2">
+                        <input
+                          type="text"
+                          placeholder="Type Hash"
+                          className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+                        />
+                        <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
+                          <CrossIcon
+                            height={20}
+                            width={20}
+                          />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Transaction Destination */}
+                    <div className="text-left">
+                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                        Transaction Destination
+                      </label>
+                      <div className="mt-1.5 flex items-center gap-2">
+                        <input
+                          type="text"
+                          placeholder="Type Destination"
+                          className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+                        />
+                        <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
+                          <CrossIcon
+                            height={20}
+                            width={20}
+                          />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <div className="text-left">
+                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                        Description
+                      </label>
+                      <div className="mt-1.5 flex items-start gap-2">
+                        <textarea
+                          placeholder="Ex: sent some crypto to..."
+                          rows={3}
+                          className="flex-1 text-sm px-4 py-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none"
+                        />
+                        <button className="p-3 border border-default dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 flex items-center justify-center text-gray-400 hover:text-gray-600">
+                          <CrossIcon
+                            height={20}
+                            width={20}
+                          />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Additional Fields/Tags */}
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap gap-2">
+                        {additionalTags.map((tag, index) => (
+                          <button 
+                            key={index}
+                            className="flex items-center gap-3 px-3 py-1.5 rounded-full text-sm 
+                            border border-default dark:border-transparent dark:bg-gray-900 text-gray-900 dark:text-gray-100 bg-gray-100"
+                          >
+                            <span className="text-xs">+</span>
+                            <span>{tag}</span>
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
-
-                 {/* Additional Fields/Tags */}
-                 <div className="space-y-3">
-                   <div className="flex flex-wrap gap-2">
-                     {additionalTags.map((tag, index) => (
-                       <button 
-                         key={index}
-                         className="flex items-center gap-3 px-3 py-1.5 rounded-full text-sm 
-                          border border-default dark:border-transparent dark:bg-gray-900 text-gray-900 dark:text-gray-100 bg-gray-100"
-                       >
-                         <span className="text-xs">+</span>
-                         <span>{tag}</span>
-                       </button>
-                     ))}
-                   </div>
-                 </div>
-              </div>
+                </>
+              )}
             </div>
           </div>
 

@@ -298,7 +298,7 @@ const TaxWizardTab: React.FC = () => {
                       value={customAmount}
                       onChange={(e) => setCustomAmount(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      className={`w-full rounded-lg text-sm px-4 py-3 font-medium
+                      className={`w-full rounded-lg text-sm px-4 py-2 font-medium
                         border-default bg-white text-gray-900 dark:text-gray-100 focus:outline-none dark:bg-gray-900 dark:border-gray-700`}
                       autoFocus
                     />
