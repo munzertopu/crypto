@@ -68,7 +68,7 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
               </h2>
               <button
                 onClick={onClose}
-                className="text-gray-500 dark:text-gray-400 p-1"
+                className="text-gray-500 dark:text-gray-400 p-1 focus:outline-none focus:ring-0"
               >
                 <CrossIcon
                   height={20}
@@ -155,14 +155,14 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
                         <Input
                           type="number"
                           placeholder="Type number"
-                          className={`w-full rounded-lg text-sm md:text-base px-4 py-3 font-semibold border-default bg-transparent text-gray-900 focus:outline-none
-                            dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250`}
+                          className={`w-full rounded-lg text-sm md:text-base px-4 py-3 font-semibold border-default bg-transparent text-gray-900 focus:outline-none focus:ring-0 focus:border-default
+                            dark:bg-transparent dark:border-[#4D5050] dark:text-gray-250 dark:focus:border-[#4D5050]`}
                         />
                         <button
                           onClick={() =>
                             setShowCoinDropdown(!showCoinDropdown)
                           }
-                          className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 bg-white focus:outline-none
+                          className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 bg-white focus:outline-none focus:ring-0
                             dark:bg-transparent dark:border-[#4D5050]`}
                         >
                           <div className="flex items-center gap-1">
@@ -210,7 +210,7 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
                      {additionalTags.map((tag, index) => (
                        <button 
                          key={index}
-                         className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm 
+                         className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm focus:outline-none focus:ring-0
                           border border-default dark:border-transparent dark:bg-gray-900 text-gray-900 dark:text-gray-100 bg-gray-100"
                        >
                          <span className="text-xs">+</span>
@@ -227,7 +227,7 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
           <div className="p-4 md:p-6 pt-4">
             <button
               onClick={handleSave}
-              className={`w-full px-5 py-3 rounded-lg md:rounded-xl font-medium transition-colors text-base ${
+              className={`w-full px-5 py-3 rounded-lg md:rounded-xl font-medium transition-colors text-base focus:outline-none focus:ring-0 ${
                 dateValue && selectedWallet 
                   ? 'bg-green-500 text-gray-900 hover:bg-green-500' 
                   : 'bg-default text-gray-400 cursor-not-allowed'
