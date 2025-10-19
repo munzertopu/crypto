@@ -313,7 +313,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
         </div>
 
         {/* Mobile Client Cards */}
-        <div className="sm:hidden space-y-4">
+        <div className="sm:hidden space-y-4 mb-4">
           {filteredClients.map((client) => (
             <div
               key={client.id}
@@ -337,20 +337,20 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
                     <div className="flex items-center gap-2 mb-1">
                       <Typography
                         variant="small"
-                        className="text-lg font-bold text-[#0E201E] dark:text-gray-100"
+                        className="text-base font-semibold text-gray-900 dark:text-gray-100"
                       >
                         {client.name}
                       </Typography>
                       <Typography
                         variant="small"
-                        className="text-sm font-bold text-[#0E201E] dark:text-gray-400"
+                        className="text-base font-semibold text-gray-900 dark:text-gray-100"
                       >
                         | {client.id}
                       </Typography>
                     </div>
                     <Typography
                       variant="small"
-                      className="text-sm text-gray-600 dark:text-gray-400"
+                      className="text-left text-sm text-gray-600 dark:text-gray-250"
                     >
                       {client.email}
                     </Typography>
@@ -372,7 +372,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
                   <span className="text-sm text-gray-600 dark:text-gray-400">
                     Transactions:
                   </span>
-                  <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  <span className="text-base dark:text-gray-100">
                     {client.transactions.toLocaleString()}
                   </span>
                 </div>
@@ -381,7 +381,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
                   <span className="text-sm text-gray-600 dark:text-gray-400">
                     Last Active:
                   </span>
-                  <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  <span className="text-base dark:text-gray-100">
                     {client.lastActive}
                   </span>
                 </div>
@@ -391,7 +391,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
                     License Status:
                   </span>
                   <span
-                    className={`inline-flex px-2 py-1 text-xs font-medium rounded-lg ${
+                    className={`inline-flex px-2 py-1 text-sm font-medium rounded-[8px] ${
                       client.licenseStatus === "Licensed"
                         ? "bg-green-200 text-[#4D772F] dark:bg-green-900 dark:text-green-200"
                         : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
@@ -414,15 +414,25 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
                   <span className="text-sm text-gray-600 dark:text-gray-400">
                     Ownership:
                   </span>
-                  <span
-                    className={`inline-flex px-2 py-1 text-xs font-medium rounded-lg ${
-                      client.ownership === "Owned by Client"
-                        ? "bg-[#ECDFFB] text-[#5314A3] dark:bg-purple-900 dark:text-purple-200"
-                        : "bg-[#E3EAFD] text-[#133A9A] dark:bg-blue-900 dark:text-blue-200"
-                    }`}
-                  >
-                    {client.ownership}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    {client?.assignedTo?.avatar && (
+                      <img
+                        src={client?.assignedTo?.avatar}
+                        alt={client?.assignedTo?.name}
+                        className="w-6 h-6 rounded-full object-cover"
+                      />
+                    )}
+
+                    <span
+                      className={`inline-flex px-2 py-1 text-sm font-medium rounded-[8px] ${
+                        client.ownership === "Owned by Client"
+                          ? "bg-[#ECDFFB] text-[#5314A3] dark:bg-purple-900 dark:text-purple-200"
+                          : "bg-[#E3EAFD] text-[#133A9A] dark:bg-blue-900 dark:text-blue-200"
+                      }`}
+                    >
+                      {client.ownership}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -588,7 +598,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
         </Card>
 
         {/* Pagination */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6">
+        <div className="hidden md:flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6">
           <div className="flex items-center gap-2 mb-4 sm:mb-0">
             <span className="text-sm text-gray-600 dark:text-gray-400">
               Show
