@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Input } from "@material-tailwind/react";
 import Dropdown from "../../../components/UI/Dropdown";
 import DateRangePicker from "../../../components/DateRangePicker";
@@ -21,10 +21,49 @@ const TaxWizardTab: React.FC = () => {
   const [customAmount, setCustomAmount] = useState('');
   const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
+  const [showCustomInput, setShowCustomInput] = useState(false);
+  
+  // Exclusion state - radio button behavior (only one selected)
+  const [selectedExclusion, setSelectedExclusion] = useState("Exclude ETH");
+  
+  // Wallets & Exchanges state - radio button behavior (only one selected)
+  const [selectedWallet, setSelectedWallet] = useState("Kraken");
+  
+  // Assets state - radio button behavior (only one selected)
+  const [selectedAsset, setSelectedAsset] = useState("Ethereum");
+  
+  // Refs for outside click detection
+  const customInputRef = useRef<HTMLDivElement>(null);
   const [dateRange, setDateRange] = useState({
     startDate: new Date("2025-09-23"),
     endDate: new Date("2025-12-31"),
   });
+
+  // Handle outside click to close custom input
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (customInputRef.current && !customInputRef.current.contains(event.target as Node)) {
+        setShowCustomInput(false);
+        setShowCurrencyDropdown(false);
+      }
+    };
+
+    if (showCustomInput) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showCustomInput]);
+
+  // Handle Enter key to close custom input
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      setShowCustomInput(false);
+      setShowCurrencyDropdown(false);
+    }
+  };
 
   // Constrains state
   const [isConstrainsOpen, setIsConstrainsOpen] = useState(false);
@@ -221,8 +260,17 @@ const TaxWizardTab: React.FC = () => {
               </label>
               <div className="grid grid-cols-5 gap-3">
                 {["$1,000", "$5,000", "$10,000", "Custom"].map((amount) => {
+                  const getCurrencySymbol = (currency: string) => {
+                    switch (currency) {
+                      case "USD": return "$";
+                      case "EUR": return "€";
+                      case "GBP": return "£";
+                      default: return currency;
+                    }
+                  };
+                  
                   const displayLabel = amount === "Custom" && customAmount 
-                    ? `Custom: ${selectedCurrency === "USD" ? "$" : selectedCurrency}${customAmount}` 
+                    ? `Custom: ${getCurrencySymbol(selectedCurrency)}${customAmount}` 
                     : amount;
                   
                   return (
@@ -230,20 +278,29 @@ const TaxWizardTab: React.FC = () => {
                       key={amount}
                       label={displayLabel}
                       isSelected={selectedAmount === amount}
-                      onClick={() => setSelectedAmount(amount)}
+                      onClick={() => {
+                        setSelectedAmount(amount);
+                        if (amount === "Custom") {
+                          setShowCustomInput(true);
+                        } else {
+                          setShowCustomInput(false);
+                        }
+                      }}
                     />
                   );
                 })}
                 {/* Custom Amount Input */}
-                {selectedAmount === "Custom" && (
-                  <div className="relative">
+                {selectedAmount === "Custom" && showCustomInput && (
+                  <div className="relative" ref={customInputRef}>
                     <Input
                       type="number"
                       placeholder="0"
                       value={customAmount}
                       onChange={(e) => setCustomAmount(e.target.value)}
+                      onKeyPress={handleKeyPress}
                       className={`w-full rounded-lg text-sm px-4 py-3 font-medium
                         border-default bg-white text-gray-900 dark:text-gray-100 focus:outline-none dark:bg-gray-900 dark:border-gray-700`}
+                      autoFocus
                     />
                     <button
                       onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
@@ -251,6 +308,9 @@ const TaxWizardTab: React.FC = () => {
                         border-default text-gray-600 bg-white dark:bg-transparent dark:border-[#4D5050]`}
                     >
                       <div className="flex items-center gap-1">
+                        {selectedCurrency === "USD"}
+                        {selectedCurrency === "EUR"}
+                        {selectedCurrency === "GBP"}
                         <span className="text-xs font-medium">{selectedCurrency}</span>
                         <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2" />
                       </div>
@@ -263,20 +323,24 @@ const TaxWizardTab: React.FC = () => {
                           border-default dark:border-gray-700 bg-white dark:bg-[#0E201E]`}
                       >
                         <div className="py-1 px-2">
-                          {["USD", "EUR", "USDT"].map((currency) => (
+                          {[
+                            { code: "USD", symbol: "$" },
+                            { code: "EUR", symbol: "€" },
+                            { code: "GBP", symbol: "£" }
+                          ].map((currency) => (
                             <button
-                              key={currency}
+                              key={currency.code}
                               onClick={() => {
-                                setSelectedCurrency(currency);
+                                setSelectedCurrency(currency.code);
                                 setShowCurrencyDropdown(false);
                               }}
-                              className={`w-full px-3 py-1 text-left text-xs rounded-md ${
-                                selectedCurrency === currency
+                              className={`w-full px-3 py-1 text-left text-xs rounded-md flex items-center gap-2 ${
+                                selectedCurrency === currency.code
                                   ? "bg-gray-100 dark:bg-[#0E201E] dark:text-gray-500"
                                   : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
                               }`}
                             >
-                              {currency}
+                              <span>{currency.code}</span>
                             </button>
                           ))}
                         </div>
@@ -349,20 +413,20 @@ const TaxWizardTab: React.FC = () => {
               <div className="flex gap-3 w-max">
                 <OptionButton
                   label="Exclude BTC"
-                  isSelected={false}
-                  onClick={() => {}}
+                  isSelected={selectedExclusion === "Exclude BTC"}
+                  onClick={() => setSelectedExclusion("Exclude BTC")}
                   className="px-5 py-3 w-max"
                 />
                 <OptionButton
                   label="Exclude ETH"
-                  isSelected={true}
-                  onClick={() => {}}
+                  isSelected={selectedExclusion === "Exclude ETH"}
+                  onClick={() => setSelectedExclusion("Exclude ETH")}
                   className="px-5 py-3 w-max"
                 />
                 <OptionButton
                   label="Cold Storage"
-                  isSelected={false}
-                  onClick={() => {}}
+                  isSelected={selectedExclusion === "Cold Storage"}
+                  onClick={() => setSelectedExclusion("Cold Storage")}
                   className="px-5 py-3 w-max"
                 />
               </div>
@@ -375,35 +439,42 @@ const TaxWizardTab: React.FC = () => {
               </label>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
                 {[
-                  { name: "Coinbase Pro", amount: "$24,350", status: "Synced 30 min ago", selected: false },
-                  { name: "Kraken", amount: "$12,500", status: "Synced 2 h ago", selected: true },
-                  { name: "MetaMask", amount: "$8,930", status: "Synced 8 h ago", selected: false },
-                  { name: "Solana", amount: "$5,900", status: "Synced 1 d ago", selected: false },
-                ].map((wallet) => (
-                  <div key={wallet.name} className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-default dark:border-gray-700">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm">{wallet.name}</h4>
-                        <div className="flex items-center gap-2 mt-1">
-                          <p className="text-sm text-gray-700 dark:text-gray-300">{wallet.amount}</p>
-                          <div className="w-px h-4 bg-default dark:bg-gray-300"></div>
-                          <p className="text-xs text-gray-700 dark:text-gray-300">{wallet.status}</p>
+                  { name: "Coinbase Pro", amount: "$24,350", status: "Synced 30 min ago" },
+                  { name: "Kraken", amount: "$12,500", status: "Synced 2 h ago" },
+                  { name: "MetaMask", amount: "$8,930", status: "Synced 8 h ago" },
+                  { name: "Solana", amount: "$5,900", status: "Synced 1 d ago" },
+                ].map((wallet) => {
+                  const isSelected = selectedWallet === wallet.name;
+                  return (
+                    <div 
+                      key={wallet.name} 
+                      onClick={() => setSelectedWallet(wallet.name)}
+                      className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-default dark:border-gray-700 cursor-pointer hover:border-green-500 transition-colors"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm">{wallet.name}</h4>
+                          <div className="flex items-center gap-2 mt-1">
+                            <p className="text-sm text-gray-700 dark:text-gray-300">{wallet.amount}</p>
+                            <div className="w-px h-4 bg-default dark:bg-gray-300"></div>
+                            <p className="text-xs text-gray-700 dark:text-gray-300">{wallet.status}</p>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className={`w-4 h-4 rounded-full border-2 border-green-500 ${
-                          wallet.selected 
-                            ? "bg-transparent border-green-500" 
-                            : "border-gray-300 dark:border-gray-600"
-                        }`}>
-                          {wallet.selected && (
-                            <div className="w-full h-full rounded-full bg-green-500 scale-75"></div>
-                          )}
+                        <div className="flex items-center">
+                          <div className={`w-4 h-4 rounded-full border-2 border-green-500 ${
+                            isSelected 
+                              ? "bg-transparent border-green-500" 
+                              : "border-gray-300 dark:border-gray-600"
+                          }`}>
+                            {isSelected && (
+                              <div className="w-full h-full rounded-full bg-green-500 scale-75"></div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
@@ -414,35 +485,42 @@ const TaxWizardTab: React.FC = () => {
               </label>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
-                  { name: "Bitcoin", amount: "+$1,250", status: "Available", selected: false },
-                  { name: "Ethereum", amount: "+$5,320", status: "Excluded", selected: true },
-                  { name: "Solana", amount: "+$2,100", status: "Available", selected: false },
-                  { name: "Polygon", amount: "+$850", status: "Available", selected: false },
-                ].map((asset) => (
-                  <div key={asset.name} className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 dark:text-gray-100 text-base">{asset.name}</h4>
-                        <div className="flex items-center gap-2 mt-1">
-                          <p className="text-sm text-gray-700 dark:text-gray-300">{asset.amount}</p>
-                          <div className="w-px h-4 bg-default dark:text-gray-300"></div>
-                          <p className="text-xs text-gray-700 dark:text-gray-300">{asset.status}</p>
+                  { name: "Bitcoin", amount: "+$1,250", status: "Available" },
+                  { name: "Ethereum", amount: "+$5,320", status: "Excluded" },
+                  { name: "Solana", amount: "+$2,100", status: "Available" },
+                  { name: "Polygon", amount: "+$850", status: "Available" },
+                ].map((asset) => {
+                  const isSelected = selectedAsset === asset.name;
+                  return (
+                    <div 
+                      key={asset.name} 
+                      onClick={() => setSelectedAsset(asset.name)}
+                      className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-green-500 transition-colors"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <h4 className="font-medium text-gray-900 dark:text-gray-100 text-base">{asset.name}</h4>
+                          <div className="flex items-center gap-2 mt-1">
+                            <p className="text-sm text-gray-700 dark:text-gray-300">{asset.amount}</p>
+                            <div className="w-px h-4 bg-default dark:text-gray-300"></div>
+                            <p className="text-xs text-gray-700 dark:text-gray-300">{asset.status}</p>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className={`w-4 h-4 rounded-full border-2 border-green-500 ${
-                          asset.selected 
-                            ? "bg-transparent border-green-500" 
-                            : "border-gray-300 dark:border-gray-600"
-                        }`}>
-                          {asset.selected && (
-                            <div className="w-full h-full rounded-full bg-green-500 scale-75"></div>
-                          )}
+                        <div className="flex items-center">
+                          <div className={`w-4 h-4 rounded-full border-2 border-green-500 ${
+                            isSelected 
+                              ? "bg-transparent border-green-500" 
+                              : "border-gray-300 dark:border-gray-600"
+                          }`}>
+                            {isSelected && (
+                              <div className="w-full h-full rounded-full bg-green-500 scale-75"></div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 

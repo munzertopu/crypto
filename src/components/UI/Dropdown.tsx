@@ -125,7 +125,7 @@ const Dropdown: React.FC<DropdownProps> = ({
               <div
                 key={option.value + index}
                 onClick={() => handleSelect(option)}
-                className={`px-1.5 py-1.5 text-sm text-gray-900 text-left hover:bg-gray-100 cursor-pointer rounded-lg w-full flex items-center gap-2 dark:text-gray-250 ${
+                className={`px-1.5 py-1.5 text-sm text-gray-900 text-left hover:bg-gray-800 cursor-pointer rounded-lg w-full flex items-center gap-2 dark:text-gray-250 ${
                   showTickMark && currentSelectedValue === option.label ? 'bg-gray-100 dark:bg-gray-800' : ''
                 }`}
               >

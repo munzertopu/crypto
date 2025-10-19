@@ -247,7 +247,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
         <div
           className={`absolute top-full ${
             openingPosition === "right" ? "md:left-[-710px]" : "md:left-0"
-          } mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
+          } mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-700 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
             isDrawer ? " left-[-10px]" : "left-[-175px]"
           }`}
         >
@@ -336,7 +336,7 @@ const RenderDateRange = ({
 }) => {
   return (
     <>
-      <div className="hidden min-w-[200px] pr-4 border-r border-gray-150 md:flex flex-col justify-start items-start px-2 gap-2 ">
+      <div className="hidden min-w-[200px] pr-4 border-r border-gray-150 dark:border-gray-700 md:flex flex-col justify-start items-start px-2 gap-2 ">
         {createShortcuts().map((shortcut, index) => (
           <div
             key={index}
