@@ -5,12 +5,17 @@ import TransactionFooter from "./TransactionFooter";
 import useScreenSize from "../../../hooks/useScreenSize";
 import MobileFormDrawer from "../../../components/Drawers/MobileFormDrawer";
 import type { Transaction } from "../../../data/transactionAssets";
-import TableSortIcon from '../../../components/Icons/TableSortIcon';
+import TableSortIcon from "../../../components/Icons/TableSortIcon";
 import { getTableHeaders } from "../../../data/transactionAssets";
 import Checkbox from "../../../components/UI/Checkbox";
 import Badge from "../../../components/Badge";
 import TradeIcon from "../../../components/Icons/TradeIcon";
 import DepositIcon from "../../../components/Icons/DepositIcon";
+import EditIcon from "../../../components/Icons/EditIcon";
+import DuplicateIcon from "../../../components/Icons/DuplicateIcon";
+import EyeIcon from "../../../components/Icons/EyeIcon";
+import DeleteIcon from "../../../components/Icons/DeleteIcon";
+import DeleteConfirmationModal from "../../../components/UI/DeleteConfirmationModal";
 
 interface TransactionTableProps {
   transactions: Transaction[];
@@ -31,8 +36,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   selectedTransactions = [],
   onSelectedTransactionsChange,
 }) => {
-
   const TABLE_HEAD = getTableHeaders(activeTab);
+  const [showInContext, setShowInContext] = useState(false);
 
   const data = transactions;
 
@@ -57,6 +62,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   };
 
   const groupedTransactions = groupTransactionsByDate(data);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedContext, setSelectedContext] = useState<Transaction | null>(
+    null
+  );
 
   // Format date for display
   const formatDateForDisplay = (dateString: string) => {
@@ -458,6 +467,43 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         height="93vh"
         noPadding
         noChildPadding
+        showMoreIcon
+        showMoreContent={
+          <>
+            <div className="flex gap-2 items-center py-1.5 cursor-pointer">
+              <EditIcon />
+              <span className="text-sm text-gray-900 dark:text-gray-100">
+                Edit
+              </span>
+            </div>
+            <div className="flex gap-2 items-center py-1.5">
+              <DuplicateIcon />
+              <span className="text-sm text-gray-900 dark:text-gray-100">
+                Duplicate
+              </span>
+            </div>
+            <div
+              onClick={() => setShowInContext(true)}
+              className="flex gap-2 items-center py-1.5"
+            >
+              <EyeIcon />
+              <span className="text-sm text-gray-900 dark:text-gray-100">
+                View in context
+              </span>
+            </div>
+            <div
+              onClick={() => {
+                setIsDeleteModalOpen(true);
+              }}
+              className="flex gap-2 items-center py-1.5"
+            >
+              <DeleteIcon />
+              <span className="text-sm text-gray-900 dark:text-gray-100">
+                Delete
+              </span>
+            </div>
+          </>
+        }
       >
         <div className="flex flex-col justify-start items-center w-full gap-6 dark:bg-[#0E201E] pt-2">
           <div className="flex flex-col justify-start items-center w-full gap-2">
@@ -480,15 +526,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                   <Badge label={"Trade"} variant="orange" />
                 )}
               </div>
-              {/* <div className="flex justify-center items-center gap-3">
-                <span className="text-lg font-semibold  text-error-500">
-                  {selectedRow?.sent}
-                </span>
-                <TradeIcon />
-                <span className="text-lg font-semibold  text-green-600">
-                  {selectedRow?.received}
-                </span>
-              </div> */}
+
               <div className="flex justify-start items-center gap-2">
                 <span className="text-lg font-semibold  text-error-500">
                   {selectedRow?.sent}
@@ -509,9 +547,196 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           <TransactionDetail selectedRow={selectedRow} />
         </div>
       </MobileFormDrawer>
+      <MobileFormDrawer
+        isOpen={selectedRow !== null && showInContext}
+        onClose={() => setShowInContext(false)}
+        header={`${selectedRow?.wallet.name} Transaction`}
+        height="93vh"
+        noPadding
+      >
+        <Card className="h-full w-full border-transparent bg-transprent shadow-none">
+          <CardBody className="px-0 sm:px-3.5 sm:py-2.5 md:px-0 md:py-0">
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-max table-auto text-left">
+                <tbody className="flex flex-col gap-3 sm:table-row-group overflow-y-auto h-[calc(100vh-250px)]">
+                  {groupedTransactions.map((group) => (
+                    <React.Fragment key={group.date}>
+                      {/* Date Header Row */}
+                      <tr>
+                        <td colSpan={TABLE_HEAD.length} className="pt-6 pb-3">
+                          <Typography
+                            variant="small"
+                            className="font-semibold text-gray-700 dark:text-[#E1E3E5]"
+                          >
+                            {formatDateForDisplay(group.date)}
+                          </Typography>
+                        </td>
+                      </tr>
+
+                      {/* Transactions for this date */}
+                      {group.transactions.map((transaction, index) => {
+                        const {
+                          id,
+                          wallet,
+                          action,
+                          sent,
+                          received,
+                          transactionId,
+                          result,
+                          status,
+                          time,
+                        } = transaction;
+                        const isCompleted = status === "completed";
+                        return (
+                          <React.Fragment key={id}>
+                            <tr
+                              className={`flex justify-start
+                              bg-white sm:table-row 
+                              dark:bg-transparent ${
+                                onToggleExpanded
+                                  ? "cursor-pointer transition-colors"
+                                  : ""
+                              }`}
+                              onClick={() => {}}
+                            >
+                              <td
+                                className={`py-4 
+                                ${index === 0 ? "rounded-tl-lg" : "0"} 
+                                ${
+                                  index === groupedTransactions.length - 1
+                                    ? "rounded-bl-lg"
+                                    : "0"
+                                } `}
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <div
+                                  className=" sm:flex sm:items-center sm:justify-center
+                              "
+                                >
+                                  <Checkbox
+                                    checked={selectedTransactions.includes(id)}
+                                    onChange={() => handleSelectTransaction(id)}
+                                  />
+                                </div>
+                              </td>
+                              <td className="py-0 sm:py-4">
+                                <div className="flex items-center gap-3">
+                                  {!expandedTransactionId && (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 24 24"
+                                      fill="currentColor"
+                                      className="size-4"
+                                    >
+                                      <path
+                                        fillRule="evenodd"
+                                        d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                        clipRule="evenodd"
+                                      />
+                                    </svg>
+                                  )}
+                                  {expandedTransactionId && (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 24 24"
+                                      fill="currentColor"
+                                      className="size-4 rotate-180"
+                                    >
+                                      <path
+                                        fillRule="evenodd"
+                                        d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                        clipRule="evenodd"
+                                      />
+                                    </svg>
+                                  )}
+                                  <Avatar
+                                    src={wallet.logo}
+                                    alt={wallet.name}
+                                    size="sm"
+                                    className={`h-12 w-12 flex items-center justify-center text-white text-xs font-bold`}
+                                  />
+                                  <div className="flex flex-col gap-1">
+                                    <Typography
+                                      variant="small"
+                                      className={`text-base font-normal text-gray-900
+                                      dark:text-gray-250 truncate`}
+                                    >
+                                      {wallet.name}
+                                    </Typography>
+                                    <Typography
+                                      variant="small"
+                                      className={`sm:hidden text-sm font-normal text-gray-900
+                                    dark:text-gray-250 opacity-70`}
+                                    >
+                                      {action}
+                                    </Typography>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="sm:hidden table-cell w-full">
+                                <div className="flex flex-col justify-center items-end ">
+                                  {" "}
+                                  {sent && (
+                                    <div className="flex items-center gap-2">
+                                      <Typography
+                                        variant="small"
+                                        className="text-base font-normal text-red-600"
+                                      >
+                                        {sent}
+                                      </Typography>
+                                    </div>
+                                  )}
+                                  {received && (
+                                    <div className="flex items-center gap-2">
+                                      <Typography
+                                        variant="small"
+                                        className="text-base font-normal text-green-600"
+                                      >
+                                        {received}
+                                      </Typography>
+                                    </div>
+                                  )}
+                                </div>
+                              </td>
+                              <td className="hidden sm:table-cell py-4 space-y-1">
+                                <Typography
+                                  variant="small"
+                                  className={`text-base font-normal text-[#0E201E]
+                                      dark:text-gray-250`}
+                                >
+                                  {action}
+                                </Typography>
+                                <Typography
+                                  variant="small"
+                                  className={`text-sm font-normal text-gray-600
+                                      dark:text-gray-250`}
+                                >
+                                  {time}
+                                </Typography>
+                              </td>
+                            </tr>
+                          </React.Fragment>
+                        );
+                      })}
+                    </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardBody>
+        </Card>
+      </MobileFormDrawer>
       <TransactionFooter
         selectedTransactions={selectedTransactions}
         onClearSelection={() => onSelectedTransactionsChange?.([])}
+      />
+      <DeleteConfirmationModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={() => setIsDeleteModalOpen(false)}
+        itemName={""}
+        drawerHeight="25%"
+        deleteButtonText="yes,Delete"
       />
     </div>
   );

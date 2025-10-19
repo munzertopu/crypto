@@ -90,7 +90,7 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
               trigger={
                 <SecondaryButton
                   icon={<ThreeDotIcon />}
-                  className="flex sm:hidden"
+                  className="flex sm:hidden !border-none !shadow-none"
                 />
               }
               position="bottom-right"

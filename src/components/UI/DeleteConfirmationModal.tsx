@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface DeleteConfirmationModalProps {
   isOpen: boolean;
@@ -6,14 +6,16 @@ interface DeleteConfirmationModalProps {
   onConfirm: () => void;
   itemName?: string;
   drawerHeight?: string; // e.g., "70%", "80vh", "400px"
+  deleteButtonText?: string;
 }
 
 const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
   isOpen,
   onClose,
   onConfirm,
-  itemName = 'item',
-  drawerHeight = '35%',
+  itemName = "item",
+  drawerHeight = "35%",
+  deleteButtonText = "Delete",
 }) => {
   if (!isOpen) return null;
 
@@ -29,7 +31,7 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
       {/* Modal Container */}
       <div className="flex min-h-full md:items-center md:justify-center md:p-4">
         {/* Mobile Drawer */}
-        <div 
+        <div
           className="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-100 rounded-t-2xl shadow-xl flex flex-col transition-transform duration-300 ease-in-out transform translate-y-0"
           style={{ height: drawerHeight }}
         >
@@ -43,8 +45,18 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
               className="text-gray-500 transition-colors"
               aria-label="Close modal"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -52,7 +64,8 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
           {/* Mobile Content */}
           <div className="flex-1 p-3 flex flex-col">
             <p className="text-gray-11 mb-6 text-left text-sm">
-              This action will permanently remove the imported file and all associated transaction records from history.
+              This action will permanently remove the imported file and all
+              associated transaction records from history.
             </p>
 
             {/* Mobile Action Buttons */}
@@ -85,15 +98,26 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
               className="text-gray-500 transition-colors"
               aria-label="Close modal"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
 
           {/* Desktop Warning Message */}
           <p className="text-gray-11 mb-6 text-left text-base">
-            This action will permanently remove the imported file and all associated transaction records from history.
+            This action will permanently remove the imported file and all
+            associated transaction records from history.
           </p>
 
           {/* Desktop Action Buttons */}
@@ -108,13 +132,13 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
               onClick={onConfirm}
               className="px-4 py-3 bg-red-500 text-white rounded-xl font-bold text-base"
             >
-              Delete
+              {deleteButtonText}
             </button>
           </div>
         </div>
       </div>
     </div>
   );
- };
+};
 
 export default DeleteConfirmationModal;
