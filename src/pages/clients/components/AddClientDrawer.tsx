@@ -72,18 +72,18 @@ const AddClientDrawer: React.FC<AddClientDrawerProps> = ({
         onClick={onClose}
       />
 
-      {/* Responsive Drawer */}
-      <div className="fixed left-0 top-0 h-full w-96 bg-white dark:bg-gray-800 z-50 transform transition-transform duration-300 ease-in-out shadow-xl">
+      {/* Drawer - Mobile Bottom Sheet / Desktop Sidebar */}
+      <div className={`fixed bottom-0 left-0 right-0 md:left-0 md:right-auto md:top-0 md:bottom-auto h-[93vh] md:h-full w-full md:w-96 bg-white dark:bg-gray-800 z-50 transform transition-transform duration-300 ease-in-out shadow-xl rounded-t-3xl md:rounded-none ${isOpen ? 'translate-y-0' : 'translate-y-full'} md:translate-y-0 md:translate-x-0`}>
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="p-6 pb-4">
+          <div className="p-4 md:p-6 pb-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-h5 font-bold text-gray-11 dark:text-gray-100">
+              <h2 className="text-lg md:text-h5 font-bold text-gray-11 dark:text-gray-100">
                 Add client
               </h2>
               <button
                 onClick={onClose}
-                className="text-gray-500 dark:text-gray-400"
+                className="text-gray-500 dark:text-gray-400 p-1 focus:outline-none focus:ring-0"
               >
                 <CrossIcon
                   height={20}
@@ -94,20 +94,20 @@ const AddClientDrawer: React.FC<AddClientDrawerProps> = ({
           </div>
 
           {/* Scrollable Content */}
-          <div className="flex-1 overflow-y-auto px-6 pb-6">
-            <div className="space-y-5 sm:space-y-3 pb-6 sm:pb-0">
+          <div className="flex-1 overflow-y-auto px-4 md:px-6 pb-6">
+            <div className="space-y-4 md:space-y-5">
               {/* Client name */}
               <div className="text-left">
                 <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
                   Client name
                 </label>
-                <div className="sm:mt-1.5">
+                <div className="mt-1.5">
                   <Input
                     type="text"
                     value={clientName}
                     onChange={(e) => setClientName(e.target.value)}
                     placeholder="Type name"
-                    className="w-full border border-gray-300 sm:border-default dark:border-gray-700 rounded-lg focus:ring-0 focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    className="w-full border border-gray-300 sm:border-default dark:border-gray-700 rounded-lg focus:ring-0 focus:outline-none focus:border-default bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm md:text-base"
                   />
                 </div>
               </div>
@@ -132,13 +132,13 @@ const AddClientDrawer: React.FC<AddClientDrawerProps> = ({
                     </div>
                   </div>
                 </div>
-                <div className="sm:mt-1.5">
+                <div className="mt-1.5">
                   <Input
                     type="email"
                     value={shareAccess}
                     onChange={(e) => setShareAccess(e.target.value)}
                     placeholder="client@email.com"
-                    className="w-full border border-gray-300 sm:border-default dark:border-gray-700 rounded-lg focus:ring-0 focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    className="w-full border border-gray-300 sm:border-default dark:border-gray-700 rounded-lg focus:ring-0 focus:outline-none focus:border-default bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm md:text-base"
                   />
                 </div>
               </div>
@@ -148,14 +148,14 @@ const AddClientDrawer: React.FC<AddClientDrawerProps> = ({
                 <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
                   Client type
                 </label>
-                <div className="sm:mt-1.5">
+                <div className="mt-1.5">
                   <Dropdown
                     options={clientTypeOptions}
                     selectedValue={clientType}
                     onSelect={(value) => setClientType(value)}
                     className="w-full"
                     showTickMark={true}
-                    inputClassName='dark:bg-transparent'
+                    inputClassName='dark:bg-transparent text-sm md:text-base'
                   />
                 </div>
               </div>
@@ -165,25 +165,25 @@ const AddClientDrawer: React.FC<AddClientDrawerProps> = ({
                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300 mb-2 sm:mb-0 block">
                   Assign to
                 </label>
-                <div className="sm:mt-1.5">
+                <div className="mt-1.5">
                   <Dropdown
                     options={assignedToOptions}
                     selectedValue={assignedTo}
                     onSelect={(value) => setAssignedTo(value)}
                     className="w-full"
-                    inputClassName='dark:bg-transparent'
+                    inputClassName='dark:bg-transparent text-sm md:text-base'
                   />
                 </div>
               </div>
 
               {/* Assign license */}
-              <div className="text-left sm:!my-6">
-                <div className="flex items-center gap-3 sm:gap-2">
+              <div className="text-left">
+                <div className="flex items-center gap-3">
                   <div
-                    className={`w-4 h-4 border-2 rounded flex items-center justify-center transition-colors cursor-pointer ${
+                    className={`w-4 h-4 border-2 rounded flex items-center justify-center transition-colors cursor-pointer focus:outline-none focus:ring-0 ${
                       assignLicense
                         ? "bg-green-600 border-green-600"
-                        : "border-gray-300 dark:border-gray-600 sm:border-gray-300"
+                        : "border-gray-300 dark:border-gray-600"
                     }`}
                     onClick={() => setAssignLicense(!assignLicense)}
                   >
@@ -211,7 +211,7 @@ const AddClientDrawer: React.FC<AddClientDrawerProps> = ({
               </div>
 
               {/* Information box */}
-              <div className="bg-gray-100 dark:bg-[#232726] rounded-lg p-4 sm:p-3 border border-gray-200 dark:border-gray-700 sm:border-0 justify-start text-left">
+              <div className="bg-gray-100 dark:bg-[#232726] rounded-lg p-3 md:p-4 border border-gray-200 dark:border-gray-700 justify-start text-left">
                 <div className="flex items-start gap-3">
                   <InfoCircleIcon className="text-gray-400 mt-0.5 flex-shrink-0" />
                   <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -224,10 +224,10 @@ const AddClientDrawer: React.FC<AddClientDrawerProps> = ({
           </div>
 
           {/* Footer */}
-          <div className="flex-shrink-0 p-6 pt-4 sm:pt-0 sm:border-t-0 border-t border-gray-200 dark:border-gray-700">
+          <div className="flex-shrink-0 p-4 md:p-6 pt-4">
             <button
               onClick={handleSave}
-              className={`w-full px-5 py-3 rounded-xl font-medium transition-colors ${
+              className={`w-full px-5 py-3 rounded-lg md:rounded-xl font-medium transition-colors text-base focus:outline-none focus:ring-0 ${
                 clientName && shareAccess
                   ? 'bg-green-500 text-gray-900 hover:bg-green-500' 
                   : 'bg-default dark:bg-gray-700 text-gray-400 dark:text-gray-300 cursor-not-allowed'
