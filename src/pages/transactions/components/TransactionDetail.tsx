@@ -4,6 +4,12 @@ import { faGhost, faExchange } from "@fortawesome/free-solid-svg-icons";
 import { Card, Typography, CardBody, Avatar } from "@material-tailwind/react";
 import { ledgerData, costAnalysisData } from "../../../data/transactionAssets";
 import useScreenSize from "../../../hooks/useScreenSize";
+import { Popover } from "../../../components";
+import EyeIcon from "../../../components/Icons/EyeIcon";
+import RefreshIcon from "../../../components/Icons/RefreshIcon";
+import MobileDrawer from "../../../components/Drawers/MobileDrawer";
+import WalletConfigureForm from "../../../components/Forms/WalletConfigureForm";
+import SuccessNotification from "../../../components/SuccessNotification";
 
 interface TransactionDetailProps {
   selectedRow?: {
@@ -12,6 +18,7 @@ interface TransactionDetailProps {
     received: string;
     wallet: {
       address: string;
+      name: string;
     };
     date: string;
     result: string;
@@ -30,6 +37,25 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({
   );
   const tabs =
     screenSize.width <= 768 ? [...mobileTabs, ...defaultTabs] : defaultTabs;
+
+  const [selectedPlatform, setSelectedPlatform] = useState("");
+  const [showNotification, setShowNotification] = useState(false);
+  const [isWalletAddressValid, setIsWalletAddressValid] = useState(false);
+
+  const [openConfigure, setOpenConfigure] = useState(false);
+
+  const handleCloseModal = () => {
+    setOpenConfigure(false);
+  };
+
+  const handleConfigureSuccess = () => {
+    setShowNotification(true);
+  };
+
+  const handleCloseNotification = () => {
+    setShowNotification(false);
+    setSelectedPlatform("");
+  };
   return (
     <div className="w-full sm:w-[auto] md:space-y-2 md:mx-4 md:px-2 md:py-4 rounded-xl bg-background dark:bg-gray-800">
       {/* Tabs */}
@@ -60,9 +86,46 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({
                 <span className="text-base  text-[#4D5050] dark:text-gray-250">
                   Sent Amount:
                 </span>
-                <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
-                  {"-1,000 USDT"}
-                </span>
+
+                {selectedRow?.wallet?.name.includes("Avax") ? (
+                  <Popover
+                    trigger={
+                      <div className="flex flex-col">
+                        <span className="text-right">-</span>
+                        <div className="px-3 py-2 border border-gray-150 rounded-[12px] bg-gray-150 dark:bg-gray-800">
+                          <span className="text-gray-600 text-sm">
+                            {" "}
+                            Cypto Com
+                          </span>
+                        </div>
+                      </div>
+                    }
+                    position="bottom-right"
+                  >
+                    <div className="py-2 px-3 min-w-[200px] flex flex-col gap-2">
+                      {" "}
+                      <div
+                        onClick={() => setOpenConfigure(true)}
+                        className="flex gap-2 items-center py-1.5 cursor-pointer"
+                      >
+                        <RefreshIcon />
+                        <span className="text-sm text-gray-900 dark:text-gray-100">
+                          Configure Address
+                        </span>
+                      </div>
+                      <div className="flex gap-2 items-center py-1.5">
+                        <EyeIcon />
+                        <span className="text-sm text-gray-900 dark:text-gray-100">
+                          View interactions
+                        </span>
+                      </div>
+                    </div>
+                  </Popover>
+                ) : (
+                  <span className="text-base font-medium text-[#0e201e] dark:text-gray-250 transform capitalize">
+                    "-1,000 USDT"
+                  </span>
+                )}
               </div>
             </div>
           </>
@@ -643,6 +706,44 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({
           </div>
         </div>
       )}
+      <MobileDrawer
+        isOpen={openConfigure}
+        key={selectedRow?.wallet?.name}
+        onClose={() => setOpenConfigure(false)}
+        header={`Configure ${selectedRow?.wallet?.name} address`}
+        height={isWalletAddressValid ? 400 : 260}
+        leftButtonText="Cancel"
+        rightButtonText="Configure"
+        disableRightButton={!isWalletAddressValid}
+        onLeftButtonClick={() => setOpenConfigure(false)}
+        onRightButtonClick={() => {
+          setOpenConfigure(false);
+          setShowNotification(true);
+        }}
+      >
+        <div
+          key={selectedPlatform}
+          className="flex items-center justify-center w-full"
+        >
+          <WalletConfigureForm
+            key={selectedRow?.wallet?.name}
+            isOpen={openConfigure}
+            onClose={handleCloseModal}
+            platformName={selectedRow?.wallet?.name ?? selectedPlatform}
+            onConfigureSuccess={handleConfigureSuccess}
+            showHeader={false}
+            showFooter={false}
+            setIsWalletAddressValid={setIsWalletAddressValid}
+          />
+        </div>
+      </MobileDrawer>
+      {/* Success Notification */}
+      <SuccessNotification
+        message={`${selectedRow?.wallet?.name} wallet configured successfully`}
+        isVisible={showNotification}
+        onClose={handleCloseNotification}
+        duration={5000}
+      />
     </div>
   );
 };

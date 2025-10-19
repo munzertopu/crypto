@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface RefreshIconProps {
   className?: string;
@@ -8,8 +8,8 @@ interface RefreshIconProps {
 }
 
 const RefreshIcon: React.FC<RefreshIconProps> = ({
-  className = '',
-  color = 'currentColor',
+  className = "",
+  color = "currentColor",
   width = 20,
   height = 20,
 }) => {
@@ -20,7 +20,7 @@ const RefreshIcon: React.FC<RefreshIconProps> = ({
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
+      className={`text-gray-500 dark:text-gray-400 ${className}`}
     >
       <path
         d="M12.4087 4.23333C11.6837 4.01667 10.8837 3.875 10.0004 3.875C6.00872 3.875 2.77539 7.10833 2.77539 11.1C2.77539 15.1 6.00872 18.3333 10.0004 18.3333C13.9921 18.3333 17.2254 15.1 17.2254 11.1083C17.2254 9.625 16.7754 8.24167 16.0087 7.09167"

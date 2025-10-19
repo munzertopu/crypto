@@ -98,7 +98,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
               Transactions
             </h4>{" "}
             <h1
-              className="hidden sm:inline text-xl font-semibold text-[rgba(77,80,80,1)] 
+              className="text-base md:text-xl font-semibold text-[rgba(77,80,80,1)] 
               dark:text-[#E1E3E5]"
             >
               (258)
@@ -126,7 +126,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
                   : "Add Transaction"}
               </span>
               <span className="block sm:hidden text-white">
-                {selectedTransactions.length > 0 ? "✏️" : "+"}
+                {selectedTransactions.length > 0 ? "+" : "+"}
               </span>
             </button>
           </div>

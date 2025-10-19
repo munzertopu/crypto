@@ -1,5 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import Popover from "../UI/Popover";
+import SecondaryButton from "../UI/Buttons/SecondaryButton";
+import ThreeDotIcon from "../Icons/ThreeDotIcon";
 
 interface DrawerProps {
   isOpen: boolean;
@@ -10,6 +13,8 @@ interface DrawerProps {
   height?: string;
   children: React.ReactNode;
   noChildPadding?: boolean;
+  showMoreIcon?: boolean;
+  showMoreContent?: React.ReactNode;
 }
 
 const MobileFormDrawer: React.FC<DrawerProps> = ({
@@ -21,6 +26,8 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
   showLogo = false,
   noPadding = false,
   noChildPadding = false,
+  showMoreIcon = false,
+  showMoreContent,
 }) => {
   return (
     <>
@@ -77,6 +84,21 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
                 className="h-6 sm:h-7 lg:h-7 w-auto"
               />
             </div>
+          )}
+          {showMoreIcon && (
+            <Popover
+              trigger={
+                <SecondaryButton
+                  icon={<ThreeDotIcon />}
+                  className="flex sm:hidden !border-none !shadow-none"
+                />
+              }
+              position="bottom-right"
+            >
+              <div className="py-2 px-3 min-w-[180px] flex flex-col gap-2">
+                {showMoreContent}
+              </div>
+            </Popover>
           )}
         </div>
 
