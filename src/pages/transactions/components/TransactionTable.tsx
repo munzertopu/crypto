@@ -16,6 +16,7 @@ import DuplicateIcon from "../../../components/Icons/DuplicateIcon";
 import EyeIcon from "../../../components/Icons/EyeIcon";
 import DeleteIcon from "../../../components/Icons/DeleteIcon";
 import DeleteConfirmationModal from "../../../components/UI/DeleteConfirmationModal";
+import MobileBottomSheet from "../../../components/UI/MobileBottomSheet";
 
 interface TransactionTableProps {
   transactions: Transaction[];
@@ -37,7 +38,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   onSelectedTransactionsChange,
 }) => {
   const TABLE_HEAD = getTableHeaders(activeTab);
-  const [showInContext, setShowInContext] = useState(false);
 
   const data = transactions;
 
@@ -66,6 +66,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   const [selectedContext, setSelectedContext] = useState<Transaction | null>(
     null
   );
+  const [selectedBottomContext, setSelectedBottomContext] =
+    useState<Transaction | null>(null);
 
   // Format date for display
   const formatDateForDisplay = (dateString: string) => {
@@ -104,8 +106,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
   const screenSize = useScreenSize();
   const [selectedRow, setSelectedRow] = useState<Transaction | null>(null);
-
-  console.log("selectedRow", selectedRow);
 
   const renderExpandedDetails = (transaction: Transaction) => (
     <tr
@@ -483,7 +483,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
               </span>
             </div>
             <div
-              onClick={() => setShowInContext(true)}
+              onClick={() => {
+                setSelectedContext(selectedRow);
+                setSelectedRow(null);
+              }}
               className="flex gap-2 items-center py-1.5"
             >
               <EyeIcon />
@@ -548,9 +551,9 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         </div>
       </MobileFormDrawer>
       <MobileFormDrawer
-        isOpen={selectedRow !== null && showInContext}
-        onClose={() => setShowInContext(false)}
-        header={`${selectedRow?.wallet.name} Transaction`}
+        isOpen={selectedContext !== null}
+        onClose={() => setSelectedContext(null)}
+        header={`${selectedContext?.wallet.name} Transaction`}
         height="93vh"
         noPadding
       >
@@ -597,7 +600,9 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                   ? "cursor-pointer transition-colors"
                                   : ""
                               }`}
-                              onClick={() => {}}
+                              onClick={() => {
+                                setSelectedBottomContext(transaction);
+                              }}
                             >
                               <td
                                 className={`py-4 
@@ -737,6 +742,13 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         itemName={""}
         drawerHeight="25%"
         deleteButtonText="yes,Delete"
+      />
+
+      {/* Mobile Bottom Sheet */}
+      <MobileBottomSheet
+        isOpen={selectedBottomContext !== null}
+        onClose={() => setSelectedBottomContext(null)}
+        transaction={selectedBottomContext}
       />
     </div>
   );
