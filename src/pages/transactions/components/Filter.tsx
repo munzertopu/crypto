@@ -21,6 +21,8 @@ import CloseIcon from "../../../components/Icons/CloseIcon";
 import SecondaryButton from "../../../components/UI/Buttons/SecondaryButton";
 import FilterIcon from "../../../components/Icons/FilterIcon";
 import EyeIcon from "../../../components/Icons/EyeIcon";
+import { set } from "date-fns";
+import { tr } from "date-fns/locale";
 
 interface WalletOption {
   id: string;
@@ -199,6 +201,7 @@ const Filter: React.FC<FilterProps> = ({
   const [showWarningBanner, setShowWarningBanner] = useState(true);
   const [walletSearchTerm, setWalletSearchTerm] = useState("");
   const [enabledManual, setEnabledManual] = useState(false);
+  const [showAdvanceFilter, setShowAdvanceFilter] = useState(false);
 
   // Tag Dropdown
   const [tagSearchTerm, setTagSearchTerm] = useState("");
@@ -1091,8 +1094,165 @@ const Filter: React.FC<FilterProps> = ({
             </button>
           </div>
 
+          {showAdvanceFilter && (
+            <div className="w-full">
+              <div className="flex justify-between items-center py-6">
+                <span className="text-base font-semibold text-gray-700 dark:text-gray-300 text-left">
+                  Advanced Filters
+                </span>
+                <button
+                  onClick={() => {
+                    setShowAdvanceFilter(false);
+                    setAdvancedFilters([
+                      { account: "", condition: "", value: "" },
+                    ]);
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 text-gray-400 hover:text-red-500 transition-colors"
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18 6L6 18M6 6L18 18"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <span className="text-sm font-medium">Clear all</span>
+                </button>
+              </div>
+              <div className="space-y-3 w-full">
+                {advancedFilters.map((filter, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col items-start gap-3 w-full"
+                  >
+                    <div className="flex w-full gap-2">
+                      <Dropdown
+                        options={[
+                          { label: "Account", value: "account" },
+                          { label: "Wallet", value: "wallet" },
+                        ]}
+                        onSelect={(value) => {
+                          const newFilters = [...advancedFilters];
+                          newFilters[index].account = value;
+                          setAdvancedFilters(newFilters);
+                        }}
+                        defaultValue={filter.account || "Account"}
+                        className="!w-full"
+                      />
+
+                      <Dropdown
+                        options={[
+                          { label: "Is", value: "is" },
+                          { label: "Is not", value: "is_not" },
+                          { label: "Contains", value: "contains" },
+                          { label: "Greater than", value: "gt" },
+                          { label: "Less than", value: "lt" },
+                        ]}
+                        onSelect={(value) => {
+                          const newFilters = [...advancedFilters];
+                          newFilters[index].condition = value;
+                          setAdvancedFilters(newFilters);
+                        }}
+                        defaultValue={filter.condition || "Is"}
+                      />
+                    </div>
+                    <div className="flex w-full gap-2">
+                      <Dropdown
+                        options={[
+                          { label: "BTC", value: "btc" },
+                          { label: "ETH", value: "eth" },
+                          { label: "USD", value: "usd" },
+                        ]}
+                        onSelect={(value) => {
+                          const newFilters = [...advancedFilters];
+                          newFilters[index].value = value;
+                          setAdvancedFilters(newFilters);
+                        }}
+                        defaultValue={filter.value || "Set Value"}
+                        className="w-full"
+                      />
+                      {advancedFilters.length > 1 && (
+                        <button
+                          onClick={() => {
+                            const newFilters = advancedFilters.filter(
+                              (_, i) => i !== index
+                            );
+                            setAdvancedFilters(newFilters);
+                          }}
+                          className="ml-auto p-3 border border-default rounded-lg text-gray-400 hover:text-red-500 transition-colors"
+                        >
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M18 6L6 18M6 6L18 18"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+
+                {/* <div className="flex items-center justify-between dark:border-gray-700">
+                  <button
+                    onClick={() => {
+                      setAdvancedFilters([
+                        ...advancedFilters,
+                        { account: "", condition: "", value: "" },
+                      ]);
+                    }}
+                    className="flex items-center gap-2 px-2.5 py-1.5 text-gray-600 rounded-lg border border-default hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 5V19M5 12H19"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <span className="text-sm font-medium">Add Filter</span>
+                  </button>
+                </div> */}
+              </div>
+            </div>
+          )}
+
           <button
-            // onClick={handleAddRuleClick}
+            onClick={() => {
+              setShowAdvanceFilter(true);
+
+              if (showAdvanceFilter) {
+                setAdvancedFilters([
+                  ...advancedFilters,
+                  { account: "", condition: "", value: "" },
+                ]);
+              }
+            }}
             className="flex items-center justify-center md:justify-start space-x-2 px-5 py-3 rounded-lg border border-[#E1E3E5] text-[#0E201E] dark:border-gray-600 dark:text-green-400"
           >
             <FontAwesomeIcon icon={faPlus} className="w-4 h-4 text-gray-500" />
