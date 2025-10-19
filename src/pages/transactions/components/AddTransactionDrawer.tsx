@@ -57,18 +57,18 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
         onClick={onClose}
       />
       
-      {/* Drawer */}
-      <div className="fixed left-0 top-0 h-full w-96 bg-white dark:bg-gray-800 z-50 transform transition-transform duration-300 ease-in-out shadow-xl">
+      {/* Drawer - Mobile Bottom Sheet / Desktop Sidebar */}
+      <div className={`fixed bottom-0 left-0 right-0 md:left-0 md:right-auto md:top-0 md:bottom-auto h-[93vh] md:h-full w-full md:w-96 bg-white dark:bg-gray-800 z-50 transform transition-transform duration-300 ease-in-out shadow-xl rounded-t-3xl md:rounded-none ${isOpen ? 'translate-y-0' : 'translate-y-full'} md:translate-y-0 md:translate-x-0`}>
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="p-6 pb-4">
+          <div className="p-4 md:p-6 pb-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-h5 font-bold text-gray-11 dark:text-gray-100">
+              <h2 className="text-lg md:text-h5 font-bold text-gray-11 dark:text-gray-100">
                 Add transaction
               </h2>
               <button
                 onClick={onClose}
-                className="text-gray-500 dark:text-gray-400"
+                className="text-gray-500 dark:text-gray-400 p-1"
               >
                 <CrossIcon
                   height={20}
@@ -79,8 +79,8 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
           </div>
 
           {/* Scrollable Content */}
-          <div className="flex-1 overflow-y-auto px-6 pb-6">
-            <div className="space-y-5">
+          <div className="flex-1 overflow-y-auto px-4 md:px-6 pb-6">
+            <div className="space-y-4 md:space-y-5">
               <div className='space-y-3'>
                 {/* Transaction Type */}
                 <div className='text-left'>
@@ -93,7 +93,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                       onSelect={setTransactionType}
                       defaultValue="Deposit"
                       className="w-full"
-                      inputClassName='dark:bg-transparent'
+                      inputClassName='dark:bg-transparent text-sm md:text-base'
                     />
                   </div>
                 </div>
@@ -110,7 +110,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                           value={dateValue}
                           onChange={setDateValue}
                           placeholder="Set date"
-                          className='dark:bg-transparent'
+                          className='dark:bg-transparent text-sm md:text-base'
                           datePickerClass=''
                         />
                       </div>
@@ -164,7 +164,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                              onSelect={setSelectedWallet}
                              defaultValue="Select wallet"
                              className="w-full"
-                             inputClassName='dark:bg-transparent'
+                             inputClassName='dark:bg-transparent text-sm md:text-base'
                              showLogo={true}
                            />
                          </div>
@@ -179,8 +179,8 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                           <div className="relative">
                             <Input
                               type="number"
-                              placeholder="0"
-                              className={`w-full rounded-lg text-sm px-4 py-3 font-semibold border-default bg-transparent text-gray-900 focus:outline-none
+                              placeholder="Type number"
+                              className={`w-full rounded-lg text-sm md:text-base px-4 py-3 font-semibold border-default bg-transparent text-gray-900 focus:outline-none
                                 dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250`}
                             />
                             <button
@@ -338,7 +338,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                         {additionalTags.map((tag, index) => (
                           <button 
                             key={index}
-                            className="flex items-center gap-3 px-3 py-1.5 rounded-full text-sm 
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm 
                             border border-default dark:border-transparent dark:bg-gray-900 text-gray-900 dark:text-gray-100 bg-gray-100"
                           >
                             <span className="text-xs">+</span>
@@ -354,10 +354,10 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
           </div>
 
           {/* Footer */}
-          <div className="p-6 pt-4">
+          <div className="p-4 md:p-6 pt-4">
             <button
               onClick={handleSave}
-              className={`w-full px-5 py-3 rounded-xl font-medium transition-colors ${
+              className={`w-full px-5 py-3 rounded-lg md:rounded-xl font-medium transition-colors text-base ${
                 dateValue && selectedWallet 
                   ? 'bg-green-500 text-gray-900 hover:bg-green-500' 
                   : 'bg-default dark:bg-gray-700 text-gray-400 dark:text-gray-300 cursor-not-allowed'
