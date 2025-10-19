@@ -1,4 +1,4 @@
-const EyeIcon = () => {
+const DeleteIcon = () => {
   return (
     <svg
       width="20"
@@ -33,4 +33,4 @@ const EyeIcon = () => {
   );
 };
 
-export default EyeIcon;
+export default DeleteIcon;
