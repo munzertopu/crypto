@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Input } from "@material-tailwind/react";
 import Dropdown from "../../../components/UI/Dropdown";
 import DateRangePicker from "../../../components/DateRangePicker";
@@ -21,10 +21,40 @@ const TaxWizardTab: React.FC = () => {
   const [customAmount, setCustomAmount] = useState('');
   const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
+  const [showCustomInput, setShowCustomInput] = useState(false);
+  
+  // Refs for outside click detection
+  const customInputRef = useRef<HTMLDivElement>(null);
   const [dateRange, setDateRange] = useState({
     startDate: new Date("2025-09-23"),
     endDate: new Date("2025-12-31"),
   });
+
+  // Handle outside click to close custom input
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (customInputRef.current && !customInputRef.current.contains(event.target as Node)) {
+        setShowCustomInput(false);
+        setShowCurrencyDropdown(false);
+      }
+    };
+
+    if (showCustomInput) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showCustomInput]);
+
+  // Handle Enter key to close custom input
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      setShowCustomInput(false);
+      setShowCurrencyDropdown(false);
+    }
+  };
 
   // Constrains state
   const [isConstrainsOpen, setIsConstrainsOpen] = useState(false);
@@ -221,8 +251,17 @@ const TaxWizardTab: React.FC = () => {
               </label>
               <div className="grid grid-cols-5 gap-3">
                 {["$1,000", "$5,000", "$10,000", "Custom"].map((amount) => {
+                  const getCurrencySymbol = (currency: string) => {
+                    switch (currency) {
+                      case "USD": return "$";
+                      case "EUR": return "€";
+                      case "GBP": return "£";
+                      default: return currency;
+                    }
+                  };
+                  
                   const displayLabel = amount === "Custom" && customAmount 
-                    ? `Custom: ${selectedCurrency === "USD" ? "$" : selectedCurrency}${customAmount}` 
+                    ? `Custom: ${getCurrencySymbol(selectedCurrency)}${customAmount}` 
                     : amount;
                   
                   return (
@@ -230,20 +269,29 @@ const TaxWizardTab: React.FC = () => {
                       key={amount}
                       label={displayLabel}
                       isSelected={selectedAmount === amount}
-                      onClick={() => setSelectedAmount(amount)}
+                      onClick={() => {
+                        setSelectedAmount(amount);
+                        if (amount === "Custom") {
+                          setShowCustomInput(true);
+                        } else {
+                          setShowCustomInput(false);
+                        }
+                      }}
                     />
                   );
                 })}
                 {/* Custom Amount Input */}
-                {selectedAmount === "Custom" && (
-                  <div className="relative">
+                {selectedAmount === "Custom" && showCustomInput && (
+                  <div className="relative" ref={customInputRef}>
                     <Input
                       type="number"
                       placeholder="0"
                       value={customAmount}
                       onChange={(e) => setCustomAmount(e.target.value)}
+                      onKeyPress={handleKeyPress}
                       className={`w-full rounded-lg text-sm px-4 py-3 font-medium
                         border-default bg-white text-gray-900 dark:text-gray-100 focus:outline-none dark:bg-gray-900 dark:border-gray-700`}
+                      autoFocus
                     />
                     <button
                       onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
@@ -251,6 +299,9 @@ const TaxWizardTab: React.FC = () => {
                         border-default text-gray-600 bg-white dark:bg-transparent dark:border-[#4D5050]`}
                     >
                       <div className="flex items-center gap-1">
+                        {selectedCurrency === "USD"}
+                        {selectedCurrency === "EUR"}
+                        {selectedCurrency === "GBP"}
                         <span className="text-xs font-medium">{selectedCurrency}</span>
                         <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2" />
                       </div>
@@ -263,20 +314,24 @@ const TaxWizardTab: React.FC = () => {
                           border-default dark:border-gray-700 bg-white dark:bg-[#0E201E]`}
                       >
                         <div className="py-1 px-2">
-                          {["USD", "EUR", "USDT"].map((currency) => (
+                          {[
+                            { code: "USD", symbol: "$" },
+                            { code: "EUR", symbol: "€" },
+                            { code: "GBP", symbol: "£" }
+                          ].map((currency) => (
                             <button
-                              key={currency}
+                              key={currency.code}
                               onClick={() => {
-                                setSelectedCurrency(currency);
+                                setSelectedCurrency(currency.code);
                                 setShowCurrencyDropdown(false);
                               }}
-                              className={`w-full px-3 py-1 text-left text-xs rounded-md ${
-                                selectedCurrency === currency
+                              className={`w-full px-3 py-1 text-left text-xs rounded-md flex items-center gap-2 ${
+                                selectedCurrency === currency.code
                                   ? "bg-gray-100 dark:bg-[#0E201E] dark:text-gray-500"
                                   : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
                               }`}
                             >
-                              {currency}
+                              <span>{currency.code}</span>
                             </button>
                           ))}
                         </div>
