@@ -84,7 +84,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
               <div className='space-y-3'>
                 {/* Transaction Type */}
                 <div className='text-left'>
-                  <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                  <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
                     Transaction type
                   </label>
                   <div className="mt-1.5">
@@ -101,7 +101,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                 {transactionType && (
                   <div className='text-left'>
                     <div className="items-center gap-3">
-                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                      <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
                         Date (UTC)
                       </label>
                       {/* Date input */}
@@ -134,23 +134,45 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                     <div className='text-left'>
                       {/* Wallet */}
                       <div className="mt-1.5">
-                        <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                        <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
                           Wallet
                         </label>
-                        <div className="mt-1.5">
-                          <Dropdown
-                            options={['Bitcoin Wallet', 'Ethereum', 'MetaMask', 'Coinbase']}
-                            onSelect={setSelectedWallet}
-                            defaultValue="Select wallet"
-                            className="w-full"
-                            inputClassName='dark:bg-transparent'
-                          />
-                        </div>
+                         <div className="mt-1.5">
+                           <Dropdown
+                             options={[
+                               { 
+                                 label: 'Bitcoin Wallet', 
+                                 value: 'Bitcoin Wallet',
+                                 logo: '/crypto/bitcoin-btc-logo.png'
+                               },
+                               { 
+                                 label: 'Ethereum', 
+                                 value: 'Ethereum',
+                                 logo: '/crypto/ethereum-eth-logo.png'
+                               },
+                               { 
+                                 label: 'MetaMask', 
+                                 value: 'MetaMask',
+                                 logo: '/crypto/metamask.png'
+                               },
+                               { 
+                                 label: 'Coinbase', 
+                                 value: 'Coinbase',
+                                 logo: '/crypto/coinbase.png'
+                               }
+                             ]}
+                             onSelect={setSelectedWallet}
+                             defaultValue="Select wallet"
+                             className="w-full"
+                             inputClassName='dark:bg-transparent'
+                             showLogo={true}
+                           />
+                         </div>
                       </div>
 
                       {/* Number of coins */}
                       <div className="mt-4">
-                        <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                        <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
                           Number of coins
                         </label>
                         <div className="mt-1.5">
@@ -212,7 +234,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                   <div className='space-y-3'>
                     {/* Tag Fields */}
                     <div className="text-left">
-                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                      <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
                         Tag
                       </label>
                       <div className="mt-1.5 flex items-center gap-2">
@@ -232,7 +254,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                     </div>
 
                     <div className="text-left">
-                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                      <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
                         Tag
                       </label>
                       <div className="mt-1.5 flex items-center gap-2">
@@ -252,7 +274,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
 
                     {/* Transaction Hash */}
                     <div className="text-left">
-                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                      <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
                         Transaction Hash
                       </label>
                       <div className="mt-1.5 flex items-center gap-2">
@@ -272,7 +294,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
 
                     {/* Transaction Destination */}
                     <div className="text-left">
-                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                      <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
                         Transaction Destination
                       </label>
                       <div className="mt-1.5 flex items-center gap-2">
@@ -292,7 +314,7 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
 
                     {/* Description */}
                     <div className="text-left">
-                      <label className="text-left text-sm font-medium text-gray-700 dark:text-gray-100">
+                      <label className="text-left text-sm font-medium text-gray-900 dark:text-gray-100">
                         Description
                       </label>
                       <div className="mt-1.5 flex items-start gap-2">

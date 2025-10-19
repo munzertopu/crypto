@@ -24,6 +24,7 @@ interface DropdownProps {
   multiline?: boolean;
   showTickMark?: boolean;
   selectedValue?: string;
+  showLogo?: boolean;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -38,6 +39,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   searchPlaceholder = "Search...",
   showTickMark = false,
   selectedValue,
+  showLogo = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -62,6 +64,10 @@ const Dropdown: React.FC<DropdownProps> = ({
   
   // Use external selectedValue if provided, otherwise use internal state
   const currentSelectedValue = selectedValue !== undefined ? selectedValue : internalSelectedValue;
+  
+  // Find the current selected option object
+  const currentSelectedOption = normalizedOptions.find(option => option.label === currentSelectedValue);
+  
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => {
@@ -101,9 +107,18 @@ const Dropdown: React.FC<DropdownProps> = ({
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <span className="text-base text-gray-900 dark:text-white">
-          {currentSelectedValue}
-        </span>
+        <div className="flex items-center gap-2">
+          {showLogo && currentSelectedOption?.logo && (
+            <img 
+              src={currentSelectedOption.logo} 
+              alt={currentSelectedOption.label} 
+              className="w-5 h-5 rounded-full flex-shrink-0" 
+            />
+          )}
+          <span className="text-base text-gray-900 dark:text-white">
+            {currentSelectedValue}
+          </span>
+        </div>
         {isOpen ? <ArrowUpIcon height={16} width={16} /> : <ArrowDownIcon height={16} width={16} />}
       </button>
       {isOpen && (
