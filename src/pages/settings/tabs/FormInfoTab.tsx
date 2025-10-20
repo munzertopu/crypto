@@ -93,7 +93,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
             placeholder="Type your name"
             value={formData.name}
             onChange={(e) => handleInputChange("name", e.target.value)}
-            className={`text-base bg-transparent border-[#E1E3E5] dark:border-gray-700 text-white`}
+            className={`text-base bg-transparent py-2.5 border-[#E1E3E5] dark:border-gray-700 dark:text-white`}
           />
         </div>
       </div>
@@ -111,7 +111,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="000000000"
               value={formData.personalId}
               onChange={(e) => handleInputChange("personalId", e.target.value)}
-              className="text-base bg-transparent border-[#E1E3E5] dark:border-gray-700 dark:text-white"
+              className="text-base bg-transparent py-2.5 border-[#E1E3E5] dark:border-gray-700 dark:text-white"
             />
           </div>
 
@@ -124,7 +124,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="Type your city"
               value={formData.city}
               onChange={(e) => handleInputChange("city", e.target.value)}
-              className="text-base bg-transparent border-[#E1E3E5] dark:border-gray-700 dark:text-white"
+              className="text-base bg-transparent py-2.5 border-[#E1E3E5] dark:border-gray-700 dark:text-white"
             />
           </div>
 
@@ -137,7 +137,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="00000"
               value={formData.postalCode}
               onChange={(e) => handleInputChange("postalCode", e.target.value)}
-              className="text-base bg-transparent border-[#E1E3E5] dark:border-gray-700 dark:text-white"
+              className="text-base bg-transparent py-2.5 border-[#E1E3E5] dark:border-gray-700 dark:text-white"
             />
           </div>
         </div>
@@ -201,8 +201,8 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
                     key={country.code}
                     type="button"
                     onClick={() => handleCountrySelect(country)}
-                    className={`w-full px-3 py-2 flex items-center hover:bg-gray-50 ${"text-gray-900 dark:text-gray-150 dark:hover:bg-gray-600"} ${
-                      selectedCountry.code === country.code ? "bg-gray-100" : ""
+                    className={`w-full px-3 py-2.5 flex items-center hover:bg-gray-50 ${"text-gray-900 dark:text-gray-150 dark:hover:bg-gray-600"} ${
+                      selectedCountry.code === country.code ? "bg-gray-100 dark:bg-gray-600" : ""
                     }`}
                   >
                     <img src={country.flag} className="mr-2 w-4 h-3"></img>
@@ -225,7 +225,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="00000"
               value={formData.state}
               onChange={(e) => handleInputChange("state", e.target.value)}
-              className="text-base bg-transparent border-[#E1E3E5] dark:text-white dark:border-gray-700"
+              className="text-base bg-transparent py-2.5 border-[#E1E3E5] dark:text-white dark:border-gray-700"
             />
           </div>
 
@@ -284,7 +284,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="000000000"
               value={formData.inn}
               onChange={(e) => handleInputChange("inn", e.target.value)}
-              className="text-base bg-transparent border-[#E1E3E5] dark:text-white dark:border-gray-700"
+              className="text-base bg-transparent py-2.5 border-[#E1E3E5] dark:text-white dark:border-gray-700"
             />
           </div>
         </div>
@@ -294,7 +294,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
       <div className="flex md:justify-end pt-6">
         <Button
           onClick={handleSaveChanges}
-          className="w-full md:w-auto bg-[#90C853] text-[#0E201E] px-6 py-2 rounded-lg font-medium border-0"
+          className="w-full md:w-auto text-base bg-[#90C853] text-[#0E201E] px-5 py-3 border-0 rounded-lg font-medium"
         >
           Save changes
         </Button>

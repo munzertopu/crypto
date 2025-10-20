@@ -8,7 +8,7 @@ const AuthLayout = ({ children }: ChildrenProps) => {
   const screenSize = useScreenSize();
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row bg-white mx-1 sm:mx-14 my-6 sm:p-14">
+    <div className="flex flex-col-reverse lg:flex-row bg-white dark:bg-[#0E201E] mx-1 sm:mx-14 my-6 sm:p-14">
       {/* Left Side - Login Form */}
       <div className="flex-1 flex items-center justify-end px-5 sm:px-12 md:px-0 lg:px-16 text-left">
         <div className="w-full max-w-md">{children}</div>
