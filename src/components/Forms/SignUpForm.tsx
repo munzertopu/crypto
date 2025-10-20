@@ -84,7 +84,7 @@ const SignUpForm = ({
       <div>
         <label
           htmlFor="fullName"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
         >
           Full name
         </label>
@@ -94,7 +94,7 @@ const SignUpForm = ({
             type="text"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            className="block w-full p-3 border border-gray-150 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="text-gray-900 dark:text-gray-100 block w-full p-3 border border-gray-150 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-transparent"
             placeholder="Enter your full name"
             required
           />
@@ -105,7 +105,7 @@ const SignUpForm = ({
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
         >
           Email
         </label>
@@ -115,7 +115,7 @@ const SignUpForm = ({
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="block w-full p-3 border border-gray-150 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="text-gray-900 dark:text-gray-100 block w-full p-3 border border-gray-150 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-transparent"
             placeholder="Enter your email"
             required
           />
@@ -126,7 +126,7 @@ const SignUpForm = ({
       <div>
         <label
           htmlFor="password"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
         >
           Password
         </label>
@@ -136,12 +136,12 @@ const SignUpForm = ({
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className={`block w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+            className={`text-gray-900 dark:text-gray-100 block w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-transparent ${
               password.length > 0
                 ? isPasswordValid
                   ? "border-green-500"
                   : "border-red-500"
-                : "border-gray-150"
+                : "border-gray-150 dark:border-gray-700"
             }`}
             placeholder="Type a password"
             required
@@ -160,7 +160,7 @@ const SignUpForm = ({
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                className="h-4 w-4"
+                className="h-4 w-4 text-gray-500 dark:text-gray-400"
               >
                 <path
                   d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42004 13.98 8.42004 12C8.42004 10.02 10.02 8.42 12 8.42C13.98 8.42 15.58 10.02 15.58 12Z"
@@ -184,7 +184,7 @@ const SignUpForm = ({
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
+                className="h-4 w-4 text-gray-500 dark:text-gray-400"
               >
                 <path
                   d="M14.53 9.47L9.47004 14.53C8.82004 13.88 8.42004 12.99 8.42004 12C8.42004 10.02 10.02 8.42 12 8.42C12.99 8.42 13.88 8.82 14.53 9.47Z"
@@ -241,7 +241,7 @@ const SignUpForm = ({
                 passwordValidation.hasUpperCase &&
                 passwordValidation.hasLowerCase
                   ? "text-green-600"
-                  : "text-red-600"
+                  : "text-red-600 dark:text-red-400"
               }`}
             >
               <svg
@@ -273,7 +273,7 @@ const SignUpForm = ({
               className={`flex items-center text-sm ${
                 passwordValidation.hasMinLength
                   ? "text-green-600"
-                  : "text-red-600"
+                  : "text-red-600 dark:text-red-400"
               }`}
             >
               <svg
@@ -305,7 +305,7 @@ const SignUpForm = ({
                 passwordValidation.hasNumber &&
                 passwordValidation.hasSpecialChar
                   ? "text-green-600"
-                  : "text-red-600"
+                  : "text-red-600 dark:text-red-400"
               }`}
             >
               <svg
@@ -341,7 +341,7 @@ const SignUpForm = ({
       <div>
         <label
           htmlFor="confirmPassword"
-          className="block text-sm font-medium text-gray-700 mb-2"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
         >
           Confirm password
         </label>
@@ -351,7 +351,7 @@ const SignUpForm = ({
             type={showConfirmPassword ? "text" : "password"}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="block w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="text-gray-900 dark:text-gray-100 block w-full p-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-transparent"
             placeholder="Type a password"
             required
           />
@@ -371,7 +371,7 @@ const SignUpForm = ({
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                className="h-4 w-4"
+                className="h-4 w-4 text-gray-500 dark:text-gray-400"
               >
                 <path
                   d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42004 13.98 8.42004 12C8.42004 10.02 10.02 8.42 12 8.42C13.98 8.42 15.58 10.02 15.58 12Z"
@@ -395,7 +395,7 @@ const SignUpForm = ({
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
+                className="h-4 w-4 text-gray-500 dark:text-gray-400"
               >
                 <path
                   d="M14.53 9.47L9.47004 14.53C8.82004 13.88 8.42004 12.99 8.42004 12C8.42004 10.02 10.02 8.42 12 8.42C12.99 8.42 13.88 8.82 14.53 9.47Z"
@@ -506,10 +506,10 @@ const SignUpForm = ({
       {/* Divider */}
       <div className="hidden sm:block relative">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-300" />
+          <div className="w-full border-t border-gray-300 dark:border-gray-700" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-gray-50 text-gray-500">OR</span>
+          <span className="px-2 bg-white dark:bg-[#0E201E] text-gray-500 dark:text-gray-400">OR</span>
         </div>
       </div>
 
@@ -517,7 +517,7 @@ const SignUpForm = ({
       <div className="hidden sm:block">
         <button
           type="button"
-          className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+          className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm bg-white dark:bg-transparent text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
           aria-label="Sign up with Google account"
         >
           <img src="/google.png" alt="Google" className="w-5 h-5" />
@@ -527,12 +527,11 @@ const SignUpForm = ({
 
       {/* Login Link */}
       <div className="text-center">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-600 dark:text-gray-300">
           Already have a Portal Account?{" "}
           <button
             onClick={onLoginClick}
-            className="font-medium hover:text-green-500 focus:outline-none"
-            style={{ color: "#5f9339" }}
+            className="font-medium hover:text-green-500 focus:outline-none text-green-700 dark:text-green-600 dark:hover:text-green-700 transition-colors"
             aria-label="Navigate to login page"
           >
             Log in here

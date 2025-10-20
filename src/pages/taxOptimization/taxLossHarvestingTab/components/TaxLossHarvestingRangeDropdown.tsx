@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Input, Typography } from "@material-tailwind/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
@@ -88,7 +88,8 @@ const TaxLossHarvestingRangeDropdown: React.FC<
                   value={fromValue}
                   onChange={(e) => setFromValue(e.target.value)}
                   className="w-full rounded-lg text-sm border-gray-150 bg-white text-gray-900
-                    dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100"
+                    dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100
+                    [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
               </div>
 
@@ -106,7 +107,8 @@ const TaxLossHarvestingRangeDropdown: React.FC<
                   value={toValue}
                   onChange={(e) => setToValue(e.target.value)}
                   className="w-full rounded-lg text-sm border-gray-150 bg-white text-gray-900
-                    dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100"
+                    dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100
+                    [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
               </div>
             </div>
@@ -154,7 +156,8 @@ const TaxLossHarvestingRangeDropdown: React.FC<
                   value={fromValue}
                   onChange={(e) => setFromValue(e.target.value)}
                   className={`w-full rounded-lg text-sm font-semibold border-gray-150 bg-white !text-gray-900
-                   dark:border-gray-500 dark:bg-gray-700 dark:text-gray-250`}
+                   dark:border-gray-500 dark:bg-gray-700 dark:text-gray-250
+                   [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                 />
               </div>
 
@@ -172,7 +175,8 @@ const TaxLossHarvestingRangeDropdown: React.FC<
                   value={toValue}
                   onChange={(e) => setToValue(e.target.value)}
                   className={`w-full rounded-lg text-sm font-semibold border-gray-150 bg-white !text-gray-900
-                   dark:border-gray-500 dark:bg-gray-700 dark:text-gray-250`}
+                   dark:border-gray-500 dark:bg-gray-700 dark:text-gray-250
+                   [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                 />
               </div>
             </div>

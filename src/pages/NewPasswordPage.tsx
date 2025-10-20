@@ -69,7 +69,7 @@ const NewPasswordPage: React.FC<NewPasswordPageProps> = ({
 
       {/* Header */}
       <div className="text-center mb-4">
-        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-[#0E201E] mb-2 text-left">
+        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left dark:text-gray-150">
           Set New Password
         </h1>
       </div>
@@ -80,7 +80,7 @@ const NewPasswordPage: React.FC<NewPasswordPageProps> = ({
         <div>
           <label
             htmlFor="password"
-            className="block text-sm font-medium text-gray-700 mb-2"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
           >
             Password
           </label>
@@ -90,12 +90,12 @@ const NewPasswordPage: React.FC<NewPasswordPageProps> = ({
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={`block w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+              className={`text-gray-900 dark:text-gray-100 block w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-transparent ${
                 password.length > 0
                   ? isPasswordValid
                     ? "border-green-500"
                     : "border-red-500"
-                  : "border-gray-150"
+                  : "border-gray-150 dark:border-gray-700"
               }`}
               placeholder="Enter your new password"
               required
@@ -116,7 +116,7 @@ const NewPasswordPage: React.FC<NewPasswordPageProps> = ({
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
-                  className="h-4 w-4"
+                  className="h-4 w-4 text-gray-500 dark:text-gray-400"
                 >
                   <path
                     d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42004 13.98 8.42004 12C8.42004 10.02 10.02 8.42 12 8.42C13.98 8.42 15.58 10.02 15.58 12Z"
@@ -140,7 +140,7 @@ const NewPasswordPage: React.FC<NewPasswordPageProps> = ({
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
+                  className="h-4 w-4 text-gray-500 dark:text-gray-400"
                 >
                   <path
                     d="M14.53 9.47L9.47004 14.53C8.82004 13.88 8.42004 12.99 8.42004 12C8.42004 10.02 10.02 8.42 12 8.42C12.99 8.42 13.88 8.82 14.53 9.47Z"
@@ -192,38 +192,38 @@ const NewPasswordPage: React.FC<NewPasswordPageProps> = ({
           {/* Password Validation Rules */}
           <div className="mt-3 space-y-2">
             <div
-              className={`flex items-center text-sm text-gray-600`}
+              className={`flex items-center text-sm text-gray-600 dark:text-gray-300`}
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`size-4 mr-2  ${
                 passwordValidation.hasUpperCase &&
                 passwordValidation.hasLowerCase
-                  ? "text-green-700"
-                  : "text-gray-600"
+                  ? "text-green-700 dark:text-green-600"
+                  : "text-gray-600 dark:text-gray-400"
               }`}>
                 <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
               </svg>
               One uppercase & lowercase letter
             </div>
             <div
-              className={`flex items-center text-sm text-gray-600`}
+              className={`flex items-center text-sm text-gray-600 dark:text-gray-300`}
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`size-4 mr-2  ${
                 passwordValidation.hasMinLength
-                  ? "text-green-700"
-                  : "text-gray-600"
+                  ? "text-green-700 dark:text-green-600"
+                  : "text-gray-600 dark:text-gray-400"
               }`}>
                 <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
               </svg>
               Minimum 8 characters
             </div>
             <div
-              className={`flex items-center text-sm text-gray-600`}
+              className={`flex items-center text-sm text-gray-600 dark:text-gray-300`}
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={`size-4 mr-2 ${
                 passwordValidation.hasNumber &&
                 passwordValidation.hasSpecialChar
-                  ? "text-green-700"
-                  : "text-gray-600"
+                  ? "text-green-700 dark:text-green-600"
+                  : "text-gray-600 dark:text-gray-400"
               }`}>
                 <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
               </svg>

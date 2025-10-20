@@ -156,7 +156,8 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
                           type="number"
                           placeholder="Type number"
                           className={`w-full rounded-lg text-sm md:text-base px-4 py-3 font-semibold border-default bg-transparent text-gray-900 focus:outline-none focus:ring-0 focus:border-default
-                            dark:bg-transparent dark:border-[#4D5050] dark:text-gray-250 dark:focus:border-[#4D5050]`}
+                            dark:bg-transparent dark:border-[#4D5050] dark:text-gray-250 dark:focus:border-[#4D5050]
+                            [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                         />
                         <button
                           onClick={() =>
