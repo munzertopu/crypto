@@ -237,19 +237,19 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             {/* Market Value Filter */}
             {(marketValueFromValue !== "" || marketValueToValue !== "") && (
               <div
-                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5] border
-                  dark:bg-gray-700 dark:text-white dark:border-gray-600`}
+                className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]
+                  dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600`}
               >
-                <span className="text-[#666868]">Market Value:</span>
+                <span className="text-gray-900 dark:text-gray-100">Market Value:</span>
                 <span>
                   {" "}
                   {marketValueFromValue} - {marketValueToValue}
                 </span>
                 <button
                   onClick={removeMarketValueFilter}
-                  className="ml-1 hover:text-red-500 transition-colors"
+                  className="ml-1 hover:text-red-500 dark:hover:text-red-400 transition-colors"
                 >
-                  <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
+                  <FontAwesomeIcon icon={faTimes} className="w-3 h-3 dark:text-gray-100" />
                 </button>
               </div>
             )}
@@ -258,16 +258,16 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             {(amountHeldFromValue !== "" || amountHeldToValue !== "") && (
               <div
                 className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]
-                  dark:bg-gray-700 dark:text-white dark:border-gray-600`}
+                  dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600`}
               >
-                <span className="text-[#666868]">Amount Held:</span>
+                <span className="text-[#666868] dark:text-gray-400">Amount Held:</span>
                 <span>
                   {" "}
                   {amountHeldFromValue} - {amountHeldToValue}
                 </span>
                 <button
                   onClick={removeAmountHeldFilter}
-                  className="ml-1 hover:text-red-500 transition-colors"
+                  className="ml-1 hover:text-red-500 dark:hover:text-red-400 transition-colors"
                 >
                   <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
                 </button>
@@ -278,17 +278,17 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             {(costBasisFromValue !== "" || costBasisToValue !== "") && (
               <div
                 className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]
-                  dark:bg-gray-700 dark:text-white dark:border-gray-600
+                  dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600
                 `}
               >
-                <span className="text-[#666868]">Cost Basis:</span>
+                <span className="text-[#666868] dark:text-gray-400">Cost Basis:</span>
                 <span>
                   {" "}
                   {costBasisFromValue} - {costBasisToValue}
                 </span>
                 <button
                   onClick={removeCostBasisFilter}
-                  className="ml-1 hover:text-red-500 transition-colors"
+                  className="ml-1 hover:text-red-500 dark:hover:text-red-400 transition-colors"
                 >
                   <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
                 </button>
@@ -299,16 +299,16 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             {(gainsLossesFromValue !== "" || gainsLossesToValue !== "") && (
               <div
                 className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]
-                  dark:bg-gray-700 dark:text-white dark:border-gray-600`}
+                  dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600`}
               >
-                <span className="text-[#666868]">Gain/Losses:</span>
+                <span className="text-[#666868] dark:text-gray-400">Gain/Losses:</span>
                 <span>
                   {" "}
                   {gainsLossesFromValue} - {gainsLossesToValue}
                 </span>
                 <button
                   onClick={removeGainsLossesFilter}
-                  className="ml-1 hover:text-red-500 transition-colors"
+                  className="ml-1 hover:text-red-500 dark:hover:text-red-400 transition-colors"
                 >
                   <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
                 </button>
@@ -320,17 +320,17 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
               potentialLossToValue !== "") && (
               <div
                 className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-[#F3F5F7] text-[#2F3232] border border-[#E1E3E5]
-                  dark:bg-gray-700 dark:text-white dark:border-gray-600
+                  dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600
                 `}
               >
-                <span className="text-[#666868]">Potential Loss:</span>
+                <span className="text-[#666868] dark:text-gray-400">Potential Loss:</span>
                 <span>
                   {" "}
                   {potentialLossFromValue} - {potentialLossToValue}
                 </span>
                 <button
                   onClick={removePotentialLossFilter}
-                  className="ml-1 hover:text-red-500 transition-colors"
+                  className="ml-1 hover:text-red-500 dark:hover:text-red-400 transition-colors"
                 >
                   <FontAwesomeIcon icon={faTimes} className="w-3 h-3" />
                 </button>
@@ -341,7 +341,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             <div className="flex items-center justify-between mx-3">
               <button
                 onClick={clearAllFilters}
-                className={`text-xs text-[#5F9339] font-medium transition-colors`}
+                className={`text-xs text-[#5F9339] dark:text-green-500 font-medium transition-colors hover:text-[#4a7a2b] dark:hover:text-green-400`}
               >
                 <FontAwesomeIcon
                   icon={faTimes}

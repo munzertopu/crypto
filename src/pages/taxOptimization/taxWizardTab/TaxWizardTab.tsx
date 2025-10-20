@@ -14,25 +14,26 @@ const TaxWizardTab: React.FC = () => {
   const [includeOnlyMode, setIncludeOnlyMode] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState("Cash Target");
   const [selectedAmount, setSelectedAmount] = useState("$5,000");
-  const [selectedOptimization, setSelectedOptimization] = useState("Minimize Tax");
+  const [selectedOptimization, setSelectedOptimization] =
+    useState("Minimize Tax");
   const [selectedTimeline, setSelectedTimeline] = useState("23/09/2025");
   const [maxTrades, setMaxTrades] = useState("3");
-  
+
   // Custom amount state
-  const [customAmount, setCustomAmount] = useState('');
+  const [customAmount, setCustomAmount] = useState("");
   const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
   const [showCustomInput, setShowCustomInput] = useState(false);
-  
+
   // Exclusion state - radio button behavior (only one selected)
   const [selectedExclusion, setSelectedExclusion] = useState("Exclude ETH");
-  
+
   // Wallets & Exchanges state - radio button behavior (only one selected)
   const [selectedWallet, setSelectedWallet] = useState("Kraken");
-  
+
   // Assets state - radio button behavior (only one selected)
   const [selectedAsset, setSelectedAsset] = useState("Ethereum");
-  
+
   // Refs for outside click detection
   const customInputRef = useRef<HTMLDivElement>(null);
   const [dateRange, setDateRange] = useState({
@@ -43,24 +44,27 @@ const TaxWizardTab: React.FC = () => {
   // Handle outside click to close custom input
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (customInputRef.current && !customInputRef.current.contains(event.target as Node)) {
+      if (
+        customInputRef.current &&
+        !customInputRef.current.contains(event.target as Node)
+      ) {
         setShowCustomInput(false);
         setShowCurrencyDropdown(false);
       }
     };
 
     if (showCustomInput) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showCustomInput]);
 
   // Handle Enter key to close custom input
   const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       setShowCustomInput(false);
       setShowCurrencyDropdown(false);
     }
@@ -75,16 +79,23 @@ const TaxWizardTab: React.FC = () => {
 
   // Mode toggle component
   const ModeToggle = () => (
-    <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl px-5 py-3 flex items-center justify-between gap-4">
+    <div className="md:bg-gray-100 dark:bg-gray-800 rounded-2xl md:px-5 md:py-3 flex items-center md:justify-between gap-3  md:gap-4">
       {/* Left side - Include only Mode */}
-      <div className={`flex items-center gap-2 ${includeOnlyMode ? "text-gray-900 dark:text-gray-100" : "text-gray-500 dark:text-gray-300"}`}>
-        <span className={`text-sm font-medium`}>
-          Include only Mode
-        </span>
-        <Tooltip 
+      <div
+        className={`flex items-center gap-2 ${
+          includeOnlyMode
+            ? "text-gray-900 dark:text-gray-100"
+            : "text-gray-500 dark:text-gray-300"
+        }`}
+      >
+        <span className={`text-sm font-medium`}>Include only Mode</span>
+        <Tooltip
           title={
             <>
-              <strong>Include only Mode</strong> - This mode allows you to select specific assets, wallets, or exchanges to include in your tax optimization strategy. Only the selected items will be considered for tax calculations.
+              <strong>Include only Mode</strong> - This mode allows you to
+              select specific assets, wallets, or exchanges to include in your
+              tax optimization strategy. Only the selected items will be
+              considered for tax calculations.
             </>
           }
           placement="bottom"
@@ -95,12 +106,16 @@ const TaxWizardTab: React.FC = () => {
             aria-label="Include only mode help"
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+              <path
+                fillRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                clipRule="evenodd"
+              />
             </svg>
           </button>
         </Tooltip>
       </div>
-      
+
       {/* Toggle Switch */}
       <div className="relative">
         <button
@@ -118,14 +133,21 @@ const TaxWizardTab: React.FC = () => {
       </div>
 
       {/* Right side - Exclude Mode */}
-      <div className={`flex items-center gap-2  ${includeOnlyMode ? "text-gray-500 dark:text-gray-300" : "text-gray-900 dark:text-gray-100"}`}>
-        <span className={`text-sm font-medium`}>
-          Exclude Mode
-        </span>
-        <Tooltip 
+      <div
+        className={`flex items-center gap-2  ${
+          includeOnlyMode
+            ? "text-gray-500 dark:text-gray-300"
+            : "text-gray-900 dark:text-gray-100"
+        }`}
+      >
+        <span className={`text-sm font-medium`}>Exclude Mode</span>
+        <Tooltip
           title={
             <>
-              <strong>Exclude Mode</strong> - This mode allows you to exclude specific assets, wallets, or exchanges from your tax optimization strategy. All items except the selected ones will be considered for tax calculations.
+              <strong>Exclude Mode</strong> - This mode allows you to exclude
+              specific assets, wallets, or exchanges from your tax optimization
+              strategy. All items except the selected ones will be considered
+              for tax calculations.
             </>
           }
           placement="bottom"
@@ -136,7 +158,11 @@ const TaxWizardTab: React.FC = () => {
             aria-label="Exclude mode help"
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+              <path
+                fillRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                clipRule="evenodd"
+              />
             </svg>
           </button>
         </Tooltip>
@@ -183,12 +209,12 @@ const TaxWizardTab: React.FC = () => {
   return (
     <div className="space-y-5 pb-8">
       {/* Sales Wizard Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div className="text-left">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 md:gap-4">
+        <div className="text-left ">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 pb-2 md:pb-0">
             Sales Wizard
           </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+          <p className="text-sm text-gray-600 dark:text-gray-300 md:mt-1">
             Turn portfolio into cash, tax-optimized.
           </p>
         </div>
@@ -196,9 +222,9 @@ const TaxWizardTab: React.FC = () => {
       </div>
 
       {/* Main Card */}
-      <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-8">
-        <div className="text-left mb-6">
-          <h3 className="text-h6 font-semibold text-gray-900 dark:text-gray-100 mb-2">
+      <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 md:p-8">
+        <div className="text-left mb-5 md:mb-6">
+          <h3 className=" text-basemd:text-h6 font-semibold text-gray-900 dark:text-gray-100 mb-1 md:mb-2">
             How much cash do you need?
           </h3>
           <p className="text-gray-600 dark:text-gray-300">
@@ -212,7 +238,7 @@ const TaxWizardTab: React.FC = () => {
           <div className="lg:col-span-2 space-y-8">
             {/* What is your goal? */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-3">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 md:mb-3 mb-2">
                 What is your goal?
               </label>
               <div className="flex bg-white dark:bg-gray-900 p-1 rounded-lg justify-between">
@@ -256,8 +282,16 @@ const TaxWizardTab: React.FC = () => {
                 </label>
                 <div className="flex items-center gap-1">
                   <button className="text-gray-400 dark:text-gray-300">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   </button>
                   <span className="text-sm text-gray-600 dark:text-gray-300">
@@ -289,17 +323,24 @@ const TaxWizardTab: React.FC = () => {
                 {["$1,000", "$5,000", "$10,000", "Custom"].map((amount) => {
                   const getCurrencySymbol = (currency: string) => {
                     switch (currency) {
-                      case "USD": return "$";
-                      case "EUR": return "€";
-                      case "GBP": return "£";
-                      default: return currency;
+                      case "USD":
+                        return "$";
+                      case "EUR":
+                        return "€";
+                      case "GBP":
+                        return "£";
+                      default:
+                        return currency;
                     }
                   };
-                  
-                  const displayLabel = amount === "Custom" && customAmount 
-                    ? `Custom: ${getCurrencySymbol(selectedCurrency)}${customAmount}` 
-                    : amount;
-                  
+
+                  const displayLabel =
+                    amount === "Custom" && customAmount
+                      ? `Custom: ${getCurrencySymbol(
+                          selectedCurrency
+                        )}${customAmount}`
+                      : amount;
+
                   return (
                     <OptionButton
                       key={amount}
@@ -331,7 +372,9 @@ const TaxWizardTab: React.FC = () => {
                       autoFocus
                     />
                     <button
-                      onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
+                      onClick={() =>
+                        setShowCurrencyDropdown(!showCurrencyDropdown)
+                      }
                       className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b focus:outline-none
                         border-default text-gray-600 bg-white dark:bg-transparent dark:border-[#4D5050]`}
                     >
@@ -339,8 +382,13 @@ const TaxWizardTab: React.FC = () => {
                         {selectedCurrency === "USD"}
                         {selectedCurrency === "EUR"}
                         {selectedCurrency === "GBP"}
-                        <span className="text-xs font-medium">{selectedCurrency}</span>
-                        <FontAwesomeIcon icon={faChevronDown} className="w-2 h-2" />
+                        <span className="text-xs font-medium">
+                          {selectedCurrency}
+                        </span>
+                        <FontAwesomeIcon
+                          icon={faChevronDown}
+                          className="w-2 h-2"
+                        />
                       </div>
                     </button>
 
@@ -354,7 +402,7 @@ const TaxWizardTab: React.FC = () => {
                           {[
                             { code: "USD", symbol: "$" },
                             { code: "EUR", symbol: "€" },
-                            { code: "GBP", symbol: "£" }
+                            { code: "GBP", symbol: "£" },
                           ].map((currency) => (
                             <button
                               key={currency.code}
@@ -389,7 +437,7 @@ const TaxWizardTab: React.FC = () => {
                   <DateRangePicker
                     selectedDateRange={dateRange}
                     onDateRangeChange={setDateRange}
-                    className="dark:!border-gray-700 md:py-3"
+                    className="dark:!border-gray-700 md:py-3 !w-full md:w-auto"
                   />
                 </div>
                 <div className="grid grid-cols-4 gap-3">
@@ -467,33 +515,57 @@ const TaxWizardTab: React.FC = () => {
               </label>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
                 {[
-                  { name: "Coinbase Pro", amount: "$24,350", status: "Synced 30 min ago" },
-                  { name: "Kraken", amount: "$12,500", status: "Synced 2 h ago" },
-                  { name: "MetaMask", amount: "$8,930", status: "Synced 8 h ago" },
-                  { name: "Solana", amount: "$5,900", status: "Synced 1 d ago" },
+                  {
+                    name: "Coinbase Pro",
+                    amount: "$24,350",
+                    status: "Synced 30 min ago",
+                  },
+                  {
+                    name: "Kraken",
+                    amount: "$12,500",
+                    status: "Synced 2 h ago",
+                  },
+                  {
+                    name: "MetaMask",
+                    amount: "$8,930",
+                    status: "Synced 8 h ago",
+                  },
+                  {
+                    name: "Solana",
+                    amount: "$5,900",
+                    status: "Synced 1 d ago",
+                  },
                 ].map((wallet) => {
                   const isSelected = selectedWallet === wallet.name;
                   return (
-                    <div 
-                      key={wallet.name} 
+                    <div
+                      key={wallet.name}
                       onClick={() => setSelectedWallet(wallet.name)}
                       className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-default dark:border-gray-700 cursor-pointer hover:border-green-500 transition-colors"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm">{wallet.name}</h4>
+                          <h4 className="font-medium text-gray-900 dark:text-gray-100 text-sm">
+                            {wallet.name}
+                          </h4>
                           <div className="flex items-center gap-2 mt-1">
-                            <p className="text-sm text-gray-700 dark:text-gray-300">{wallet.amount}</p>
+                            <p className="text-sm text-gray-700 dark:text-gray-300">
+                              {wallet.amount}
+                            </p>
                             <div className="w-px h-4 bg-default dark:bg-gray-300"></div>
-                            <p className="text-xs text-gray-700 dark:text-gray-300">{wallet.status}</p>
+                            <p className="text-xs text-gray-700 dark:text-gray-300">
+                              {wallet.status}
+                            </p>
                           </div>
                         </div>
                         <div className="flex items-center">
-                          <div className={`w-4 h-4 rounded-full border-2 border-green-500 ${
-                            isSelected 
-                              ? "bg-transparent border-green-500" 
-                              : "border-gray-300 dark:border-gray-600"
-                          }`}>
+                          <div
+                            className={`w-4 h-4 rounded-full border-2 border-green-500 ${
+                              isSelected
+                                ? "bg-transparent border-green-500"
+                                : "border-gray-300 dark:border-gray-600"
+                            }`}
+                          >
                             {isSelected && (
                               <div className="w-full h-full rounded-full bg-green-500 scale-75"></div>
                             )}
@@ -520,26 +592,34 @@ const TaxWizardTab: React.FC = () => {
                 ].map((asset) => {
                   const isSelected = selectedAsset === asset.name;
                   return (
-                    <div 
-                      key={asset.name} 
+                    <div
+                      key={asset.name}
                       onClick={() => setSelectedAsset(asset.name)}
                       className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-green-500 transition-colors"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h4 className="font-medium text-gray-900 dark:text-gray-100 text-base">{asset.name}</h4>
+                          <h4 className="font-medium text-gray-900 dark:text-gray-100 text-base">
+                            {asset.name}
+                          </h4>
                           <div className="flex items-center gap-2 mt-1">
-                            <p className="text-sm text-gray-700 dark:text-gray-300">{asset.amount}</p>
+                            <p className="text-sm text-gray-700 dark:text-gray-300">
+                              {asset.amount}
+                            </p>
                             <div className="w-px h-4 bg-default dark:text-gray-300"></div>
-                            <p className="text-xs text-gray-700 dark:text-gray-300">{asset.status}</p>
+                            <p className="text-xs text-gray-700 dark:text-gray-300">
+                              {asset.status}
+                            </p>
                           </div>
                         </div>
                         <div className="flex items-center">
-                          <div className={`w-4 h-4 rounded-full border-2 border-green-500 ${
-                            isSelected 
-                              ? "bg-transparent border-green-500" 
-                              : "border-gray-300 dark:border-gray-600"
-                          }`}>
+                          <div
+                            className={`w-4 h-4 rounded-full border-2 border-green-500 ${
+                              isSelected
+                                ? "bg-transparent border-green-500"
+                                : "border-gray-300 dark:border-gray-600"
+                            }`}
+                          >
                             {isSelected && (
                               <div className="w-full h-full rounded-full bg-green-500 scale-75"></div>
                             )}
@@ -555,12 +635,17 @@ const TaxWizardTab: React.FC = () => {
             {/* Footer */}
             <div className="flex items-center justify-between pt-5 border-t border-gray-200 dark:border-gray-700">
               <span className="text-sm text-gray-900 dark:text-gray-400">
-                <span className="dark:text-gray-100 font-bold">Last updated:</span> <span className="font-medium text-gray-700 dark:text-gray-300">1-4h ago</span>
+                <span className="dark:text-gray-100 font-bold">
+                  Last updated:
+                </span>{" "}
+                <span className="font-medium text-gray-700 dark:text-gray-300">
+                  1-4h ago
+                </span>
               </span>
-               <button className="flex bg-white items-center gap-2 px-5 py-3 text-base font-medium text-gray-700 rounded-lg dark:text-gray-500 dark:bg-gray-900 dark:border-gray-700">
-                 <RefreshIcon width={16} height={16} />
-                 <span className="dark:text-gray-100">Refresh All</span>
-               </button>
+              <button className="flex bg-white items-center gap-2 px-5 py-3 text-base font-medium text-gray-700 rounded-lg dark:text-gray-500 dark:bg-gray-900 dark:border-gray-700">
+                <RefreshIcon width={16} height={16} />
+                <span className="dark:text-gray-100">Refresh All</span>
+              </button>
             </div>
           </div>
         )}
@@ -568,7 +653,7 @@ const TaxWizardTab: React.FC = () => {
 
       {/* Find Best Plan Button */}
       <div className="flex justify-end">
-        <button 
+        <button
           onClick={handleFindBestPlan}
           className="bg-green-500 hover:bg-green-700 text-gray-900 px-5 py-3 rounded-lg font-medium"
         >
@@ -577,7 +662,7 @@ const TaxWizardTab: React.FC = () => {
       </div>
 
       {/* Optimization Modal */}
-      <OptimizationModal 
+      <OptimizationModal
         isOpen={isOptimizationModalOpen}
         onClose={handleModalClose}
       />
