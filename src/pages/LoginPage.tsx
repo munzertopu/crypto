@@ -47,8 +47,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
     // Password validation
     if (!password.trim()) {
       newErrors.password = "*Password field cannot be blank";
-    }
-    else if (password !== "123456") {
+    } else if (password !== "123456") {
       newErrors.password = "Wrong password. Try again or reset password";
     }
 
@@ -59,13 +58,13 @@ const LoginPage: React.FC<LoginPageProps> = ({
   // Clear specific field error when user starts typing
   const clearFieldError = (field: keyof FormErrors) => {
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: undefined }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validate form before submission
     if (!validateForm()) {
       return;
@@ -86,11 +85,13 @@ const LoginPage: React.FC<LoginPageProps> = ({
   return (
     <AuthLayout>
       <div className="text-center mb-4">
-        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left
-         dark:text-gray-250">
+        <h1
+          className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left
+         dark:text-gray-150"
+        >
           Login
         </h1>
-        <p className="text-base text-base sm:text-lg text-gray-900 text-left">
+        <p className="text-base text-base sm:text-lg text-gray-900 text-left dark:text-gray-250">
           Access your crypto tax tools securely.
         </p>
       </div>
@@ -101,7 +102,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
         <div className="my-4">
           <label
             htmlFor="email"
-            className="text-sm font-medium text-gray-700 my-2"
+            className="text-sm font-medium text-gray-700 dark:text-gray-200 my-2"
           >
             Email
           </label>
@@ -112,12 +113,12 @@ const LoginPage: React.FC<LoginPageProps> = ({
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              clearFieldError('email');
+              clearFieldError("email");
             }}
-            className={`block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none placeholder:text-base ${
-              errors.email 
-                ? 'border-red-500 focus:border-red-500' 
-                : 'border-gray-150 focus:border-green-500'
+            className={`block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none placeholder:text-base dark:bg-transparent ${
+              errors.email
+                ? "border-red-500 focus:border-red-500"
+                : "border-gray-700 focus:border-green-500"
             }`}
             placeholder="Enter your email"
           />
@@ -131,7 +132,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
           <div className="flex text-sm justify-between items-center">
             <label
               htmlFor="password"
-              className="text-sm font-medium text-gray-700 my-0"
+              className="text-sm font-medium text-gray-700 dark:text-gray-200 my-0"
             >
               Password
             </label>
@@ -144,8 +145,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
                   onForgotPasswordClick();
                 }
               }}
-              className="font-medium focus:outline-none"
-              style={{ color: "#5f9339" }}
+              className="font-medium focus:outline-none text-green-700 dark:text-green-600"
               aria-label="Navigate to forgot password page"
             >
               Forgot your password?
@@ -158,12 +158,12 @@ const LoginPage: React.FC<LoginPageProps> = ({
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                clearFieldError('password');
+                clearFieldError("password");
               }}
-              className={`block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none ${
-                errors.password 
-                  ? 'border-red-500 focus:border-red-500' 
-                  : 'border-gray-150 focus:border-green-500'
+              className={`block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none placeholder:text-base dark:bg-transparent ${
+                errors.password
+                  ? "border-red-500 focus:border-red-500"
+                  : "border-gray-700 focus:border-green-500"
               }`}
               placeholder="Type a password"
             />
@@ -181,7 +181,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
-                  className="h-4 w-4"
+                  className="h-4 w-4 text-gray-500 dark:text-gray-400"
                 >
                   <path
                     d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42004 13.98 8.42004 12C8.42004 10.02 10.02 8.42 12 8.42C13.98 8.42 15.58 10.02 15.58 12Z"
@@ -205,7 +205,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
+                  className="h-4 w-4 text-gray-500 dark:text-gray-400"
                 >
                   <path
                     d="M14.53 9.47L9.47004 14.53C8.82004 13.88 8.42004 12.99 8.42004 12C8.42004 10.02 10.02 8.42 12 8.42C12.99 8.42 13.88 8.82 14.53 9.47Z"
@@ -264,30 +264,46 @@ const LoginPage: React.FC<LoginPageProps> = ({
             type="submit"
             disabled={isSubmitting}
             className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-base font-medium rounded-lg transition-colors ${
-              isSubmitting 
-                ? 'opacity-50 cursor-not-allowed' 
-                : 'hover:opacity-90'
+              isSubmitting
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:opacity-90"
             }`}
             style={{ backgroundColor: "#90C853", color: "black" }}
             aria-label="Sign in to account"
           >
             {isSubmitting ? (
               <div className="flex items-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                <svg
+                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-black"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
                 </svg>
                 Logging in...
               </div>
             ) : (
-              'Login'
+              "Login"
             )}
           </button>
         </div>
 
         {/* Sign Up Link */}
         <div className="text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             Don't have an account?{" "}
             <button
               onClick={(event) => {
@@ -297,8 +313,8 @@ const LoginPage: React.FC<LoginPageProps> = ({
                   onSignUpClick();
                 }
               }}
-              className="font-medium focus:outline-none"
-              style={{ color: "#5f9339" }}
+              className="font-medium focus:outline-none text-green-700 hover:text-green-600 dark:text-green-600 dark:hover:text-green-700 transition-colors"
+              // style={{ color: "#5f9339" }}
               aria-label="Navigate to sign up page"
             >
               Sign up
