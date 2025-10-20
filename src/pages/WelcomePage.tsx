@@ -63,7 +63,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onGetStarted }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-white dark:bg-[#0E201E] relative overflow-hidden">
       {/* Confetti and Sparkles */}
       <div className="absolute inset-0 pointer-events-none">
         {confetti.map((piece) => (
@@ -110,10 +110,10 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onGetStarted }) => {
           {/* Success Message */}
           <div className="mb-8">
             <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4
-             dark:text-gray-250">
+             dark:text-gray-150">
               You're Ready to Go!
             </h1>
-            <p className=" text-base sm:text-lg text-gray-800">
+            <p className=" text-base sm:text-lg text-gray-900 dark:text-gray-250">
               Enter the Portal now
             </p>
           </div>
