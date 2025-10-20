@@ -115,7 +115,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
               setEmail(e.target.value);
               clearFieldError("email");
             }}
-            className={`block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none placeholder:text-base dark:bg-transparent ${
+            className={ `text-gray-900 dark:text-gray-100 block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none placeholder:text-base dark:bg-transparent ${
               errors.email
                 ? "border-red-500 focus:border-red-500"
                 : "border-gray-700 focus:border-green-500"
@@ -160,7 +160,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
                 setPassword(e.target.value);
                 clearFieldError("password");
               }}
-              className={`block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none placeholder:text-base dark:bg-transparent ${
+              className={`text-gray-900 dark:text-gray-100 block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none placeholder:text-base dark:bg-transparent ${
                 errors.password
                   ? "border-red-500 focus:border-red-500"
                   : "border-gray-700 focus:border-green-500"
