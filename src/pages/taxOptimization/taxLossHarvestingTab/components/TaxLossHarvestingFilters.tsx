@@ -86,6 +86,51 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
     setPotentialLossToValue("0");
   };
 
+  // Function to close all dropdowns
+  const closeAllDropdowns = () => {
+    setMarketValueDropdownOpen(false);
+    setAmountHeldDropdownOpen(false);
+    setCostBasisDropdownOpen(false);
+    setGainsLossesDropdownOpen(false);
+    setPotentialLossDropdownOpen(false);
+  };
+
+  // Handler functions to ensure only one dropdown is open at a time
+  const handleMarketValueDropdown = (open: boolean) => {
+    if (open) {
+      closeAllDropdowns();
+    }
+    setMarketValueDropdownOpen(open);
+  };
+
+  const handleAmountHeldDropdown = (open: boolean) => {
+    if (open) {
+      closeAllDropdowns();
+    }
+    setAmountHeldDropdownOpen(open);
+  };
+
+  const handleCostBasisDropdown = (open: boolean) => {
+    if (open) {
+      closeAllDropdowns();
+    }
+    setCostBasisDropdownOpen(open);
+  };
+
+  const handleGainsLossesDropdown = (open: boolean) => {
+    if (open) {
+      closeAllDropdowns();
+    }
+    setGainsLossesDropdownOpen(open);
+  };
+
+  const handlePotentialLossDropdown = (open: boolean) => {
+    if (open) {
+      closeAllDropdowns();
+    }
+    setPotentialLossDropdownOpen(open);
+  };
+
   // Check if any filters are active
   const hasActiveFilters =
     marketValueFromValue !== "0" ||
@@ -134,7 +179,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             toValue={marketValueToValue}
             setToValue={setMarketValueToValue}
             isOpen={marketValueDropdownOpen}
-            setIsOpen={setMarketValueDropdownOpen}
+            setIsOpen={handleMarketValueDropdown}
             title="Market value"
           />
 
@@ -145,7 +190,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             toValue={amountHeldToValue}
             setToValue={setAmountHeldToValue}
             isOpen={amountHeldDropdownOpen}
-            setIsOpen={setAmountHeldDropdownOpen}
+            setIsOpen={handleAmountHeldDropdown}
             title="Amount held"
           />
 
@@ -156,7 +201,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             toValue={costBasisToValue}
             setToValue={setCostBasisToValue}
             isOpen={costBasisDropdownOpen}
-            setIsOpen={setCostBasisDropdownOpen}
+            setIsOpen={handleCostBasisDropdown}
             title="Cost basis"
           />
 
@@ -167,7 +212,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             toValue={gainsLossesToValue}
             setToValue={setGainsLossesToValue}
             isOpen={gainsLossesDropdownOpen}
-            setIsOpen={setGainsLossesDropdownOpen}
+            setIsOpen={handleGainsLossesDropdown}
             title="Gains/losses"
             isRight={true}
           />
@@ -179,7 +224,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             toValue={potentialLossToValue}
             setToValue={setPotentialLossToValue}
             isOpen={potentialLossDropdownOpen}
-            setIsOpen={setPotentialLossDropdownOpen}
+            setIsOpen={handlePotentialLossDropdown}
             title="Potential Loss"
             isRight={true}
           />
@@ -326,7 +371,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             toValue={marketValueToValue}
             setToValue={setMarketValueToValue}
             isOpen={marketValueDropdownOpen}
-            setIsOpen={setMarketValueDropdownOpen}
+            setIsOpen={handleMarketValueDropdown}
             title="Market value"
           />
 
@@ -337,7 +382,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             toValue={amountHeldToValue}
             setToValue={setAmountHeldToValue}
             isOpen={amountHeldDropdownOpen}
-            setIsOpen={setAmountHeldDropdownOpen}
+            setIsOpen={handleAmountHeldDropdown}
             title="Amount held"
           />
 
@@ -348,7 +393,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             toValue={costBasisToValue}
             setToValue={setCostBasisToValue}
             isOpen={costBasisDropdownOpen}
-            setIsOpen={setCostBasisDropdownOpen}
+            setIsOpen={handleCostBasisDropdown}
             title="Cost basis"
           />
 
@@ -359,7 +404,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             toValue={gainsLossesToValue}
             setToValue={setGainsLossesToValue}
             isOpen={gainsLossesDropdownOpen}
-            setIsOpen={setGainsLossesDropdownOpen}
+            setIsOpen={handleGainsLossesDropdown}
             title="Gains/losses"
             isRight={true}
           />
@@ -371,7 +416,7 @@ const TaxLossHarvestingFilters: React.FC<TaxLossHarvestingFiltersProps> = ({
             toValue={potentialLossToValue}
             setToValue={setPotentialLossToValue}
             isOpen={potentialLossDropdownOpen}
-            setIsOpen={setPotentialLossDropdownOpen}
+            setIsOpen={handlePotentialLossDropdown}
             title="Potential Loss"
             isRight={true}
           />
