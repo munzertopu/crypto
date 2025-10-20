@@ -5,6 +5,7 @@ import DateRangePicker from "../../../components/DateRangePicker";
 import OptimizationModal from "./components/OptimizationModal";
 import OptimizationResults from "./components/OptimizationResults";
 import RefreshIcon from "../../../components/Icons/RefreshIcon";
+import Tooltip from "../../../components/UI/Tooltip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -81,22 +82,38 @@ const TaxWizardTab: React.FC = () => {
     <div className="md:bg-gray-100 dark:bg-gray-800 rounded-2xl md:px-5 md:py-3 flex items-center md:justify-between gap-3  md:gap-4">
       {/* Left side - Include only Mode */}
       <div
-        className={`flex items-center gap-1 md:gap-2 ${
+        className={`flex items-center gap-2 ${
           includeOnlyMode
             ? "text-gray-900 dark:text-gray-100"
             : "text-gray-500 dark:text-gray-300"
         }`}
       >
         <span className={`text-sm font-medium`}>Include only Mode</span>
-        <button>
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
+        <Tooltip
+          title={
+            <>
+              <strong>Include only Mode</strong> - This mode allows you to
+              select specific assets, wallets, or exchanges to include in your
+              tax optimization strategy. Only the selected items will be
+              considered for tax calculations.
+            </>
+          }
+          placement="bottom"
+        >
+          <button
+            type="button"
+            className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            aria-label="Include only mode help"
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fillRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </Tooltip>
       </div>
 
       {/* Toggle Switch */}
@@ -117,22 +134,38 @@ const TaxWizardTab: React.FC = () => {
 
       {/* Right side - Exclude Mode */}
       <div
-        className={`flex items-center gap-1 md:gap-2 ${
+        className={`flex items-center gap-2  ${
           includeOnlyMode
             ? "text-gray-500 dark:text-gray-300"
             : "text-gray-900 dark:text-gray-100"
         }`}
       >
         <span className={`text-sm font-medium`}>Exclude Mode</span>
-        <button className="">
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
+        <Tooltip
+          title={
+            <>
+              <strong>Exclude Mode</strong> - This mode allows you to exclude
+              specific assets, wallets, or exchanges from your tax optimization
+              strategy. All items except the selected ones will be considered
+              for tax calculations.
+            </>
+          }
+          placement="bottom"
+        >
+          <button
+            type="button"
+            className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+            aria-label="Exclude mode help"
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fillRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </Tooltip>
       </div>
     </div>
   );
@@ -334,7 +367,8 @@ const TaxWizardTab: React.FC = () => {
                       onChange={(e) => setCustomAmount(e.target.value)}
                       onKeyPress={handleKeyPress}
                       className={`w-full rounded-lg text-sm px-4 py-2 font-medium
-                        border-default bg-white text-gray-900 dark:text-gray-100 focus:outline-none dark:bg-gray-900 dark:border-gray-700`}
+                        border-default bg-white text-gray-900 dark:text-gray-100 focus:outline-none dark:bg-gray-900 dark:border-gray-700
+                        [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                       autoFocus
                     />
                     <button

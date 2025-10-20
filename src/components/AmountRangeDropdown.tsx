@@ -74,7 +74,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                   value={fromValue}
                   onChange={(e) => setFromValue(e.target.value)}
                   className={`w-full rounded-lg text-sm font-semibold border-default bg-white text-gray-900 focus:outline-none focus:ring-1 focus:ring-border-gray-300
-                    dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250`}
+                    dark:bg-transparent dark:border-[#4D5050]  dark:text-gray-250
+                    [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                 />
                 <button
                   onClick={() =>
@@ -134,7 +135,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                   value={toValue}
                   onChange={(e) => setToValue(e.target.value)}
                   className={`w-full rounded-lg text-sm font-semibold border-default bg-white text-gray-900
-                    dark:bg-transparent dark:border-[#4D5050] dark:text-gray-250`}
+                    dark:bg-transparent dark:border-[#4D5050] dark:text-gray-250
+                    [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                 />
                 <button
                   onClick={() =>

@@ -19,7 +19,7 @@ const RegisterPage: React.FC<RegisterPageProps> = ({
     <AuthLayout>
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-[#0E201E] mb-2 sm:text-left text-center">
+        <h1 className="text-xl sm:text-2xl font-semibold sm:font-bold text-[#0E201E] mb-2 sm:text-left text-center dark:text-gray-150">
           Welcome to Portal!
         </h1>
       </div>
@@ -43,10 +43,10 @@ const RegisterPage: React.FC<RegisterPageProps> = ({
         {/* Divider */}
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-150" />
+            <div className="w-full border-t border-gray-150 dark:border-gray-700" />
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-gray-50 text-gray-500">OR</span>
+            <span className="px-2 bg-white dark:bg-[#0E201E] text-gray-500 dark:text-gray-400">OR</span>
           </div>
         </div>
 
@@ -54,7 +54,7 @@ const RegisterPage: React.FC<RegisterPageProps> = ({
         <div>
           <button
             type="button"
-            className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-700 rounded-lg shadow-sm bg-white dark:bg-transparent text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
             aria-label="Sign up with Google account"
           >
             <img src="/google.png" alt="Google" className="w-5 h-5" />
@@ -64,12 +64,11 @@ const RegisterPage: React.FC<RegisterPageProps> = ({
 
         {/* Login Link */}
         <div className="text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
             Already have a Portal Account?{" "}
             <button
               onClick={onLoginClick}
-              className="font-medium hover:text-green-500 focus:outline-none"
-              style={{ color: "#75AE46" }}
+              className="font-medium hover:text-green-500 focus:outline-none text-green-700 dark:text-green-600 dark:hover:text-green-700 transition-colors"
               aria-label="Navigate to login page"
             >
               Log in here

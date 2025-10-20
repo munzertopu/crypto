@@ -32,11 +32,9 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
   const [selectedDustCurrency, setSelectedDustCurrency] = useState(
     currencies[0]
   );
-  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const currencyDropdownRef = useRef<HTMLDivElement>(null);
   const dustCurrencyDropdownRef = useRef<HTMLDivElement>(null);
-  const datePickerRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({
@@ -88,12 +86,6 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
         !dustCurrencyDropdownRef.current.contains(event.target as Node)
       ) {
         setIsDustCurrencyDropdownOpen(false);
-      }
-      if (
-        datePickerRef.current &&
-        !datePickerRef.current.contains(event.target as Node)
-      ) {
-        setIsDatePickerOpen(false);
       }
     };
 
@@ -174,7 +166,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   onClick={() =>
                     setIsCountryDropdownOpen(!isCountryDropdownOpen)
                   }
-                  className={`w-full px-3 border rounded-lg focus:outline-none flex items-center justify-between
+                  className={`w-full px-3 py-2.5 border rounded-lg focus:outline-none flex items-center justify-between
                     border-default bg-transparent text-gray-900
                     dark:border-gray-700 dark:text-gray-250`}
                 >
@@ -190,9 +182,9 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                       }`}
                     />
                     <div
-                      className={`w-px h-10 my-0 bg-default mx-3 dark:bg-gray-700`}
+                      className={`w-px h-6 my-0 bg-default mx-3 dark:bg-gray-700`}
                     ></div>
-                    <span className="py-1.5 font-medium">
+                    <span className="font-medium">
                       {selectedCountry.name}
                     </span>
                   </div>
@@ -209,12 +201,12 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                         key={country.code}
                         type="button"
                         onClick={() => handleCountrySelect(country)}
-                        className={`w-full px-3 border focus:outline-none flex items-center justify-between
+                        className={`w-full px-3 py-2.5 border focus:outline-none flex items-center justify-between
                           border-b-default bg-white text-gray-900
                           dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250
-                        } ${
+                        ${
                           selectedCountry.code === country.code
-                            ? "bg-gray-100"
+                            ? "bg-gray-100 dark:bg-gray-600"
                             : ""
                         }`}
                       >
@@ -242,8 +234,8 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   onClick={() =>
                     setIsCurrencyDropdownOpen(!isCurrencyDropdownOpen)
                   }
-                  className={`w-full px-3 py-2 border border-default rounded-lg focus:outline-none flex items-center justify-between bg-transparent text-gray-900
-                    dark:text-gray-250`}
+                  className={`w-full px-3 py-2.5 border border-default rounded-lg focus:outline-none flex items-center justify-between bg-transparent text-gray-900
+                    dark:border-gray-700 dark:text-gray-250`}
                 >
                   <div className="flex items-center justify-between w-full">
                     <div className="flex items-center">
@@ -272,11 +264,11 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                         key={currency.code}
                         type="button"
                         onClick={() => handleCurrencySelect(currency)}
-                        className={`w-full px-3 py-2 flex items-center hover:bg-gray-50 text-gray-900
+                        className={`w-full px-3 py-2.5 flex items-center hover:bg-gray-50 text-gray-900
                           dark:hover:bg-gray-600 dark:text-gray-250 
                           ${
                             selectedCurrency.code === currency.code
-                              ? "bg-gray-100"
+                              ? "bg-gray-100 dark:bg-gray-600"
                               : ""
                           }`}
                       >
@@ -294,12 +286,12 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
               >
                 Lock transaction prior to this date
               </label>
-              <div className="relative" ref={datePickerRef}>
+              <div className="relative">
                 <DatePicker
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
-                  className={`w-full px-3 py-2 border border-default rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-transparent text-gray-900
-                    dark:border-gray-600 dark:text-gray-250
+                  className={`w-full px-3 py-2.5 border border-default rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-transparent text-gray-900
+                    dark:border-gray-700 dark:text-gray-250
                   `}
                   placeholderText="MM/DD/YYYY"
                   dateFormat="MM/dd/yyyy"
@@ -345,8 +337,8 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   onChange={(e) =>
                     handleInputChange("timezone", e.target.value)
                   }
-                  className={`w-full appearance-none px-4 py-2 border border-default rounded-lg focus:outline-none bg-transparent text-gray-900
-                    dark:border-gray-600 dark:text-gray-250`}
+                  className={`w-full appearance-none px-4 py-2.5 border border-default rounded-lg focus:outline-none bg-transparent text-gray-900
+                    dark:border-gray-700 dark:text-gray-250`}
                 >
                   <option value="Pacific Daylight Time (GMT-7)">
                     Pacific Daylight Time (GMT-7)
@@ -393,15 +385,14 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                   />
                 </svg>
               </div>
-              <div className="flex space-x-0 px-4 py-2 border border-default rounded-lg">
+              <div className="flex space-x-0 px-4 py-2.5 border border-default rounded-lg dark:border-gray-700">
                 <input
                   type="text"
                   value={formData.dustValueThreshold}
                   onChange={(e) =>
                     handleInputChange("dustValueThreshold", e.target.value)
                   }
-                  className={`flex-1 focus:outline-none bg-transparent border-gray-700 
-                      dark:border-gray-600 dark:text-white`}
+                  className={`flex-1 focus:outline-none bg-transparent text-gray-900 dark:text-white`}
                 />
                 <div className="relative" ref={dustCurrencyDropdownRef}>
                   <button
@@ -439,11 +430,11 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                           key={currency.code}
                           type="button"
                           onClick={() => handleDustCurrencySelect(currency)}
-                          className={`w-full px-3 py-2 flex items-center text-gray-900
-                            dark:text-gray-250
+                          className={`w-full px-3 py-2.5 flex items-center hover:bg-gray-50 text-gray-900
+                            dark:hover:bg-gray-600 dark:text-gray-250
                             ${
                               selectedDustCurrency.code === currency.code
-                                ? "bg-gray-100"
+                                ? "bg-gray-100 dark:bg-gray-600"
                                 : ""
                             }`}
                         >
@@ -466,8 +457,8 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                 <DatePicker
                   selected={taxReportingYearDate}
                   onChange={(date) => setTaxReportingYearDate(date)}
-                  className={`w-full px-3 mt-{1px} py-2 border border-default rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-transparent text-gray-900
-                      dark:border-gray-600 dark:text-gray-250
+                  className={`w-full px-3 py-2.5 border border-default rounded-lg focus:outline-none flex items-center justify-between cursor-pointer bg-transparent text-gray-900
+                      dark:border-gray-700 dark:text-gray-250
                    `}
                   placeholderText="MM/DD/YYYY"
                   dateFormat="MM/dd/yyyy"

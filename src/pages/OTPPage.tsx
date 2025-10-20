@@ -75,11 +75,11 @@ const OTPPage: React.FC<OTPPageProps> = ({
       <div className="text-center mb-8">
         <h1
           className="text-xl sm:text-2xl font-semibold sm:font-bold text-gray-900 mb-2 text-left
-         dark:text-gray-250"
+         dark:text-gray-150"
         >
           Enter 6 digit code we sent you
         </h1>
-        <p className="text-base sm:text-lg text-[#2F3232] text-left">
+        <p className="text-base sm:text-lg text-gray-900 text-left dark:text-gray-250">
           We sent a code to <strong>{email}</strong> to verify your identity.
           Enter it below to reset your password securely.
         </p>
@@ -89,7 +89,7 @@ const OTPPage: React.FC<OTPPageProps> = ({
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* OTP Input Fields */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-4">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-4">
             Code
           </label>
           <div className="flex justify-between gap-2">
@@ -105,7 +105,7 @@ const OTPPage: React.FC<OTPPageProps> = ({
                 value={digit}
                 onChange={(e) => handleOtpChange(index, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(index, e)}
-                className="w-12 h-12 text-center border border-gray-150 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-lg font-semibold"
+                className="text-gray-900 dark:text-gray-100 w-12 h-12 text-center border border-gray-150 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-lg font-semibold dark:bg-transparent"
                 placeholder="-"
                 maxLength={1}
                 required
