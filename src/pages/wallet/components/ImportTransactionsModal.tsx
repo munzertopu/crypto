@@ -77,7 +77,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
 
       {/* Modal */}
       <div className="flex min-h-full items-end md:items-center md:justify-center md:p-4">
-        <div className="relative bg-white dark:bg-gray-900 rounded-t-3xl md:rounded-2xl shadow-xl max-w-4xl w-full p-4 md:p-8 flex flex-col">
+        <div className="relative bg-white dark:bg-gray-800 rounded-t-3xl md:rounded-2xl shadow-xl max-w-4xl w-full p-4 md:p-8 flex flex-col">
           {/* Header */}
           <div className="flex items-start justify-between mb-4 md:mb-0">
             <div>
@@ -170,7 +170,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
 
                       {/* Google Drive Button */}
                       <button
-                        className="w-full py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm font-medium"
+                        className="w-full py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm font-medium"
                         onClick={(e) => {
                           e.stopPropagation();
                           // Handle Google Drive upload
@@ -295,24 +295,26 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
               <div className="">
                 {/* Mobile Accordion Instructions */}
                 <div className="block md:hidden">
-                  <Accordion className="!bg-gray-100 dark:!bg-gray-800 p-3">
+                  <Accordion className="!bg-gray-100 dark:!bg-gray-900 p-3">
                     <AccordionItem
                       title="Instructions"
-                      className="!bg-gray-100 dark:!bg-gray-800"
+                      className="!bg-gray-100 dark:!bg-gray-900"
                     >
                       <div className="md:hidden">
                         <ol className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
                           <li className="flex items-start space-x-2">
-                            <span className="flex-shrink-0 w-6 h-6 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
+                            <span className="flex-shrink-0 w-6 h-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
                               1
                             </span>
                             <span className="text-base font-medium text-gray-700 dark:text-gray-300">
-                              <span className="text-gray-900 dark:text-gray-100">Log in</span> to
-                              the {walletName} app
+                              <span className="text-gray-900 dark:text-gray-100">
+                                Log in
+                              </span>{" "}
+                              to the {walletName} app
                             </span>
                           </li>
                           <li className="flex items-start space-x-2">
-                            <span className="flex-shrink-0 w-6 h-6 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
+                            <span className="flex-shrink-0 w-6 h-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
                               2
                             </span>
                             <span className="text-base text-left font-medium text-gray-700 dark:text-gray-300">
@@ -324,30 +326,34 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                             </span>
                           </li>
                           <li className="flex items-start space-x-2">
-                            <span className="flex-shrink-0 w-6 h-6 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
+                            <span className="flex-shrink-0 w-6 h-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
                               3
                             </span>
                             <span className="text-base font-medium text-gray-700 dark:text-gray-300">
                               Select send{" "}
-                              <span className="text-gray-900 dark:text-gray-100">CSV</span> to
-                              email.
+                              <span className="text-gray-900 dark:text-gray-100">
+                                CSV
+                              </span>{" "}
+                              to email.
                             </span>
                           </li>
                           <li className="flex items-start space-x-2 text-left">
-                            <span className="flex-shrink-0 w-6 h-6 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
+                            <span className="flex-shrink-0 w-6 h-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
                               4
                             </span>
                             <span className="text-base font-medium text-gray-700 dark:text-gray-300">
                               Your CSV file will be sent to the email associated
                               with your {walletName} account -{" "}
-                              <span className="text-gray-900 dark:text-gray-100">download</span> it
-                              from here.
+                              <span className="text-gray-900 dark:text-gray-100">
+                                download
+                              </span>{" "}
+                              it from here.
                             </span>
                           </li>
                         </ol>
                       </div>
                       <div className="pt-2">
-                        <button className="w-full py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm font-medium">
+                        <button className="w-full py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-sm font-medium">
                           Watch video
                         </button>
                       </div>
@@ -363,8 +369,10 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                         1
                       </span>
                       <span className="text-base font-medium text-gray-700 dark:text-gray-300">
-                        <span className="text-gray-900 dark:text-gray-100">Log in</span> to the{" "}
-                        {walletName} app
+                        <span className="text-gray-900 dark:text-gray-100">
+                          Log in
+                        </span>{" "}
+                        to the {walletName} app
                       </span>
                     </li>
                     <li className="flex items-start space-x-2">
@@ -373,7 +381,9 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                       </span>
                       <span className="text-base font-medium text-gray-700 dark:text-gray-300">
                         Select{" "}
-                        <span className="text-gray-900 dark:text-gray-100">account balance</span>{" "}
+                        <span className="text-gray-900 dark:text-gray-100">
+                          account balance
+                        </span>{" "}
                         in the top left.
                       </span>
                     </li>
@@ -382,7 +392,10 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                         3
                       </span>
                       <span className="text-base font-medium text-gray-700 dark:text-gray-300">
-                        Select send <span className="text-gray-900 dark:text-gray-100">CSV</span>{" "}
+                        Select send{" "}
+                        <span className="text-gray-900 dark:text-gray-100">
+                          CSV
+                        </span>{" "}
                         to email.
                       </span>
                     </li>
@@ -393,8 +406,10 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                       <span className="text-base font-medium text-gray-700 dark:text-gray-300">
                         Your CSV file will be sent to the email associated with
                         your {walletName} account -{" "}
-                        <span className="text-gray-900 dark:text-gray-100">download</span> it from
-                        here.
+                        <span className="text-gray-900 dark:text-gray-100">
+                          download
+                        </span>{" "}
+                        it from here.
                       </span>
                     </li>
                   </ol>
@@ -407,12 +422,12 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
           </div>
           {/* Bottom Actions */}
           <div className="flex  md:flex-row justify-between mt-6 md:mt-6 gap-3">
-            <button className="px-4 md:px-5 py-3 md:py-3 border-2 border-gray-300 dark:border-gray-600 text-sm md:text-base font-medium rounded-lg bg-transparent dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+            <button className="px-4 md:px-5 py-3 md:py-3 border-2 border-gray-300 dark:border-gray-600 text-sm md:text-base font-medium rounded-lg bg-transparent dark:bg-gray-800 text-gray-700 dark:text-gray-100">
               View history
             </button>
             <button
               onClick={onClose}
-              className="px-4 md:px-5 py-3 md:py-3 bg-green-500 text-gray-900 dark:text-gray-100 rounded-xl text-sm md:text-base font-medium"
+              className="px-4 md:px-5 py-3 md:py-3 bg-green-500 text-gray-900  rounded-xl text-sm md:text-base font-medium"
             >
               Import
             </button>
