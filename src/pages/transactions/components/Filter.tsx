@@ -503,7 +503,7 @@ const Filter: React.FC<FilterProps> = ({
       {/* Tabs */}
       {!hideTab && (
         <div className={`border-gray-200 dark:border-gray-700`}>
-          <Tabs>
+          <Tabs className="overflow-x-auto scrollbar-hide">
             <Tabs.List className="my-0 mt-3 lg:my-2 bg-white dark:bg-gray-800  w-full sm:w-[fit-content]">
               {tabs.map((tab) => (
                 <Tabs.Trigger

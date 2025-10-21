@@ -33,16 +33,15 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 
-    dark:text-gray-250">
+    <div
+      className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 
+    dark:text-gray-250"
+    >
       {/* Navigation Bar */}
-      <NavigationBar
-        userName="Kristin Watson"
-        onLogout={handleLogout}
-      />
+      <NavigationBar userName="Kristin Watson" onLogout={handleLogout} />
 
       {/* Dashboard Content */}
-      <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full">
+      <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full pb-3 ">
         {/* Welcome Banner */}
         {showWelcomeBanner && (
           <>
@@ -60,10 +59,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
         )}
 
         {/* Dashboard Header */}
-        <DashboardHeader
-          activeTab={activeTab}
-          onTabChange={handleTabChange}
-        />
+        <DashboardHeader activeTab={activeTab} onTabChange={handleTabChange} />
         <div className="mx-0 md:mx-0 sm:mx-1">
           {/* Portfolio Tab */}
           {activeTab === "Portfolio" && (
