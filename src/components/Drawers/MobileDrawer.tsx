@@ -93,7 +93,7 @@ const MobileDrawer: React.FC<DrawerProps> = ({
           <div className="flex justify-between pt-3 mt-auto">
             <button
               onClick={onLeftButtonClick || onClose}
-              className="w-[90px] font-medium focus:outline-none dark:text-gray-250"
+              className="w-[90px] font-medium focus:outline-none dark:text-gray-300"
               style={{ color: "rgba(77,80,80,1)" }}
               aria-label="leftButtonText"
             >

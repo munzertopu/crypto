@@ -113,7 +113,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               key={item.name}
               to={item.href}
               className={`opacity-80 px-1 lg:px-0 py-2 text-sm lg:text-base text-gray-900
-                 dark:text-gray-300
+                 dark:text-gray-100
                 ${
                   currentPage === item.href.replace("/", "") ||
                   currentPage === item.name.toLowerCase().replace(/\s+/g, "-")
@@ -418,9 +418,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               <Link
                 key={item.name}
                 to={item.href}
-                className={`dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800 text-gray-900 hover:text-gray-900
+                className={`dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-800 text-gray-900 hover:text-gray-900
                    hover:bg-gray-50 block text-sm transition-colors opacity-80
-                   dark:text-gray-250`}
+                   `}
                 onClick={() => setIsMobileMenuOpen(false)}
                 role="menuitem"
               >

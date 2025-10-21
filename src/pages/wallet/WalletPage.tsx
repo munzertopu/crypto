@@ -18,7 +18,7 @@ const WalletPage: React.FC<WalletPageProps> = ({ onLogout }) => {
       <NavigationBar onLogout={onLogout} currentPage="wallets" />
 
       <div className="px-4 md:px-10">
-        <div className="pt-6 sm:pt-0 md:mx-auto md:px-0 md:py-5">
+        <div className="pt-6 sm:pt-0 md:mx-auto md:px-0 md:py-5 pb-5 md:pb-0">
           {/* Main Title */}
           <h1
             className={`text-lg md:text-2xl font-semibold text-left text-[#0E201E]

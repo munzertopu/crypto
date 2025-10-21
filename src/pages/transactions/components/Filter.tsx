@@ -678,13 +678,13 @@ const Filter: React.FC<FilterProps> = ({
           >
             <div className="py-2 px-3 min-w-[250px] flex flex-col gap-2">
               <div className="flex flex-row w-full  items-center">
-                <span className="text-sm text-gray-900 px-1 flex-1 text-left">
+                <span className="text-sm text-gray-900 dark:text-gray-100 px-1 flex-1 text-left">
                   Show deleted
                 </span>
                 <Toggle enabled={showDeleted} onChange={setShowDeleted} />
               </div>
               <div className="flex flex-row w-full  items-center">
-                <span className="text-sm text-gray-900 px-1 flex-1 text-left">
+                <span className="text-sm text-gray-900 dark:text-gray-100 px-1 flex-1 text-left">
                   Show soft deleted only
                 </span>
                 <Toggle
