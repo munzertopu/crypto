@@ -12,6 +12,7 @@ interface TaxLossHarvestingRangeDropdownProps {
   setIsOpen: (open: boolean) => void;
   title: string;
   isRight?: boolean;
+  className?: string;
 }
 
 const TaxLossHarvestingRangeDropdown: React.FC<
@@ -25,6 +26,7 @@ const TaxLossHarvestingRangeDropdown: React.FC<
   setIsOpen,
   title,
   isRight,
+  className = ""
 }) => {
   // Generate display value for the main input
   const getDisplayValue = () => {
@@ -119,7 +121,7 @@ const TaxLossHarvestingRangeDropdown: React.FC<
       {/* Desktop Layout */}
       <div className="hidden md:block">
         <button
-          className={`flex items-center space-x-8 px-4 py-3 border rounded-xl text-base 
+          className={`flex items-center space-x-8 px-4 py-3 border rounded-xl text-base ${className}
             border-default text-primary 
             dark:text-gray-300 dark:border-gray-600`}
           onClick={() => setIsOpen(!isOpen)}
