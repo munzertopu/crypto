@@ -179,7 +179,7 @@ const TaxWizardTab: React.FC = () => {
   }> = ({ label, isSelected, onClick, className = "" }) => (
     <button
       onClick={onClick}
-      className={`px-2.5 py-2 w-full rounded-lg text-sm font-medium transition-colors border ${
+      className={`px-2.5 py-1.5 md:py-2 w-full rounded-lg text-sm font-medium transition-colors border ${
         isSelected
           ? "bg-green-200 text-gray-900 dark:bg-green-500 dark:text-gray-900 border-green-700 dark:border-green-600"
           : "bg-white text-gray-600 dark:bg-gray-900 dark:text-gray-300 border-transparent"
@@ -319,7 +319,7 @@ const TaxWizardTab: React.FC = () => {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-3">
                 What is your preference?
               </label>
-              <div className="grid grid-cols-5 gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                 {["$1,000", "$5,000", "$10,000", "Custom"].map((amount) => {
                   const getCurrencySymbol = (currency: string) => {
                     switch (currency) {
@@ -359,14 +359,17 @@ const TaxWizardTab: React.FC = () => {
                 })}
                 {/* Custom Amount Input */}
                 {selectedAmount === "Custom" && showCustomInput && (
-                  <div className="relative" ref={customInputRef}>
+                  <div
+                    className="relative col-span-2 md:col-span-1"
+                    ref={customInputRef}
+                  >
                     <Input
                       type="number"
                       placeholder="0"
                       value={customAmount}
                       onChange={(e) => setCustomAmount(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      className={`w-full rounded-lg text-sm px-4 py-2 font-medium
+                      className={`w-full  rounded-lg text-sm px-4 py-2 font-medium
                         border-default bg-white text-gray-900 dark:text-gray-100 focus:outline-none dark:bg-gray-900 dark:border-gray-700 focus:outline-none focus:ring-0`}
                       autoFocus
                     />
@@ -432,7 +435,7 @@ const TaxWizardTab: React.FC = () => {
                 What is your timeline?
               </label>
               <div className="space-y-3">
-                <div className="w-max">
+                <div className="w-full md:w-max">
                   <DateRangePicker
                     selectedDateRange={dateRange}
                     onDateRangeChange={setDateRange}
@@ -460,9 +463,9 @@ const TaxWizardTab: React.FC = () => {
       <div className="bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700">
         <button
           onClick={() => setIsConstrainsOpen(!isConstrainsOpen)}
-          className="w-full p-8 flex items-center justify-between text-left"
+          className="w-full p-4 md:p-8 flex items-center justify-between text-left"
         >
-          <span className="text-h6 font-medium text-gray-900 dark:text-white">
+          <span className="text-base md:text-h6 font-medium text-gray-900 dark:text-white">
             Constrains
           </span>
           <svg
@@ -482,10 +485,13 @@ const TaxWizardTab: React.FC = () => {
           </svg>
         </button>
         {isConstrainsOpen && (
-          <div className="px-8 pb-8 space-y-6">
+          <div className="md:px-8 px-4 md:pb-8 space-y-6">
             {/* Quick Exclusions */}
-            <div className="text-left pt-5">
-              <div className="flex gap-3 w-max">
+            <div className="text-left md:pt-5">
+              <label className=" text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Quick Exclusions
+              </label>
+              <div className="flex gap-3 md:w-max w-full overflow-x-auto scrollbar-hide flex-wrap mt-2 ">
                 <OptionButton
                   label="Exclude BTC"
                   isSelected={selectedExclusion === "Exclude BTC"}
@@ -512,7 +518,7 @@ const TaxWizardTab: React.FC = () => {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Wallets & Exchanges
               </label>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                 {[
                   {
                     name: "Coinbase Pro",
@@ -582,7 +588,7 @@ const TaxWizardTab: React.FC = () => {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                 Assets
               </label>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
                   { name: "Bitcoin", amount: "+$1,250", status: "Available" },
                   { name: "Ethereum", amount: "+$5,320", status: "Excluded" },
@@ -651,10 +657,10 @@ const TaxWizardTab: React.FC = () => {
       </div>
 
       {/* Find Best Plan Button */}
-      <div className="flex justify-end">
+      <div className="flex md:justify-end">
         <button
           onClick={handleFindBestPlan}
-          className="bg-green-500 hover:bg-green-700 text-gray-900 px-5 py-3 rounded-lg font-medium"
+          className="w-full md:w-auto bg-green-500 hover:bg-green-700 text-gray-900 px-5 py-3 rounded-lg font-medium"
         >
           Find Best Plan
         </button>

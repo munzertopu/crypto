@@ -40,7 +40,7 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
 
           {/* Sub Navigation Tabs */}
           <div className="border-gray-200 dark:border-gray-700">
-            <Tabs>
+            <Tabs className="overflow-x-auto scrollbar-hide">
               <Tabs.List className="my-2 lg:my-0 bg-[#F3F5F7] dark:bg-[#2F3232]">
                 {tabs.map((tab) => (
                   <Tabs.Trigger
