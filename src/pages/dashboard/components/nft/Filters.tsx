@@ -80,16 +80,18 @@ const Filters: React.FC<FiltersProps> = ({ searchTerm, setSearchTerm }) => {
         {/* Filters - 1/3 width */}
         <div className="hidden sm:flex gap-3 flex-col sm:flex-row">
           {/* Market Value Dropdown */}
-          <TaxLossHarvestingRangeDropdown
-            fromValue={fromValue}
-            setFromValue={setFromValue}
-            toValue={toValue}
-            setToValue={setToValue}
-            isOpen={showEstimatedValueDropdown}
-            setIsOpen={setShowEstimatedValueDropdown}
-            title="Estimated value"
-            className="md:py-2.5 dark:text-white"
-          />
+           <div className="relative z-50">
+             <TaxLossHarvestingRangeDropdown
+               fromValue={fromValue}
+               setFromValue={setFromValue}
+               toValue={toValue}
+               setToValue={setToValue}
+               isOpen={showEstimatedValueDropdown}
+               setIsOpen={setShowEstimatedValueDropdown}
+               title="Estimated value"
+               className="md:py-2.5 dark:text-white dark:border-gray-700"
+             />
+           </div>
           
           <div className={`max-w-[190px] flex`}>
             <DateRangePickerPopover
