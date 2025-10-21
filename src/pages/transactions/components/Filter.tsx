@@ -503,7 +503,7 @@ const Filter: React.FC<FilterProps> = ({
       {/* Tabs */}
       {!hideTab && (
         <div className={`border-gray-200 dark:border-gray-700`}>
-          <Tabs>
+          <Tabs className="overflow-x-auto scrollbar-hide">
             <Tabs.List className="my-0 mt-3 lg:my-2 bg-white dark:bg-gray-800  w-full sm:w-[fit-content]">
               {tabs.map((tab) => (
                 <Tabs.Trigger
@@ -531,7 +531,7 @@ const Filter: React.FC<FilterProps> = ({
           className={`sm:my-2 px-4 py-3 sm:px-6 sm:py-4 rounded-lg border border-info-500 text-[#2186D7]
             dark:border-blue-600 dark:text-blue-300`}
         >
-          <div className="sm:hidden">
+          <div className="md:hidden">
             <div className="flex justify-between items-start">
               <div className="w-5 h-5">
                 <BlueCheckedIcon />
@@ -545,7 +545,7 @@ const Filter: React.FC<FilterProps> = ({
               </button>
             </div>
             <div className="mt-1.5 flex justify-start items-center">
-              <span className="text-base font-medium text-gray-900 text-left">
+              <span className="text-base font-medium text-gray-900 dark:text-gray-200 text-left">
                 You have 10 missing pricing, match them at the setting
               </span>
             </div>

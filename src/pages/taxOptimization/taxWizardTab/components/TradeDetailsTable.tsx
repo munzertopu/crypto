@@ -18,6 +18,7 @@ const TradeDetailsTable: React.FC<TradeDetailsTableProps> = ({ details }) => {
   const TABLE_HEAD = ["Aquired on", "Holding period", "Amount", "Cost(USD)", "Gain(USD)"];
   
   const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set());
+  const [expandedItems, setExpandedItems] = useState<Set<number>>(new Set());
 
   const toggleItemSelection = (index: number) => {
     setSelectedItems(prevSelected => {
@@ -39,9 +40,151 @@ const TradeDetailsTable: React.FC<TradeDetailsTableProps> = ({ details }) => {
     }
   };
 
+  const toggleItemExpansion = (index: number) => {
+    setExpandedItems(prevExpanded => {
+      const newExpanded = new Set(prevExpanded);
+      if (newExpanded.has(index)) {
+        newExpanded.delete(index);
+      } else {
+        newExpanded.add(index);
+      }
+      return newExpanded;
+    });
+  };
+
+
   return (
-    <div className="px-5 relative">
-      <Card className="h-full w-full border-transparent bg-transparent shadow-none relative z-10">
+    <div className="md:px-5 relative">
+      {/* Mobile Accordion Layout */}
+      <div className="block sm:hidden space-y-2">
+        {details.map((detail, index) => (
+          <div
+            key={index}
+            className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700"
+          >
+            <div className="flex items-center p-4">
+              {/* Checkbox */}
+              <div
+                className={`w-4 h-4 border-2 rounded flex items-center justify-center transition-colors cursor-pointer ${
+                  selectedItems.has(index)
+                    ? "bg-green-600 border-green-600"
+                    : "border-gray-300"
+                }`}
+                onClick={() => toggleItemSelection(index)}
+              >
+                {selectedItems.has(index) && (
+                  <svg
+                    className="w-2.5 h-2.5 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                )}
+              </div>
+              
+              {/* Title and Chevron */}
+              <button
+                onClick={() => toggleItemExpansion(index)}
+                className="flex-1 flex justify-between items-center ml-3 text-left focus:outline-none"
+              >
+                <span className="text-base font-medium text-gray-900 dark:text-white">
+                  {detail.acquiredOn}
+                </span>
+                <svg
+                  className={`w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform ${
+                    expandedItems.has(index) ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+            </div>
+            
+            {/* Expanded Content */}
+            {expandedItems.has(index) && (
+              <div className="px-4 pb-4">
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      Amount:
+                    </span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                      {detail.amount}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      Holding Period:
+                    </span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                      {detail.holdingPeriod}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      Cost(USD):
+                    </span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                      ${detail.costUSD}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      Gain(USD):
+                    </span>
+                    <span className="text-sm font-medium text-green-600 dark:text-green-400">
+                      {detail.gainUSD}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+        
+        {/* Mobile Selected Items Bar */}
+        {selectedItems.size > 0 && (
+          <div className="sticky bottom-0 left-0 right-0 z-50 px-5">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-medium text-gray-900 dark:text-white">
+                    {selectedItems.size} selected
+                  </span>
+                  <button 
+                    onClick={() => setSelectedItems(new Set())}
+                    className="text-sm font-medium px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md"
+                  >
+                    Clear All
+                  </button>
+                </div>
+                <button
+                  onClick={() => setSelectedItems(new Set())}
+                  className="w-8 h-8 flex items-center justify-center rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+                >
+                  <XMarkIcon className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Desktop Table */}
+      <Card className="hidden sm:block h-full w-full border-transparent bg-transparent shadow-none relative z-10">
         <CardBody className="bg-table-header dark:bg-gray-800 px-1 pt-5 pb-6 rounded-lg sm:overflow-x-auto">
           <table className="w-full min-w-max table-auto text-left">
             <thead className="hidden sm:table-header-group">
@@ -170,9 +313,9 @@ const TradeDetailsTable: React.FC<TradeDetailsTableProps> = ({ details }) => {
         </CardBody>
       </Card>
 
-      {/* Selected Items Bar */}
+      {/* Desktop Selected Items Bar */}
       {selectedItems.size > 0 && (
-        <div className="absolute px-6 py-3 -bottom-15 left-1/2 transform -translate-x-1/2 bg-white dark:bg-gray-800 dark:border-gray-700 flex items-center justify-center rounded-xl shadow-sm border border-default w-max z-50">
+        <div className="hidden sm:block absolute px-6 py-3 -bottom-15 left-1/2 transform -translate-x-1/2 bg-white dark:bg-gray-800 dark:border-gray-700 flex items-center justify-center rounded-xl shadow-sm border border-default w-max z-50">
           <div className="flex items-center gap-4">
             <Typography variant="small" className="text-sm text-gray-600 dark:text-white">
               {selectedItems.size} selected
@@ -189,6 +332,7 @@ const TradeDetailsTable: React.FC<TradeDetailsTableProps> = ({ details }) => {
           </div>
         </div>
       )}
+
     </div>
   );
 };
