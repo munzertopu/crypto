@@ -52,26 +52,37 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs }) => {
                     <span className="text-sm text-left font-medium text-gray-600 dark:text-gray-400">
                       Estimated Current Value:
                     </span>
-                    <svg
-                      className="w-4 h-4 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        cx="12"
-                        cy="12"
-                        r="10"
+                    <div className="relative group">
+                      <svg
+                        className="w-4 h-4 text-gray-400"
+                        fill="none"
                         stroke="currentColor"
-                        strokeWidth="2"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 9v2m0 4h.01"
-                      />
-                    </svg>
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 9v2m0 4h.01"
+                        />
+                      </svg>
+                      {/* Tooltip */}
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 text-sm rounded-lg
+                      bg-gray-900 dark:bg-gray-700 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50 w-max">
+                        {/* Arrow pointing up */}
+                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-b-gray-900 dark:border-b-gray-700"></div>
+                        <div className="text-center leading-tight">
+                          <div>Estimated value tooltip</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <span className="font-semibold text-sm text-gray-900 dark:text-gray-150">
                     {nft.estimatedValue}
