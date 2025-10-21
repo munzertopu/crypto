@@ -112,7 +112,7 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = () => {
         {/* Table Tabs */}
         <div className="border-gray-100 dark:border-gray-700">
           <Tabs>
-            <Tabs.List className='bg-gray-100 dark:bg-[#2F3232]'>
+            <Tabs.List className='bg-gray-100 dark:bg-[#2F3232] w-full md:w-max justify-between'>
               {tableTabs.map((tab) => (
                 <Tabs.Trigger 
                   key={tab}

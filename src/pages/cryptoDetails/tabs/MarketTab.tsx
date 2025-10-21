@@ -15,13 +15,13 @@ const MarketTab: React.FC<MarketTabProps> = ({
 
   return (
     <div className="mb-6 md:mb-0 bg-white dark:bg-[#0E201E]">
-      {/* Header and Time Range in one row */}
-      <div className="flex justify-between items-center mb-4">
+      {/* Header and Time Range - Stacked on mobile, side by side on desktop */}
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4 gap-4">
         <h2 className="text-h6 font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Market Performance</h2>
         {/* Time Range Selector */}
         <div className="border-gray-100 dark:border-gray-700">
           <Tabs>
-            <Tabs.List className='bg-gray-100 dark:bg-[#2F3232]'>
+            <Tabs.List className='bg-gray-100 dark:bg-[#2F3232] w-full justify-between'>
               {timeRanges.map((timeRange) => (
                 <Tabs.Trigger 
                   key={timeRange}

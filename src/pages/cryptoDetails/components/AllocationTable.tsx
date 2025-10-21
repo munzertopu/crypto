@@ -6,6 +6,7 @@ import {
   Card,
   Typography,
   CardBody,
+  Avatar,
 } from "@material-tailwind/react";
 
 interface AllocationData {
@@ -75,7 +76,9 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
       <div className="pt-6 pb-2">
         <h3 className="text-lg font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Allocations</h3>
       </div>
-      <div className="overflow-x-auto">
+      
+      {/* Desktop Table */}
+      <div className="hidden md:block overflow-x-auto">
         <Card className="h-full w-full border-transparent bg-transprent shadow-none">
           <CardBody className="px-0 rounded-lg m-0 p-0 border-0">
             <table className="w-full min-w-max table-auto text-left shadow-none">
@@ -120,7 +123,7 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
                       {item.allocation}
                     </td>
                     <td className="pl-3 pr-5 py-3 whitespace-nowrap">
-                      <div className="w-full h-5 bg-[#D8382C] dark:bg-[#4D5050] rounded-md">
+                      <div className="w-full h-5 bg-error-500 dark:bg-error-500 rounded-md">
                         <div 
                           className="bg-[#419F45] h-5 rounded-l-md" 
                           style={{ width: `${item.longTermGain}` }}
@@ -133,6 +136,50 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
             </table>
           </CardBody>
         </Card>
+      </div>
+
+      {/* Mobile Layout */}
+      <div className="md:hidden">
+        {tableData.map((item) => (
+          <div key={item.id} className="bg-white dark:bg-[#0E201E] border-b border-default dark:border-[#2F3232] py-4">
+            {/* First Row: Wallet Name + Allocation | Balance + Value */}
+            <div className="grid grid-cols-2 gap-4 mb-3">
+              {/* First Column: Wallet Name + Allocation */}
+              <div className="space-y-1">
+                <div className="flex items-center gap-3">
+                  <Typography variant="small" className="text-base text-gray-900 dark:text-gray-100">
+                    {item.wallet.name}
+                  </Typography>
+                </div>
+                <Typography variant="small" className="text-left text-sm opacity-70 text-[#0E201E] dark:text-gray-100">
+                  {item.allocation} allocation
+                </Typography>
+              </div>
+              
+              {/* Second Column: Balance + Value */}
+              <div className="space-y-1 text-right">
+                <Typography variant="small" className="text-base text-gray-900 dark:text-gray-100">
+                  {item.balance}
+                </Typography>
+                <Typography variant="small" className="text-base text-gray-600 dark:text-gray-250">
+                  ${item.value}
+                </Typography>
+              </div>
+            </div>
+            
+            {/* Second Row: Progress Bar spanning both columns */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="col-span-2">
+                <div className="w-full h-4 bg-error-500 dark:bg-error-500 rounded-md">
+                  <div 
+                    className="bg-success-500 h-4 rounded-l-md" 
+                    style={{ width: `${parseInt(item.longTermGain)}%` }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

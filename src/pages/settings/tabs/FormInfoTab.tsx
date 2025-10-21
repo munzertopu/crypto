@@ -93,7 +93,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
             placeholder="Type your name"
             value={formData.name}
             onChange={(e) => handleInputChange("name", e.target.value)}
-            className={`text-base bg-transparent py-2.5 border-[#E1E3E5] dark:border-gray-700 dark:text-white`}
+            className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100`}
           />
         </div>
       </div>
@@ -111,7 +111,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="000000000"
               value={formData.personalId}
               onChange={(e) => handleInputChange("personalId", e.target.value)}
-              className="text-base bg-transparent py-2.5 border-[#E1E3E5] dark:border-gray-700 dark:text-white"
+              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100`}
             />
           </div>
 
@@ -124,7 +124,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="Type your city"
               value={formData.city}
               onChange={(e) => handleInputChange("city", e.target.value)}
-              className="text-base bg-transparent py-2.5 border-[#E1E3E5] dark:border-gray-700 dark:text-white"
+              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100`}
             />
           </div>
 
@@ -137,7 +137,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="00000"
               value={formData.postalCode}
               onChange={(e) => handleInputChange("postalCode", e.target.value)}
-              className="text-base bg-transparent py-2.5 border-[#E1E3E5] dark:border-gray-700 dark:text-white"
+              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100`}
             />
           </div>
         </div>
@@ -149,8 +149,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               Phone number (optional)
             </label>
             <div
-              className="relative flex border border-[#E1E3E5] rounded-lg overflow-hidden
-            bg-transparent dark:border-gray-700
+              className="relative flex border border-[#E1E3E5] rounded-lg overflow-hidden bg-transparent dark:border-gray-700
             "
             >
               {/* Country Dropdown Section */}
@@ -160,11 +159,11 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
                   onClick={() =>
                     setIsCountryDropdownOpen(!isCountryDropdownOpen)
                   }
-                  className={`flex items-center px-3 py-2 focus:outline-none ${"text-gray-900 dark:text-gray-150"}`}
+                  className={`flex items-center px-4 py-3 focus:outline-none ${"text-gray-900 dark:text-gray-150"}`}
                 >
                   <img
                     src={selectedCountry.flag}
-                    className="mr-2 w-4 h-3"
+                    className="mr-2 w-8 h-5"
                   ></img>
                   <FontAwesomeIcon
                     icon={faChevronDown}
@@ -225,20 +224,20 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="00000"
               value={formData.state}
               onChange={(e) => handleInputChange("state", e.target.value)}
-              className="text-base bg-transparent py-2.5 border-[#E1E3E5] dark:text-white dark:border-gray-700"
+              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100`}
             />
           </div>
 
           <div>
             <div className="flex items-center space-x-2 relative">
-              <label className="block text-sm font-medium text-left mb-1 text-[#2F3232] dark:text-gray-300">
+              <label className="block text-sm font-medium text-left mb-2 text-[#2F3232] dark:text-gray-300">
                 INN
               </label>
               <div className="relative" ref={tooltipRef}>
                 <button
                   type="button"
                   onClick={() => setShowInnTooltip(!showInnTooltip)}
-                  className="w-4 h-4 mx-2 -mt-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  className="w-4 h-4 mx-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                   aria-label="INN help information"
                 >
                   <svg
@@ -284,7 +283,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="000000000"
               value={formData.inn}
               onChange={(e) => handleInputChange("inn", e.target.value)}
-              className="text-base bg-transparent py-2.5 border-[#E1E3E5] dark:text-white dark:border-gray-700"
+              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100`}
             />
           </div>
         </div>
