@@ -29,7 +29,7 @@ const TaxOptimizationPage: React.FC<TaxOptimizationPageProps> = ({
     <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-gray-150">
       <NavigationBar onLogout={handleLogout} currentPage="tax-optimization" />
 
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 mt-8 md:mt-5">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 mt-8 md:mt-5 pb-5 md:pb-0">
         {/* Header */}
         <div className="mb-5">
           <h1
