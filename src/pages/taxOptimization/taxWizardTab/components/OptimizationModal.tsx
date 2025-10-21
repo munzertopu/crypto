@@ -57,37 +57,37 @@ const OptimizationModal: React.FC<OptimizationModalProps> = ({ isOpen, onClose }
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end md:items-center justify-center z-50">
+      <div className="bg-white dark:bg-gray-800 rounded-t-3xl md:rounded-lg p-6 md:p-8 max-w-md w-full md:max-w-md">
         {/* Icon */}
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-4 md:mb-6">
           <img
               src={"/logo-mobile-white.png"}
               alt="Portal"
-              className="h-11 w-11"
+              className="h-10 w-10 md:h-11 md:w-11"
             />
         </div>
 
         {/* Title */}
-        <h2 className="text-h5 font-bold text-gray-900 dark:text-white text-center mb-3">
+        <h2 className="text-lg md:text-h5 font-bold text-gray-900 dark:text-white text-center mb-4 md:mb-3">
           Optimizing your Plan
         </h2>
 
         {/* Steps */}
-        <div className="space-y-2 mb-6">
+        <div className="space-y-3 md:space-y-2 mb-6 md:mb-6">
           {optimizationSteps.map((step) => {
             const stepProgress = step.completed ? 100 : (step.id === completedSteps + 1 ? optimizationProgress : 0);
             return (
-              <div key={step.id} className="flex items-center justify-center gap-3">
-                <div className="relative w-8 h-8">
+              <div key={step.id} className="flex items-center justify-center gap-3 md:gap-3">
+                <div className="relative w-7 h-7 md:w-8 md:h-8">
                   {step.completed ? (
                     /* TickCircleFilledIcon for completed steps */
                     <div className="flex items-center justify-center">
-                      <TickCircleFilledIcon width={24} height={24} />
+                      <TickCircleFilledIcon width={20} height={20} className="md:w-6 md:h-6" />
                     </div>
                   ) : (
                     /* Progress circle for incomplete steps */
-                    <svg className="w-6 h-6 transform -rotate-90" viewBox="0 0 36 36">
+                    <svg className="w-5 h-5 md:w-6 md:h-6 transform -rotate-90" viewBox="0 0 36 36">
                       <path
                         className="text-gray-200 dark:text-gray-600"
                         stroke="currentColor"
@@ -111,7 +111,7 @@ const OptimizationModal: React.FC<OptimizationModalProps> = ({ isOpen, onClose }
                     </svg>
                   )}
                 </div>
-                <span className={`text-sm ${
+                <span className={`text-xs md:text-sm ${
                   step.completed 
                     ? "text-gray-900 dark:text-white font-medium" 
                     : "text-gray-500 dark:text-gray-400"
@@ -124,15 +124,15 @@ const OptimizationModal: React.FC<OptimizationModalProps> = ({ isOpen, onClose }
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-4">
+        <div className="mb-4 md:mb-4">
           <div className="flex justify-between items-center mb-2">
-            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 md:h-2">
               <div 
                 className="bg-green-700 h-2 rounded-full transition-all duration-500"
                 style={{ width: `${optimizationProgress}%` }}
               ></div>
             </div>
-            <span className="ml-3 text-lg font-bold text-gray-900 dark:text-white">
+            <span className="ml-3 text-base md:text-lg font-bold text-gray-900 dark:text-white">
               {optimizationProgress}%
             </span>
           </div>
