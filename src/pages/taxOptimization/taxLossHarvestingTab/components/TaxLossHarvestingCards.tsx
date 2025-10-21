@@ -10,6 +10,7 @@ import {
   faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
+import { Tooltip } from "../../../../components";
 
 interface TaxLossHarvestingCardsProps {
   isDarkMode?: boolean;
@@ -137,26 +138,36 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({}) => {
               >
                 {title}
               </div>
-              <svg
-                className="w-5 h-5 mx-2 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+              <Tooltip
+                title={
+                  <div className="space-y-2">
+                    <div className="text-sm font-medium text-gray-900 dark:text-gray-150">
+                      {title}
+                    </div>
+                  </div>
+                }
               >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
+                <svg
+                  className="w-5 h-5 mx-2 text-gray-400"
+                  fill="none"
                   stroke="currentColor"
-                  strokeWidth="1.5"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 9v2m0 4h.01"
-                />
-              </svg>
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 9v2m0 4h.01"
+                  />
+                </svg>
+              </Tooltip>
             </div>
             {showDropdown && (
               <div

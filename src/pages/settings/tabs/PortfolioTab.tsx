@@ -101,7 +101,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
   };
 
   return (
-    <div className="md:space-y-8 mt-5 md:mt-0">
+    <div className="md:space-y-8 mt-5 md:mt-0 ">
       {/* User Avatar Section */}
       <div className="flex items-center md:items-start justify-center md:justify-start mb-3 md:mb-0">
         <div className="relative">
@@ -184,9 +184,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                     <div
                       className={`w-px h-6 my-0 bg-default mx-3 dark:bg-gray-700`}
                     ></div>
-                    <span className="font-medium">
-                      {selectedCountry.name}
-                    </span>
+                    <span className="font-medium">{selectedCountry.name}</span>
                   </div>
                 </button>
 

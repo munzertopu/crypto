@@ -364,7 +364,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
             >
               {/* Toggle Switch */}
               <div
-                className={`relative inline-flex h-6 w-11 mr-3 items-center rounded-full transition-colors ${
+                className={`min-w-[45px] relative inline-flex h-6 w-11 mr-3 items-center rounded-full transition-colors ${
                   rule.enabled
                     ? "bg-[#90C853]"
                     : "bg-[#CDCFD1] dark:bg-gray-700"

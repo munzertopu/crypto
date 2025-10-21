@@ -2,7 +2,15 @@ import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 
 interface TooltipProps {
   title: string | React.ReactNode;
-  placement?: "top" | "bottom" | "left" | "right" | "top-start" | "top-end" | "bottom-start" | "bottom-end";
+  placement?:
+    | "top"
+    | "bottom"
+    | "left"
+    | "right"
+    | "top-start"
+    | "top-end"
+    | "bottom-start"
+    | "bottom-end";
   children: React.ReactElement;
   className?: string;
 }
@@ -25,26 +33,32 @@ const Tooltip: React.FC<TooltipProps> = ({
         const tooltipRect = contentRef.current.getBoundingClientRect();
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
-        
+
         let newPlacement = placement;
-        
+
         // Check horizontal overflow
         if (tooltipRect.right > viewportWidth - 10) {
           // Tooltip overflows right
           if (placement === "bottom" || placement === "top") {
             newPlacement = placement === "bottom" ? "bottom-end" : "top-end";
-          } else if (placement === "bottom-start" || placement === "top-start") {
-            newPlacement = placement === "bottom-start" ? "bottom-end" : "top-end";
+          } else if (
+            placement === "bottom-start" ||
+            placement === "top-start"
+          ) {
+            newPlacement =
+              placement === "bottom-start" ? "bottom-end" : "top-end";
           }
         } else if (tooltipRect.left < 10) {
           // Tooltip overflows left
           if (placement === "bottom" || placement === "top") {
-            newPlacement = placement === "bottom" ? "bottom-start" : "top-start";
+            newPlacement =
+              placement === "bottom" ? "bottom-start" : "top-start";
           } else if (placement === "bottom-end" || placement === "top-end") {
-            newPlacement = placement === "bottom-end" ? "bottom-start" : "top-start";
+            newPlacement =
+              placement === "bottom-end" ? "bottom-start" : "top-start";
           }
         }
-        
+
         // Check vertical overflow
         if (tooltipRect.bottom > viewportHeight - 10) {
           // Tooltip overflows bottom, switch to top
@@ -57,7 +71,7 @@ const Tooltip: React.FC<TooltipProps> = ({
             newPlacement = newPlacement.replace("top", "bottom") as any;
           }
         }
-        
+
         setAdjustedPlacement(newPlacement);
       }
     };
@@ -65,14 +79,14 @@ const Tooltip: React.FC<TooltipProps> = ({
     if (isVisible) {
       // Adjust position immediately
       adjustPosition();
-      
+
       // Also adjust on window resize and scroll
-      window.addEventListener('resize', adjustPosition);
-      window.addEventListener('scroll', adjustPosition, true);
-      
+      window.addEventListener("resize", adjustPosition);
+      window.addEventListener("scroll", adjustPosition, true);
+
       return () => {
-        window.removeEventListener('resize', adjustPosition);
-        window.removeEventListener('scroll', adjustPosition, true);
+        window.removeEventListener("resize", adjustPosition);
+        window.removeEventListener("scroll", adjustPosition, true);
       };
     } else {
       // Reset to original placement when closed
@@ -166,14 +180,14 @@ const Tooltip: React.FC<TooltipProps> = ({
       {isVisible && (
         <div
           ref={contentRef}
-          className={`absolute z-50 w-72 sm:w-64 p-3 text-sm text-white bg-gray-900 dark:bg-gray-800 rounded-lg shadow-lg border border-gray-700 dark:border-gray-600 ${getPositionClasses()} ${className}`}
-          style={{ maxWidth: 'calc(100vw - 20px)' }}
+          className={`absolute z-50 w-72 sm:w-64 p-3 text-sm text-white bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-700 dark:border-gray-600 ${getPositionClasses()} ${className}`}
+          style={{ maxWidth: "calc(100vw - 20px)" }}
         >
           {/* Arrow */}
           <div
             className={`absolute w-2 h-2 bg-gray-900 dark:bg-gray-800 border-gray-700 dark:border-gray-600 ${getArrowClasses()}`}
           ></div>
-          
+
           {/* Content */}
           {typeof title === "string" ? (
             <p className="text-xs leading-relaxed">{title}</p>
@@ -187,4 +201,3 @@ const Tooltip: React.FC<TooltipProps> = ({
 };
 
 export default Tooltip;
-
