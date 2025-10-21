@@ -7,6 +7,7 @@ interface SearchFieldProps {
   placeholder?: string;
   ariaLabel?: string;
   className?: string;
+  divClassName?: string;
   size?: "sm" | "md" | "lg";
 }
 
@@ -16,6 +17,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
   placeholder = "Search",
   ariaLabel,
   className = "",
+  divClassName = "",
   size = "md",
 }) => {
   const getSizeClasses = () => {
@@ -52,7 +54,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
   };
 
   return (
-    <div className={`relative w-full`}>
+    <div className={`relative w-full ${divClassName}`}>
       <SearchIcon
         width={getIconSize()}
         height={getIconSize()}

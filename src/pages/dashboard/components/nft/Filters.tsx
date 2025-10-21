@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Input } from "@material-tailwind/react";
-import EstimatedValueDropdown from "../../../../components/AmountRangeDropdown";
 import SearchField from "../../../../components/UI/SearchField";
 
 import { faChevronDown, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +11,7 @@ import { Accordion, AccordionItem } from "../../../../components/Accordion";
 import MobileDrawer from "../../../../components/Drawers/MobileDrawer";
 import useScreenSize from "../../../../hooks/useScreenSize";
 import TopBadge from "../../../../components/UI/TopBadge";
+import TaxLossHarvestingRangeDropdown from "../../../taxOptimization/taxLossHarvestingTab/components/TaxLossHarvestingRangeDropdown";
 
 interface FiltersProps {
   searchTerm: string;
@@ -26,7 +26,7 @@ const Filters: React.FC<FiltersProps> = ({ searchTerm, setSearchTerm }) => {
   const [fromCurrency, setFromCurrency] = useState("USDT");
   const [toCurrency, setToCurrency] = useState("USDT");
   const [showGainDropdown, setShowGainDropdown] = useState(false);
-  const [selectedGain, setSelectedGain] = useState("");
+  const [selectedGain, setSelectedGain] = useState("Highest gain");
   const [fromValue, setFromValue] = useState("0");
   const [toValue, setToValue] = useState("0");
   const [showMobileFilters, setShowMobileFilters] = useState(false);
@@ -46,15 +46,15 @@ const Filters: React.FC<FiltersProps> = ({ searchTerm, setSearchTerm }) => {
 
   return (
     <div className="sm:mx-8 md:mx-6 mt-8">
-      <div className="w-full flex flex-row justify-between items-center gap-2">
+      <div className="w-full flex flex-row justify-between items-start gap-2">
         {/* Search Bar - 1/3 width */}
         <SearchField
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           placeholder="Search"
           ariaLabel="Search NFTs"
-          className="!w-full border-default dark:border-[#4D5050]"
-          size="lg"
+          divClassName="!w-max"
+          className="border-default dark:border-[#4D5050] dark:bg-transparent"
         />
 
         <TopBadge
@@ -79,32 +79,32 @@ const Filters: React.FC<FiltersProps> = ({ searchTerm, setSearchTerm }) => {
 
         {/* Filters - 1/3 width */}
         <div className="hidden sm:flex gap-3 flex-col sm:flex-row">
-          <EstimatedValueDropdown
+          {/* Market Value Dropdown */}
+          <TaxLossHarvestingRangeDropdown
             fromValue={fromValue}
             setFromValue={setFromValue}
             toValue={toValue}
             setToValue={setToValue}
-            fromCurrency={fromCurrency}
-            setFromCurrency={setFromCurrency}
-            toCurrency={toCurrency}
-            setToCurrency={setToCurrency}
             isOpen={showEstimatedValueDropdown}
             setIsOpen={setShowEstimatedValueDropdown}
             title="Estimated value"
+            className="md:py-2.5 dark:text-white"
           />
-          <div className={`max-w-[190px] flex items-center`}>
+          
+          <div className={`max-w-[190px] flex`}>
             <DateRangePickerPopover
               selectedDateRange={selectedDateRange}
               onDateRangeChange={setSelectedDateRange}
               buttonLabel="Purchase date"
-              className="py-3"
+              buttonLabelClassName="!text-base"
+              className="md:py-2.5"
             />
           </div>
 
-          <div className="flex-1 relative my-4">
+          <div className="flex-1 relative">
             <div
-              className="w-full sm:w-[200px] px-3 py-3 flex items-center justify-between cursor-pointer rounded-lg shadow-sm border text-sm bg-transparent border-[#E1E3E5] text-[#0E201E] 
-                dark:border-[#4D5050] dark:text-white"
+              className="w-full sm:w-[200px] px-3 py-2.5 flex items-center justify-between cursor-pointer rounded-lg shadow-sm border text-base bg-transparent border-default text-gray-900 
+                dark:border-gray-800 dark:text-gray-100"
               onClick={() => setShowGainDropdown(!showGainDropdown)}
             >
               <span>{selectedGain}</span>
