@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { Typography, Input, Button } from "@material-tailwind/react";
 import { countriesData } from "../../../data/settingsAssets";
+import { Tooltip } from "../../../components";
 
 interface FormInfoTabProps {}
 
@@ -201,7 +202,9 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
                     type="button"
                     onClick={() => handleCountrySelect(country)}
                     className={`w-full px-3 py-2.5 flex items-center hover:bg-gray-50 ${"text-gray-900 dark:text-gray-150 dark:hover:bg-gray-600"} ${
-                      selectedCountry.code === country.code ? "bg-gray-100 dark:bg-gray-600" : ""
+                      selectedCountry.code === country.code
+                        ? "bg-gray-100 dark:bg-gray-600"
+                        : ""
                     }`}
                   >
                     <img src={country.flag} className="mr-2 w-4 h-3"></img>
@@ -229,14 +232,26 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
           </div>
 
           <div>
-            <div className="flex items-center space-x-2 relative">
+            <div className="flex items-center space-x-2 ">
               <label className="block text-sm font-medium text-left mb-2 text-[#2F3232] dark:text-gray-300">
                 INN
               </label>
-              <div className="relative" ref={tooltipRef}>
+              <Tooltip
+                title={
+                  <div>
+                    <strong>
+                      INN (Individual Taxpayer Identification Number)
+                    </strong>{" "}
+                    is a unique identifier used for tax purposes. This field is
+                    optional and only required if you want this information to
+                    appear on your tax reports.
+                  </div>
+                }
+                placement="bottom"
+              >
                 <button
                   type="button"
-                  onClick={() => setShowInnTooltip(!showInnTooltip)}
+                  // onClick={() => setShowInnTooltip(!showInnTooltip)}
                   className="w-4 h-4 mx-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                   aria-label="INN help information"
                 >
@@ -261,22 +276,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
                     />
                   </svg>
                 </button>
-
-                {/* Tooltip */}
-                {showInnTooltip && (
-                  <div className="absolute z-50 w-64 p-3 mt-2 text-sm text-white bg-gray-900 dark:bg-gray-800 rounded-lg shadow-lg border border-gray-700 dark:border-gray-600 left-1/2 transform -translate-x-1/2">
-                    <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-900 dark:bg-gray-800 rotate-45 border-l border-t border-gray-700 dark:border-gray-600"></div>
-                    <p className="text-xs leading-relaxed">
-                      <strong>
-                        INN (Individual Taxpayer Identification Number)
-                      </strong>{" "}
-                      is a unique identifier used for tax purposes. This field
-                      is optional and only required if you want this information
-                      to appear on your tax reports.
-                    </p>
-                  </div>
-                )}
-              </div>
+              </Tooltip>
             </div>
             <Input
               type="text"
@@ -291,12 +291,12 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
 
       {/* Save Button */}
       <div className="flex md:justify-end pt-6">
-        <Button
+        <button
           onClick={handleSaveChanges}
           className="w-full md:w-auto text-base bg-[#90C853] text-[#0E201E] px-5 py-3 border-0 rounded-lg font-medium"
         >
           Save changes
-        </Button>
+        </button>
       </div>
     </div>
   );

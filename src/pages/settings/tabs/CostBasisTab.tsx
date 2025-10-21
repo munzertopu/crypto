@@ -364,7 +364,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
             >
               {/* Toggle Switch */}
               <div
-                className={`relative inline-flex h-6 w-11 mr-3 items-center rounded-full transition-colors ${
+                className={`min-w-[45px] relative inline-flex h-6 w-11 mr-3 items-center rounded-full transition-colors ${
                   rule.enabled
                     ? "bg-[#90C853]"
                     : "bg-[#CDCFD1] dark:bg-gray-700"
@@ -388,21 +388,21 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
 
       {/* Action Buttons */}
       <div className="flex justify-between pt-6 my-8 gap-4 md:gap-0">
-        <Button
+        <button
           onClick={handleRecalculate}
           className={`w-[50%] md:w-auto border-gray-150 px-5 py-3 rounded-lg font-medium bg-transparent  text-[#0E201E]
             dark:border-gray-600 dark:text-gray-100
           `}
         >
           Recalculate
-        </Button>
+        </button>
 
-        <Button
+        <button
           onClick={handleSaveChanges}
           className={`w-[50%] md:w-auto border-gray-150 bg-[#90C853] text-[#0E201E] px-5 py-3 rounded-lg font-medium border-0`}
         >
           Save changes
-        </Button>
+        </button>
       </div>
 
       {/* Override Cost Modal */}

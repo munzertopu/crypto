@@ -10,6 +10,7 @@ import {
   faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
+import { Tooltip } from "../../../../components";
 
 interface TaxLossHarvestingCardsProps {
   isDarkMode?: boolean;
@@ -137,7 +138,15 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({}) => {
               >
                 {title}
               </div>
-              <div className="relative group">
+              <Tooltip
+                title={
+                  <div className="space-y-2">
+                    <div className="text-sm font-medium text-gray-900 dark:text-gray-150">
+                      {title}
+                    </div>
+                  </div>
+                }
+              >
                 <svg
                   className="w-5 h-5 mx-2 text-gray-400"
                   fill="none"
@@ -158,18 +167,7 @@ const TaxLossHarvestingCards: React.FC<TaxLossHarvestingCardsProps> = ({}) => {
                     d="M12 9v2m0 4h.01"
                   />
                 </svg>
-                {/* Tooltip */}
-                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 text-sm rounded-lg
-                bg-gray-900 dark:bg-gray-700 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50 w-max">
-                  {/* Arrow pointing up */}
-                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-b-gray-900 dark:border-b-gray-700"></div>
-                  <div className="text-center leading-tight">
-                    <div>Realized capital gains are profits</div>
-                    <div>from selling assets that have</div>
-                    <div>appreciated in value</div>
-                  </div>
-                </div>
-              </div>
+              </Tooltip>
             </div>
             {showDropdown && (
               <div

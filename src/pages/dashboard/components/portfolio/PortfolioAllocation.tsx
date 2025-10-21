@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { defaultAllocations } from "../../../../data/dashboardassets";
 import type { AssetAllocation } from "../../../../data/dashboardassets";
-
+import { Tabs } from "@material-tailwind/react";
 interface PortfolioAllocationProps {
   allocations?: AssetAllocation[];
   isDarkMode?: boolean;
@@ -10,7 +10,6 @@ interface PortfolioAllocationProps {
 const PortfolioAllocation: React.FC<PortfolioAllocationProps> = ({
   allocations = [],
 }) => {
-
   const data = allocations.length > 0 ? allocations : defaultAllocations;
 
   // Group data into rows of 5 elements each

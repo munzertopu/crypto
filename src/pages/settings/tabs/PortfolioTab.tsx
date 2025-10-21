@@ -101,7 +101,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
   };
 
   return (
-    <div className="md:space-y-8 mt-5 md:mt-0">
+    <div className="md:space-y-8 mt-5 md:mt-0 ">
       {/* User Avatar Section */}
       <div className="flex items-center md:items-start justify-center md:justify-start mb-3 md:mb-0">
         <div className="relative">
@@ -184,9 +184,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
                     <div
                       className={`w-px h-6 my-0 bg-default mx-3 dark:bg-gray-700`}
                     ></div>
-                    <span className="font-medium">
-                      {selectedCountry.name}
-                    </span>
+                    <span className="font-medium">{selectedCountry.name}</span>
                   </div>
                 </button>
 
@@ -514,12 +512,12 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
 
       {/* Save Button */}
       <div className="flex md:justify-end pt-8 md:pt-2">
-        <Button
+        <button
           onClick={handleSaveChanges}
           className="w-full md:w-auto text-base bg-[#90C853] text-[#0E201E] px-5 py-3 border-0 rounded-lg font-medium"
         >
           Save changes
-        </Button>
+        </button>
       </div>
     </div>
   );

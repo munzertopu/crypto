@@ -248,7 +248,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onLogout }) => {
             <Card
               className={`border-transparent shadow-transparent bg-white dark:bg-transparent overflow-visible`}
             >
-              <CardBody className="md:px-5 py-0 overflow-visible px-0">
+              <CardBody className="md:px-5 py-0 overflow-visible px-0 mb-5 md:mb-0">
                 {renderTabContent()}
               </CardBody>
             </Card>

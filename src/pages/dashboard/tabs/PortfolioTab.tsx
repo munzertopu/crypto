@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FinancialMetrics,
@@ -7,15 +7,19 @@ import {
   PortfolioAllocation,
   HoldingsTable,
 } from "../components";
+import { Tabs } from "@material-tailwind/react";
 
 interface PortfolioTabProps {
   onAddKPI: () => void;
 }
 
-const PortfolioTab: React.FC<PortfolioTabProps> = ({
-  onAddKPI,
-}) => {
+const PortfolioTab: React.FC<PortfolioTabProps> = ({ onAddKPI }) => {
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("Portfolio Allocation");
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+  };
 
   return (
     <>
@@ -62,15 +66,45 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
       </div>
 
       {/* Portfolio Allocation */}
-      <div className="md:px-6">
-        <PortfolioAllocation />
+
+      {/* Tabs */}
+      <div className="md:hidden mb-4 mt-4 md:mt-5 border-gray-200 dark:border-gray-800 md:mb-0 sm:mt-0">
+        <Tabs className="">
+          <Tabs.List className="p-1 bg-[#F3F5F7] dark:bg-gray-800 rounded-xl w-full sm:w-[fit-content]">
+            {["Portfolio Allocation", "Holdings"].map((tab) => (
+              <Tabs.Trigger
+                key={tab}
+                value={tab}
+                onClick={() => handleTabChange?.(tab)}
+                className={`w-full sm:w-[inherit] px-1.5 sm:px-5 md:px-2.5 py-2.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-lg text-smh sm:text-smh md:smh ${
+                  activeTab === tab
+                    ? "bg-white dark:bg-gray-0 text-gray-900 dark:text-gray-900"
+                    : "text-gray-900 dark:text-gray-200"
+                }`}
+              >
+                {tab}
+              </Tabs.Trigger>
+            ))}
+            <Tabs.TriggerIndicator />
+          </Tabs.List>
+        </Tabs>
       </div>
 
-      {/* Holdings Table */}
-      <div className="md:px-6">
+      <div className="hidden md:block md:px-6">
+        <PortfolioAllocation />
         <HoldingsTable
           onCryptoClick={(symbol) => navigate(`/crypto/${symbol}`)}
         />
+      </div>
+
+      {/* Holdings Table */}
+      <div className="md:hidden">
+        {activeTab === "Portfolio Allocation" && <PortfolioAllocation />}
+        {activeTab === "Holdings" && (
+          <HoldingsTable
+            onCryptoClick={(symbol) => navigate(`/crypto/${symbol}`)}
+          />
+        )}
       </div>
     </>
   );
