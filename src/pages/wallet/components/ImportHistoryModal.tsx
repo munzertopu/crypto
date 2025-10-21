@@ -149,13 +149,16 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
 
       {/* Modal */}
       <div className="flex min-h-full md:items-center md:justify-center md:p-4">
-        <div className="relative bg-white dark:bg-gray-100 rounded-t-2xl md:rounded-2xl shadow-xl max-w-6xl w-full p-3 md:p-8 flex flex-col">
+        <div className="relative bg-white dark:bg-gray-800 rounded-t-2xl md:rounded-2xl shadow-xl max-w-6xl w-full p-3 md:p-8 flex flex-col">
           {/* Header */}
           <div className="flex items-center justify-between">
-            <h2 className="text-lg md:text-2xl font-semibold text-gray-11">
+            <h2 className="text-lg md:text-2xl font-semibold text-gray-900 dark:text-gray-100">
               Import History
             </h2>
-            <button onClick={onClose} className="text-gray-500">
+            <button
+              onClick={onClose}
+              className="text-gray-500 dark:text-gray-400"
+            >
               <svg
                 className="w-4 h-4 md:w-8 md:h-8"
                 fill="none"
@@ -178,7 +181,7 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
             <div className="relative w-full md:w-auto">
               <div className="absolute inset-y-0 left-0 pl-3 md:pl-4 flex items-center pointer-events-none">
                 <svg
-                  className="w-4 h-4 md:w-5 md:h-5 text-gray-400"
+                  className="w-4 h-4 md:w-5 md:h-5 text-gray-400 dark:text-gray-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -196,7 +199,7 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
                 placeholder="Search"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full md:w-80 py-2 md:py-2.5 pl-9 md:pl-10 pr-3 md:pr-4 border border-default rounded-lg focus:outline-none text-sm md:text-base"
+                className="w-full md:w-80 py-2 md:py-2.5 pl-9 md:pl-10 pr-3 md:pr-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none text-sm md:text-base bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               />
             </div>
 
@@ -207,12 +210,16 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
                 onSelect={setImportType}
                 defaultValue="Import type"
                 className="w-full md:w-auto"
+                inputClassName="dark:!bg-gray-800"
+                menuClassName="dark:!bg-gray-800"
               />
               <Dropdown
                 options={["Sort by recent"]}
                 onSelect={setSortBy}
                 defaultValue="Sort by: Recent"
                 className="w-full md:w-auto"
+                inputClassName="dark:!bg-gray-800"
+                menuClassName="dark:!bg-gray-800"
               />
             </div>
           </div>
@@ -221,7 +228,10 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
           <div className="flex-1 overflow-auto block md:hidden">
             <div className="space-y-3">
               {mockImportHistory.map((item, index) => (
-                <div key={index} className="bg-white rounded-lg p-4">
+                <div
+                  key={index}
+                  className="bg-white dark:bg-gray-800 rounded-lg p-4"
+                >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div
@@ -234,20 +244,20 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
                         />
                       </div>
                       <div className="flex flex-col justify-start items-start">
-                        <span className="text-sm font-medium text-gray-900">
+                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                           {item.wallet.name}
                         </span>
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-gray-500 dark:text-gray-400">
                           {item.fileName}.csv
                         </span>
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-gray-500 dark:text-gray-400">
                           {item.transactionsAdded} transactions
                         </span>
                       </div>
                     </div>
                     <button
                       onClick={() => handleDeleteClick(item)}
-                      className="text-gray-400 hover:text-gray-600 transition-colors"
+                      className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                       aria-label="Delete import"
                     >
                       <TrashIcon strokeColor="currentColor" />
@@ -280,7 +290,7 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
                         >
                           <Typography
                             variant="small"
-                            className="flex items-center justify-start gap-2 font-normal text-sm leading-none text-gray-600 dark:text-[#B6B8BA]"
+                            className="flex items-center justify-start gap-2 font-normal text-sm leading-none text-gray-600 dark:text-gray-400"
                           >
                             {head}{" "}
                             {head !== "" && (
@@ -290,7 +300,7 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
                                     head.toLowerCase().replace(" ", "")
                                   )
                                 }
-                                className="text-gray-900"
+                                className="text-gray-900 dark:text-gray-100"
                               >
                                 <TableSortIcon
                                   width={8}
@@ -309,7 +319,7 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
                     {mockImportHistory.map((item, index) => (
                       <tr
                         key={index}
-                        className="hover:bg-gray-50 dark:hover:bg-gray-700"
+                        className="hover:bg-gray-50 dark:hover:bg-gray-800"
                       >
                         <td className="px-5 py-3">
                           <div className="flex items-center gap-3">
@@ -348,7 +358,7 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
                         <td className="px-5 py-3">
                           <button
                             onClick={() => handleDeleteClick(item)}
-                            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                            className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                             aria-label="Delete import"
                           >
                             <TrashIcon strokeColor="currentColor" />
