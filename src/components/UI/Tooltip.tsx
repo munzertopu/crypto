@@ -185,7 +185,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         >
           {/* Arrow */}
           <div
-            className={`absolute w-2 h-2 bg-gray-900 dark:bg-gray-800 border-gray-700 dark:border-gray-600 ${getArrowClasses()}`}
+            className={`absolute w-2 h-2  bg-white dark:bg-gray-800 border-gray-700 dark:border-gray-600 ${getArrowClasses()}`}
           ></div>
 
           {/* Content */}
