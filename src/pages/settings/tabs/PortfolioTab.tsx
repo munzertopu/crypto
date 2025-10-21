@@ -512,12 +512,12 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
 
       {/* Save Button */}
       <div className="flex md:justify-end pt-8 md:pt-2">
-        <Button
+        <button
           onClick={handleSaveChanges}
           className="w-full md:w-auto text-base bg-[#90C853] text-[#0E201E] px-5 py-3 border-0 rounded-lg font-medium"
         >
           Save changes
-        </Button>
+        </button>
       </div>
     </div>
   );

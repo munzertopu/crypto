@@ -446,12 +446,12 @@ const RulesTab: React.FC<RulesTabProps> = () => {
       </div>
       {/* Action Buttons */}
       <div className="hidden md:flex justify-end pt-6 my-8">
-        <Button
+        <button
           onClick={handleSaveChanges}
           className="bg-[#90C853] text-[#0E201E] px-5 py-3 rounded-lg font-medium border-0"
         >
           Save changes
-        </Button>
+        </button>
       </div>
 
       <MobileDrawer

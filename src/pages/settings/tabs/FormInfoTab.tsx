@@ -291,12 +291,12 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
 
       {/* Save Button */}
       <div className="flex md:justify-end pt-6">
-        <Button
+        <button
           onClick={handleSaveChanges}
           className="w-full md:w-auto text-base bg-[#90C853] text-[#0E201E] px-5 py-3 border-0 rounded-lg font-medium"
         >
           Save changes
-        </Button>
+        </button>
       </div>
     </div>
   );
