@@ -253,7 +253,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
                 setSearchTerm={setSearchTerm}
                 placeholder="Search"
                 ariaLabel="Search clients"
-                className="!w-full border-default dark:border-[#4D5050]"
+                className="!w-full border-default dark:border-[#4D5050] dark:bg-transparent"
               />
             </div>
             <SecondaryButton
