@@ -146,23 +146,23 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
         {selectedTransactions.length > 0 && (
           <div
             className={`w-full sm:w-[auto] flex flex-col gap-2 sm:gap-0 sm:flex-row items-center sm:space-x-3 p-3 sm:p-0 sm:px-6 sm:py-3 rounded-xl border shadow-sm
-              bg-white border-default dark:border-[#4D5050]`}
+              bg-white dark:bg-gray-900 border-default dark:border-gray-700`}
           >
             <div className="w-full sm:w-[auto] flex items-center justify-around gap-3 sm:gap-0 sm:space-x-3">
               <span
                 className={`text-sm font-normal text-gray-700
-               dark:text-gray-250`}
+               dark:text-gray-300`}
               >
                 {selectedTransactions.length} selected
               </span>
               <div
                 className={`w-px h-4 bg-default
-                dark:bg-[#F3F5F7]`}
+                dark:bg-gray-700`}
                 role="separator"
               ></div>
               <span
                 className={`text-sm text-[#4D5050] font-medium
-                dark:text-gray-250`}
+                dark:text-gray-300`}
               >
                 Tag as:
               </span>
@@ -170,7 +170,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
                 <button
                   className={`w-full sm:w-[auto] px-4 py-1 text-sm rounded border flex items-center space-x-16 
                   border-default text-gray-900
-                   dark:text-gray-250`}
+                  dark:border-gray-700 dark:text-gray-100`}
                   onClick={() => setIsTagDropdownOpen(!isTagDropdownOpen)}
                   aria-label="Select tag type for selected transactions"
                   aria-haspopup="true"
@@ -189,14 +189,14 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
                 {/* Tag Dropdown Menu */}
                 {isTagDropdownOpen && (
                   <div
-                    className={`absolute bottom-full left-0 mb-1 px-1.5 border rounded-lg shadow-lg py-1 z-50 max-h-40 overflow-y-auto bg-white border-gray-300
-                    dark:bg-gray-800 dark:border-gray-600`}
+                    className={`absolute bottom-full left-0 mb-1 px-1.5 border rounded-lg shadow-lg py-1 z-50 max-h-40 overflow-y-auto bg-white border-gray-200 
+                      dark:bg-gray-800 dark:border-gray-600`}
                   >
                     {tagOptions.map((option) => (
                       <button
                         key={option}
                         className={`w-full px-3 py-2 text-sm text-left rounded-lg flex items-center justify-between ${
-                          selectedTag === option ? "bg-gray-100" : ""
+                          selectedTag === option ? "bg-gray-600" : ""
                         }`}
                         onClick={() => {
                           setSelectedTag(option);
@@ -230,12 +230,12 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
             <div className="w-full sm:w-[auto] flex items-center sm:space-x-3 gap-3 sm:gap-0">
               <div
                 className={`hidden sm:flex  w-px h-4 bg-default
-                dark:bg-[#F3F5F7]`}
+                dark:bg-gray-700`}
                 role="separator"
               ></div>
               <button
                 className={` sm:hidden px-2 py-1 text-sm rounded rounded-lg border border-default text-gray-700
-              dark:text-gray-250`}
+                  dark:border-gray-700 dark:text-gray-100`}
                 onClick={onClearSelection}
                 aria-label="Clear selection"
               >
@@ -244,14 +244,14 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
               <button
                 className={`w-full sm:w-[auto] px-2.5 py-1.5 text-sm rounded border 
                 border-default text-gray-900
-                 dark:text-gray-250`}
+                 dark:border-gray-700 dark:text-gray-100`}
                 aria-label="Merge selected transactions"
               >
                 Merge
               </button>
               <div
                 className={`hidden sm:flex w-px h-4 bg-default
-                dark:bg-[#F3F5F7]`}
+                dark:bg-gray-700`}
                 role="separator"
               ></div>
               <button
@@ -263,7 +263,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
               </button>
               <button
                 className={`hidden sm:flex px-2 py-1 text-sm rounded rounded-lg border border-default text-gray-700
-              dark:text-gray-250`}
+                dark:border-gray-700 dark:text-gray-300`}
                 onClick={onClearSelection}
                 aria-label="Clear selection"
               >

@@ -19,7 +19,7 @@ interface NFTGridProps {
 
 const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs }) => {
   return (
-    <div className="sm:mx-6 mb-10 mt-5 sm:mt-0">
+    <div className="sm:mx-6 pb-10 mt-5 sm:mt-0">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 ">
         {filteredNFTs.map((nft) => (
           <div
