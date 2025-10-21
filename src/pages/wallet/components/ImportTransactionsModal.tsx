@@ -162,12 +162,14 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                           <div className="w-full border-t border-gray-300" />
                         </div>
                         <div className="relative flex justify-center">
-                          <span className="px-2 bg-white text-gray-500 text-xs font-medium">OR</span>
+                          <span className="px-2 bg-white text-gray-500 text-xs font-medium">
+                            OR
+                          </span>
                         </div>
                       </div>
 
                       {/* Google Drive Button */}
-                      <button 
+                      <button
                         className="w-full py-3 px-4 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm font-medium"
                         onClick={(e) => {
                           e.stopPropagation();
@@ -238,7 +240,6 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                   </div>
                 )}
 
-
                 {/* Timezone Selector */}
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
@@ -294,11 +295,57 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
               <div className="">
                 {/* Mobile Accordion Instructions */}
                 <div className="block md:hidden">
-                  <Accordion className="bg-transparent">
+                  <Accordion className="!bg-gray-100 p-3">
                     <AccordionItem
                       title="Instructions"
-                      className="bg-transparent"
+                      className="!bg-gray-100"
                     >
+                      <div className="md:hidden">
+                        <ol className="space-y-3 text-sm text-gray-700">
+                          <li className="flex items-start space-x-2">
+                            <span className="flex-shrink-0 w-6 h-6 bg-white text-gray-900 border border-default rounded-full flex items-center justify-center text-xs font-medium">
+                              1
+                            </span>
+                            <span className="text-base font-medium text-gray-700">
+                              <span className="text-gray-900">Log in</span> to
+                              the {walletName} app
+                            </span>
+                          </li>
+                          <li className="flex items-start space-x-2">
+                            <span className="flex-shrink-0 w-6 h-6 bg-white text-gray-900 border border-default rounded-full flex items-center justify-center text-xs font-medium">
+                              2
+                            </span>
+                            <span className="text-base text-left font-medium text-gray-700">
+                              Select{" "}
+                              <span className="text-gray-900">
+                                account balance
+                              </span>{" "}
+                              in the top left.
+                            </span>
+                          </li>
+                          <li className="flex items-start space-x-2">
+                            <span className="flex-shrink-0 w-6 h-6 bg-white text-gray-900 border border-default rounded-full flex items-center justify-center text-xs font-medium">
+                              3
+                            </span>
+                            <span className="text-base font-medium text-gray-700">
+                              Select send{" "}
+                              <span className="text-gray-900">CSV</span> to
+                              email.
+                            </span>
+                          </li>
+                          <li className="flex items-start space-x-2 text-left">
+                            <span className="flex-shrink-0 w-6 h-6 bg-white text-gray-900 border border-default rounded-full flex items-center justify-center text-xs font-medium">
+                              4
+                            </span>
+                            <span className="text-base font-medium text-gray-700">
+                              Your CSV file will be sent to the email associated
+                              with your {walletName} account -{" "}
+                              <span className="text-gray-900">download</span> it
+                              from here.
+                            </span>
+                          </li>
+                        </ol>
+                      </div>
                       <div className="pt-2">
                         <button className="w-full py-3 px-4 border border-gray-300 rounded-xl bg-white text-gray-900 text-sm font-medium">
                           Watch video
@@ -359,7 +406,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
             </div>
           </div>
           {/* Bottom Actions */}
-          <div className="flex flex-row-reverse md:flex-row justify-between mt-6 md:mt-6 gap-3">
+          <div className="flex  md:flex-row justify-between mt-6 md:mt-6 gap-3">
             <button className="px-4 md:px-5 py-3 md:py-3 border-2 border-gray-300 text-sm md:text-base font-medium rounded-lg bg-transparent text-gray-700">
               View history
             </button>
