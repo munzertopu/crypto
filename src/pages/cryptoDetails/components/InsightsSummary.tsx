@@ -152,17 +152,16 @@ const InsightsSummary: React.FC<InsightsSummaryProps> = ({
         
         {/* Dismissible Banner */}
         {showBanner && (
-          <div className="mb-4 px-5 py-4 rounded-lg border border-blue-200 bg-white dark:bg-[#2F3232] dark:border-[#4D5050]">
-            <div className="flex items-center justify-between">
+          <div className="mb-4 px-5 py-4 rounded-lg border border-blue-200 bg-white dark:bg-transparent dark:border-info-500">
+            {/* Desktop: Single Row Layout */}
+            <div className="hidden md:flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 text-[#2186D7] bg-white rounded-full flex items-center justify-center">
+                <div className="w-6 h-6 text-[#2186D7] bg-white dark:bg-transparent rounded-full flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
                     <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" />
                   </svg>
-
-
                 </div>
-                <span className="text-base text-gray-700 dark:text-gray-250">
+                <span className="text-base text-gray-700 dark:text-gray-100">
                   Insights are estimates only and subject to change with reconciliation and tax rules.
                 </span>
               </div>
@@ -175,6 +174,32 @@ const InsightsSummary: React.FC<InsightsSummaryProps> = ({
                 <span className="text-sm">Close</span>
               </button>
             </div>
+
+            {/* Mobile: Two Row Layout */}
+            <div className="md:hidden">
+              {/* First Row: Info Icon and Close Icon */}
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-6 h-6 text-[#2186D7] bg-white dark:bg-transparent rounded-full flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                    <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <button 
+                  onClick={() => setShowBanner(false)}
+                  className="flex items-center gap-1 text-gray-500 hover:text-gray-700 dark:text-[#A1A3A5] dark:hover:text-[#CDCFD1] transition-colors"
+                  aria-label="Close insights banner"
+                >
+                  <FontAwesomeIcon icon={faTimes} className="text-sm dark:text-gray-100" aria-hidden="true" />
+                </button>
+              </div>
+              
+              {/* Second Row: Text */}
+              <div className="text-left">
+                <span className="text-base text-gray-700 dark:text-gray-100">
+                  Insights are estimates only and subject to change with reconciliation and tax rules.
+                </span>
+              </div>
+            </div>
           </div>
         )}
         
@@ -182,7 +207,7 @@ const InsightsSummary: React.FC<InsightsSummaryProps> = ({
           {insightCards.map((card) => (
             <div 
                key={card.id}
-               className="px-6 py-5 rounded-xl border border-[#E3F3C7] bg-[#F4FAEB] dark:bg-[#2F3232]"
+               className="px-6 py-5 rounded-xl border border-[#E3F3C7] dark:border-green-900 bg-[#F4FAEB] dark:bg-green-900"
              >
                <div className="flex flex-col items-left text-left">
                  <div className="mb-3">
@@ -195,11 +220,11 @@ const InsightsSummary: React.FC<InsightsSummaryProps> = ({
                    </div>
                  </div>
                  
-                 <h4 className="text-base font-semibold mb-2 text-[#0E201E] dark:text-[#E1E3E5]">
+                 <h4 className="text-base font-semibold mb-2 text-[#0E201E] dark:text-gray-100">
                    {card.title}
                  </h4>
                  
-                 <p className="text-sm leading-relaxed text-[#0E201E] dark:text-gray-250">
+                 <p className="text-sm leading-relaxed text-[#0E201E] dark:text-gray-100">
                    {card.description}
                  </p>
                </div>
