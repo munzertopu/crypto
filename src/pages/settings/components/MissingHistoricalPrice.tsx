@@ -119,6 +119,10 @@ const MissingHistoricalPrice: React.FC<MissingHistoricalPriceProps> = ({
   const handleEditMissingPrice = () => {
     if (screenSize.width < 640) {
       setIsAddPriceModalOpen(true);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
       return;
     }
     onEditMissingPrice(selectedPlatforms);
