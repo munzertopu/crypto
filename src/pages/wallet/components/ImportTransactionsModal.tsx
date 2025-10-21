@@ -14,7 +14,6 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
   walletName = "Coinbase",
 }) => {
   const [timezone, setTimezone] = useState("UTC");
-  const [dragActive, setDragActive] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   // Clear selected file when modal closes
@@ -29,17 +28,11 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
   };
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setDragActive(false);
 
     const files = e.dataTransfer.files;
     if (files && files[0]) {
@@ -74,7 +67,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
   };
 
   return (
-    <div className="fixed top-[150px] md:top-0 inset-0 z-50 overflow-y-auto">
+    <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
@@ -83,20 +76,18 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
       />
 
       {/* Modal */}
-      <div className="flex min-h-full md:items-center md:justify-center md:p-4">
-        <div className="relative bg-white dark:bg-gray-100 rounded-t-2xl md:rounded-2xl shadow-xl max-w-4xl w-full p-3 md:p-8 flex flex-col">
+      <div className="flex min-h-full items-end md:items-center md:justify-center md:p-4">
+        <div className="relative bg-white dark:bg-gray-100 rounded-t-3xl md:rounded-2xl shadow-xl max-w-4xl w-full p-4 md:p-8 flex flex-col">
           {/* Header */}
-          <div className="flex items-start justify-between">
+          <div className="flex items-start justify-between mb-4 md:mb-0">
             <div>
               <h3 className="text-lg md:text-2xl font-semibold text-gray-11 text-left">
                 Import transactions for {walletName}
               </h3>
-              <p className="text-sm md:text-base text-gray-11 text-left">
+              <p className="text-sm md:text-base text-gray-11 text-left mt-1">
                 Download your transaction files for all years of trading and
-                upload them here.
-              </p>
-              <p className="text-xs md:text-sm text-gray-11 text-left">
-                Every deposit, withdrawal & trade should be added.
+                upload them here. Every deposit, withdrawal & trade should be
+                added.
               </p>
             </div>
             <button
@@ -122,12 +113,12 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
 
           {/* Content */}
           <div className="flex-1">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 lg:gap-8 mt-4 md:mt-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-6 lg:gap-8 mt-2 md:mt-6">
               {/* Left Section - File Upload */}
               <div className="space-y-4 md:space-y-6">
                 {/* File Upload Area */}
                 <div
-                  className={`border-[1px] border-dashed rounded-lg p-3 md:p-6 text-center transition-colors border-gray-250 bg-transparent cursor-pointer`}
+                  className={`border-2 border-dashed rounded-lg p-4 md:p-6 text-center transition-colors border-gray-300 bg-white cursor-pointer`}
                   onDragEnter={handleDrag}
                   onDragLeave={handleDrag}
                   onDragOver={handleDrag}
@@ -144,23 +135,67 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                     accept=".csv,.zip,.xlsx,.xls"
                   />
 
-                  <div className="flex flex-col items-center">
-                    {/* Green Folder Icon */}
-                    <div className="pb-2 md:pb-3 rounded-lg flex items-center justify-center text-green-500">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 640 640"
-                        className="size-8 md:size-12"
-                        fill="currentColor"
+                  <div className="flex flex-col items-center space-y-4">
+                    {/* Mobile Layout */}
+                    <div className="block md:hidden w-full">
+                      {/* Browse file section */}
+                      <div className="flex flex-col items-center space-y-3">
+                        {/* Green Folder Icon */}
+                        <div className="flex items-center justify-center text-green-500">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 640 640"
+                            className="size-12"
+                            fill="currentColor"
+                          >
+                            <path d="M128 512L512 512C547.3 512 576 483.3 576 448L576 208C576 172.7 547.3 144 512 144L362.7 144C355.8 144 349 141.8 343.5 137.6L305.1 108.8C294 100.5 280.5 96 266.7 96L128 96C92.7 96 64 124.7 64 160L64 448C64 483.3 92.7 512 128 512z" />
+                          </svg>
+                        </div>
+                        <span className="text-gray-900 font-normal text-sm">
+                          Browse file
+                        </span>
+                      </div>
+
+                      {/* OR Divider */}
+                      <div className="relative my-4">
+                        <div className="absolute inset-0 flex items-center">
+                          <div className="w-full border-t border-gray-300" />
+                        </div>
+                        <div className="relative flex justify-center">
+                          <span className="px-2 bg-white text-gray-500 text-xs font-medium">OR</span>
+                        </div>
+                      </div>
+
+                      {/* Google Drive Button */}
+                      <button 
+                        className="w-full py-3 px-4 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm font-medium"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // Handle Google Drive upload
+                        }}
                       >
-                        <path d="M128 512L512 512C547.3 512 576 483.3 576 448L576 208C576 172.7 547.3 144 512 144L362.7 144C355.8 144 349 141.8 343.5 137.6L305.1 108.8C294 100.5 280.5 96 266.7 96L128 96C92.7 96 64 124.7 64 160L64 448C64 483.3 92.7 512 128 512z" />
-                      </svg>
+                        Upload from Google Drive
+                      </button>
                     </div>
 
-                    <p className="text-gray-900 font-normal text-xs md:text-sm">
-                      Drag and drop your file or{" "}
-                      <span className="text-[#5F9339]">Browse file</span>
-                    </p>
+                    {/* Desktop Layout */}
+                    <div className="hidden md:block">
+                      {/* Green Folder Icon */}
+                      <div className="pb-3 rounded-lg flex items-center justify-center text-green-500">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 640 640"
+                          className="size-12"
+                          fill="currentColor"
+                        >
+                          <path d="M128 512L512 512C547.3 512 576 483.3 576 448L576 208C576 172.7 547.3 144 512 144L362.7 144C355.8 144 349 141.8 343.5 137.6L305.1 108.8C294 100.5 280.5 96 266.7 96L128 96C92.7 96 64 124.7 64 160L64 448C64 483.3 92.7 512 128 512z" />
+                        </svg>
+                      </div>
+                      <p className="text-gray-900 font-normal text-sm">
+                        Drag and drop your file or{" "}
+                        <span className="text-[#5F9339]">Browse file</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -203,29 +238,15 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                   </div>
                 )}
 
-                {/* OR Divider */}
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300" />
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-gray-900">OR</span>
-                  </div>
-                </div>
-
-                {/* Google Drive Upload Button */}
-                <button className="w-full text-xs md:text-sm font-medium py-2 md:py-3 px-3 md:px-4 border-2 border-default rounded-xl bg-transparent text-gray-900">
-                  Upload from Google Drive
-                </button>
 
                 {/* Timezone Selector */}
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
-                    <label className="text-xs md:text-sm font-medium text-gray-900">
+                    <label className="text-sm md:text-sm font-medium text-gray-900">
                       Timezone
                     </label>
                     <svg
-                      className="w-3 h-3 md:w-4 md:h-4 text-gray-500"
+                      className="w-4 h-4 md:w-4 md:h-4 text-gray-500"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -242,7 +263,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                     <select
                       value={timezone}
                       onChange={(e) => setTimezone(e.target.value)}
-                      className="w-full px-3 md:px-4 py-2 md:py-3 border border-default text-sm md:text-base rounded-xl bg-transparent text-gray-900 focus:ring-none focus:outline-none appearance-none pr-10 md:pr-12"
+                      className="w-full px-4 md:px-4 py-3 md:py-3 border border-gray-300 text-sm md:text-base rounded-xl bg-transparent text-gray-900 focus:ring-none focus:outline-none appearance-none pr-10 md:pr-12"
                     >
                       <option value="UTC">UTC</option>
                       <option value="EST">EST</option>
@@ -250,9 +271,9 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                       <option value="CST">CST</option>
                     </select>
                     {/* Custom dropdown arrow with 16px margin from right */}
-                    <div className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <div className="absolute right-4 md:right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                       <svg
-                        className="w-3 h-3 md:w-4 md:h-4 text-gray-900"
+                        className="w-4 h-4 md:w-4 md:h-4 text-gray-900"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -273,57 +294,13 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
               <div className="">
                 {/* Mobile Accordion Instructions */}
                 <div className="block md:hidden">
-                  <Accordion className="bg-gray-100 rounded-xl p-3 md:p-5 h-min">
+                  <Accordion className="bg-transparent">
                     <AccordionItem
-                      title="How to get your transaction file"
-                      className="!bg-gray-100"
+                      title="Instructions"
+                      className="bg-transparent"
                     >
                       <div className="pt-2">
-                        <ol className="space-y-3 text-sm text-gray-700">
-                          <li className="flex items-start space-x-2">
-                            <span className="flex-shrink-0 w-5 h-5 bg-white text-gray-900 border border-default rounded-full flex items-center justify-center text-xs font-medium">
-                              1
-                            </span>
-                            <span className="text-sm font-medium text-gray-700">
-                              <span className="text-gray-900">Log in</span> to
-                              the {walletName} app
-                            </span>
-                          </li>
-                          <li className="flex items-start space-x-2">
-                            <span className="flex-shrink-0 w-5 h-5 bg-white text-gray-900 border border-default rounded-full flex items-center justify-center text-xs font-medium">
-                              2
-                            </span>
-                            <span className="text-sm font-medium text-gray-700">
-                              Select{" "}
-                              <span className="text-gray-900">
-                                account balance
-                              </span>{" "}
-                              in the top left.
-                            </span>
-                          </li>
-                          <li className="flex items-start space-x-2">
-                            <span className="flex-shrink-0 w-5 h-5 bg-white text-gray-900 border border-default rounded-full flex items-center justify-center text-xs font-medium">
-                              3
-                            </span>
-                            <span className="text-sm font-medium text-gray-700">
-                              Select send{" "}
-                              <span className="text-gray-900">CSV</span> to
-                              email.
-                            </span>
-                          </li>
-                          <li className="flex items-start space-x-2 text-left">
-                            <span className="flex-shrink-0 w-5 h-5 bg-white text-gray-900 border border-default rounded-full flex items-center justify-center text-xs font-medium">
-                              4
-                            </span>
-                            <span className="text-sm font-medium text-gray-700">
-                              Your CSV file will be sent to the email associated
-                              with your {walletName} account -{" "}
-                              <span className="text-gray-900">download</span> it
-                              from here.
-                            </span>
-                          </li>
-                        </ol>
-                        <button className="mt-4 w-full py-2 px-4 border border-default rounded-xl bg-white text-gray-900 text-sm">
+                        <button className="w-full py-3 px-4 border border-gray-300 rounded-xl bg-white text-gray-900 text-sm font-medium">
                           Watch video
                         </button>
                       </div>
@@ -382,13 +359,13 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
             </div>
           </div>
           {/* Bottom Actions */}
-          <div className="flex flex-row-reverse md:flex-row justify-between mt-4 md:mt-6">
-            <button className="px-4 md:px-5 py-2 md:py-3 border-2 border-default text-sm md:text-base font-medium rounded-lg bg-transparent text-gray-700">
+          <div className="flex flex-row-reverse md:flex-row justify-between mt-6 md:mt-6 gap-3">
+            <button className="px-4 md:px-5 py-3 md:py-3 border-2 border-gray-300 text-sm md:text-base font-medium rounded-lg bg-transparent text-gray-700">
               View history
             </button>
             <button
               onClick={onClose}
-              className="px-4 md:px-5 py-2 md:py-3 bg-green-500 text-gray-900 rounded-xl text-sm md:text-base font-medium"
+              className="px-4 md:px-5 py-3 md:py-3 bg-green-500 text-gray-900 rounded-xl text-sm md:text-base font-medium"
             >
               Import
             </button>
