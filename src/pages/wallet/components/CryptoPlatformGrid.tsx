@@ -251,7 +251,7 @@ const CryptoPlatformGrid: React.FC<CryptoPlatformGridProps> = () => {
           >
             <div
               className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity justify-center rounded-[12px] px-6 py-2 sm:px-0 sm:py-0 sm:px-6 md:px-5 sm:py-4 md:py-5 
-              border border-gray-150 dark:border-[#B6B8BA]"
+              border border-gray-150 dark:border-gray-700"
               onClick={() => handlePlatformClick(platform)}
             >
               <div className="relative mb-6">
