@@ -152,12 +152,12 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onLogout }) => {
       component: PortfolioTab,
     },
     { id: "tax", name: "Tax", icon: TaxIcon, component: FormInfoTab },
-    {
-      id: "formInfo",
-      name: "Form Info",
-      icon: FormInfoIcon,
-      component: FormInfoTab,
-    },
+    // {
+    //   id: "formInfo",
+    //   name: "Form Info",
+    //   icon: FormInfoIcon,
+    //   component: FormInfoTab,
+    // },
     {
       id: "costBasis",
       name: "Cost Basis",

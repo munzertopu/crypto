@@ -91,12 +91,12 @@ const TaxWizardTab: React.FC = () => {
         <span className={`text-sm font-medium`}>Include only Mode</span>
         <Tooltip
           title={
-            <>
+            <div className="text-gray-900 dark:text-gray-100">
               <strong>Include only Mode</strong> - This mode allows you to
               select specific assets, wallets, or exchanges to include in your
               tax optimization strategy. Only the selected items will be
               considered for tax calculations.
-            </>
+            </div>
           }
           placement="bottom"
         >
@@ -143,12 +143,12 @@ const TaxWizardTab: React.FC = () => {
         <span className={`text-sm font-medium`}>Exclude Mode</span>
         <Tooltip
           title={
-            <>
+            <div className="text-gray-900 dark:text-gray-100">
               <strong>Exclude Mode</strong> - This mode allows you to exclude
               specific assets, wallets, or exchanges from your tax optimization
               strategy. All items except the selected ones will be considered
               for tax calculations.
-            </>
+            </div>
           }
           placement="bottom"
         >
