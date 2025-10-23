@@ -81,7 +81,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
 
   return (
     <div
-      className={`fixed sm:static bottom-[60px] left-0 w-full px-1 sm:px-8 sm:py-4 
+      className={`fixed sm:static bottom-0 md:bottom-[60px] left-0 w-full px-1 sm:px-8 sm:py-4 
         dark:bg-transparent`}
     >
       <div className="flex items-center justify-between">

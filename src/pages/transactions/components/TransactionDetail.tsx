@@ -57,7 +57,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({
     setSelectedPlatform("");
   };
   return (
-    <div className="w-full sm:w-[auto] md:space-y-2 md:mx-4 md:px-2 md:py-4 rounded-xl bg-background dark:bg-gray-800">
+    <div className="w-full sm:w-[auto] md:space-y-2 md:mx-4 md:px-2 md:py-4 rounded-xl bg-transparent md:bg-white dark:bg-transparent md:dark:bg-gray-800">
       {/* Tabs */}
       <div className="w-full sm:w-[auto] flex border-b border-gray-200 ">
         {tabs.map((tab) => (
