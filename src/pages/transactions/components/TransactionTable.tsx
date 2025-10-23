@@ -177,7 +177,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                   ))}
                 </tr>
               </thead>
-              <tbody className="flex flex-col gap-3 sm:table-row-group">
+              <tbody className="flex flex-col gap-0 md:gap-3 sm:table-row-group">
                 {groupedTransactions.map((group) => (
                   <React.Fragment key={group.date}>
                     {/* Date Header Row */}
@@ -211,7 +211,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                           <tr
                             className={`flex justify-start
                               bg-white sm:table-row 
-                              dark:bg-transparent ${
+                              dark:bg-transparent p-3 md:p-0 overflow-y-hidden ${
                                 onToggleExpanded
                                   ? "cursor-pointer transition-colors"
                                   : ""
@@ -566,7 +566,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           <CardBody className="px-0 sm:px-3.5 sm:py-2.5 md:px-0 md:py-0">
             <div className="overflow-x-auto">
               <table className="w-full min-w-max table-auto text-left">
-                <tbody className="flex flex-col gap-3 sm:table-row-group overflow-y-auto h-[calc(100vh-250px)]">
+                <tbody className="flex flex-col gap-0 md:gap-3 sm:table-row-group overflow-y-auto h-[calc(100vh-250px)]">
                   {groupedTransactions.map((group) => (
                     <React.Fragment key={group.date}>
                       {/* Date Header Row */}
