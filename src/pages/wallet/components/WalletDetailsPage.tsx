@@ -240,9 +240,9 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
             <img
               src={walletLogo}
               alt={walletName}
-              className="w-10 h-10 rounded-lg"
+              className="w-8 h-8 md:w-10 md:h-10 rounded-lg"
             />
-            <h1 className="text-[32px] font-semibold text-gray-900 dark:text-white">
+            <h1 className="text-lg md:text-[32px] font-semibold text-gray-900 dark:text-white">
               {walletName}
             </h1>
           </div>
@@ -392,6 +392,11 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
             {/* Vertical Separator at right edge */}
             <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-px bg-default"></div>
           </div>
+          <div
+            className={`w-full h-px md:hidden 
+            dark:bg-gray-700  bg-gray-150
+            `}
+          ></div>
 
           {/* Right Panel - Asset Details Table (3 columns) */}
           <div className="lg:col-span-3 space-y-6">
@@ -436,7 +441,7 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
                             <img
                               src={asset.logo}
                               alt={asset.name}
-                              className="w-12 h-12 rounded-full"
+                              className="w-11 h-11 md:w-12 md:h-12 rounded-full"
                             />
                             <div className="flex flex-col">
                               <span className="text-base text-gray-900 dark:text-gray-100">

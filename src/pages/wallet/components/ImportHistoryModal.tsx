@@ -151,7 +151,7 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
       <div className="flex min-h-full md:items-center md:justify-center md:p-4">
         <div className="relative bg-white dark:bg-gray-800 rounded-t-2xl md:rounded-2xl shadow-xl max-w-6xl w-full p-3 md:p-8 flex flex-col">
           {/* Header */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mt-2 md:mt-0">
             <h2 className="text-lg md:text-2xl font-semibold text-gray-900 dark:text-gray-100">
               Import History
             </h2>
@@ -178,7 +178,7 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
           {/* Search and Filters */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0">
             {/* Search Bar */}
-            <div className="relative w-full md:w-auto">
+            <div className="relative w-full md:w-auto mt-5 md:mt-0">
               <div className="absolute inset-y-0 left-0 pl-3 md:pl-4 flex items-center pointer-events-none">
                 <svg
                   className="w-4 h-4 md:w-5 md:h-5 text-gray-400 dark:text-gray-500"
@@ -225,32 +225,32 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
           </div>
 
           {/* Mobile Card Layout */}
-          <div className="flex-1 overflow-auto block md:hidden">
-            <div className="space-y-3">
+          <div className="flex-1 overflow-auto block md:hidden mt-5">
+            <div className="flex flex-col gap-4">
               {mockImportHistory.map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-lg p-4"
+                  className="bg-white dark:bg-gray-800 rounded-lg py-1"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div
-                        className={`w-10 h-10 ${item.wallet.color} rounded-full flex items-center justify-center text-white text-sm font-medium`}
+                        className={`w-11 h-11 ${item.wallet.color} rounded-full flex items-center justify-center text-white text-sm font-medium`}
                       >
                         <img
                           src={item.wallet.img}
                           alt={item.wallet.name}
-                          className="w-6 h-6"
+                          className="w-11 h-11"
                         />
                       </div>
-                      <div className="flex flex-col justify-start items-start">
-                        <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                      <div className="flex flex-col justify-start items-start gap-1">
+                        <span className="text-base  text-gray-900 dark:text-gray-100">
                           {item.wallet.name}
                         </span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-900 dark:text-gray-400 opacity-70">
                           {item.fileName}.csv
                         </span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                        <span className="text-[13px] text-gray-700 dark:text-gray-300">
                           {item.transactionsAdded} transactions
                         </span>
                       </div>

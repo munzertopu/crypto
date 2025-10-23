@@ -79,7 +79,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
       <div className="flex min-h-full items-end md:items-center md:justify-center md:p-4">
         <div className="relative bg-white dark:bg-gray-800 rounded-t-3xl md:rounded-2xl shadow-xl max-w-4xl w-full p-4 md:p-8 flex flex-col">
           {/* Header */}
-          <div className="flex items-start justify-between mb-4 md:mb-0">
+          <div className="flex items-start justify-between mb-4 md:mb-0 mt-2 md:mt-0">
             <div>
               <h3 className="text-lg md:text-2xl font-semibold text-gray-900 dark:text-gray-100 text-left">
                 Import transactions for {walletName}
