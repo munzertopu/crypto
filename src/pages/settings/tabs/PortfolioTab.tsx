@@ -5,6 +5,7 @@ import { Input, Button } from "@material-tailwind/react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { countriesData, currencies } from "../../../data/settingsAssets";
+import { Tooltip } from "../../../components";
 
 interface PortfolioTabProps {}
 
@@ -279,11 +280,53 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
             </div>
 
             <div>
-              <label
-                className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
-              >
-                Lock transaction prior to this date
-              </label>
+              <div className="flex items-center space-x-2">
+                <label
+                  className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
+                >
+                  Lock transaction prior to this date
+                </label>
+                <Tooltip
+                  title={
+                    <div className="text-gray-900 dark:text-gray-100">
+                      <strong>Transaction Lock Date</strong>
+                      <br />
+                      This date prevents any transactions before this date from
+                      being modified or deleted. This is useful for maintaining
+                      data integrity once you've completed your tax reporting
+                      for a specific period.
+                    </div>
+                  }
+                  placement="bottom"
+                >
+                  <button
+                    type="button"
+                    className="w-4 h-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                    aria-label="Transaction lock date help information"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 9v2m0 4h.01"
+                      />
+                    </svg>
+                  </button>
+                </Tooltip>
+              </div>
               <div className="relative">
                 <DatePicker
                   selected={startDate}
@@ -356,32 +399,53 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
             </div>
 
             <div>
-              <div className="flex space-x-2">
+              <div className="flex items-center space-x-2">
                 <label
                   className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
                 >
-                  Dust valur threshold
+                  Dust value threshold
                 </label>
-                <svg
-                  className="w-5 h-5 mx-2 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <Tooltip
+                  title={
+                    <div className="text-gray-900 dark:text-gray-100">
+                      <strong>Dust Value Threshold</strong>
+                      <br />
+                      This is the minimum value (in your selected currency) that
+                      a transaction must have to be included in your tax
+                      reports. Transactions below this threshold are considered
+                      "dust" and are automatically filtered out to reduce
+                      clutter in your reports.
+                    </div>
+                  }
+                  placement="bottom"
                 >
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 9v2m0 4h.01"
-                  />
-                </svg>
+                  <button
+                    type="button"
+                    className="w-4 h-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                    aria-label="Dust value threshold help information"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 9v2m0 4h.01"
+                      />
+                    </svg>
+                  </button>
+                </Tooltip>
               </div>
               <div className="flex space-x-0 px-4 py-2.5 border border-default rounded-lg dark:border-gray-700">
                 <input
@@ -446,11 +510,54 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
             </div>
 
             <div>
-              <label
-                className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
-              >
-                Beginning of tax reporting year
-              </label>
+              <div className="flex items-center space-x-2">
+                <label
+                  className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
+                >
+                  Beginning of tax reporting year
+                </label>
+                <Tooltip
+                  title={
+                    <div className="text-gray-900 dark:text-gray-100">
+                      <strong>Tax Reporting Year Start Date</strong>
+                      <br />
+                      This date marks the beginning of your tax reporting year.
+                      All transactions from this date forward will be included
+                      in your current tax year calculations. This is typically
+                      January 1st, but can be adjusted based on your specific
+                      tax situation.
+                    </div>
+                  }
+                  placement="bottom"
+                >
+                  <button
+                    type="button"
+                    className="w-4 h-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                    aria-label="Tax reporting year help information"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 9v2m0 4h.01"
+                      />
+                    </svg>
+                  </button>
+                </Tooltip>
+              </div>
               <div className="relative">
                 <DatePicker
                   selected={taxReportingYearDate}

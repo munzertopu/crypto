@@ -238,7 +238,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               </label>
               <Tooltip
                 title={
-                  <div>
+                  <div className="text-gray-900 dark:text-gray-100">
                     <strong>
                       INN (Individual Taxpayer Identification Number)
                     </strong>{" "}
