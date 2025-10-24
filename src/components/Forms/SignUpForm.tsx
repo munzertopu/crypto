@@ -495,7 +495,7 @@ const SignUpForm = ({
       <div>
         <button
           type="submit"
-          className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-lg text-gray-900 dark:text-gray-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+          className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-base font-medium rounded-lg text-gray-900 dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
           style={{ backgroundColor: "#75AE46" }}
           aria-label="Create new portal account"
         >
@@ -509,7 +509,9 @@ const SignUpForm = ({
           <div className="w-full border-t border-gray-300 dark:border-gray-700" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-white dark:bg-[#0E201E] text-gray-500 dark:text-gray-400">OR</span>
+          <span className="px-2 bg-white dark:bg-[#0E201E] text-gray-500 dark:text-gray-400">
+            OR
+          </span>
         </div>
       </div>
 
