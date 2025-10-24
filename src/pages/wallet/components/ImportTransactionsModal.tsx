@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Accordion, AccordionItem } from "../../../components/Accordion";
 import TrashIcon from "../../../components/Icons/TrashIcon";
+import { Tooltip } from "../../../components";
 
 interface ImportTransactionsModalProps {
   isOpen: boolean;
@@ -246,19 +247,31 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                     <label className="text-sm md:text-sm font-medium text-gray-900 dark:text-gray-100">
                       Timezone
                     </label>
-                    <svg
-                      className="w-4 h-4 md:w-4 md:h-4 text-gray-500 dark:text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                    <Tooltip
+                      title={
+                        <div>
+                          <div className="text-sm md:text-sm font-medium text-gray-600 dark:text-gray-300">
+                            Select a timezone to view the transactions in the
+                            correct time
+                          </div>
+                        </div>
+                      }
+                      placement="bottom"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
+                      <svg
+                        className="w-4 h-4 md:w-4 md:h-4 text-gray-500 dark:text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </Tooltip>
                   </div>
                   <div className="relative">
                     <select
@@ -295,7 +308,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
               <div className="">
                 {/* Mobile Accordion Instructions */}
                 <div className="block md:hidden">
-                  <Accordion className="!bg-gray-100 dark:!bg-gray-900 p-3">
+                  <Accordion className="!bg-gray-100 dark:!bg-gray-900 p-3 border border-gray-150 dark:border-gray-700 rounded-xl">
                     <AccordionItem
                       title="Instructions"
                       className="!bg-gray-100 dark:!bg-gray-900"

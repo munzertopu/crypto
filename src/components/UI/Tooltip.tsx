@@ -286,9 +286,9 @@ const Tooltip: React.FC<TooltipProps> = ({
           className={`w-72 sm:w-64 max-w-[calc(100vw-20px)] p-3 text-sm text-white bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-700 dark:border-gray-600 ${className}`}
         >
           {/* Arrow */}
-          <div
+          {/* <div
             className={`absolute w-2 h-2 bg-white dark:bg-gray-800 border border-gray-700 dark:border-gray-600 ${getArrowClasses()}`}
-          ></div>
+          ></div> */}
 
           {/* Content */}
           {typeof title === "string" ? (
