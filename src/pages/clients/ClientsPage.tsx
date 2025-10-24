@@ -708,6 +708,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
         leftButtonText="Clear All"
         rightButtonText="Apply"
         height={500}
+        className="dark:!bg-gray-800"
       >
         <div className="text-left space-y-2">
           <label className="text-left text-sm font-medium text-[#4D5050] dark:text-gray-300">
@@ -715,7 +716,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
           </label>
           <button
             onClick={() => setOpenAssigneeDropdown(!openAssigneeDropdown)}
-            className={`w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none ${"bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250"}`}
+            className={`w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none ${"bg-white text-gray-900 dark:bg-transparent dark:border-gray-600 dark:text-gray-250"}`}
           >
             <span className={selectedAssignee ? "" : "text-gray-500"}>
               {selectedAssignee ? selectedAssignee : "Select Assignee"}
@@ -751,7 +752,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
         </div>
         <button
           onClick={() => setOpenSortDropdown(!openSortDropdown)}
-          className={`w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none ${"bg-white text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-250"}`}
+          className={`w-full flex items-center justify-between px-3 py-2 border border-[#E1E3E5] rounded-lg focus:outline-none ${"bg-white text-gray-900 dark:bg-transparent dark:border-gray-600 dark:text-gray-250"}`}
         >
           <span className={selectedSort ? "" : "text-gray-500"}>
             Sort by : {selectedSort ? selectedSort : ""}
@@ -786,7 +787,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
           onSelect={(value) => setSelectedAssignee(value)}
           searchable={true}
           defaultValue="Assignees"
-          inputClassName="!py-2.5"
+          inputClassName="!py-2.5 dark:!bg-transparent"
           multiline={true}
           showTickMark={true}
         />

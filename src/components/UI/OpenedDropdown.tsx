@@ -110,6 +110,7 @@ const OpenedDropdown: React.FC<OpenedDropdownProps> = ({
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
             placeholder={searchPlaceholder}
+            className={inputClassName}
           />
         </div>
       )}
