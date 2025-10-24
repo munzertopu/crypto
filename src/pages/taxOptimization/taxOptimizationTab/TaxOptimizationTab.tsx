@@ -200,7 +200,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
 
             {/* Categorized Sections */}
             <div className="mb-4">
-              <Accordion className=" h-min ">
+              <Accordion className="border-b border-gray-150 dark:border-gray-700 rounded-[8px] h-min ">
                 <AccordionItem
                   title="Short term"
                   className="!bg-gray-100 dark:!bg-gray-700 !px-3 !py-2 border-b border-gray-150 dark:border-gray-700 rounded-[8px]"
