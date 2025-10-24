@@ -15,6 +15,8 @@ interface DrawerProps {
   noChildPadding?: boolean;
   showMoreIcon?: boolean;
   showMoreContent?: React.ReactNode;
+  headerClassName?: string;
+  childrenClassName?: string;
 }
 
 const MobileFormDrawer: React.FC<DrawerProps> = ({
@@ -28,6 +30,8 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
   noChildPadding = false,
   showMoreIcon = false,
   showMoreContent,
+  headerClassName,
+  childrenClassName,
 }) => {
   return (
     <>
@@ -43,7 +47,7 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
         {/* Header */}
 
         <div
-          className={`flex justify-between items-center ${
+          className={`flex justify-between items-center ${headerClassName} ${
             !noChildPadding ? "p-0" : "px-4 pt-6"
           }`}
         >
@@ -106,7 +110,7 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
         <div
           className={`${
             noPadding ? "py-4" : "p-4"
-          }  overflow-y-auto flex flex-col justify-between items-start`}
+          }  overflow-y-auto flex flex-col justify-between items-start ${childrenClassName}`}
           style={{ height: `calc(${height} - 140px)` }}
         >
           {children}

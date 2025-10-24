@@ -465,8 +465,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       <MobileFormDrawer
         isOpen={selectedRow !== null}
         onClose={() => setSelectedRow(null)}
-        header={`${selectedRow?.wallet.name} Transaction`}
+        header={`Transaction details`}
         height="93vh"
+        headerClassName="bg-background dark:bg-[#232726]"
+        childrenClassName="pt-0 pb-4"
         noPadding
         noChildPadding
         showMoreIcon
@@ -513,8 +515,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           </>
         }
       >
-        <div className="flex flex-col justify-start items-center w-full gap-6 dark:bg-[#0E201E] pt-2">
-          <div className="flex flex-col justify-start items-center w-full gap-2">
+        <div className="flex flex-col justify-start items-center w-full gap-6 dark:bg-[#0E201E] ">
+          <div className="flex flex-col justify-start items-center w-full gap-2 bg-background dark:bg-[#232726] pb-4">
             {" "}
             <Avatar
               src={selectedRow?.wallet.logo}
