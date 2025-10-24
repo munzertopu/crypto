@@ -24,9 +24,9 @@ const CryptoDetailHeader: React.FC<CryptoDetailHeaderProps> = ({
         <img
           src={cryptoLogo}
           alt={cryptoName}
-          className="w-10 h-10 rounded-full mr-2"
+          className="w-8 h-8 md:w-10 md:h-10 rounded-full mr-2"
         />
-        <h1 className="text-h4 font-semibold text-[#0E201E] dark:text-[#E1E3E5]">
+        <h1 className="text-lg md:text-h4 font-semibold text-[#0E201E] dark:text-[#E1E3E5]">
           {cryptoName}
         </h1>
       </div>
