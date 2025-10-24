@@ -320,7 +320,7 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
             />
             <PrimaryButton
               onClick={() => setIsImportModalOpen(true)}
-              icon={<ExportIcon />}
+              icon={<ExportIcon className="text-gray-900" />}
               className="flex sm:hidden"
             />
           </div>
@@ -443,9 +443,12 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
                               alt={asset.name}
                               className="w-11 h-11 md:w-12 md:h-12 rounded-full"
                             />
-                            <div className="flex flex-col">
+                            <div className="flex flex-col gap-1 sm:gap-0">
                               <span className="text-base text-gray-900 dark:text-gray-100">
                                 {asset.name}
+                              </span>
+                              <span className="md:hidden text-sm gap-2 text-gray-600 dark:text-gray-400">
+                                {asset.symbol}
                               </span>
                             </div>
                           </div>

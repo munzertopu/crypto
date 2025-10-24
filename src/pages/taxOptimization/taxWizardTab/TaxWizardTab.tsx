@@ -369,16 +369,17 @@ const TaxWizardTab: React.FC = () => {
                       value={customAmount}
                       onChange={(e) => setCustomAmount(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      className={`w-full  rounded-lg text-sm px-4 py-2 font-medium
-                        border-default bg-white text-gray-900 dark:text-gray-100 focus:outline-none dark:bg-gray-900 dark:border-gray-700 focus:outline-none focus:ring-0`}
-                      autoFocus
+                      className="w-full rounded-lg text-sm px-4 py-2 font-medium border-default bg-white text-gray-900 dark:text-gray-100 dark:bg-gray-900 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-none focus:shadow-none"
                     />
                     <button
-                      onClick={() =>
-                        setShowCurrencyDropdown(!showCurrencyDropdown)
-                      }
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowCurrencyDropdown(!showCurrencyDropdown);
+                      }}
                       className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b focus:outline-none
-                        border-default text-gray-600 bg-white dark:bg-transparent dark:border-[#4D5050]`}
+                        border-gray-150 text-gray-600 bg-white dark:bg-transparent dark:border-[#4D5050]`}
                     >
                       <div className="flex items-center gap-1">
                         {selectedCurrency === "USD"}
@@ -408,7 +409,10 @@ const TaxWizardTab: React.FC = () => {
                           ].map((currency) => (
                             <button
                               key={currency.code}
-                              onClick={() => {
+                              type="button"
+                              onMouseDown={(e) => e.preventDefault()}
+                              onClick={(e) => {
+                                e.preventDefault();
                                 setSelectedCurrency(currency.code);
                                 setShowCurrencyDropdown(false);
                               }}

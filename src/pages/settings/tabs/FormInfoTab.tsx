@@ -94,7 +94,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
             placeholder="Type your name"
             value={formData.name}
             onChange={(e) => handleInputChange("name", e.target.value)}
-            className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100`}
+            className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100 focus:outline-none focus:ring-0 focus:border-[#E1E3E5] focus:shadow-none`}
           />
         </div>
       </div>
@@ -112,7 +112,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="000000000"
               value={formData.personalId}
               onChange={(e) => handleInputChange("personalId", e.target.value)}
-              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100`}
+              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100 focus:outline-none focus:ring-0 focus:border-[#E1E3E5] focus:shadow-none`}
             />
           </div>
 
@@ -125,7 +125,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="Type your city"
               value={formData.city}
               onChange={(e) => handleInputChange("city", e.target.value)}
-              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100`}
+              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100 focus:outline-none focus:ring-0 focus:border-[#E1E3E5] focus:shadow-none`}
             />
           </div>
 
@@ -138,7 +138,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="00000"
               value={formData.postalCode}
               onChange={(e) => handleInputChange("postalCode", e.target.value)}
-              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100`}
+              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100 focus:outline-none focus:ring-0 focus:border-[#E1E3E5] focus:shadow-none`}
             />
           </div>
         </div>
@@ -160,7 +160,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
                   onClick={() =>
                     setIsCountryDropdownOpen(!isCountryDropdownOpen)
                   }
-                  className={`flex items-center px-4 py-3 focus:outline-none ${"text-gray-900 dark:text-gray-150"}`}
+                  className={`flex items-center px-4 py-3 focus:outline-none focus:ring-0 focus:shadow-none ${"text-gray-900 dark:text-gray-150"}`}
                 >
                   <img
                     src={selectedCountry.flag}
@@ -185,7 +185,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
                     onChange={(e) =>
                       handleInputChange("phoneNumber", e.target.value)
                     }
-                    className={`w-full px-3 py-2 focus:outline-none bg-transparent text-gray-900 
+                    className={`w-full px-3 py-2 focus:outline-none focus:ring-0 focus:border-transparent focus:shadow-none bg-transparent text-gray-900 
                       dark:text-gray-150`}
                   />
                 </div>
@@ -227,7 +227,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="00000"
               value={formData.state}
               onChange={(e) => handleInputChange("state", e.target.value)}
-              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100`}
+              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100 focus:outline-none focus:ring-0 focus:border-[#E1E3E5] focus:shadow-none`}
             />
           </div>
 
@@ -238,7 +238,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               </label>
               <Tooltip
                 title={
-                  <div>
+                  <div className="text-gray-900 dark:text-gray-100">
                     <strong>
                       INN (Individual Taxpayer Identification Number)
                     </strong>{" "}
@@ -283,7 +283,7 @@ const FormInfoTab: React.FC<FormInfoTabProps> = ({}) => {
               placeholder="000000000"
               value={formData.inn}
               onChange={(e) => handleInputChange("inn", e.target.value)}
-              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100`}
+              className={`text-base bg-transparent py-3 px-4 border-[#E1E3E5] dark:border-gray-700 dark:text-gray-100 focus:outline-none focus:ring-0 focus:border-[#E1E3E5] focus:shadow-none`}
             />
           </div>
         </div>
