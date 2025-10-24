@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import UpgradeModal from '../components/UpgradeModal';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import UpgradeModal from "../components/UpgradeModal";
 
 interface PlansTabProps {}
 
 const PlansTab: React.FC<PlansTabProps> = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState('');
+  const [selectedPlan, setSelectedPlan] = useState("");
 
   const handleUpgradeClick = (planName: string) => {
     setSelectedPlan(planName);
@@ -16,51 +16,51 @@ const PlansTab: React.FC<PlansTabProps> = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setSelectedPlan('');
+    setSelectedPlan("");
   };
   const plans = [
     {
-      name: 'Newbie',
-      price: '$49',
-      status: 'Current',
-      statusColor: 'bg-[#FDEAD8]',
-      textColor: 'text-[#AE590A]',
+      name: "Newbie",
+      price: "$49",
+      status: "Current",
+      statusColor: "bg-[#FDEAD8]",
+      textColor: "text-[#AE590A]",
       features: [
-        '100 transactions',
-        'Unlimited revisions',
-        'Unlimited wallets',
-        'Comprehensive tax reports',
-        'Basic portfolio tracking'
-      ]
+        "100 transactions",
+        "Unlimited revisions",
+        "Unlimited wallets",
+        "Comprehensive tax reports",
+        "Basic portfolio tracking",
+      ],
     },
     {
-      name: 'Trader',
-      price: '$99',
-      status: 'Most Popular',
-      statusColor: 'bg-[#E3EAFD]',
-      textColor: 'text-[#133A9A]',
+      name: "Trader",
+      price: "$99",
+      status: "Most Popular",
+      statusColor: "bg-[#E3EAFD]",
+      textColor: "text-[#133A9A]",
       features: [
-        '1,000 transactions',
-        'Unlimited revisions',
-        'Unlimited wallets',
-        'Comprehensive tax reports',
-        'Basic portfolio tracking'
-      ]
+        "1,000 transactions",
+        "Unlimited revisions",
+        "Unlimited wallets",
+        "Comprehensive tax reports",
+        "Basic portfolio tracking",
+      ],
     },
     {
-      name: 'Pro',
-      price: '$299',
+      name: "Pro",
+      price: "$299",
       status: null,
-      statusColor: '',
-      textColor: 'text-[#AE590A]',
+      statusColor: "",
+      textColor: "text-[#AE590A]",
       features: [
-        '10,000 transactions',
-        'Unlimited revisions',
-        'Unlimited wallets',
-        'Comprehensive tax reports',
-        'Basic portfolio tracking'
-      ]
-    }
+        "10,000 transactions",
+        "Unlimited revisions",
+        "Unlimited wallets",
+        "Comprehensive tax reports",
+        "Basic portfolio tracking",
+      ],
+    },
   ];
 
   return (
@@ -80,10 +80,12 @@ const PlansTab: React.FC<PlansTabProps> = () => {
             className="relative bg-white text-left h-full rounded-lg shadow-sm border border-default 
             dark:bg-gray-800 dark:border-gray-700 flex flex-col"
           >
-            <div className='py-10 px-8'>
+            <div className="px-6 pt-8 pb-5 md:py-10 md:px-8">
               {/* Status Badge */}
               {plan.status && (
-                <div className={`absolute right-8 ${plan.statusColor} ${plan.textColor} px-3 py-1 rounded-lg text-sm font-medium`}>
+                <div
+                  className={`absolute right-8 ${plan.statusColor} ${plan.textColor} px-3 py-1 rounded-lg text-sm font-medium`}
+                >
                   {plan.status}
                 </div>
               )}
@@ -98,10 +100,12 @@ const PlansTab: React.FC<PlansTabProps> = () => {
                 {plan.price}
               </div>
             </div>
-              
+
             {/* Separator */}
-            <div className={`border-t border-default dark:border-gray-700`}></div>
-            <div className='py-6 px-8 flex-1 flex flex-col'>
+            <div
+              className={`border-t border-default dark:border-gray-700`}
+            ></div>
+            <div className="pt-4 pb-8 md:py-6 px-6 md:px-8 flex-1 flex flex-col">
               {/* Features */}
               <div className="mb-6 flex-1">
                 <h5 className={`text-lg font-medium mb-3 dark:text-gray-100`}>
@@ -110,8 +114,8 @@ const PlansTab: React.FC<PlansTabProps> = () => {
                 <ul className="space-y-5">
                   {plan.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center">
-                      <FontAwesomeIcon 
-                        icon={faCheck} 
+                      <FontAwesomeIcon
+                        icon={faCheck}
                         className="w-4 h-4 text-[#5F9339] mr-3 flex-shrink-0"
                       />
                       <span className="text-base text-gray-700 dark:text-gray-300">
@@ -123,8 +127,8 @@ const PlansTab: React.FC<PlansTabProps> = () => {
               </div>
 
               {/* Action Button */}
-              {plan.name !== 'Newbie' && (
-                <button 
+              {plan.name !== "Newbie" && (
+                <button
                   onClick={() => handleUpgradeClick(plan.name)}
                   className={`w-full py-2 px-4 text-base bg-white border border-default rounded-lg text-gray-700 font-semibold text-primary dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100 mt-auto`}
                 >

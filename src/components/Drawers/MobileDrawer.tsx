@@ -50,7 +50,7 @@ const MobileDrawer: React.FC<DrawerProps> = ({
       <div
         className={`fixed bottom-0 left-0 w-[99.8%] bg-white z-50 transition-transform duration-300 transform ${
           isOpen ? "translate-y-0" : "translate-y-full"
-        } rounded-t-[24px] sm:hidden py-6 px-5 dark:bg-[#0E201E] flex flex-col ${className}`}
+        } rounded-t-[24px] sm:hidden py-6 px-5 dark:bg-gray-800 flex flex-col ${className}`}
         style={{ height: `${height}px` }}
       >
         {/* Header */}
@@ -93,8 +93,7 @@ const MobileDrawer: React.FC<DrawerProps> = ({
           <div className="flex justify-between pt-3 mt-auto">
             <button
               onClick={onLeftButtonClick || onClose}
-              className="w-[90px] font-medium focus:outline-none dark:text-gray-300"
-              style={{ color: "rgba(77,80,80,1)" }}
+              className="w-[90px] font-medium focus:outline-none text-gray-700 dark:text-gray-300"
               aria-label="leftButtonText"
             >
               {leftButtonText}

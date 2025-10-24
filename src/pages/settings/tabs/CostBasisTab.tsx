@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import OverrideCostModal from "../components/OverrideCostModal";
+import { Tooltip } from "../../../components";
 
 interface CostBasisTabProps {}
 
@@ -187,26 +188,36 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
             >
               Cost Basis Method
             </Typography>
-            <svg
-              className="size-4 text-[#7C7C7C]"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <Tooltip
+              title={
+                <div className="text-gray-900 dark:text-gray-100">
+                  Select the cost basis method used to calculate your crypto
+                  gains and losses.
+                </div>
+              }
+              placement="bottom"
             >
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
+              <svg
+                className="size-4 text-[#7C7C7C]"
+                fill="none"
                 stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 9v2m0 4h.01"
-              />
-            </svg>
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 9v2m0 4h.01"
+                />
+              </svg>
+            </Tooltip>
           </div>
 
           {/* Radio Button Options */}
