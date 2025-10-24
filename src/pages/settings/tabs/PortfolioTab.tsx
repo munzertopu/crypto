@@ -133,7 +133,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
               type="text"
               value={formData.fullName}
               onChange={(e) => handleInputChange("fullName", e.target.value)}
-              className={`text-base bg-transparent py-2.5 border-default dark:border-gray-700 dark:text-white`}
+              className={`text-base bg-transparent py-3 border-default dark:border-gray-700 dark:text-white`}
             />
           </div>
           <div>
@@ -146,7 +146,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
               type="email"
               value={formData.email}
               onChange={(e) => handleInputChange("email", e.target.value)}
-              className={`text-base bg-transparent py-2.5 border-default dark:border-gray-700 dark:text-white`}
+              className={`text-base bg-transparent py-3 border-default dark:border-gray-700 dark:text-white`}
             />
           </div>
         </div>
