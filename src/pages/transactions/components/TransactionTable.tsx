@@ -595,17 +595,19 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                           <EyeIcon />
                                           <span className="text-sm text-gray-900 dark:text-gray-100">View in context</span>
                                         </div>
-                                        <div
+                                        <button
+                                          type="button"
                                           onClick={(e) => {
                                             e.stopPropagation();
+                                            e.preventDefault();
                                             setIsDeleteModalOpen(true);
                                             setDropdownOpen(null);
                                           }}
-                                          className="flex gap-2 items-center py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer last:rounded-b-lg"
+                                          className="flex gap-2 items-center py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer last:rounded-b-lg w-full text-left"
                                         >
                                           <DeleteIcon />
                                           <span className="text-sm text-gray-900 dark:text-gray-100">Delete</span>
-                                        </div>
+                                        </button>
                                       </div>
                                     )}
                                   </div>
@@ -926,7 +928,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         onConfirm={() => setIsDeleteModalOpen(false)}
         itemName={""}
         drawerHeight="25%"
-        deleteButtonText="yes,Delete"
+        deleteButtonText="Delete"
       />
 
       {/* Mobile Bottom Sheet */}

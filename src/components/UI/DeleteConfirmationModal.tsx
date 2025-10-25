@@ -64,8 +64,7 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
           {/* Mobile Content */}
           <div className="flex-1 p-3 flex flex-col">
             <p className="text-gray-11 mb-6 text-left text-sm">
-              This action will permanently remove the imported file and all
-              associated transaction records from history.
+              This action will permanently remove the transaction records from history.
             </p>
 
             {/* Mobile Action Buttons */}
@@ -87,10 +86,10 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
         </div>
 
         {/* Desktop Modal */}
-        <div className="hidden md:block relative bg-white dark:bg-gray-100 rounded-xl shadow-xl max-w-md w-full p-8 flex flex-col">
+        <div className="hidden md:block relative bg-white dark:bg-[#2F3232] rounded-xl shadow-xl max-w-md w-full p-8 flex flex-col">
           {/* Desktop Header */}
           <div className="flex items-center justify-between mb-1.5">
-            <h3 className="text-lg font-bold text-gray-11 text-left">
+            <h3 className="text-lg font-bold text-gray-11 dark:text-[#F3F5F7] text-left">
               Are you sure you want to delete?
             </h3>
             <button
@@ -115,22 +114,21 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
           </div>
 
           {/* Desktop Warning Message */}
-          <p className="text-gray-11 mb-6 text-left text-base">
-            This action will permanently remove the imported file and all
-            associated transaction records from history.
+          <p className="text-gray-11 dark:text-[#A1A3A5] mb-6 text-left text-base">
+            This action will permanently remove the transaction records from history.
           </p>
 
           {/* Desktop Action Buttons */}
           <div className="flex justify-between">
             <button
               onClick={onClose}
-              className="py-3 text-gray-700 rounded-xl transition-colors text-base"
+              className="py-3 text-gray-700 dark:text-[#A1A3A5] rounded-xl transition-colors text-base"
             >
               Cancel
             </button>
             <button
               onClick={onConfirm}
-              className="px-4 py-3 bg-red-500 text-white rounded-xl font-bold text-base"
+              className="px-4 py-3 bg-red-500 dark:bg-[#FD4B3E] text-sm text-white rounded-xl"
             >
               {deleteButtonText}
             </button>
