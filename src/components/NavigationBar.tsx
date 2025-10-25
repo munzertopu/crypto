@@ -411,7 +411,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
       {isMobileMenuOpen && (
         <div
           ref={mobileMenuRef}
-          className="absolute top-[64px] right-4 w-[240px] bg-white shadow-lg rounded-[12px] border border-gray-150 py-3 z-50 flex flex-col justify-center items-start  dark:bg-[#0E201E] dark:border-[#2F3232]"
+          className="absolute top-[64px] right-4 w-[240px] bg-white shadow-lg rounded-[12px] border border-gray-150 py-3 z-[60] flex flex-col justify-center items-start  dark:bg-[#0E201E] dark:border-[#2F3232]"
         >
           <div className="w-full flex flex-col justify-start items-start gap-2 px-4 ">
             {navigationItems.map((item) => (
