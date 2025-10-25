@@ -415,7 +415,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                       </Typography>
                                       <Typography
                                         variant="small"
-                                        className="text-sm font-normal text-gray-250"
+                                        className="text-sm font-normal text-gray-600
+                                      dark:text-gray-250"
                                       >
                                         = {current}
                                       </Typography>
@@ -445,7 +446,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                     </Typography>
                                     <Typography
                                       variant="small"
-                                      className="text-sm font-normal text-gray-250"
+                                      className="text-sm font-normal text-gray-600
+                                      dark:text-gray-250"
                                     >
                                       = {current}
                                     </Typography>
