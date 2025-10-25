@@ -196,7 +196,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({
 
           {/* Transfer Card - Right Side */}
           <Card
-            className={`md:bg-white mt-3 md:mt-0 border-none md:border border-gray-200 w-full md:w-2/4 dark:bg-transparent shadow-none md:shadow-lg`}
+            className={`bg-transparent md:bg-white mt-3 md:mt-0 border-none md:border border-gray-200 w-full md:w-2/4 dark:bg-transparent shadow-none md:shadow-lg`}
           >
             <CardBody className="md:p-6 px-0 py-0">
               <div className="flex items-center justify-between">
@@ -210,7 +210,10 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({
                     >
                       Phantom
                     </Typography>
-                    <Typography variant="small" className="text-sm font-medium">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-medium text-gray-700 dark:text-gray-250"
+                    >
                       -0.32348600 ETH
                     </Typography>
                   </div>
@@ -235,7 +238,10 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({
                     >
                       Bitcoin
                     </Typography>
-                    <Typography variant="small" className="text-sm font-medium">
+                    <Typography
+                      variant="small"
+                      className="text-sm font-medium text-gray-700 dark:text-gray-250"
+                    >
                       +0.292096470 ETH
                     </Typography>
                   </div>

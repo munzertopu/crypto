@@ -49,16 +49,18 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   const getCryptoIcon = (amount: string): string => {
     if (!amount) return "";
     const upperAmount = amount.toUpperCase();
-    
+
     if (upperAmount.includes("BTC")) return "crypto/bitcoin-btc-logo.png";
     if (upperAmount.includes("ETH")) return "crypto/ethereum-eth-logo.png";
     if (upperAmount.includes("USDT")) return "crypto/tether-usdt-logo.png";
     if (upperAmount.includes("SOL")) return "crypto/solana-sol-logo.png";
     if (upperAmount.includes("LINK")) return "crypto/chainlink-link-logo.png";
-    if (upperAmount.includes("SNX")) return "crypto/synthetix-network-token-snx-logo.png";
+    if (upperAmount.includes("SNX"))
+      return "crypto/synthetix-network-token-snx-logo.png";
     if (upperAmount.includes("SHIB")) return "crypto/ShibaInu.png";
-    if (upperAmount.includes("TFUEL")) return "crypto/theta-fuel-tfuel-logo.png";
-    
+    if (upperAmount.includes("TFUEL"))
+      return "crypto/theta-fuel-tfuel-logo.png";
+
     return "";
   };
 
@@ -68,13 +70,13 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       case "Transfer":
         return <TransferIcon height={36} width={36} />;
       case "Deposit":
-         return <DepositIcon height={36} width={36} />;
-       case "Withdrawal":
-         return <WithdrawIcon height={36} width={36} />;
-       case "Swap":
-         return <SwapIcon height={36} width={36} />;
-       case "Trade":
-         return <TradeIcon height={36} width={36} />;
+        return <DepositIcon height={36} width={36} />;
+      case "Withdrawal":
+        return <WithdrawIcon height={36} width={36} />;
+      case "Swap":
+        return <SwapIcon height={36} width={36} />;
+      case "Trade":
+        return <TradeIcon height={36} width={36} />;
       default:
         return null;
     }
@@ -147,21 +149,22 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   const screenSize = useScreenSize();
   const [selectedRow, setSelectedRow] = useState<Transaction | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
-  const [selectedTransactionForEdit, setSelectedTransactionForEdit] = useState<Transaction | null>(null);
+  const [selectedTransactionForEdit, setSelectedTransactionForEdit] =
+    useState<Transaction | null>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       // Check if click is outside the dropdown
-      if (dropdownOpen && !target.closest('[data-dropdown]')) {
+      if (dropdownOpen && !target.closest("[data-dropdown]")) {
         setDropdownOpen(null);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropdownOpen]);
 
@@ -261,7 +264,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         result,
                         status,
                         time,
-                        editable
+                        editable,
                       } = transaction;
                       const isCompleted = status === "completed";
                       return (
@@ -361,14 +364,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                 {" "}
                                 {sent && (
                                   <div className="flex items-center gap-2">
-                                    {getCryptoIcon(sent) && (
-                                      <Avatar 
-                                        src={getCryptoIcon(sent)} 
-                                        alt="" 
-                                        size="sm" 
+                                    {/* {getCryptoIcon(sent) && (
+                                      <Avatar
+                                        src={getCryptoIcon(sent)}
+                                        alt=""
+                                        size="sm"
                                         className="h-6 w-6"
                                       />
-                                    )}
+                                    )} */}
                                     <Typography
                                       variant="small"
                                       className="text-base font-normal text-red-600"
@@ -379,14 +382,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                 )}
                                 {received && (
                                   <div className="flex items-center gap-2">
-                                    {getCryptoIcon(received) && (
-                                      <Avatar 
-                                        src={getCryptoIcon(received)} 
-                                        alt="" 
-                                        size="sm" 
+                                    {/* {getCryptoIcon(received) && (
+                                      <Avatar
+                                        src={getCryptoIcon(received)}
+                                        alt=""
+                                        size="sm"
                                         className="h-6 w-6"
                                       />
-                                    )}
+                                    )} */}
                                     <Typography
                                       variant="small"
                                       className="text-base font-normal text-green-600"
@@ -418,10 +421,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                 <div className="flex justify-between">
                                   <div className="flex items-start gap-2">
                                     {getCryptoIcon(sent) && (
-                                      <Avatar 
-                                        src={getCryptoIcon(sent)} 
-                                        alt="" 
-                                        size="sm" 
+                                      <Avatar
+                                        src={getCryptoIcon(sent)}
+                                        alt=""
+                                        size="sm"
                                         className="h-6 w-6"
                                       />
                                     )}
@@ -449,10 +452,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                               {received && (
                                 <div className="flex items-start gap-2">
                                   {getCryptoIcon(received) && (
-                                    <Avatar 
-                                      src={getCryptoIcon(received)} 
-                                      alt="" 
-                                      size="sm" 
+                                    <Avatar
+                                      src={getCryptoIcon(received)}
+                                      alt=""
+                                      size="sm"
                                       className="h-6 w-6"
                                     />
                                   )}
@@ -471,7 +474,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                       = {current}
                                     </Typography>
                                   </div>
-                                  
                                 </div>
                               )}
                             </td>
@@ -558,31 +560,42 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                     <div
                                       onClick={(e) => {
                                         e.stopPropagation();
-                                        setDropdownOpen(dropdownOpen === id ? null : id);
+                                        setDropdownOpen(
+                                          dropdownOpen === id ? null : id
+                                        );
                                       }}
                                       className="cursor-pointer"
                                     >
                                       <BoardEditIcon width={20} height={20} />
                                     </div>
                                     {dropdownOpen === id && (
-                                       <div data-dropdown className="absolute right-0 mt-2 w-48 rounded-lg bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 z-50">
-                                         <button
-                                           type="button"
-                                           onClick={(e) => {
-                                             e.stopPropagation();
-                                             e.preventDefault();
-                                             setSelectedTransactionForEdit(transaction);
-                                             onOpenEditDrawer?.();
-                                             setDropdownOpen(null);
-                                           }}
-                                           className="flex gap-2 items-center py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer first:rounded-t-lg w-full text-left"
+                                      <div
+                                        data-dropdown
+                                        className="absolute right-0 mt-2 w-48 rounded-lg bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 z-50"
+                                      >
+                                        <button
+                                          type="button"
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                            setSelectedTransactionForEdit(
+                                              transaction
+                                            );
+                                            onOpenEditDrawer?.();
+                                            setDropdownOpen(null);
+                                          }}
+                                          className="flex gap-2 items-center py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer first:rounded-t-lg w-full text-left"
                                         >
-                                           <EditIcon />
-                                           <span className="text-sm text-gray-900 dark:text-gray-100">Edit</span>
+                                          <EditIcon />
+                                          <span className="text-sm text-gray-900 dark:text-gray-100">
+                                            Edit
+                                          </span>
                                         </button>
                                         <div className="flex gap-2 items-center py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
                                           <DuplicateIcon />
-                                          <span className="text-sm text-gray-900 dark:text-gray-100">Duplicate</span>
+                                          <span className="text-sm text-gray-900 dark:text-gray-100">
+                                            Duplicate
+                                          </span>
                                         </div>
                                         <div
                                           onClick={(e) => {
@@ -593,7 +606,9 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                           className="flex gap-2 items-center py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
                                         >
                                           <EyeIcon />
-                                          <span className="text-sm text-gray-900 dark:text-gray-100">View in context</span>
+                                          <span className="text-sm text-gray-900 dark:text-gray-100">
+                                            View in context
+                                          </span>
                                         </div>
                                         <button
                                           type="button"
@@ -606,7 +621,9 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                           className="flex gap-2 items-center py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer last:rounded-b-lg w-full text-left"
                                         >
                                           <DeleteIcon />
-                                          <span className="text-sm text-gray-900 dark:text-gray-100">Delete</span>
+                                          <span className="text-sm text-gray-900 dark:text-gray-100">
+                                            Delete
+                                          </span>
                                         </button>
                                       </div>
                                     )}
@@ -857,10 +874,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                   {sent && (
                                     <div className="flex items-center gap-2">
                                       {getCryptoIcon(sent) && (
-                                        <Avatar 
-                                          src={getCryptoIcon(sent)} 
-                                          alt="" 
-                                          size="sm" 
+                                        <Avatar
+                                          src={getCryptoIcon(sent)}
+                                          alt=""
+                                          size="sm"
                                           className="h-6 w-6"
                                         />
                                       )}
@@ -875,10 +892,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                   {received && (
                                     <div className="flex items-center gap-2">
                                       {getCryptoIcon(received) && (
-                                        <Avatar 
-                                          src={getCryptoIcon(received)} 
-                                          alt="" 
-                                          size="sm" 
+                                        <Avatar
+                                          src={getCryptoIcon(received)}
+                                          alt=""
+                                          size="sm"
                                           className="h-6 w-6"
                                         />
                                       )}
