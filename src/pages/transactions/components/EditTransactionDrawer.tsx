@@ -47,7 +47,9 @@ const EditTransactionDrawer: React.FC<EditTransactionDrawerProps> = ({
     onClose();
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <>

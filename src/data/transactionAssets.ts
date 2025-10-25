@@ -19,12 +19,14 @@ export interface Transaction {
   sent: string;
   received: string;
   transactionId: string;
+  current: string;
   result: string;
   date: string;
   time: string;
   status: "completed" | "pending" | "failed";
   platform: string;
   error?: string;
+  editable?: boolean;
 }
 
 export const mockTransactions: Transaction[] = [
@@ -38,8 +40,9 @@ export const mockTransactions: Transaction[] = [
       color: "bg-orange-500",
     },
     action: "Trade",
+    current: "$1500",
     type: "buy",
-    sent: "",
+    sent: "-320 BTC",
     received: "+296,48 USDT",
     transactionId: "TX-0001",
     result: "-$220.5",
@@ -48,6 +51,7 @@ export const mockTransactions: Transaction[] = [
     status: "completed",
     platform: "Coinbase",
     error: "Missing purchase history",
+    editable: true
   },
   {
     id: "2",
@@ -58,9 +62,10 @@ export const mockTransactions: Transaction[] = [
       logo: "crypto/kraken.png",
       color: "bg-red-500",
     },
-    action: "Receive",
+    action: "Transfer",
+    current: "$1300",
     type: "sell",
-    sent: "",
+    sent: "-150 USDT",
     received: "+296,48 USDT",
     transactionId: "TX-0141",
     result: "-$500",
@@ -80,6 +85,7 @@ export const mockTransactions: Transaction[] = [
       color: "bg-purple-400",
     },
     action: "Transfer",
+    current: "$100",
     type: "transfer",
     sent: "-1,000 USDT",
     received: "+1 BTC",
@@ -101,6 +107,7 @@ export const mockTransactions: Transaction[] = [
       color: "bg-blue-500",
     },
     action: "Swap",
+    current: "$500",
     type: "swap",
     sent: "-12 USDT",
     received: "",
@@ -111,6 +118,7 @@ export const mockTransactions: Transaction[] = [
     status: "completed",
     platform: "Phantom",
     error: "Missing purchase history",
+    editable: true
   },
   {
     id: "5",
@@ -121,7 +129,8 @@ export const mockTransactions: Transaction[] = [
       logo: "crypto/metamask.png",
       color: "bg-orange-400",
     },
-    action: "Send",
+    action: "Deposit",
+    current: "$15",
     type: "transfer",
     sent: "-12 USDT",
     received: "",
@@ -143,6 +152,7 @@ export const mockTransactions: Transaction[] = [
       color: "bg-purple-500",
     },
     action: "Deposit",
+    current: "$43.5",
     type: "buy",
     sent: "-500 USDT",
     received: "+25 SOL",
@@ -153,6 +163,7 @@ export const mockTransactions: Transaction[] = [
     status: "completed",
     platform: "Binance",
     error: "---",
+    editable: true
   },
   {
     id: "7",
@@ -163,7 +174,8 @@ export const mockTransactions: Transaction[] = [
       logo: "crypto/chainlink-link-logo.png",
       color: "bg-blue-600",
     },
-    action: "Receive",
+    action: "Swap",
+    current: "$789",
     type: "sell",
     sent: "-100 LINK",
     received: "+1,200 USDT",
@@ -185,6 +197,7 @@ export const mockTransactions: Transaction[] = [
       color: "bg-green-500",
     },
     action: "Transfer",
+    current: "$54",
     type: "transfer",
     sent: "-2,000 USDT",
     received: "",
@@ -208,7 +221,7 @@ export const getTableHeaders = (activeTab: string): string[] => {
         "Action",
         "Sent",
         "Received",
-        "Result",
+        "Gain/Loss",
         "Transaction ID",
         "",
       ];
@@ -219,7 +232,7 @@ export const getTableHeaders = (activeTab: string): string[] => {
         "Action",
         "Sent",
         "Received",
-        "Result",
+        "Gain/Loss",
         "Transaction ID",
         "",
       ];
@@ -242,7 +255,7 @@ export const getTableHeaders = (activeTab: string): string[] => {
         "Action",
         "Sent",
         "Received",
-        "Result",
+        "Gain/Loss",
         "Transaction ID",
         "",
       ];

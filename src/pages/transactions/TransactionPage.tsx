@@ -158,6 +158,9 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
           onToggleExpanded={handleToggleExpanded}
           selectedTransactions={selectedTransactions}
           onSelectedTransactionsChange={setSelectedTransactions}
+          onOpenEditDrawer={() => {
+            setIsEditTransactionDrawerOpen(true);
+          }}
         />
       </div>
 
