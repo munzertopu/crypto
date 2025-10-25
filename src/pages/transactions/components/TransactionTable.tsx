@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Typography, CardBody, Avatar } from "@material-tailwind/react";
 import TransactionDetail from "./TransactionDetail";
 import TransactionFooter from "./TransactionFooter";
@@ -21,7 +21,6 @@ import EyeIcon from "../../../components/Icons/EyeIcon";
 import DeleteIcon from "../../../components/Icons/DeleteIcon";
 import DeleteConfirmationModal from "../../../components/UI/DeleteConfirmationModal";
 import MobileBottomSheet from "../../../components/UI/MobileBottomSheet";
-import EditTransactionDrawer from "./EditTransactionDrawer";
 
 interface TransactionTableProps {
   transactions: Transaction[];
@@ -31,6 +30,7 @@ interface TransactionTableProps {
   onToggleExpanded?: (transactionId: string) => void;
   selectedTransactions?: string[];
   onSelectedTransactionsChange?: (selected: string[]) => void;
+  onOpenEditDrawer?: () => void;
 }
 
 const TransactionTable: React.FC<TransactionTableProps> = ({
@@ -41,6 +41,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   onToggleExpanded,
   selectedTransactions = [],
   onSelectedTransactionsChange,
+  onOpenEditDrawer,
 }) => {
   const TABLE_HEAD = getTableHeaders(activeTab);
 
@@ -108,8 +109,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   );
   const [selectedBottomContext, setSelectedBottomContext] =
     useState<Transaction | null>(null);
-  const [isEditTransactionDrawerOpen, setIsEditTransactionDrawerOpen] =
-    useState(false);
   // Format date for display
   const formatDateForDisplay = (dateString: string) => {
     const date = new Date(dateString);
@@ -147,6 +146,24 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
 
   const screenSize = useScreenSize();
   const [selectedRow, setSelectedRow] = useState<Transaction | null>(null);
+  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
+  const [selectedTransactionForEdit, setSelectedTransactionForEdit] = useState<Transaction | null>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      // Check if click is outside the dropdown
+      if (dropdownOpen && !target.closest('[data-dropdown]')) {
+        setDropdownOpen(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownOpen]);
 
   const renderExpandedDetails = (transaction: Transaction) => (
     <tr
@@ -536,10 +553,63 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                     </svg>
                                   </div>
                                 )}
-                                {editable &&
-                                  <BoardEditIcon width={20} height={20} />
-                                }
-                                
+                                {editable && (
+                                  <div className="relative">
+                                    <div
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setDropdownOpen(dropdownOpen === id ? null : id);
+                                      }}
+                                      className="cursor-pointer"
+                                    >
+                                      <BoardEditIcon width={20} height={20} />
+                                    </div>
+                                    {dropdownOpen === id && (
+                                       <div data-dropdown className="absolute right-0 mt-2 w-48 rounded-lg bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 z-50">
+                                         <button
+                                           type="button"
+                                           onClick={(e) => {
+                                             e.stopPropagation();
+                                             e.preventDefault();
+                                             setSelectedTransactionForEdit(transaction);
+                                             onOpenEditDrawer?.();
+                                             setDropdownOpen(null);
+                                           }}
+                                           className="flex gap-2 items-center py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer first:rounded-t-lg w-full text-left"
+                                        >
+                                           <EditIcon />
+                                           <span className="text-sm text-gray-900 dark:text-gray-100">Edit</span>
+                                        </button>
+                                        <div className="flex gap-2 items-center py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
+                                          <DuplicateIcon />
+                                          <span className="text-sm text-gray-900 dark:text-gray-100">Duplicate</span>
+                                        </div>
+                                        <div
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            setSelectedContext(transaction);
+                                            setDropdownOpen(null);
+                                          }}
+                                          className="flex gap-2 items-center py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
+                                        >
+                                          <EyeIcon />
+                                          <span className="text-sm text-gray-900 dark:text-gray-100">View in context</span>
+                                        </div>
+                                        <div
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            setIsDeleteModalOpen(true);
+                                            setDropdownOpen(null);
+                                          }}
+                                          className="flex gap-2 items-center py-2 px-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer last:rounded-b-lg"
+                                        >
+                                          <DeleteIcon />
+                                          <span className="text-sm text-gray-900 dark:text-gray-100">Delete</span>
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                )}
                               </div>
                             </td>
                           </tr>
@@ -567,7 +637,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         showMoreContent={
           <>
             <div
-              onClick={() => setIsEditTransactionDrawerOpen(true)}
+              onClick={() => onOpenEditDrawer?.()}
               className="flex gap-2 items-center py-1.5 cursor-pointer"
             >
               <EditIcon />
@@ -864,10 +934,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         isOpen={selectedBottomContext !== null}
         onClose={() => setSelectedBottomContext(null)}
         transaction={selectedBottomContext}
-      />
-      <EditTransactionDrawer
-        isOpen={isEditTransactionDrawerOpen}
-        onClose={() => setIsEditTransactionDrawerOpen(false)}
       />
     </div>
   );
