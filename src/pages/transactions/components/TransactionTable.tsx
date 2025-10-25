@@ -14,6 +14,7 @@ import DepositIcon from "../../../components/Icons/DepositIcon";
 import SwapIcon from "../../../components/Icons/SwapIcon";
 import WithdrawIcon from "../../../components/Icons/WithdrawIcon";
 import TransferIcon from "../../../components/Icons/TransferIcon";
+import BoardEditIcon from "../../../components/Icons/BoardEditIcon";
 import EditIcon from "../../../components/Icons/EditIcon";
 import DuplicateIcon from "../../../components/Icons/DuplicateIcon";
 import EyeIcon from "../../../components/Icons/EyeIcon";
@@ -64,15 +65,15 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   const renderActionIcon = (action: string) => {
     switch (action) {
       case "Transfer":
-        return <TransferIcon height={48} width={48} />;
-             case "Deposit":
-         return <DepositIcon height={48} width={48} />;
+        return <TransferIcon height={36} width={36} />;
+      case "Deposit":
+         return <DepositIcon height={36} width={36} />;
        case "Withdrawal":
-         return <WithdrawIcon height={48} width={48} />;
+         return <WithdrawIcon height={36} width={36} />;
        case "Swap":
-         return <SwapIcon height={48} width={48} />;
+         return <SwapIcon height={36} width={36} />;
        case "Trade":
-         return <TradeIcon height={48} width={48} />;
+         return <TradeIcon height={36} width={36} />;
       default:
         return null;
     }
@@ -243,6 +244,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         result,
                         status,
                         time,
+                        editable
                       } = transaction;
                       const isCompleted = status === "completed";
                       return (
@@ -515,24 +517,30 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                 }
                             `}
                             >
-                              {isCompleted && (
-                                <div className="w-10 h-10 rounded-full flex items-center justify-end text-[#7C7C7C]">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    stroke="currentColor"
-                                    className="size-8"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                                    />
-                                  </svg>
-                                </div>
-                              )}
+                              <div className="flex items-center justify-end gap-2">
+                                {isCompleted && (
+                                  <div className="w-5 h-5 rounded-full flex items-center justify-end text-[#7C7C7C]">
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth={1.5}
+                                      stroke="currentColor"
+                                      className="size-8"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                                      />
+                                    </svg>
+                                  </div>
+                                )}
+                                {editable &&
+                                  <BoardEditIcon width={20} height={20} />
+                                }
+                                
+                              </div>
                             </td>
                           </tr>
                           {/* Expanded Details Row */}

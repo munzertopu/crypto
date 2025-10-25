@@ -26,6 +26,7 @@ export interface Transaction {
   status: "completed" | "pending" | "failed";
   platform: string;
   error?: string;
+  editable?: boolean;
 }
 
 export const mockTransactions: Transaction[] = [
@@ -50,6 +51,7 @@ export const mockTransactions: Transaction[] = [
     status: "completed",
     platform: "Coinbase",
     error: "Missing purchase history",
+    editable: true
   },
   {
     id: "2",
@@ -116,6 +118,7 @@ export const mockTransactions: Transaction[] = [
     status: "completed",
     platform: "Phantom",
     error: "Missing purchase history",
+    editable: true
   },
   {
     id: "5",
@@ -160,6 +163,7 @@ export const mockTransactions: Transaction[] = [
     status: "completed",
     platform: "Binance",
     error: "---",
+    editable: true
   },
   {
     id: "7",
