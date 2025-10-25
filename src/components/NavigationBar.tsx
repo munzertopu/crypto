@@ -397,7 +397,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden w-11 h-11  flex flex-row justify-center items-center gap-1 p-3 rounded-xl shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border border-[#E1E3E5] dark:border-gray-700 text-[#7C7C7C] rounded-lg hover:bg-gray-50 transition-colors focus:border-green-400 "
+            className="lg:hidden w-11 h-11 dark:bg-[#0E201E]  flex flex-row justify-center items-center gap-1 p-3 rounded-xl shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border border-[#E1E3E5] dark:border-gray-700 text-[#7C7C7C] rounded-lg hover:bg-gray-50 transition-colors focus:border-green-400 dark:focus:border-green-400"
             aria-label="Open mobile menu"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
