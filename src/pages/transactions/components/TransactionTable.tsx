@@ -11,6 +11,9 @@ import Checkbox from "../../../components/UI/Checkbox";
 import Badge from "../../../components/Badge";
 import TradeIcon from "../../../components/Icons/TradeIcon";
 import DepositIcon from "../../../components/Icons/DepositIcon";
+import SwapIcon from "../../../components/Icons/SwapIcon";
+import WithdrawIcon from "../../../components/Icons/WithdrawIcon";
+import TransferIcon from "../../../components/Icons/TransferIcon";
 import EditIcon from "../../../components/Icons/EditIcon";
 import DuplicateIcon from "../../../components/Icons/DuplicateIcon";
 import EyeIcon from "../../../components/Icons/EyeIcon";
@@ -39,6 +42,41 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   onSelectedTransactionsChange,
 }) => {
   const TABLE_HEAD = getTableHeaders(activeTab);
+
+  // Helper function to get crypto icon path based on amount string
+  const getCryptoIcon = (amount: string): string => {
+    if (!amount) return "";
+    const upperAmount = amount.toUpperCase();
+    
+    if (upperAmount.includes("BTC")) return "crypto/bitcoin-btc-logo.png";
+    if (upperAmount.includes("ETH")) return "crypto/ethereum-eth-logo.png";
+    if (upperAmount.includes("USDT")) return "crypto/tether-usdt-logo.png";
+    if (upperAmount.includes("SOL")) return "crypto/solana-sol-logo.png";
+    if (upperAmount.includes("LINK")) return "crypto/chainlink-link-logo.png";
+    if (upperAmount.includes("SNX")) return "crypto/synthetix-network-token-snx-logo.png";
+    if (upperAmount.includes("SHIB")) return "crypto/ShibaInu.png";
+    if (upperAmount.includes("TFUEL")) return "crypto/theta-fuel-tfuel-logo.png";
+    
+    return "";
+  };
+
+  // Helper function to render action icon
+  const renderActionIcon = (action: string) => {
+    switch (action) {
+      case "Transfer":
+        return <TransferIcon height={48} width={48} />;
+             case "Deposit":
+         return <DepositIcon height={48} width={48} />;
+       case "Withdrawal":
+         return <WithdrawIcon height={48} width={48} />;
+       case "Swap":
+         return <SwapIcon height={48} width={48} />;
+       case "Trade":
+         return <TradeIcon height={48} width={48} />;
+      default:
+        return null;
+    }
+  };
 
   const data = transactions;
 
@@ -198,6 +236,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                         id,
                         wallet,
                         action,
+                        current,
                         sent,
                         received,
                         transactionId,
@@ -238,13 +277,6 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                 className=" sm:flex sm:items-center sm:justify-center
                               "
                               >
-                                {/* <input
-                                  type="checkbox"
-                                  checked={selectedTransactions.includes(id)}
-                                  onChange={() => handleSelectTransaction(id)}
-                                  className={`w-4 h-4 rounded-lg accent-green-600 focus:outline-none`}
-                                  aria-label={`Select transaction ${transactionId}`}
-                                /> */}
                                 <Checkbox
                                   checked={selectedTransactions.includes(id)}
                                   onChange={() => handleSelectTransaction(id)}
@@ -310,6 +342,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                 {" "}
                                 {sent && (
                                   <div className="flex items-center gap-2">
+                                    {getCryptoIcon(sent) && (
+                                      <Avatar 
+                                        src={getCryptoIcon(sent)} 
+                                        alt="" 
+                                        size="sm" 
+                                        className="h-6 w-6"
+                                      />
+                                    )}
                                     <Typography
                                       variant="small"
                                       className="text-base font-normal text-red-600"
@@ -320,6 +360,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                 )}
                                 {received && (
                                   <div className="flex items-center gap-2">
+                                    {getCryptoIcon(received) && (
+                                      <Avatar 
+                                        src={getCryptoIcon(received)} 
+                                        alt="" 
+                                        size="sm" 
+                                        className="h-6 w-6"
+                                      />
+                                    )}
                                     <Typography
                                       variant="small"
                                       className="text-base font-normal text-green-600"
@@ -346,27 +394,63 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                 {time}
                               </Typography>
                             </td>
-                            <td className="hidden sm:table-cell py-4">
+                            <td className="hidden sm:table-cell py-4 pr-4">
                               {sent && (
-                                <div className="flex items-center gap-2">
-                                  <Typography
-                                    variant="small"
-                                    className="text-base font-normal text-error-500"
-                                  >
-                                    {sent}
-                                  </Typography>
+                                <div className="flex justify-between">
+                                  <div className="flex items-start gap-2">
+                                    {getCryptoIcon(sent) && (
+                                      <Avatar 
+                                        src={getCryptoIcon(sent)} 
+                                        alt="" 
+                                        size="sm" 
+                                        className="h-6 w-6"
+                                      />
+                                    )}
+                                    <div>
+                                      <Typography
+                                        variant="small"
+                                        className="text-base font-normal text-error-500"
+                                      >
+                                        {sent}
+                                      </Typography>
+                                      <Typography
+                                        variant="small"
+                                        className="text-sm font-normal text-gray-250"
+                                      >
+                                        = {current}
+                                      </Typography>
+                                    </div>
+                                  </div>
+                                  {renderActionIcon(action)}
                                 </div>
                               )}
                             </td>
                             <td className="hidden sm:table-cell py-4">
                               {received && (
-                                <div className="flex items-center gap-2">
-                                  <Typography
-                                    variant="small"
-                                    className="text-base font-normal text-green-600"
-                                  >
-                                    {received}
-                                  </Typography>
+                                <div className="flex items-start gap-2">
+                                  {getCryptoIcon(received) && (
+                                    <Avatar 
+                                      src={getCryptoIcon(received)} 
+                                      alt="" 
+                                      size="sm" 
+                                      className="h-6 w-6"
+                                    />
+                                  )}
+                                  <div>
+                                    <Typography
+                                      variant="small"
+                                      className="text-base font-normal text-green-600"
+                                    >
+                                      {received}
+                                    </Typography>
+                                    <Typography
+                                      variant="small"
+                                      className="text-sm font-normal text-gray-250"
+                                    >
+                                      = {current}
+                                    </Typography>
+                                  </div>
+                                  
                                 </div>
                               )}
                             </td>
@@ -688,6 +772,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                   {" "}
                                   {sent && (
                                     <div className="flex items-center gap-2">
+                                      {getCryptoIcon(sent) && (
+                                        <Avatar 
+                                          src={getCryptoIcon(sent)} 
+                                          alt="" 
+                                          size="sm" 
+                                          className="h-6 w-6"
+                                        />
+                                      )}
                                       <Typography
                                         variant="small"
                                         className="text-base font-normal text-red-600"
@@ -698,6 +790,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                   )}
                                   {received && (
                                     <div className="flex items-center gap-2">
+                                      {getCryptoIcon(received) && (
+                                        <Avatar 
+                                          src={getCryptoIcon(received)} 
+                                          alt="" 
+                                          size="sm" 
+                                          className="h-6 w-6"
+                                        />
+                                      )}
                                       <Typography
                                         variant="small"
                                         className="text-base font-normal text-green-600"

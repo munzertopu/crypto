@@ -1,9 +1,9 @@
-interface TradeIconProps {
+interface WithdrawIconProps {
   width?: number | string;
   height?: number | string;
 }
 
-const TradeIcon = ({ width = 20, height = 20 }: TradeIconProps) => {
+const WithdrawIcon = ({ width = 20, height = 20 }: WithdrawIconProps) => {
   return (
     <svg
       width={width}
@@ -14,28 +14,35 @@ const TradeIcon = ({ width = 20, height = 20 }: TradeIconProps) => {
       className="text-gray-600 dark:text-gray-400"
     >
       <path
-        d="M15.4375 29.3863C15.8238 30.03 16.2959 30.6309 16.8323 31.1674C20.7808 35.1159 27.1971 35.1159 31.167 31.1674C32.7764 29.558 33.6992 27.5193 33.9996 25.4377"
+        d="M21.5 25.75C21.5 26.72 22.25 27.5 23.17 27.5H25.05C25.85 27.5 26.5 26.82 26.5 25.97C26.5 25.06 26.1 24.73 25.51 24.52L22.5 23.47C21.91 23.26 21.51 22.94 21.51 22.02C21.51 21.18 22.16 20.49 22.96 20.49H24.84C25.76 20.49 26.51 21.27 26.51 22.24"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M14 22.5622C14.3004 20.4592 15.2232 18.442 16.8326 16.8326C20.7811 12.8841 27.1973 12.8841 31.1673 16.8326C31.7252 17.3905 32.1758 17.9914 32.5621 18.6137"
+        d="M24 19.5V28.5"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M15.0303 35.1158V29.3862H20.7598"
+        d="M34 24C34 29.52 29.52 34 24 34C18.48 34 14 29.52 14 24C14 18.48 18.48 14 24 14"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M32.9698 12.8842V18.6137H27.2402"
+        d="M34 18V14H30"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M29 19L34 14"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
@@ -45,4 +52,4 @@ const TradeIcon = ({ width = 20, height = 20 }: TradeIconProps) => {
   );
 };
 
-export default TradeIcon;
+export default WithdrawIcon;

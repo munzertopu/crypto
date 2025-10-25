@@ -1,9 +1,9 @@
-interface TradeIconProps {
+interface TransferIconProps {
   width?: number | string;
   height?: number | string;
 }
 
-const TradeIcon = ({ width = 20, height = 20 }: TradeIconProps) => {
+const TransferIcon = ({ width = 20, height = 20 }: TransferIconProps) => {
   return (
     <svg
       width={width}
@@ -14,30 +14,50 @@ const TradeIcon = ({ width = 20, height = 20 }: TradeIconProps) => {
       className="text-gray-600 dark:text-gray-400"
     >
       <path
-        d="M15.4375 29.3863C15.8238 30.03 16.2959 30.6309 16.8323 31.1674C20.7808 35.1159 27.1971 35.1159 31.167 31.1674C32.7764 29.558 33.6992 27.5193 33.9996 25.4377"
+        d="M19.0099 32.5L13.9899 27.49"
         stroke="currentColor"
         strokeWidth="1.5"
+        strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M14 22.5622C14.3004 20.4592 15.2232 18.442 16.8326 16.8326C20.7811 12.8841 27.1973 12.8841 31.1673 16.8326C31.7252 17.3905 32.1758 17.9914 32.5621 18.6137"
+        d="M18.9901 32.5L24.0101 27.49"
         stroke="currentColor"
         strokeWidth="1.5"
+        strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M15.0303 35.1158V29.3862H20.7598"
+        d="M19.0099 15.5L19.0099 32.5"
         stroke="currentColor"
         strokeWidth="1.5"
+        strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M32.9698 12.8842V18.6137H27.2402"
+        d="M29.9899 15.5L35.0099 20.51"
         stroke="currentColor"
         strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M30.0101 15.5L24.9901 20.51"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M29.9899 32.5L29.9899 15.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -45,4 +65,4 @@ const TradeIcon = ({ width = 20, height = 20 }: TradeIconProps) => {
   );
 };
 
-export default TradeIcon;
+export default TransferIcon;
