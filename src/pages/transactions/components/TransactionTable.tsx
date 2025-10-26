@@ -312,7 +312,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24"
                                     fill="currentColor"
-                                    className="size-4"
+                                    className="size-4 text-gray-500 dark:text-gray-400"
                                   >
                                     <path
                                       fillRule="evenodd"
@@ -326,7 +326,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24"
                                     fill="currentColor"
-                                    className="size-4 rotate-180"
+                                    className="size-4 rotate-180 text-gray-500 dark:text-gray-400"
                                   >
                                     <path
                                       fillRule="evenodd"
