@@ -428,7 +428,7 @@ const RenderDateRange = ({
               }
               setSelectedOption(value);
               if (value === "By year") return;
-              console.log(value);
+
               const selectedShortcut = createShortcuts().find(
                 (shortcut) => shortcut.label === value
               );
