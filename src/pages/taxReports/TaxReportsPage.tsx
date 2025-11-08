@@ -5,6 +5,7 @@ import DateRangePickerPopover from "../../components/DateRangePicker";
 import useScreenSize from "../../hooks/useScreenSize";
 import FinancialMetrics from "./components/FinancialMetrics";
 import TaxReportChart from "./components/TaxReportChart";
+import TaxReportSummary from "./components/TaxReportSummary";
 
 interface TaxReportsPageProps {
   onLogout: () => void;
@@ -64,7 +65,9 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
           />
         </div>
 
-        
+        <div className="mx-0 sm:mx-2 lg:mx-1">
+          <TaxReportSummary />
+        </div>        
       </div>
     </div>
   );
