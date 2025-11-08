@@ -15,6 +15,7 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
     startDate: new Date("2025-05-01") as Date | null,
     endDate: new Date("2025-05-29") as Date | null,
   });
+  const [allCapitalGainMode, setAllCapitalGainMode] = useState(false);
   const screenSize = useScreenSize();
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -50,13 +51,20 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
             totalValueChange="+5.73%"
             unrealizedGain="–$7,052"
             unrealizedGainChange="-2.38%"
+            allCapitalGainMode={allCapitalGainMode}
+            onAllCapitalGainModeChange={setAllCapitalGainMode}
           />
         </div>
 
         {/* Portfolio Chart */}
         <div className="mx-0 sm:mx-2 lg:mx-1">
-          <TaxReportChart chartColor="#90C853" />
+          <TaxReportChart
+            chartColor="#90C853"
+            allCapitalGains={allCapitalGainMode}
+          />
         </div>
+
+        
       </div>
     </div>
   );

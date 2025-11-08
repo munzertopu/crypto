@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DollarCircleIcon from "../../../components/Icons/DollarCircleIcon";
 import WalletIcon from "../../../components/Icons/WalletIcon";
@@ -79,6 +79,8 @@ interface FinancialMetricsProps {
   totalValueChange: string;
   unrealizedGain: string;
   unrealizedGainChange: string;
+  allCapitalGainMode: boolean;
+  onAllCapitalGainModeChange: (value: boolean) => void;
 }
 
 const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
@@ -86,8 +88,9 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
   totalValueChange = "+5.73%",
   unrealizedGain = "$1,000,744",
   unrealizedGainChange = "+1.29%",
+  allCapitalGainMode,
+  onAllCapitalGainModeChange,
 }) => {
-  const [allCapitalGainMode, setAllCapitalGainMode] = useState(false);
   // SVG Icons
   const totalValueSvg = (
     <DollarCircleIcon
@@ -155,7 +158,9 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
             {/* Toggle Switch */}
             <div className="relative">
               <button
-                onClick={() => setAllCapitalGainMode(!allCapitalGainMode)}
+                onClick={() =>
+                  onAllCapitalGainModeChange(!allCapitalGainMode)
+                }
                 className={`relative inline-flex h-6 w-12 items-center rounded-full transition-colors ${
                   allCapitalGainMode ? "bg-green-700" : "bg-gray-300"
                 }`}

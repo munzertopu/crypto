@@ -12,34 +12,71 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import useScreenSize from "../../../hooks/useScreenSize";
+
 interface TaxReportChartProps {
   data?: TaxReportDataPoint[];
   chartColor?: string;
+  allCapitalGains?: boolean;
 }
+
+interface CustomTooltipEntry {
+  value: number;
+  name?: string;
+}
+
 interface CustomTooltipProps {
   active?: boolean;
-  payload?: Array<{ value: number }>;
+  payload?: CustomTooltipEntry[];
   label?: string;
 }
+
+const tooltipLabels: Record<string, string> = {
+  value: "Portfolio Value",
+  value2: "Capital Gains",
+};
+
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  minimumFractionDigits: 0,
+});
 
 const TaxReportChart: React.FC<TaxReportChartProps> = ({
   data = [],
   chartColor = "#90C853",
+  allCapitalGains = false,
 }) => {
   // Use provided data or fall back to mock data
   const chartData = data.length > 0 ? data : taxReportChartMockData;
   const screenSize = useScreenSize();
-  
+
   const CustomTooltip: React.FC<CustomTooltipProps> = ({
     active,
     payload,
     label,
   }) => {
     if (active && payload && payload.length) {
+      const filteredPayload = payload.filter(
+        (entry) => entry.value !== undefined && entry.value !== null
+      );
+
       return (
-        <div className="flex flex-col justify-start items-center py-2 px-4 gap-[2px] bg-white dark:bg-gray-800  rounded-lg shadow-lg border border-gray-150 dark:border-none">
-          <p className="text-base font-medium text-gray-900 dark:text-gray-200">{`$${payload[0].value}`}</p>
-          <p className="text-xs font-medium text-gray-500 dark:text-gray-300">{`${label}`}</p>
+        <div className="flex flex-col items-start justify-start gap-1 rounded-lg border border-gray-150 bg-white py-2 px-4 shadow-lg dark:border-none dark:bg-gray-800">
+          {label && (
+            <span className="text-xs font-medium text-gray-500 dark:text-gray-300">
+              {label}
+            </span>
+          )}
+          {filteredPayload.map((entry, index) => {
+            const key = entry.name ?? `value-${index}`;
+            const labelText = tooltipLabels[key] ?? key;
+            return (
+              <span
+                key={key}
+                className="text-sm font-semibold text-gray-900 dark:text-gray-200"
+              >
+                {`${labelText}: $${currencyFormatter.format(entry.value)}`}
+              </span>
+            );
+          })}
         </div>
       );
     }
@@ -48,10 +85,7 @@ const TaxReportChart: React.FC<TaxReportChartProps> = ({
 
   return (
     <div className="sm:mb-6 md:mb-0">
-      <div
-        className="p-0 md:p-0 sm:p-3 bg-white
-        dark:bg-[#0E201E]"
-      >
+      <div className="p-0 md:p-0 sm:p-3 bg-white dark:bg-[#0E201E]">
         <div className="w-full h-100 md:mx-6 mb-8 md:mb-[36px]">
           <ResponsiveContainer width="100%" height={320}>
             <AreaChart
@@ -68,26 +102,36 @@ const TaxReportChart: React.FC<TaxReportChartProps> = ({
                   <stop offset="0%" stopColor="rgba(144, 200, 83, 0.4)" />
                   <stop offset="95%" stopColor="rgba(144, 200, 83, 0.02)" />
                 </linearGradient>
-                <linearGradient id="colorGradient2" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="rgba(83, 20, 163, 0.4)" />
-                  <stop offset="95%" stopColor="rgba(83, 20, 163, 0.02)" />
-                </linearGradient>
+                {allCapitalGains && (
+                  <linearGradient
+                    id="colorGradient2"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop offset="0%" stopColor="rgba(83, 20, 163, 0.4)" />
+                    <stop offset="95%" stopColor="rgba(83, 20, 163, 0.02)" />
+                  </linearGradient>
+                )}
               </defs>
-              <XAxis hide={true} dataKey="date" />
-              <YAxis hide={true} />
+              <XAxis hide dataKey="date" />
+              <YAxis hide />
               <Tooltip content={<CustomTooltip />} />
               <Area
                 type="monotone"
                 dataKey="value"
-                stroke="#90c853"
+                stroke={chartColor}
                 fill="url(#colorGradient)"
               />
-              <Area
-                type="monotone"
-                dataKey="value2"
-                stroke="#5314A3"
-                fill="url(#colorGradient2)"
-              />
+              {allCapitalGains && (
+                <Area
+                  type="monotone"
+                  dataKey="value2"
+                  stroke="#5314A3"
+                  fill="url(#colorGradient2)"
+                />
+              )}
             </AreaChart>
           </ResponsiveContainer>
         </div>
