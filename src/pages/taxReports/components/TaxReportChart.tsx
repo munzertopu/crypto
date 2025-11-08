@@ -85,8 +85,8 @@ const TaxReportChart: React.FC<TaxReportChartProps> = ({
 
   return (
     <div className="sm:mb-6 md:mb-0">
-      <div className="p-0 md:p-0 sm:p-3 bg-white dark:bg-[#0E201E]">
-        <div className="w-full h-100 md:mx-6 mb-8 md:mb-[36px]">
+      <div className="p-0 md:p-0 sm:p-3 ">
+        <div className="w-full h-100 md:mx-0 mb-8 md:mb-[36px]">
           <ResponsiveContainer width="100%" height={320}>
             <AreaChart
               data={chartData}

@@ -58,14 +58,14 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
         </div>
 
         {/* Portfolio Chart */}
-        <div className="mx-0 sm:mx-2 lg:mx-1">
+        <div className="mx-0 md:mx-6 sm:mx-2">
           <TaxReportChart
             chartColor="#90C853"
             allCapitalGains={allCapitalGainMode}
           />
         </div>
 
-        <div className="mx-0 sm:mx-2 lg:mx-1">
+        <div className="mx-0 md:mx-6 sm:mx-2">
           <TaxReportSummary />
         </div>        
       </div>

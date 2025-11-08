@@ -1,9 +1,5 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronDown,
-  faCircleInfo,
-} from "@fortawesome/free-solid-svg-icons";
+import InfoCircleIcon from "../../../components/Icons/InfoCircleIcon";
 
 interface SummaryItem {
   label: string;
@@ -60,14 +56,16 @@ const TaxReportSummary: React.FC = () => {
   return (
     <section className="mt-6 grid gap-6 lg:grid-cols-[2fr_1fr]">
       {/* Summary card */}
-      <div className="rounded-2xl border border-gray-150 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
-        <div className="flex flex-col p-6 gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div className="rounded-2xl border border-default bg-white dark:border-gray-800 dark:bg-gray-900">
+        <div className="flex flex-col px-6 pt-6 pb-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex flex-col gap-2">
             <div className="flex flex-wrap items-center gap-3">
               <h3 className="text-h4 font-semibold text-gray-900 dark:text-gray-100">
                 Summary
               </h3>
-              <span className="rounded-full bg-gray-100 border border-gray-150 px-3 py-1 text-sm font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-200">
+              <span className="rounded-full border px-3 py-1 text-sm font-medium 
+                bg-gray-100 border-gray-150 text-gray-700 
+                dark:bg-gray-800 dark:text-gray-200">
                 17 transactions
               </span>
             </div>
@@ -78,30 +76,22 @@ const TaxReportSummary: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-6 divide-y divide-default border-t border-gray-150 dark:divide-gray-800 dark:border-gray-800">
+        <div className="divide-y divide-default dark:divide-gray-800 dark:border-gray-800">
           {summaryItems.map((item, index) => (
             <div
               key={item.label}
               className="px-6 flex flex-col gap-2 py-4 sm:flex-row sm:items-center sm:justify-between"
             >
               <div className="flex items-start gap-2">
-                <FontAwesomeIcon
-                  icon={faCircleInfo}
-                  className="mt-1 h-3.5 w-3.5 text-gray-400 dark:text-gray-500"
-                />
                 <div className="flex flex-col">
-                  <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
+                  <span className="text-base text-gray-900 dark:text-gray-200">
                     {item.label}
                   </span>
-                  {item.description && (
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {item.description}
-                    </span>
-                  )}
                 </div>
+                <InfoCircleIcon className="mt-1 h-3.5 w-3.5 text-gray-400 dark:text-gray-500" />
               </div>
               <span
-                className={`text-sm font-semibold ${
+                className={`text-base font-semibold ${
                   item.emphasize
                     ? "text-gray-900 dark:text-gray-100"
                     : "text-gray-700 dark:text-gray-200"
@@ -113,70 +103,89 @@ const TaxReportSummary: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-5 rounded-xl border border-dashed border-gray-200 bg-gray-50 px-4 py-3 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-800/40 dark:text-gray-300">
-          This section is for informational purposes only. Download a detailed
-          Tax Report for full calculations, cost basis, and disposal data.
+        <div className="flex mx-6 mb-7 text-left rounded-xl border-default bg-gray-100 p-3 text-gray-700 dark:border-gray-700 dark:bg-gray-800/40 dark:text-gray-300">
+          <div>
+            <InfoCircleIcon className="mt-1.5 mx-1 h-3.5 w-3.5"/>
+          </div>
+          <div>
+            This section is for informational purposes only. Download a detailed Tax Report for full calculations, cost basis, and disposal data.
+          </div>
+          
         </div>
       </div>
 
-      {/* Settings and download card */}
-      <div className="flex flex-col gap-4 rounded-2xl border border-gray-150 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-        <div>
-          <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">
-            Settings
-          </h3>
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            Your current tax calculation settings are listed below. Adjust these
-            in the Tax Settings tab if needed.
-          </p>
-          <dl className="mt-4 space-y-3 text-sm">
-            {settingsItems.map((item) => (
+      <div className="flex flex-col gap-4">
+        {/* Settings card */}
+        <div className="rounded-2xl border border-default bg-white dark:border-gray-800 dark:bg-gray-900">
+          <div className="flex flex-col px-6 pt-6 pb-5 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap items-center gap-3">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                  Settings
+                </h3>
+              </div>
+              <p className="text-left text-base text-gray-700 dark:text-gray-300">
+                Your current tax calculation settings are listed below. Adjust these in the <span className="text-green-700">Tax Settings</span>  tab if needed.
+              </p>
+            </div>
+          </div>
+
+          <div className="divide-y divide-default dark:divide-gray-800 dark:border-gray-800">
+            {settingsItems.map((item, index) => (
               <div
                 key={item.label}
-                className="flex items-baseline justify-between gap-3"
+                className="px-6 flex flex-col gap-2 py-4 sm:flex-row sm:items-center sm:justify-between"
               >
-                <dt className="text-gray-600 dark:text-gray-300">
-                  {item.label}:
-                </dt>
-                <dd className="text-right font-medium text-gray-900 dark:text-gray-100">
+                <div className="flex items-start gap-2">
+                  <div className="flex flex-col">
+                    <span className="text-base text-medium text-gray-900 dark:text-gray-200">
+                      {item.label}:
+                    </span>
+                  </div>
+                </div>
+                <span
+                  className={`text-base font-semibold text-gray-900 dark:text-gray-100`}
+                >
                   {item.value}
-                </dd>
+                </span>
               </div>
             ))}
-          </dl>
+          </div>
         </div>
 
-        <div className="h-px w-full bg-gray-150 dark:bg-gray-800" />
-
-        <div>
-          <h4 className="text-base font-semibold text-gray-900 dark:text-gray-100">
-            Download report
-          </h4>
-          <label
-            htmlFor="tax-report-type"
-            className="mt-3 block text-xs font-medium text-gray-600 dark:text-gray-300"
-          >
-            Report type
-          </label>
-          <select
-            id="tax-report-type"
-            className="mt-1 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-300 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
-            defaultValue=""
-          >
-            <option value="" disabled>
-              Select report type
-            </option>
-            <option value="detailed">Detailed Tax Report</option>
-            <option value="capital-gains">Capital Gains Summary</option>
-            <option value="income">Income Report</option>
-          </select>
-
-          <button
-            type="button"
-            className="mt-4 w-full rounded-lg bg-[#90C853] py-2 text-sm font-semibold text-white transition hover:bg-[#7ab144]"
-          >
-            Download report
-          </button>
+        <div className="rounded-2xl border border-default bg-white dark:border-gray-800 dark:bg-gray-900">
+          <div className="px-6 pt-6 pb-5 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex flex-wrap items-center gap-3">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                Download report
+              </h3>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <div className="text-left text-sm">
+                  Report type
+                </div>
+                <select
+                  id="tax-report-type"
+                  className="mt-1 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-300 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    Select report type
+                  </option>
+                  <option value="detailed">Detailed Tax Report</option>
+                  <option value="capital-gains">Capital Gains Summary</option>
+                  <option value="income">Income Report</option>
+                </select>
+              </div>
+              <button
+                type="button"
+                className="mt-4 w-full rounded-lg bg-[#90C853] py-2 text-sm font-semibold text-white transition hover:bg-[#7ab144]"
+              >
+                Download report
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
