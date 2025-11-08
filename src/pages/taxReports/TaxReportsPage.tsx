@@ -3,8 +3,8 @@ import { useState } from "react";
 import NavigationBar from "../../components/NavigationBar";
 import DateRangePickerPopover from "../../components/DateRangePicker";
 import useScreenSize from "../../hooks/useScreenSize";
-import PortfolioChart from "./components/PortfolioChart";
 import FinancialMetrics from "./components/FinancialMetrics";
+import TaxReportChart from "./components/TaxReportChart";
 
 interface TaxReportsPageProps {
   onLogout: () => void;
@@ -55,7 +55,7 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
 
         {/* Portfolio Chart */}
         <div className="mx-0 sm:mx-2 lg:mx-1">
-          <PortfolioChart chartColor="#90C853" />
+          <TaxReportChart chartColor="#90C853" />
         </div>
       </div>
     </div>

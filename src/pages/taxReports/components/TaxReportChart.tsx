@@ -12,7 +12,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import useScreenSize from "../../../hooks/useScreenSize";
-interface PortfolioChartProps {
+interface TaxReportChartProps {
   data?: TaxReportDataPoint[];
   chartColor?: string;
 }
@@ -22,7 +22,7 @@ interface CustomTooltipProps {
   label?: string;
 }
 
-const PortfolioChart: React.FC<PortfolioChartProps> = ({
+const TaxReportChart: React.FC<TaxReportChartProps> = ({
   data = [],
   chartColor = "#90C853",
 }) => {
@@ -96,4 +96,4 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({
   );
 };
 
-export default PortfolioChart;
+export default TaxReportChart;
