@@ -134,55 +134,62 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
               />
             </div>
           </div>
-          {/* Horizontal Separator */}
-
-          <div
-            className={`w-full h-px lg:hidden 
-            dark:bg-gray-700  bg-gray-150
-            `}
-          ></div>
 
           {/* Right Section -  */}
-          <div className="md:px-5 md:py-3 flex items-center md:justify-between gap-3  md:gap-4">
-            {/* Left side - All Capital Gains */}
-            <div
-              className={`flex items-center gap-2 ${
-                allCapitalGainMode
-                  ? "text-gray-500 dark:text-gray-300"
-                  : "text-gray-900 dark:text-gray-100"
-              }`}
-            >
-              <span className={`text-sm font-medium`}>All Capital Gains</span>
-            </div>
-
-            {/* Toggle Switch */}
-            <div className="relative">
-              <button
-                onClick={() =>
-                  onAllCapitalGainModeChange(!allCapitalGainMode)
-                }
-                className={`relative inline-flex h-6 w-12 items-center rounded-full transition-colors ${
-                  allCapitalGainMode ? "bg-green-700" : "bg-gray-300"
+          <div className="">
+            <div className="md:py-3 flex items-center md:justify-between gap-3 md:gap-4">
+              {/* Left side - All Capital Gains */}
+              <div
+                className={`flex items-center gap-2 ${
+                  allCapitalGainMode
+                    ? "text-gray-500 dark:text-gray-300"
+                    : "text-gray-900 dark:text-gray-100"
                 }`}
               >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm ${
-                    allCapitalGainMode ? "translate-x-7" : "translate-x-1"
-                  }`}
-                />
-              </button>
-            </div>
+                <span className={`text-sm font-medium`}>All Capital Gains</span>
+              </div>
 
-            {/* Right side - Long-term vs Short-term */}
-            <div
-              className={`flex items-center gap-2  ${
-                allCapitalGainMode
-                  ? "text-gray-900 dark:text-gray-100"
-                  : "text-gray-500 dark:text-gray-300"
-              }`}
-            >
-              <span className={`text-sm font-medium`}>Long-term vs Short-term</span>
+              {/* Toggle Switch */}
+              <div className="relative">
+                <button
+                  onClick={() =>
+                    onAllCapitalGainModeChange(!allCapitalGainMode)
+                  }
+                  className={`relative inline-flex h-6 w-12 items-center rounded-full transition-colors ${
+                    allCapitalGainMode ? "bg-green-700" : "bg-gray-300"
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm ${
+                      allCapitalGainMode ? "translate-x-7" : "translate-x-1"
+                    }`}
+                  />
+                </button>
+              </div>
+
+              {/* Right side - Long-term vs Short-term */}
+              <div
+                className={`flex items-center gap-2  ${
+                  allCapitalGainMode
+                    ? "text-gray-900 dark:text-gray-100"
+                    : "text-gray-500 dark:text-gray-300"
+                }`}
+              >
+                <span className={`text-sm font-medium`}>Long-term vs Short-term</span>
+              </div>
             </div>
+            {allCapitalGainMode && (
+              <div className="justify-end flex items-center gap-5 text-sm font-medium text-gray-700 dark:text-gray-300">
+                <div className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#5314A3]" />
+                  <span>Short term</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#90C853]" />
+                  <span>Long term</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
