@@ -17,8 +17,65 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
     startDate: new Date("2025-05-01") as Date | null,
     endDate: new Date("2025-05-29") as Date | null,
   });
+  const [selectedYear, setSelectedYear] = useState<string>("");
   const [allCapitalGainMode, setAllCapitalGainMode] = useState(false);
   const screenSize = useScreenSize();
+
+  const handleDateRangeChange = (range: {
+    startDate: Date | null;
+    endDate: Date | null;
+  }) => {
+    setSelectedDateRange(range);
+    if (range.startDate && range.endDate) {
+      const start = range.startDate;
+      const end = range.endDate;
+      const isFullYear =
+        start.getMonth() === 0 &&
+        start.getDate() === 1 &&
+        end.getMonth() === 11 &&
+        end.getDate() === 31 &&
+        start.getFullYear() === end.getFullYear();
+      if (isFullYear) {
+        setSelectedYear(start.getFullYear().toString());
+      } else {
+        setSelectedYear("");
+      }
+    } else {
+      setSelectedYear("");
+    }
+  };
+
+  const renderYearDropdown = (extraClassName = "") => (
+    <Dropdown
+      options={[
+        { label: "2025", value: "2025" },
+        { label: "2024", value: "2024" },
+        { label: "2023", value: "2023" },
+        { label: "2022", value: "2022" },
+        { label: "2021", value: "2021" },
+        { label: "2020", value: "2020" },
+      ]}
+      onSelect={handleYearSelect}
+      searchable={false}
+      inputClassName="md:py-2"
+      defaultValue="Select year"
+      selectedValue={selectedYear || "Select year"}
+      className={extraClassName}
+    />
+  );
+
+  const handleYearSelect = (value: string) => {
+    setSelectedYear(value);
+    const yearNumber = parseInt(value, 10);
+    if (!Number.isNaN(yearNumber)) {
+      const startOfYear = new Date(yearNumber, 0, 1);
+      const endOfYear = new Date(yearNumber, 11, 31);
+      setSelectedDateRange({
+        startDate: startOfYear,
+        endDate: endOfYear,
+      });
+    }
+  };
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <NavigationBar onLogout={onLogout} currentPage="tax-reports" />
@@ -26,38 +83,29 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
       {/* Tax report Content */}
       <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full pb-3 ">
         <div className="sm:px-4 lg:px-6 lg:pt-0 md:pb-8 pt-8">
-          <div className="flex flex-row items-center justify-between gap-4 ">
-            {/* Title */}
-            <h4
-              className={`text-lg md:text-h4 font-semibold text-gray-900
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-center gap-3">
+              {/* Title */}
+              <h4
+                className={`text-lg md:text-h4 font-semibold text-gray-900
                 dark:text-default`}
-            >
-              Tax Reports
-            </h4>
-            
-            <div className="flex space-x-4">
-              <div>
-                <Dropdown
-                  options={[
-                    { label: "2025", value: "2025" },
-                    { label: "2024", value: "2024" },
-                    { label: "2023", value: "2023" },
-                    { label: "2022", value: "2022" },
-                    { label: "2021", value: "2021" },
-                    { label: "2020", value: "2020" }
-                  ]}
-                  onSelect={(value) => {
-                    console.log("Selected report type:", value);
-                  }}
-                  searchable={false}
-                  inputClassName="md:py-2"
-                />
-              </div>
+              >
+                Tax Reports
+              </h4>
+              {selectedYear && (
+                <div className="w-[140px] md:w-auto">
+                  {renderYearDropdown("w-full")}
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-center gap-3 md:gap-4">
+              {!selectedYear && <div className="w-[140px] md:w-auto">{renderYearDropdown("w-full")}</div>}
               {/* Date Range Selector */}
-              <div className={`max-w-[190px]`}>
+              <div className="max-w-[190px]">
                 <DateRangePickerPopover
                   selectedDateRange={selectedDateRange}
-                  onDateRangeChange={setSelectedDateRange}
+                  onDateRangeChange={handleDateRangeChange}
                   showSelectedDate={screenSize.width >= 640}
                   className="md:!py-2.5 md:!px-4 text-base"
                 />
