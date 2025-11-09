@@ -142,7 +142,7 @@ const TaxReportSummary: React.FC<TaxReportSummaryProps> = ({
                           <InfoCircleIcon className="h-3.5 w-3.5" />
                         </button>
                         <div className="pointer-events-none absolute left-6 top-1/2 hidden -translate-y-1/2 rounded-lg bg-gray-900 p-3 text-xs text-white transition group-hover:flex group-focus-within:flex">
-                          <span className="relative md:whitespace-nowrap">
+                          <span className="relative min-w-[150px] max-w-auto whitespace-normal md:whitespace-nowrap">
                             {item.description}
                             <span className="absolute left-[-15px] top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 rounded-sm bg-gray-900" />
                           </span>
@@ -222,7 +222,7 @@ const TaxReportSummary: React.FC<TaxReportSummaryProps> = ({
           </div>
 
           <div className="divide-y divide-default dark:divide-gray-800 dark:border-gray-800">
-            {settingsItems.map((item, index) => (
+            {settingsItems.map((item) => (
               <div
                 key={item.label}
                 className="px-6 flex flex-row gap-2 py-4 items-center justify-between"
