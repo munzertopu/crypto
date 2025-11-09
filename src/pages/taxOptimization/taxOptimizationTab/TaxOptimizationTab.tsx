@@ -89,7 +89,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
           aria-valuemax={100}
         >
           <div
-            className="h-full bg-[#8C5DF3] transition-all duration-300"
+            className="h-full bg-[#5314A3] transition-all duration-300"
             style={{ width: `${longPercentage}%` }}
             aria-label={`Long term holdings: ${longPercentage}%`}
           />
@@ -284,13 +284,13 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
                   <th></th>
                   <th></th>
                   <th className="py-2">
-                    <span className="text-sm px-2 py-1 rounded-lg font-normal text-[#5F9339] bg-[#E3F3C7] dark:text-[#B6B8BA] dark:bg-transparent">
+                    <span className="text-sm px-2 py-1 rounded-lg font-normal text-[#4D772F] bg-[#E3F3C7]">
                       Short term
                     </span>
                   </th>
                   <th></th>
                   <th className="py-2">
-                    <span className="text-sm px-2 py-1 rounded-lg font-normal text-[#8C5DF3] bg-[#8C5DF31F] dark:text-[#B6B8BA] dark:bg-transparent">
+                    <span className="text-sm px-2 py-1 rounded-lg font-normal text-[#5314A3] bg-[#ECDFFB]">
                       Long term
                     </span>
                   </th>
