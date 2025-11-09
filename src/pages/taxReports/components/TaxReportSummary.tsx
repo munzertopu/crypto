@@ -19,30 +19,37 @@ const summaryItems: SummaryItem[] = [
     label: "Capital gains / P&L",
     amount: "$3,371.00",
     emphasize: true,
+    description: "Realized gains minus losses across all sales and swaps.",
   },
   {
     label: "Other gains (futures, derivatives etc)",
     amount: "$0.00",
+    description: "Taxable profits from futures, derivatives, and similar trades.",
   },
   {
     label: "Income",
     amount: "$8.00",
+    description: "Income from staking, interest, and other reward sources.",
   },
   {
     label: "Costs & expenses",
     amount: "$0.00",
+    description: "Fees or costs related to your transactions.",
   },
   {
     label: "Gifts",
     amount: "$2,000.00",
+    description: "Value of crypto you gifted to others during the tax year.",
   },
   {
     label: "Donations",
     amount: "$1,500.00",
+    description: "Fair market value of crypto donated to charitable causes.",
   },
   {
     label: "Lost coins",
     amount: "$2,460.00",
+    description: "Declared losses for crypto permanently lost or inaccessible.",
   },
 ];
 
@@ -78,18 +85,31 @@ const TaxReportSummary: React.FC = () => {
         </div>
 
         <div className="divide-y divide-default dark:divide-gray-800 dark:border-gray-800">
-          {summaryItems.map((item, index) => (
+           {summaryItems.map((item) => (
             <div
               key={item.label}
               className="px-6 flex flex-col gap-2 py-4 sm:flex-row sm:items-center sm:justify-between"
             >
-              <div className="flex items-start gap-2">
-                <div className="flex flex-col">
-                  <span className="text-base text-gray-900 dark:text-gray-200">
-                    {item.label}
-                  </span>
+               <div className="flex items-start gap-2">
+                <span className="text-base text-gray-900 dark:text-gray-200">
+                  {item.label}
+                </span>
+                <div className="group relative inline-flex">
+                  <button
+                    type="button"
+                    className="flex h-5 w-5 items-center justify-center rounded-full text-gray-400 transition hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:text-gray-500 dark:hover:text-gray-300"
+                    aria-label={`More info about ${item.label}`}
+                  >
+                    <InfoCircleIcon className="h-3.5 w-3.5" />
+                  </button>
+                  <div className="pointer-events-none absolute left-6 top-1/2 hidden -translate-y-1/2 rounded-lg bg-gray-900 p-3 text-xs text-white transition group-hover:flex group-focus-within:flex">
+                    <span className="relative whitespace-nowrap">
+                      {item.description}
+                      <span className="absolute left-[-15px] top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 rounded-sm bg-gray-900" />
+                    </span>
+                  </div>
                 </div>
-                <InfoCircleIcon className="mt-1 h-3.5 w-3.5 text-gray-400 dark:text-gray-500" />
+                 
               </div>
               <span
                 className={`text-base font-semibold ${
@@ -162,15 +182,20 @@ const TaxReportSummary: React.FC = () => {
               </h3>
             </div>
             <div>
-              <div className="my-4">
+                <div className="my-4">
                 <div className="text-left text-sm mb-2">
                   Report type
                 </div>
                 <Dropdown
                   options={[
-                    { label: "Detailed Tax Report", value: "detailed" },
-                    { label: "Capital Gains Summary", value: "capital-gains" },
-                    { label: "Income Report", value: "income" },
+                      { label: "Capital Gains Report", value: "capital-gains" },
+                      { label: "Other Gains Report", value: "other-gains" },
+                      { label: "Expenses Report", value: "expenses" },
+                      { label: "Donations Report", value: "donations" },
+                      { label: "Gifts Report", value: "gifts" },
+                      { label: "Lost Coins Report", value: "lost-coins" },
+                      { label: "Full Audit Report", value: "full-audit" },
+                      { label: "Transaction History", value: "transaction-history" },
                   ]}
                   onSelect={(value) => {
                     console.log("Selected report type:", value);
