@@ -6,6 +6,7 @@ import useScreenSize from "../../hooks/useScreenSize";
 import FinancialMetrics from "./components/FinancialMetrics";
 import TaxReportChart from "./components/TaxReportChart";
 import TaxReportSummary from "./components/TaxReportSummary";
+import Dropdown from "../../components/UI/Dropdown";
 
 interface TaxReportsPageProps {
   onLogout: () => void;
@@ -33,14 +34,34 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
             >
               Tax Reports
             </h4>
-
-            {/* Date Range Selector */}
-            <div className={`max-w-[190px]`}>
-              <DateRangePickerPopover
-                selectedDateRange={selectedDateRange}
-                onDateRangeChange={setSelectedDateRange}
-                showSelectedDate={screenSize.width >= 640}
-              />
+            
+            <div className="flex space-x-4">
+              <div>
+                <Dropdown
+                  options={[
+                    { label: "2024", value: "2024" },
+                    { label: "2025", value: "2025" },
+                    { label: "2026", value: "2026" },
+                    { label: "2027", value: "2027" },
+                    { label: "2028", value: "2028" },
+                    { label: "2029", value: "2029" }
+                  ]}
+                  onSelect={(value) => {
+                    console.log("Selected report type:", value);
+                  }}
+                  searchable={false}
+                  inputClassName="md:py-2"
+                />
+              </div>
+              {/* Date Range Selector */}
+              <div className={`max-w-[190px]`}>
+                <DateRangePickerPopover
+                  selectedDateRange={selectedDateRange}
+                  onDateRangeChange={setSelectedDateRange}
+                  showSelectedDate={screenSize.width >= 640}
+                  className="md:!py-2.5 md:!px-4 text-base"
+                />
+              </div>
             </div>
           </div>
         </div>

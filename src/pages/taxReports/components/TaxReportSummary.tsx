@@ -1,5 +1,6 @@
 import React from "react";
 import InfoCircleIcon from "../../../components/Icons/InfoCircleIcon";
+import Dropdown from "../../../components/UI/Dropdown";
 
 interface SummaryItem {
   label: string;
@@ -160,27 +161,27 @@ const TaxReportSummary: React.FC = () => {
                 Download report
               </h3>
             </div>
-            <div className="space-y-4">
-              <div>
-                <div className="text-left text-sm">
+            <div>
+              <div className="my-4">
+                <div className="text-left text-sm mb-2">
                   Report type
                 </div>
-                <select
-                  id="tax-report-type"
-                  className="mt-1 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-300 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Select report type
-                  </option>
-                  <option value="detailed">Detailed Tax Report</option>
-                  <option value="capital-gains">Capital Gains Summary</option>
-                  <option value="income">Income Report</option>
-                </select>
+                <Dropdown
+                  options={[
+                    { label: "Detailed Tax Report", value: "detailed" },
+                    { label: "Capital Gains Summary", value: "capital-gains" },
+                    { label: "Income Report", value: "income" },
+                  ]}
+                  onSelect={(value) => {
+                    console.log("Selected report type:", value);
+                  }}
+                  searchable={false}
+                  inputClassName="md:py-2"
+                />
               </div>
               <button
                 type="button"
-                className="mt-4 w-full rounded-lg bg-[#90C853] py-2 text-sm font-semibold text-white transition hover:bg-[#7ab144]"
+                className="w-full rounded-lg bg-green-500 py-2 text-base font-semibold text-gray-900 transition"
               >
                 Download report
               </button>

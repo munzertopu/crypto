@@ -73,7 +73,7 @@ const TaxReportChart: React.FC<TaxReportChartProps> = ({
                 key={key}
                 className="text-sm font-semibold text-gray-900 dark:text-gray-200"
               >
-                {`${labelText}: $${currencyFormatter.format(entry.value)}`}
+                {`$${currencyFormatter.format(entry.value)}`}
               </span>
             );
           })}

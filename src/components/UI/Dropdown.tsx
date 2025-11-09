@@ -119,7 +119,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             {currentSelectedValue}
           </span>
         </div>
-        {isOpen ? <ArrowUpIcon height={16} width={16} /> : <ArrowDownIcon height={16} width={16} />}
+        {isOpen ? <ArrowDownIcon height={16} width={16} /> : <ArrowUpIcon height={16} width={16} />}
       </button>
       {isOpen && (
         <div className={`absolute top-full left-0 mt-1 w-full rounded-lg shadow-sm z-50 min-w-[max-content] md:min-w-25 
