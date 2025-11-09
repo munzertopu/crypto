@@ -141,11 +141,10 @@ const TaxReportSummary: React.FC<TaxReportSummaryProps> = ({
                         >
                           <InfoCircleIcon className="h-3.5 w-3.5" />
                         </button>
-                        <div className="pointer-events-none absolute top-full left-1/2 mt-2 hidden -translate-x-1/2 rounded-lg bg-gray-900 p-3 text-xs text-white transition transform group-hover:flex group-focus-within:flex md:left-6 md:top-1/2 md:mt-0 md:translate-x-0 md:-translate-y-1/2">
-                          <span className="relative max-w-xs text-left md:whitespace-nowrap">
+                        <div className="pointer-events-none absolute left-6 top-1/2 hidden -translate-y-1/2 rounded-lg bg-gray-900 p-3 text-xs text-white transition group-hover:flex group-focus-within:flex">
+                          <span className="relative md:whitespace-nowrap">
                             {item.description}
-                            <span className="absolute left-1/2 top-0 h-3 w-3 -translate-x-1/2 -translate-y-[9px] rotate-45 rounded-sm bg-gray-900 md:hidden" />
-                            <span className="absolute left-[-15px] top-1/2 hidden h-3 w-3 -translate-y-1/2 rotate-45 rounded-sm bg-gray-900 md:block" />
+                            <span className="absolute left-[-15px] top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 rounded-sm bg-gray-900" />
                           </span>
                         </div>
                       </div>
