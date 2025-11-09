@@ -106,12 +106,12 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
             <div className="hidden md:flex items-center gap-3 md:gap-4">
               {!selectedYear && <div className="w-[140px] md:w-auto">{renderYearDropdown("w-full")}</div>}
               {/* Date Range Selector */}
-              <div className="max-w-[190px]">
+              <div className="max-w-[200px]">
                 <DateRangePickerPopover
                   selectedDateRange={selectedDateRange}
                   onDateRangeChange={handleDateRangeChange}
                   showSelectedDate={screenSize.width >= 640}
-                  className="md:!py-2.5 md:!px-4 text-base"
+                  className="md:!py-2.5 md:!px-3 text-base"
                 />
               </div>
             </div>
