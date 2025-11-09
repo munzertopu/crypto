@@ -239,7 +239,7 @@ const TradeDetailsTable: React.FC<TradeDetailsTableProps> = ({ details }) => {
                 ))}
               </tr>
             </thead>
-            <tbody className="bg-white dark:bg-gray-900">
+            <tbody className="bg-background-light dark:bg-background-dark">
               {details.map((detail, index) => (
                 <tr key={index}>
                   <td className="px-5 py-6 md:px-5 md:py-6 sm:p-5">

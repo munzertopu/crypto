@@ -63,7 +63,7 @@ const WelcomePage: React.FC<WelcomePageProps> = ({ onGetStarted }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0E201E] relative overflow-hidden">
+    <div className="min-h-screen bg-background-light dark:bg-background-dark relative overflow-hidden">
       {/* Confetti and Sparkles */}
       <div className="absolute inset-0 pointer-events-none">
         {confetti.map((piece) => (

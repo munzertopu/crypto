@@ -72,7 +72,7 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
   const tableData = data.length > 0 ? data : defaultData;
 
   return (
-    <div className="bg-white dark:bg-[#0E201E]">
+    <div className="bg-background-light dark:bg-background-dark">
       <div className="pt-6 pb-2">
         <h3 className="text-lg font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Allocations</h3>
       </div>
@@ -103,7 +103,7 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
                   ))}
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-[#0E201E] divide-gray-200 dark:divide-[#2F3232]">
+              <tbody className="bg-background-light dark:bg-background-dark divide-gray-200 dark:divide-[#2F3232]">
                 {tableData.map((item) => (
                   <tr key={item.id} className="hover:bg-gray-50 dark:hover:bg-[#2F3232]">
                     <td className="px-5 py-3 whitespace-nowrap">
@@ -141,7 +141,7 @@ const AllocationTable: React.FC<AllocationTableProps> = ({
       {/* Mobile Layout */}
       <div className="md:hidden">
         {tableData.map((item) => (
-          <div key={item.id} className="bg-white dark:bg-[#0E201E] border-b border-default dark:border-[#2F3232] py-4">
+          <div key={item.id} className="bg-background-light dark:bg-background-dark border-b border-default dark:border-[#2F3232] py-4">
             {/* First Row: Wallet Name + Allocation | Balance + Value */}
             <div className="grid grid-cols-2 gap-4 mb-3">
               {/* First Column: Wallet Name + Allocation */}

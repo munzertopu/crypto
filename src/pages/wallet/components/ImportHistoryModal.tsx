@@ -149,7 +149,7 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
 
       {/* Modal */}
       <div className="flex min-h-full md:items-center md:justify-center md:p-4">
-        <div className="relative bg-white dark:bg-gray-800 rounded-t-2xl md:rounded-2xl shadow-xl max-w-6xl w-full p-3 md:p-8 flex flex-col">
+        <div className="relative space-y-4 bg-background-light dark:bg-background-dark rounded-t-2xl md:rounded-2xl shadow-xl max-w-6xl w-full p-3 md:p-8 flex flex-col">
           {/* Header */}
           <div className="flex items-center justify-between mt-2 md:mt-0">
             <h2 className="text-lg md:text-2xl font-semibold text-gray-900 dark:text-gray-100">
@@ -199,7 +199,9 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
                 placeholder="Search"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full md:w-80 py-2 md:py-2.5 pl-9 md:pl-10 pr-3 md:pr-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none text-sm md:text-base bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                className="w-full md:w-80 py-2 md:py-2.5 pl-9 md:pl-10 pr-3 md:pr-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none text-sm md:text-base 
+                  bg-background-light dark:bg-background-dark 
+                  text-gray-900 dark:text-gray-100"
               />
             </div>
 
@@ -210,16 +212,16 @@ const ImportHistoryModal: React.FC<ImportHistoryModalProps> = ({
                 onSelect={setImportType}
                 defaultValue="Import type"
                 className="w-full md:w-auto"
-                inputClassName="dark:!bg-gray-800"
-                menuClassName="dark:!bg-gray-800"
+                inputClassName="bg-background-light dark:bg-background-dark"
+                menuClassName="bg-background-light dark:bg-background-dark"
               />
               <Dropdown
                 options={["Sort by recent"]}
                 onSelect={setSortBy}
                 defaultValue="Sort by: Recent"
                 className="w-full md:w-auto"
-                inputClassName="dark:!bg-gray-800"
-                menuClassName="dark:!bg-gray-800"
+                inputClassName="bg-background-light dark:bg-background-dark"
+                menuClassName="bg-background-light dark:bg-background-dark"
               />
             </div>
           </div>

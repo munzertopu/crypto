@@ -190,7 +190,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onLogout }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-gray-150">
+    <div className="min-h-screen bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-150">
       <NavigationBar onLogout={handleLogout} currentPage="settings" />
       <div className="px-4 md:px-10 sm:px-6 pt-6 md:pt-5 w-full">
         <Typography

@@ -130,7 +130,7 @@ const PlansTab: React.FC<PlansTabProps> = () => {
               {plan.name !== "Newbie" && (
                 <button
                   onClick={() => handleUpgradeClick(plan.name)}
-                  className={`w-full py-2 px-4 text-base bg-white border border-default rounded-lg text-gray-700 font-semibold text-primary dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100 mt-auto`}
+                  className={`w-full py-2 px-4 text-base border border-default rounded-lg text-gray-700 font-semibold text-primary bg-background-light dark:bg-background-dark dark:border-gray-700 dark:text-gray-100 mt-auto`}
                 >
                   Upgrade
                 </button>

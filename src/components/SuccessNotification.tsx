@@ -34,7 +34,8 @@ const SuccessNotification: React.FC<SuccessNotificationProps> = ({
 
   return (
     <div className="fixed w-[calc(100%-32px)] md:w-auto bottom-4 sm:top-4 right-4 z-50 animate-fade-in">
-      <div className="flex items-start gap-4 rounded-xl border border-success-500 bg-white px-4 py-3 shadow-lg dark:bg-[#0E201E]">
+      <div className="flex items-start gap-4 rounded-xl border border-success-500 px-4 py-3 shadow-lg 
+        bg-background-light dark:bg-background-dark">
         <div className="flex flex-1 items-start gap-3">
           <TickCircleFilledIcon height={20} width={20} className="mt-0.5 flex-shrink-0" currentColor="#419F45"/>
           <div className="flex flex-col text-left">

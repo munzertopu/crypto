@@ -15,7 +15,7 @@ export default function SecondaryButton({
       className={`w-11 h-11 flex justify-center items-center gap-1 p-3 
         box-border border border-gray-150 dark:border-gray-700 rounded-xl 
         shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
-        bg-white dark:bg-gray-900  
+        bg-background-light dark:bg-background-dark
          ${className}`}
     >
       {icon}

@@ -141,7 +141,7 @@ const InsightsSummary: React.FC<InsightsSummaryProps> = ({
   ];
 
   return (
-    <div className="bg-white dark:bg-[#0E201E]">
+    <div className="bg-background-light dark:bg-background-dark">
       <div className="pt-6 pb-4">
         <div className="flex items-center gap-2 mb-4">
           <h3 className="text-h6 font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Insights Summary</h3>

@@ -97,7 +97,7 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({ data = [] }) => {
   const tableData = data.length > 0 ? data : defaultData;
 
   return (
-    <div className="bg-white dark:bg-[#0E201E]">
+    <div className="bg-background-light dark:bg-background-dark">
       <div className="pt-6 pb-2">
         <h3 className="text-lg font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">
           Tax Lots
@@ -137,7 +137,7 @@ const TaxLotTable: React.FC<TaxLotTableProps> = ({ data = [] }) => {
                   ))}
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-[#0E201E] divide-gray-200 dark:divide-[#2F3232]">
+              <tbody className="bg-background-light dark:bg-background-dark divide-gray-200 dark:divide-[#2F3232]">
                 {tableData.map((item) => (
                   <tr
                     key={item.id}

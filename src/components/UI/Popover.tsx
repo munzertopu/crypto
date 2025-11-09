@@ -86,7 +86,7 @@ const Popover: React.FC<PopoverProps> = ({
           }}
         >
           <div
-            className="flex flex-col justify-center items-start gap-0.5 py-2 px-0 box-border border border-default rounded-xl bg-white dark:bg-gray-900 dark:border-gray-700 min-w-max"
+            className="flex flex-col justify-center items-start gap-0.5 py-2 px-0 box-border border border-default rounded-xl bg-background-light dark:bg-background-dark dark:border-gray-700 min-w-max"
             style={{
               boxShadow: "2px -1px 6px 0px rgba(0, 0, 0, 0.05)",
             }}

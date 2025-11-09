@@ -133,8 +133,8 @@ const PortfolioChart: React.FC<PortfolioChartProps> = ({
   return (
     <div className="sm:mb-6 md:mb-0">
       <div
-        className="p-0 md:p-0 sm:p-3 bg-white
-        dark:bg-[#0E201E]"
+        className="p-0 md:p-0 sm:p-3
+        bg-background-light dark:bg-background-dark"
       >
         <div className="w-full h-100 md:mx-6 mb-8 md:mb-[36px]">
           {/* <ReactApexChart

@@ -77,7 +77,7 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
     }
   };
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background-light dark:bg-background-dark">
       <NavigationBar onLogout={onLogout} currentPage="tax-reports" />
 
       {/* Tax report Content */}

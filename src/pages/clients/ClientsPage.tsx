@@ -481,7 +481,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
                   ))}
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-[#0E201E] divide-gray-200 dark:divide-[#2F3232]">
+              <tbody className="bg-background-light dark:bg-background-dark divide-gray-200 dark:divide-[#2F3232]">
                 {filteredClients.map((client) => (
                   <tr key={client.id}>
                     {/* Client */}
@@ -612,7 +612,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
             <span className="text-sm text-gray-600 dark:text-gray-400">
               Show
             </span>
-            <select className="px-3 py-1 border border-gray-200 dark:border-gray-700 rounded bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none">
+            <select className="px-3 py-1 border border-gray-200 dark:border-gray-700 rounded bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 focus:outline-none">
               <option>7</option>
               <option>10</option>
               <option>25</option>
@@ -624,7 +624,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <button className="px-2 py-[9px] border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300">
+            <button className="px-2 py-[9px] border border-gray-200 dark:border-gray-700 rounded-lg bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-300">
               <svg
                 className="w-4 h-4"
                 fill="none"
@@ -643,21 +643,21 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
             <button className="px-3.5 py-1.5 bg-green-500 text-dark-900 rounded-lg font-medium hover:bg-green-700 transition-colors">
               1
             </button>
-            <button className="px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300">
+            <button className="px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-300">
               2
             </button>
-            <button className="px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300">
+            <button className="px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-300">
               3
             </button>
-            <button className="px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300">
+            <button className="px-2.5 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-300">
               ...
             </button>
 
-            <button className="px-2 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300">
+            <button className="px-2 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-300">
               13
             </button>
 
-            <button className="px-2 py-[9px] border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-300">
+            <button className="px-2 py-[9px] border border-gray-200 dark:border-gray-700 rounded-lg bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-300">
               <svg
                 className="w-4 h-4"
                 fill="none"

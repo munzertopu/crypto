@@ -30,8 +30,8 @@ const ErrorNotification: React.FC<ErrorNotificationProps> = ({
   return (
     <div className="fixed bottom-4 sm:top-4 right-4 z-50 animate-fade-in">
       <div
-        className="flex items-center justify-between bg-white border border-error-500 rounded-xl px-4 py-3 shadow-lg w-auto min-w-fit gap-4
-      dark:bg-[#0E201E]"
+        className="flex items-center justify-between border border-error-500 rounded-xl px-4 py-3 shadow-lg w-auto min-w-fit gap-4
+      bg-background-light dark:bg-background-dark "
       >
         {/* Success Icon */}
 

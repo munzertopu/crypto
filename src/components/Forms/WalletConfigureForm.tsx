@@ -73,8 +73,8 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
 
   return (
     <div
-      className={`bg-white text-gray-900 rounded-2xl sm:p-8 w-full sm:max-w-2xl
-        dark:bg-[#0E201E] dark:text-gray-250`}
+      className={`text-gray-900 rounded-2xl sm:p-8 w-full sm:max-w-2xl
+        bg-background-light dark:bg-background-dark dark:text-gray-250`}
     >
       {/* Header */}
       {showHeader && (
@@ -251,7 +251,7 @@ const WalletConfigureForm: React.FC<ConfigureModalProps> = ({
 
             {isDropdownOpen && (
               <div
-                className={`absolute left-0 right-0 border rounded-lg shadow-lg z-10 bg-white border-gray-150 dark:bg-[#0E201E] dark:border-[#4D5050] dark:text-gray-250 ${
+                className={`absolute left-0 right-0 border rounded-lg shadow-lg z-10 border-gray-150 dark:border-[#4D5050] dark:text-gray-250 ${
                   openUpward ? "bottom-full mb-1" : "top-full mt-1"
                 }`}
               >

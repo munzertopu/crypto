@@ -95,7 +95,8 @@ const TaxReportSummary: React.FC<TaxReportSummaryProps> = ({
   return (
       <section className="mt-6 grid gap-6 lg:grid-cols-[2fr_1fr]">
         {/* Summary card */}
-        <div className="rounded-2xl border border-default bg-white dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-2xl border border-default dark:border-gray-800 
+          bg-background-light dark:bg-background-dark">
         <div className="flex flex-col px-6 pt-6 pb-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex flex-col gap-2">
             <div className="flex flex-wrap items-center gap-3">
@@ -205,7 +206,8 @@ const TaxReportSummary: React.FC<TaxReportSummaryProps> = ({
 
       <div className="flex flex-col gap-4">
         {/* Settings card */}
-        <div className="rounded-2xl border border-default bg-white dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-2xl border border-default dark:border-gray-800 
+          bg-background-light dark:bg-background-dark">
           <div className="flex flex-col px-6 pt-6 pb-5 sm:flex-row sm:items-start sm:justify-between">
             <div className="flex flex-col gap-2">
               <div className="flex flex-wrap items-center gap-3">
@@ -242,7 +244,8 @@ const TaxReportSummary: React.FC<TaxReportSummaryProps> = ({
           </div>
         </div>
 
-        <div className="rounded-2xl border border-default bg-white dark:border-gray-800 dark:bg-gray-900">
+        <div className="rounded-2xl border border-default dark:border-gray-800 
+          bg-background-light dark:bg-background-dark">
           <div className="px-6 pt-6 pb-5 sm:flex-row sm:items-start sm:justify-between">
             <div className="flex flex-wrap items-center gap-3">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">

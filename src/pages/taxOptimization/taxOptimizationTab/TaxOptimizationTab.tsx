@@ -280,7 +280,7 @@ const TaxOptimizationTab: React.FC<TaxOptimizationTabProps> = () => {
               aria-label="Tax optimization cryptocurrency holdings"
             >
               <thead className={`bg-table-header dark:bg-gray-800`}>
-                <tr role="row" className="bg-white dark:bg-[#0E201E]">
+                <tr role="row" className="bg-background-light dark:bg-background-dark">
                   <th></th>
                   <th></th>
                   <th className="py-2">

@@ -30,7 +30,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={`bg-white dark:bg-[#0E201E] ${className}`}>
+    <div className={`bg-background-light dark:bg-background-dark ${className}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex justify-between items-center py-1.5 text-left focus:outline-none opacity-80"

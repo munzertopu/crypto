@@ -310,7 +310,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({
       )}
 
       {activeTab === "Ledger" && (
-        <div className="sm:py-2">
+        <div className="sm:py-2 ">
           <div className="overflow-x-auto">
             <table className="w-full min-w-full table-auto text-left">
               <thead className="hidden md:table-header-group">
@@ -406,7 +406,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({
                   </th>
                 </tr>
               </thead>
-              <tbody className="">
+              <tbody className="bg-background-light dark:bg-background-dark">
                 {ledgerData.map((row) => (
                   <tr key={row.id} className={`border-b border-gray-100 `}>
                     <td className="sm:hidden py-3 pl-4 sm:pl-0 sm:px-4">
@@ -589,7 +589,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({
               </thead>
               <tbody>
                 {costAnalysisData.map((row, index) => (
-                  <tr key={row.id} className={`bg-white dark:bg-gray-900`}>
+                  <tr key={row.id} className={`bg-background-light dark:bg-background-dark`}>
                     <td
                       className={`hidden sm:table-cell py-2.5 px-5
                         ${

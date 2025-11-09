@@ -37,11 +37,12 @@ const MobileFormDrawer: React.FC<DrawerProps> = ({
     <>
       {/* MobileFormDrawer */}
       <div
-        className={`fixed bottom-0 left-0 w-[99.7%] bg-white z-50 transition-transform duration-300 transform ${
+        className={`fixed bottom-0 left-0 w-[99.7%] z-50 transition-transform duration-300 transform ${
           isOpen ? "translate-y-0" : "translate-y-full"
         } rounded-t-[24px] sm:hidden ${
           noChildPadding ? "p-0" : "px-5 pt-8"
-        } dark:bg-[#0E201E]`}
+        } 
+        bg-background-light dark:bg-background-dark`}
         style={{ height }}
       >
         {/* Header */}

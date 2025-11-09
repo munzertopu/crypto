@@ -102,7 +102,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       <button
         onClick={handleToggle}
         className={`flex flex-row justify-between items-center px-4 py-3 rounded-lg gap-4 md:min-w-24 min-w-[max-content] w-full
-          box-border border border-default dark:text-gray-400 bg-white dark:bg-gray-900 dark:border-gray-700 focus:outline-none ${inputClassName}`}
+          box-border border border-default dark:text-gray-400 bg-background-light dark:bg-background-dark dark:border-gray-700 focus:outline-none ${inputClassName}`}
         aria-label="Toggle dropdown"
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -123,7 +123,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       </button>
       {isOpen && (
         <div className={`absolute top-full left-0 mt-1 w-full rounded-lg shadow-sm z-50 min-w-[max-content] md:min-w-25 
-          border border-default dark:border-gray-700 bg-white dark:bg-gray-900 dark:text-white ${menuClassName}`}>
+          border border-default dark:border-gray-700 bg-background-light dark:bg-background-dark dark:text-white ${menuClassName}`}>
           {searchable && (
             <div className="px-3 border-b border-gray-150 dark:border-gray-700">
               <input
@@ -131,7 +131,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 placeholder={searchPlaceholder}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-3 py-2 rounded text-sm text-gray-900 dark:text-gray-150 placeholder-gray-500 focus:outline-none dark:bg-[#0E201E] dark:text-gray-50"
+                className="w-full px-3 py-2 rounded text-sm text-gray-900 dark:text-gray-150 placeholder-gray-500 focus:outline-none dark:bg-background-dark dark:text-gray-50"
               />
             </div>
           )}

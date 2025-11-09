@@ -102,7 +102,7 @@ const OpenedDropdown: React.FC<OpenedDropdownProps> = ({
   return (
     <div
       className={`w-full  z-50 min-w-[max-content] md:min-w-25 
-          bg-white dark:bg-gray-900 dark:text-white`}
+          bg-background-light dark:bg-background-dark dark:text-white`}
     >
       {searchable && (
         <div className=" ">

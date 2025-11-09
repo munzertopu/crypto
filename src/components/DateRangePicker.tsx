@@ -195,8 +195,9 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
           onClick={handleIconClick}
           className={`w-full flex items-center ${
             iconPosition === "right" ? "justify-between" : "justify-start"
-          } p-2 md:p-0 md:px-4 md:py-2 border rounded-lg transition-colors bg-white border-gray-150 text-gray-900
-          dark:text-gray-100 dark:bg-[#0E201E] dark:border-gray-700 md:min-w-[194px] ${className}`}
+          } p-2 md:p-0 md:px-4 md:py-2 border rounded-lg transition-colors border-gray-150 text-gray-900
+          bg-background-light dark:bg-background-dark 
+          dark:text-gray-100 dark:border-gray-700 md:min-w-[194px] ${className}`}
           aria-label="Select date range"
           aria-expanded={isOpen}
           aria-haspopup="true"
@@ -247,7 +248,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
         <div
           className={`absolute top-full ${
             openingPosition === "right" ? "md:left-[-710px]" : "md:left-0"
-          } mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 dark:border-gray-700 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
+          } mt-1 z-50 bg-background-light dark:bg-background-dark border border-gray-150 dark:border-gray-700 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
             isDrawer ? " left-[-10px]" : "left-[-175px]"
           }`}
         >
@@ -291,7 +292,7 @@ const DateRangePickerPopover: React.FC<DateRangeSelectorProps> = ({
       ) : isOpen && isDrawer && screenSize.width < 640 ? (
         <>
           <div
-            className={`absolute top-full w-full mt-1 z-50 bg-white dark:bg-gray-900 border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
+            className={`absolute top-full w-full mt-1 z-50 bg-background-light dark:bg-background-dark border border-gray-150 rounded-lg shadow-lg p-4 md:p-5 flex flex-col md:flex-row gap-2 ${
               isDrawer ? " " : "left-[-175px]"
             } ${popOverClassName}`}
           >
@@ -350,13 +351,13 @@ const RenderDateRange = ({
               });
               setIsOpen(false);
             }}
-            className="cursor-pointer  hover:bg-gray-100 px-2 py-1 rounded text-sm"
+            className="cursor-pointer hover:bg-gray-100 hover:dark:bg-gray-700 px-2 py-1 rounded text-sm dark:text-white"
           >
             {shortcut.label}
           </div>
         ))}
         <div className="flex justify-start items-center gap-2 px-2 opacity-90">
-          <span className="text-sm ">By year</span>{" "}
+          <span className="text-sm dark:text-white">By year</span>{" "}
           <Dropdown
             options={Array.from({
               length: new Date().getFullYear() - 2010 + 1,
@@ -380,7 +381,7 @@ const RenderDateRange = ({
               });
               setIsOpen(false);
             }}
-            className="cursor-pointer  hover:bg-gray-100 px-2 py-1 rounded text-sm opacity-90"
+            className="cursor-pointer hover:bg-gray-100 px-2 py-1 rounded text-sm opacity-90 dark:text-white hover:dark:bg-gray-700"
           >
             All Time
           </div>

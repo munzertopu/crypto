@@ -171,8 +171,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   const renderExpandedDetails = (transaction: Transaction) => (
     <tr
       key={`${transaction.id}-details`}
-      className={`bg-white
-      dark:bg-[#0E201E]`}
+      className={`bg-background-light dark:bg-background-dark`}
     >
       <td colSpan={TABLE_HEAD.length} className="px-4">
         <TransactionDetail />
