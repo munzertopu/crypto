@@ -211,7 +211,7 @@ const ClientsPage: React.FC<ClientsPageProps> = ({ onLogout }) => {
   });
 
   return (
-    <div className="min-h-screen bg-background dark:bg-[#0E201E]">
+    <div className="min-h-screen bg-background-light dark:bg-background-dark">
       <NavigationBar onLogout={onLogout} currentPage="clients" />
 
       <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full pb-5 md:pb-0">

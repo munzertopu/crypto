@@ -69,7 +69,10 @@ module.exports = {
         },
         default: "#E1E3E5",
 
-        background: "#F7F8F9",
+        background: {
+          light: "#FFFFFF",
+          dark: "#000000",
+        },
         table: {
           header: "#F3F5F7",
         },
