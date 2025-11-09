@@ -1,8 +1,10 @@
 import React from "react";
 import InfoCircleIcon from "../../../components/Icons/InfoCircleIcon";
 import Dropdown from "../../../components/UI/Dropdown";
- import SuccessNotification from "../../../components/SuccessNotification";
- import { useState } from "react";
+import SuccessNotification from "../../../components/SuccessNotification";
+import { useState } from "react";
+import ArrowUpIcon from "../../../components/Icons/ArrowUpIcon";
+import ArrowDownIcon from "../../../components/Icons/ArrowDownIcon";
 
 interface SummaryItem {
   label: string;
@@ -64,7 +66,16 @@ const settingsItems: SettingsItem[] = [
   { label: "Cost tracking method", value: "Wallet based" },
 ];
 
- const TaxReportSummary: React.FC = () => {
+interface TaxReportSummaryProps {
+  allCapitalGains?: boolean;
+}
+
+const shortTermAmount = "$1,790.80";
+const longTermAmount = "$2,543.20";
+
+const TaxReportSummary: React.FC<TaxReportSummaryProps> = ({
+  allCapitalGains = false,
+}) => {
   const [isDownloadNotificationVisible, setIsDownloadNotificationVisible] =
     useState(false);
 
@@ -82,9 +93,9 @@ const settingsItems: SettingsItem[] = [
   };
 
   return (
-    <section className="mt-6 grid gap-6 lg:grid-cols-[2fr_1fr]">
-      {/* Summary card */}
-      <div className="rounded-2xl border border-default bg-white dark:border-gray-800 dark:bg-gray-900">
+      <section className="mt-6 grid gap-6 lg:grid-cols-[2fr_1fr]">
+        {/* Summary card */}
+        <div className="rounded-2xl border border-default bg-white dark:border-gray-800 dark:bg-gray-900">
         <div className="flex flex-col px-6 pt-6 pb-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex flex-col gap-2">
             <div className="flex flex-wrap items-center gap-3">
@@ -105,46 +116,78 @@ const settingsItems: SettingsItem[] = [
         </div>
 
         <div className="divide-y divide-default dark:divide-gray-800 dark:border-gray-800">
-           {summaryItems.map((item) => (
-            <div
-              key={item.label}
-              className="px-6 flex flex-row gap-2 py-4 items-center justify-between"
-            >
-               <div className="flex items-start gap-0 md:gap-2">
-                <span className="text-sm md:text-base text-gray-900 dark:text-gray-200">
-                  {item.label}
-                </span>
-                {item.subLabel && (
-                  <span className="hidden md:flex text-sm md:text-base text-gray-900 dark:text-gray-200">
-                    {item.subLabel}
-                  </span>
-                )}
-                <div className="group relative inline-flex">
-                  <button
-                    type="button"
-                    className="flex h-5 w-5 items-center justify-center rounded-full text-gray-400 transition hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:text-gray-500 dark:hover:text-gray-300"
-                    aria-label={`More info about ${item.label}`}
-                  >
-                    <InfoCircleIcon className="h-3.5 w-3.5" />
-                  </button>
-                  <div className="pointer-events-none absolute left-6 top-1/2 hidden -translate-y-1/2 rounded-lg bg-gray-900 p-3 text-xs text-white transition group-hover:flex group-focus-within:flex">
-                    <span className="relative whitespace-nowrap">
-                      {item.description}
-                      <span className="absolute left-[-15px] top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 rounded-sm bg-gray-900" />
+          {summaryItems.map((item) => (
+            <div key={item.label} className="px-6 py-4">
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-start gap-2">
+                    <div className="flex flex-row gap-1">
+                      <div className="flex items-center gap-1">
+                        <span className="text-sm md:text-base text-gray-900 dark:text-gray-200">
+                          {item.label}
+                        </span>
+                        {item.subLabel && (
+                          <span className="hidden md:inline text-sm text-gray-700 dark:text-gray-200">
+                            {item.subLabel}
+                          </span>
+                        )}
+                      </div>
+                      <div className="group relative inline-flex">
+                        <button
+                          type="button"
+                          className="flex h-5 w-5 items-center justify-center rounded-full text-gray-400 transition hover:text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:text-gray-500 dark:hover:text-gray-300"
+                          aria-label={`More info about ${item.label}`}
+                        >
+                          <InfoCircleIcon className="h-3.5 w-3.5" />
+                        </button>
+                        <div className="pointer-events-none absolute left-6 top-1/2 hidden -translate-y-1/2 rounded-lg bg-gray-900 p-3 text-xs text-white transition group-hover:flex group-focus-within:flex">
+                          <span className="relative whitespace-nowrap">
+                            {item.description}
+                            <span className="absolute left-[-15px] top-1/2 h-3 w-3 -translate-y-1/2 rotate-45 rounded-sm bg-gray-900" />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`text-sm md:text-base font-semibold ${
+                        item.emphasize
+                          ? "text-gray-900 dark:text-gray-100"
+                          : "text-gray-700 dark:text-gray-200"
+                      }`}
+                    >
+                      {item.amount}
                     </span>
+                    {item.emphasize && allCapitalGains && (
+                      <ArrowDownIcon className="h-3.5 w-3.5 text-gray-600 dark:text-gray-300" />
+                    )}
+                    {item.emphasize && !allCapitalGains && (
+                      <ArrowUpIcon className="h-3.5 w-3.5 text-gray-600 dark:text-gray-300" />
+                    )}
                   </div>
                 </div>
-                 
+
+                {item.emphasize && allCapitalGains && (
+                  <div className="ml-1 space-y-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#5314A3]" />
+                        Short term:
+                      </div>
+                      <span>{shortTermAmount}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#72C24D]" />
+                        Long term:
+                      </div>
+                      <span>{longTermAmount}</span>
+                    </div>
+                  </div>
+                )}
               </div>
-              <span
-                className={`text-sm md:text-base font-semibold ${
-                  item.emphasize
-                    ? "text-gray-900 dark:text-gray-100"
-                    : "text-gray-700 dark:text-gray-200"
-                }`}
-              >
-                {item.amount}
-              </span>
             </div>
           ))}
         </div>

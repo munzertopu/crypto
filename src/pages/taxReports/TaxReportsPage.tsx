@@ -139,7 +139,7 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
         </div>
 
         <div className="mx-0 md:mx-6 sm:mx-2">
-          <TaxReportSummary />
+          <TaxReportSummary allCapitalGains={allCapitalGainMode} />
         </div>        
       </div>
     </div>
