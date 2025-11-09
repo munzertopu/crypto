@@ -6,6 +6,7 @@ import Dropdown from "../../../components/UI/Dropdown";
 
 interface SummaryItem {
   label: string;
+  subLabel?: string;
   amount: string;
   description?: string;
   emphasize?: boolean;
@@ -24,7 +25,8 @@ const summaryItems: SummaryItem[] = [
     description: "Realized gains minus losses across all sales and swaps.",
   },
   {
-    label: "Other gains (futures, derivatives etc)",
+    label: "Other gains",
+    subLabel: " (e.g., futures, derivatives)",
     amount: "$0.00",
     description: "Taxable profits from futures, derivatives, and similar trades.",
   },
@@ -95,7 +97,7 @@ const settingsItems: SettingsItem[] = [
                 17 transactions
               </span>
             </div>
-            <p className="text-base text-gray-700 dark:text-gray-300">
+            <p className="text-base text-left text-gray-700 dark:text-gray-300">
               Below is a summary of your total transactions and taxable gains
               used in this report.
             </p>
@@ -106,12 +108,17 @@ const settingsItems: SettingsItem[] = [
            {summaryItems.map((item) => (
             <div
               key={item.label}
-              className="px-6 flex flex-col gap-2 py-4 sm:flex-row sm:items-center sm:justify-between"
+              className="px-6 flex flex-row gap-2 py-4 items-center justify-between"
             >
-               <div className="flex items-start gap-2">
-                <span className="text-base text-gray-900 dark:text-gray-200">
+               <div className="flex items-start gap-0 md:gap-2">
+                <span className="text-sm md:text-base text-gray-900 dark:text-gray-200">
                   {item.label}
                 </span>
+                {item.subLabel && (
+                  <span className="hidden md:flex text-sm md:text-base text-gray-900 dark:text-gray-200">
+                    {item.subLabel}
+                  </span>
+                )}
                 <div className="group relative inline-flex">
                   <button
                     type="button"
@@ -130,7 +137,7 @@ const settingsItems: SettingsItem[] = [
                  
               </div>
               <span
-                className={`text-base font-semibold ${
+                className={`text-sm md:text-base font-semibold ${
                   item.emphasize
                     ? "text-gray-900 dark:text-gray-100"
                     : "text-gray-700 dark:text-gray-200"
@@ -173,17 +180,17 @@ const settingsItems: SettingsItem[] = [
             {settingsItems.map((item, index) => (
               <div
                 key={item.label}
-                className="px-6 flex flex-col gap-2 py-4 sm:flex-row sm:items-center sm:justify-between"
+                className="px-6 flex flex-row gap-2 py-4 items-center justify-between"
               >
                 <div className="flex items-start gap-2">
                   <div className="flex flex-col">
-                    <span className="text-base text-medium text-gray-900 dark:text-gray-200">
+                    <span className="text-sm md:text-base text-medium text-gray-900 dark:text-gray-200">
                       {item.label}:
                     </span>
                   </div>
                 </div>
                 <span
-                  className={`text-base font-semibold text-gray-900 dark:text-gray-100`}
+                  className={`text-sm md:text-base font-semibold text-gray-900 dark:text-gray-100`}
                 >
                   {item.value}
                 </span>

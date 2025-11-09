@@ -57,7 +57,7 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
       ]}
       onSelect={handleYearSelect}
       searchable={false}
-      inputClassName="md:py-2"
+      inputClassName="!py-1 md:!py-2"
       defaultValue="Select year"
       selectedValue={selectedYear || "Select year"}
       className={extraClassName}
@@ -92,14 +92,18 @@ const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
               >
                 Tax Reports
               </h4>
+              {/* Year Dropdown for small screens */}
+              <div className="md:hidden ml-auto flex items-center">
+                <div className="w-auto">{renderYearDropdown("w-full")}</div>
+              </div>
               {selectedYear && (
-                <div className="w-[140px] md:w-auto">
+                <div className="hidden md:block w-[140px] md:w-auto">
                   {renderYearDropdown("w-full")}
                 </div>
               )}
             </div>
 
-            <div className="flex items-center gap-3 md:gap-4">
+            <div className="hidden md:flex items-center gap-3 md:gap-4">
               {!selectedYear && <div className="w-[140px] md:w-auto">{renderYearDropdown("w-full")}</div>}
               {/* Date Range Selector */}
               <div className="max-w-[190px]">

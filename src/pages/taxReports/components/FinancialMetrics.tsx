@@ -11,6 +11,7 @@ interface MetricItemProps {
   icon?: any; // FontAwesome icon
   svgIcon?: React.ReactNode; // SVG icon
   isRowDirection?: boolean;
+  className?: string;
   isLarge?: boolean;
 }
 
@@ -21,7 +22,7 @@ const MetricItem: React.FC<MetricItemProps> = ({
   isPositive,
   icon,
   svgIcon,
-  isRowDirection = false,
+  className = "",
   isLarge = false
 }) => (
   <div className="flex flex-col gap-3">
@@ -44,7 +45,7 @@ const MetricItem: React.FC<MetricItemProps> = ({
       </div>
       <div className="flex items-center md:gap-3">
         <span
-          className={`text-base ${isLarge ? "md:text-[18px]" : "md:text-16[px]"} font-medium md:font-semibold text-gray-900 opacity-80
+          className={`text-sm ${isLarge ? "md:text-[18px]" : "md:text-16[px]"} font-medium md:font-semibold text-gray-900 opacity-80
            dark:text-gray-250`}
         >
           {title}
@@ -53,20 +54,18 @@ const MetricItem: React.FC<MetricItemProps> = ({
     </div>
 
     <div
-      className={`flex ${
-        isRowDirection
-          ? "flex-row gap-2 justify-start items-center"
-          : "flex-col gap-1 sm:flex-row"
-      }  items-start sm:items-end sm:gap-2  `}
+      className={`flex flex-col md:flex-row gap-1 md:gap-2 
+        items-start sm:items-end 
+        sm:gap-2  `}
     >
       <span className={`text-xl ${isLarge ? "md:text-[32px]" : "md:text-24[px]"} font-semibold text-gray-900
-       dark:text-gray-250`}>
+       dark:text-gray-250 ${className}`}>
         {value}
       </span>
       <span
         className={`text-caption sm:text-sm font-semibold ${
           isPositive ? "text-[#5F9339]" : "text-[#D8382C]"
-        }`}
+        } ${className}`}
       >
         {change}
       </span>
@@ -108,15 +107,14 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
     <div className="md:px-2 mb-4 sm:mb-6 pt-4 sm:pt-0">
       <div className="bg-transparent">
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
-          {/* Left Section - Total Value */}
-          <div className="flex gap-6 lg:flex-1">
+          {/* Left Section - Total Income */}
+          <div className="flex gap-6 lg:flex-1 justify-between md:justify-start">
             <MetricItem
-              title="Total Value"
+              title="Total Income"
               value={totalValue}
               change={totalValueChange}
               isPositive={totalValueChange.startsWith("+")}
               svgIcon={totalValueSvg}
-              isRowDirection
               isLarge = {true}
             />
             {/* Vertical Separator */}
@@ -130,14 +128,15 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
                 change={unrealizedGainChange}
                 isPositive={unrealizedGainChange.startsWith("+")}
                 svgIcon={unrealizedGainSvg}
+                className="ml-auto md:justify-self-auto"
                 isLarge = {true}
               />
             </div>
           </div>
 
           {/* Right Section -  */}
-          <div className="">
-            <div className="md:py-3 flex items-center md:justify-between gap-3 md:gap-4">
+          <div className="space-y-2 md:space-y-0">
+            <div className="md:py-3 flex items-center md:justify-between gap-1 md:gap-4">
               {/* Left side - All Capital Gains */}
               <div
                 className={`flex items-center gap-2 ${
@@ -155,13 +154,13 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
                   onClick={() =>
                     onAllCapitalGainModeChange(!allCapitalGainMode)
                   }
-                  className={`relative inline-flex h-6 w-12 items-center rounded-full transition-colors ${
+                  className={`relative inline-flex h-6 w-10 md:w-12 items-center rounded-full transition-colors ${
                     allCapitalGainMode ? "bg-green-700" : "bg-gray-300"
                   }`}
                 >
                   <span
                     className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm ${
-                      allCapitalGainMode ? "translate-x-7" : "translate-x-1"
+                      allCapitalGainMode ? "translate-x-5 md:translate-x-7" : "translate-x-1"
                     }`}
                   />
                 </button>
@@ -179,7 +178,7 @@ const FinancialMetrics: React.FC<FinancialMetricsProps> = ({
               </div>
             </div>
             {allCapitalGainMode && (
-              <div className="justify-end flex items-center gap-5 text-sm font-medium text-gray-700 dark:text-gray-300">
+              <div className="justify-start md:justify-end flex items-center gap-5 text-sm font-medium text-gray-700 dark:text-gray-300">
                 <div className="flex items-center gap-2">
                   <span className="h-2.5 w-2.5 rounded-full bg-[#5314A3]" />
                   <span>Short term</span>
