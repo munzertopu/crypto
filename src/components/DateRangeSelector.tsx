@@ -123,8 +123,8 @@ const DateRangeSelector: React.FC<DateRangeSelectorProps> = ({
   if (variant === 'inline') {
     return (
       <div className={`flex items-center rounded-lg border p-2 shadow-sm w-full sm:w-auto md:w-64
-        border-[#E1E3E5] bg-[#FFFFFF]
-        dark:bg-[#0E201E] dark:border-[#4D5050]`}
+        border-[#E1E3E5]
+        bg-background-light dark:bg-background-dark  dark:border-[#4D5050]`}
       >
         <Datepicker
           displayFormat="DD MMM YYYY"
@@ -153,7 +153,7 @@ const DateRangeSelector: React.FC<DateRangeSelectorProps> = ({
       {/* Date Range Display Button */}
       <button
         onClick={handleToggle}
-        className="w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-white dark:bg-[#0E201E] border-gray-300 dark:border-[#4D5050] text-gray-900 hover:bg-gray-50 
+        className="w-full flex items-center justify-between px-4 py-2 border rounded-lg transition-colors bg-background-light dark:bg-background-dark  border-gray-300 dark:border-[#4D5050] text-gray-900 hover:bg-gray-50 
         dark:text-gray-250 dark:hover:bg-[#2F3232]"
         aria-label="Select date range"
         aria-expanded={isOpen}

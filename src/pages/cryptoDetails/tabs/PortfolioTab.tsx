@@ -15,7 +15,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
   const timeRanges = ["1D", "1W", "1M", "3M", "1Y", "All time"];
 
   return (
-    <div className="mb-6 md:mb-0 bg-white dark:bg-[#0E201E]">
+    <div className="mb-6 md:mb-0 bg-background-light dark:bg-background-dark">
       {/* Header and Time Range in one row */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 md:gap-0   mb-6">
         <h2 className="text-h6 font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">
@@ -32,7 +32,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = ({
                   onClick={() => onTimeRangeChange?.(timeRange)}
                   className={`py-1.5 px-2.5 rounded-lg text-sm ${
                     activeTimeRange === timeRange
-                      ? "bg-white dark:bg-[#0E201E] text-black dark:text-white"
+                      ? "bg-background-light dark:bg-background-dark text-black dark:text-white"
                       : "text-[#0E201E] dark:text-[#FFFFFF]"
                   }`}
                 >

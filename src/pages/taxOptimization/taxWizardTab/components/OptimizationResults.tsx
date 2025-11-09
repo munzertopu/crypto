@@ -295,7 +295,7 @@ const OptimizationResults: React.FC = () => {
           {metrics.map((metric, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-gray-900 rounded-lg px-4 py-3 md:px-8 md:py-4"
+              className="bg-background-light dark:bg-background-dark rounded-lg px-4 py-3 md:px-8 md:py-4"
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="opacity-80 text-gray-900 dark:text-gray-100">
@@ -329,7 +329,7 @@ const OptimizationResults: React.FC = () => {
           {tradePlan.map((trade, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-gray-900 rounded-lg p-4 cursor-pointer"
+              className="bg-background-light dark:bg-background-dark rounded-lg p-4 cursor-pointer"
               onClick={() => setSelectedDetails(trade)}
             >
               {/* Header with Asset and Eye Icon */}
@@ -422,7 +422,7 @@ const OptimizationResults: React.FC = () => {
 
         {/* Desktop Table */}
         <div className="hidden md:block overflow-x-auto">
-          <table className="w-full bg-white dark:bg-gray-900 rounded-lg">
+          <table className="w-full bg-background-light dark:bg-background-dark rounded-lg">
             <thead>
               <tr className="border-b border-default dark:border-gray-700">
                 {TABLE_HEAD.map((head, index) => (

@@ -24,7 +24,7 @@ const NFTGrid: React.FC<NFTGridProps> = ({ filteredNFTs }) => {
         {filteredNFTs.map((nft) => (
           <div
             key={nft.id}
-            className="rounded-2xl overflow-hidden border bg-white dark:bg-gray-800 border-default dark:border-gray-700 "
+            className="rounded-2xl overflow-hidden border bg-background-light dark:bg-background-dark border-default dark:border-gray-700 "
           >
             {/* NFT Image */}
             <div className="aspect-[3/2] bg-gray-200 relative overflow-hidden">

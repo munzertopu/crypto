@@ -97,7 +97,7 @@ const CheckboxDropdown: React.FC<CheckboxDropdownProps> = ({
       <button
         onClick={handleToggle}
         className="flex flex-row justify-between items-center px-4 py-2.5 md:py-3 rounded-lg md:min-w-24 min-w-[max-content] w-full gap-4
-          text-gray-900 dark:text-gray-400 box-border border border-default bg-white dark:bg-gray-900 dark:border-gray-700 focus:ring-2 focus:ring-[#E3F3C7B2] focus:outline-none"
+          text-gray-900 dark:text-gray-400 box-border border border-default bg-background-light dark:bg-background-dark dark:border-gray-700 focus:ring-2 focus:ring-[#E3F3C7B2] focus:outline-none"
         aria-label="Toggle dropdown"
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -118,7 +118,7 @@ const CheckboxDropdown: React.FC<CheckboxDropdownProps> = ({
         )}
       </button>
       {isOpen && (
-        <div className="absolute top-full left-0 mt-1 w-full border border-default rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 bg-white dark:bg-gray-900 dark:text-white">
+        <div className="absolute top-full left-0 mt-1 w-full border border-default rounded-lg shadow-lg z-50 min-w-[max-content] md:min-w-25 bg-background-light dark:bg-background-dark dark:text-white">
           {searchable && (
             <div className="flex px-3 items-center border-b border-gray-150 dark:border-gray-700">
               <SearchIcon />
@@ -127,7 +127,7 @@ const CheckboxDropdown: React.FC<CheckboxDropdownProps> = ({
                 placeholder={searchPlaceholder}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-3 py-2 rounded text-sm text-gray-900 dark:text-gray-150 placeholder-gray-500 focus:outline-none dark:bg-[#0E201E] dark:text-gray-50"
+                className="w-full px-3 py-2 rounded text-sm text-gray-900 dark:text-gray-150 placeholder-gray-500 focus:outline-none dark:bg-background-dark dark:text-gray-50"
               />
             </div>
           )}

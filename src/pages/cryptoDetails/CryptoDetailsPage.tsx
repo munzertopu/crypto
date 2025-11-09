@@ -93,7 +93,7 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = () => {
 
   return (
     <div
-      className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900
+      className="min-h-screen bg-background-light dark:bg-background-dark text-gray-900
      dark:text-gray-250"
     >
       <NavigationBar
@@ -173,7 +173,7 @@ const CryptoDetailsPage: React.FC<CryptoDetailsPageProps> = () => {
                   }
                   className={`py-1.5 px-2.5 rounded-lg text-sm ${
                     activeTableTab === tab.toLowerCase().replace(/\s+/g, "")
-                      ? "bg-white dark:bg-[#0E201E] text-black dark:text-white"
+                      ? "bg-background-light dark:bg-background-dark text-black dark:text-white"
                       : "text-[#0E201E] dark:text-[#FFFFFF]"
                   }`}
                 >

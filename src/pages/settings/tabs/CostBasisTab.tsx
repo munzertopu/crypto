@@ -382,7 +382,7 @@ const CostBasisTab: React.FC<CostBasisTabProps> = ({}) => {
                 }`}
               >
                 <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform dark:bg-gray-900 ${
+                  className={`inline-block h-4 w-4 transform rounded-full transition-transform bg-background-light dark:bg-background-dark ${
                     rule.enabled ? "translate-x-6" : "translate-x-1"
                   }`}
                 />

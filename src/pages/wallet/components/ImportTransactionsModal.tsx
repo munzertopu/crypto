@@ -78,7 +78,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
 
       {/* Modal */}
       <div className="flex min-h-full items-end md:items-center md:justify-center md:p-4">
-        <div className="relative bg-white dark:bg-gray-800 rounded-t-3xl md:rounded-2xl shadow-xl max-w-4xl w-full p-4 md:p-8 flex flex-col">
+        <div className="relative bg-background-light dark:bg-background-dark rounded-t-3xl md:rounded-2xl shadow-xl max-w-4xl w-full p-4 md:p-8 flex flex-col">
           {/* Header */}
           <div className="flex items-start justify-between mb-4 md:mb-0 mt-2 md:mt-0">
             <div>
@@ -119,7 +119,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
               <div className="space-y-4 md:space-y-6">
                 {/* File Upload Area */}
                 <div
-                  className={`border-2 border-dashed rounded-lg p-4 md:p-6 text-center transition-colors border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 cursor-pointer`}
+                  className={`border-2 border-dashed rounded-lg p-4 md:p-6 text-center transition-colors border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark cursor-pointer`}
                   onDragEnter={handleDrag}
                   onDragLeave={handleDrag}
                   onDragOver={handleDrag}
@@ -277,7 +277,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                     <select
                       value={timezone}
                       onChange={(e) => setTimezone(e.target.value)}
-                      className="w-full px-4 md:px-4 py-3 md:py-3 border border-gray-300 dark:border-gray-600 text-sm md:text-base rounded-xl bg-transparent dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-none focus:outline-none appearance-none pr-10 md:pr-12"
+                      className="w-full px-4 md:px-4 py-3 md:py-3 border border-gray-300 dark:border-gray-600 text-sm md:text-base rounded-xl bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 focus:ring-none focus:outline-none appearance-none pr-10 md:pr-12"
                     >
                       <option value="UTC">UTC</option>
                       <option value="EST">EST</option>
@@ -316,7 +316,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                       <div className="md:hidden">
                         <ol className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
                           <li className="flex items-start space-x-2">
-                            <span className="flex-shrink-0 w-6 h-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
+                            <span className="flex-shrink-0 w-6 h-6 bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
                               1
                             </span>
                             <span className="text-base font-medium text-gray-700 dark:text-gray-300">
@@ -327,7 +327,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                             </span>
                           </li>
                           <li className="flex items-start space-x-2">
-                            <span className="flex-shrink-0 w-6 h-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
+                            <span className="flex-shrink-0 w-6 h-6 bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
                               2
                             </span>
                             <span className="text-base text-left font-medium text-gray-700 dark:text-gray-300">
@@ -339,7 +339,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                             </span>
                           </li>
                           <li className="flex items-start space-x-2">
-                            <span className="flex-shrink-0 w-6 h-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
+                            <span className="flex-shrink-0 w-6 h-6 bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
                               3
                             </span>
                             <span className="text-base font-medium text-gray-700 dark:text-gray-300">
@@ -351,7 +351,7 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                             </span>
                           </li>
                           <li className="flex items-start space-x-2 text-left">
-                            <span className="flex-shrink-0 w-6 h-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
+                            <span className="flex-shrink-0 w-6 h-6 bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-full flex items-center justify-center text-xs font-medium">
                               4
                             </span>
                             <span className="text-base font-medium text-gray-700 dark:text-gray-300">
@@ -366,7 +366,8 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                         </ol>
                       </div>
                       <div className="pt-2">
-                        <button className="w-full py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-sm font-medium">
+                        <button className="w-full py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-xl 
+                          bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 text-sm font-medium">
                           Watch video
                         </button>
                       </div>
@@ -426,7 +427,9 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
                       </span>
                     </li>
                   </ol>
-                  <button className="mt-5 w-full py-3 px-5 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                  <button className="mt-5 w-full py-3 px-5 border border-gray-300 dark:border-gray-600 rounded-xl 
+                    bg-background-light dark:bg-background-dark 
+                    text-gray-900 dark:text-gray-100">
                     Watch video
                   </button>
                 </div>
@@ -435,7 +438,8 @@ const ImportTransactionsModal: React.FC<ImportTransactionsModalProps> = ({
           </div>
           {/* Bottom Actions */}
           <div className="flex  md:flex-row justify-between mt-6 md:mt-6 gap-3">
-            <button className="px-4 md:px-5 py-3 md:py-3 border-2 border-gray-300 dark:border-gray-600 text-sm md:text-base font-medium rounded-lg bg-transparent dark:bg-gray-800 text-gray-700 dark:text-gray-100">
+            <button className="px-4 md:px-5 py-3 md:py-3 border-2 border-gray-300 dark:border-gray-600 text-sm md:text-base font-medium rounded-lg 
+              bg-background-light dark:bg-background-dark text-gray-700 dark:text-gray-100">
               View history
             </button>
             <button

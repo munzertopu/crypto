@@ -594,7 +594,7 @@ const Filter: React.FC<FilterProps> = ({
             className="relative w-full md:w-auto"
             ref={setSearchSuggestionsRef}
           >
-            <div className="w-full md:w-auto flex flex-row justify-start items-center px-4 py-3 box-border border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]">
+            <div className="w-full md:w-auto flex flex-row justify-start items-center px-4 py-3 box-border border border-[rgba(225,227,229,1)] dark:border-gray-700 rounded-[12px] shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] bg-background-light dark:bg-background-dark">
               <div className="w-full md:w-auto flex flex-row justify-start items-center gap-3">
                 <SearchIcon
                   width={16}
@@ -619,7 +619,8 @@ const Filter: React.FC<FilterProps> = ({
 
             {/* Search Suggestions */}
             {isSearchSuggestionsOpen && filteredSearchOptions.length > 0 && (
-              <div className="hidden md:block absolute top-full left-0 mt-1 w-full bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50">
+              <div className="hidden md:block absolute top-full left-0 mt-1 w-full 
+                bg-background-light dark:bg-background-dark border border-default dark:border-gray-700 rounded-lg shadow-sm z-50">
                 <div className="max-h-48 overflow-y-auto">
                   {filteredSearchOptions.map((option) => {
                     const isSelected = selectedSearchItems.includes(option.id);
@@ -792,7 +793,7 @@ const Filter: React.FC<FilterProps> = ({
           <div className="hidden md:block relative" ref={advancedFilterRef}>
             <button
               onClick={() => setIsAdvancedFilterOpen(!isAdvancedFilterOpen)}
-              className="flex items-center justify-between px-4 py-3 rounded-lg border border-transparent bg-transparent text-gray-700 hover:bg-gray-50 focus:bg-white focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none dark:border-gray-700 dark:bg-[#0E201E] dark:text-gray-300 min-w-[140px]"
+              className="flex items-center justify-between px-4 py-3 rounded-lg border border-transparent bg-transparent text-gray-700 hover:bg-gray-50 focus:bg-white focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none dark:border-gray-700 dark:text-gray-300 min-w-[140px]"
             >
               <div className="flex items-center gap-2">
                 <svg
@@ -824,7 +825,9 @@ const Filter: React.FC<FilterProps> = ({
 
             {/* Advanced Filter Dropdown Content */}
             {isAdvancedFilterOpen && (
-              <div className="absolute top-full right-0 mt-1 w-min bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50 p-4">
+              <div className="absolute top-full right-0 mt-1 w-min 
+                bg-background-light dark:bg-background-dark 
+                border border-default dark:border-gray-700 rounded-lg shadow-sm z-50 p-4">
                 <div className="space-y-3">
                   {advancedFilters.map((filter, index) => (
                     <div key={index} className="flex items-center gap-3">
@@ -965,7 +968,7 @@ const Filter: React.FC<FilterProps> = ({
         <div className="hidden md:block relative" ref={viewDropdownRef}>
           <button
             onClick={() => setIsViewDropdownOpen(!isViewDropdownOpen)}
-            className="flex items-center justify-between px-4 py-3 rounded-lg border border-default bg-white text-gray-700 hover:bg-gray-50 focus:bg-white focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none dark:border-gray-700 dark:bg-[#0E201E] dark:text-gray-300 min-w-[100px]"
+            className="flex items-center justify-between px-4 py-3 rounded-lg border border-default text-gray-700 hover:bg-gray-50 focus:bg-white focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none dark:border-gray-700 bg-background-light dark:bg-background-dark dark:text-gray-300 min-w-[100px]"
           >
             <span className="text-sm font-medium">View</span>
             <svg
@@ -990,7 +993,9 @@ const Filter: React.FC<FilterProps> = ({
 
           {/* View Dropdown Content */}
           {isViewDropdownOpen && (
-            <div className="absolute top-full right-0 mt-1 w-64 bg-white dark:bg-gray-900 border border-default dark:border-gray-700 rounded-lg shadow-sm z-50 p-4">
+            <div className="absolute top-full right-0 mt-1 w-64 
+              bg-background-light dark:bg-background-dark 
+              border border-default dark:border-gray-700 rounded-lg shadow-sm z-50 p-4">
               <div className="space-y-4">
                 {/* Show deleted toggle */}
                 <div className="flex items-center justify-between">

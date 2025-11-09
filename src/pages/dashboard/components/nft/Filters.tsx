@@ -280,7 +280,7 @@ const Filters: React.FC<FiltersProps> = ({ searchTerm, setSearchTerm }) => {
                       placeholder="Amount"
                       value={fromValue}
                       onChange={(e) => setFromValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] bg-background-light dark:bg-background-dark
                         [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                     />
                     <button
@@ -343,7 +343,7 @@ const Filters: React.FC<FiltersProps> = ({ searchTerm, setSearchTerm }) => {
                       placeholder="Amount"
                       value={toValue}
                       onChange={(e) => setToValue(e.target.value)}
-                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] dark:bg-[#0E201E]
+                      className={`text-base w-full border  border-gray-150 text-gray-900 dark:text-gray-150 placeholder-gray-400 focus:outline-none px-4 py-2 rounded-[12px] focus:border-[#90C853] bg-[rgba(255,255,255,1)] bg-background-light dark:bg-background-dark
                         [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                     />
                     <button

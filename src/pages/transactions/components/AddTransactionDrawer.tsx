@@ -206,8 +206,8 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                             {/* Currency Dropdown */}
                             {showCoinDropdown && (
                               <div
-                                className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-default
-                                  dark:bg-[#0E201E]`}
+                                className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 border-default
+                                  bg-background-light dark:bg-background-dark`}
                               >
                                 <div className="py-1 px-2">
                                   {["USD", "EUR", "USDT"].map((currency) => (
@@ -219,8 +219,8 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                                       }}
                                       className={`w-full px-3 py-1 text-left text-xs rounded-md ${
                                         coinCurrency === currency
-                                          ? "bg-gray-100 dark:bg-[#0E201E] dark:text-[#A1A3A5]"
-                                          : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                                          ? "bg-gray-100 dark:bg-background-dark dark:text-[#A1A3A5]"
+                                          : "dark:bg-background-dark dark:text-[#A1A3A5]"
                                       }`}
                                     >
                                       {currency}
@@ -331,7 +331,9 @@ const AddTransactionDrawer: React.FC<AddTransactionDrawerProps> = ({
                           <button 
                             key={index}
                             className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm focus:outline-none focus:ring-0
-                            border border-default dark:border-transparent dark:bg-gray-900 text-gray-900 dark:text-gray-100 bg-gray-100"
+                            border border-default dark:border-transparent 
+                            bg-background-light dark:bg-background-dark 
+                            text-gray-900 dark:text-gray-100 bg-gray-100"
                           >
                             <span className="text-xs">+</span>
                             <span>{tag}</span>

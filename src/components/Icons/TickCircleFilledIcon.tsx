@@ -4,12 +4,14 @@ interface TickCircleFilledIconProps {
   className?: string;
   width?: number;
   height?: number;
+  currentColor?: string;
 }
 
 const TickCircleFilledIcon: React.FC<TickCircleFilledIconProps> = ({
   className = '',
   width = 21,
   height = 20,
+  currentColor = '#90C853',
 }) => {
   return (
     <svg 
@@ -22,8 +24,8 @@ const TickCircleFilledIcon: React.FC<TickCircleFilledIconProps> = ({
     >
       <path 
         d="M10.4993 18.3332C15.0827 18.3332 18.8327 14.5832 18.8327 9.99984C18.8327 5.4165 15.0827 1.6665 10.4993 1.6665C5.91602 1.6665 2.16602 5.4165 2.16602 9.99984C2.16602 14.5832 5.91602 18.3332 10.4993 18.3332Z" 
-        fill="#90C853" 
-        stroke="#90C853" 
+        fill={currentColor}
+        stroke={currentColor}
         strokeWidth="1.2" 
         strokeLinecap="round" 
         strokeLinejoin="round"

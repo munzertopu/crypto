@@ -56,7 +56,7 @@ const Filter: React.FC<FilterProps> = ({
          border border-[rgba(225,227,229,1)] dark:border-gray-700
          rounded-[12px] 
          shadow-[0px_1px_2px_0px_rgba(20,21,26,0.05)] 
-         bg-[rgba(255,255,255,1)] dark:bg-[#0E201E] w-full sm:w-auto"
+         bg-background-light dark:bg-background-dark w-full sm:w-auto"
         >
           <div className="flex flex-row justify-start items-center gap-3">
             <svg

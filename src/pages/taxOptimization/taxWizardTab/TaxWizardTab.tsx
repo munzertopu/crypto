@@ -181,8 +181,8 @@ const TaxWizardTab: React.FC = () => {
       onClick={onClick}
       className={`px-2.5 py-1.5 md:py-2 w-full rounded-lg text-sm font-medium transition-colors border ${
         isSelected
-          ? "bg-green-200 text-gray-900 dark:bg-green-500 dark:text-gray-900 border-green-700 dark:border-green-600"
-          : "bg-white text-gray-600 dark:bg-gray-900 dark:text-gray-300 border-transparent"
+          ? "bg-green-200 text-gray-900 dark:bg-green-500 dark:text-gray-900 border-green-700 dark:border-background-dark"
+          : "bg-background-light dark:bg-background-dark text-gray-600 dark:text-gray-300 border-transparent"
       } ${className}`}
     >
       {label}
@@ -241,7 +241,7 @@ const TaxWizardTab: React.FC = () => {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 md:mb-3 mb-2">
                 What is your goal?
               </label>
-              <div className="flex bg-white dark:bg-gray-900 p-1 rounded-lg justify-between">
+              <div className="flex bg-background-light dark:bg-background-dark p-1 rounded-lg justify-between">
                 <OptionButton
                   label="Cash Target"
                   isSelected={selectedGoal === "Cash Target"}
@@ -260,7 +260,7 @@ const TaxWizardTab: React.FC = () => {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-100 mb-3">
                 What is your preference?
               </label>
-              <div className="flex bg-white dark:bg-gray-900 p-1 rounded-lg justify-between">
+              <div className="flex bg-background-light dark:bg-background-dark p-1 rounded-lg justify-between">
                 <OptionButton
                   label="Minimize Tax"
                   isSelected={selectedOptimization === "Minimize Tax"}
@@ -369,7 +369,9 @@ const TaxWizardTab: React.FC = () => {
                       value={customAmount}
                       onChange={(e) => setCustomAmount(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      className="w-full rounded-lg text-sm px-4 py-2 font-medium border-default bg-white text-gray-900 dark:text-gray-100 dark:bg-gray-900 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-none focus:shadow-none"
+                      className="w-full rounded-lg text-sm px-4 py-2 font-medium border-default text-gray-900 dark:text-gray-100 
+                      bg-background-light dark:bg-background-dark 
+                      dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-none focus:shadow-none"
                     />
                     <button
                       type="button"
@@ -399,7 +401,7 @@ const TaxWizardTab: React.FC = () => {
                     {showCurrencyDropdown && (
                       <div
                         className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20
-                          border-default dark:border-gray-700 bg-white dark:bg-[#0E201E]`}
+                          border-default dark:border-gray-700 bg-background-light dark:bg-background-dark`}
                       >
                         <div className="py-1 px-2">
                           {[
@@ -418,8 +420,8 @@ const TaxWizardTab: React.FC = () => {
                               }}
                               className={`w-full px-3 py-1 text-left text-xs rounded-md flex items-center gap-2 ${
                                 selectedCurrency === currency.code
-                                  ? "bg-gray-100 dark:bg-[#0E201E] dark:text-gray-500"
-                                  : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                                  ? "bg-gray-100 dark:bg-background-dark dark:text-gray-500"
+                                  : "dark:bg-background-dark dark:text-[#A1A3A5]"
                               }`}
                             >
                               <span>{currency.code}</span>
@@ -550,7 +552,7 @@ const TaxWizardTab: React.FC = () => {
                     <div
                       key={wallet.name}
                       onClick={() => setSelectedWallet(wallet.name)}
-                      className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-default dark:border-gray-700 cursor-pointer hover:border-green-500 transition-colors"
+                      className="bg-background-light dark:bg-background-dark rounded-lg p-4 border border-default dark:border-gray-700 cursor-pointer hover:border-green-500 transition-colors"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
@@ -604,7 +606,7 @@ const TaxWizardTab: React.FC = () => {
                     <div
                       key={asset.name}
                       onClick={() => setSelectedAsset(asset.name)}
-                      className="bg-white dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-green-500 transition-colors"
+                      className="bg-background-light dark:bg-background-dark rounded-lg p-4 border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-green-500 transition-colors"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
@@ -651,7 +653,8 @@ const TaxWizardTab: React.FC = () => {
                   1-4h ago
                 </span>
               </span>
-              <button className="flex bg-white items-center gap-2 px-5 py-3 text-base font-medium text-gray-700 rounded-lg dark:text-gray-500 dark:bg-gray-900 dark:border-gray-700">
+              <button className="flex items-center gap-2 px-5 py-3 text-base font-medium text-gray-700 rounded-lg dark:text-gray-500 
+                bg-background-light dark:bg-background-dark dark:border-gray-700">
                 <RefreshIcon width={16} height={16} />
                 <span className="dark:text-gray-100">Refresh All</span>
               </button>

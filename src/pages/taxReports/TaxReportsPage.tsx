@@ -1,24 +1,146 @@
 import React from "react";
+import { useState } from "react";
 import NavigationBar from "../../components/NavigationBar";
+import DateRangePickerPopover from "../../components/DateRangePicker";
+import useScreenSize from "../../hooks/useScreenSize";
+import FinancialMetrics from "./components/FinancialMetrics";
+import TaxReportChart from "./components/TaxReportChart";
+import TaxReportSummary from "./components/TaxReportSummary";
+import Dropdown from "../../components/UI/Dropdown";
 
 interface TaxReportsPageProps {
   onLogout: () => void;
 }
 
 const TaxReportsPage: React.FC<TaxReportsPageProps> = ({ onLogout }) => {
+  const [selectedDateRange, setSelectedDateRange] = useState({
+    startDate: new Date("2025-05-01") as Date | null,
+    endDate: new Date("2025-05-29") as Date | null,
+  });
+  const [selectedYear, setSelectedYear] = useState<string>("");
+  const [allCapitalGainMode, setAllCapitalGainMode] = useState(false);
+  const screenSize = useScreenSize();
+
+  const handleDateRangeChange = (range: {
+    startDate: Date | null;
+    endDate: Date | null;
+  }) => {
+    setSelectedDateRange(range);
+    if (range.startDate && range.endDate) {
+      const start = range.startDate;
+      const end = range.endDate;
+      const isFullYear =
+        start.getMonth() === 0 &&
+        start.getDate() === 1 &&
+        end.getMonth() === 11 &&
+        end.getDate() === 31 &&
+        start.getFullYear() === end.getFullYear();
+      if (isFullYear) {
+        setSelectedYear(start.getFullYear().toString());
+      } else {
+        setSelectedYear("");
+      }
+    } else {
+      setSelectedYear("");
+    }
+  };
+
+  const renderYearDropdown = (extraClassName = "") => (
+    <Dropdown
+      options={[
+        { label: "2025", value: "2025" },
+        { label: "2024", value: "2024" },
+        { label: "2023", value: "2023" },
+        { label: "2022", value: "2022" },
+        { label: "2021", value: "2021" },
+        { label: "2020", value: "2020" },
+      ]}
+      onSelect={handleYearSelect}
+      searchable={false}
+      inputClassName="!py-1 md:!py-2"
+      defaultValue="Select year"
+      selectedValue={selectedYear || "Select year"}
+      className={extraClassName}
+    />
+  );
+
+  const handleYearSelect = (value: string) => {
+    setSelectedYear(value);
+    const yearNumber = parseInt(value, 10);
+    if (!Number.isNaN(yearNumber)) {
+      const startOfYear = new Date(yearNumber, 0, 1);
+      const endOfYear = new Date(yearNumber, 11, 31);
+      setSelectedDateRange({
+        startDate: startOfYear,
+        endDate: endOfYear,
+      });
+    }
+  };
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background-light dark:bg-background-dark">
       <NavigationBar onLogout={onLogout} currentPage="tax-reports" />
-      
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center py-12">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-150 mb-4">
-            Tax Reports
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            No content available yet.
-          </p>
+
+      {/* Tax report Content */}
+      <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full pb-3 ">
+        <div className="sm:px-4 lg:px-6 lg:pt-0 md:pb-8 pt-8">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-center gap-3">
+              {/* Title */}
+              <h4
+                className={`text-lg md:text-h4 font-semibold text-gray-900
+                dark:text-default`}
+              >
+                Tax Reports
+              </h4>
+              {/* Year Dropdown for small screens */}
+              <div className="md:hidden ml-auto flex items-center">
+                <div className="w-auto">{renderYearDropdown("w-full")}</div>
+              </div>
+              {selectedYear && (
+                <div className="hidden md:block w-[140px] md:w-auto">
+                  {renderYearDropdown("w-full")}
+                </div>
+              )}
+            </div>
+
+            <div className="hidden md:flex items-center gap-3 md:gap-4">
+              {!selectedYear && <div className="w-[140px] md:w-auto">{renderYearDropdown("w-full")}</div>}
+              {/* Date Range Selector */}
+              <div className="max-w-[190px]">
+                <DateRangePickerPopover
+                  selectedDateRange={selectedDateRange}
+                  onDateRangeChange={handleDateRangeChange}
+                  showSelectedDate={screenSize.width >= 640}
+                  className="md:!py-2.5 md:!px-4 text-base"
+                />
+              </div>
+            </div>
+          </div>
         </div>
+        
+        {/* Financial maetics */}
+        <div className="mx-0 md:mx-6 sm:mx-2">
+          <FinancialMetrics
+            totalValue="$3,960.72"
+            totalValueChange="+5.73%"
+            unrealizedGain="–$7,052"
+            unrealizedGainChange="-2.38%"
+            allCapitalGainMode={allCapitalGainMode}
+            onAllCapitalGainModeChange={setAllCapitalGainMode}
+          />
+        </div>
+
+        {/* Portfolio Chart */}
+        <div className="mx-0 md:mx-6 sm:mx-2">
+          <TaxReportChart
+            chartColor="#90C853"
+            allCapitalGains={allCapitalGainMode}
+          />
+        </div>
+
+        <div className="mx-0 md:mx-6 sm:mx-2">
+          <TaxReportSummary allCapitalGains={allCapitalGainMode} />
+        </div>        
       </div>
     </div>
   );

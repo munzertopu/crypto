@@ -14,7 +14,7 @@ const WalletPage: React.FC<WalletPageProps> = ({ onLogout }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0E201E]">
+    <div className="min-h-screen bg-background-light dark:bg-background-dark">
       <NavigationBar onLogout={onLogout} currentPage="wallets" />
 
       <div className="px-4 md:px-10">

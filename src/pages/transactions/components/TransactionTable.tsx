@@ -171,8 +171,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   const renderExpandedDetails = (transaction: Transaction) => (
     <tr
       key={`${transaction.id}-details`}
-      className={`bg-white
-      dark:bg-[#0E201E]`}
+      className={`bg-background-light dark:bg-background-dark`}
     >
       <td colSpan={TABLE_HEAD.length} className="px-4">
         <TransactionDetail />
@@ -650,7 +649,7 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
         onClose={() => setSelectedRow(null)}
         header={`Transaction details`}
         height="93vh"
-        headerClassName="bg-background dark:bg-[#232726]"
+        headerClassName="bg-background-light dark:bg-background-dark"
         childrenClassName="pt-0 pb-4"
         noPadding
         noChildPadding
@@ -698,8 +697,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
           </>
         }
       >
-        <div className="flex flex-col justify-start items-center w-full gap-6 dark:bg-[#0E201E] ">
-          <div className="flex flex-col justify-start items-center w-full gap-2 bg-background dark:bg-[#232726] pb-4">
+        <div className="flex flex-col justify-start items-center w-full gap-6 dark:bg-background-dark">
+          <div className="flex flex-col justify-start items-center w-full gap-2 bg-background-light dark:bg-background-dark pb-4">
             {" "}
             <Avatar
               src={selectedRow?.wallet.logo}

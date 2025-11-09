@@ -14,7 +14,7 @@ const MarketTab: React.FC<MarketTabProps> = ({
   const timeRanges = ['1D', '1W', '1M', '3M', '1Y', 'All time'];
 
   return (
-    <div className="mb-6 md:mb-0 bg-white dark:bg-[#0E201E]">
+    <div className="mb-6 md:mb-0 bg-background-light dark:bg-background-dark">
       {/* Header and Time Range - Stacked on mobile, side by side on desktop */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4 gap-4">
         <h2 className="text-h6 font-semibold text-left text-[#0E201E] dark:text-[#E1E3E5]">Market Performance</h2>
@@ -29,7 +29,7 @@ const MarketTab: React.FC<MarketTabProps> = ({
                   onClick={() => onTimeRangeChange?.(timeRange)}
                   className={`py-1.5 px-2.5 rounded-lg text-sm ${
                     activeTimeRange === timeRange
-                      ? 'bg-white dark:bg-[#0E201E] text-black dark:text-white'
+                      ? 'bg-background-light dark:bg-background-dark text-black dark:text-white'
                       :'text-[#0E201E] dark:text-[#FFFFFF]'
                   }`}
                 >

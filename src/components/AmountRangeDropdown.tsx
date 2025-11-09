@@ -54,8 +54,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
       {isOpen && (
         <div
           className={`absolute top-full left-0 mt-1 md:-mt-3 p-4 rounded-lg 
-            border shadow-sm z-50 w-80 bg-white border-gray-150
-            dark:bg-[#0E201E]`}
+            border shadow-sm z-50 w-80 border-gray-150
+            bg-background-light dark:bg-background-dark `}
         >
           <div className="flex gap-4">
             {/* From Input */}
@@ -81,8 +81,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                   onClick={() =>
                     setShowFromCurrencyDropdown(!showFromCurrencyDropdown)
                   }
-                  className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 bg-white focus:outline-none
-                    dark:bg-[#0E201E] dark:border-[#4D5050]`}
+                  className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 focus:outline-none
+                    bg-background-light dark:bg-background-dark dark:border-[#4D5050]`}
                 >
                   <div className="flex items-center gap-1">
                     <span className="text-xs font-medium">{fromCurrency}</span>
@@ -93,8 +93,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                 {/* Currency Dropdown */}
                 {showFromCurrencyDropdown && (
                   <div
-                    className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-default
-                      dark:bg-[#0E201E]`}
+                    className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 border-default
+                      bg-background-light dark:bg-background-dark `}
                   >
                     <div className="py-1">
                       {["USD", "EUR", "USDT"].map((currency) => (
@@ -107,7 +107,7 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                           className={`w-full px-3 py-1 text-left text-xs ${
                             fromCurrency === currency
                               ? "bg-gray-100 dark:text-[#A1A3A5]"
-                              : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                              : "dark:bg-background-dark dark:text-[#A1A3A5]"
                           }`}
                         >
                           {currency}
@@ -142,8 +142,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                   onClick={() =>
                     setShowToCurrencyDropdown(!showToCurrencyDropdown)
                   }
-                  className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600 bg-white
-                    dark:bg-[#0E201E] dark:border-[#4D5050]`}
+                  className={`absolute right-0 top-0 h-full px-2 rounded-l-none rounded-r-lg border-r border-t border-b border-default text-gray-600
+                    bg-background-light dark:bg-background-dark  dark:border-[#4D5050]`}
                 >
                   <div className="flex items-center gap-1">
                     <span className="text-xs font-medium">{toCurrency}</span>
@@ -154,8 +154,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                 {/* Currency Dropdown */}
                 {showToCurrencyDropdown && (
                   <div
-                    className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 bg-white border-default
-                      dark:bg-[#0E201E] dark:border-[#4D5050]`}
+                    className={`absolute top-full right-0 mt-1 rounded-lg border shadow-lg z-20 border-default
+                      bg-background-light dark:bg-background-dark  dark:border-[#4D5050]`}
                   >
                     <div className="py-1">
                       {["USD", "EUR", "USDT"].map((currency) => (
@@ -167,8 +167,8 @@ const AmountRangeDropdown: React.FC<AmountRangeDropdownProps> = ({
                           }}
                           className={`w-full px-3 py-1 text-left text-xs ${
                             toCurrency === currency
-                              ? "bg-blue-50 text-blue-600 dark:bg-[#0E201E] dark:text-[#A1A3A5]"
-                              : "dark:bg-[#0E201E] dark:text-[#A1A3A5]"
+                              ? "bg-blue-50 text-blue-600 dark:bg-background-dark  dark:text-[#A1A3A5]"
+                              : "bg-background-light dark:bg-background-dark  dark:text-[#A1A3A5]"
                           }`}
                         >
                           {currency}

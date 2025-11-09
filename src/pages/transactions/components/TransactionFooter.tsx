@@ -146,7 +146,7 @@ const TransactionFooter: React.FC<TransactionFooterProps> = ({
         {selectedTransactions.length > 0 && (
           <div
             className={`w-full sm:w-[auto] flex flex-col gap-2 sm:gap-0 sm:flex-row items-center sm:space-x-3 p-3 sm:p-0 sm:px-6 sm:py-3 rounded-xl border shadow-sm
-              bg-white dark:bg-gray-900 border-default dark:border-gray-700`}
+              bg-background-light dark:bg-background-dark border-default dark:border-gray-700`}
           >
             <div className="w-full sm:w-[auto] flex items-center justify-around gap-3 sm:gap-0 sm:space-x-3">
               <span

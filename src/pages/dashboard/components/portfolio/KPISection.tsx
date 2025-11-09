@@ -341,7 +341,7 @@ const KPISection: React.FC<KPISectionProps> = ({
           {/* Dropdown Menu */}
           {isDropdownOpen && (
             <div
-              className="absolute right-6 mt-2 w-[230px] border rounded-[12px] shadow-sm z-50 bg-white dark:bg-[#0E201E] border-default dark:border-[#4D5050] z-50"
+              className="absolute right-6 mt-2 w-[230px] border rounded-[12px] shadow-sm z-50 bg-background-light dark:bg-background-dark border-default dark:border-[#4D5050] z-50"
               role="menu"
               aria-label="KPI selection menu"
             >

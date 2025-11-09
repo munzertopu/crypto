@@ -138,8 +138,9 @@ const TaxLossHarvestingRangeDropdown: React.FC<
         {/* Desktop Dropdown Content */}
         {isOpen && (
           <div
-            className={`absolute top-full mt-1 p-4 rounded-lg border shadow-lg w-80 bg-white border-gray-150
-            dark:bg-gray-900 dark:border-gray-600
+            className={`absolute top-full mt-1 p-4 rounded-lg border shadow-lg w-80 border-gray-150
+            bg-background-light dark:bg-background-dark 
+            dark:border-gray-600
             ${isRight ? "right-0" : "left-0"} 
             `}
           >
@@ -157,8 +158,9 @@ const TaxLossHarvestingRangeDropdown: React.FC<
                   placeholder="$ Amount"
                   value={fromValue}
                   onChange={(e) => setFromValue(e.target.value)}
-                  className={`w-full rounded-lg text-sm font-semibold border-gray-150 bg-white !text-gray-900
-                   dark:border-gray-500 dark:bg-gray-900 dark:!text-gray-400
+                  className={`w-full rounded-lg text-sm font-semibold border-gray-150 !text-gray-900
+                    bg-background-light dark:bg-background-dark
+                   dark:border-gray-500 dark:!text-gray-400
                    [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                 />
               </div>
@@ -176,8 +178,9 @@ const TaxLossHarvestingRangeDropdown: React.FC<
                   placeholder="$ Amount"
                   value={toValue}
                   onChange={(e) => setToValue(e.target.value)}
-                  className={`w-full rounded-lg text-sm font-semibold border-gray-150 bg-white !text-gray-900
-                   dark:border-gray-500 dark:bg-gray-900 dark:!text-gray-400
+                  className={`w-full rounded-lg text-sm font-semibold border-gray-150 !text-gray-900
+                    bg-background-light dark:bg-background-dark
+                   dark:border-gray-500 dark:!text-gray-400
                    [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`}
                 />
               </div>

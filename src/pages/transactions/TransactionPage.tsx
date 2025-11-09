@@ -84,7 +84,7 @@ const TransactionPage: React.FC<TransactionPageProps> = ({ onLogout }) => {
   };
 
   return (
-    <div className="min-h-screen bg-background dark:bg-[#0E201E]">
+    <div className="min-h-screen bg-background-light dark:bg-background-dark">
       <NavigationBar onLogout={handleLogout} currentPage="transactions" />
 
       <div className="px-4 md:px-10 sm:px-6 md:pt-5 w-full">

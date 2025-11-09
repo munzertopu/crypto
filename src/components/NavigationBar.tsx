@@ -80,8 +80,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   }, [isProfileDropdownOpen]);
   return (
     <nav
-      className={`px-4 md:px-10 py-3 md:py-4 py-3 md:py-4 bg-white border-b 
-        dark:bg-[#0E201E] dark:border-[#2F3232] border-gray-150`}
+      className={`px-4 md:px-10 py-3 md:py-4 py-3 md:py-4 border-b 
+        bg-background-light dark:bg-background-dark dark:border-[#2F3232] border-gray-150`}
     >
       <div className="flex items-center justify-between">
         {/* Logo */}
@@ -237,15 +237,15 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               <div
                 ref={profileMenuRef}
                 className="absolute top-[48px] right-[-48px] sm:right-0 w-[220px] rounded-lg shadow-lg py-2 z-50 
-                border bg-white dark:bg-[#0E201E] border-[#E1E3E5] 
+                border bg-background-light dark:bg-background-dark border-[#E1E3E5] 
                 dark:border-[#4D5050]"
                 role="menu"
                 aria-label="Profile menu"
               >
                 <div className="flex flex-col justify-center items-start gap-2 w-full">
                   <div
-                    className="w-full px-4 pb-0.5 opacity-70 bg-white 
-                    dark:bg-[#0E201E]"
+                    className="w-full px-4 pb-0.5 opacity-70
+                    bg-background-light dark:bg-background-dark"
                   >
                     <h3
                       className="text-sm font-medium text-gray-900 text-left
@@ -397,7 +397,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden w-11 h-11 dark:bg-[#0E201E]  flex flex-row justify-center items-center gap-1 p-3 rounded-xl shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border border-[#E1E3E5] dark:border-gray-700 text-[#7C7C7C] rounded-lg hover:bg-gray-50 transition-colors focus:border-green-400 dark:focus:border-green-400"
+            className="lg:hidden w-11 h-11 dark:bg-background-dark  flex flex-row justify-center items-center gap-1 p-3 rounded-xl shadow-[0 1px 2px 0 rgba(20, 21, 26, 0.05)] border border-[#E1E3E5] dark:border-gray-700 text-[#7C7C7C] rounded-lg hover:bg-gray-50 transition-colors focus:border-green-400 dark:focus:border-green-400"
             aria-label="Open mobile menu"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -411,7 +411,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
       {isMobileMenuOpen && (
         <div
           ref={mobileMenuRef}
-          className="absolute top-[64px] right-4 w-[240px] bg-white shadow-lg rounded-[12px] border border-gray-150 py-3 z-[60] flex flex-col justify-center items-start  dark:bg-[#0E201E] dark:border-[#2F3232]"
+          className="absolute top-[64px] right-4 w-[240px] shadow-lg rounded-[12px] border border-gray-150 py-3 z-[60] flex flex-col justify-center items-start 
+          bg-background-light dark:bg-background-dark dark:border-[#2F3232]"
         >
           <div className="w-full flex flex-col justify-start items-start gap-2 px-4 ">
             {navigationItems.map((item) => (

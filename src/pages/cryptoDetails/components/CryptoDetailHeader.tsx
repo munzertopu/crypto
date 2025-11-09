@@ -19,7 +19,7 @@ const CryptoDetailHeader: React.FC<CryptoDetailHeaderProps> = ({
 }) => {
   const tabs = ["market", "portfolio"];
   return (
-    <div className="mb-6 bg-white dark:bg-[#0E201E]">
+    <div className="mb-6 bg-background-light dark:bg-background-dark">
       <div className="flex items-center mb-4">
         <img
           src={cryptoLogo}

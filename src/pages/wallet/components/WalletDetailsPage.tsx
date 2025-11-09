@@ -182,7 +182,7 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white dark:bg-[#0E201E] border border-gray-200 dark:border-gray-700 rounded-lg p-3 shadow-lg">
+        <div className="bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-700 rounded-lg p-3 shadow-lg">
           <p className="text-sm font-medium text-gray-900 dark:text-white">
             {payload[0].name}
           </p>
@@ -196,7 +196,7 @@ const WalletDetailsPage: React.FC<WalletDetailsPageProps> = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0E201E] text-gray-900 dark:text-gray-250">
+    <div className="min-h-screen bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-250">
       <NavigationBar
         userName="Kristin Watson"
         onLogout={() => navigate("/login")}
