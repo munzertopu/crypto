@@ -1,6 +1,8 @@
 import React from "react";
 import InfoCircleIcon from "../../../components/Icons/InfoCircleIcon";
 import Dropdown from "../../../components/UI/Dropdown";
+ import SuccessNotification from "../../../components/SuccessNotification";
+ import { useState } from "react";
 
 interface SummaryItem {
   label: string;
@@ -60,7 +62,23 @@ const settingsItems: SettingsItem[] = [
   { label: "Cost tracking method", value: "Wallet based" },
 ];
 
-const TaxReportSummary: React.FC = () => {
+ const TaxReportSummary: React.FC = () => {
+  const [isDownloadNotificationVisible, setIsDownloadNotificationVisible] =
+    useState(false);
+
+  const handleDownloadReport = () => {
+    setIsDownloadNotificationVisible(true);
+  };
+
+  const handleCloseNotification = () => {
+    setIsDownloadNotificationVisible(false);
+  };
+
+  const handleViewReport = () => {
+    console.log("View downloaded tax report");
+    setIsDownloadNotificationVisible(false);
+  };
+
   return (
     <section className="mt-6 grid gap-6 lg:grid-cols-[2fr_1fr]">
       {/* Summary card */}
@@ -206,7 +224,8 @@ const TaxReportSummary: React.FC = () => {
               </div>
               <button
                 type="button"
-                className="w-full rounded-lg bg-green-500 py-2 text-base font-semibold text-gray-900 transition"
+                 className="w-full rounded-lg bg-green-500 py-2 text-base font-semibold text-gray-900 transition"
+                 onClick={handleDownloadReport}
               >
                 Download report
               </button>
@@ -214,6 +233,14 @@ const TaxReportSummary: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <SuccessNotification
+        message="The tax report has been downloaded"
+        actionLabel="View now"
+        onAction={handleViewReport}
+        isVisible={isDownloadNotificationVisible}
+        onClose={handleCloseNotification}
+      />
     </section>
   );
 };
