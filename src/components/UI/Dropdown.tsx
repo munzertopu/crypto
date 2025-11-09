@@ -25,6 +25,7 @@ interface DropdownProps {
   showTickMark?: boolean;
   selectedValue?: string;
   showLogo?: boolean;
+  menuPosition?: "top" | "bottom";
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -40,6 +41,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   showTickMark = false,
   selectedValue,
   showLogo = false,
+  menuPosition = "bottom",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -97,6 +99,11 @@ const Dropdown: React.FC<DropdownProps> = ({
     };
   }, []);
 
+  const menuPositionClasses =
+    menuPosition === "top"
+      ? "bottom-full mb-1"
+      : "top-full mt-1";
+
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
@@ -122,7 +129,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         {isOpen ? <ArrowDownIcon height={16} width={16} /> : <ArrowUpIcon height={16} width={16} />}
       </button>
       {isOpen && (
-        <div className={`absolute top-full left-0 mt-1 w-full rounded-lg shadow-sm z-50 min-w-[max-content] md:min-w-25 
+        <div className={`absolute left-0 ${menuPositionClasses} w-full rounded-lg shadow-sm z-50 min-w-[max-content] md:min-w-25 
           border border-default dark:border-gray-700 bg-background-light dark:bg-background-dark dark:text-white ${menuClassName}`}>
           {searchable && (
             <div className="px-3 border-b border-gray-150 dark:border-gray-700">
