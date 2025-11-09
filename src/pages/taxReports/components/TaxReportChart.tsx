@@ -36,7 +36,8 @@ const tooltipLabels: Record<string, string> = {
 };
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
-  minimumFractionDigits: 0,
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
 });
 
 const TaxReportChart: React.FC<TaxReportChartProps> = ({
@@ -58,6 +59,58 @@ const TaxReportChart: React.FC<TaxReportChartProps> = ({
         (entry) => entry.value !== undefined && entry.value !== null
       );
 
+      if (allCapitalGains) {
+        const tooltipSeries = [
+          {
+            key: "value2",
+            label: "Short term",
+            color: "#5314A3",
+          },
+          {
+            key: "value",
+            label: "Long term",
+            color: chartColor,
+          },
+        ];
+
+        return (
+          <div className="flex flex-col items-start justify-start gap-2 rounded-lg border border-gray-150 bg-white px-4 py-3 shadow-lg dark:border-none dark:bg-gray-800">
+            {label && (
+              <span className="text-xs font-medium text-gray-500 dark:text-gray-300">
+                {label}
+              </span>
+            )}
+            {tooltipSeries.map(({ key, label: seriesLabel, color }) => {
+              const seriesEntry = filteredPayload.find(
+                (entry) => (entry.name ?? "") === key
+              );
+              if (!seriesEntry) {
+                return null;
+              }
+
+              return (
+                <div
+                  key={key}
+                  className="flex items-center gap-2 text-xs font-medium"
+                >
+                  <span
+                    className="inline-flex h-2.5 w-2.5 rounded-full"
+                    style={{ backgroundColor: color }}
+                  />
+                  <span className="text-gray-600 dark:text-gray-300">
+                    {seriesLabel}:
+                  </span>
+                  <span
+                    className="text-sm font-semibold"
+                    style={{ color }}
+                  >{`$${currencyFormatter.format(seriesEntry.value)}`}</span>
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+
       return (
         <div className="flex flex-col items-start justify-start gap-1 rounded-lg border border-gray-150 bg-white py-2 px-4 shadow-lg dark:border-none dark:bg-gray-800">
           {label && (
@@ -73,7 +126,9 @@ const TaxReportChart: React.FC<TaxReportChartProps> = ({
                 key={key}
                 className="text-sm font-semibold text-gray-900 dark:text-gray-200"
               >
-                {`$${currencyFormatter.format(entry.value)}`}
+                {`${allCapitalGains ? `${labelText}: ` : ""}$${currencyFormatter.format(
+                  entry.value
+                )}`}
               </span>
             );
           })}
