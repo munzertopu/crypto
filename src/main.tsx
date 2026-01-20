@@ -1,11 +1,7 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
 import './index.css'
-import 'apexcharts/dist/apexcharts.css'
+import Application from './Application'
 import App from './App.tsx'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+// Bootstrap the application following reference project pattern
+const app = new Application('root')
+app.Run(App)

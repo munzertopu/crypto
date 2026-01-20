@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import AuthLayout from "../components/layouts/AuthLayout";
+import { AuthenticationService } from "../services/AuthenticationService";
+import { CommandService } from "../services/Commands";
+import { Models } from "../services/models";
 
 interface LoginPageProps {
+  authenticationService: AuthenticationService;
+  commandService: CommandService;
+  redirectUrl: string | null;
+  accessIds: string[] | null;
+  token: string | null;
   onSignUpClick?: () => void;
   onForgotPasswordClick?: () => void;
-  onLoginSuccess?: () => void;
 }
 
 interface FormErrors {
@@ -13,13 +20,18 @@ interface FormErrors {
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({
+  authenticationService,
+  commandService,
+  redirectUrl,
+  accessIds,
+  token,
   onSignUpClick,
   onForgotPasswordClick,
-  onLoginSuccess,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginModel, setLoginModel] = useState<Models.Authentication.Login>(() => {
+    return new Models.Authentication.Login();
+  });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -38,17 +50,15 @@ const LoginPage: React.FC<LoginPageProps> = ({
     const newErrors: FormErrors = {};
 
     // Email validation
-    if (!email.trim()) {
+    if (!loginModel.EmailAddress?.trim()) {
       newErrors.email = "*Email field cannot be blank";
-    } else if (!validateEmail(email)) {
+    } else if (!validateEmail(loginModel.EmailAddress)) {
       newErrors.email = "*Please enter a valid email address";
     }
 
     // Password validation
-    if (!password.trim()) {
+    if (!loginModel.Password?.trim()) {
       newErrors.password = "*Password field cannot be blank";
-    } else if (password !== "123456") {
-      newErrors.password = "Wrong password. Try again or reset password";
     }
 
     setErrors(newErrors);
@@ -62,7 +72,22 @@ const LoginPage: React.FC<LoginPageProps> = ({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleInputChange = (propertyKey: string, value: any) => {
+    setLoginModel((prev) => {
+      const updated = { ...prev };
+      (updated as any)[propertyKey] = value;
+      return updated;
+    });
+    
+    // Clear error for the field being changed
+    if (propertyKey === "EmailAddress") {
+      clearFieldError("email");
+    } else if (propertyKey === "Password") {
+      clearFieldError("password");
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Validate form before submission
@@ -71,15 +96,31 @@ const LoginPage: React.FC<LoginPageProps> = ({
     }
 
     setIsSubmitting(true);
-    console.log("Login attempt:", { email, password });
+    
+    try {
+      loginModel.AccessIds = accessIds;
+      loginModel.InviteToken = token;
+      
+      const response = await authenticationService.Authenticate(loginModel);
 
-    // Simulate login success - in real app, this would validate credentials
-    setTimeout(() => {
-      setIsSubmitting(false);
-      if (onLoginSuccess) {
-        onLoginSuccess();
+      if (response?.Jwt) {
+        commandService.LoggedIn(response.Jwt, redirectUrl);
+      } else {
+        // Handle case where multiple users found or other response
+        setIsSubmitting(false);
+        if (response.FoundUsers && response.FoundUsers.length > 0) {
+          // TODO: Handle multiple users scenario if needed
+          commandService.Error("Multiple users found. Please contact support.");
+        } else {
+          commandService.Error("Invalid credentials. Please try again.");
+        }
       }
-    }, 1000);
+    } catch (error: any) {
+      setIsSubmitting(false);
+      const errorMessage = error?.message || error?.toString() || "An error occurred during login";
+      commandService.Error(errorMessage);
+      setErrors({ password: errorMessage });
+    }
   };
 
   return (
@@ -110,10 +151,9 @@ const LoginPage: React.FC<LoginPageProps> = ({
           <input
             id="email"
             type="email"
-            value={email}
+            value={loginModel.EmailAddress || ""}
             onChange={(e) => {
-              setEmail(e.target.value);
-              clearFieldError("email");
+              handleInputChange("EmailAddress", e.target.value);
             }}
             className={ `text-gray-900 dark:text-gray-100 block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none placeholder:text-base dark:bg-transparent ${
               errors.email
@@ -155,10 +195,9 @@ const LoginPage: React.FC<LoginPageProps> = ({
             <input
               id="password"
               type={showPassword ? "text" : "password"}
-              value={password}
+              value={loginModel.Password || ""}
               onChange={(e) => {
-                setPassword(e.target.value);
-                clearFieldError("password");
+                handleInputChange("Password", e.target.value);
               }}
               className={`text-gray-900 dark:text-gray-100 block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none placeholder:text-base dark:bg-transparent ${
                 errors.password
