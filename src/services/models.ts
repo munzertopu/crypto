@@ -1,6 +1,7 @@
 // Authentication models based on reference project architecture
 
 export class ResponseBase {
+    public ResponseType?: number | null = null;
     public Success: boolean = false;
     public Message: string | null = null;
 }
