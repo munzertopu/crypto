@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import AuthLayout from "../components/layouts/AuthLayout";
 import { AuthenticationService } from "../services/AuthenticationService";
@@ -29,9 +30,11 @@ const LoginPage: React.FC<LoginPageProps> = ({
   onForgotPasswordClick,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [loginModel, setLoginModel] = useState<Models.Authentication.Login>(() => {
-    return new Models.Authentication.Login();
-  });
+  const [loginModel, setLoginModel] = useState<Models.Authentication.Login>(
+    () => {
+      return new Models.Authentication.Login();
+    },
+  );
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -78,7 +81,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
       (updated as any)[propertyKey] = value;
       return updated;
     });
-    
+
     // Clear error for the field being changed
     if (propertyKey === "EmailAddress") {
       clearFieldError("email");
@@ -96,11 +99,11 @@ const LoginPage: React.FC<LoginPageProps> = ({
     }
 
     setIsSubmitting(true);
-    
+
     try {
       loginModel.AccessIds = accessIds;
       loginModel.InviteToken = token;
-      
+
       const response = await authenticationService.Authenticate(loginModel);
 
       if (response?.Jwt) {
@@ -117,7 +120,8 @@ const LoginPage: React.FC<LoginPageProps> = ({
       }
     } catch (error: any) {
       setIsSubmitting(false);
-      const errorMessage = error?.message || error?.toString() || "An error occurred during login";
+      const errorMessage =
+        error?.message || error?.toString() || "An error occurred during login";
       commandService.Error(errorMessage);
       setErrors({ password: errorMessage });
     }
@@ -132,7 +136,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
         >
           Login
         </h1>
-        <p className="text-base text-base sm:text-lg text-gray-900 text-left dark:text-gray-250">
+        <p className="text-base  sm:text-lg text-gray-900 text-left dark:text-gray-250">
           Access your crypto tax tools securely.
         </p>
       </div>
@@ -155,7 +159,7 @@ const LoginPage: React.FC<LoginPageProps> = ({
             onChange={(e) => {
               handleInputChange("EmailAddress", e.target.value);
             }}
-            className={ `text-gray-900 dark:text-gray-100 block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none placeholder:text-base dark:bg-transparent ${
+            className={`text-gray-900 dark:text-gray-100 block w-full my-1 py-2 px-4 border rounded-xl focus:outline-none placeholder:text-base dark:bg-transparent ${
               errors.email
                 ? "border-red-500 focus:border-red-500"
                 : "border-gray-700 focus:border-green-500"

@@ -1,4 +1,3 @@
-// Authentication service based on reference project architecture
 import { BaseService, type OnJwtChange } from './BaseService';
 import { Models, SuccessfulResponse } from './models';
 
@@ -28,16 +27,12 @@ export class AuthenticationService extends BaseService {
         model: Models.Authentication.ChangePassword
     ): Promise<SuccessfulResponse> {
         const response = await this.Post(`${this.baseUrl}/Authentication/ChangePassword`, model);
-
-        // Check if response indicates success (either ResponseType = 1 or Success = true)
         if (response && (response.ResponseType === 1 || response.Success === true)) {
             const successResponse = new SuccessfulResponse();
             successResponse.Success = true;
             successResponse.Message = response.Message ?? null;
             return successResponse;
         }
-
-        // Check for exception/error response
         this.HandleExceptionResponse(response);
         throw new Error("Response is not as expected");
     }

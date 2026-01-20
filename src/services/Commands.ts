@@ -1,4 +1,3 @@
-// Command pattern for authentication actions based on reference project architecture
 export type OnCommandExecuted = (command: BaseCommand) => void;
 
 export class CommandService {
@@ -48,7 +47,7 @@ export class CommandService {
 }
 
 export abstract class BaseCommand {
-    constructor() {}
+    constructor() { }
 }
 
 export class LoggedInCommand extends BaseCommand {

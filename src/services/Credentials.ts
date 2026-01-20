@@ -1,4 +1,3 @@
-// Credentials management based on reference project architecture
 export class Credentials {
     private _nameFull: string | null = null;
     private _userId: number | null = null;

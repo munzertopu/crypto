@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { Card, CardBody, Tabs, Typography } from "@material-tailwind/react";
 import NavigationBar from "../../components/NavigationBar";
@@ -164,7 +166,11 @@ interface SettingsTab {
   props?: any;
 }
 
-const SettingsPage: React.FC<SettingsPageProps> = ({ onLogout, authenticationService, commandService }) => {
+const SettingsPage: React.FC<SettingsPageProps> = ({
+  onLogout,
+  authenticationService,
+  commandService,
+}) => {
   const [activeTab, setActiveTab] = useState("portfolio");
 
   const settingsTabs: SettingsTab[] = [

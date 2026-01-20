@@ -1,4 +1,4 @@
-// Base service class for HTTP requests with JWT handling
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ResponseBase } from "./models";
 
 export type OnJwtChange = (newJwt: string | null) => void;
@@ -85,8 +85,6 @@ export class BaseService {
     try {
       const response = await fetch(endpoint, options);
 
-      // Check for 401 Unauthorized BEFORE trying to parse JSON
-      // This means the token is invalid and we should clear it
       if (response.status === 401 && this.jwt) {
         this.jwtChanged(null);
         throw new ServiceError("Unauthorized - token expired or invalid");
@@ -103,7 +101,6 @@ export class BaseService {
 
       return data;
     } catch (error) {
-      // Don't clear JWT on network errors - only on 401
       if (error instanceof ServiceError) {
         throw error;
       }
