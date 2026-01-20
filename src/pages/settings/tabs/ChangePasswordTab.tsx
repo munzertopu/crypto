@@ -94,12 +94,12 @@ const ChangePasswordTab: React.FC<ChangePasswordTabProps> = ({
       return;
     }
 
-    // if (currentPassword === newPassword) {
-    //     setErrorMessage("New password must be different from current password");
-    //     setShowError(true);
-    //     setShowSuccess(false);
-    //     return;
-    // }
+    if (currentPassword === newPassword) {
+      setErrorMessage("New password must be different from current password");
+      setShowError(true);
+      setShowSuccess(false);
+      return;
+    }
 
     setIsSaving(true);
     setErrorMessage(null);
