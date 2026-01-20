@@ -8,9 +8,14 @@ import CostBasisTab from "./tabs/CostBasisTab";
 import RulesTab from "./tabs/RulesTab";
 import CustomPriceTab from "./tabs/CustomPriceTab";
 import PlansTab from "./tabs/PlansTab";
+import ChangePasswordTab from "./tabs/ChangePasswordTab";
+import { AuthenticationService } from "../../services/AuthenticationService";
+import { CommandService } from "../../services/Commands";
 
 interface SettingsPageProps {
   onLogout?: () => void;
+  authenticationService: AuthenticationService;
+  commandService: CommandService;
 }
 
 // SVG Icon Components
@@ -134,14 +139,32 @@ const PlansIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const ChangePasswordIcon = ({ className }: { className?: string }) => (
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+    />
+  </svg>
+);
+
 interface SettingsTab {
   id: string;
   name: string;
   icon: React.ComponentType<{ className?: string }>;
-  component: React.ComponentType<{}>;
+  component: React.ComponentType<any>;
+  props?: any;
 }
 
-const SettingsPage: React.FC<SettingsPageProps> = ({ onLogout }) => {
+const SettingsPage: React.FC<SettingsPageProps> = ({ onLogout, authenticationService, commandService }) => {
   const [activeTab, setActiveTab] = useState("portfolio");
 
   const settingsTabs: SettingsTab[] = [
@@ -172,6 +195,13 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onLogout }) => {
       component: CustomPriceTab,
     },
     { id: "plans", name: "Plans", icon: PlansIcon, component: PlansTab },
+    {
+      id: "changePassword",
+      name: "Change Password",
+      icon: ChangePasswordIcon,
+      component: ChangePasswordTab,
+      props: { authenticationService, commandService },
+    },
   ];
 
   const handleLogout = () => {
@@ -184,7 +214,8 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onLogout }) => {
     const activeTabData = settingsTabs.find((tab) => tab.id === activeTab);
     if (activeTabData) {
       const TabComponent = activeTabData.component;
-      return <TabComponent />;
+      const props = (activeTabData as any).props || {};
+      return <TabComponent {...props} />;
     }
     return null;
   };

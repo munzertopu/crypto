@@ -211,7 +211,11 @@ const App: React.FC<AppProps> = ({ app }) => {
           path="/settings"
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <SettingsPage onLogout={handleLogout} />
+              <SettingsPage
+                onLogout={handleLogout}
+                authenticationService={app.AuthenticationService}
+                commandService={app.CommandService}
+              />
             </ProtectedRoute>
           }
         />
