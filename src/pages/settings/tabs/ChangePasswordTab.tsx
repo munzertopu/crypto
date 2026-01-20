@@ -11,8 +11,6 @@ import {
 import { AuthenticationService } from "../../../services/AuthenticationService";
 import { CommandService } from "../../../services/Commands";
 import { Models } from "../../../services/models";
-import SuccessNotification from "../../../components/SuccessNotification";
-import ErrorNotification from "../../../components/ErrorNotification";
 
 interface ChangePasswordTabProps {
   authenticationService: AuthenticationService;
@@ -28,10 +26,6 @@ const ChangePasswordTab: React.FC<ChangePasswordTabProps> = ({
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [showError, setShowError] = useState(false);
 
   // Password validation states
   const [passwordValidation, setPasswordValidation] = useState({
@@ -74,38 +68,26 @@ const ChangePasswordTab: React.FC<ChangePasswordTabProps> = ({
 
     // Validation
     if (!currentPassword.trim()) {
-      setErrorMessage("Current password is required");
-      setShowError(true);
-      setShowSuccess(false);
+      commandService.Error("Current password is required");
       return;
     }
 
     if (!newPassword.trim()) {
-      setErrorMessage("New password is required");
-      setShowError(true);
-      setShowSuccess(false);
+      commandService.Error("New password is required");
       return;
     }
 
     if (!isPasswordValid) {
-      setErrorMessage("New password does not meet all requirements");
-      setShowError(true);
-      setShowSuccess(false);
+      commandService.Error("New password does not meet all requirements");
       return;
     }
 
     if (currentPassword === newPassword) {
-      setErrorMessage("New password must be different from current password");
-      setShowError(true);
-      setShowSuccess(false);
+      commandService.Error("New password must be different from current password");
       return;
     }
 
     setIsSaving(true);
-    setErrorMessage(null);
-    setSuccessMessage(null);
-    setShowError(false);
-    setShowSuccess(false);
 
     try {
       const changePasswordModel = new Models.Authentication.ChangePassword();
@@ -114,25 +96,18 @@ const ChangePasswordTab: React.FC<ChangePasswordTabProps> = ({
 
       await authenticationService.ChangePassword(changePasswordModel);
 
-      setSuccessMessage("Password changed successfully!");
-      setShowSuccess(true);
-      setShowError(false);
-
       // Clear form after successful change
-      setTimeout(() => {
-        setCurrentPassword("");
-        setNewPassword("");
-        setSuccessMessage(null);
-        setShowSuccess(false);
-      }, 3000);
+      setCurrentPassword("");
+      setNewPassword("");
+
+      commandService.ShowMessage("Password changed successfully!", () => {
+        // Form already cleared above
+      });
     } catch (error: any) {
       const errorMsg =
         error?.message ||
         error?.toString() ||
         "Failed to change password. Please try again.";
-      setErrorMessage(errorMsg);
-      setShowError(true);
-      setShowSuccess(false);
       commandService.Error(errorMsg);
     } finally {
       setIsSaving(false);
@@ -141,32 +116,6 @@ const ChangePasswordTab: React.FC<ChangePasswordTabProps> = ({
 
   return (
     <div className="md:space-y-8 mt-5 md:mt-0">
-      {showSuccess && successMessage && (
-        <div className="mb-4">
-          <SuccessNotification
-            message={successMessage}
-            isVisible={showSuccess}
-            onClose={() => {
-              setShowSuccess(false);
-              setSuccessMessage(null);
-            }}
-          />
-        </div>
-      )}
-
-      {showError && errorMessage && (
-        <div className="mb-4">
-          <ErrorNotification
-            message={errorMessage}
-            isVisible={showError}
-            onClose={() => {
-              setShowError(false);
-              setErrorMessage(null);
-            }}
-          />
-        </div>
-      )}
-
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -188,7 +137,6 @@ const ChangePasswordTab: React.FC<ChangePasswordTabProps> = ({
                 value={currentPassword}
                 onChange={(e) => {
                   setCurrentPassword(e.target.value);
-                  setErrorMessage(null);
                 }}
                 className={`text-base bg-transparent py-3 border-default dark:border-gray-700 dark:text-white pr-10`}
                 disabled={isSaving}
@@ -224,15 +172,13 @@ const ChangePasswordTab: React.FC<ChangePasswordTabProps> = ({
                 value={newPassword}
                 onChange={(e) => {
                   setNewPassword(e.target.value);
-                  setErrorMessage(null);
                 }}
-                className={`text-base bg-transparent py-3 border-default dark:border-gray-700 dark:text-white pr-10 ${
-                  newPassword && !isPasswordValid
-                    ? "border-red-500 focus:border-red-500"
-                    : newPassword && isPasswordValid
-                      ? "border-green-500 focus:border-green-500"
-                      : ""
-                }`}
+                className={`text-base bg-transparent py-3 border-default dark:border-gray-700 dark:text-white pr-10 ${newPassword && !isPasswordValid
+                  ? "border-red-500 focus:border-red-500"
+                  : newPassword && isPasswordValid
+                    ? "border-green-500 focus:border-green-500"
+                    : ""
+                  }`}
                 disabled={isSaving}
                 required
               />
@@ -334,11 +280,10 @@ const ChangePasswordTab: React.FC<ChangePasswordTabProps> = ({
         <button
           onClick={handleSave}
           disabled={isSaving || !isPasswordValid || !currentPassword.trim()}
-          className={`w-full md:w-auto text-base px-5 py-3 border-0 rounded-lg font-medium ${
-            isSaving || !isPasswordValid || !currentPassword.trim()
-              ? "opacity-50 cursor-not-allowed bg-gray-300 dark:bg-gray-600 text-gray-500"
-              : "bg-[#90C853] text-[#0E201E]"
-          }`}
+          className={`w-full md:w-auto text-base px-5 py-3 border-0 rounded-lg font-medium ${isSaving || !isPasswordValid || !currentPassword.trim()
+            ? "opacity-50 cursor-not-allowed bg-gray-300 dark:bg-gray-600 text-gray-500"
+            : "bg-[#90C853] text-[#0E201E]"
+            }`}
         >
           {isSaving ? (
             <span className="flex items-center justify-center">

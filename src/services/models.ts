@@ -14,6 +14,17 @@ export class SuccessfulResponse extends ResponseBase {
 }
 
 export namespace Models {
+  export enum ResponseType {
+    SuccessfulResponse = 1,
+    LoginResponse = 2,
+    Profile = 3,
+    InitialDataResponse = 4,
+    VerifiedResponse = 5,
+    PasswordResetResponse = 6,
+    BooleanResponse = 7,
+    Exception = 8,
+    CreatePasswordResetResponse = 9,
+  }
   export namespace Authentication {
     export class Login {
       public EmailAddress: string | null = null;
@@ -35,6 +46,6 @@ export namespace Models {
       public NewPassword: string | null = null;
     }
 
-    export class InitialDataResponse extends ResponseBase {}
+    export class InitialDataResponse extends ResponseBase { }
   }
 }

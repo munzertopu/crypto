@@ -199,18 +199,18 @@ const RouteManager = ({ app }: { app: Application }) => {
     };
 
     app.DisplayingModal = () => {
-        history.pushState(null, '', location.href);
+        history.pushState(null, '', location.pathname + location.search);
     };
 
     app.ClosedModal = () => {
         history.back();
-        history.pushState(null, '', location.href);
+        history.pushState(null, '', location.pathname + location.search);
     };
 
     useEffect(() => {
         const handlePopState = (event: PopStateEvent) => {
             if (app.ShouldPreventNavigation()) {
-                history.replaceState(null, '', location.href);
+                history.replaceState(null, '', location.pathname + location.search);
             }
         };
 

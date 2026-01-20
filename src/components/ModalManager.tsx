@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { ReactNode, useState, forwardRef, useImperativeHandle } from "react";
+import React, { type ReactNode, useState, forwardRef, useImperativeHandle } from "react";
 
 export interface ModalManagerMethods {
     ShowError: (message: string, closedDelegate: () => void) => void;
