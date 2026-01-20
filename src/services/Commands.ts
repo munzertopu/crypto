@@ -1,16 +1,28 @@
 export type OnCommandExecuted = (command: BaseCommand) => void;
+export type GetCommandExecutedUrl = (command: BaseCommand) => string;
 
 export class CommandService {
     private _onCommandExecuted: OnCommandExecuted | null;
+    private _getCommandExecutedUrl: GetCommandExecutedUrl | null;
 
-    constructor(onCommandExecuted: OnCommandExecuted | null) {
+    constructor(
+        onCommandExecuted: OnCommandExecuted | null,
+        getCommandExecutedUrl: GetCommandExecutedUrl | null = null
+    ) {
         this._onCommandExecuted = onCommandExecuted;
+        this._getCommandExecutedUrl = getCommandExecutedUrl;
     }
 
     private Executed(command: BaseCommand) {
         if (this._onCommandExecuted) {
             this._onCommandExecuted(command);
         }
+    }
+
+    private GetUrl(command: BaseCommand): string {
+        return this._getCommandExecutedUrl
+            ? this._getCommandExecutedUrl(command)
+            : "#";
     }
 
     public LoggedIn(jwt: string, redirectUrl?: string | null) {
