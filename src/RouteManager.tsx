@@ -44,8 +44,7 @@ const LoginWrapper: React.FC<{
             redirectUrl={redirectUrl ?? null}
             token={token ?? null}
             accessIds={accessIds}
-            onSignUpClick={() => commandService.LogIn("/register")}
-            onForgotPasswordClick={() => commandService.LogIn("/reset-password")}
+
         />
     );
 };
