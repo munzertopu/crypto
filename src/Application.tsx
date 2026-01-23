@@ -270,13 +270,12 @@ class Application {
             </BrowserRouter>,
         );
 
-        if (this.IsLoggedIn && this._jwt) {
+        if (this.IsLoggedIn) {
             try {
                 await this._authenticationService.InitialData();
-                if (this._jwt) {
-                    this.IsLoggedIn = true;
-                }
+
             } catch (err: any) {
+                this.IsLoggedIn = false;
                 const errorMessage = err?.message || err?.toString() || "";
                 if (
                     errorMessage.includes("Unauthorized") ||
