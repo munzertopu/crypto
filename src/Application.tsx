@@ -62,6 +62,10 @@ class Application {
         return this._commandService;
     }
 
+    public get AccessIds(): string[] {
+        return JSON.parse(localStorage.getItem("AccessIds") ?? "[]") ?? [];
+    }
+
     public NavigateTo: (url: string, options?: any) => void = (url: string) => {
         if (window.location.pathname !== url) {
             window.history.pushState(null, "", url);
@@ -188,6 +192,13 @@ class Application {
                     val.DoneDelegate();
                 }
             });
+            return;
+        }
+
+        if (command instanceof Commands.ConfirmCommand) {
+            const confirmCommand: Commands.ConfirmCommand = command as Commands.ConfirmCommand;
+            this._modalManager.current?.ShowConfirmation(confirmCommand.Message, confirmCommand.YesDelegate, confirmCommand.NoDelegate, this.ClosedModal);
+            this.DisplayingModal();
             return;
         }
 

@@ -30,7 +30,15 @@ export class CommandService {
     }
 
     public Logout() {
-        this.Executed(new LoggedOutCommand());
+        this.Confirm("Are you sure you want to logout?", () => {
+            this.Executed(new LoggedOutCommand());
+        }, () => {
+            // No action on cancel
+        });
+    }
+
+    public Confirm(message: string, yesDelegate: () => void, noDelegate: () => void) {
+        this.Executed(new ConfirmCommand(message, yesDelegate, noDelegate));
     }
 
     public ChangePassword() {
@@ -117,5 +125,18 @@ export class ShowMessageCommand extends BaseCommand {
         super();
         this.Message = message;
         this.DoneDelegate = doneDelegate;
+    }
+}
+
+export class ConfirmCommand extends BaseCommand {
+    public Message: string;
+    public YesDelegate: () => void;
+    public NoDelegate: () => void;
+
+    constructor(message: string, yesDelegate: () => void, noDelegate: () => void) {
+        super();
+        this.Message = message;
+        this.YesDelegate = yesDelegate;
+        this.NoDelegate = noDelegate;
     }
 }

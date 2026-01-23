@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect } from "react";
-import { Input } from "@material-tailwind/react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheckCircle,
   faXmarkCircle,
-  faEye,
-  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { AuthenticationService } from "../../../services/AuthenticationService";
 import { CommandService } from "../../../services/Commands";
 import { Models } from "../../../services/models";
+import MagnaForm from "../../../components/common/MagnaForm";
+import InputControl from "../../../components/common/InputControl";
+import { validateAll, ValidatePassword } from "../../../helpers/validation";
+import { ValidationError } from "class-validator";
 
 interface ChangePasswordTabProps {
   authenticationService: AuthenticationService;
@@ -21,244 +22,132 @@ const ChangePasswordTab: React.FC<ChangePasswordTabProps> = ({
   authenticationService,
   commandService,
 }) => {
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [errors, setErrors] = useState<ValidationError[]>([]);
+  const [validPassword, setValidPassword] = useState<[boolean, boolean, boolean, boolean, boolean]>([false, false, false, false, false]);
+  const [model, setModel] = useState<Models.Authentication.ChangePassword>(new Models.Authentication.ChangePassword());
 
-  // Password validation states
-  const [passwordValidation, setPasswordValidation] = useState({
-    hasUpperCase: false,
-    hasLowerCase: false,
-    hasNumber: false,
-    hasSpecialChar: false,
-    hasMinLength: false,
-  });
-
-  // Password validation function
-  const validatePassword = (password: string) => {
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumber = /\d/.test(password);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    const hasMinLength = password.length >= 8;
-
-    setPasswordValidation({
-      hasUpperCase,
-      hasLowerCase,
-      hasNumber,
-      hasSpecialChar,
-      hasMinLength,
-    });
-  };
-
-  // Update password validation when new password changes
-  useEffect(() => {
-    validatePassword(newPassword);
-  }, [newPassword]);
-
-  // Check if password meets all requirements
-  const isPasswordValid = Object.values(passwordValidation).every(Boolean);
-
-  const handleSave = async () => {
+  const handleSave = async (event: React.FormEvent) => {
+    event.preventDefault();
     if (isSaving) {
       return;
     }
-
-    // Validation
-    if (!currentPassword.trim()) {
-      commandService.Error("Current password is required");
+    const validationErrors: ValidationError[] = validateAll(
+      model,
+      Models.Authentication.ChangePassword
+    );
+    if (!(validPassword[0] && validPassword[1] && validPassword[2] && validPassword[3] && validPassword[4])) {
       return;
     }
-
-    if (!newPassword.trim()) {
-      commandService.Error("New password is required");
-      return;
-    }
-
-    if (!isPasswordValid) {
-      commandService.Error("New password does not meet all requirements");
-      return;
-    }
-
-    if (currentPassword === newPassword) {
-      commandService.Error("New password must be different from current password");
+    if (validationErrors.length > 0) {
+      console.error("Validation errors:", validationErrors);
+      setErrors(validationErrors);
       return;
     }
 
     setIsSaving(true);
 
     try {
-      const changePasswordModel = new Models.Authentication.ChangePassword();
-      changePasswordModel.CurrentPassword = currentPassword;
-      changePasswordModel.NewPassword = newPassword;
-
-      await authenticationService.ChangePassword(changePasswordModel);
-
-      // Clear form after successful change
-      setCurrentPassword("");
-      setNewPassword("");
-
+      await authenticationService.ChangePassword(model);
       commandService.ShowMessage("Password changed successfully!", () => {
-        // Form already cleared above
+        setTimeout(() => {
+          commandService.CloseChangePassword();
+        }, 200);
       });
     } catch (error: any) {
-      const errorMsg =
-        error?.message ||
-        error?.toString() ||
-        "Failed to change password. Please try again.";
-      commandService.Error(errorMsg);
+      commandService.Error(error.toString());
     } finally {
       setIsSaving(false);
     }
   };
 
+  const handleCancel = () => {
+    commandService.CloseChangePassword();
+  };
+
+  const handleInputChange = (propertyKey: string, value: any) => {
+    if (propertyKey === "NewPassword") {
+      setValidPassword(ValidatePassword(value));
+    }
+    setModel((prev) => {
+      if (!prev) return prev;
+      (prev as any)[propertyKey] = value;
+      return prev;
+    });
+  };
+
   return (
     <div className="md:space-y-8 mt-5 md:mt-0">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSave();
-        }}
-      >
+      <MagnaForm onSubmit={handleSave} noValidate>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div>
-            <label
-              htmlFor="currentPassword"
-              className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
-            >
-              Current Password
-            </label>
-            <div className="relative">
-              <Input
-                id="currentPassword"
-                type={showCurrentPassword ? "text" : "password"}
-                value={currentPassword}
-                onChange={(e) => {
-                  setCurrentPassword(e.target.value);
-                }}
-                className={`text-base bg-transparent py-3 border-default dark:border-gray-700 dark:text-white pr-10`}
-                disabled={isSaving}
-                required
-              />
-              <button
-                type="button"
-                className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                aria-label={
-                  showCurrentPassword ? "Hide password" : "Show password"
-                }
-              >
-                <FontAwesomeIcon
-                  icon={showCurrentPassword ? faEyeSlash : faEye}
-                  className="h-4 w-4 text-gray-500 dark:text-gray-400"
-                />
-              </button>
-            </div>
-          </div>
+          <InputControl
+            obj={model}
+            selector={(m) => m.CurrentPassword}
+            onChange={handleInputChange}
+            errors={errors}
+            setErrors={setErrors}
+            labelOverride="Current Password"
+            placeHolderOverride="Enter current password"
+            dataTypeOverride="password"
+          />
 
           <div>
-            <label
-              htmlFor="newPassword"
-              className={`block text-sm font-medium text-left mb-2 text-gray-800 dark:text-gray-300`}
-            >
-              New Password
-            </label>
-            <div className="relative">
-              <Input
-                id="newPassword"
-                type={showNewPassword ? "text" : "password"}
-                value={newPassword}
-                onChange={(e) => {
-                  setNewPassword(e.target.value);
-                }}
-                className={`text-base bg-transparent py-3 border-default dark:border-gray-700 dark:text-white pr-10 ${newPassword && !isPasswordValid
-                  ? "border-red-500 focus:border-red-500"
-                  : newPassword && isPasswordValid
-                    ? "border-green-500 focus:border-green-500"
-                    : ""
-                  }`}
-                disabled={isSaving}
-                required
-              />
-              <button
-                type="button"
-                className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                onClick={() => setShowNewPassword(!showNewPassword)}
-                aria-label={showNewPassword ? "Hide password" : "Show password"}
-              >
-                <FontAwesomeIcon
-                  icon={showNewPassword ? faEyeSlash : faEye}
-                  className="h-4 w-4 text-gray-500 dark:text-gray-400"
-                />
-              </button>
-            </div>
+            <InputControl
+              obj={model}
+              selector={(m) => m.NewPassword}
+              onChange={handleInputChange}
+              errors={errors}
+              setErrors={setErrors}
+              labelOverride="New Password"
+              placeHolderOverride="Enter new password"
+              dataTypeOverride="password"
+              forceUpdateOnKey={true}
+            />
 
             {/* Password Requirements */}
-            {newPassword && (
+            {model.NewPassword && (
               <div className="mt-3 space-y-1 text-xs">
                 <div
-                  className={`flex items-center ${passwordValidation.hasMinLength ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+                  className={`flex items-center ${validPassword[0] ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
                 >
                   <FontAwesomeIcon
-                    icon={
-                      passwordValidation.hasMinLength
-                        ? faCheckCircle
-                        : faXmarkCircle
-                    }
+                    icon={validPassword[0] ? faCheckCircle : faXmarkCircle}
                     className="w-3 h-3 mr-2"
                   />
                   At least 8 characters
                 </div>
                 <div
-                  className={`flex items-center ${passwordValidation.hasLowerCase ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+                  className={`flex items-center ${validPassword[1] ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
                 >
                   <FontAwesomeIcon
-                    icon={
-                      passwordValidation.hasLowerCase
-                        ? faCheckCircle
-                        : faXmarkCircle
-                    }
+                    icon={validPassword[1] ? faCheckCircle : faXmarkCircle}
                     className="w-3 h-3 mr-2"
                   />
                   At least one lowercase letter
                 </div>
                 <div
-                  className={`flex items-center ${passwordValidation.hasUpperCase ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+                  className={`flex items-center ${validPassword[2] ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
                 >
                   <FontAwesomeIcon
-                    icon={
-                      passwordValidation.hasUpperCase
-                        ? faCheckCircle
-                        : faXmarkCircle
-                    }
+                    icon={validPassword[2] ? faCheckCircle : faXmarkCircle}
                     className="w-3 h-3 mr-2"
                   />
                   At least one uppercase letter
                 </div>
                 <div
-                  className={`flex items-center ${passwordValidation.hasNumber ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+                  className={`flex items-center ${validPassword[3] ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
                 >
                   <FontAwesomeIcon
-                    icon={
-                      passwordValidation.hasNumber
-                        ? faCheckCircle
-                        : faXmarkCircle
-                    }
+                    icon={validPassword[3] ? faCheckCircle : faXmarkCircle}
                     className="w-3 h-3 mr-2"
                   />
                   At least one number
                 </div>
                 <div
-                  className={`flex items-center ${passwordValidation.hasSpecialChar ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+                  className={`flex items-center ${validPassword[4] ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
                 >
                   <FontAwesomeIcon
-                    icon={
-                      passwordValidation.hasSpecialChar
-                        ? faCheckCircle
-                        : faXmarkCircle
-                    }
+                    icon={validPassword[4] ? faCheckCircle : faXmarkCircle}
                     className="w-3 h-3 mr-2"
                   />
                   At least one special character
@@ -267,53 +156,62 @@ const ChangePasswordTab: React.FC<ChangePasswordTabProps> = ({
             )}
           </div>
         </div>
-      </form>
 
-      {/* Separator */}
-      <div
-        className="hidden md:block border-t border-default my-8 dark:border-gray-700"
-        role="separator"
-      ></div>
+        {/* Separator */}
+        <div
+          className="hidden md:block border-t border-default my-8 dark:border-gray-700"
+          role="separator"
+        ></div>
 
-      {/* Save Button */}
-      <div className="flex md:justify-end pt-8 md:pt-2">
-        <button
-          onClick={handleSave}
-          disabled={isSaving || !isPasswordValid || !currentPassword.trim()}
-          className={`w-full md:w-auto text-base px-5 py-3 border-0 rounded-lg font-medium ${isSaving || !isPasswordValid || !currentPassword.trim()
-            ? "opacity-50 cursor-not-allowed bg-gray-300 dark:bg-gray-600 text-gray-500"
-            : "bg-[#90C853] text-[#0E201E]"
+        {/* Action Buttons */}
+        <div className="flex md:justify-end pt-8 md:pt-2 gap-3">
+          <button
+            type="button"
+            onClick={handleCancel}
+            disabled={isSaving}
+            className="w-full md:w-auto text-base px-5 py-3 border-0 rounded-lg font-medium bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={isSaving || !(validPassword[0] && validPassword[1] && validPassword[2] && validPassword[3] && validPassword[4])}
+            className={`w-full md:w-auto text-base px-5 py-3 border-0 rounded-lg font-medium ${
+              isSaving || !(validPassword[0] && validPassword[1] && validPassword[2] && validPassword[3] && validPassword[4])
+                ? "opacity-50 cursor-not-allowed bg-gray-300 dark:bg-gray-600 text-gray-500"
+                : "bg-[#90C853] text-[#0E201E]"
             }`}
-        >
-          {isSaving ? (
-            <span className="flex items-center justify-center">
-              <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5 text-[#0E201E]"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
-              Changing Password...
-            </span>
-          ) : (
-            "Save changes"
-          )}
-        </button>
-      </div>
+          >
+            {isSaving ? (
+              <span className="flex items-center justify-center">
+                <svg
+                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-[#0E201E]"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                Changing Password...
+              </span>
+            ) : (
+              "Save changes"
+            )}
+          </button>
+        </div>
+      </MagnaForm>
     </div>
   );
 };

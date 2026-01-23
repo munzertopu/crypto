@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import './index.css'
 import Application from './Application'
 import App from './App.tsx'

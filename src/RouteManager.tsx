@@ -6,10 +6,13 @@ import {
     Navigate,
     useNavigate,
     useLocation,
+    useParams,
 } from "react-router-dom";
 import Application from "./Application";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LoginPage from "./pages/LoginPage";
+import { CommandService } from "./services/Commands";
+import { AuthenticationService } from "./services/AuthenticationService";
 import RegisterPage from "./pages/RegisterPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import OTPPage from "./pages/OTPPage";
@@ -26,20 +29,23 @@ import ClientsPage from "./pages/clients/ClientsPage";
 import SettingsPage from "./pages/settings/SettingsPage";
 
 const LoginWrapper: React.FC<{
-    app: Application;
-}> = ({ app }) => {
+    commandService: CommandService;
+    authenticationService: AuthenticationService;
+    accessIds: string[];
+}> = ({ commandService, authenticationService, accessIds }) => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const redirectUrl = searchParams.get("redirectUrl");
+    const { token } = useParams<{ token: string }>();
     return (
         <LoginPage
-            authenticationService={app.AuthenticationService}
-            commandService={app.CommandService}
-            redirectUrl={redirectUrl}
-            accessIds={JSON.parse(localStorage.getItem("AccessIds") ?? "[]")}
-            token={null}
-            onSignUpClick={() => app.CommandService.LogIn("/register")}
-            onForgotPasswordClick={() => app.CommandService.LogIn("/reset-password")}
+            authenticationService={authenticationService}
+            commandService={commandService}
+            redirectUrl={redirectUrl ?? null}
+            token={token ?? null}
+            accessIds={accessIds}
+            onSignUpClick={() => commandService.LogIn("/register")}
+            onForgotPasswordClick={() => commandService.LogIn("/reset-password")}
         />
     );
 };
@@ -223,13 +229,23 @@ const RouteManager = ({ app }: { app: Application }) => {
     return (
         <Routes>
             <Route
+                path="/login/:token"
+                element={
+                    <LoginWrapper
+                        authenticationService={app.AuthenticationService}
+                        commandService={app.CommandService}
+                        accessIds={app.AccessIds}
+                    />
+                }
+            />
+            <Route
                 path="/login"
                 element={
-                    app.IsLoggedIn ? (
-                        <Navigate to="/dashboard" replace />
-                    ) : (
-                        <LoginWrapper app={app} />
-                    )
+                    <LoginWrapper
+                        authenticationService={app.AuthenticationService}
+                        commandService={app.CommandService}
+                        accessIds={app.AccessIds}
+                    />
                 }
             />
             <Route path="/register" element={<RegisterWrapper app={app} />} />
