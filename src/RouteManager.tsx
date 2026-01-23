@@ -227,16 +227,7 @@ const RouteManager = ({ app }: { app: Application }) => {
 
     return (
         <Routes>
-            <Route
-                path="/login/:token"
-                element={
-                    <LoginWrapper
-                        authenticationService={app.AuthenticationService}
-                        commandService={app.CommandService}
-                        accessIds={app.AccessIds}
-                    />
-                }
-            />
+
             <Route
                 path="/login"
                 element={
