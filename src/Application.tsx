@@ -9,6 +9,9 @@ import { Credentials } from "./services/Credentials";
 import { AuthenticationService } from "./services/AuthenticationService";
 import ModalManager from "./components/ModalManager";
 import type { ModalManagerMethods } from "./components/ModalManager";
+import AppProvider from "./Providers/AppProvider";
+import BreakpointsProvider from "./Providers/BreakpointsProvider";
+import RouteManager from "./RouteManager";
 
 export interface CustomJwtPayload {
     sub?: string;
@@ -79,6 +82,7 @@ class Application {
 
     public DisplayingModal: () => void = () => { };
     public ClosedModal: () => void = () => { };
+    public OnLanguageChange: (lang: string) => void = () => { };
     public onAuthStateChange: ((isLoggedIn: boolean) => void) | null = null;
 
     private set Jwt(value: string | null) {
@@ -257,36 +261,30 @@ class Application {
         this.NavigateTo(gotoUrl, { replace: text1.toLowerCase() === text2.toLowerCase() });
     }
 
-    public async Run(AppComponent: React.ComponentType<{ app: Application }>) {
+    public async Run() {
         if (!this._root) {
             console.error("Root element not found!");
             return;
         }
 
-        this._root.render(
-            <BrowserRouter>
-                <ModalManager ref={this._modalManager} />
-                <AppComponent app={this} />
-            </BrowserRouter>,
-        );
-
         if (this.IsLoggedIn) {
             try {
                 await this._authenticationService.InitialData();
-
             } catch (err: any) {
                 this.IsLoggedIn = false;
-                const errorMessage = err?.message || err?.toString() || "";
-                if (
-                    errorMessage.includes("Unauthorized") ||
-                    errorMessage.includes("401")
-                ) {
-                    console.error("Authentication failed - token invalid:", err);
-                } else {
-                    console.warn("Failed to load initial data (non-auth error):", err);
-                }
             }
         }
+
+        this._root.render(
+            <AppProvider app={this}>
+                <BreakpointsProvider>
+                    <BrowserRouter>
+                        <ModalManager ref={this._modalManager} />
+                        <RouteManager app={this} />
+                    </BrowserRouter>
+                </BreakpointsProvider>
+            </AppProvider>
+        );
     }
 }
 

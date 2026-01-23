@@ -1,18 +1,8 @@
 import React from "react";
-import Application from "./Application";
-import RouteManager from "./RouteManager";
-import "./App.css";
+import { Outlet } from "react-router-dom";
 
-interface AppProps {
-  app: Application;
-}
-
-const App: React.FC<AppProps> = ({ app }) => {
-  return (
-    <div className="App">
-      <RouteManager app={app} />
-    </div>
-  );
+const App: React.FC = () => {
+	return <Outlet />;
 };
 
 export default App;
