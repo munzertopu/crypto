@@ -1,10 +1,16 @@
 export type OnCommandExecuted = (command: BaseCommand) => void;
+export type GetCommandExecutedUrl = (command: BaseCommand) => string;
 
 export class CommandService {
     private _onCommandExecuted: OnCommandExecuted | null;
+    private _getCommandExecutedUrl: GetCommandExecutedUrl | null;
 
-    constructor(onCommandExecuted: OnCommandExecuted | null) {
+    constructor(
+        onCommandExecuted: OnCommandExecuted | null,
+        getCommandExecutedUrl: GetCommandExecutedUrl | null = null
+    ) {
         this._onCommandExecuted = onCommandExecuted;
+        this._getCommandExecutedUrl = getCommandExecutedUrl;
     }
 
     private Executed(command: BaseCommand) {
@@ -13,12 +19,26 @@ export class CommandService {
         }
     }
 
+    private GetUrl(command: BaseCommand): string {
+        return this._getCommandExecutedUrl
+            ? this._getCommandExecutedUrl(command)
+            : "#";
+    }
+
     public LoggedIn(jwt: string, redirectUrl?: string | null) {
         this.Executed(new LoggedInCommand(jwt, redirectUrl));
     }
 
     public Logout() {
-        this.Executed(new LoggedOutCommand());
+        this.Confirm("Are you sure you want to logout?", () => {
+            this.Executed(new LoggedOutCommand());
+        }, () => {
+            // No action on cancel
+        });
+    }
+
+    public Confirm(message: string, yesDelegate: () => void, noDelegate: () => void) {
+        this.Executed(new ConfirmCommand(message, yesDelegate, noDelegate));
     }
 
     public ChangePassword() {
@@ -105,5 +125,18 @@ export class ShowMessageCommand extends BaseCommand {
         super();
         this.Message = message;
         this.DoneDelegate = doneDelegate;
+    }
+}
+
+export class ConfirmCommand extends BaseCommand {
+    public Message: string;
+    public YesDelegate: () => void;
+    public NoDelegate: () => void;
+
+    constructor(message: string, yesDelegate: () => void, noDelegate: () => void) {
+        super();
+        this.Message = message;
+        this.YesDelegate = yesDelegate;
+        this.NoDelegate = noDelegate;
     }
 }

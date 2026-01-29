@@ -7,6 +7,11 @@ import { jwtDecode } from "jwt-decode";
 import * as Commands from "./services/Commands";
 import { Credentials } from "./services/Credentials";
 import { AuthenticationService } from "./services/AuthenticationService";
+import ModalManager from "./components/ModalManager";
+import type { ModalManagerMethods } from "./components/ModalManager";
+import AppProvider from "./Providers/AppProvider";
+import BreakpointsProvider from "./Providers/BreakpointsProvider";
+import RouteManager from "./RouteManager";
 
 export interface CustomJwtPayload {
     sub?: string;
@@ -30,6 +35,7 @@ class Application {
     private _commandService: Commands.CommandService;
     private _credentials: Credentials = new Credentials();
     private _isLoggedIn: boolean = false;
+    private _modalManager: React.RefObject<ModalManagerMethods | null> = React.createRef<ModalManagerMethods | null>();
 
     public get IsLoggedIn(): boolean {
         return this._isLoggedIn;
@@ -59,6 +65,10 @@ class Application {
         return this._commandService;
     }
 
+    public get AccessIds(): string[] {
+        return JSON.parse(localStorage.getItem("AccessIds") ?? "[]") ?? [];
+    }
+
     public NavigateTo: (url: string, options?: any) => void = (url: string) => {
         if (window.location.pathname !== url) {
             window.history.pushState(null, "", url);
@@ -70,6 +80,9 @@ class Application {
         return window.location.pathname + window.location.search;
     };
 
+    public DisplayingModal: () => void = () => { };
+    public ClosedModal: () => void = () => { };
+    public OnLanguageChange: (lang: string) => void = () => { };
     public onAuthStateChange: ((isLoggedIn: boolean) => void) | null = null;
 
     private set Jwt(value: string | null) {
@@ -133,6 +146,7 @@ class Application {
 
         this._commandService = new Commands.CommandService(
             this.OnCommandExecuted.bind(this),
+            this.GetCommandExecutedUrl.bind(this),
         );
 
         this.ConfigureServiceJWT(this._jwt);
@@ -143,7 +157,70 @@ class Application {
         this._authenticationService.SetJWT(jwt);
     }
 
+    public ShouldPreventNavigation(): boolean {
+        if (this._modalManager.current && this._modalManager.current.Count() > 0) {
+            this._modalManager.current.Close();
+            return true;
+        }
+        return false;
+    }
+
+    private GetCommandExecutedUrl(command: Commands.BaseCommand): string {
+        if (command instanceof Commands.CloseChangePasswordCommand) {
+            return "/settings";
+        }
+        if (command instanceof Commands.ChangePasswordCommand) {
+            return "/settings?tab=changePassword";
+        }
+        if (command instanceof Commands.LogInCommand) {
+            const val = command as Commands.LogInCommand;
+            return `/login${val.RedirectUrl ? "?redirectUrl=" + encodeURIComponent(val.RedirectUrl) : ""}`;
+        }
+        return "#";
+    }
+
     private async OnCommandExecuted(command: Commands.BaseCommand) {
+        const currentPath = this.CurrentUrl();
+
+        if (command instanceof Commands.ErrorCommand) {
+            const val = command as Commands.ErrorCommand;
+            this._modalManager.current?.ShowError(val.Error ?? "Error", this.ClosedModal);
+            return;
+        }
+
+        if (command instanceof Commands.ShowMessageCommand) {
+            const val = command as Commands.ShowMessageCommand;
+            this._modalManager.current?.ShowMessage(val.Message ?? "", () => {
+                this.ClosedModal();
+                if (val.DoneDelegate !== null) {
+                    val.DoneDelegate();
+                }
+            });
+            return;
+        }
+
+        if (command instanceof Commands.ConfirmCommand) {
+            const confirmCommand: Commands.ConfirmCommand = command as Commands.ConfirmCommand;
+            this._modalManager.current?.ShowConfirmation(confirmCommand.Message, confirmCommand.YesDelegate, confirmCommand.NoDelegate, this.ClosedModal);
+            this.DisplayingModal();
+            return;
+        }
+
+        if (command instanceof Commands.CloseChangePasswordCommand) {
+            this.NavigateTo(this.GetCommandExecutedUrl(command), { replace: true });
+            return;
+        }
+
+        if (command instanceof Commands.ChangePasswordCommand) {
+            this.NavigateTo(this.GetCommandExecutedUrl(command));
+            return;
+        }
+
+        if (command instanceof Commands.LogInCommand) {
+            this.NavigateTo(this.GetCommandExecutedUrl(command));
+            return;
+        }
+
         if (command instanceof Commands.LoggedInCommand) {
             const val = command as Commands.LoggedInCommand;
             this._credentials = new Credentials();
@@ -176,38 +253,38 @@ class Application {
             this.NavigateTo("/login");
             return;
         }
+
+        const gotoUrl = this.GetCommandExecutedUrl(command);
+        const regex = /[^?]*/;
+        const text1 = gotoUrl.match(regex)?.[0] || gotoUrl;
+        const text2 = currentPath.match(regex)?.[0] || currentPath;
+        this.NavigateTo(gotoUrl, { replace: text1.toLowerCase() === text2.toLowerCase() });
     }
 
-    public async Run(AppComponent: React.ComponentType<{ app: Application }>) {
+    public async Run() {
         if (!this._root) {
             console.error("Root element not found!");
             return;
         }
 
-        this._root.render(
-            <BrowserRouter>
-                <AppComponent app={this} />
-            </BrowserRouter>,
-        );
-
-        if (this.IsLoggedIn && this._jwt) {
+        if (this.IsLoggedIn) {
             try {
                 await this._authenticationService.InitialData();
-                if (this._jwt) {
-                    this.IsLoggedIn = true;
-                }
             } catch (err: any) {
-                const errorMessage = err?.message || err?.toString() || "";
-                if (
-                    errorMessage.includes("Unauthorized") ||
-                    errorMessage.includes("401")
-                ) {
-                    console.error("Authentication failed - token invalid:", err);
-                } else {
-                    console.warn("Failed to load initial data (non-auth error):", err);
-                }
+                this.IsLoggedIn = false;
             }
         }
+
+        this._root.render(
+            <AppProvider app={this}>
+                <BreakpointsProvider>
+                    <BrowserRouter>
+                        <ModalManager ref={this._modalManager} />
+                        <RouteManager app={this} />
+                    </BrowserRouter>
+                </BreakpointsProvider>
+            </AppProvider>
+        );
     }
 }
 
