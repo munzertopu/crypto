@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import MobileDrawer from "../../../components/Drawers/MobileDrawer";
-import { is } from "date-fns/locale";
-import { se } from "date-fns/locale";
+
 import useScreenSize from "../../../hooks/useScreenSize";
 
 interface OverrideCostModalProps {
@@ -172,9 +171,8 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({
                   </span>
                   <FontAwesomeIcon
                     icon={faChevronDown}
-                    className={`w-3 h-3 transition-transform ${
-                      isTaxYearDropdownOpen ? "rotate-180" : ""
-                    }`}
+                    className={`w-3 h-3 transition-transform ${isTaxYearDropdownOpen ? "rotate-180" : ""
+                      }`}
                   />
                 </button>
 
@@ -190,11 +188,10 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({
                       >
                         {/* Checkbox */}
                         <div
-                          className={`w-4 h-4 border-2 rounded mr-3 flex items-center justify-center ${
-                            selectedTaxYears.includes(year.value)
+                          className={`w-4 h-4 border-2 rounded mr-3 flex items-center justify-center ${selectedTaxYears.includes(year.value)
                               ? "border-[#90C853] bg-[#90C853]"
                               : "border-default"
-                          }`}
+                            }`}
                         >
                           {selectedTaxYears.includes(year.value) && (
                             <svg
@@ -237,9 +234,8 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({
                   </span>
                   <FontAwesomeIcon
                     icon={faChevronDown}
-                    className={`w-3 h-3 transition-transform ${
-                      isCostBasisDropdownOpen ? "rotate-180" : ""
-                    }`}
+                    className={`w-3 h-3 transition-transform ${isCostBasisDropdownOpen ? "rotate-180" : ""
+                      }`}
                   />
                 </button>
               </div>
@@ -257,11 +253,10 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({
             <button
               onClick={handleSubmit}
               disabled={isSubmitDisabled}
-              className={`px-4 py-3 rounded-lg font-medium transition-colors ${
-                isSubmitDisabled
+              className={`px-4 py-3 rounded-lg font-medium transition-colors ${isSubmitDisabled
                   ? "bg-[#E1E3E5] text-[#8C8E90] cursor-not-allowed"
                   : "bg-[#90C853] text-[#0E201E] hover:bg-[#7AB342] cursor-pointer"
-              }`}
+                }`}
             >
               Submit
             </button>
@@ -295,9 +290,8 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({
                 </span>
                 <FontAwesomeIcon
                   icon={faChevronDown}
-                  className={`w-3 h-3 transition-transform ${
-                    isTaxYearDropdownOpen ? "rotate-180" : ""
-                  }`}
+                  className={`w-3 h-3 transition-transform ${isTaxYearDropdownOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
             </div>
@@ -322,9 +316,8 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({
                 </span>
                 <FontAwesomeIcon
                   icon={faChevronDown}
-                  className={`w-3 h-3 transition-transform ${
-                    isCostBasisDropdownOpen ? "rotate-180" : ""
-                  }`}
+                  className={`w-3 h-3 transition-transform ${isCostBasisDropdownOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
             </div>
@@ -350,11 +343,10 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({
           >
             {/* Checkbox */}
             <div
-              className={`w-4 h-4 border-2 rounded mr-3 flex items-center justify-center ${
-                selectedTaxYears.includes(year.value)
+              className={`w-4 h-4 border-2 rounded mr-3 flex items-center justify-center ${selectedTaxYears.includes(year.value)
                   ? "border-[#90C853] bg-[#90C853]"
                   : "border-default"
-              }`}
+                }`}
             >
               {selectedTaxYears.includes(year.value) && (
                 <svg
@@ -389,9 +381,8 @@ const OverrideCostModal: React.FC<OverrideCostModalProps> = ({
               setSelectedCostBasisMethod(method.label);
               setIsCostBasisDropdownOpen(false);
             }}
-            className={`w-full px-3 py-2 text-left hover:bg-gray-50 ${"text-gray-900 dark:hover:bg-gray-600 dark:text-gray-250"} ${
-              selectedCostBasisMethod === method.label ? "bg-gray-100" : ""
-            }`}
+            className={`w-full px-3 py-2 text-left hover:bg-gray-50 ${"text-gray-900 dark:hover:bg-gray-600 dark:text-gray-250"} ${selectedCostBasisMethod === method.label ? "bg-gray-100" : ""
+              }`}
           >
             <div>
               <div className="font-medium">{method.label}</div>

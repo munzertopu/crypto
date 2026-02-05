@@ -21,8 +21,7 @@ import CloseIcon from "../../../components/Icons/CloseIcon";
 import SecondaryButton from "../../../components/UI/Buttons/SecondaryButton";
 import FilterIcon from "../../../components/Icons/FilterIcon";
 import EyeIcon from "../../../components/Icons/EyeIcon";
-import { set } from "date-fns";
-import { tr } from "date-fns/locale";
+
 import { Popover, Toggle } from "../../../components";
 
 interface WalletOption {
@@ -510,11 +509,10 @@ const Filter: React.FC<FilterProps> = ({
                   key={tab}
                   value={tab}
                   onClick={() => onTabChange?.(tab)}
-                  className={`w-full sm:w-[inherit] px-2.5 sm:px-5 md:px-2.5 py-1.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${
-                    activeTab === tab
+                  className={`w-full sm:w-[inherit] px-2.5 sm:px-5 md:px-2.5 py-1.5 sm:py-2 md:py-1.5 rounded-lg sm:rounded-xl md:rounded-xl text-sm sm:text-lg md:text-sm ${activeTab === tab
                       ? "bg-green-400 dark:bg-gray-0 text-primary dark:text-gray-900"
                       : "text-gray-600 dark:text-gray-200"
-                  }`}
+                    }`}
                 >
                   {tab}
                 </Tabs.Trigger>
@@ -631,11 +629,10 @@ const Filter: React.FC<FilterProps> = ({
                         className="flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
                       >
                         <div
-                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${
-                            isSelected
+                          className={`w-4 h-4 border-2 rounded flex items-center justify-center mr-3 transition-colors ${isSelected
                               ? "bg-green-600 border-green-600"
                               : "border-gray-300"
-                          }`}
+                            }`}
                         >
                           {isSelected && (
                             <svg
@@ -977,9 +974,8 @@ const Filter: React.FC<FilterProps> = ({
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={`w-4 h-4 transform transition-transform ${
-                isViewDropdownOpen ? "rotate-180" : ""
-              }`}
+              className={`w-4 h-4 transform transition-transform ${isViewDropdownOpen ? "rotate-180" : ""
+                }`}
             >
               <path
                 d="m19.5 8.25-7.5 7.5-7.5-7.5"
@@ -1004,16 +1000,14 @@ const Filter: React.FC<FilterProps> = ({
                   </span>
                   <button
                     onClick={() => setShowDeleted(!showDeleted)}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      showDeleted
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${showDeleted
                         ? "bg-green-500"
                         : "bg-gray-300 dark:bg-gray-600"
-                    }`}
+                      }`}
                   >
                     <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        showDeleted ? "translate-x-6" : "translate-x-1"
-                      }`}
+                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${showDeleted ? "translate-x-6" : "translate-x-1"
+                        }`}
                     />
                   </button>
                 </div>
@@ -1025,16 +1019,14 @@ const Filter: React.FC<FilterProps> = ({
                   </span>
                   <button
                     onClick={() => setShowSoftDeletedOnly(!showSoftDeletedOnly)}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      showSoftDeletedOnly
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${showSoftDeletedOnly
                         ? "bg-green-500"
                         : "bg-gray-300 dark:bg-gray-600"
-                    }`}
+                      }`}
                   >
                     <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        showSoftDeletedOnly ? "translate-x-6" : "translate-x-1"
-                      }`}
+                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${showSoftDeletedOnly ? "translate-x-6" : "translate-x-1"
+                        }`}
                     />
                   </button>
                 </div>
@@ -1118,14 +1110,12 @@ const Filter: React.FC<FilterProps> = ({
             </span>
             <button
               onClick={() => setEnabledManual(!enabledManual)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                enabledManual ? "bg-[#90C853]" : "bg-[#CDCFD1] dark:bg-gray-700"
-              }`}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${enabledManual ? "bg-[#90C853]" : "bg-[#CDCFD1] dark:bg-gray-700"
+                }`}
             >
               <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                  enabledManual ? "translate-x-6" : "translate-x-1"
-                }`}
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${enabledManual ? "translate-x-6" : "translate-x-1"
+                  }`}
               />
             </button>
           </div>
